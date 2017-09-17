@@ -613,7 +613,7 @@ public class UsuarioBean extends Actividad {
             estadoFormulario = false;
         } else {
             if (this.usuarioSelecionado.getNombreUsuario().length() > 16) {
-                this.msgNombre = "El nombre de usuario debe contener mÃ¡ximo 16 caracteres";
+                this.msgNombre = "El nombre de usuario debe contener  máximo 16 caracteres";
                 estadoFormulario = false;
             } else {
                 TUsuario usu = this.usuarioBo.getUsuarioValRep(this.usuarioSelecionado.getNombreUsuario());
@@ -637,14 +637,14 @@ public class UsuarioBean extends Actividad {
 
         if (editPass) {
             if (this.clave.length() < 8) {
-                this.msgClave = "La contraseÃ±a debe contener nimimo 8 caracteres";
+                this.msgClave = "La contraseña debe contener mínimo 8 caracteres";
                 estadoFormulario = false;
             } else {
                 this.msgClave = "";
             }
 
             if (!this.clave.equals(this.claveConfir)) {
-                this.msgClaveConfir = "Las contraseÃ±a deben ser iguales";
+                this.msgClaveConfir = "Las contraseñas deben ser iguales";
                 estadoFormulario = false;
             } else {
                 this.msgClaveConfir = "";
@@ -700,7 +700,7 @@ public class UsuarioBean extends Actividad {
             }
 
             if (!this.clave.equals(this.claveConfir)) {
-                this.msgClaveConfir = "Las contraseña deben ser iguales";
+                this.msgClaveConfir = "Las contraseñas deben ser iguales";
                 estadoFormulario = false;
             } else {
                 this.msgClaveConfir = "";

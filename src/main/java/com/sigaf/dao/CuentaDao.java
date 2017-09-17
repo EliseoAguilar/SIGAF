@@ -82,7 +82,7 @@ public class CuentaDao implements ICuentaDao {
     @Override
     public List<TCuenta> listCuentaEnt(Integer id) {
         Session session = this.sessionFactory.openSession();
-        List<TCuenta> listCuenta = session.createQuery(" select distinct c from TCuenta c left join fetch c.TCuentas  where c.TEntidad.idEntidad  =:id order by c.codigoCuenta").setParameter("id", id).list();
+        List<TCuenta> listCuenta = session.createQuery("select distinct c from TCuenta c left join fetch c.TCuentas  where c.TEntidad.idEntidad  =:id order by c.codigoCuenta").setParameter("id", id).list();
         session.close();
         return listCuenta;
     }

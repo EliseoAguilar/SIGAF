@@ -46,14 +46,14 @@ public class ActivoFijoDao implements IActivoFijoDao {
     @Override
     public List<TActivoFijo> listActivoFijo(Integer id) {
         Session session = this.sessionFactory.openSession();
-        List<TActivoFijo> listaArea = session.createQuery("from TActivoFijo a inner join fetch a.TTipoActivo t"
+        List<TActivoFijo> listaArea = session.createQuery("select distinct a from TActivoFijo a inner join fetch a.TTipoActivo t"
                 + "inner join fetch a.TProveedor p"
                 + " inner join fetch a.TEmpleado e"
-                + " inner join fetch a.TEmpleado.TEmpleadoAreas ea"
+                + " left join fetch  e.TEmpleadoAreas ea"
                 + " left join fetch  a.TBajaActivoFijos ab"
                 + " left join fetch  a.TDepreciacions ad"
-                + " inner join fetch  a.TValorActivos av"
-                + " where a.TTipoActivo.TEntidad.idEntidad =:id  ").setParameter("id", id).list();
+                + " left join fetch  a.TValorActivos av"
+                + " where a.TTipoActivo.TEntidad.idEntidad =:id").setParameter("id", id).list();
         session.close();
         return listaArea;
     
@@ -65,8 +65,8 @@ public class ActivoFijoDao implements IActivoFijoDao {
         Session session = this.sessionFactory.openSession();
         List<TActivoFijo> listaArea = session.createQuery("from TActivoFijo a"
                 + " inner join fetch a.TEmpleado e"
-                + " inner join fetch a.TEmpleado.TEmpleadoAreas ea"
-                + " inner join fetch  a.TValorActivos av"
+                + " left join fetch e.TEmpleadoAreas ea"
+                + " left join fetch  a.TValorActivos av"
                 + " where a.TTipoActivo.idTipo =:id  ").setParameter("id", id).list();
         session.close();
         return listaArea;
