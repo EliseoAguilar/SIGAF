@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TPolitica" table="t_politica" schema="public" optimistic-lock="version">
+        <id name="idPolitica" type="int">
+            <column name="id_politica" />
+               <generator class="sequence">
+                <param name="sequence">t_politica_id_politica_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TTipoCredito" class="com.sigaf.pojo.TTipoCredito" fetch="select">
+            <column name="idtipocredito" />
+        </many-to-one>
+        <property name="tasaInteres" type="big_decimal">
+            <column name="tasa_interes" precision="131089" scale="0" />
+        </property>
+        <property name="edadMaxima" type="java.lang.Integer">
+            <column name="edad_maxima" />
+        </property>
+        <property name="edadMinima" type="java.lang.Integer">
+            <column name="edad_minima" />
+        </property>
+        <property name="montoMinimo" type="big_decimal">
+            <column name="monto_minimo" precision="131089" scale="0" />
+        </property>
+        <property name="montoMaximo" type="big_decimal">
+            <column name="monto_maximo" precision="131089" scale="0" />
+        </property>
+        <property name="tasaInteresMora" type="big_decimal">
+            <column name="tasa_interes_mora" precision="131089" scale="0" />
+        </property>
+        <property name="comision" type="big_decimal">
+            <column name="comision" precision="131089" scale="0" />
+        </property>
+        <property name="seguroDeuda" type="big_decimal">
+            <column name="seguro_deuda" precision="131089" scale="0" />
+        </property>
+        <property name="capacidadPagoMinimo" type="big_decimal">
+            <column name="capacidad_pago_minimo" precision="131089" scale="0" />
+        </property>
+        <property name="capacidadEndeudamientoMinimo" type="big_decimal">
+            <column name="capacidad_endeudamiento_minimo" precision="131089" scale="0" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+         <property name="registro" type="date">
+            <column name="registro" />
+        </property>
+        <set name="TProyectos" table="t_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_politica" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProyecto" />
+        </set>
+    </class>
+</hibernate-mapping>

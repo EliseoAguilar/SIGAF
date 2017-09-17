@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <div class="row">              
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminPerfil.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">supervisor_account
+                                    </i></div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title" > <br></br>Perfil</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar perfil.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>                     
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminAreas.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">business</i></div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title" > <br></br>Áreas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar áreas.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>                  
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminEmpleados.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">wc
+                                    </i></div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title" > <br></br>Empleados</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar empleados.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminCargos.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">location_on</i></div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title" ><br></br>Cargos</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar cargos.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminPoliticas.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header " data-background-color="green">
+                                    <i class="material-icons">settings</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title"><br></br>Políticas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar politicas
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminReportesConfiguracion.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">find_in_page</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Configuración</p>
+                                    <h3 class="title"><br></br>Reportes</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Ver reportes
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="aux">
+                <h:outputScript name="./js/jquery-3.1.0.min.js" />
+                <script>
+                    $(document).ready(function () {
+                        $("#conf").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

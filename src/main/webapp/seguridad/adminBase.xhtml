@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <p:outputPanel id="padding"  > 
+
+                    <p:growl id="msg" showDetail="true"  />
+
+
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" appendTo="@(body)">
+                        <p:graphicImage name="/img/loader.gif" height="30px" width="150px" />
+                    </p:dialog>
+
+                    <p:dialog  header="Confirmar" widgetVar="dlNew" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" >
+                        <h:form>  
+                            <div align="center">
+                                ¿Estás seguro de generar el respaldo?
+                                <br></br>
+
+                                <hr></hr>
+
+
+                                <p:commandButton value="Si" id="withI"  onstart="PF('statusDialog').show()" actionListener="#{baseBean.hacerBackup()}"  oncomplete="PF('dlNew').hide()"  onsuccess=" PF('statusDialog').hide()"  style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                <p:commandButton value="No" id="with" oncomplete="PF('dlNew').hide()" update=":padding"  style="#{baseBean.btnCancelar}" >
+
+                                </p:commandButton>
+                            </div>
+                        </h:form>
+                    </p:dialog>
+
+
+                    <h:form id="fPol">
+
+
+
+
+
+                        <p:panel id="opAdmiPol" header="Administrar base de datos" style="margin-bottom:20px">
+                            <p:fieldset>
+
+                                <p:commandButton  oncomplete="PF('dlNew').show()" icon="fa fa-plus" title="Nuevo respaldo" style="#{baseBean.btnCrear}">
+
+                                </p:commandButton>
+
+
+                            </p:fieldset>
+
+
+
+
+                            <p:dataTable   id="dtUsuario"
+                                           var="bas" 
+                                           value="#{baseBean.listBase}"
+                                           paginator="true"
+                                           rows="10"
+                                           paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                           currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                           rowsPerPageTemplate="5,10,15"
+                                           paginatorPosition="bottom"
+                                           emptyMessage="No se encontraron respaldos."
+                                           rowIndexVar="N"
+                                           widgetVar="datosCue"
+
+                                           >
+                                        
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <p:inputText id="globalFilter" onkeyup="PF('datosCue').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                <p:columnGroup type="header">
+
+                                    <p:row>
+
+                                        <p:column headerText="Nº" width="5%" />
+                                        <p:column headerText="Nombre"  filterBy="#{bas.getName()}" sortBy="#{bas.getName()}"  filterMatchMode="contains" width="60%" filterStyle="width: 100%"/>
+                                        <p:column headerText="Tamaño"   filterBy="#{baseBean.readableFileSize(bas.length())}" sortBy="#{baseBean.readableFileSize(bas.length())}" filterMatchMode="contains"  filterStyle="width: 100%"/>
+                                        <p:column headerText="" style="width: 9%"/>
+
+                                    </p:row>
+
+                                </p:columnGroup>
+
+                                <p:column style="text-align: center">
+                                    <h:outputText value="#{N+1}"/>
+
+                                </p:column>
+
+                                <p:column  >
+                                    <h:outputText value="#{bas.getName()}" />
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputText value="#{baseBean.readableFileSize(bas.length())}" />
+                                </p:column>
+
+
+                                <p:column>
+                                    
+                                    <p:splitButton   update=":padding" oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{baseBean.btnDarDeAlta}">
+                                        <f:setPropertyActionListener value="#{bas}" target="#{baseBean.baseSeleccionada}" />
+                                 
+                                        <p:menuitem update=":padding" oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Restaurar respaldo" >
+                                            <f:setPropertyActionListener value="#{bas}" target="#{baseBean.baseSeleccionada}" />
+                                        </p:menuitem>
+                                                    
+                                        </p:splitButton>
+                                    
+                                </p:column>
+
+
+                                <f:facet name="footer">
+
+                                </f:facet>
+                            </p:dataTable>
+
+                            <p:dialog header="Datos del respaldo" widgetVar="dlVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <p:outputPanel id="dlVerArea" style=" width: 100%" styleClass="companyHeaderGrid">
+                                    <p:panelGrid id="pgVer" columns="2" >
+
+                                        <h:outputText value="Nombre:" />
+                                        <h:outputText value="#{baseBean.baseSeleccionada.name}" />
+
+                                        <h:outputText value="Tamaño:" />
+                                        <h:outputText value="#{baseBean.readableFileSize( baseBean.baseSeleccionada.length())}" />
+
+                                        <h:outputText value="Fecha de creación:" />
+                                        <h:outputText value="#{ baseBean.fechaCreacion( baseBean.baseSeleccionada.name)}" />
+
+                                        <h:outputText value="Hora de creación:" />
+                                        <h:outputText value="#{ baseBean.horaCreacion( baseBean.baseSeleccionada.name)}" />
+
+                                        <h:outputText value="Ruta:" />
+                                        <h:outputText value="#{baseBean.baseSeleccionada.absolutePath}" />
+
+                                    </p:panelGrid>
+                                    <hr></hr>
+                                </p:outputPanel>
+                            </p:dialog>
+
+
+
+
+
+                        </p:panel>
+
+
+
+
+
+                    </h:form>
+
+                    <p:dialog  header="Confirmar" widgetVar="dlAlta" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" >
+                        <h:form>             
+                            <div align="center">
+                                ¿Estás seguro de restaurar este respaldo?
+                                <br></br>
+                                <h:outputText value="#{baseBean.baseSeleccionada.name}"/>
+                                <hr></hr>
+                                <p:commandButton value="Si"  actionListener="#{baseBean.restaurarBackup()}" onstart="PF('statusDialog').show()"  oncomplete="PF('dlAlta').hide()" onsuccess=" PF('statusDialog').hide()"    style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                <p:commandButton value="No"  oncomplete="PF('dlAlta').hide()" update=":padding"  style="#{baseBean.btnCancelar}" >
+
+                                </p:commandButton>
+                            </div>
+                        </h:form>
+                    </p:dialog>
+
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#seg").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

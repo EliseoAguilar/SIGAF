@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanceGeneral" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2ecc2a4-5771-4b19-9e7c-2600f20058b6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEntidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idCuentaResultado" class="java.lang.Integer"/>
+	<parameter name="haberResultado" class="java.math.BigDecimal"/>
+	<parameter name="debeResultado" class="java.math.BigDecimal"/>
+	<parameter name="idCuentaRenta" class="java.lang.Integer"/>
+	<parameter name="haberRenta" class="java.math.BigDecimal"/>
+	<parameter name="debeRenta" class="java.math.BigDecimal"/>
+	<parameter name="idCuentaReserva" class="java.lang.Integer"/>
+	<parameter name="debeReserva" class="java.math.BigDecimal"/>
+	<parameter name="haberReserva" class="java.math.BigDecimal"/>
+	<parameter name="totalPasivoCapital" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT
+     *
+FROM
+      t_estructura e
+WHERE
+     e.id_ejercicio_estructura =$P{idEjercicio} AND  e.tipo_reporte = 2 order by e.grupo_reporte]]>
+	</queryString>
+	<field name="id_estructura" class="java.lang.Integer"/>
+	<field name="id_cuenta_estructura" class="java.lang.Integer"/>
+	<field name="grupo_reporte" class="java.lang.Integer"/>
+	<field name="tipo_reporte" class="java.lang.Integer"/>
+	<field name="id_ejercicio_estructura" class="java.lang.Integer"/>
+	<field name="nivel_reporte" class="java.lang.Integer"/>
+	<field name="por_max_estructura" class="java.math.BigDecimal"/>
+	<field name="por_min_estructura" class="java.math.BigDecimal"/>
+	<field name="valor_rango" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="79" uuid="4d1dfe22-2611-49fa-98f1-b3f62f2a8eb7"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="0" width="164" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BALANCE GENERAL AL ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="555" height="20" uuid="6e7bac28-7615-404c-948a-6747d3371b89"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="320" y="0" width="235" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
+				<subreportParameter name="id_ejercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fecha_reportes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="37" uuid="ae9d0f51-7191-4762-a386-a0f9082547bd"/>
+				<subreportParameter name="idCuentaRenta">
+					<subreportParameterExpression><![CDATA[$P{idCuentaRenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haberResultado">
+					<subreportParameterExpression><![CDATA[$P{haberResultado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idCuentaReserva">
+					<subreportParameterExpression><![CDATA[$P{idCuentaReserva}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idCuentaResultado">
+					<subreportParameterExpression><![CDATA[$P{idCuentaResultado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idEjercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelCuenta">
+					<subreportParameterExpression><![CDATA[$F{nivel_reporte}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haberRenta">
+					<subreportParameterExpression><![CDATA[$P{haberRenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalPasivoCapital">
+					<subreportParameterExpression><![CDATA[$P{totalPasivoCapital}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="debeReserva">
+					<subreportParameterExpression><![CDATA[$P{debeReserva}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haberReserva">
+					<subreportParameterExpression><![CDATA[$P{haberReserva}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="debeResultado">
+					<subreportParameterExpression><![CDATA[$P{debeResultado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idCuenta">
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_estructura}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="debeRenta">
+					<subreportParameterExpression><![CDATA[$P{debeRenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subBalanceGeneral.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<textField pattern="#,##0.00">
+				<reportElement x="232" y="10" width="272" height="20" uuid="44fbadae-e2ad-46a4-b941-0aac8c8bf5e3"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalPasivoCapital}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="10" width="195" height="20" uuid="9f924358-309d-4274-938c-20e96bc828c3"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE PASIVO MÁS PATRIMONIO ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

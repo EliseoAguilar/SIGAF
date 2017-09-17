@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudLisiadoH" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34aa5181-76f9-43d2-929b-c599178679b8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="87"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_proyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_cliente."id_cliente" AS t_cliente_id_cliente,
+     t_cliente."nombre_cliente" AS t_cliente_nombre_cliente,
+     t_cliente."apellido_cliente" AS t_cliente_apellido_cliente,
+     t_cliente."dui_cliente" AS t_cliente_dui_cliente,
+     t_cliente."nit_cliente" AS t_cliente_nit_cliente,
+     t_cliente."direccion_cliente" AS t_cliente_direccion_cliente,
+     t_cliente."fecha_nacimiento" AS t_cliente_fecha_nacimiento,
+     t_cliente."estado_familiar" AS t_cliente_estado_familiar,
+     t_cliente."telefono_cliente" AS t_cliente_telefono_cliente,
+     t_cliente."correo_cliente" AS t_cliente_correo_cliente,
+     t_cliente."celular_cliente" AS t_cliente_celular_cliente,
+     t_cliente."calificacion_cliente" AS t_cliente_calificacion_cliente,
+     t_cliente."codigo_cliente" AS t_cliente_codigo_cliente,
+     t_cliente."dui_copia_cliente" AS t_cliente_dui_copia_cliente,
+     t_cliente."nit_copia_cliente" AS t_cliente_nit_copia_cliente,
+     t_cliente."sexo_cliente" AS t_cliente_sexo_cliente,
+     t_cliente."tipo_cliente1" AS t_cliente_tipo_cliente1,
+     t_cliente."tipo_cliente2" AS t_cliente_tipo_cliente2,
+     t_cliente."tipo_cliente3" AS t_cliente_tipo_cliente3
+FROM
+     "public"."t_cliente" t_cliente
+WHERE
+      t_cliente."id_cliente" = $P{id_proyecto}]]>
+	</queryString>
+	<field name="t_cliente_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_nombre_cliente" class="java.lang.String"/>
+	<field name="t_cliente_apellido_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_cliente" class="java.lang.String"/>
+	<field name="t_cliente_direccion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="t_cliente_estado_familiar" class="java.lang.String"/>
+	<field name="t_cliente_telefono_cliente" class="java.lang.String"/>
+	<field name="t_cliente_correo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_celular_cliente" class="java.lang.String"/>
+	<field name="t_cliente_calificacion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_codigo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_sexo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_tipo_cliente1" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente2" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente3" class="java.lang.Integer"/>
+	<variable name="variable1" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="681">
+			<image>
+				<reportElement x="110" y="69" width="351" height="471" uuid="a214300b-3445-4ae2-9ed4-1db9447c6d1b"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($F{t_cliente_dui_copia_cliente}.split(",")[1].getBytes()))]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30"/>
+	</pageFooter>
+</jasperReport>

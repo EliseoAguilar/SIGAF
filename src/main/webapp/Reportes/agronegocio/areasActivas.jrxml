@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tiposAreas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b286a86c-1399-45f0-b0e6-56fb99725e5b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_area_cultivo."id_area_cultivo" AS t_area_cultivo_id_area_cultivo,
+     t_area_cultivo."nombre_area_cultivo" AS t_area_cultivo_nombre_area_cultivo,
+     t_area_cultivo."estado_area_cultivo" AS t_area_cultivo_estado_area_cultivo
+FROM
+     "public"."t_area_cultivo" t_area_cultivo where t_area_cultivo."estado_area_cultivo" = $P{estado}]]>
+	</queryString>
+	<field name="t_area_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<field name="t_area_cultivo_nombre_area_cultivo" class="java.lang.String"/>
+	<field name="t_area_cultivo_estado_area_cultivo" class="java.lang.Boolean"/>
+	<group name="AREA">
+		<groupExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<subreport>
+				<reportElement x="10" y="0" width="200" height="79" uuid="17d73c2c-0bbe-4025-9c5c-01677f6cbaa5"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="80" width="555" height="20" uuid="80989161-66c0-47e4-86be-c09db5b3899b"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE ÁREAS ACTIVAS</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="103" width="555" height="1" uuid="4ee78dd2-1419-433b-bb24-e010a27caf90"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="2" width="100" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>NOMBRE</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="554" height="1" uuid="14f3b0c0-0945-4a6e-9b35-750976b03e96"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="18" y="0" width="241" height="20" uuid="6b0b9fe6-0aba-4990-b871-e2c9818fb5c2"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="16" width="80" height="20" uuid="e7a05cdf-2d4f-4e9b-83b3-c868f42303c5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="16" width="40" height="20" uuid="582f88ba-c108-4666-a4a1-5139b2789dcf"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

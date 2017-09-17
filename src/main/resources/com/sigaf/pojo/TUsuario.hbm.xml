@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TUsuario" table="t_usuario" schema="public" optimistic-lock="version">
+        <id name="idUsuario" type="int">
+            <column name="id_usuario" />
+              <generator class="sequence">
+                <param name="sequence">t_usuario_id_usuario_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TEmpleado" class="com.sigaf.pojo.TEmpleado" fetch="select">
+            <column name="id_empleado_usuario" unique="true" />
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="nombre_usuario" />
+        </property>
+        <property name="claveUsuario" type="string">
+            <column name="clave_usuario" />
+        </property>
+        <property name="estadoUsuario" type="java.lang.Boolean">
+            <column name="estado_usuario" />
+        </property>
+        <property name="tipoUsuario" type="java.lang.Integer">
+            <column name="tipo_usuario" />
+        </property>
+        <set name="TBitacoras" table="t_bitacora" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario_bitacora" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TBitacora" />
+        </set>
+    </class>
+</hibernate-mapping>

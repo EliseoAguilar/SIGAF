@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comprador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="528e91ea-b461-4075-b1b3-97f85fe8c918">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="18"/>
+	<parameter name="id_comprador" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="edad" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_comprador."id_comprador" AS t_comprador_id_comprador,
+     t_comprador."nombres_comprador" AS t_comprador_nombres_comprador,
+     t_comprador."apellidos_comprador" AS t_comprador_apellidos_comprador,
+     t_comprador."dui_comprador" AS t_comprador_dui_comprador,
+     t_comprador."nit_comprador" AS t_comprador_nit_comprador,
+     t_comprador."sexo_comprador" AS t_comprador_sexo_comprador,
+     t_comprador."tipo_comprador" AS t_comprador_tipo_comprador,
+     t_comprador."correo_comprador" AS t_comprador_correo_comprador,
+     t_comprador."telefono_comprador" AS t_comprador_telefono_comprador,
+     t_comprador."movil_comprador" AS t_comprador_movil_comprador,
+     t_comprador."direccion_comprador" AS t_comprador_direccion_comprador,
+     t_comprador."estado_comprador" AS t_comprador_estado_comprador,
+     t_comprador."fechanacimiento_comprador" AS t_comprador_fechanacimiento_comprador
+FROM
+     "public"."t_comprador" t_comprador where   t_comprador."id_comprador" =$P{id_comprador}]]>
+	</queryString>
+	<field name="t_comprador_id_comprador" class="java.lang.Integer"/>
+	<field name="t_comprador_nombres_comprador" class="java.lang.String"/>
+	<field name="t_comprador_apellidos_comprador" class="java.lang.String"/>
+	<field name="t_comprador_dui_comprador" class="java.lang.String"/>
+	<field name="t_comprador_nit_comprador" class="java.lang.String"/>
+	<field name="t_comprador_sexo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_tipo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_correo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_telefono_comprador" class="java.lang.String"/>
+	<field name="t_comprador_movil_comprador" class="java.lang.String"/>
+	<field name="t_comprador_direccion_comprador" class="java.lang.String"/>
+	<field name="t_comprador_estado_comprador" class="java.lang.Boolean"/>
+	<field name="t_comprador_fechanacimiento_comprador" class="java.sql.Date"/>
+	<title>
+		<band height="105" splitType="Stretch">
+			<subreport>
+				<reportElement x="13" y="0" width="200" height="79" uuid="fc428174-e3d0-412f-aa1f-adfddc1ae38f"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="104" width="555" height="1" uuid="d6bba73a-7b30-4396-abfb-68f5c1adc079"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="81" width="554" height="20" uuid="28a0e2b3-81ed-4fe2-8b1d-5c66dc981961"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE COMPRADOR</style>]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="355" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="53" width="124" height="20" uuid="5dd44ab1-6e43-4a4a-a6b3-b6097bb9a9fa"/>
+				<text><![CDATA[NOMBRES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="53" width="100" height="20" uuid="5276033f-a590-458d-8a60-8936e4476795"/>
+				<text><![CDATA[APELLIDOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="73" width="124" height="20" uuid="bad0d47e-91fa-410f-9102-5776ac0afc96"/>
+				<text><![CDATA[DUI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="73" width="100" height="20" uuid="5d5c9b73-c80f-4f14-92f6-d557cd54b83e"/>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="93" width="124" height="20" uuid="ca96215a-05e7-40b7-8644-834785ab6a58"/>
+				<text><![CDATA[FECHA DE NACIMIENTO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="113" width="153" height="20" uuid="a8597722-ea42-46c5-970a-c36702ebc468"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_sexo_comprador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="113" width="124" height="20" uuid="cb69bd37-ff96-40d1-98bc-b8927b6a6433"/>
+				<text><![CDATA[SEXO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="113" width="100" height="20" uuid="dbbadc07-4dec-4efa-8bdb-86aee6285469"/>
+				<text><![CDATA[TIPO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="405" y="113" width="132" height="20" uuid="59b3777a-7751-42b3-a1e6-39b30a9f622f"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_tipo_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="246" width="153" height="20" uuid="c2d9cad1-d432-41a6-8338-7ac10c3b5c85"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_correo_comprador}.equals("")? "----":$F{t_comprador_correo_comprador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="246" width="124" height="20" uuid="049e8abf-7b85-4fb7-8d84-e2bb6d18fd6d"/>
+				<text><![CDATA[CORREO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="246" width="114" height="20" uuid="ced30455-31ab-4a24-b785-65da6fdfa5e0"/>
+				<text><![CDATA[TELÉFONO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="266" width="124" height="20" uuid="8cedcbf8-9f4f-4731-8eb3-f5778124791c"/>
+				<text><![CDATA[MÓVIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="133" width="124" height="20" uuid="59ed88ad-1b81-4d7a-8cb9-81df6ad0d3f3"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="286" width="124" height="20" uuid="3b85921f-831b-4233-8a97-8ed842f4d48b"/>
+				<text><![CDATA[DIRECCIÓN:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="286" width="397" height="20" uuid="abc1e929-2a69-4e38-abaa-ff04dad59682"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_direccion_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="405" y="246" width="130" height="20" uuid="e2cfa26a-cba8-42bc-8ea2-606e3439d201"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_telefono_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="266" width="153" height="20" uuid="077b715b-0370-40f1-ab01-22f9e41ae20f"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_movil_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="53" width="153" height="20" uuid="2b67ae95-4d32-484e-8f38-8b93aeb0a55f"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="405" y="53" width="132" height="20" uuid="469a995f-2212-4e12-810c-753779bf9a3f"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="73" width="153" height="20" uuid="798d743f-287e-45c4-859f-eca76aa894ab"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_dui_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="405" y="73" width="132" height="20" uuid="f27a6df5-71df-4af2-b2a2-6a571530732a"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_nit_comprador}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="133" width="399" height="20" uuid="ce81037d-5cb9-4648-82f9-146e92fc80a1"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_estado_comprador}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="138" y="93" width="153" height="20" uuid="1cbb715c-7197-4960-807f-1d1552df78a7"/>
+				<textFieldExpression><![CDATA[$F{t_comprador_fechanacimiento_comprador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="291" y="93" width="100" height="20" uuid="f7b19c50-ea01-4cce-8bce-6c5887f9d059"/>
+				<text><![CDATA[EDAD (años):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="405" y="93" width="132" height="20" uuid="d7c0bc75-c3a9-41fe-9628-60a5b1c2a1f1"/>
+				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="683c5731-22a0-43c1-a718-3d56eb1bacfe"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="198" width="554" height="20" uuid="ec62b69b-ac4c-4923-ba6f-31a02d570c03"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CONTACTO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="217" width="555" height="1" uuid="0196c90c-0d0f-4a3f-8b71-bf6260b9db5a"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="554" height="20" uuid="56035245-882d-4e83-ae70-76b7236bce49"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PERSONALES</style>]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="430" y="16" width="80" height="20" uuid="30b175b1-48c1-47d4-9e16-0c9e8aa9e068"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="16" width="40" height="20" uuid="5a021afa-0626-4f43-b531-7232d0751c8a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

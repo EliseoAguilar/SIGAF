@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <style>
+                    #fData\:opMenu td{
+                        border: none !important;
+                    }
+
+                    #fData\:opMenu  tr{
+                        border: none !important;
+                    }
+
+
+
+                </style>
+
+
+                <p:outputPanel id="padding"  > 
+
+
+
+                    <p:outputPanel rendered="#{bitacoraBean.showData}">
+
+
+
+                        <p:panel id="pBit" header="Administrar bitacora" style="margin-bottom:20px">
+                            <h:form id="fData">
+                                <p:fieldset>
+                                    <p:panelGrid id="opMenu"  style="width: 100%; margin: auto;">   
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputText value="Usuario:*"/>
+                                            </p:column>
+
+                                            <p:column style="width: 15%;">
+                                                <h:outputText value="Fecha inicio:*"/>
+                                            </p:column>
+
+
+                                            <p:column style="width: 15%;">
+                                                <h:outputText value="Fecha fin:*"/>
+                                            </p:column>
+
+                                            <p:column style="width: 10%;">
+                                                <h:outputText value=""/>
+                                            </p:column>
+
+                                        </p:row>
+
+                                        <p:row>
+
+                                            <p:column >
+                                                <p:selectOneMenu id="Ejer"  style="width: 100%"  value="#{bitacoraBean.idUsuario}"  >
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{bitacoraBean.listaUsuarios}" var="l" itemLabel="#{l.nombreUsuario}" itemValue="#{l.idUsuario}"  />
+                                                </p:selectOneMenu>
+                                                <br></br>
+                                                <h:outputText value="#{bitacoraBean.msgIdUsuario}" style=" color:  red" />
+
+                                            </p:column>
+                                            <p:column  >
+                                                <p:calendar  value="#{bitacoraBean.fecha1}"  maxdate="#{bitacoraBean.fechaActual}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy"/>
+                                                <br></br>
+                                                <h:outputText value="#{bitacoraBean.msgFecha1}" style=" color:  red" />
+
+                                            </p:column>
+                                            <p:column>
+                                                <p:calendar  value="#{bitacoraBean.fecha2}" maxdate="#{bitacoraBean.fechaActual}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy"/>
+                                                <br></br>
+                                                <h:outputText value="#{bitacoraBean.msgFecha2}" style=" color:  red" />
+
+                                            </p:column>
+
+
+                                            <p:column>
+                                                <p:commandButton  update=":padding"  icon="fa fa-search" title="Buscar" actionListener="#{bitacoraBean.cargaBitacora()}" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+
+
+
+                                    </p:panelGrid>
+                                </p:fieldset>
+
+                            </h:form>
+
+                            <p:outputPanel id="datos"  rendered="#{bitacoraBean.usuarioSelecionado eq null? false:true}" > 
+                                <br></br>
+                                <p:panelGrid  style=" width: 100%"   >
+
+                                    <p:row >
+                                        <p:column style="background-color: #ebedf0">Empleado</p:column>
+                                        <p:column style="background-color: #ebedf0">Tipo usuario</p:column>
+                                        <p:column  style="background-color: #ebedf0">Estado usuario</p:column>
+                                    </p:row>
+
+
+
+                                    <p:row>
+                                        <p:column  >
+                                            <h:outputText value="#{bitacoraBean.usuarioSelecionado.TEmpleado.nombreEmpleado} #{bitacoraBean.usuarioSelecionado.TEmpleado.apellidoEmpleado}" />
+                                        </p:column>
+
+                                        <p:column  >
+                                            <h:outputText value="#{bitacoraBean.tipoUser(bitacoraBean.usuarioSelecionado.tipoUsuario)}" />
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText value="#{bitacoraBean.usuarioSelecionado.estadoUsuario? 'Activo' : 'Inactivo'}"  />
+                                        </p:column>
+
+                                    </p:row>
+
+                                </p:panelGrid>
+
+
+                                <br></br>
+
+                                <h:form>
+                                    <p:dataTable   id="bitData"
+                                                   var="bit" 
+                                                   value="#{bitacoraBean.listaBitacora}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                    currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                    rowsPerPageTemplate="5,10,15"
+                                                    paginatorPosition="bottom"
+                                                   emptyMessage="No se encontraron acciones."
+                                                   rowIndexVar="No"
+                                                   widgetVar="datosbit"
+                                                   >
+                                        
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <p:inputText id="globalFilter" onkeyup="PF('datosbit').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:column headerText="Nº" style="text-align: center"  width="5%" >
+                                            <h:outputText value="#{No+1}" />
+                                        </p:column>
+
+                                        <p:column headerText="Tabla" sortBy="#{bit.tableBitacora}" filterBy="#{bit.tableBitacora}" filterMatchMode="contains" width="35%" filterStyle="width: 100%" >
+                                            <h:outputText value="#{bit.tableBitacora}" />
+                                        </p:column>
+
+                                        <p:column headerText="Acción"  sortBy="#{bit.accionBitacora}" filterBy="#{bit.accionBitacora}" filterMatchMode="contains" width="40%" filterStyle="width: 100%" >
+                                            <h:outputText value="#{bit.accionBitacora}" />
+                                        </p:column>
+
+                                        <p:column headerText="Fecha" style="text-align: center"  sortBy="#{bit.fechaBitacora}" filterBy="#{bit.fechaBitacora}" filterMatchMode="contains" width="35%" filterStyle="width: 100%" >
+                                            <h:outputText value="#{bit.fechaBitacora}"  >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Hora" style="text-align: center"   sortBy="#{bit.horaBitacora}" filterBy="#{bit.horaBitacora}" filterMatchMode="contains" width="35%" filterStyle="width: 100%" >
+                                            <h:outputText value="#{bit.horaBitacora}" />
+                                        </p:column>
+
+                                        <p:column width="9%">
+                                            <p:commandButton  update=":padding" oncomplete="PF('dlVer').show()" icon="fa fa-eye" title="Ver" style="#{bitacoraBean.btnDarDeAlta}">
+                                                <f:setPropertyActionListener value="#{bit}" target="#{bitacoraBean.bitacoraSelecionada}" />
+                                            </p:commandButton>
+
+
+                                        </p:column>
+
+
+                                        <f:facet name="footer">
+
+                                        </f:facet>
+                                    </p:dataTable>
+                                </h:form>
+
+                                <p:dialog header="Datos de la acción" widgetVar="dlVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                    <h:form target="_blank">
+                                        <p:outputPanel id="dlVerArea" style=" width: 100%" styleClass="companyHeaderGrid">
+
+
+
+                                            <b><h:outputText value="Datos del usuario"></h:outputText></b> 
+                                            <p:panelGrid id="pgVer"  style=" width: 100%" >
+
+                                                <p:row>
+                                                    <p:column rowspan="5" colspan="2">
+                                                        <h:graphicImage value="#{bitacoraBean.usuarioSelecionado.TEmpleado.fotoEmpleado} " width="120px" height="150px" />
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Empleado:" />
+                                                    </p:column>  
+                                                    <p:column>  
+                                                        <h:outputText value="#{bitacoraBean.usuarioSelecionado.TEmpleado.nombreEmpleado} #{usuarioBean.usuarioSelecionado.TEmpleado.apellidoEmpleado}  " />
+                                                    </p:column>  
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Usuario:" />
+                                                    </p:column>  
+                                                    <p:column> 
+                                                        <h:outputText value="#{bitacoraBean.usuarioSelecionado.nombreUsuario}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Tipo:" />
+                                                    </p:column>  
+                                                    <p:column> 
+                                                        <h:outputText value="#{bitacoraBean.tipoUser(bitacoraBean.usuarioSelecionado.tipoUsuario)}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Estado:" />
+                                                    </p:column>  
+                                                    <p:column> 
+                                                        <h:outputText value="#{bitacoraBean.usuarioSelecionado.estadoUsuario? 'Activo' : 'Inactivo'}" />
+                                                    </p:column>
+                                                </p:row>
+
+                                            </p:panelGrid> 
+
+
+
+
+
+                                            <br></br>
+                                            <b><h:outputText value="Datos de la  acción"></h:outputText></b>
+                                            <p:panelGrid id="pgVer2" columns="2" style="text-align:center; width: 100%" >
+
+                                                <h:outputText value="Tabla:" />
+                                                <h:outputText value="#{bitacoraBean.bitacoraSelecionada.tableBitacora}" />
+
+                                                <h:outputText value="Acción:" />
+                                                <h:outputText value="#{bitacoraBean.bitacoraSelecionada.accionBitacora}" />
+
+                                                <h:outputText value="Fecha:" />
+                                                <h:outputText value="#{bitacoraBean.bitacoraSelecionada.fechaBitacora}" >
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+
+                                                <h:outputText value="Hora:" />
+                                                <h:outputText value="#{bitacoraBean.bitacoraSelecionada.horaBitacora}" />
+
+                                                <h:outputText value="Datos:" />
+                                                <h:outputText value="#{bitacoraBean.bitacoraSelecionada.datosBitacora}" />
+
+                                            </p:panelGrid>
+                                            <br></br>
+
+                                            <center>
+                                                <p:splitButton id="btnVer"   ajax="false"  actionListener="#{bitacoraBean.generarUsuario()}"     value="Ver PDF"> 
+
+                                              
+
+                                                <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{bitacoraBean.generarUsuarioPDF}"     value="Descargar PDF"/> 
+                                                
+                                                </p:splitButton> 
+
+                                            </center>
+
+
+                                      
+                                        </p:outputPanel>
+                                    </h:form>
+                                </p:dialog>
+
+                            </p:outputPanel>
+                        </p:panel>
+
+                    </p:outputPanel>
+
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#seg").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
+

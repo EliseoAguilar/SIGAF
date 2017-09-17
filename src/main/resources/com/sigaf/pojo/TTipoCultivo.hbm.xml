@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TTipoCultivo" table="t_tipo_cultivo" schema="public" optimistic-lock="version">
+        <id name="idTipoCultivo" type="int">
+            <column name="id_tipo_cultivo" />
+            <generator class="sequence">
+                <param name="sequence">t_tipo_cultivo_id_tipo_cultivo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TAreaCultivo" class="com.sigaf.pojo.TAreaCultivo" fetch="select">
+            <column name="id_area_cultivo" />
+        </many-to-one>
+        <property name="nombreTipoCultivo" type="string">
+            <column name="nombre_tipo_cultivo" />
+        </property>
+        <property name="estadoTipoCultivo" type="java.lang.Boolean">
+            <column name="estado_tipo_cultivo" />
+        </property>
+        <set name="TProductos" table="t_producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtipocultivo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProducto" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientesPersonasMorosos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b17e2f0-e720-4ffd-8d11-7399126195f5">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreEntidad" class="java.lang.String"/>
+	<parameter name="direccionEntidad" class="java.lang.String"/>
+	<parameter name="telEntidad" class="java.lang.String"/>
+	<parameter name="logoEntidad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="abreviacionEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[abreviacionEntidad]]></fieldDescription>
+	</field>
+	<field name="actaEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[actaEntidad]]></fieldDescription>
+	</field>
+	<field name="calificacionEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[calificacionEntidad]]></fieldDescription>
+	</field>
+	<field name="celularEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[celularEntidad]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="codigoClienteEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[codigoClienteEntidad]]></fieldDescription>
+	</field>
+	<field name="codigoEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[codigoEntidad]]></fieldDescription>
+	</field>
+	<field name="correoEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[correoEntidad]]></fieldDescription>
+	</field>
+	<field name="credencialEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[credencialEntidad]]></fieldDescription>
+	</field>
+	<field name="direccionEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[direccionEntidad]]></fieldDescription>
+	</field>
+	<field name="duiRepresentanteEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[duiRepresentanteEntidad]]></fieldDescription>
+	</field>
+	<field name="estadoEntidad" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[estadoEntidad]]></fieldDescription>
+	</field>
+	<field name="giroEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[giroEntidad]]></fieldDescription>
+	</field>
+	<field name="idEntidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idEntidad]]></fieldDescription>
+	</field>
+	<field name="logoEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[logoEntidad]]></fieldDescription>
+	</field>
+	<field name="misionEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[misionEntidad]]></fieldDescription>
+	</field>
+	<field name="nitEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[nitEntidad]]></fieldDescription>
+	</field>
+	<field name="nitRepresentanteEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[nitRepresentanteEntidad]]></fieldDescription>
+	</field>
+	<field name="nombreEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreEntidad]]></fieldDescription>
+	</field>
+	<field name="nombreRepresentanteEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreRepresentanteEntidad]]></fieldDescription>
+	</field>
+	<field name="telefonoEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[telefonoEntidad]]></fieldDescription>
+	</field>
+	<field name="visionEntidad" class="java.lang.String">
+		<fieldDescription><![CDATA[visionEntidad]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="114" y="13" width="350" height="20" uuid="312a8792-e665-431c-b815-db97c8d55518"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{nombreEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="33" width="350" height="20" uuid="3c6f73e2-b3dd-473c-9563-adc39d5cc53d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{direccionEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="53" width="350" height="20" uuid="6f58b468-c749-4ea6-a701-10b851961e49"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Tel.:"+$P{telEntidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="476" y="33" width="78" height="20" uuid="e7ba9970-b064-4a9a-9d72-6ccff6608888"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="476" y="53" width="78" height="20" uuid="b94a0483-6e37-46be-8d20-c4ecd6f38f38"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="26" y="13" width="88" height="60" uuid="46d985e0-9a81-4992-9775-644f80d79553"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($P{logoEntidad}.split(",")[1].getBytes()))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="79" width="555" height="20" uuid="e19d5ac6-b43a-4810-9fb8-e8113683fa6c"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CLIENTES CON MORA (COOPERATIVAS)</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="101" width="555" height="1" uuid="86abda47-240f-4c7e-a783-391d2314631e"/>
+			</line>
+			<staticText>
+				<reportElement x="14" y="104" width="62" height="20" uuid="c5f02beb-e727-4755-ba15-44fd1ec89740"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="104" width="55" height="20" uuid="59f8f150-c0de-4383-9d2d-672682ddfbd0"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="104" width="65" height="20" uuid="342bf1b8-fa80-48d5-a277-5774881e531d"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NIT</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="121" width="555" height="1" uuid="7b636709-ca60-4b82-93a3-52558afbd513"/>
+			</line>
+			<staticText>
+				<reportElement x="436" y="104" width="118" height="20" uuid="a87fb01f-fb0f-4a10-8db8-aeb8eff676ff"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPRESENTANTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="104" width="95" height="20" uuid="e3d3b4d6-6016-4771-a0ab-eebce188ccc0"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="357" y="0" width="79" height="20" uuid="4c67c4be-c225-48e9-9d8b-94511686cbfc"/>
+				<textFieldExpression><![CDATA[$F{nitEntidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="173" y="0" width="184" height="20" uuid="c3827edf-bafa-4144-9f9d-c119ad3388df"/>
+				<textFieldExpression><![CDATA[$F{nombreEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="0" width="62" height="20" uuid="4e962547-0fba-4fef-aa1b-c06a46c603e5"/>
+				<textFieldExpression><![CDATA[$F{codigoClienteEntidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="436" y="0" width="119" height="20" uuid="49e55db1-6ba1-4e96-bf89-ffe98983036a"/>
+				<textFieldExpression><![CDATA[$F{nombreRepresentanteEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="95" height="20" uuid="62e447a1-98a5-4f2b-bb05-70cc327ac7ed"/>
+				<textFieldExpression><![CDATA[$F{codigoEntidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="18" width="80" height="20" uuid="1525cfd3-37d2-4e1b-9971-1a3d49e2ff61"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="18" width="40" height="20" uuid="c0bbf765-fa94-4dd0-92f8-7d2a70abe432"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

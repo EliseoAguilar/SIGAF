@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TBajaActivoFijo" table="t_baja_activo_fijo" schema="public" optimistic-lock="version">
+        <id name="idBajaActivoFijo" type="int">
+            <column name="id_baja_activo_fijo" />
+               <generator class="sequence">
+                <param name="sequence">t_baja_activo_fijo_id_baja_activo_fijo_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TActivoFijo" class="com.sigaf.pojo.TActivoFijo" fetch="select">
+            <column name="id_activo_fijo_baja_activo_fijo" />
+        </many-to-one>
+        <many-to-one name="TPartida" class="com.sigaf.pojo.TPartida" fetch="select">
+            <column name="id_partida_baja_activo_fijo" />
+        </many-to-one>
+        <property name="tipoBajaActivoFijo" type="string">
+            <column name="tipo_baja_activo_fijo" />
+        </property>
+        <property name="valorBajaActivoFijo" type="big_decimal">
+            <column name="valor_baja_activo_fijo" precision="131089" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

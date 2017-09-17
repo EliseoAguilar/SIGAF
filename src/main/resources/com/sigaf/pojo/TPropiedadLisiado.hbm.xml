@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TPropiedadLisiado" table="t_propiedad_lisiado" schema="public" optimistic-lock="version">
+        <id name="idPropiedadLisiado" type="int">
+            <column name="id_propiedad_lisiado" />
+               <generator class="sequence">
+                <param name="sequence">t_propiedad_lisiado_id_propiedad_lisiado_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TLisiado" class="com.sigaf.pojo.TLisiado" fetch="select">
+            <column name="id_lisiado" />
+        </many-to-one>
+        <property name="nombrePropiedad" type="string">
+            <column name="nombre_propiedad" />
+        </property>
+    </class>
+</hibernate-mapping>

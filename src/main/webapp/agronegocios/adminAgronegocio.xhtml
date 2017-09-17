@@ -1,0 +1,1235 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .first-row {
+                        background-color: #ffffff !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .second-row {
+                        background-color: #fff999 !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #opMenu td{
+                        border: none !important;
+
+                    }
+                    #opMenu tr{
+                        border: none !important;
+
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />                   
+                    <p:outputPanel  rendered="#{agronegocioBean.mostrarPago}" style=" width: 100%">
+                        <h:form id="fAgregarArea">
+                            <p:panel id="pRegistrarComprador" header="Agregar pago"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <br></br>
+                                <p:panelGrid  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                            <center>  <h:outputText value="Agronegocio"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 15%; ">
+                                            <h:outputText value="Código:"/> <br></br>
+                                            <h:outputText value="Comprador:"/> <br></br>
+                                            <h:outputText value="DUI:"/> <br></br>
+                                            <h:outputText value="Tipo:"/> <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 35%">
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.codigo}"/> <br></br>
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.TComprador.nombresComprador} #{agronegocioBean.agronegocioSeleccionado.TComprador.apellidosComprador}"/> <br></br>
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.TComprador.duiComprador}"/> <br></br>
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.tipo}"/> <br></br>
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:25%; ">
+                                            <h:outputText value="Plazo (meses):"/> <br></br>
+                                            <h:outputText value="Fecha de pago: "/> <br></br>
+                                            <h:outputText value="Fecha estipulada de pago:"/>
+                                            <br></br>
+                                            <h:outputText value="Días de retraso en el pago:"/> <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.plazo}"/> <br></br>
+                                            <h:outputText value="#{agronegocioBean.fechaDePago}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" /> </h:outputText> <br></br>
+                                            <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.fechapago}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{agronegocioBean.dias}"/> <br></br>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column colspan="6" style=" width: 25%; background-color: #ebedf0 "> 
+                                            <center>           <h:outputText value="Pago"/> </center> 
+                                        </p:column>
+                                        <p:column colspan="3" style=" width: 25%; background-color: #ebedf0 "> 
+                                            <center>           <h:outputText value="Detalle"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="6" style=" width: 50%;"> 
+                                            <h:outputText value="Forma"/> 
+                                            <p:selectOneMenu  value="#{agronegocioBean.tipoefectivo}" style=" width: 100%;">
+                                                <p:ajax update="numeroCheque" listener="#{agronegocioBean.cambiarForma1}" />
+                                                <f:selectItem itemLabel="Efectivo" itemValue="true" />
+                                                <f:selectItem itemLabel="Cheque" itemValue="false" />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="Numero de cheque"/>
+                                            <p:outputPanel id="numeroCheque">
+                                                <p:inputText disabled="#{agronegocioBean.habilitar}" value="#{agronegocioBean.pagoAgro.cheque}"  style=" width: 100%" /> 
+                                                <h:outputText value="#{agronegocioBean.msgCheque}" style=" color:  red" />
+                                            </p:outputPanel>
+                                            <br></br>
+                                        </p:column>
+                                        <p:column colspan="2" style=" width: 25%">
+                                            <h:outputText value="Monto: "/> 
+                                            <br></br>                                            
+                                            <h:outputText value="Interés:"/>
+                                            <br></br>
+                                            <h:outputText value="Interés por retraso:"/>
+                                            <br></br>
+                                            <h:outputText value="Total:"/><br></br>
+                                            <h:outputText value="Comisión:"/>
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{agronegocioBean.monto}">
+                                                <f:convertNumber  pattern=",#00.00" locale="en-US" />
+                                            </h:outputText><br></br>
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{agronegocioBean.interes}">
+                                                <f:convertNumber  pattern=",#00.00" locale="en-US" />
+                                            </h:outputText><br></br>
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{agronegocioBean.mora}">
+                                                <f:convertNumber  pattern="#0.00" locale="en-US" />
+                                            </h:outputText><br></br>
+                                            <b>
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{agronegocioBean.totales}">
+                                                    <f:convertNumber  pattern="#0.00" locale="en-US" />
+                                                </h:outputText>
+                                            </b>
+                                            <br></br>
+                                            <b>
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{agronegocioBean.comision}">
+                                                    <f:convertNumber  pattern="#0.00" locale="en-US" />
+                                                </h:outputText>
+                                            </b>
+                                            <br></br>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{agronegocioBean.validarFormularioPago()}"  update=":padding"   icon="fa fa-check" style="#{agronegocioBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton  actionListener="#{agronegocioBean.enableShowDataBean()}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{agronegocioBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{agronegocioBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea agregar este pago?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{agronegocioBean.registtrarPago()}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{agronegocioBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{agronegocioBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{agronegocioBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{agronegocioBean.showCreate}" >
+                        <h:form id="fEmpleados" >                            
+                            <p:panel id="basic"  header="Agregar agronegocio"  style="width: 90%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pgEmpleado3" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                    <p:row>                                              
+                                        <p:column style=" width: 75%">
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="Fecha:*"/>
+                                        </p:column>
+                                    </p:row>                                            
+                                    <p:row>    
+                                        <p:column >     
+                                            <p:inputText   value="#{agronegocioBean.agronegocio.codigo}"    style="width: 30%;" >  </p:inputText>
+                                            <h:outputText value="#{agronegocioBean.msgCodigo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:calendar navigator="true" yearRange="1910:" maxdate="#{agronegocioBean.hoy}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{agronegocioBean.agronegocio.fecha}"/><br></br>
+                                            <h:outputText value="#{agronegocioBean.msgFecha}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <hr></hr>
+                                <p:tabView >
+                                    <p:tab title="Cultivos y productos">
+                                        <p:outputPanel id="productores">
+                                            <b> <h:outputText  value="Productor"/></b>
+                                            <hr></hr>
+                                            <p:outputPanel id="productorIndividual"  style=" width: 100%">
+                                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                                    <p:row>
+                                                        <p:column>
+                                                            <h:outputText value="DUI:*"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <h:outputText value="Nombre:*"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="1" style=" width: 30%">
+                                                            <p:inputText style=" width: 100%"  value="#{agronegocioBean.productorIndividualSeleccionado.duiProductorIndividual}" readonly="true" /> 
+                                                        </p:column>
+                                                        <p:column colspan="1" style=" width: 70%">
+                                                            <p:inputText style=" width: 100%"  value="#{agronegocioBean.productorIndividualSeleccionado.nombresProdcutorIndividual} #{agronegocioBean.productorIndividualSeleccionado.apellidosProductorIndividual}" readonly="true" /> 
+                                                        </p:column>
+                                                        <p:column colspan="1" style=" width: 100%">
+                                                            <p:commandButton  update=":padding" actionListener="#{agronegocioBean.mostrarProductorIndividual()}" oncomplete="PF('dgBuscarProductor').show()" icon="fa fa-search" title="Buscar productor" >
+                                                            </p:commandButton>
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="1" style=" width: 25%">
+                                                            <h:outputText value="#{agronegocioBean.msgProductor}" style=" color:  red" />
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid> 
+                                            </p:outputPanel>
+                                        </p:outputPanel>
+                                        <br></br>
+                                        <b> <h:outputText value="Cultivo"  /></b>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Nombre:*"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Sistema de riego:*"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Asistencia tecnica:*"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Oganizacion de apoyo:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="1" style=" width: 30%">
+                                                    <p:inputText style=" width: 100%"  value="#{agronegocioBean.productoSeleccionado.nombre}" readonly="true" /> 
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 20%">
+                                                    <p:inputText style=" width: 100%"  value="#{agronegocioBean.productoSeleccionado.sistema}" readonly="true" /> 
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 20%">
+                                                    <p:inputText style=" width: 100%"  value="#{agronegocioBean.productoSeleccionado.asistencia eq true? 'Si': 'No' or agronegocioBean.productoSeleccionado.asistencia eq false? 'No': '' }" readonly="true" /> 
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 30%">
+                                                    <p:inputText style=" width: 100%"  value="#{agronegocioBean.productoSeleccionado.organizacion}" readonly="true" /> 
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 100%">
+                                                    <p:commandButton  update=":padding"  oncomplete="PF('dgBuscarCultivo').show()" icon="fa fa-search" title="Buscar cultivos" >
+                                                        <f:actionListener binding="#{agronegocioBean.productos()}"/>
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="1" style=" width: 30%">
+                                                    <h:outputText value="#{agronegocioBean.msgProductoSeleccionadoPasar}" style=" color:  red" />
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid> 
+                                        <p:panelGrid styleClass="companyHeaderGrid">
+                                            <p:row>   
+                                                <p:column>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <b>   <h:outputText value="Detalles del cultivo"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid id="pgEmpleado3" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                            <p:row>                                              
+                                                <p:column style=" width: 60%">
+                                                    <h:outputText value="Unidades:*"/>
+                                                </p:column>
+                                                <p:column style=" width: 20%">
+                                                    <h:outputText value="Precio ($):*"/>
+                                                </p:column>
+                                                <p:column style=" width: 20%">
+                                                    <h:outputText value="Cantidad:*"/>
+                                                </p:column>
+                                            </p:row>                                            
+                                            <p:row>    
+                                                <p:column >     
+                                                    <p:inputText   value="#{agronegocioBean.productoAgronegocio.unidad}"    style="width: 100%;" >  </p:inputText>
+                                                    <h:outputText value="#{agronegocioBean.msgUnidad}" style=" color:  red" />
+                                                </p:column>
+                                                <p:column > 
+                                                    <p:inputNumber   value="#{agronegocioBean.productoAgronegocio.precio}" minValue="0"    style="width: 100%;" >  </p:inputNumber>
+                                                    <h:outputText value="#{agronegocioBean.msgPrecio}" style=" color:  red" />
+                                                </p:column>
+                                                <p:column >  
+                                                    <p:inputNumber   value="#{agronegocioBean.productoAgronegocio.cantidad}" minValue="1"    style="width: 100%;" >  </p:inputNumber>
+                                                    <h:outputText value="#{agronegocioBean.msgCantidad}" style=" color:  red" />
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 100%">
+                                                    <p:commandButton  update=":padding" style="#{agronegocioBean.btnNuevo}" actionListener="#{agronegocioBean.validarPasar()}"  icon="fa fa-plus" title="Agregar cultivo" >
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Detalles">    
+                                        <p:outputPanel id="busqueda">
+                                            <b>     <h:outputText  value="Comprador"/>  </b>
+                                            <hr></hr>
+                                            <p:panelGrid  styleClass="companyHeaderGrid" style="width: 100%; margin: auto;">   
+                                                <p:row> 
+                                                    <p:column >                                                
+                                                        <h:outputText value="DUI:*"/>
+                                                    </p:column>
+                                                    <p:column >                                                
+                                                        <h:outputText value="Nombre:*"/>
+                                                    </p:column>
+                                                    <p:column >                                                
+                                                       
+                                                    </p:column>
+                                                </p:row>                                       
+                                                <p:row>
+                                                    <p:column style=" width: 30%" >
+                                                        <p:inputText id="dui"  value="#{agronegocioBean.compradorSeleccionado.duiComprador}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                                    </p:column>
+                                                    <p:column style=" width: 70%" >
+                                                        <p:inputText id="nombre"  value="#{agronegocioBean.compradorSeleccionado.nombresComprador} #{agronegocioBean.compradorSeleccionado.apellidosComprador}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                                    </p:column>
+                                                    <p:column  >
+                                                        <p:commandButton  update=":padding" actionListener="#{agronegocioBean.mostrarCompradores()}"  oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar comprador" >
+                                                        </p:commandButton>
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="#{agronegocioBean.msgComprador}" style=" color:  red" />
+                                                    </p:column>
+
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel>
+                                        <br></br>
+                                        <b> <h:outputText  value="Cultivos"/> </b>
+                                        <hr></hr>
+                                        <p:panelGrid  styleClass="companyHeaderGrid">
+                                            <p:row>
+                                                <p:column>
+                                                    <p:dataTable id="basicDT3" var="productos"  value="#{agronegocioBean.listaProductoAgronegocio}"  paginator="true"
+                                                                 widgetVar="cultivosDataDetalle"
+                                                                 currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"                                                
+                                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="10" paginatorPosition="bottom" style="width: 100%"
+                                                                 rowIndexVar="No" emptyMessage="No se encontraron cultivos o productos"
+                                                                 >
+                                                        <f:facet name="header"  >
+                                                        </f:facet>
+                                                        <p:column headerText="Nº" width="5%">
+                                                            <h:outputText value=" #{No+1}" />
+                                                        </p:column>
+                                                        <p:column headerText="Nombre" width="35%" filterBy="#{productos.nombre}" sortBy="#{productos.nombre}"  >
+                                                            <h:outputText value="#{productos.nombre}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Unidad" width="20%" filterBy="#{productos.unidad}" sortBy="#{productos.unidad}"  >
+                                                            <h:outputText value="#{productos.unidad}" />
+                                                        </p:column>
+                                                        <p:column headerText="Cantidad" width="12%" filterBy="#{productos.cantidad}" sortBy="#{productos.cantidad}"  >
+                                                            <div style=" text-align: center">
+                                                                <h:outputText value="#{productos.cantidad}" />
+                                                            </div>
+                                                        </p:column>
+                                                        <p:column headerText="Precio" width="10%" filterBy="#{productos.precio}" sortBy="#{productos.precio}"  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$" />
+                                                                <h:outputText value="#{productos.precio}">
+                                                                    <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>
+                                                        <p:column headerText="Total" width="10%" filterBy="#{productos.precio}" sortBy="#{productos.precio}"  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$" />
+                                                                <h:outputText value="#{agronegocioBean.calcularTotal(productos.cantidad, productos.precio)}">
+                                                                    <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>
+                                                        <p:column style=" width: 7%"  >  
+                                                            <p:commandButton update=":padding"     icon="fa fa-trash" title="Quitar cultivo" style="#{productoBean.btnCancelar}" actionListener="#{agronegocioBean.quitar(No)}" >
+                                                            </p:commandButton>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                    <h:outputText value="#{agronegocioBean.msglistaProductos}" style=" color:  red" />
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                       
+                                        <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">   
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText   value="Total ($):"/>  
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  style=" width: 30%"> 
+                                                    <p:inputNumber id="tagro" value="#{agronegocioBean.total}" readonly="true"   style=" width: 100%" />
+                                                   
+                                                  
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Forma de pago">
+                                        <p:outputPanel id="pcontado">
+                                            <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">   
+                                                <p:row>
+                                                    <p:column>
+                                                        <p:selectBooleanCheckbox id="tipo1" value="#{agronegocioBean.tipocontado}" >
+                                                            <p:ajax update="pcontado" listener="#{agronegocioBean.cambiarTipo1}" />
+                                                        </p:selectBooleanCheckbox> 
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;  <h:outputText  value="Agronegocio al contado"/> 
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p:selectBooleanCheckbox id="tipo2" value="#{agronegocioBean.tipocredito}"  >
+                                                            <p:ajax update="pcontado"  listener="#{agronegocioBean.cambiarTipo2}" />
+                                                        </p:selectBooleanCheckbox>
+                                                        &nbsp;&nbsp;   &nbsp;&nbsp;
+                                                        <h:outputText  value="Agronegocio al crédito"/> 
+                                                        <hr></hr>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                            <br></br>
+                                            <p:outputPanel  rendered="#{agronegocioBean.PContado}" >
+                                                <p:panelGrid id="addPanel5"  style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">   
+                                                    <p:row>
+                                                        <p:column>
+                                                            <h:outputText value="Forma:*"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <h:outputText value="Numero de cheque:*" /> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="1" style=" width: 50%"> 
+                                                            <p:selectOneMenu  value="#{agronegocioBean.tipoefectivo}" style=" width: 100%;">
+                                                                <p:ajax update="numeroCheque" listener="#{agronegocioBean.cambiarForma1}" />
+                                                                <f:selectItem itemLabel="Efectivo" itemValue="true" />
+                                                                <f:selectItem itemLabel="Cheque" itemValue="false" />
+                                                            </p:selectOneMenu>
+                                                        </p:column>
+                                                        <p:column colspan="1">
+                                                            <p:outputPanel id="numeroCheque">
+                                                                <p:inputText disabled="#{agronegocioBean.habilitar}" value="#{agronegocioBean.pagoAgro.cheque}"  style=" width: 100%" /> 
+                                                                <h:outputText value="#{agronegocioBean.msgCheque}" style=" color:  red" />
+                                                            </p:outputPanel>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <br></br>
+                                                <hr></hr>
+                                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                                    <p:row>
+                                                        <p:column style=" width: 50%" >
+                                                            <h:outputText value="Total de la deuda ($):"/>   
+                                                            <h:outputText value="#{agronegocioBean.total}">
+                                                                <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                        <p:column style=" width: 50%" >
+                                                            <h:outputText value="Comisión basada en ("/>
+                                                            <h:outputText value="#{agronegocioBean.politicaAgronegocio.tasaComisionAgronegocio}">
+                                                                <f:convertNumber    pattern="#0.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                            <h:outputText value=" %) ($):"/>
+                                                            <h:outputText value="#{agronegocioBean.comision}">
+                                                                <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row> 
+                                                </p:panelGrid>
+                                            </p:outputPanel>
+                                            <p:outputPanel id="calculos" rendered="#{agronegocioBean.PCredito}" >
+                                                <div aling="center">
+                                                    <p:outputPanel  rendered="#{agronegocioBean.PCredito}" >
+                                                        <b>  <h:outputText value="Crédito"/></b>
+                                                        <hr></hr>
+                                                        <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                                            <p:row>
+                                                                <p:column style=" width: 33%" >
+                                                                    <h:outputText value="Total ($):"/>
+                                                                </p:column>
+                                                                <p:column style=" width: 33%" >
+                                                                    <h:outputText value="Tasa de interés (%):"/>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column style=" width: 33%" >
+                                                                    <p:inputNumber  value="#{agronegocioBean.total}" readonly="true"   style=" width: 100%" />
+                                                                </p:column>
+                                                                <p:column style=" width: 33%" >
+                                                                    <p:inputNumber value="#{agronegocioBean.politicaAgronegocio.tasaInteresAgronegocio}"  readonly="true"   style=" width: 100%" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column style=" width: 33%" >
+                                                                    <h:outputText value="Plazo(meses):*"/>
+                                                                </p:column>
+                                                                <p:column style=" width: 33%" >
+                                                                    <h:outputText value="Comisión a aplicar (%):"/>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column style=" width: 33%" >
+                                                                    <p:inputNumber  value="#{agronegocioBean.agronegocio.plazo}" placeholder="12" decimalPlaces="0" minValue="0"   style=" width: 100%" />
+                                                                    <br></br>
+                                                                    <h:outputText value="#{agronegocioBean.msgPlazo}" style=" color:  red" />
+                                                                </p:column>
+                                                                <p:column style=" width: 33%" >
+                                                                    <p:inputNumber  value="#{agronegocioBean.politicaAgronegocio.tasaComisionAgronegocio}"  readonly="true"   style=" width: 100%" />
+                                                                </p:column>
+                                                                <p:column style=" width: 33%" >
+                                                                    <p:commandButton  value="Calcular pago" icon="fa fa-calendar" style="#{productoBean.btnModificar}" actionListener="#{agronegocioBean.mostrarCalculos}" update=":padding" > 
+                                                                    </p:commandButton>
+                                                                    <br></br>
+                                                                    <h:outputText value="#{agronegocioBean.msgDatosPago}" style=" color:  red" />
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+
+                                                    </p:outputPanel>
+
+
+                                                    <p:outputPanel rendered="#{agronegocioBean.mostrarTable}" style="width: 100%; " >
+                                                        <br></br>
+                                                        <b><h:outputText value="Detalles del pago"/></b>
+                                                        <hr></hr>
+                                                        <p:panelGrid styleClass="companyHeaderGrid" id="calc"  style="width: 100%; margin: auto;">
+                                                            <p:row>
+                                                                <p:column style=" width: 25%" >
+                                                                    <h:outputText value="Monto de la deuda: $"/>
+                                                                    <h:outputText value="#{agronegocioBean.total}">
+                                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                    </h:outputText>
+                                                                </p:column>
+                                                               
+                                                            </p:row>   
+                                                            <p:row>  
+                                                                <p:column style=" width: 25%" >
+                                                                    <h:outputText value="Interés: $"/>
+                                                                    <h:outputText value="#{agronegocioBean.interes}">
+                                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                    </h:outputText>
+                                                                </p:column>
+                                                                
+                                                            </p:row>   
+                                                            <p:row>
+                                                                <p:column style=" width: 25%" >
+                                                                    <h:outputText value="Total (Monto+Interes): $"/>
+                                                                    <h:outputText value="#{agronegocioBean.totales}">
+                                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                    </h:outputText>
+                                                                </p:column>
+                                                            </p:row>   
+                                                            <p:row>
+                                                                <p:column style=" width: 25%" >
+                                                                    <h:outputText value="Comisión: $"/> 
+                                                                    <h:outputText value="#{agronegocioBean.comisionCredito}"> 
+                                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                    </h:outputText>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                         <hr></hr>
+                                                        <p:panelGrid styleClass="companyHeaderGrid"   style="width: 100%; margin: auto;">
+                                                            <p:row>
+                                                                
+                                                                     <p:column style=" width: 25%" >
+                                                                    <h:outputText value="Fecha de pago:"/> 
+                                                                </p:column>
+                                                                
+                                                             
+                                                                    
+                                                            </p:row>
+                                                            
+                                                            <p:row>
+                                                                
+                                                                 
+                                                                
+                                                                <p:column style=" width: 25%" >
+                                                                    <p:calendar navigator="true" yearRange="1910:2100"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{agronegocioBean.agronegocio.fechapago}" /><br></br>
+                                                                    <h:outputText value="#{agronegocioBean.msgFechaEstipulada}" style=" color:  red" />
+                                                                </p:column>
+                                                                    
+                                                            </p:row>
+                                                            
+                                                            
+                                                            
+                                                            
+                                                        </p:panelGrid>
+                                                    </p:outputPanel>
+                                                </div>
+                                            </p:outputPanel>
+                                        </p:outputPanel>
+                                    </p:tab>
+                                </p:tabView>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{productoBean.btnCrear}" actionListener="#{agronegocioBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{agronegocioBean.btnLimpiar}"  value="Limpiar" id="btnClean"   actionListener="#{agronegocioBean.limpiarAgronegocio()}" update=":padding"  icon="fa fa-fw fa-minus"/>
+                                        <p:commandButton  actionListener="#{agronegocioBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </div>
+                                </center>  
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{agronegocioBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea agregar este agronegocio?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{agronegocioBean.btnNuevo}" value="Si" actionListener="#{agronegocioBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{agronegocioBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{agronegocioBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>  
+                        <p:dialog header="Buscar cultivo" widgetVar="dgBuscarCultivo"  width="70%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCultivo"> 
+                                <p:dataTable   id="activosData"
+                                               var="productos" 
+                                               value="#{agronegocioBean.listaProductosProductor}"
+                                               rows="5" rowExpandMode="multiple"
+                                               widgetVar="cultivosData"
+                                               paginator="true"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               paginatorPosition="bottom" 
+                                               rowsPerPageTemplate="5,10,15"
+                                               currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                               emptyMessage="No se encontraron cultivos o productos" rowIndexVar="No" >
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('cultivosData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" style=" width: 5%">  
+                                        <h:outputText value=" #{No+1}" />
+                                    </p:column>
+                                    <p:column headerText="Nombre" style=" width: 35%;" filterBy="#{productos.nombre}" sortBy="#{productos.nombre}">  
+                                        <h:outputText value="#{productos.nombre}"  />
+                                    </p:column>
+                                    <p:column headerText="Sistema" style=" width: 15%;" filterBy="#{productos.sistema}" sortBy="#{productos.sistema}">  
+                                        <h:outputText value="#{productos.sistema}"  />
+                                    </p:column>
+                                    <p:column headerText="Asistencia" style=" width: 12%;" filterBy="#{agronegocioBean.cambiarAsistencia(productos.asistencia)}" sortBy="#{agronegocioBean.cambiarAsistencia(productos.asistencia)}">  
+                                        <h:outputText value="#{agronegocioBean.cambiarAsistencia(productos.asistencia)}"/>
+                                    </p:column>
+                                    <p:column headerText="Organización" style=" width: 20%;" filterBy="#{productos.organizacion}" sortBy="#{productos.organizacion}">  
+                                        <h:outputText value="#{productos.organizacion}"  />
+                                    </p:column>
+                                    <p:column style=" width: 6%"  >  
+                                        <p:commandButton update=":padding"     icon="fa fa-check" title="Seleccionar cultivo o producto">
+                                            <f:setPropertyActionListener value="#{productos}" target="#{agronegocioBean.productoSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form> 
+                        </p:dialog>
+                        <p:dialog header="Buscar productor" widgetVar="dgBuscarProductor"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta2"> 
+                                <p:dataTable var="entidades" value="#{agronegocioBean.listaProductoresIndividuales}" widgetVar="productorDatamodal"
+                                             paginator="true"
+                                             rows="10"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontro ningun productor" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('productorDatamodal').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" width="5%">       
+                                        <h:outputText value="#{No+1}"  />
+                                    </p:column>
+                                    <p:column headerText="Nombres" width="25%" filterBy="#{entidades.nombresProdcutorIndividual}" sortBy="#{entidades.nombresProdcutorIndividual}" filterStyle="width:100%"  >
+                                        <h:outputText value="#{entidades.nombresProdcutorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="Apellidos" width="25%" filterBy="#{entidades.nombresProdcutorIndividual}" sortBy="#{entidades.nombresProdcutorIndividual}" filterStyle="width:100%"  >
+                                        <h:outputText value="#{entidades.apellidosProductorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="DUI" width="12%" filterBy="#{entidades.duiProductorIndividual}" sortBy="#{entidades.duiProductorIndividual}" filterStyle="width:100%"  >
+                                        <h:outputText value="#{entidades.duiProductorIndividual}" />
+                                    </p:column>
+                                    <p:column  width="6%">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar productor" style="#{solicitudCooperBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{agronegocioBean.productorIndividualSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                        <p:dialog header="Buscar comprador" widgetVar="dgBuscarCuenta"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta"> 
+                                <p:dataTable var="entidades" value="#{agronegocioBean.listaComprador}" widgetVar="compradorData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron compradores" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('compradorData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.nombresComprador}"  sortBy="#{entidades.nombresComprador}" 
+                                              headerText="Nombres"
+                                              filterMatchMode="contains" width="25%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.nombresComprador}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.apellidosComprador}"  sortBy="#{entidades.apellidosComprador}" 
+                                              headerText="Apellidos"
+                                              filterMatchMode="contains" width="25%"  filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.apellidosComprador}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.duiComprador}" sortBy="#{entidades.duiComprador}"  
+                                              headerText="DUI"
+                                              filterMatchMode="contains" width="12%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.duiComprador}"  />  
+                                    </p:column> 
+                                    <p:column  width="6%">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar comprador" >
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{agronegocioBean.compradorSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{agronegocioBean.showData}">
+                        <h:form target="_blank">     
+                            #{agronegocioBean.updateListaAgronegocios()}
+                            <p:panel id="pDatosCompradores" header="Administrar agronegocios" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nuevo agronegocio" id="add"  actionListener="#{agronegocioBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{agronegocioBean.btnNuevo}">
+                                                <f:actionListener binding="#{agronegocioBean.cargarNuevoAgronegocio()}"/> 
+                                            </p:commandButton>   
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="agronegocios" widgetVar="dataAgronegocios"  paginator="true" rows="10" value="#{agronegocioBean.listaAgronegocio}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  emptyMessage="No se encontraron agronegocios"
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15">
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('dataAgronegocios').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Código" width="15%" filterBy="#{agronegocios.codigo}"  filterStyle="width:100%" sortBy="#{agronegocios.codigo}" >
+                                            <h:outputText value="#{agronegocios.codigo}"/>
+                                        </p:column>
+                                        <p:column headerText="DUI comprador" width="15%" filterBy="#{agronegocios.TComprador.duiComprador}" sortBy="#{agronegocios.TComprador.duiComprador}"   filterStyle="width:100%" >
+                                            <h:outputText value="#{agronegocios.TComprador.duiComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre comprador" width="30%" filterBy="#{agronegocios.TComprador.duiComprador}" sortBy="#{agronegocios.TComprador.duiComprador}"   filterStyle="width:100%" >
+                                            <h:outputText value="#{agronegocios.TComprador.nombresComprador} #{agronegocios.TComprador.apellidosComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="Tipo" width="10%" filterBy="#{agronegocios.tipo}" sortBy="#{agronegocios.tipo}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{agronegocios.tipo}"></h:outputText>  
+                                        </p:column>
+                                        <p:column headerText="Estado" width="15%" filterBy="#{agronegocios.estado}" sortBy="#{agronegocios.estado}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{agronegocios.estado}"/>
+                                        </p:column>
+                                        <p:column headerText="Fecha" width="12%" filterBy="#{agronegocios.tipo}" sortBy="#{agronegocios.tipo}"  filterStyle="width:100%" >
+                                            <div style=" text-align: center">
+                                                <h:outputText value="#{agronegocios.fecha}">
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>  
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center"  >
+                                            <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye" style="#{agronegocios.estadoregistro eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener  value="#{agronegocios.TComprador}" target="#{agronegocioBean.compradorSeleccionado}" />                                                
+                                                <f:setPropertyActionListener  value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}"/>
+                                                <f:actionListener binding="#{agronegocioBean.cargarVistaAgronegocio()}"/> 
+                                                <p:menuitem rendered="#{agronegocios.estadoregistro}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                    <f:setPropertyActionListener value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{!agronegocios.estadoregistro}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{agronegocios.estado eq 'Pendiente'}"   update=":padding" value="Registrar pago"  icon="fa fa-money" >
+                                                    <f:setPropertyActionListener  value="#{agronegocios.TComprador}" target="#{agronegocioBean.compradorSeleccionado}" />                                                
+                                                    <f:setPropertyActionListener  value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}"/>
+                                                    <f:actionListener binding="#{agronegocioBean.cargarAgronegocio()}"/> 
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{agronegocios.estado eq 'Finalizado'}"  ajax="false" update=":padding" value="Generar recibo"  icon="fa fa-file-text-o" >
+                                                    <f:setPropertyActionListener  value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}"  />
+                                                    <f:actionListener binding="#{agronegocioBean.generarRecibo()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este agronegocio?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{agronegocioBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este agronegocio?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{agronegocioBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>    
+                        <p:dialog  width="65%" header="Datos del agronegocio" onHide="#{agronegocioBean.limpiarAgroVista()}" widgetVar="pgVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel > 
+                                    <p:tabView>
+                                        
+                                        <p:tab title="Registro"> 
+                                            <p:panelGrid  style="width: 100%;"> 
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Código: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.codigo}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Fecha: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Tipo: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.tipo}"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="Fecha de pago: "/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.fechapago}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column >
+                                                        <h:outputText value="Plazo: "/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.plazo} meses"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Total:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.total}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Interés:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.interes}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Comisión:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.comision}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Estado:"/>
+                                                    </p:column>
+                                                    <p:column colspan="3">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estadoregistro eq true? 'Activo': 'Inactivo'}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                            
+                                            
+                                        </p:tab>
+                                        <p:tab title="Comprador"> 
+                                           
+                                            <p:panelGrid  style="width: 100%;" > 
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Nombres: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.nombresComprador}"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Apellidos: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.apellidosComprador}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="DUI: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.duiComprador}"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="NIT: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.nitComprador}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Teléfono: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.telefonoComprador}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Móvil: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.movilComprador}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column colspan="1" style=" width: 25%">
+                                                        <h:outputText value="Dirección: "/>
+                                                    </p:column>
+                                                    <p:column colspan="3" style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.compradorSeleccionado.direccionComprador}"/>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                            
+                                        </p:tab>
+                                        
+                                        <p:tab title="Productor"> 
+                                            
+                                            <p:panelGrid  style="width: 100%;" > 
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Nombres: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.nombresProdcutorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Apellidos: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.apellidosProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="DUI: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.duiProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="NIT: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.nitProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Teléfono: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.telefonoProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Móvil: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.movilProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column colspan="1" style=" width: 25%">
+                                                        <h:outputText value="Dirección: "/>
+                                                    </p:column>
+                                                    <p:column colspan="3" style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.productorIndividualSeleccionadoVista.direccionProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        
+                                        
+                                        
+                                       
+                                        
+                                        <p:tab title="Pago"> 
+                                            <p:panelGrid  style="width: 100%;" > 
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Estado: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Fecha de pago: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.fecha eq null? '--/--/----': agronegocioBean.pagoAgro.fecha }">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Interés:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '----': agronegocioBean.pagoAgro.interes}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Otro interés (#{agronegocioBean.pagoAgro.dias} dias):"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '----': agronegocioBean.pagoAgro.otrosinteres}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Total pagado:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '----': agronegocioBean.totales}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Comisión:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '----': agronegocioBean.pagoAgro.comision}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Forma de pago: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.forma eq null? '----':agronegocioBean.pagoAgro.forma}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Numeo de cheque: "/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.cheque eq null? '----':agronegocioBean.pagoAgro.cheque }"/>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                         <p:tab title="Cultivos"> 
+                                            
+                                            <p:dataTable  id="basicDT" var="entidades" widgetVar="produrTable3"  paginator="true" rows="5" value="#{agronegocioBean.listaProductoAgronegocio}"
+                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                          paginatorPosition="bottom" style="width: 100%;"
+                                                          rowIndexVar="No" rowsPerPageTemplate="5"
+                                                          currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                          >
+                                                <f:facet name="header">
+                                                    <p:outputPanel>                                           
+                                                        <p:inputText id="globalFilter" onkeyup="PF('produrTable3').filter()" style="width:150px" placeholder="Buscar"/>
+                                                    </p:outputPanel>
+                                                </f:facet>
+                                                <p:column   
+                                                    headerText="Nº" width="5%" >                                             
+                                                    <h:outputText value="#{No+1}"  />  
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Nombre" width="35%" filterBy="#{entidades.nombre}" sortBy="#{entidades.nombre}" >                                             
+                                                    <h:outputText value="#{entidades.nombre}"  >
+                                                    </h:outputText>
+                                                </p:column> 
+                                                <p:column headerText="Unidad" width="10%" filterBy="#{entidades.unidad}" sortBy="#{entidades.unidad}"  
+                                                          >  
+                                                    <h:outputText value="#{entidades.unidad}"  />  
+                                                </p:column>  
+                                                <p:column  headerText="Cantidad" width="10%" filterBy="#{entidades.cantidad}" sortBy="#{entidades.cantidad}"  
+                                                           >   <div style=" text-align: center">
+                                                    <h:outputText value="#{entidades.cantidad}"  />  
+                                                     </div>
+                                                </p:column> 
+                                                <p:column headerText="Precio" width="10%" filterBy="#{entidades.precio}" sortBy="#{entidades.precio}" 
+                                                          >  <div style=" text-align: right">
+                                                    <h:outputText value="$"></h:outputText>
+                                                    <h:outputText value="#{entidades.precio}" >
+                                                        <f:convertNumber     pattern="#0.00" locale="en-US" />  
+                                                    </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                                <p:column headerText="Total" width="10%" filterBy="#{agronegocioBean.calcularTotal(entidades.cantidad, entidades.precio)}" sortBy="#{agronegocioBean.calcularTotal(entidades.cantidad, entidades.precio)}"  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$" />
+                                                                <h:outputText value="#{agronegocioBean.calcularTotal(entidades.cantidad, entidades.precio)}">
+                                                                    <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>
+                                            </p:dataTable>
+                                            
+                                            
+                                              </p:tab>
+                                    </p:tabView>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:setPropertyActionListener  value="#{agronegocios.TComprador}" target="#{agronegocioBean.compradorSeleccionado}" />                                                
+                                            <f:actionListener binding="#{agronegocioBean.verReporteAgronegocio()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{agronegocioBean.verReporteAgronegocioPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

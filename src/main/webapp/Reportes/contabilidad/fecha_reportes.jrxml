@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fecha_reportes" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6d08a1ae-b3ae-417f-b909-4dc62f55a6e8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_ejercicio" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     id_ejercicio, estado_ejercicio ,
+     case  WHEN estado_ejercicio = TRUE THEN current_date
+     ELSE fecha_cierre end
+
+FROM
+     t_ejercicio
+WHERE
+     id_ejercicio = $P{id_ejercicio}]]>
+	</queryString>
+	<field name="id_ejercicio" class="java.lang.Integer"/>
+	<field name="estado_ejercicio" class="java.lang.Boolean"/>
+	<field name="fecha_cierre" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="141" height="20" uuid="b99296d6-3031-44d7-84e8-0d349639299a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

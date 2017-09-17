@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TLisiado" table="t_lisiado" schema="public" optimistic-lock="version">
+        <id name="idLisiado" type="int">
+            <column name="id_lisiado" />
+           <generator class="sequence">
+                <param name="sequence">t_lisiado_id_lisiado_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TCliente" class="com.sigaf.pojo.TCliente" fetch="select">
+            <column name="id_cliente_lisiado" />
+        </many-to-one>
+      
+        <property name="nombreConyugue" type="string">
+            <column name="nombre_conyugue" />
+        </property>
+        <property name="telefonoConyugue" type="string">
+            <column name="telefono_conyugue" />
+        </property>
+        <property name="numeroHijos" type="java.lang.Integer">
+            <column name="numero_hijos" />
+        </property>
+        <property name="nombreHijoMayor" type="string">
+            <column name="nombre_hijo_mayor" />
+        </property>
+        <property name="telefonoHijo" type="string">
+            <column name="telefono_hijo" />
+        </property>
+        <property name="celularHijo" type="string">
+            <column name="celular_hijo" />
+        </property>
+        <property name="tenenciaVivienda" type="string">
+            <column name="tenencia_vivienda" />
+        </property>
+        <property name="anhosDeResidencia" type="java.lang.Integer">
+            <column name="anhos_de_residencia" />
+        </property>
+        <property name="propiedades" type="string">
+            <column name="propiedades" />
+        </property>
+        <property name="presupuesto" type="string">
+            <column name="presupuesto" />
+        </property>
+        <property name="experienciaCrediticia" type="java.lang.Boolean">
+            <column name="experiencia_crediticia" />
+        </property>
+        <property name="montoCreditoExperiencia" type="big_decimal">
+            <column name="monto_credito_experiencia" precision="131089" scale="0" />
+        </property>
+        <property name="institucionCrediticia" type="string">
+            <column name="institucion_crediticia" />
+        </property>
+        <property name="tipoLesion" type="string">
+            <column name="tipo_lesion" />
+        </property>
+        <property name="otrasEnfermedades" type="string">
+            <column name="otras_enfermedades" />
+        </property>
+        <property name="apellidoConyugue" type="string">
+            <column name="apellido_conyugue" />
+        </property>
+        <property name="apellidoHijo" type="string">
+            <column name="apellido_hijo" />
+        </property>
+        <property name="edadHijo" type="java.lang.Integer">
+            <column name="edad_hijo" />
+        </property>
+        
+        <property name="edadConyugue" type="java.lang.Integer">
+            <column name="edad_conyugue" />
+        </property>
+        
+        <property name="cartaLisiado" type="string">
+            <column name="carta_lisiado" />
+        </property>
+        <property name="lugarTrabajo" type="string">
+            <column name="lugar_trabajo" />
+        </property>
+        <property name="nombreJefe" type="string">
+            <column name="nombre_jefe" />
+        </property>
+        <property name="cargoTrabajo" type="string">
+            <column name="cargo_trabajo" />
+        </property>
+        <property name="telefonoTrabajo" type="string">
+            <column name="telefono_trabajo" />
+        </property>
+        <set name="TPropiedadLisiados" table="t_propiedad_lisiado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lisiado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPropiedadLisiado" />
+        </set>
+    </class>
+</hibernate-mapping>

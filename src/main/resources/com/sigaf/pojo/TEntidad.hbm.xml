@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TEntidad" table="t_entidad" schema="public" optimistic-lock="version">
+        <id name="idEntidad" type="int">
+            <column name="id_entidad" />
+              <generator class="sequence">
+                <param name="sequence">t_entidad_id_entidad_seq</param>
+            </generator>
+        </id>
+        <property name="nombreEntidad" type="string">
+            <column name="nombre_entidad" />
+        </property>
+        <property name="giroEntidad" type="string">
+            <column name="giro_entidad" />
+        </property>
+        <property name="correoEntidad" type="string">
+            <column name="correo_entidad" />
+        </property>
+        <property name="direccionEntidad" type="string">
+            <column name="direccion_entidad" />
+        </property>
+        <property name="nitEntidad" type="string">
+            <column name="nit_entidad" />
+        </property>
+        <property name="codigoEntidad" type="string">
+            <column name="codigo_entidad" />
+        </property>
+        <property name="nombreRepresentanteEntidad" type="string">
+            <column name="nombre_representante_entidad" />
+        </property>
+        <property name="codigoClienteEntidad" type="string">
+            <column name="codigo_cliente_entidad" />
+        </property>
+        <property name="telefonoEntidad" type="string">
+            <column name="telefono_entidad" />
+        </property>
+        <property name="celularEntidad" type="string">
+            <column name="celular_entidad" />
+        </property>
+        <property name="misionEntidad" type="string">
+            <column name="mision_entidad" />
+        </property>
+        <property name="visionEntidad" type="string">
+            <column name="vision_entidad" />
+        </property>
+        <property name="actaEntidad" type="string">
+            <column name="acta_entidad" />
+        </property>
+        <property name="estadoEntidad" type="java.lang.Boolean">
+            <column name="estado_entidad" />
+        </property>
+        <property name="credencialEntidad" type="string">
+            <column name="credencial_entidad" />
+        </property>
+        <property name="logoEntidad" type="string">
+            <column name="logo_entidad" />
+        </property>
+        <property name="duiRepresentanteEntidad" type="string">
+            <column name="dui_representante_entidad" />
+        </property>
+        <property name="nitRepresentanteEntidad" type="string">
+            <column name="nit_representante_entidad" />
+        </property>
+        <property name="abreviacionEntidad" type="string">
+            <column name="abreviacion_entidad" />
+        </property>
+        <property name="calificacionEntidad" type="string">
+            <column name="calificacion_entidad" />
+        </property>
+        <set name="TTipoActivos" table="t_tipo_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entidad_tipo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTipoActivo" />
+        </set>
+      
+        <set name="TEjercicios" table="t_ejercicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entidad_ejercicio" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEjercicio" />
+        </set>
+        <set name="TAreas" table="t_area" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identidad_area" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TArea" />
+        </set>
+        <set name="TProveedors" table="t_proveedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entidad_proveedor" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProveedor" />
+        </set>
+        <set name="TProductoCooperativas" table="t_producto_cooperativa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cooperativa" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoCooperativa" />
+        </set>
+        <set name="TEntidadProyectos" table="t_entidad_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identidad" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEntidadProyecto" />
+        </set>
+        <set name="TConfiguracions" table="t_configuracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entidad_configuracion" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TConfiguracion" />
+        </set>
+        <set name="TAgronegocios" table="t_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identidad" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAgronegocio" />
+        </set>
+        <set name="TCuentas" table="t_cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entidad_cuenta" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TCuenta" />
+        </set>
+    </class>
+</hibernate-mapping>

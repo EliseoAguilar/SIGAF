@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TTipoActivo" table="t_tipo_activo" schema="public" optimistic-lock="version">
+        <id name="idTipo" type="int">
+            <column name="id_tipo" />
+               <generator class="sequence">
+                <param name="sequence">t_tipo_activo_id_tipo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TCuentaByIdCuentaVentaTipo" class="com.sigaf.pojo.TCuenta"   fetch="select">
+            <column name="id_cuenta_venta_tipo" />
+        </many-to-one>
+        <many-to-one name="TCuentaByIdCuentaDepreciacionTipo" class="com.sigaf.pojo.TCuenta"  fetch="select">
+            <column name="id_cuenta_depreciacion_tipo" />
+        </many-to-one>
+        <many-to-one name="TCuentaByIdCuentaGastoTipo" class="com.sigaf.pojo.TCuenta"  fetch="select">
+            <column name="id_cuenta_gasto_tipo" />
+        </many-to-one>
+        <many-to-one name="TCuentaByIdCuentaActivoTipo" class="com.sigaf.pojo.TCuenta"   fetch="select">
+            <column name="id_cuenta_activo_tipo" />
+        </many-to-one>
+        <many-to-one name="TEntidad" class="com.sigaf.pojo.TEntidad"  fetch="select">
+            <column name="id_entidad_tipo" />
+        </many-to-one>
+        <property name="nombreTipo" type="string">
+            <column name="nombre_tipo" />
+        </property>
+        <property name="descripcionTipo" type="string">
+            <column name="descripcion_tipo" />
+        </property>
+        <property name="codigoTipo" type="string">
+            <column name="codigo_tipo" />
+        </property>
+        <property name="vidaUtilTipo" type="java.lang.Integer">
+            <column name="vida_util_tipo" />
+        </property>
+          <property name="calculoTipoActivo" type="string">
+            <column name="calculo_tipo_activo" />
+        </property>
+        <property name="estadoTipo" type="java.lang.Boolean">
+            <column name="estado_tipo" />
+        </property>
+        <set name="TActivoFijos" table="t_activo_fijo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo_activo_activo_fijo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TActivoFijo" />
+        </set>
+    </class>
+</hibernate-mapping>

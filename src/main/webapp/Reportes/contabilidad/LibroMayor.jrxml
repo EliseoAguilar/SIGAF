@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroMayor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc425f1b-4538-42e3-b3a3-a246e0207806">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="241"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEntidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select DISTINCT id_cuenta,codigo_cuenta,nombre_cuenta,naturaleza_cuenta from t_cuenta t  inner join t_detalle_partida d on t.id_cuenta=d.id_cuenta_detalle_partida
+inner join t_partida p on p.id_partida=d.id_partida_detalle_partida
+inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{idEjercicio} and estado_partida=true order by codigo_cuenta]]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="codigo_cuenta" class="java.lang.String"/>
+	<field name="nombre_cuenta" class="java.lang.String"/>
+	<field name="naturaleza_cuenta" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="545" height="48" uuid="dde6c02e-329b-4012-bb86-259c83780785"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="51" y="2" width="258" height="20" uuid="ec8c5c77-3792-4053-a960-0daba91ffbf3"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIBRO MAYOR AL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="22" width="555" height="20" uuid="c7393bfb-a75f-45e5-ba14-89350c050669"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="312" y="2" width="126" height="20" uuid="d0441dcd-1c97-47c0-b10e-a5ec2fa3efdd"/>
+				<subreportParameter name="id_ejercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fecha_reportes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="51" height="20" uuid="6a5ef09d-75d3-462a-8694-4d03933da1dd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="3" width="100" height="20" uuid="f14ad105-93f6-4e76-bf60-4d74fd9b4211"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="15" width="50" height="20" uuid="68833c63-4776-4231-8ad9-45bfc5906ccc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="0ea3fa41-20d8-4f16-ac53-a5fd71890e8d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="38" width="555" height="1" uuid="a7a6db5f-3318-4c07-ad99-a95dab9201b7"/>
+			</line>
+			<staticText>
+				<reportElement x="363" y="17" width="50" height="20" uuid="a6b5459a-4fd4-4430-9177-d5dfd7cfc72f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HABER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="3" width="85" height="20" uuid="c6120e88-f8fa-439a-804f-97b563cbaec1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMIENTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="496" y="15" width="59" height="20" uuid="54a2370b-553a-4a45-935b-fa6627861f3a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACREEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="3" width="85" height="20" uuid="a9879bbe-0353-45d9-9624-8c24d20fc6f3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="15" width="50" height="20" uuid="2d5c0c09-4a22-4a74-a893-43c482d4d6c3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEUDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="4" width="18" height="19" uuid="a698eb2a-16af-4af7-a080-a9404cbad545"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="57" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="2" width="158" height="20" uuid="e04596d0-ccc7-43ac-be2e-5de115632fa8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="158" y="2" width="284" height="20" uuid="82fb17ad-c9f0-4ed0-9eae-356ef913a5b7"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="23" width="555" height="32" uuid="eca84fcf-fea5-4f0a-a2af-6383abf2e7a8"/>
+				<subreportParameter name="idEjercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idCuenta">
+					<subreportParameterExpression><![CDATA[$F{id_cuenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "LibroMayorSub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="442" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="1366f612-b961-4318-9c59-fd2d3418730b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="516" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="4df04dbb-73e2-465e-af8a-0ecbfb2698a0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

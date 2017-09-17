@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientePersonas1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad3cb0a3-1bc5-43b4-95e9-7546f4c65dca">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_cliente."id_cliente" AS t_cliente_id_cliente,
+     t_cliente."nombre_cliente" AS t_cliente_nombre_cliente,
+     t_cliente."apellido_cliente" AS t_cliente_apellido_cliente,
+     t_cliente."dui_cliente" AS t_cliente_dui_cliente,
+     t_cliente."nit_cliente" AS t_cliente_nit_cliente,
+     t_cliente."direccion_cliente" AS t_cliente_direccion_cliente,
+
+     t_cliente."fecha_nacimiento" AS t_cliente_fecha_nacimiento,
+     t_cliente."estado_familiar" AS t_cliente_estado_familiar,
+     t_cliente."telefono_cliente" AS t_cliente_telefono_cliente,
+     t_cliente."correo_cliente" AS t_cliente_correo_cliente,
+     t_cliente."celular_cliente" AS t_cliente_celular_cliente,
+     t_cliente."calificacion_cliente" AS t_cliente_calificacion_cliente,
+     t_cliente."codigo_cliente" AS t_cliente_codigo_cliente,
+     t_cliente."dui_copia_cliente" AS t_cliente_dui_copia_cliente,
+     t_cliente."nit_copia_cliente" AS t_cliente_nit_copia_cliente,
+     t_cliente."sexo_cliente" AS t_cliente_sexo_cliente,
+     t_cliente."tipo_cliente1" AS t_cliente_tipo_cliente1,
+t_cliente."tipo_cliente2" AS t_cliente_tipo_cliente2,
+t_cliente."tipo_cliente3" AS t_cliente_tipo_cliente3
+
+
+FROM
+     "public"."t_cliente" t_cliente where t_cliente."codigo_cliente"!='' order by t_cliente."codigo_cliente"]]>
+	</queryString>
+	<field name="t_cliente_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_nombre_cliente" class="java.lang.String"/>
+	<field name="t_cliente_apellido_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_cliente" class="java.lang.String"/>
+	<field name="t_cliente_direccion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="t_cliente_estado_familiar" class="java.lang.String"/>
+	<field name="t_cliente_telefono_cliente" class="java.lang.String"/>
+	<field name="t_cliente_correo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_celular_cliente" class="java.lang.String"/>
+	<field name="t_cliente_calificacion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_codigo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_sexo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_tipo_cliente1" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente2" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente3" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="82" width="555" height="20" uuid="ead3615c-5c3a-4095-9d62-301af3ad3ae1"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CLIENTES (PERSONAS NATURALES)</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="106" width="555" height="1" uuid="3aba6ca9-c30e-4235-9b5f-e6cf22d002f0"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="110" width="65" height="20" uuid="ebdfef2d-494c-4f8d-8a8d-1fdbc17985f1"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="110" width="85" height="20" uuid="0a3069cc-1304-480f-ad3c-7d3a23f0fa30"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="110" width="84" height="20" uuid="96bce5d7-3054-48b9-b857-89e9c0b895da"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DUI</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="110" width="75" height="20" uuid="7cc66b34-e79c-4005-896c-b8ad8323b133"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NIT</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="128" width="555" height="1" uuid="31405007-62ba-4446-9bc9-12ce0d7488d4"/>
+			</line>
+			<subreport>
+				<reportElement x="11" y="0" width="200" height="77" uuid="0afe611d-ebd6-463b-8529-9ba176e6ba32"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="0" width="75" height="20" uuid="c3dd8513-aeb8-482b-889e-78cf1e60f4d8"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_codigo_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="190" height="20" uuid="44cfcfee-31b7-46e9-8bfc-50882d35574c"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_nombre_cliente}+" "+$F{t_cliente_apellido_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="0" width="85" height="20" uuid="52d6583c-a987-49fb-bcb5-3d75343a12a2"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_dui_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="120" height="20" uuid="a7c0600d-00a9-4b34-a0a4-5db1f063a751"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_nit_cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="18" width="80" height="20" uuid="acb23f65-ea74-4478-859e-c710c072444c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="18" width="40" height="20" uuid="c53f7a21-85c5-4455-af27-2d75ff0c5343"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

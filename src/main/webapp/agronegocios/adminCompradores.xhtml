@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .first-row {
+                        background-color: #ffffff !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .second-row {
+                        background-color: #fff999 !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #fAgregarComprador\:pgAgregar td{
+                        border: none !important;
+                    }
+
+                    #fAgregarComprador\:pgAgregar tr{
+                        border: none !important;
+                    }
+                    #fAgregarComprador\:pgAgregar2 td{
+                        border: none !important;
+                    }
+
+                    #fAgregarComprador\:pgAgregar2 tr{
+                        border: none !important;
+                    }
+                    #fModificarComprador\:pgModificar td{
+                        border: none !important;
+                    }
+
+                    #fModificarComprador\:pgModificar tr{
+                        border: none !important;
+                    }
+                    #fModificarComprador\:pgModificar2 td{
+                        border: none !important;
+                    }
+                    #fModificarComprador\:pgModificar2 tr{
+                        border: none !important;
+                    }
+                    #opMenu td{
+                        border: none !important;
+                    }
+                    #opMenu tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs"  />
+                    <p:outputPanel  rendered="#{compradorBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarComprador">
+                            <p:panel id="pRegistrarComprador" header="Agregar comprador"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <b>     <h:outputText value="Personales"/></b>
+                                <hr></hr>                               
+                                <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombres:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Apellidos:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca los nombres"  style=" width: 100%" value="#{compradorBean.comprador.nombresComprador}" />
+                                            <h:outputText value="#{compradorBean.msgNombres}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca los apellidos"  style=" width: 100%" value="#{compradorBean.comprador.apellidosComprador}" />
+                                            <h:outputText value="#{compradorBean.msgApellidos}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Fecha de nacimiento:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="DUI:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"><p:calendar placeholder="Introduzca la fecha" locale="es" navigator="true" yearRange="1910:" mask="true" pattern="dd/MM/yyyy" showOn="button" size="26" value="#{compradorBean.comprador.fechanacimientoComprador}"   /> 
+                                            <br></br>
+                                            <h:outputText value="#{compradorBean.msgFecha}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%" value="#{compradorBean.comprador.duiComprador}" />
+                                            <h:outputText value="#{compradorBean.msgDui}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="NIT:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Sexo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%" value="#{compradorBean.comprador.nitComprador}" />
+                                            <h:outputText value="#{compradorBean.msgNit}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"><p:selectOneRadio id="options" value="#{compradorBean.comprador.sexoComprador}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Masculino" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino" itemValue="Femenino" />
+                                            </p:selectOneRadio>  </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Tipo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:selectOneMenu id="tipo" value="#{compradorBean.comprador.tipoComprador}" style="width:100%" >
+                                                <f:selectItem  itemLabel="[SELECCIONE]" itemValue=""  />
+                                                <f:selectItem  itemLabel="Mayorista" itemValue="Mayorista"  />
+                                                <f:selectItem  itemLabel="Detallista" itemValue="Detallista" />
+                                            </p:selectOneMenu> 
+                                            <h:outputText value="#{compradorBean.msgTipo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  </p:column>
+                                    </p:row>
+                                </p:panelGrid>                           
+                                <br></br>
+                                <b>     <h:outputText value="Contacto"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="pgAgregar2" style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca el correo" style=" width: 100%" value="#{compradorBean.comprador.correoComprador}"/>
+                                        </p:column>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el teléfono"  mask="9999-9999" style=" width: 100%" value="#{compradorBean.comprador.telefonoComprador}" />
+                                            <h:outputText value="#{compradorBean.msgTelefono}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el movil"  mask="9999-9999" style=" width: 100%" value="#{compradorBean.comprador.movilComprador}" />
+                                            <h:outputText value="#{compradorBean.msgMovil}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca la dirección" value="#{compradorBean.comprador.direccionComprador}" /> 
+                                            <h:outputText value="#{compradorBean.msgDireccion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>                              
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{compradorBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{compradorBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton  actionListener="#{compradorBean.limpiar}"  icon="fa fa-minus" title="Cancelar" update=":padding" value="Limpiar" style="#{compradorBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{compradorBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{compradorBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">                                   
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este comprador?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{compradorBean.crear}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{compradorBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{compradorBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarComprador">
+                            <p:panel id="pModificarComprador" header="Modificar comprador"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <b>     <h:outputText value="Personales"/> </b>
+                                <hr></hr>
+                                <p:panelGrid id="pgModificar"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombres:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Apellidos:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText   style=" width: 100%" placeholder="Introduzca los nombres" value="#{compradorBean.compradorSeleccionado.nombresComprador}" />
+                                            <h:outputText value="#{compradorBean.msgNombres}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca los apellidos"  style=" width: 100%" value="#{compradorBean.compradorSeleccionado.apellidosComprador}" />
+                                            <h:outputText value="#{compradorBean.msgApellidos}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Fecha de nacimiento:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="DUI:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"><p:calendar id="restricted" placeholder="Introduzca la fecha" pattern="dd/MM/yyyy" mask="true" showOn="button" size="26" value="#{compradorBean.compradorSeleccionado.fechanacimientoComprador}"   />
+                                            <br></br>
+                                            <h:outputText value="#{compradorBean.msgFecha}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%" value="#{compradorBean.compradorSeleccionado.duiComprador}" />
+                                            <h:outputText value="#{compradorBean.msgDui}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="NIT:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Sexo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%" value="#{compradorBean.compradorSeleccionado.nitComprador}" /> 
+                                            <h:outputText value="#{compradorBean.msgNit}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"><p:selectOneRadio id="options2" value="#{compradorBean.compradorSeleccionado.sexoComprador}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Masculino" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino" itemValue="Femenino" />
+                                            </p:selectOneRadio>  </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Tipo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:selectOneMenu id="tipo2" value="#{compradorBean.compradorSeleccionado.tipoComprador}" style="width:100%" >
+                                                <f:selectItem  itemLabel="[SELECCIONE]" itemValue=""  />
+                                                <f:selectItem id="ind" itemLabel="Mayorista" itemValue="Mayorista"  />
+                                                <f:selectItem  id="coo" itemLabel="Detallista" itemValue="Detallista" />
+                                            </p:selectOneMenu>   
+                                            <h:outputText value="#{compradorBean.msgTipo}" style=" color:  red" />
+
+                                        </p:column>
+                                        <p:column colspan="1">  </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>      <h:outputText value="Contacto"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="pgModificar2" style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca el correo"  style=" width: 100%" value="#{compradorBean.compradorSeleccionado.correoComprador}"/>
+                                        </p:column>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el teléfono"  mask="9999-9999" style=" width: 100%" value="#{compradorBean.compradorSeleccionado.telefonoComprador}" />
+                                            <h:outputText value="#{compradorBean.msgTelefono}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el movil"  mask="9999-9999" style=" width: 100%" value="#{compradorBean.compradorSeleccionado.movilComprador}" />
+                                            <h:outputText value="#{compradorBean.msgMovil}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca la dirección" value="#{compradorBean.compradorSeleccionado.direccionComprador}" /> 
+                                            <h:outputText value="#{compradorBean.msgDireccion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{compradorBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{compradorBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{compradorBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{compradorBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este comprador?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{compradorBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{compradorBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{compradorBean.showData}">
+                        <h:form>    
+                            #{compradorBean.updateListaComprador()}
+                            <p:panel id="pDatosCompradores" header="Administrar compradores" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nuevo comprador" id="add"  actionListener="#{compradorBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{compradorBean.btnNuevo}"  />
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="compradores"   paginator="true" rows="10" value="#{compradorBean.listaComprador}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  emptyMessage="No se encontraron compradores"
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15" 
+                                                  widgetVar="companyTable"
+                                                  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre" width="25%" filterBy="#{compradores.nombresComprador}"  filterStyle="width:100%" sortBy="#{compradores.nombresComprador}" >
+                                            <h:outputText value="#{compradores.nombresComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="Apellidos" width="25%" filterBy="#{compradores.nombresComprador}"  filterStyle="width:100%" sortBy="#{compradores.nombresComprador}" >
+                                            <h:outputText value="#{compradores.nombresComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="DUI" width="10%" filterBy="#{compradores.duiComprador}" filterStyle="width:100%" sortBy="#{compradores.duiComprador}"    >
+                                            <h:outputText value="#{compradores.duiComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="NIT" width="15%" filterBy="#{compradores.nitComprador}" filterStyle="width:100%" sortBy="#{compradores.nitComprador}"  >
+                                            <h:outputText value="#{compradores.nitComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="Tipo" width="10%" filterBy="#{compradores.tipoComprador}" filterStyle="width:100%" sortBy="#{compradores.tipoComprador}"  >
+                                            <h:outputText value="#{compradores.tipoComprador}"/>
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center"  >
+                                            <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye" style="#{compradores.estadoComprador eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{compradores}" target="#{compradorBean.compradorSeleccionado}" />
+                                                <p:menuitem  value="Modificar" update=":padding"     
+                                                             actionListener="#{compradorBean.enableShowUpdate}" icon=" fa fa-pencil">
+                                                    <f:setPropertyActionListener value="#{compradores}" target="#{compradorBean.compradorSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{compradores.duiComprador}" target="#{compradorBean.duiAux}" />
+                                              
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{compradores.estadoComprador}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                    <f:setPropertyActionListener value="#{compradores}" target="#{compradorBean.compradorSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{!compradores.estadoComprador}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{compradores}" target="#{compradorBean.compradorSeleccionado}" />
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este comprador?" />
+                                    </p:panelGrid> 
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{compradorBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este comprador?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{compradorBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>    
+                        <p:dialog  width="65%" header="Datos del comprador" widgetVar="pgVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel >
+                                    <b>   <h:outputText value="Personales"/> </b>
+                                    <hr></hr>
+                                    <p:panelGrid  style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Nombres:"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.nombresComprador}"/> 
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Apellidos:"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.apellidosComprador}"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column > <h:outputText value="Fecha de nacimiento:"/>  </p:column>
+                                            <p:column > <h:outputText value="#{compradorBean.compradorSeleccionado.fechanacimientoComprador}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column > <h:outputText value="Edad:"/>  </p:column>
+                                            <p:column > <h:outputText value="#{compradorBean.calcularEdad(compradorBean.compradorSeleccionado.fechanacimientoComprador)}">
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column>
+                                                <h:outputText value="DUI:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.duiComprador}"/>
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="NIT:"/>
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.nitComprador}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column>
+                                                <h:outputText value="Sexo:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.sexoComprador}"/> 
+                                            </p:column>
+                                            <p:column> <h:outputText value="Tipo:"/>  </p:column>
+                                            <p:column > <h:outputText value="#{compradorBean.compradorSeleccionado.tipoComprador}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column>
+                                                <h:outputText value="Estado:"/>
+                                            </p:column>
+                                            <p:column colspan="3">
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.estadoComprador eq true? 'Activo': 'Inactivo'}"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <b>    <h:outputText value="Contacto"/></b>
+                                    <hr></hr>
+                                    <p:panelGrid  style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Correo:"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.correoComprador eq ''? '----':compradorBean.compradorSeleccionado.correoComprador}"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%" colspan="1"> 
+                                                <h:outputText value="Teléfono:"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%" colspan="1"> 
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.telefonoComprador}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="Móvil:"/>
+                                            </p:column>
+                                            <p:column colspan="3"> 
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.movilComprador}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="Dirección:"/>
+                                            </p:column>
+                                            <p:column colspan="3"> 
+                                                <h:outputText value="#{compradorBean.compradorSeleccionado.direccionComprador}"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{compradorBean.verReporteComprador()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{compradorBean.verReporteCompradorPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

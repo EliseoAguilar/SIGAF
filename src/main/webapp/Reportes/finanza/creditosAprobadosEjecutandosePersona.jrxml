@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="creditosFinalizalos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ab62ded-e4e6-4a28-9434-fb9f281248f2">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_cliente."id_cliente" AS t_cliente_id_cliente,
+     t_cliente."nombre_cliente" AS t_cliente_nombre_cliente,
+     t_cliente."apellido_cliente" AS t_cliente_apellido_cliente,
+     t_cliente."dui_cliente" AS t_cliente_dui_cliente,
+     t_cliente."nit_cliente" AS t_cliente_nit_cliente,
+     t_cliente."direccion_cliente" AS t_cliente_direccion_cliente,
+
+     t_cliente."fecha_nacimiento" AS t_cliente_fecha_nacimiento,
+     t_cliente."estado_familiar" AS t_cliente_estado_familiar,
+     t_cliente."telefono_cliente" AS t_cliente_telefono_cliente,
+     t_cliente."correo_cliente" AS t_cliente_correo_cliente,
+     t_cliente."celular_cliente" AS t_cliente_celular_cliente,
+     t_cliente."calificacion_cliente" AS t_cliente_calificacion_cliente,
+     t_cliente."codigo_cliente" AS t_cliente_codigo_cliente,
+     t_cliente."dui_copia_cliente" AS t_cliente_dui_copia_cliente,
+     t_cliente."nit_copia_cliente" AS t_cliente_nit_copia_cliente,
+     t_cliente."sexo_cliente" AS t_cliente_sexo_cliente,
+     t_cliente."tipo_cliente1" AS t_cliente_tipo_cliente1,
+t_cliente."tipo_cliente2" AS t_cliente_tipo_cliente2,
+t_cliente."tipo_cliente3" AS t_cliente_tipo_cliente3,
+     t_cliente_proyecto."id_cliente_proyecto" AS t_cliente_proyecto_id_cliente_proyecto,
+     t_cliente_proyecto."id_cliente" AS t_cliente_proyecto_id_cliente,
+     t_cliente_proyecto."id_proyecto" AS t_cliente_proyecto_id_proyecto,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_politica."id_politica" AS t_politica_id_politica,
+     t_politica."tasa_interes" AS t_politica_tasa_interes,
+     t_politica."edad_maxima" AS t_politica_edad_maxima,
+     t_politica."edad_minima" AS t_politica_edad_minima,
+     t_politica."monto_minimo" AS t_politica_monto_minimo,
+     t_politica."monto_maximo" AS t_politica_monto_maximo,
+     t_politica."tasa_interes_mora" AS t_politica_tasa_interes_mora,
+     t_politica."comision" AS t_politica_comision,
+     t_politica."seguro_deuda" AS t_politica_seguro_deuda,
+     t_politica."capacidad_pago_minimo" AS t_politica_capacidad_pago_minimo,
+     t_politica."capacidad_endeudamiento_minimo" AS t_politica_capacidad_endeudamiento_minimo,
+     t_politica."idtipocredito" AS t_politica_idtipocredito,
+     t_politica."estado" AS t_politica_estado
+FROM
+     "public"."t_cliente" t_cliente INNER JOIN "public"."t_cliente_proyecto" t_cliente_proyecto ON t_cliente."id_cliente" = t_cliente_proyecto."id_cliente"
+     INNER JOIN "public"."t_proyecto" t_proyecto ON t_cliente_proyecto."id_proyecto" = t_proyecto."idproyecto"
+     INNER JOIN "public"."t_politica" t_politica ON t_proyecto."id_politica" = t_politica."id_politica" where (t_proyecto."estado"=5) and(t_proyecto."fecha_aprovacion" >=$P{fechaInicial} and t_proyecto."fecha_aprovacion" <=$P{fechaFinal}) order by t_proyecto."codigo_proyecto"]]>
+	</queryString>
+	<field name="t_cliente_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_nombre_cliente" class="java.lang.String"/>
+	<field name="t_cliente_apellido_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_cliente" class="java.lang.String"/>
+	<field name="t_cliente_direccion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="t_cliente_estado_familiar" class="java.lang.String"/>
+	<field name="t_cliente_telefono_cliente" class="java.lang.String"/>
+	<field name="t_cliente_correo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_celular_cliente" class="java.lang.String"/>
+	<field name="t_cliente_calificacion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_codigo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_sexo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_tipo_cliente1" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente2" class="java.lang.Integer"/>
+	<field name="t_cliente_tipo_cliente3" class="java.lang.Integer"/>
+	<field name="t_cliente_proyecto_id_cliente_proyecto" class="java.lang.Integer"/>
+	<field name="t_cliente_proyecto_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_proyecto_id_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_politica_id_politica" class="java.lang.Integer"/>
+	<field name="t_politica_tasa_interes" class="java.math.BigDecimal"/>
+	<field name="t_politica_edad_maxima" class="java.lang.Integer"/>
+	<field name="t_politica_edad_minima" class="java.lang.Integer"/>
+	<field name="t_politica_monto_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_monto_maximo" class="java.math.BigDecimal"/>
+	<field name="t_politica_tasa_interes_mora" class="java.math.BigDecimal"/>
+	<field name="t_politica_comision" class="java.math.BigDecimal"/>
+	<field name="t_politica_seguro_deuda" class="java.math.BigDecimal"/>
+	<field name="t_politica_capacidad_pago_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_capacidad_endeudamiento_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_politica_estado" class="java.lang.Boolean"/>
+	<variable name="interes" class="java.lang.Double"/>
+	<variable name="t_proyecto_monto_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_proyecto_monto}]]></variableExpression>
+	</variable>
+	<variable name="t_proyecto_monto_2" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_proyecto_monto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="85" width="555" height="20" uuid="c2b5ad00-8bce-4021-921c-8e583b3d616b"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS APROBADOS/EJECUTANDOSE (PERSONAS NATURALES) ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="109" width="554" height="1" uuid="680f5c04-1d05-40be-97d8-5521d2b6ede5"/>
+			</line>
+			<subreport>
+				<reportElement x="16" y="0" width="200" height="79" uuid="41d18f94-0bb1-49c1-ae68-495a19e9c95c"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="21" width="554" height="1" uuid="c722ba09-54fe-4562-8659-d69367cdfba8"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="70" height="20" uuid="bc27a3b1-c6b3-4ca8-8ccb-28e1da711da5"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="1" width="73" height="20" uuid="57d4346b-57a5-464a-bd01-fd44829ff598"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CLIENTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="1" width="100" height="20" uuid="d3440d8d-b1ea-42e3-9cc4-62b3c9432978"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="1" width="60" height="20" uuid="c1559c84-1b56-4f14-a22e-805a9fef6000"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="1" width="78" height="20" uuid="b59fd5dc-a795-40ff-8674-7110dedf0e9a"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RESOLUCIÓN</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="1" width="59" height="20" uuid="824b8301-52ef-4c87-817a-daa8bc865afb"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="1" width="57" height="20" uuid="f6b65e54-29d3-412e-8ab8-ca05b8c3b968"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20" uuid="34da5b3c-90a1-452f-9a56-606afaded3ed"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="73" height="20" uuid="ffffab48-cb9b-441f-ac9e-ea94e6852b53"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_cliente_codigo_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="143" y="0" width="156" height="20" uuid="4798d8af-e893-4d61-bad1-fe5df5395dd4"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="299" y="0" width="60" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="476" y="0" width="78" height="20" uuid="51b00e7c-75c6-4884-be0f-3103a291bb46"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_aprovacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="0" width="60" height="20" uuid="d63298fd-a197-40b6-9064-35da673c347a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="0" width="57" height="20" uuid="49dfa54e-9f53-4a31-b6d7-b7c5fc4f1d10"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false ||$F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="17" width="80" height="20" uuid="ce5b736c-1672-498e-b78f-487952868039"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="17" width="40" height="20" uuid="b8388d27-9d61-48fc-a87c-31888ddfd730"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

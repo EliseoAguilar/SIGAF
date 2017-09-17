@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <p:outputPanel id="padding">
+                    <p:growl id="msg" />
+                    <p:outputPanel rendered="#{areaBean.showCreate}">
+                        <h:form id="fAgregarAreas" >
+                            <p:panel id="pAgregar" header="Agregar área"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;" class="noBoder">                 
+                                    <p:row>
+                                        <p:column  width="50%">
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column width="50%">
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column  width="50%">
+                                            <p:inputText placeholder="Introduzca el nombre"  id="tNombre"   value="#{areaBean.area.nombreArea}"  style="width: 100%;"/>
+                                            <h:outputText value="#{areaBean.msgNombre}" style=" color:  red" />
+                                        </p:column  >
+                                        <p:column  width="50%">
+                                            <p:inputMask mask="#{areaBean.configuracion.areaConfiguracion}"  placeholder="#{areaBean.configuracion.areaConfiguracion}" id="tCodigo"   value="#{areaBean.area.codigoArea}" style="width: 100%;" />
+                                            <h:outputText value="#{areaBean.msgCodigo}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons"> 
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{areaBean.btnCrear}" actionListener="#{areaBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton value="Limpiar" id="btnLimpiar" style="#{areaBean.btnLimpiar}" actionListener="#{areaBean.limpiar(1)}"  icon="fa fa-fw fa-minus"  update=":padding" >
+                                        </p:commandButton>
+                                        <p:commandButton value="Cancelar" id="btnCancelar"  style="#{areaBean.btnCancelar}" icon="fa fa-fw fa-close" actionListener="#{areaBean.limpiar(0)}" update=":padding"  />
+                                    </div>
+                                </center>
+                            </p:panel>  
+                        </h:form>
+                        <p:dialog header="Confirmar" widgetVar="pgGuardar" modal="true" width="25%" visible="#{areaBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">                      
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta área?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{areaBean.btnNuevo}" value="Si" actionListener="#{areaBean.create}"  update=":padding" oncomplete="PF('pgGuardar').hide()"  title="Cerrar">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{areaBean.estadoFormulario}"/>
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <!-- actualizar-->
+                    <p:outputPanel rendered="#{areaBean.showUpdate}">
+                        <h:form id="fModificarAreas" >
+                            <p:panel id="pModificar" header="Modificar área"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pgModificarArea"  style="width: 100%; margin: auto;" class="noBoder">                 
+                                    <p:row>
+                                        <p:column width="50%">
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column width="50%">
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText  id="tNombre"   value="#{areaBean.areaSeleccionada.nombreArea}"  style="width: 100%;"/>
+                                            <h:outputText value="#{areaBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputMask mask="#{areaBean.configuracion.areaConfiguracion}"  placeholder="#{areaBean.configuracion.areaConfiguracion}" id="tCodigoModificar"   value="#{areaBean.areaSeleccionada.codigoArea}" style="width: 100%;" /> 
+                                            <h:outputText value="#{areaBean.msgCodigo}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons"> 
+                                        <p:commandButton value="Guardar" id="btnModificar" style="#{areaBean.btnCrear}" icon="fa fa-fw fa-check" actionListener="#{areaBean.validarFormularioModificar(1)}" update=":padding" > 
+
+                                        </p:commandButton>
+                                        <p:commandButton value="Cancelar" id="btnCancelarModificar" style="#{areaBean.btnCancelar}" icon="fa fa-fw fa-close" actionListener="#{areaBean.limpiar(0)}"  update=":padding"  />
+                                    </div>
+                                </center>
+                            </p:panel>  
+                        </h:form>
+                        <p:dialog header="Confirmar" widgetVar="pgModificar" modal="true"  width="25%" visible="#{areaBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar esta área?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton  actionListener="#{areaBean.modificar}" style="#{areaBean.btnNuevo}"  update=":padding" oncomplete="PF('pgModificar').hide()" value="Si" >
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{areaBean.btnCancelar}" value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{areaBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{areaBean.showData}">
+                        <!--Actuliza la lista de areas para la fundacion-->
+                        #{areaBean.updateListaAreas()}
+                        <p:panel id="pDatosAreas" header="Administrar áreas" style="margin-bottom:20px; width: 100%; margin: auto">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:panelGrid columns="1" cellpadding="10">
+                                    <h:form id="fData">
+                                        <p:fieldset>
+                                            <div align="left">
+                                                <p:commandButton title="Nueva área" id="btnNuevo"  actionListener="#{areaBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{areaBean.btnNuevo }"  />
+                                            </div>
+                                        </p:fieldset>
+                                        <p:dataTable   id="areasData"
+                                                       var="areas" 
+                                                       value="#{areaBean.listaArea}" 
+                                                       widgetVar="companyTable"
+                                                       paginator="true"
+                                                       rows="10"
+                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                       rowsPerPageTemplate="5,10,15"
+                                                       paginatorPosition="bottom"
+                                                       emptyMessage="No se encontraron áreas"
+                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                       rowIndexVar="No"
+                                                       >
+                                            <f:facet name="header">
+                                                <p:outputPanel>                                           
+                                                    <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+                                            <p:column headerText="Nº" width="5%" >
+                                                <h:outputText value="#{No+1}" />
+                                            </p:column>
+                                            <p:column headerText="Nombre"  filterBy="#{areas.nombreArea}" filterMatchMode="contains" width="70%" sortBy="#{areas.nombreArea}" filterStyle="width: 100%" >
+                                                <h:outputText value="#{areas.nombreArea}" />
+                                            </p:column>
+                                            <p:column headerText="Código" filterBy="#{areas.codigoArea}" filterMatchMode="contains" width="20%" sortBy="#{areas.codigoArea}" filterStyle="width: 100%" >
+                                                <h:outputText value="#{ areas.codigoArea }" />
+                                            </p:column>
+                                            <p:column width="9%">
+                                                <p:splitButton  update=":dataArea"  oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{areas.estadoArea eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                    <f:setPropertyActionListener value="#{areas}" target="#{areaBean.areaSeleccionada}" />
+                                                    <p:menuitem  actionListener="#{areaBean.enableShowUpdate}" update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                        <f:setPropertyActionListener value="#{areas}" target="#{areaBean.areaSeleccionada}" />
+                                                    </p:menuitem>
+                                                    <p:menuitem rendered="#{areas.estadoArea}"   oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down" value="Dar de baja"    >
+                                                        <f:setPropertyActionListener value="#{areas}" target="#{areaBean.areaSeleccionada}" />
+                                                    </p:menuitem>                                              
+                                                    <p:menuitem rendered="#{!areas.estadoArea}"   oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                        <f:setPropertyActionListener value="#{areas}" target="#{areaBean.areaSeleccionada}" />
+                                                    </p:menuitem>                                              
+                                                </p:splitButton> 
+                                            </p:column>
+                                            <f:facet name="footer">
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </h:form>
+                                    <p:outputPanel id="dataArea">
+                                        <p:dialog header="Datos del área" width="50%" widgetVar="dlVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                            <h:form target="_blank">
+                                                <p:outputPanel id="dlVerArea" >
+                                                    <p:panelGrid id="pgVer" style=" width: 100%" >
+                                                        <p:row>
+                                                            <p:column style=" width: 25%">
+                                                                <h:outputText value="Nombre:" />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%">
+                                                                <h:outputText value="#{areaBean.areaSeleccionada.nombreArea}" />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%">
+                                                                <h:outputText value="Código:" />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%">
+                                                                <h:outputText value="#{areaBean.areaSeleccionada.codigoArea}" />
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column style=" width: 25%">
+                                                                <h:outputText value="Estado:" />
+                                                            </p:column>
+                                                            <p:column colspan="3">
+                                                                <h:outputText value="#{areaBean.areaSeleccionada.estadoArea? 'Activo' : 'Inactivo'}" />
+                                                            </p:column>
+                                                        </p:row>  
+                                                    </p:panelGrid>
+                                                    <br></br>
+                                                    <center>
+                                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                            <f:actionListener binding="#{areaBean.verReporteAreaFundacion()}"/> 
+                                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                                <f:actionListener binding="#{areaBean.verReporteAreaFundacionPDF()}"/> 
+                                                            </p:menuitem>
+                                                        </p:splitButton>
+                                                    </center>
+                                                </p:outputPanel>
+                                            </h:form>
+                                        </p:dialog>
+                                    </p:outputPanel>
+                                    <p:dialog header="Confirmar" widgetVar="dlBaja" modal="true"   width="25%" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                        <h:form target="_blanck">
+                                            <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+                                                <br></br>
+                                                <p:panelGrid>
+                                                    <h:outputText value="¿Desea dar de baja esta área?" />
+                                                </p:panelGrid>
+                                                <br></br>
+                                                <hr></hr>
+                                                <p:commandButton id="btnGuardarBaja" actionListener="#{areaBean.darDeBaja}" update=":padding" style="#{areaBean.btnNuevo}"  value="Si"> 
+                                                </p:commandButton>
+                                                <p:commandButton id="btnCancelBaja" oncomplete="PF('dlBaja').show()"  style="#{areaBean.btnCancelar}"  value="No" > 
+                                                </p:commandButton>
+                                            </p:outputPanel>
+                                        </h:form>
+                                    </p:dialog>
+                                    <p:dialog header="Confirmar" widgetVar="dlAlta" modal="true"   visible="false"  width="25%" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                        <h:form target="_blanck">
+                                            <p:outputPanel id="dlDarDealta" style="text-align:center; width: 100%">
+                                                <br></br>
+                                                <p:panelGrid>
+                                                    <h:outputText value="¿Desea dar de alta esta área?" />
+                                                </p:panelGrid>
+                                                <br></br>
+                                                <hr></hr> 
+                                                <p:commandButton id="btnGuardarAlta" actionListener="#{areaBean.darDeAlta}" update=":padding" style="#{areaBean.btnNuevo}"    value="Si"> 
+                                                </p:commandButton>
+                                                <p:commandButton id="btnCancelAlta"   oncomplete="PF('dlAlta').show()"  style="#{areaBean.btnCancelar}"   value="No"> 
+                                                </p:commandButton>
+                                            </p:outputPanel>
+                                        </h:form>
+                                    </p:dialog>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#conf").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

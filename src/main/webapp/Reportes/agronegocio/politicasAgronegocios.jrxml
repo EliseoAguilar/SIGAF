@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="politicasAgronegocios" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f745f202-e5f2-48eb-ba6e-b56e44ab0031">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     t_configuracion_agronegocio."id_configuracion_agronegocio" AS t_configuracion_agronegocio_id_configuracion_agronegocio,
+     t_configuracion_agronegocio."tasa_comision_agronegocio" AS t_configuracion_agronegocio_tasa_comision_agronegocio,
+     t_configuracion_agronegocio."tasa_interes_agronegocio" AS t_configuracion_agronegocio_tasa_interes_agronegocio,
+     t_configuracion_agronegocio."tasa_mora_agronegocio" AS t_configuracion_agronegocio_tasa_mora_agronegocio,
+     t_configuracion_agronegocio."vigencia_agronegocio" AS t_configuracion_agronegocio_vigencia_agronegocio,
+     t_configuracion_agronegocio."estado_configuracion" AS t_configuracion_agronegocio_estado_configuracion
+FROM
+     "public"."t_configuracion_agronegocio" t_configuracion_agronegocio]]>
+	</queryString>
+	<field name="t_configuracion_agronegocio_id_configuracion_agronegocio" class="java.lang.Integer"/>
+	<field name="t_configuracion_agronegocio_tasa_comision_agronegocio" class="java.lang.Double"/>
+	<field name="t_configuracion_agronegocio_tasa_interes_agronegocio" class="java.lang.Double"/>
+	<field name="t_configuracion_agronegocio_tasa_mora_agronegocio" class="java.lang.Double"/>
+	<field name="t_configuracion_agronegocio_vigencia_agronegocio" class="java.sql.Date"/>
+	<field name="t_configuracion_agronegocio_estado_configuracion" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<subreport>
+				<reportElement x="9" y="0" width="200" height="79" uuid="e31ad62f-0be2-4d99-ab1b-f14cfbbd7eba"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="2" y="81" width="553" height="20" uuid="6c48774c-7afc-42a5-a1e9-efda5775f30d"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE POLÍTICAS PARA AGRONEGOCIOS</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="104" width="555" height="1" uuid="db5d5dbc-478a-464c-afa6-00b0b23d0200"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="3" width="170" height="20" uuid="14c7a9e2-989e-48c0-804d-52284318ac1e"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>TASA DE INTERÉS POR MORA (%)</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="e98efde4-e06d-4c7b-a587-760845d0b1ca"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="3" width="111" height="20" uuid="fed235d7-27d1-4cb4-bdae-cdb321e57f10"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>TASA DE INTERÉS (%)</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="3" width="123" height="20" uuid="8fab8ee0-8609-45b3-88d2-6df6ac2c7279"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>TASA DE COMISIÓN (%)</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="3" width="58" height="20" uuid="7749f542-cec3-4e6d-866c-c4289135bd70"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>FECHA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="496" y="3" width="59" height="20" uuid="81052565-b6a4-48af-8313-66e3fce152a3"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="###0.00">
+				<reportElement x="13" y="0" width="40" height="20" uuid="21ae421a-8b29-4f31-9c6b-0b83d605de01"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_tasa_interes_agronegocio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="143" y="0" width="52" height="20" uuid="d8684a90-cefc-430d-b9a0-3d21104a92ee"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_tasa_mora_agronegocio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="302" y="0" width="48" height="20" uuid="50489707-f70a-4138-bb52-a021a1a6eff9"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_tasa_comision_agronegocio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="425" y="0" width="58" height="20" uuid="251d8141-0bd1-4389-ad9c-e79275474efd"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_vigencia_agronegocio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="496" y="0" width="59" height="20" uuid="09fb781d-b3c1-4f33-b6df-0f45e46b1c1a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_estado_configuracion}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="20" width="80" height="20" uuid="ddac74fd-773a-406e-b43b-c03116b0e043"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="20" width="40" height="20" uuid="b2bc33e5-6d2c-4d02-b8ef-b7e7112a7ace"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

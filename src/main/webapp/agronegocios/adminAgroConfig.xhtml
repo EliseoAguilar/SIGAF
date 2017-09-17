@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">              
+                <style>
+                    #fAgregarArea\:pgAgregar td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar tr{
+                        border: none !important;
+                    }
+                    #fModificarArea\:pgModificar td{
+                        border: none !important;
+                    }
+
+                    #fModificarArea\:pgModificar tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs"  />
+                    <p:outputPanel  rendered="#{configuracionAgronegocioBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarArea">                           
+                            <p:panel id="pRegistrarConfiguracion" header="Agregar política"  style="width: 60%; margin: auto; margin-bottom: 20px">
+                              
+                                    <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;">   
+                                        <p:row>
+                                            <p:column style=" width: 50%">
+                                                <h:outputText value="Tasa de interés(%):*"/>
+                                            </p:column>
+                                            <p:column style=" width: 50%">
+                                                <h:outputText value="Tasa de interés x mora(%):*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 50%">  <p:inputNumber placeholder="5" minValue="0"  style=" width: 100%" value="#{configuracionAgronegocioBean.configuracionAgronegocio.tasaInteresAgronegocio}" />
+                                                <br></br>
+                                                <h:outputText value="#{configuracionAgronegocioBean.msgInteres}" style=" color:  red" />                     
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 50%">  <p:inputNumber placeholder="5" minValue="0"  style=" width: 100%" value="#{configuracionAgronegocioBean.configuracionAgronegocio.tasaMoraAgronegocio}" />
+                                                <br></br>
+                                                <h:outputText value="#{configuracionAgronegocioBean.msgMora}" style=" color:  red" />                     
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 50%">
+                                                <h:outputText value="Comisión(%):*"/>
+                                            </p:column >
+                                            <p:column style=" width: 50%" >
+                                                <h:outputText value="Fecha de registro:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 50%">  <p:inputNumber placeholder="5" minValue="0"  style=" width: 100%" value="#{configuracionAgronegocioBean.configuracionAgronegocio.tasaComisionAgronegocio}" />
+                                                <br></br>
+                                                <h:outputText value="#{configuracionAgronegocioBean.msgComision}" style=" color:  red" />                     
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 50%">  
+                                                <p:calendar placeholder="" maxdate="#{configuracionAgronegocioBean.hoy}"  pattern="dd/MM/yyyy" mask="true" showOn="button"  value="#{configuracionAgronegocioBean.configuracionAgronegocio.vigenciaAgronegocio}"   /> 
+                                                <br></br>
+                                                <h:outputText value="#{configuracionAgronegocioBean.msgFecha}" style=" color:  red" />                     
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                              
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{configuracionAgronegocioBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{configuracionAgronegocioBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton  actionListener="#{configuracionAgronegocioBean.limpiar}"  icon="fa fa-minus"  update=":padding"  title="Cancelar" value="Limpiar" style="#{configuracionAgronegocioBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{configuracionAgronegocioBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{configuracionAgronegocioBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{configuracionAgronegocioBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta política?"/>
+                                    </p:panelGrid>                                
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{configuracionAgronegocioBean.crear}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{configuracionAgronegocioBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{configuracionAgronegocioBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{configuracionAgronegocioBean.showData}">
+                        <h:form>        
+                            #{configuracionAgronegocioBean.updateListaPoliticas()}
+                            <p:panel id="pDatosCultivos" header="Administrar políticas" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center">
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nueva política" id="add"  actionListener="#{configuracionAgronegocioBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{configuracionAgronegocioBean.btnNuevo}"  />
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="configuraciones" widgetVar="dataPoliticas"  paginator="true" rows="10" value="#{configuracionAgronegocioBean.listaConfiguracionAgronegocios}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15"
+                                                  emptyMessage="No se encontraron politicas"
+                                                  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('dataPoliticas').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="3%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Tasa de interés (%)" width="12%" filterBy="#{configuraciones.tasaInteresAgronegocio}" sortBy="#{configuraciones.tasaInteresAgronegocio}"    >
+                                            <div align="center">
+                                                <h:outputText value="#{configuraciones.tasaInteresAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Tasa de interés x mora (%)" width="15%" filterBy="#{configuraciones.tasaMoraAgronegocio}" sortBy="#{configuraciones.tasaMoraAgronegocio}" >
+                                            <div align="center">
+                                                <h:outputText value="#{configuraciones.tasaMoraAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Comisión (%)" width="15%" filterBy="#{configuraciones.tasaComisionAgronegocio}" sortBy="#{configuraciones.tasaComisionAgronegocio}"  >
+                                            <div align="center">
+                                                <h:outputText value="#{configuraciones.tasaComisionAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Fecha de registro" width="10%" filterBy="#{configuraciones.vigenciaAgronegocio}" sortBy="#{configuraciones.vigenciaAgronegocio}"  >
+                                            <div align="center">
+                                                <h:outputText value="#{configuraciones.vigenciaAgronegocio}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column width="5%" rendered="#{configuraciones.estadoConfiguracion}" headerText="Estado">
+                                            <center>
+                                                <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                            </center>
+                                        </p:column>
+                                        <p:column width="5%" rendered="#{!configuraciones.estadoConfiguracion}" headerText="Estado" >
+                                            <center>
+                                                <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                            </center>
+                                        </p:column>    
+                                        <p:column headerText="" width="4%"  >
+                                            <p:commandButton update=":padding" oncomplete="PF('dlVerPolitica').show()" icon="fa fa-eye" title="Ver">
+                                                <f:setPropertyActionListener  value="#{configuraciones}" target="#{configuracionAgronegocioBean.configuracionSeleccionada}"  />
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog  width="50%" header="Datos de la política" widgetVar="dlVerPolitica" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form id="fVerPolitica" target="_blank">
+                                <p:outputPanel>
+                                    <p:panelGrid  style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Tasa de interés (%):"/>
+                                            </p:column>
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.tasaInteresAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </p:column>  
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="Tasa de interés x mora (%):"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.tasaMoraAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Comisión (%):"/>
+                                            </p:column>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.tasaComisionAgronegocio}">
+                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </p:column>  
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Fecha de registro:"/>
+                                            </p:column>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.vigenciaAgronegocio}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Estado:"/>
+                                            </p:column>
+                                            <p:column colspan="3" style=" width: 30%">
+                                                <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.estadoConfiguracion eq true? 'Activo':'Inactivo'}"/> 
+                                            </p:column>  
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{configuracionAgronegocioBean.verReportePolitica()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{configuracionAgronegocioBean.verReportePoliticaPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

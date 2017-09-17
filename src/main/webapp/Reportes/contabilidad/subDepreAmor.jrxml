@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subDepreAmor" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="786a4ae7-c1ba-46df-83b1-235f9e3e9ffe">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idActivoFijo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     t_partida."id_partida" AS t_partida_id_partida,
+     t_partida."fecha_partida" AS t_partida_fecha_partida,
+     t_partida."concepto_partida" AS t_partida_concepto_partida,
+     t_partida."id_periodo_partida" AS t_partida_id_periodo_partida,
+     t_partida."numero_partida" AS t_partida_numero_partida,
+     t_partida."estado_partida" AS t_partida_estado_partida,
+     t_depreciacion."id_depreciacion" AS t_depreciacion_id_depreciacion,
+     t_depreciacion."valor_depreciacion" AS t_depreciacion_valor_depreciacion,
+     t_depreciacion."id_partida_depreacion" AS t_depreciacion_id_partida_depreacion,
+     t_depreciacion."id_activo_fijo_depreciacion" AS t_depreciacion_id_activo_fijo_depreciacion,
+     (
+SELECT
+
+     t_valor_activo."valor_activo" AS t_valor_activo_valor_activo
+
+FROM
+     "public"."t_partida" t_partida INNER JOIN "public"."t_valor_activo" t_valor_activo ON t_partida."id_partida" = t_valor_activo."id_partida_valor_activo"
+WHERE
+     t_valor_activo."id_activo_valor_activo" = $P{idActivoFijo}
+
+
+     ) AS valor_activo,
+
+     (
+SELECT
+
+
+     t_partida."fecha_partida" AS t_partida_fecha_partida
+FROM
+     "public"."t_partida" t_partida INNER JOIN "public"."t_valor_activo" t_valor_activo ON t_partida."id_partida" = t_valor_activo."id_partida_valor_activo"
+WHERE
+     t_valor_activo."id_activo_valor_activo" =  $P{idActivoFijo}) as fecha_registro
+FROM
+     "public"."t_partida" t_partida INNER JOIN "public"."t_depreciacion" t_depreciacion ON t_partida."id_partida" = t_depreciacion."id_partida_depreacion"
+WHERE
+     t_depreciacion."id_activo_fijo_depreciacion" = $P{idActivoFijo}]]>
+	</queryString>
+	<field name="id_partida" class="java.lang.Integer"/>
+	<field name="fecha_partida" class="java.sql.Date"/>
+	<field name="concepto_partida" class="java.lang.String"/>
+	<field name="id_periodo_partida" class="java.lang.Integer"/>
+	<field name="numero_partida" class="java.lang.Integer"/>
+	<field name="estado_partida" class="java.lang.Boolean"/>
+	<field name="id_depreciacion" class="java.lang.Integer"/>
+	<field name="valor_depreciacion" class="java.math.BigDecimal"/>
+	<field name="id_partida_depreacion" class="java.lang.Integer"/>
+	<field name="id_activo_fijo_depreciacion" class="java.lang.Integer"/>
+	<field name="t_partida_id_partida" class="java.lang.Integer"/>
+	<field name="t_partida_fecha_partida" class="java.sql.Date"/>
+	<field name="t_partida_concepto_partida" class="java.lang.String"/>
+	<field name="t_partida_id_periodo_partida" class="java.lang.Integer"/>
+	<field name="t_partida_numero_partida" class="java.lang.Integer"/>
+	<field name="t_partida_estado_partida" class="java.lang.Boolean"/>
+	<field name="t_depreciacion_id_depreciacion" class="java.lang.Integer"/>
+	<field name="t_depreciacion_valor_depreciacion" class="java.math.BigDecimal"/>
+	<field name="t_depreciacion_id_partida_depreacion" class="java.lang.Integer"/>
+	<field name="t_depreciacion_id_activo_fijo_depreciacion" class="java.lang.Integer"/>
+	<field name="valor_activo" class="java.math.BigDecimal"/>
+	<field name="fecha_registro" class="java.sql.Date"/>
+	<variable name="numeroMes" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="depreAcumulada" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_depreciacion}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="61" y="3" width="75" height="20" uuid="4e2d8fc7-39b3-4dc8-923d-63cb645d8b7e"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="61" height="20" uuid="ccd37e7b-fedd-44f6-9feb-f95f255d08d0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="3" width="109" height="20" uuid="6500e543-3e87-48ae-8113-28f7bff86238"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[  MENSUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="7" width="116" height="20" uuid="83cfea3f-e9fa-412b-b99d-658055c33a79"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ ACUMULADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="9" width="117" height="20" uuid="9eddfcf1-c3a8-40f8-8307-0aec7af79864"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[VALOR NETO]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="407" y="31" width="117" height="20" uuid="5142444c-46b8-4584-a203-3f6e334c0f9e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valor_activo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="31" width="116" height="20" uuid="e0b5872b-455f-41d3-9622-c4011ed87b31"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[0.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="25" width="109" height="20" uuid="f1cdaf2c-1534-4951-9a6e-c1d324f65533"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[0.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="61" height="20" uuid="6634621b-f72b-4535-ad95-5956ad110ad5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="61" y="25" width="75" height="20" uuid="c27b661d-35e5-492f-9270-1b7ad4bfd60a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fecha_registro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="61" height="20" uuid="c078de95-2001-4737-8de5-0c0c89c145c7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{numeroMes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="269" y="4" width="116" height="20" uuid="1e1e9d1d-e0d3-47f1-b672-a140108ae1a2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{depreAcumulada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="61" y="0" width="75" height="20" uuid="d8c51d39-0ef0-4e83-b93e-6c27ac2c42e6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fecha_partida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="148" y="0" width="109" height="20" uuid="a16c86ff-37da-4f1d-8392-8a16c916c7c1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valor_depreciacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="407" y="6" width="117" height="20" uuid="200765c6-941f-4469-8f47-cf50e672cfe4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valor_activo}.subtract( $V{depreAcumulada} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

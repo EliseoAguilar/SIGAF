@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TCooperativa" table="t_cooperativa" schema="public" optimistic-lock="version">
+        <id name="idCooperativa" type="int">
+            <column name="id_cooperativa" />
+            <generator class="sequence">
+                <param name="sequence">t_cooperativa_id_cooperativa_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="id_proyecto" />
+        </many-to-one>
+        <property name="areaProducida" type="big_decimal">
+            <column name="area_producida" precision="131089" scale="0" />
+        </property>
+        <property name="creditoAnterior" type="big_decimal">
+            <column name="credito_anterior" precision="131089" scale="0" />
+        </property>
+        <property name="presupuesto" type="string">
+            <column name="presupuesto" />
+        </property>
+        <property name="balanceGeneral" type="string">
+            <column name="balance_general" />
+        </property>
+        <property name="acuerdoSolicitud" type="string">
+            <column name="acuerdo_solicitud" />
+        </property>
+        <property name="activoCorriente" type="big_decimal">
+            <column name="activo_corriente" precision="131089" scale="0" />
+        </property>
+        <property name="activoNocorriente" type="big_decimal">
+            <column name="activo_nocorriente" precision="131089" scale="0" />
+        </property>
+        <property name="pasivoCorriente" type="big_decimal">
+            <column name="pasivo_corriente" precision="131089" scale="0" />
+        </property>
+        <property name="pasivoNocorriente" type="big_decimal">
+            <column name="pasivo_nocorriente" precision="131089" scale="0" />
+        </property>
+        <property name="patrimonio" type="big_decimal">
+            <column name="patrimonio" precision="131089" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

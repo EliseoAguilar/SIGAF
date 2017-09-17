@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+
+
+                <div class="row">
+                    <h:link outcome="adminUsuarios.xhtml">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header " data-background-color="green">
+                                <i class="material-icons">accessibility</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Seguridad</p>
+                                <h3 class="title"><br></br>Usuarios</h3>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">info</i> Administrar seguridad
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </h:link>
+                    <h:link outcome="adminBase.xhtml">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">list</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Seguridad</p>
+                                <h3 class="title"><br></br>Base de datos</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">info</i> Administrar base de datos
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </h:link>
+                    <h:link outcome="adminBitacora.xhtml">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="blue">
+                                <i class="material-icons">done_all</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Seguridad</p>
+                                <h3 class="title"><br></br>  Bitácora </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">info</i>Administrar bitácora
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                        </h:link>
+                    
+                    
+                    <h:link outcome="adminReportesSeguridad.xhtml">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header " data-background-color="red">
+                                <i class="material-icons">event</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Seguridad</p>
+                                <h3 class="title"><br></br>Reportes</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">info</i>Ver reportes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </h:link>
+
+
+
+                </div>
+
+
+            </ui:define>
+            
+            <ui:define name="aux">
+      
+        <h:outputScript name="./js/jquery-3.1.0.min.js" />
+                <script>
+                    $(document).ready(function () {
+                        $("#seg").addClass("active");
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

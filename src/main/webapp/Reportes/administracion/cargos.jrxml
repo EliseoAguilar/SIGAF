@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cargos" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="20" uuid="9c1a6d95-c521-45e2-9d26-fdb4b23b290c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEmpleado" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_empleado."correo_empleado" AS t_empleado_correo_empleado,
+     t_empleado."dui_empleado" AS t_empleado_dui_empleado,
+     t_empleado."nit_empleado" AS t_empleado_nit_empleado,
+     t_empleado."fechanacimiento_empleado" AS t_empleado_fechanacimiento_empleado,
+     t_empleado."salario_empleado" AS t_empleado_salario_empleado,
+     t_empleado."fechaingreso_empleado" AS t_empleado_fechaingreso_empleado,
+     t_empleado."telefono_empleado" AS t_empleado_telefono_empleado,
+     t_empleado."celular_empleado" AS t_empleado_celular_empleado,
+     t_empleado."sexo_empleado" AS t_empleado_sexo_empleado,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_empleado."estado_empleado" AS t_empleado_estado_empleado,
+     t_empleado."foto_empleado" AS t_empleado_foto_empleado,
+     t_empleado."lugar_nacimiento_empleado" AS t_empleado_lugar_nacimiento_empleado,
+     t_empleado."tipo_empleado" AS t_empleado_tipo_empleado,
+     t_empleado."estado_socio" AS t_empleado_estado_socio,
+     t_empleado_cargo."id_empleado_cargo" AS t_empleado_cargo_id_empleado_cargo,
+     t_empleado_cargo."fechainicio_empleado_cargo" AS t_empleado_cargo_fechainicio_empleado_cargo,
+     t_empleado_cargo."fechafin_empleado_cargo" AS t_empleado_cargo_fechafin_empleado_cargo,
+     t_empleado_cargo."idempleado_empleado_cargo" AS t_empleado_cargo_idempleado_empleado_cargo,
+     t_empleado_cargo."idcargo_empleado_cargo" AS t_empleado_cargo_idcargo_empleado_cargo,
+     t_empleado_cargo."estado_empleado_cargo" AS t_empleado_cargo_estado_empleado_cargo,
+     t_cargo."id_cargo" AS t_cargo_id_cargo,
+     t_cargo."nombre_cargo" AS t_cargo_nombre_cargo,
+     t_cargo."estado_cargo" AS t_cargo_estado_cargo,
+     t_cargo."tipo_cargo" AS t_cargo_tipo_cargo
+FROM
+     "public"."t_empleado" t_empleado INNER JOIN "public"."t_empleado_cargo" t_empleado_cargo ON t_empleado."id_empleado" = t_empleado_cargo."idempleado_empleado_cargo"
+     INNER JOIN "public"."t_cargo" t_cargo ON t_empleado_cargo."idcargo_empleado_cargo" = t_cargo."id_cargo" where t_empleado_cargo."idempleado_empleado_cargo"=$P{idEmpleado}]]>
+	</queryString>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_empleado_correo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_dui_empleado" class="java.lang.String"/>
+	<field name="t_empleado_nit_empleado" class="java.lang.String"/>
+	<field name="t_empleado_fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_salario_empleado" class="java.lang.Float"/>
+	<field name="t_empleado_fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_telefono_empleado" class="java.lang.String"/>
+	<field name="t_empleado_celular_empleado" class="java.lang.String"/>
+	<field name="t_empleado_sexo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_empleado_estado_empleado" class="java.lang.Boolean"/>
+	<field name="t_empleado_foto_empleado" class="java.lang.String"/>
+	<field name="t_empleado_lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="t_empleado_tipo_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_estado_socio" class="java.lang.Boolean"/>
+	<field name="t_empleado_cargo_id_empleado_cargo" class="java.lang.Integer"/>
+	<field name="t_empleado_cargo_fechainicio_empleado_cargo" class="java.sql.Date"/>
+	<field name="t_empleado_cargo_fechafin_empleado_cargo" class="java.sql.Date"/>
+	<field name="t_empleado_cargo_idempleado_empleado_cargo" class="java.lang.Integer"/>
+	<field name="t_empleado_cargo_idcargo_empleado_cargo" class="java.lang.Integer"/>
+	<field name="t_empleado_cargo_estado_empleado_cargo" class="java.lang.Boolean"/>
+	<field name="t_cargo_id_cargo" class="java.lang.Integer"/>
+	<field name="t_cargo_nombre_cargo" class="java.lang.String"/>
+	<field name="t_cargo_estado_cargo" class="java.lang.Integer"/>
+	<field name="t_cargo_tipo_cargo" class="java.lang.Integer"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="176" height="20" uuid="65e1b3a8-dc35-4ca2-a243-90c0407c955f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_cargo_nombre_cargo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="191" y="0" width="89" height="20" uuid="9b056418-3ea2-4317-8a57-65af9d309503"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_cargo_fechainicio_empleado_cargo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="288" y="0" width="111" height="20" uuid="995d3586-282a-413c-8d53-c0134a338b1d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_cargo_fechafin_empleado_cargo} == null? "--":$F{t_empleado_cargo_fechafin_empleado_cargo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

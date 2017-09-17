@@ -1,0 +1,746 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+     
+
+                <p:outputPanel id="padding"  > 
+
+                    <p:growl id="msgs"   />
+
+                    <p:panel id="basic" header="Configuración contabilidad "  style="width: 100%; margin: auto; margin-bottom: 20px">
+                        <!-- Actualiza la lista de las Entidades -->
+                        #{configuracionBean.updateListaEntidades()}
+                        
+                        <h:form id="fFiltro"> 
+                            <p:fieldset>
+                                <p:panelGrid style=" width: 100%" id="pgfiltro"  class="noBoder">
+                                    <p:row>
+                                        <p:column style=" width: 60%" >
+                                            <h:outputText value="Entidad:*" /> 
+                                        </p:column>
+                                        <p:column style=" width: 40%"  >
+                                            <h:outputText value="" />  
+                                        </p:column>
+                                    </p:row>
+
+                                    <p:row>
+
+                                        <p:column >
+                                            <p:outputPanel id="opPrede" rendered="#{configuracionBean.estadoPredeterminado eq true? true:true}">
+                                                <p:selectOneMenu id="car" disabled="#{configuracionBean.estadoPredeterminado}"  value="#{configuracionBean.idEntidad}" style=" width: 100%;" > 
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems  var="end" value="#{configuracionBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                                    <p:ajax update=":padding"></p:ajax>
+                                                </p:selectOneMenu>
+                                            </p:outputPanel>
+                                        </p:column>
+                                        <p:column > 
+
+                                            <p:outputPanel rendered="#{configuracionBean.idEntidad eq 0? false : true}">
+                                                <p:selectBooleanCheckbox value="#{configuracionBean.estadoPredeterminado}" >
+                                                    <p:ajax update="opPrede" listener="#{configuracionBean.cambiarPredeterminado()}" />
+                                                </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
+                                            </p:outputPanel>
+
+                                        </p:column>
+
+
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
+                        </h:form>
+                        <br></br>
+
+                        <p:outputPanel rendered="#{configuracionBean.idEntidad eq 0 ? false:true}" id="data">
+                            
+                            <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValido}">
+                                <h:form>
+                                    <div align="center">
+                                        ¿Estás seguro de guardar?
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrar}"  oncomplete="PF('dialogCrear').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrear').hide()" style="#{configuracionBean.btnCancelar}" >
+                                            <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValido}"/>
+                                        </p:commandButton>
+                                    </div>
+                                </h:form>
+                            </p:dialog>
+                            
+                            <p:dialog  header="Confirmar" widgetVar="dialogCrearBalance" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValidoBalance}">
+                                <h:form>
+                                    <div align="center">
+                                        ¿Estás seguro de guardar?
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarBalance()}"  oncomplete="PF('dialogCrearBalance').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearBalance').hide()" style="#{configuracionBean.btnCancelar}" >
+                                            <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValidoBalance}"/>
+                                        </p:commandButton>
+                                    </div>
+                                </h:form>
+                            </p:dialog>
+                            
+                            <p:dialog  header="Confirmar" widgetVar="dialogCrearEstado" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValidoEstado}">
+                                <h:form>
+                                    <div align="center">
+                                        ¿Estás seguro de guardar?
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarEstado()}"  oncomplete="PF('dialogCrearEstado').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearEstado').hide()" style="#{configuracionBean.btnCancelar}" >
+                                            <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValidoEstado}"/>
+                                        </p:commandButton>
+                                    </div>
+                                </h:form>
+                            </p:dialog>
+                            
+                            <h:form>
+                                
+                                <p:tabView dynamic="true"  activeIndex="#{configuracionBean.idTab}"  >
+                                    
+                                    <p:ajax event="tabChange" listener="#{configuracionBean.onTabChange}" />
+
+                                    <p:tab title="Estructura códigos ">
+                                        <p:panelGrid id="addPanel"   style="width: 100%; margin: auto;"  class="noBoder" >   
+                                            <p:row>
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Cuentas:*" />
+                                                </p:column>
+
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Areas:*" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText id="tCodigoEntidad" value="#{configuracionBean.configuracion.cuentaConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
+                                                    <h:outputText value="#{configuracionBean.msgCuenta}" style="color: red"/> 
+                                                </p:column>
+
+                                                <p:column>
+                                                    <p:inputText id="tCodigoArea" value="#{configuracionBean.configuracion.areaConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
+                                                    <h:outputText value="#{configuracionBean.msgArea}" style="color: red"/> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Tipos de activo:*" />
+                                                </p:column>
+
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Activos:*" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText id="tCodigoTipo" value="#{configuracionBean.configuracion.tipoConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
+                                                    <h:outputText value="#{configuracionBean.msgTipo}" style="color: red"/> 
+                                                </p:column>
+
+                                                <p:column>
+                                                    <p:inputText id="tCodigoActivo" value="#{configuracionBean.configuracion.activoConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
+                                                    <h:outputText value="#{configuracionBean.msgActivo}" style="color: red"/> 
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <center>
+                                            <p:commandButton id="btnCreate"  actionListener="#{configuracionBean.validarFormulario()}" update="data"   icon="fa fa-check" style="#{configuracionBean.btnCrear}" value="Guardar"> 
+                                            </p:commandButton>
+
+                                            <p:commandButton id="btnCancel" actionListener="#{configuracionBean.limpiar}"   icon="fa fa-close" style="#{configuracionBean.btnCancelar}"  value="Cancelar" action="contabilidad?faces-redirect=true"> 
+                                            </p:commandButton>
+                                        </center>
+
+
+                                    </p:tab>
+
+                                    <p:tab title="Balance general "   rendered="#{configuracionBean.ejerAbierto eq null? false:true}"   >
+
+                                        <p:panelGrid id="pnEst"   style="width: 100%; margin: auto;"  class="noBoder" >   
+
+                                            <p:row> 
+                                                <p:column colspan="3">
+                                                    <br></br>
+                                                    <b><h:outputText value="Activo"/> </b>
+                                                    <hr></hr>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Código:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nombre:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nivel de detalle:"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.codigoCuenta}" style="width: 85%" disabled ="true"  />
+                                                    <p:commandButton title="Activo" update=":opDataCuentasBala"    oncomplete="PF('dgBuscarCuentaBala').show()"  actionListener="#{configuracionBean.setIdGrupo(11)}"   icon="fa fa-search" /> 
+                                                    <h:outputText value="#{configuracionBean.msgEstActivo}" style="color: red"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.nombreCuenta}" style="width: 100%" disabled ="true" />
+
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.estructuraActivo.nivelReporte}"  />
+                                                     <br></br>
+                                                    <h:outputText value="#{configuracionBean.msgEstActivoNivel}" style="color: red"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row> 
+                                                <p:column colspan="3">
+                                                    <br></br>
+                                                    <b><h:outputText value="Pasivo"/> </b>
+                                                    <hr></hr>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Código:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nombre:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nivel de detalle:"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.codigoCuenta}" style="width: 85%"  disabled="true" />
+                                                    <p:commandButton title="Pasivo"   update=":opDataCuentasBala" actionListener="#{configuracionBean.setIdGrupo(12)}" oncomplete="PF('dgBuscarCuentaBala').show()"    icon="fa fa-search" />
+                                                    <h:outputText value="#{configuracionBean.msgEstPasivo}" style="color: red"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.nombreCuenta}" style="width: 100%" disabled="true"  />
+
+                                                </p:column>
+                                                <p:column>
+                                                        <p:inputMask mask="9?" maxlength="1"  value="#{configuracionBean.estructuraPasivo.nivelReporte}"   />
+                                                        <br></br>
+                                                       <h:outputText value="#{configuracionBean.msgEstPasivoNivel}" style="color: red"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row> 
+                                                <p:column colspan="3">
+                                                    <br></br>
+                                                    <b><h:outputText value="Patrimonio"/> </b>
+                                                    <hr></hr>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Código:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nombre:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nivel de detalle:"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.codigoCuenta}" style="width: 85%"   disabled="true"/>
+                                                    <p:commandButton title="Patrimonio"  update=":opDataCuentasBala" actionListener="#{configuracionBean.setIdGrupo(13)}"  oncomplete="PF('dgBuscarCuentaBala').show()"    icon="fa fa-search" />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.nombreCuenta}" style="width: 100%"  disabled="true" />
+
+                                                </p:column>
+                                                <p:column>
+                                                         <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.estructuraCapital.nivelReporte}"  />
+                                                         <br></br>
+                                                         <h:outputText value="#{configuracionBean.msgEstCapitalNivel}" style="color: red"/>
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <center>
+                                            <p:commandButton   actionListener="#{configuracionBean.validarFormularioBalance()}" update=":data"  icon="fa fa-check" style="#{configuracionBean.btnCrear}" value="Guardar"> 
+
+                                            </p:commandButton>
+
+                                            <p:commandButton actionListener="#{configuracionBean.limpiarBalance}"   icon="fa fa-close" style="#{configuracionBean.btnCancelar}"  value="Cancelar" action="contabilidad?faces-redirect=true"> 
+                                            </p:commandButton>
+                                        </center>
+
+
+                                    </p:tab>
+
+                                    <p:tab title="Estado de resultado" rendered="#{configuracionBean.ejerAbierto eq null? false:true}">
+                                        <p:accordionPanel >
+                                            <p:tab title="Ingresos">
+                                                <p:fieldset>
+                                                    <p:commandButton title="Agregar cuenta ingreso"  update=":opDataCuentasEst"   oncomplete="PF('dgBuscarCuenta').show()"  actionListener="#{configuracionBean.setIdGrupo(1)}"   icon="fa fa-plus"  style="#{configuracionBean.btnNuevo}" > 
+
+                                                    </p:commandButton>
+                                                </p:fieldset>  
+
+                                                <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraIngresos}" rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
+                                                    <p:columnGroup type="header">
+                                                        <p:row>
+                                                            <p:column headerText="Código"  width="30%" />
+
+                                                            <p:column headerText="Cuenta"  width="60%" />
+
+                                                            <p:column headerText=""  width="10%" />
+                                                        </p:row>
+                                                    </p:columnGroup>
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
+                                                    </p:column>  
+
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                                    </p:column> 
+
+                                                    <p:column> 
+
+                                                        <p:commandButton title="Eliminar" icon="fa fa-trash" style="#{configuracionBean.btnCancelar}" actionListener="#{configuracionBean.removeListEstado(i,1)}" 
+                                                                         update=":data"/>
+                                                    </p:column> 
+
+                                                </p:dataTable>
+                                                <br></br>
+                                                <h:outputText value="#{configuracionBean.msgIngresos}" style="color: red"/> 
+
+                                            </p:tab>
+                                            <p:tab title="Costos">
+                                                <p:fieldset>
+                                                    <p:commandButton title="Agregar cuenta costos"  update=":opDataCuentasEst" actionListener="#{configuracionBean.setIdGrupo(2)}" oncomplete="PF('dgBuscarCuenta').show()"     icon="fa fa-plus"  style="#{cuentaBean.btnNuevo}" />
+                                                </p:fieldset>  
+
+                                                <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraCostos}" rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
+                                                    <p:columnGroup type="header">
+                                                        <p:row>
+                                                            <p:column headerText="Código"  width="30%" />
+
+                                                            <p:column headerText="Cuenta"  width="60%" />
+
+                                                            <p:column headerText=""  width="10%" />
+                                                        </p:row>
+                                                    </p:columnGroup>
+
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
+                                                    </p:column>  
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                                    </p:column> 
+
+                                                    <p:column> 
+                                                        <p:commandButton title="Eliminar" icon="fa fa-trash" style="#{configuracionBean.btnCancelar}" actionListener="#{configuracionBean.removeListEstado(i,2)}" 
+                                                                         update=":data"/>
+                                                    </p:column> 
+
+                                                </p:dataTable>
+                                                <br></br>
+                                                <h:outputText value="#{configuracionBean.msgCostos}" style="color: red"/>
+                                            </p:tab>
+                                            <p:tab title="Gastos">
+                                                <p:fieldset>
+                                                    <p:commandButton title="Agregar cuenta gastos" update=":opDataCuentasEst" actionListener="#{configuracionBean.setIdGrupo(3)}"  oncomplete="PF('dgBuscarCuenta').show()"      icon="fa fa-plus"  style="#{cuentaBean.btnNuevo}" />
+                                                </p:fieldset>  
+
+                                                <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraGastos}"  rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
+                                                    <p:columnGroup type="header">
+                                                        <p:row>
+                                                            <p:column headerText="Código"  width="30%" />
+
+                                                            <p:column headerText="Cuenta"  width="60%" />
+
+                                                            <p:column headerText=""  width="10%" />
+                                                        </p:row>
+                                                    </p:columnGroup>
+
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
+                                                    </p:column>  
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                                    </p:column> 
+
+                                                    <p:column>
+                                                        <p:commandButton title="Eliminar" icon="fa fa-trash" style="#{configuracionBean.btnCancelar}" actionListener="#{configuracionBean.removeListEstado(i,3)}" 
+                                                                         update=":data"/>
+                                                    </p:column> 
+                                                </p:dataTable>
+                                                <br></br>
+                                                <h:outputText value="#{configuracionBean.msgGastos}" style="color: red"/>
+                                            </p:tab>
+                                            <p:tab title="Otros ingresos">
+                                                <p:fieldset>
+                                                    <p:commandButton title="Cuenta otros ingreso" update=":opDataCuentasEst" actionListener="#{configuracionBean.setIdGrupo(4)}"  oncomplete="PF('dgBuscarCuenta').show()"      icon="fa fa-plus"  style="#{cuentaBean.btnNuevo}" />
+                                                </p:fieldset>  
+
+                                                <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraOtrosIngresos}" rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
+                                                    <p:columnGroup type="header">
+                                                        <p:row>
+                                                            <p:column headerText="Código"  width="30%" />
+
+                                                            <p:column headerText="Cuenta"  width="60%" />
+
+                                                            <p:column headerText=""  width="10%" />
+                                                        </p:row>
+                                                    </p:columnGroup>
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
+                                                    </p:column>  
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                                    </p:column>
+                                                    <p:column> 
+
+                                                        <p:commandButton title="Eliminar" icon="fa fa-trash" style="#{configuracionBean.btnCancelar}" actionListener="#{configuracionBean.removeListEstado(i,4)}" 
+                                                                         update=":data"/>
+                                                    </p:column> 
+                                                </p:dataTable>
+                                                <br></br>
+                                                <h:outputText value="#{configuracionBean.msgOtrosIngresos}" style="color: red"/>
+                                            </p:tab>
+                                            <p:tab title="Otros gastos">
+                                                <p:fieldset>
+                                                    <p:commandButton title="Cuenta otros gastos" update=":opDataCuentasEst"  actionListener="#{configuracionBean.setIdGrupo(5)}"  oncomplete="PF('dgBuscarCuenta').show()"      icon="fa fa-plus"  style="#{cuentaBean.btnNuevo}" />
+                                                </p:fieldset>  
+                                                <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraOtrosGastos}" rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
+                                                    <p:columnGroup type="header">
+                                                        <p:row>
+                                                            <p:column headerText="Código"  width="30%" />
+
+                                                            <p:column headerText="Cuenta"  width="60%" />
+
+                                                            <p:column headerText=""  width="10%" />
+                                                        </p:row>
+                                                    </p:columnGroup>
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
+                                                    </p:column>  
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                                    </p:column>
+                                                    <p:column> 
+
+                                                        <p:commandButton title="Eliminar" icon="fa fa-trash" style="#{configuracionBean.btnCancelar}" actionListener="#{configuracionBean.removeListEstado(i,5)}" 
+                                                                         update="data"/>
+                                                    </p:column> 
+                                                </p:dataTable>
+                                                <br></br>
+                                                <h:outputText value="#{configuracionBean.msgOtrosGastos}" style="color: red"/>
+                                            </p:tab>
+                                            <p:tab title="Impuesto sobre la renta">
+
+                                                <p:outputPanel id="impRe">
+                                                    <p:panelGrid    style="width: 100%; margin: auto;"  class="noBoder" > 
+                                                        <p:row>  
+                                                            <p:column >
+                                                                <p:selectBooleanCheckbox value="#{configuracionBean.considerarRenta}">
+                                                                    <p:ajax update="impRe" />
+                                                                </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Considerar?"/> 
+                                                            </p:column>
+                                                        </p:row>  
+                                                        <p:row>
+                                                            <p:column style="width: 50%;" >
+                                                                <h:outputText value="Cuenta: *"/>
+                                                            </p:column>
+                                                            <p:column  style="width: 50%;">
+                                                                <h:outputText value="Nombre: *"/>
+                                                            </p:column>
+                                                        </p:row>
+
+                                                        <p:row>
+                                                            <p:column >
+                                                                <p:inputText   style="width:80%" value="#{configuracionBean.rentaEstructura.TCuenta.codigoCuenta}"  disabled="true" />
+                                                                <p:commandButton  actionListener="#{configuracionBean.setIdGrupo(6)}" update=":opDataCuentasEst"  oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar" disabled="#{!configuracionBean.considerarRenta}" >
+                                                                </p:commandButton>
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgRenta}" style="color: red"/>
+                                                            </p:column>
+
+                                                            <p:column >
+                                                                <p:inputText  value="#{configuracionBean.rentaEstructura.TCuenta.nombreCuenta}" style="width: 100%"  disabled="true" />
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column>
+                                                                <h:outputText value="Valor de referencia: *" />
+                                                            </p:column>
+                                                            <p:column>
+                                                                <h:outputText value="Valores menores o iguales (%): *" />
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column style="width: 50%;">
+                                                                <p:inputNumber  value="#{configuracionBean.rentaEstructura.valorRango}"  style="width: 100% !important" placeholder="150,000" disabled="#{!configuracionBean.considerarRenta}" />
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgValorRef}" style="color: red"/>
+
+                                                            </p:column>
+
+                                                            <p:column style="width: 50%;">
+                                                                <p:inputNumber  value="#{configuracionBean.rentaEstructura.porMinEstructura}"  style="width: 100% !important" placeholder="25" disabled="#{!configuracionBean.considerarRenta}" />
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgValorMin}" style="color: red"/>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column>
+                                                                <h:outputText value="Valores mayores (%): *" />
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column style="width: 50%;">
+                                                                <p:inputNumber  value="#{configuracionBean.rentaEstructura.porMaxEstructura}"  style="width: 100% !important" placeholder="30" disabled="#{!configuracionBean.considerarRenta}" />
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgValorMax}" style="color: red"/>
+                                                            </p:column>
+                                                        </p:row>
+                                                    </p:panelGrid>
+
+                                                </p:outputPanel>
+
+                                            </p:tab>
+                                            <p:tab title="Reserva legal">
+
+                                                <p:outputPanel id="impRese">
+                                                    <p:panelGrid    style="width: 100%; margin: auto;"  class="noBoder" > 
+
+                                                        <p:row>  
+                                                            <p:column >
+                                                                <p:selectBooleanCheckbox value="#{configuracionBean.considerarReserva}">
+                                                                    <p:ajax update="impRese" />
+                                                                </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Considerar?"/> 
+                                                            </p:column>
+                                                        </p:row>
+
+                                                        <p:row>
+                                                            <p:column style="width: 50%;" >
+                                                                <h:outputText value="Codigo: *"/>
+                                                            </p:column>
+                                                            <p:column  style="width: 50%;">
+                                                                <h:outputText value="Nombre: *"/>
+                                                            </p:column>
+                                                        </p:row>
+
+                                                        <p:row>
+                                                            <p:column >
+                                                                <p:inputText  style="width:80%" value="#{configuracionBean.reservaEstructura.TCuenta.codigoCuenta}" disabled="true" />
+                                                                <p:commandButton actionListener="#{configuracionBean.setIdGrupo(7)}" update=":opDataCuentasEst"  oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar" disabled="#{!configuracionBean.considerarReserva}">
+                                                                </p:commandButton>
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgReserva}" style="color: red"/>
+                                                            </p:column>
+
+                                                            <p:column >
+                                                                <p:inputText  value="#{configuracionBean.reservaEstructura.TCuenta.nombreCuenta}" style="width: 100%" disabled="true" />
+                                                            </p:column>
+                                                        </p:row>
+
+                                                        <p:row>
+                                                            <p:column style="width: 50%;" >
+                                                                <h:outputText value="Valor (%): *"/>
+                                                            </p:column>
+                                                            <p:column  style="width: 50%;">
+
+                                                            </p:column>
+                                                        </p:row>
+
+                                                        <p:row>
+                                                            <p:column >
+                                                                <p:inputNumber    style="width:100%" value="#{configuracionBean.reservaEstructura.porMinEstructura}" placeholder="7" disabled="#{!configuracionBean.considerarReserva}"/> 
+                                                                <br></br>
+                                                                <h:outputText value="#{configuracionBean.msgValorRes}" style="color: red"/>
+                                                            </p:column>
+
+                                                            <p:column >
+                                                            </p:column>
+                                                        </p:row>
+
+                                                    </p:panelGrid>
+                                                </p:outputPanel>
+                                            </p:tab>
+                                            <p:tab title="Utilidad">
+                                                <p:panelGrid    style="width: 100%; margin: auto;"  class="noBoder" > 
+
+                                                    <p:row>
+                                                        <p:column style="width: 50%;" >
+                                                            <h:outputText value="Codigo: *"/>
+                                                        </p:column>
+                                                        <p:column  style="width: 50%;">
+                                                            <h:outputText value="Nombre: *"/>
+                                                        </p:column>
+                                                    </p:row>
+
+                                                    <p:row>
+                                                        <p:column >
+                                                            <p:inputText style="width:80%" value="#{configuracionBean.utilidadEstructura.TCuenta.codigoCuenta}"  disabled="true"/>
+                                                            <p:commandButton  actionListener="#{configuracionBean.setIdGrupo(8)}" update=":opDataCuentasEst" oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar" >
+                                                            </p:commandButton>
+                                                            <br></br>
+                                                            <h:outputText value="#{configuracionBean.msgUtilidad}" style="color: red"/>
+                                                        </p:column>
+
+                                                        <p:column >
+                                                            <p:inputText  value="#{configuracionBean.utilidadEstructura.TCuenta.nombreCuenta}" style="width: 100%" disabled="true" />
+                                                        </p:column>
+                                                    </p:row>
+
+                                                </p:panelGrid>
+                                            </p:tab>
+                                        </p:accordionPanel>
+                                        <br></br>
+                                        <center>
+                                            <p:commandButton   actionListener="#{configuracionBean.validarFormularioEstado()}" update=":data"  icon="fa fa-check" style="#{configuracionBean.btnCrear}" value="Guardar"> 
+                                            </p:commandButton>
+
+                                            <p:commandButton actionListener="#{configuracionBean.limpiarEstado}"   icon="fa fa-close" style="#{configuracionBean.btnCancelar}"  value="Cancelar" action="contabilidad?faces-redirect=true"> 
+                                            </p:commandButton>
+                                        </center>
+                                    </p:tab>
+
+                                </p:tabView>
+
+                            </h:form>
+
+                        </p:outputPanel>
+
+                        <p:outputPanel id="opDataCuentasEst">
+                            
+                        #{configuracionBean.updateListaCuentas()}
+                            
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuenta"  width="50%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta"> 
+
+                                <p:dataTable var="cue" value="#{configuracionBean.listaCuentas}" widgetVar="companyTable"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."
+                                             >  
+
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                              headerText="Codigo"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuenta').hide()" style="#{configuracionBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+
+                            </h:form> 
+                        </p:dialog> 
+                            
+                        </p:outputPanel>
+
+                        <p:outputPanel id="opDataCuentasBala">
+                            
+                        #{configuracionBean.updateListaCuentasBalance()}
+                        
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaBala"  width="50%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta2"> 
+
+                                <p:dataTable var="cue" value="#{configuracionBean.getListaCuentasBalance()}" widgetVar="companyTable2"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."
+                                             >  
+
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable2').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                              headerText="Codigo"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuentaBala').hide()" style="#{configuracionBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+
+                            </h:form> 
+                        </p:dialog> 
+                            
+                        </p:outputPanel>
+
+                    </p:panel>
+
+                </p:outputPanel>
+
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

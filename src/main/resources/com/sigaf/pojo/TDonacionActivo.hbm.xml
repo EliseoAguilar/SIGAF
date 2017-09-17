@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2017 20:31:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TDonacionActivo" table="t_donacion_activo" schema="public" optimistic-lock="version">
+        <id name="iddonacionactivofijo" type="int">
+            <column name="iddonacionactivofijo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombrebeneficiario" type="string">
+            <column name="nombrebeneficiario" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="idactivo" type="java.lang.Integer">
+            <column name="idactivo" />
+        </property>
+    </class>
+</hibernate-mapping>

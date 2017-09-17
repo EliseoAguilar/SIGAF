@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TComprador" table="t_comprador" schema="public" optimistic-lock="version">
+        <id name="idComprador" type="int">
+            <column name="id_comprador" />
+            <generator class="sequence">
+                <param name="sequence">t_comprador_id_comprador_seq</param>
+            </generator>
+        </id>
+        <property name="nombresComprador" type="string">
+            <column name="nombres_comprador" />
+        </property>
+        <property name="apellidosComprador" type="string">
+            <column name="apellidos_comprador" />
+        </property>
+        <property name="duiComprador" type="string">
+            <column name="dui_comprador" />
+        </property>
+        <property name="nitComprador" type="string">
+            <column name="nit_comprador" />
+        </property>
+        <property name="sexoComprador" type="string">
+            <column name="sexo_comprador" />
+        </property>
+        <property name="tipoComprador" type="string">
+            <column name="tipo_comprador" />
+        </property>
+        <property name="correoComprador" type="string">
+            <column name="correo_comprador" />
+        </property>
+        <property name="telefonoComprador" type="string">
+            <column name="telefono_comprador" />
+        </property>
+        <property name="movilComprador" type="string">
+            <column name="movil_comprador" />
+        </property>
+        <property name="direccionComprador" type="string">
+            <column name="direccion_comprador" />
+        </property>
+        <property name="estadoComprador" type="java.lang.Boolean">
+            <column name="estado_comprador" />
+        </property>
+        <property name="fechanacimientoComprador" type="date">
+            <column name="fechanacimiento_comprador" length="13" />
+        </property>
+        <set name="TAgronegocios" table="t_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcomprador" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAgronegocio" />
+        </set>
+    </class>
+</hibernate-mapping>

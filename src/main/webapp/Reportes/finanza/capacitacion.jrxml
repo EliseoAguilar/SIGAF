@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientePersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e35999d-239d-4b67-a136-4dbdf81ac442">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="119"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_cliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_empleado."correo_empleado" AS t_empleado_correo_empleado,
+     t_empleado."dui_empleado" AS t_empleado_dui_empleado,
+     t_empleado."nit_empleado" AS t_empleado_nit_empleado,
+     t_empleado."fechanacimiento_empleado" AS t_empleado_fechanacimiento_empleado,
+     t_empleado."salario_empleado" AS t_empleado_salario_empleado,
+     t_empleado."fechaingreso_empleado" AS t_empleado_fechaingreso_empleado,
+     t_empleado."telefono_empleado" AS t_empleado_telefono_empleado,
+     t_empleado."celular_empleado" AS t_empleado_celular_empleado,
+     t_empleado."sexo_empleado" AS t_empleado_sexo_empleado,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_empleado."estado_empleado" AS t_empleado_estado_empleado,
+     t_empleado."foto_empleado" AS t_empleado_foto_empleado,
+     t_empleado."lugar_nacimiento_empleado" AS t_empleado_lugar_nacimiento_empleado,
+     t_empleado."tipo_empleado" AS t_empleado_tipo_empleado,
+     t_empleado."estado_socio" AS t_empleado_estado_socio,
+     t_empleado."direccion_empleado" AS t_empleado_direccion_empleado,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_proyecto."fecha_finalizacion_proyecto" AS t_proyecto_fecha_finalizacion_proyecto,
+     t_proyecto."fecha_incobrabilidad" AS t_proyecto_fecha_incobrabilidad,
+     t_proyecto."razon_incobrabilidad" AS t_proyecto_razon_incobrabilidad,
+     t_capacitacion."idcapacitacion" AS t_capacitacion_idcapacitacion,
+     t_capacitacion."descripcion" AS t_capacitacion_descripcion,
+     t_capacitacion."fecha" AS t_capacitacion_fecha,
+     t_capacitacion."beneficiarios" AS t_capacitacion_beneficiarios,
+     t_capacitacion."idempleado" AS t_capacitacion_idempleado,
+     t_capacitacion."idproyecto" AS t_capacitacion_idproyecto,
+     t_capacitacion."estado" AS t_capacitacion_estado,
+     t_capacitacion."precio" AS t_capacitacion_precio
+FROM
+     "public"."t_empleado" t_empleado INNER JOIN "public"."t_capacitacion" t_capacitacion ON t_empleado."id_empleado" = t_capacitacion."idempleado"
+     INNER JOIN "public"."t_proyecto" t_proyecto ON t_capacitacion."idproyecto" = t_proyecto."idproyecto"
+WHERE
+     t_capacitacion."idcapacitacion" = $P{id_cliente}]]>
+	</queryString>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_empleado_correo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_dui_empleado" class="java.lang.String"/>
+	<field name="t_empleado_nit_empleado" class="java.lang.String"/>
+	<field name="t_empleado_fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_salario_empleado" class="java.math.BigDecimal"/>
+	<field name="t_empleado_fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_telefono_empleado" class="java.lang.String"/>
+	<field name="t_empleado_celular_empleado" class="java.lang.String"/>
+	<field name="t_empleado_sexo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_empleado_estado_empleado" class="java.lang.Boolean"/>
+	<field name="t_empleado_foto_empleado" class="java.lang.String"/>
+	<field name="t_empleado_lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="t_empleado_tipo_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_estado_socio" class="java.lang.Boolean"/>
+	<field name="t_empleado_direccion_empleado" class="java.lang.String"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha_finalizacion_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_fecha_incobrabilidad" class="java.sql.Date"/>
+	<field name="t_proyecto_razon_incobrabilidad" class="java.lang.String"/>
+	<field name="t_capacitacion_idcapacitacion" class="java.lang.Integer"/>
+	<field name="t_capacitacion_descripcion" class="java.lang.String"/>
+	<field name="t_capacitacion_fecha" class="java.sql.Date"/>
+	<field name="t_capacitacion_beneficiarios" class="java.lang.Integer"/>
+	<field name="t_capacitacion_idempleado" class="java.lang.Integer"/>
+	<field name="t_capacitacion_idproyecto" class="java.lang.Integer"/>
+	<field name="t_capacitacion_estado" class="java.lang.Boolean"/>
+	<field name="t_capacitacion_precio" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<subreport>
+				<reportElement x="20" y="0" width="200" height="79" uuid="0f4b4b0a-5ffc-4505-aafd-be52195c3995"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="106" width="554" height="1" uuid="04e4d80c-f117-4f7f-a4e7-ef09e6dd16ed"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="84" width="553" height="20" uuid="cf3a386d-9da0-460a-bd77-e8da35aeacfd"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CAPACITACIÓN</style>]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="487" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="39" width="100" height="20" uuid="3397df0f-bad3-4d6f-ad3b-bbc9de82615a"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="39" width="115" height="20" uuid="d4e03d75-4416-4941-adf2-761a9a03aab6"/>
+				<text><![CDATA[CRÉDITO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="61" width="100" height="20" uuid="356f9e4d-c06b-4d7b-96fb-f32e6c5ab258"/>
+				<text><![CDATA[PROYECTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="96" width="100" height="20" uuid="0be52d02-4ff5-413f-bdbe-fdb4f529feac"/>
+				<text><![CDATA[PRECIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="97" width="115" height="20" uuid="38cee90e-d87d-4ea8-9f57-172fe98f9f5c"/>
+				<text><![CDATA[BENEFICIARIOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="119" width="100" height="20" uuid="a1ed5451-8c83-41ee-a232-610c531af094"/>
+				<text><![CDATA[DESCRIPCIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="163" width="100" height="20" uuid="8f821bdf-e143-4341-a15f-0561670447cb"/>
+				<text><![CDATA[DUI ENCARGADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="163" width="115" height="20" uuid="e79e53fa-da46-4feb-82ac-5518249fd08d"/>
+				<text><![CDATA[NOMBRE ENCARGADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="389" y="163" width="147" height="20" uuid="6c4573e7-bf42-4f2a-b634-028222306888"/>
+				<textFieldExpression><![CDATA[$F{t_empleado_nombre_empleado}+" "+$F{t_empleado_apellido_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="163" width="143" height="20" uuid="e381b569-b5a7-4e4f-9ed3-0d1a725b11cc"/>
+				<textFieldExpression><![CDATA[$F{t_empleado_dui_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="39" width="147" height="20" uuid="68c7ff56-353e-44c2-a5d1-81bd6c47afda"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="61" width="419" height="20" uuid="f71c97e2-7ae7-47d8-b638-a81051a2295b"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="183" width="100" height="20" uuid="be68c1a5-9a19-4dc8-85ff-26248c031ae8"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="117" y="39" width="143" height="20" uuid="663f7b3f-9a96-46a6-8c43-6c721d8e551a"/>
+				<textFieldExpression><![CDATA[$F{t_capacitacion_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="97" width="147" height="20" uuid="29caa6f3-d33a-4546-b228-fab11eced191"/>
+				<textFieldExpression><![CDATA[$F{t_capacitacion_beneficiarios}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="183" width="143" height="20" uuid="889b0a16-da14-4474-9b37-23d8a757cd19"/>
+				<textFieldExpression><![CDATA[$F{t_capacitacion_estado}.equals( true )? "Activo": "Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="117" y="96" width="143" height="20" uuid="e3b6426e-0e03-4060-9c1d-20b953909e04"/>
+				<textFieldExpression><![CDATA[$F{t_capacitacion_precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="119" width="419" height="20" uuid="e59be378-2586-4170-a180-cfe3bdf5f576"/>
+				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="432" y="22" width="80" height="20" uuid="6551ce9a-22ab-4cca-b418-8859ca126fa4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="22" width="40" height="20" uuid="06cf2a02-f7e1-4804-b046-03574bfa8027"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

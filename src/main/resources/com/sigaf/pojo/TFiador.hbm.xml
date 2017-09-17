@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2017 20:31:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TFiador" table="t_fiador" schema="public" optimistic-lock="version">
+        <id name="idfiador" type="int">
+            <column name="idfiador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="idproyecto" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" />
+        </property>
+        <property name="dui" type="string">
+            <column name="dui" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" />
+        </property>
+        <property name="telefono1" type="string">
+            <column name="telefono1" />
+        </property>
+        <property name="telefono2" type="string">
+            <column name="telefono2" />
+        </property>
+        <property name="prefesion" type="string">
+            <column name="prefesion" />
+        </property>
+        <property name="ingresos" type="java.lang.Float">
+            <column name="ingresos" precision="8" scale="8" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

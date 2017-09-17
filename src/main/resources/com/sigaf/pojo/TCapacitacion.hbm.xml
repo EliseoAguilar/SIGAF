@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TCapacitacion" table="t_capacitacion" schema="public" optimistic-lock="version">
+        <id name="idcapacitacion" type="int">
+            <column name="idcapacitacion" />
+               <generator class="sequence">
+                <param name="sequence">t_capacitacion_id_capacitacion_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TEmpleado" class="com.sigaf.pojo.TEmpleado" fetch="select">
+            <column name="idempleado" />
+        </many-to-one>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="idproyecto" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="beneficiarios" type="java.lang.Integer">
+            <column name="beneficiarios" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="131089" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ead269f-2472-4272-bdf6-16f64393d3fd">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_pago" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_agronegocio."id_agronegocio" AS t_agronegocio_id_agronegocio,
+     t_agronegocio."fecha" AS t_agronegocio_fecha,
+     t_agronegocio."idcomprador" AS t_agronegocio_idcomprador,
+     t_agronegocio."identidad" AS t_agronegocio_identidad,
+     t_agronegocio."plazo" AS t_agronegocio_plazo,
+     t_agronegocio."tipo" AS t_agronegocio_tipo,
+     t_agronegocio."estado" AS t_agronegocio_estado,
+     t_agronegocio."codigo" AS t_agronegocio_codigo,
+     t_agronegocio."idconfiguracion" AS t_agronegocio_idconfiguracion,
+     t_agronegocio."fechapago" AS t_agronegocio_fechapago,
+     t_agronegocio."estadoregistro" AS t_agronegocio_estadoregistro,
+     t_agronegocio."total" AS t_agronegocio_total,
+     t_agronegocio."comision" AS t_agronegocio_comision,
+     t_agronegocio."interes" AS t_agronegocio_interes,
+     t_configuracion_agronegocio."id_configuracion_agronegocio" AS t_configuracion_agronegocio_id_configuracion_agronegocio,
+     t_configuracion_agronegocio."tasa_comision_agronegocio" AS t_configuracion_agronegocio_tasa_comision_agronegocio,
+     t_configuracion_agronegocio."tasa_interes_agronegocio" AS t_configuracion_agronegocio_tasa_interes_agronegocio,
+     t_configuracion_agronegocio."tasa_mora_agronegocio" AS t_configuracion_agronegocio_tasa_mora_agronegocio,
+     t_configuracion_agronegocio."vigencia_agronegocio" AS t_configuracion_agronegocio_vigencia_agronegocio,
+     t_configuracion_agronegocio."estado_configuracion" AS t_configuracion_agronegocio_estado_configuracion,
+     t_pago_agronegocio."id_pago_agronegocio" AS t_pago_agronegocio_id_pago_agronegocio,
+     t_pago_agronegocio."monto" AS t_pago_agronegocio_monto,
+     t_pago_agronegocio."fecha" AS t_pago_agronegocio_fecha,
+     t_pago_agronegocio."idagronegocio" AS t_pago_agronegocio_idagronegocio,
+     t_pago_agronegocio."interes" AS t_pago_agronegocio_interes,
+     t_pago_agronegocio."otrosinteres" AS t_pago_agronegocio_otrosinteres,
+     t_pago_agronegocio."hora" AS t_pago_agronegocio_hora,
+     t_pago_agronegocio."forma" AS t_pago_agronegocio_forma,
+     t_pago_agronegocio."cheque" AS t_pago_agronegocio_cheque,
+     t_pago_agronegocio."dias" AS t_pago_agronegocio_dias,
+     t_pago_agronegocio."comision" AS t_pago_agronegocio_comision,
+     t_pago_agronegocio."referencia" AS t_pago_agronegocio_referencia,
+     t_comprador."id_comprador" AS t_comprador_id_comprador,
+     t_comprador."nombres_comprador" AS t_comprador_nombres_comprador,
+     t_comprador."apellidos_comprador" AS t_comprador_apellidos_comprador,
+     t_comprador."dui_comprador" AS t_comprador_dui_comprador,
+     t_comprador."nit_comprador" AS t_comprador_nit_comprador,
+     t_comprador."sexo_comprador" AS t_comprador_sexo_comprador,
+     t_comprador."tipo_comprador" AS t_comprador_tipo_comprador,
+     t_comprador."correo_comprador" AS t_comprador_correo_comprador,
+     t_comprador."telefono_comprador" AS t_comprador_telefono_comprador,
+     t_comprador."movil_comprador" AS t_comprador_movil_comprador,
+     t_comprador."direccion_comprador" AS t_comprador_direccion_comprador,
+     t_comprador."estado_comprador" AS t_comprador_estado_comprador,
+     t_comprador."fechanacimiento_comprador" AS t_comprador_fechanacimiento_comprador
+FROM
+     "public"."t_configuracion_agronegocio" t_configuracion_agronegocio INNER JOIN "public"."t_agronegocio" t_agronegocio ON t_configuracion_agronegocio."id_configuracion_agronegocio" = t_agronegocio."idconfiguracion"
+     INNER JOIN "public"."t_pago_agronegocio" t_pago_agronegocio ON t_agronegocio."id_agronegocio" = t_pago_agronegocio."idagronegocio"
+     INNER JOIN "public"."t_comprador" t_comprador ON t_agronegocio."idcomprador" = t_comprador."id_comprador" where t_pago_agronegocio."id_pago_agronegocio" =  $P{id_pago}]]>
+	</queryString>
+	<field name="t_agronegocio_id_agronegocio" class="java.lang.Integer"/>
+	<field name="t_agronegocio_fecha" class="java.sql.Date"/>
+	<field name="t_agronegocio_idcomprador" class="java.lang.Integer"/>
+	<field name="t_agronegocio_identidad" class="java.lang.Integer"/>
+	<field name="t_agronegocio_plazo" class="java.lang.Integer"/>
+	<field name="t_agronegocio_tipo" class="java.lang.String"/>
+	<field name="t_agronegocio_estado" class="java.lang.String"/>
+	<field name="t_agronegocio_codigo" class="java.lang.String"/>
+	<field name="t_agronegocio_idconfiguracion" class="java.lang.Integer"/>
+	<field name="t_agronegocio_fechapago" class="java.sql.Date"/>
+	<field name="t_agronegocio_estadoregistro" class="java.lang.Boolean"/>
+	<field name="t_agronegocio_total" class="java.math.BigDecimal"/>
+	<field name="t_agronegocio_comision" class="java.math.BigDecimal"/>
+	<field name="t_agronegocio_interes" class="java.math.BigDecimal"/>
+	<field name="t_configuracion_agronegocio_id_configuracion_agronegocio" class="java.lang.Integer"/>
+	<field name="t_configuracion_agronegocio_tasa_comision_agronegocio" class="java.math.BigDecimal"/>
+	<field name="t_configuracion_agronegocio_tasa_interes_agronegocio" class="java.math.BigDecimal"/>
+	<field name="t_configuracion_agronegocio_tasa_mora_agronegocio" class="java.math.BigDecimal"/>
+	<field name="t_configuracion_agronegocio_vigencia_agronegocio" class="java.sql.Date"/>
+	<field name="t_configuracion_agronegocio_estado_configuracion" class="java.lang.Boolean"/>
+	<field name="t_pago_agronegocio_id_pago_agronegocio" class="java.lang.Integer"/>
+	<field name="t_pago_agronegocio_monto" class="java.math.BigDecimal"/>
+	<field name="t_pago_agronegocio_fecha" class="java.sql.Date"/>
+	<field name="t_pago_agronegocio_idagronegocio" class="java.lang.Integer"/>
+	<field name="t_pago_agronegocio_interes" class="java.math.BigDecimal"/>
+	<field name="t_pago_agronegocio_otrosinteres" class="java.math.BigDecimal"/>
+	<field name="t_pago_agronegocio_hora" class="java.lang.String"/>
+	<field name="t_pago_agronegocio_forma" class="java.lang.String"/>
+	<field name="t_pago_agronegocio_cheque" class="java.lang.String"/>
+	<field name="t_pago_agronegocio_dias" class="java.lang.Integer"/>
+	<field name="t_pago_agronegocio_comision" class="java.math.BigDecimal"/>
+	<field name="t_pago_agronegocio_referencia" class="java.lang.Integer"/>
+	<field name="t_comprador_id_comprador" class="java.lang.Integer"/>
+	<field name="t_comprador_nombres_comprador" class="java.lang.String"/>
+	<field name="t_comprador_apellidos_comprador" class="java.lang.String"/>
+	<field name="t_comprador_dui_comprador" class="java.lang.String"/>
+	<field name="t_comprador_nit_comprador" class="java.lang.String"/>
+	<field name="t_comprador_sexo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_tipo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_correo_comprador" class="java.lang.String"/>
+	<field name="t_comprador_telefono_comprador" class="java.lang.String"/>
+	<field name="t_comprador_movil_comprador" class="java.lang.String"/>
+	<field name="t_comprador_direccion_comprador" class="java.lang.String"/>
+	<field name="t_comprador_estado_comprador" class="java.lang.Boolean"/>
+	<field name="t_comprador_fechanacimiento_comprador" class="java.sql.Date"/>
+	<variable name="total" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="787" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="593" width="535" height="175" uuid="3ebb5040-72c2-48bc-a68f-15fbace60a90"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="11" y="331" width="535" height="183" uuid="beb88a83-23de-416c-8a26-d5bd6f7cce90"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="11" y="72" width="535" height="176" uuid="5041bea3-fd63-4ba1-8d15-4edb0789e4ae"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="26" y="80" width="43" height="20" uuid="c57ead2f-b85a-431d-987d-56a25294d7f6"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Nombre  :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="94" width="43" height="20" uuid="132a300f-c183-48fe-9f4b-89b8e2962f47"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Dirección:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="123" width="187" height="20" uuid="a28812ee-cc7d-436e-ab9f-fe1885735ea6"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Pago aplicado a:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="159" width="59" height="20" uuid="dfd747a2-891b-4d45-a7c8-e4dcfb5b1b16"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Monto</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="173" width="59" height="20" uuid="93d3a22a-4583-4a10-b27c-a475518a8981"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Intereses</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="187" width="59" height="20" uuid="68b72909-b7bc-499b-ac2e-1621821f3779"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Interés por mora</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="203" width="59" height="20" uuid="e2311c56-8276-4d27-ab9b-8b2693f1462f"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="55" width="136" height="22" uuid="f9bd7113-ea5c-4572-8f12-32147b8c5d1d"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO DE PAGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="317" width="136" height="20" uuid="8ede6cb7-25fc-4988-81e2-d6a2c5b59e40"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO DE PAGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="249" width="101" height="20" uuid="a922606a-caa5-4dcd-ade0-7b78435898df"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ORIGINAL: CLIENTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="513" width="174" height="20" uuid="8cacaefa-95ff-49bc-841a-b0ef30960b08"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ORIGINAL: CONTABILIDAD</style>]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="9" y="0" width="200" height="42" uuid="caf60553-3681-48a5-ac00-f2916c873c40"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TitulorRecibo.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="11" y="54" width="535" height="1" uuid="be32845e-fe20-46e6-ba07-4ceb669629b8"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="11" y="314" width="535" height="1" uuid="aab68dc7-188d-4e18-9e11-32dfb7b3e6a9"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="11" y="268" width="200" height="42" uuid="17720be3-c716-491e-9cfb-bf8e4ef9f130"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TitulorRecibo.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="85" y="159" width="16" height="14" uuid="e8004670-d457-4529-87f9-704e6def0c69"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="173" width="16" height="14" uuid="48abcc48-06ca-44e2-bc03-55ba411ba631"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="187" width="16" height="14" uuid="1d7938bc-e503-4d64-9a7b-dc0ba5446737"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="204" width="16" height="14" uuid="9e84052e-b300-450b-96ba-fcccb56561cc"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="385" width="187" height="20" uuid="d5ed1e1f-81e1-45a0-8c8f-075006960f94"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Pago aplicado a:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="342" width="43" height="20" uuid="e46b9f86-7a3d-481c-be62-c38121e455f7"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Nombre:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="356" width="43" height="20" uuid="ce490228-bdd2-4dbc-bccd-fad47be5016e"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Dirección:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="419" width="59" height="20" uuid="fe4fa238-e353-4a5c-8a53-ee8cec07e2b6"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Monto</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="461" width="59" height="20" uuid="0551d21c-becf-4775-9a37-e3400fae1b4a"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="433" width="59" height="20" uuid="4f9acb56-f038-4e34-b690-26cb3a4d828a"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Intereses</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="447" width="59" height="20" uuid="a9de8c0e-e7bf-4960-8e9b-bb36433f867b"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Interés por mora</style>                        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="433" width="16" height="14" uuid="81c976be-dfd1-4ca2-845f-c864134f4246"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="419" width="16" height="14" uuid="7ba20741-e4e1-4aec-973e-b4a214f5be80"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="447" width="16" height="14" uuid="143ab407-b366-4114-85ed-2a708f3ee843"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="463" width="16" height="14" uuid="9dbb0214-0d46-40a6-b173-a54b2f471140"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="12" y="530" width="200" height="42" uuid="82707996-b3c7-48fa-8cb6-eb00e9771ddb"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TitulorRecibo.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="12" y="572" width="535" height="1" uuid="b1d1153b-e4de-4544-b151-d60e3de51ff8"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="214" y="573" width="136" height="20" uuid="e2f2d6a8-3e02-4a84-8c09-da2363724259"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO DE PAGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="636" width="184" height="20" uuid="073835bf-3a5b-4597-a0fb-fa8237c63eed"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Pago aplicado a:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="596" width="40" height="20" uuid="81faaec2-d636-4882-a487-b48066f8f5bc"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Nombre:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="715" width="59" height="20" uuid="2c3a01ee-1fb9-47d2-bd9f-b71bfc7421e3"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="700" width="59" height="20" uuid="00dcc332-101f-45a8-801d-850b62e1e555"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Interés por mora</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="686" width="59" height="20" uuid="a45bee16-f25f-45eb-aa74-2d09c7091cfe"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Intereses</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="610" width="40" height="20" uuid="bbece8e9-586c-487c-86fe-8b7044fe885d"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Dirección:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="672" width="59" height="20" uuid="b88c8310-6955-4a43-b7dd-7d9df6de639a"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Monto</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="672" width="16" height="14" uuid="6032d891-65a9-4307-94d3-923d4ccee9b0"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="686" width="16" height="14" uuid="5c3eab80-1340-4381-a321-eb254488a4b5"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="701" width="16" height="14" uuid="37c7750a-4e7d-467e-a7bc-2099ff25f333"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="717" width="16" height="14" uuid="0b24bf3f-3536-46a1-bcc8-e893fef819d0"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="768" width="174" height="19" uuid="199f496e-fa55-4694-b174-8756736a2019"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ORIGINAL: ARCHIVO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="342" width="48" height="20" uuid="bbdadbe8-6ef8-4857-add8-f6fb0c784f1c"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO Nº :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="80" width="48" height="20" uuid="4cf8256a-dbd5-4e56-939c-c70669f77c03"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO Nº:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="596" width="48" height="20" uuid="5d6acb66-e858-4423-8f03-3cd26add1538"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RECIBO Nº:</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="80" width="197" height="20" uuid="2cf33ede-c713-4dde-b6f5-f2ba5285a3c8"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}+""+$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="94" width="197" height="20" uuid="0c95d19a-c08a-4afa-a5d5-62984807e03c"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_direccion_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="94" width="94" height="20" uuid="3bba90f2-7727-41cc-a7b9-0b4fd66544a3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_referencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="93" y="159" width="100" height="20" uuid="4a597039-b3be-4ac2-9010-247552520a92"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="93" y="173" width="100" height="20" uuid="6a90b2a3-e6d8-4133-9ad6-8e4bd433566e"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="93" y="187" width="100" height="20" uuid="abb62b86-5558-44e1-9162-60192d3b3824"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_otrosinteres}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="93" y="204" width="100" height="20" uuid="d5701954-71a6-4abb-bf69-4ff7509dcf14"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}.add($F{t_pago_agronegocio_interes}).add($F{t_pago_agronegocio_otrosinteres})]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="94" y="433" width="120" height="20" uuid="a770efcd-2fba-4c4f-8764-386a1c46498b"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="90" y="686" width="163" height="20" uuid="e0bc5944-ec6f-4401-baf3-485cf5dd67de"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_otrosinteres}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="93" y="419" width="142" height="20" uuid="60e8c10b-6576-4e5b-b44f-8ac6a77db0e2"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="437" y="356" width="94" height="20" uuid="9ce7be2e-a9fc-45bf-8b54-41c534d868d6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_referencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="356" width="197" height="20" uuid="96ddbf10-6e87-421e-b5bf-a60b7a1c1ea2"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_direccion_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="342" width="197" height="20" uuid="07de60c3-edc9-4f65-8313-d8eb384ec49c"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}+""+$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="610" width="100" height="20" uuid="bf92054f-1c66-4c8d-9935-473dc6acb29e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_referencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="94" width="60" height="20" uuid="92cde4f3-9da8-4647-88eb-63ee435a5bec"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino        :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="80" width="56" height="20" uuid="a4995e2a-f49b-4d1f-b8ca-e789fd58f839"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia   :</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="333" y="80" width="100" height="20" uuid="03deb3ff-de0f-4a93-9cf0-ab01a2bae2b5"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_agronegocio_codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="333" y="94" width="100" height="20" uuid="6a0898c9-ba0a-4438-8893-f1923403b4fe"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pago de agronegocio]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00">
+				<reportElement x="94" y="461" width="168" height="20" uuid="63e7c758-0ed1-4fe8-98cc-afffd2d08280"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}.add($F{t_pago_agronegocio_interes}).add($F{t_pago_agronegocio_otrosinteres})]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="90" y="717" width="168" height="20" uuid="2a70a150-9287-41ea-a787-286e9dc85a3c"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}.add($F{t_pago_agronegocio_interes}).add($F{t_pago_agronegocio_otrosinteres})]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="94" y="447" width="163" height="20" uuid="40354b5d-987a-415e-b658-d621da66758e"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_otrosinteres}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="90" y="672" width="142" height="20" uuid="6241ff72-524b-4f9b-8d5c-7a7cb4beba80"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_monto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="90" y="701" width="163" height="20" uuid="7d0e0585-13c5-4763-b6c2-762e55c653d9"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_otrosinteres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="596" width="197" height="20" uuid="bbc40f78-7c89-4e80-84a6-44f77c90b9df"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}+""+$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="610" width="197" height="20" uuid="20d567ca-a4f5-45d2-a930-9315edf1cece"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_direccion_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="342" width="100" height="20" uuid="bc91ebee-7ee6-4ef0-ac6a-44c7dae39210"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_agronegocio_codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="356" width="100" height="20" uuid="12b0fbea-bf54-4cba-b358-72413e8ccc30"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pago de agronegocio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="356" width="60" height="20" uuid="1ba33448-2a25-4220-881b-e4b4e356c36f"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino        :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="342" width="60" height="20" uuid="0effff71-e1c6-4434-a677-418b115cfb11"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia   :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="596" width="60" height="20" uuid="82757fea-b868-454a-9b66-f5c466c4d0c4"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia   :</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="337" y="596" width="100" height="20" uuid="adad0cb7-66fc-4471-a3a1-7428d2391c2c"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_agronegocio_codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="610" width="100" height="20" uuid="e64b8f6d-85ca-4043-b974-910be2b28163"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pago de agronegocio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="610" width="60" height="20" uuid="1dcc125f-4a5d-4ccb-a310-18de15cba04b"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino        :</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="344" y="419" width="142" height="20" uuid="ad7a67b9-a251-4f04-8c2c-ace0e80e6665"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_forma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="439" width="142" height="20" uuid="530f09b5-4abd-4f7e-9368-53386d1e0331"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_cheque}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="419" width="69" height="20" uuid="1e9b5730-c2af-424d-a9d5-f990825c9113"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Forma de pago   :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="439" width="69" height="20" uuid="6a75e0b1-ea56-435a-9794-2c420f1ee557"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="692" width="70" height="20" uuid="f6107ede-4727-44eb-b934-c3974e4aada7"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                 :</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="344" y="692" width="142" height="20" uuid="11a94c6a-15ad-4ef3-9636-b41caa4ec76f"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_cheque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="672" width="142" height="20" uuid="f239927a-0b9e-4dfb-99f2-d5a114cb551a"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_forma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="672" width="69" height="20" uuid="3a14bef3-c1e5-4232-a221-e36f1ff5f403"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Forma de pago   :</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="179" width="70" height="20" uuid="4b4a3fe5-66e8-4470-8177-376cdbd824a3"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                 :</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="344" y="179" width="142" height="20" uuid="0e52c6d5-3971-4d8e-80cc-013c945d76b0"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_cheque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="159" width="142" height="20" uuid="3edff7ed-f7cc-4d4a-a602-4e9b9f5ac9d5"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_forma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="159" width="70" height="20" uuid="ed39cb48-609f-426c-98d8-2a31fefe5482"/>
+				<textElement markup="styled">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Forma de pago   :</style>]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

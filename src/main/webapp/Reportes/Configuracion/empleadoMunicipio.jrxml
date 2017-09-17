@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="municipioEmpleado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="20" uuid="a4d1de4c-8773-485a-8d7b-dadc2c35f743">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEmpleado" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_municipio."id_municipio" AS t_municipio_id_municipio,
+     t_municipio."nombre_municipio" AS t_municipio_nombre_municipio,
+     t_municipio."iddepartamento_municipio" AS t_municipio_iddepartamento_municipio,
+     t_municipio."estado_municipio" AS t_municipio_estado_municipio,
+     t_municipio_empleado."id_empleado_municipio" AS t_municipio_empleado_id_empleado_municipio,
+     t_municipio_empleado."tipodireccion_municipio_empleado" AS t_municipio_empleado_tipodireccion_municipio_empleado,
+     t_municipio_empleado."idempleado_municipio_empleado" AS t_municipio_empleado_idempleado_municipio_empleado,
+     t_municipio_empleado."idmunicipio_municipio_empleado" AS t_municipio_empleado_idmunicipio_municipio_empleado,
+     t_municipio_empleado."direccion_empleado" AS t_municipio_empleado_direccion_empleado,
+     t_departamento."id_departamento" AS t_departamento_id_departamento,
+     t_departamento."nombre_departamento" AS t_departamento_nombre_departamento,
+     t_departamento."estado_departamento" AS t_departamento_estado_departamento
+FROM
+     "public"."t_municipio" t_municipio INNER JOIN "public"."t_municipio_empleado" t_municipio_empleado ON t_municipio."id_municipio" = t_municipio_empleado."idmunicipio_municipio_empleado"
+     INNER JOIN "public"."t_departamento" t_departamento ON t_municipio."iddepartamento_municipio" = t_departamento."id_departamento"
+ where t_municipio_empleado."idempleado_municipio_empleado" = $P{idEmpleado}]]>
+	</queryString>
+	<field name="t_municipio_id_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_nombre_municipio" class="java.lang.String"/>
+	<field name="t_municipio_iddepartamento_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_estado_municipio" class="java.lang.Boolean"/>
+	<field name="t_municipio_empleado_id_empleado_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_empleado_tipodireccion_municipio_empleado" class="java.lang.Integer"/>
+	<field name="t_municipio_empleado_idempleado_municipio_empleado" class="java.lang.Integer"/>
+	<field name="t_municipio_empleado_idmunicipio_municipio_empleado" class="java.lang.Integer"/>
+	<field name="t_municipio_empleado_direccion_empleado" class="java.lang.String"/>
+	<field name="t_departamento_id_departamento" class="java.lang.Integer"/>
+	<field name="t_departamento_nombre_departamento" class="java.lang.String"/>
+	<field name="t_departamento_estado_departamento" class="java.lang.Boolean"/>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="1" width="114" height="20" uuid="bf0ff24f-659b-4956-b363-7bf0094d32a8"/>
+				<textFieldExpression><![CDATA[$F{t_municipio_empleado_direccion_empleado}+','+$F{t_municipio_nombre_municipio}+','+$F{t_departamento_nombre_departamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

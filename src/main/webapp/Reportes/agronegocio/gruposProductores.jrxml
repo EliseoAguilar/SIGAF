@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gruposProductores" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e51379c-6a4d-4cff-97b8-9dac2edb76d3">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_productor_grupal."id_productor_grupal" AS t_productor_grupal_id_productor_grupal,
+     t_productor_grupal."codigo_prodcutor_grupal" AS t_productor_grupal_codigo_prodcutor_grupal,
+     t_productor_grupal."nombre_productor_grupal" AS t_productor_grupal_nombre_productor_grupal,
+     t_productor_grupal."hombres_productor_grupal" AS t_productor_grupal_hombres_productor_grupal,
+     t_productor_grupal."mujeres_productor_grupal" AS t_productor_grupal_mujeres_productor_grupal,
+     t_productor_grupal."contacto_productor_grupal" AS t_productor_grupal_contacto_productor_grupal,
+     t_productor_grupal."dui_productor_grupal" AS t_productor_grupal_dui_productor_grupal,
+     t_productor_grupal."nit_productor_grupal" AS t_productor_grupal_nit_productor_grupal,
+     t_productor_grupal."correo_productor_grupal" AS t_productor_grupal_correo_productor_grupal,
+     t_productor_grupal."telefono_productor_grupal" AS t_productor_grupal_telefono_productor_grupal,
+     t_productor_grupal."movil_productor_grupal" AS t_productor_grupal_movil_productor_grupal,
+     t_productor_grupal."ubicacion_productor_grupal" AS t_productor_grupal_ubicacion_productor_grupal,
+     t_productor_grupal."estado_productor_grupal" AS t_productor_grupal_estado_productor_grupal,
+     t_productor_grupal."calificacion_productor_grupal" AS t_productor_grupal_calificacion_productor_grupal
+FROM
+     "public"."t_productor_grupal" t_productor_grupal where  t_productor_grupal."nombre_productor_grupal"!='Ninguno']]>
+	</queryString>
+	<field name="t_productor_grupal_id_productor_grupal" class="java.lang.Integer"/>
+	<field name="t_productor_grupal_codigo_prodcutor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_nombre_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_hombres_productor_grupal" class="java.lang.Integer"/>
+	<field name="t_productor_grupal_mujeres_productor_grupal" class="java.lang.Integer"/>
+	<field name="t_productor_grupal_contacto_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_dui_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_nit_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_correo_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_telefono_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_movil_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_ubicacion_productor_grupal" class="java.lang.String"/>
+	<field name="t_productor_grupal_estado_productor_grupal" class="java.lang.Boolean"/>
+	<field name="t_productor_grupal_calificacion_productor_grupal" class="java.lang.Integer"/>
+	<variable name="t_productor_individual_id_productor_individual_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<subreport>
+				<reportElement x="19" y="0" width="200" height="79" uuid="5355cd8d-dea0-4ff9-85b9-0a241340c4da"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="135" y="79" width="230" height="20" uuid="5e1e540a-bb0d-461b-97d9-23c989697ad0"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE GRUPOS DE PRODUCTORES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="79" width="100" height="20" uuid="9ef1d357-89e5-48cf-9af3-52cefdcbd862"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estado}.equals( true )? "ACTIVOS":"INACTIVOS"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="98" width="555" height="1" uuid="9a569298-a130-4716-8da2-e6a8847a5ca7"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="7" width="70" height="20" uuid="0b3a41b1-8c03-47f8-8953-a5675ba81946"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UBICACIÓN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="26" width="554" height="1" uuid="41f43741-d7dc-4caa-8b94-e8d1e549f0bb"/>
+			</line>
+			<staticText>
+				<reportElement x="35" y="7" width="99" height="20" uuid="e4720bd2-15d7-409a-9a49-68aa07e7444b"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRUPO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="35" y="0" width="100" height="20" uuid="3b8ca73d-8a1e-47c4-9c05-99f635ad1494"/>
+				<textFieldExpression><![CDATA[$F{t_productor_grupal_nombre_productor_grupal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="227" y="0" width="300" height="20" uuid="7083c28a-47f5-40e4-9cac-672dfad63adc"/>
+				<textFieldExpression><![CDATA[$F{t_productor_grupal_ubicacion_productor_grupal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="18" width="80" height="20" uuid="5b214449-aae1-4bf8-9922-0cab2079c1b6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="18" width="40" height="20" uuid="08b2e830-db66-44d1-a7ab-29fe4596d261"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

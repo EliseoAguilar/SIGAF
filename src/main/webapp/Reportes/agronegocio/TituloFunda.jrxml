@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Titulo" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b6aa0e98-d3a8-4cae-bc1f-2def5201f2d1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<queryString>
+		<![CDATA[select * from t_entidad where id_entidad=1]]>
+	</queryString>
+	<field name="id_entidad" class="java.lang.Integer"/>
+	<field name="nombre_entidad" class="java.lang.String"/>
+	<field name="giro_entidad" class="java.lang.String"/>
+	<field name="correo_entidad" class="java.lang.String"/>
+	<field name="direccion_entidad" class="java.lang.String"/>
+	<field name="nit_entidad" class="java.lang.String"/>
+	<field name="calificacion_entidad" class="java.lang.Integer"/>
+	<field name="codigo_entidad" class="java.lang.String"/>
+	<field name="nombre_representante_entidad" class="java.lang.String"/>
+	<field name="codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="telefono_entidad" class="java.lang.String"/>
+	<field name="celular_entidad" class="java.lang.String"/>
+	<field name="mision_entidad" class="java.lang.String"/>
+	<field name="vision_entidad" class="java.lang.String"/>
+	<field name="acta_entidad" class="java.lang.String"/>
+	<field name="estado_entidad" class="java.lang.Boolean"/>
+	<field name="credencial_entidad" class="java.lang.String"/>
+	<field name="logo_entidad" class="java.lang.String"/>
+	<field name="dui_representante_entidad" class="java.lang.String"/>
+	<field name="nit_representante_entidad" class="java.lang.String"/>
+	<field name="abreviacion_entidad" class="java.lang.String"/>
+	<detail>
+		<band height="75" splitType="Stretch">
+			<image>
+				<reportElement x="18" y="0" width="79" height="73" uuid="5d11aa8b-c712-4f52-a937-9d30d5fe1dab"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($F{logo_entidad}.split(",")[1].getBytes()))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="97" y="28" width="339" height="20" uuid="84ddbc42-e98b-4641-96a3-948f289bb94b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{direccion_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="222" y="48" width="23" height="20" uuid="4191f0c4-8be9-444e-8afd-92bc7891d7f2"/>
+				<text><![CDATA[Tel.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="48" width="100" height="20" uuid="8c7ce8e0-06aa-43a5-940d-4f258324b176"/>
+				<textFieldExpression><![CDATA[$F{telefono_entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="8" width="214" height="20" uuid="52d292f3-3870-4250-a190-f3a89789c7b4"/>
+				<textFieldExpression><![CDATA[$F{nombre_entidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="28" width="100" height="20" uuid="360930ed-cf03-4649-a42c-e1f7b407b35a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="453" y="48" width="100" height="20" uuid="5bfedf1e-548a-4d8e-a62d-0bd205608f30"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

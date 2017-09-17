@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TAgronegocio" table="t_agronegocio" schema="public" optimistic-lock="version">
+        <id name="idAgronegocio" type="int">
+            <column name="id_agronegocio" />
+             <generator class="sequence">
+                <param name="sequence">t_agronegocio_id_agronegocio_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TComprador" class="com.sigaf.pojo.TComprador" fetch="select">
+            <column name="idcomprador" />
+        </many-to-one>
+        <many-to-one name="TConfiguracionAgronegocio" class="com.sigaf.pojo.TConfiguracionAgronegocio" fetch="select">
+            <column name="idconfiguracion" />
+        </many-to-one>
+        <many-to-one name="TEntidad" class="com.sigaf.pojo.TEntidad" fetch="select">
+            <column name="identidad" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="plazo" type="java.lang.Integer">
+            <column name="plazo" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" />
+        </property>
+        <property name="fechapago" type="date">
+            <column name="fechapago" length="13" />
+        </property>
+        <property name="estadoregistro" type="java.lang.Boolean">
+            <column name="estadoregistro" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="131089" scale="0" />
+        </property>
+        <property name="comision" type="big_decimal">
+            <column name="comision" precision="131089" scale="0" />
+        </property>
+        <property name="interes" type="big_decimal">
+            <column name="interes" precision="131089" scale="0" />
+        </property>
+        <set name="TPagoAgronegocios" table="t_pago_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idagronegocio" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPagoAgronegocio" />
+        </set>
+        <set name="TProductoAgronegocios" table="t_producto_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_agronegocio" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoAgronegocio" />
+        </set>
+    </class>
+</hibernate-mapping>

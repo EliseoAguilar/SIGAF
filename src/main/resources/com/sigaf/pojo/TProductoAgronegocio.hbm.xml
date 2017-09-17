@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProductoAgronegocio" table="t_producto_agronegocio" schema="public" optimistic-lock="version">
+        <id name="idProductoAgronegocio" type="int">
+            <column name="id_producto_agronegocio" />
+               <generator class="sequence">
+                <param name="sequence">t_producto_agronegocio_id_producto_agronegocio_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TAgronegocio" class="com.sigaf.pojo.TAgronegocio" fetch="select">
+            <column name="id_agronegocio" />
+        </many-to-one>
+        <many-to-one name="TProducto" class="com.sigaf.pojo.TProducto" fetch="select">
+            <column name="id_producto" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="unidad" type="string">
+            <column name="unidad" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="131089" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

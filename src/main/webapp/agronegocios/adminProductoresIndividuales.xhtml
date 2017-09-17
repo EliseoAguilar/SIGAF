@@ -1,0 +1,914 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">           
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{productorIndividualBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarProductor">
+                            <p:panel id="pAgregarProductor" header="Agregar productor individual"  style="width: 80%; margin: auto; margin-bottom: 20px">                                                          
+                                <p:panelGrid id="addPanel2" styleClass="companyHeaderGrid" style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectBooleanCheckbox  value="#{productorIndividualBean.habilitarGrupo}" >
+                                                <p:ajax update=":padding"  />
+                                            </p:selectBooleanCheckbox>                                                  
+                                            <h:outputText  value=" &nbsp;&nbsp; &nbsp;&nbsp;¿Miembro de grupo?"/>
+                                        </p:column>
+                                        <p:column > 
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br> 
+                                <b>  <h:outputText value="Grupo"/> </b>
+                                <hr></hr>
+                                <p:panelGrid  styleClass="companyHeaderGrid" style="width: 100%; margin: auto;">                                     <p:row> 
+                                        <p:column style=" width: 35%">                                                
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column style=" width: 5%">                                                
+                                        </p:column>
+                                        <p:column style=" width: 40%">                                                
+                                        </p:column>
+                                    </p:row>                                       
+                                    <p:row>
+                                        <p:column >
+                                            <p:inputText disabled="#{!productorIndividualBean.habilitarGrupo}"   value="#{productorIndividualBean.productorGrupalSeleccionado.nombreProductorGrupal}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                            <h:outputText  value="#{productorIndividualBean.msgGrupo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >  
+                                            <p:commandButton   actionListener="#{productorIndividualBean.mostrarGrupos}" disabled="#{!productorIndividualBean.habilitarGrupo}"  oncomplete="PF('productorData').show()" icon="fa fa-search" title="Buscar" update=":padding" >
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column style=" width: 33%">  
+                                            <p:selectBooleanCheckbox disabled="#{!productorIndividualBean.habilitarGrupo}"  value="#{productorIndividualBean.productorIndividual.representanteGrupal}"  >
+                                            </p:selectBooleanCheckbox> 
+                                            &nbsp;  &nbsp; &nbsp;&nbsp;  <h:outputText value="¿Representante?"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>    <h:outputText value="Personales"/> </b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%">
+                                            <h:outputText value="Apellidos:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca los nombres" style=" width: 100%" value="#{productorIndividualBean.productorIndividual.nombresProdcutorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca los apellidos"  style=" width: 100%" value="#{productorIndividualBean.productorIndividual.apellidosProductorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgApellidos}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Fecha de nacimiento:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="DUI:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"><p:calendar placeholder="Introduzca la fecha de nacimiento" navigator="true" yearRange="1910:" mask="true"  locale="es" pattern="dd/MM/yyyy" showOn="button"  size="34" value="#{productorIndividualBean.productorIndividual.fechanacimientoProductorIndividual}"> 
+                                            </p:calendar>
+                                            <br></br>
+                                            <h:outputText value="#{productorIndividualBean.msgFecha}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%"  value="#{productorIndividualBean.productorIndividual.duiProductorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgDui}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="NIT:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Sexo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%"  value="#{productorIndividualBean.productorIndividual.nitProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgNit}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> <p:selectOneRadio id="options" value="#{productorIndividualBean.productorIndividual.sexoProductorIndividual}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Masculino" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino" itemValue="Femenino" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Estado familiar:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Hijos:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> 
+                                            <p:selectOneMenu id="tipo8" style="width:100%" value="#{productorIndividualBean.productorIndividual.estadoFamiliarProductorIndividual}">
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
+                                                <f:selectItem itemLabel="Soltero/a" itemValue="Soltero/a" />   
+                                                <f:selectItem itemLabel="Casado/a" itemValue="Casado/a"  />                                                    
+                                                <f:selectItem itemLabel="Viudo/a" itemValue="Viudo/a"  />
+                                            </p:selectOneMenu>
+                                            <h:outputText  value="#{productorIndividualBean.msgEstadoFamiliar}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  
+                                            <p:inputMask  mask="9?9999"
+                                                          maxlength="5"
+                                                          slotChar=" " placeholder="Introduzca el numero de hijos" style=" width: 100%"   value="#{productorIndividualBean.productorIndividual.varonesProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgHijosvarones}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Hijas:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Experiencia créditicia:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> 
+                                            <p:inputMask  mask="9?9999"
+                                                          maxlength="5"
+                                                          slotChar=" " placeholder="Introduzca el numero de hijas" style=" width: 100%"   value="#{productorIndividualBean.productorIndividual.ninasProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgHijosninas}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> 
+                                            <p:selectBooleanCheckbox id="tipo1" value="#{productorIndividualBean.productorIndividual.experienciaProductorIndividual}" >
+                                                <p:ajax update="opCredencial" listener="#{productorIndividualBean.habilitar}" />
+                                            </p:selectBooleanCheckbox> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 50%" >                                               
+                                            <h:outputText value="Institución financiera:*" />                                                
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nivel de estudio:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  
+                                            <p:outputPanel id="opCredencial">
+                                                <p:inputText  placeholder="Introduzca el nombre de la institución" style=" width: 100%" disabled="#{!productorIndividualBean.productorIndividual.experienciaProductorIndividual}" value="#{productorIndividualBean.productorIndividual.institucionProductorIndividual}" /> 
+                                            </p:outputPanel> 
+                                            <h:outputText value="#{productorIndividualBean.msgInstitucion}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">
+                                            <p:selectOneMenu id="tipo4" value="#{productorIndividualBean.productorIndividual.estudioProductorIndividual}" style="width:100%" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
+                                                <f:selectItem itemLabel="Parvularia" itemValue="Parvularia"  />
+                                                <f:selectItem itemLabel="Basico" itemValue="Basico" />
+                                                <f:selectItem itemLabel="Media" itemValue="Media" />
+                                                <f:selectItem itemLabel="Superior" itemValue="Superior" />
+                                            </p:selectOneMenu> 
+                                            <h:outputText value="#{productorIndividualBean.msgEstudio}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Actividades economicas:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea placeholder="Introduzca las actividades economicas" style=" width: 100%" value="#{productorIndividualBean.productorIndividual.actividadesProductorIndividual}"/> 
+                                            <h:outputText value="#{productorIndividualBean.msgActividades}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>    <h:outputText value="Contacto"/> </b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca el correo"  style=" width: 100%" value="#{productorIndividualBean.productorIndividual.correoProductorIndividual}" />
+                                        </p:column>
+                                        <p:column colspan="1">  <p:inputMask placeholder="Introduzca el teléfono"  mask="9999-9999" style=" width: 100%"  value="#{productorIndividualBean.productorIndividual.telefonoProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgTelefono}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputMask placeholder="Introduzca el movil" mask="9999-9999" style=" width: 100%"  value="#{productorIndividualBean.productorIndividual.movilProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgMovil}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea placeholder="Introduzca la dirección" style=" width: 100%" value="#{productorIndividualBean.productorIndividual.direccionProductorIndividual}"/> 
+                                            <h:outputText value="#{productorIndividualBean.msgDireccion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{productorIndividualBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{compradorBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarLimpiar"  actionListener="#{productorIndividualBean.limpiar}" update=":padding" icon="fa fa-minus" title="Cancelar" value="Limpiar" style="#{compradorBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{productorIndividualBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAgregar" modal="true" visible="#{productorIndividualBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este productor individual?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorIndividualBean.crear}"  update=":padding" oncomplete="PF('pgAgregar').hide()" icon="fa fa-check"  style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgAgregar').hide()" icon="fa fa-close"  value="No" style="#{compradorBean.btnCrear}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{productorIndividualBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Buscar grupo de productores" widgetVar="productorData"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta"> 
+                                <p:dataTable var="entidades" value="#{productorIndividualBean.listaProductorGrupal}" widgetVar="productorData3"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron grupos de productores" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('productorData3').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.nombreProductorGrupal}" sortBy="#{entidades.nombreProductorGrupal}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.nombreProductorGrupal}"  />  
+                                    </p:column>  
+                                    <p:column filterBy="#{entidades.ubicacionProductorGrupal}" sortBy="#{entidades.ubicacionProductorGrupal}"  
+                                              headerText="Ubicacion"
+                                              filterMatchMode="contains" width="50%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.ubicacionProductorGrupal}"  />  
+                                    </p:column> 
+                                    <p:column  width="7%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" style="#{solicitudCooperBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{productorIndividualBean.productorGrupalSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{productorIndividualBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarProductor">
+                            <p:panel id="pModificarProductor" header="Modificar productor Individual"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="addPanel2" styleClass="companyHeaderGrid" style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectBooleanCheckbox  value="#{productorIndividualBean.habilitarGrupo}" >
+                                                <p:ajax update=":padding" listener="#{productorIndividualBean.habilitatPGrupal}" />
+                                            </p:selectBooleanCheckbox> 
+                                            &nbsp;&nbsp;&nbsp;&nbsp;        <h:outputText  value="¿Miembro de grupo?"/>
+                                        </p:column>
+                                        <p:column > 
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <p:panelGrid  styleClass="companyHeaderGrid" style="width: 100%; margin: auto;"> 
+                                    <b>    <h:outputText value="Grupo"/></b>
+                                    <hr></hr>
+                                    <p:row> 
+                                        <p:column style=" width: 35%">                                                
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column style=" width: 5%">                                                
+                                        </p:column>
+                                        <p:column style=" width: 40%">                                                
+                                        </p:column>
+                                    </p:row>                                       
+                                    <p:row>
+                                        <p:column >
+                                            <p:inputText disabled="#{!productorIndividualBean.habilitarGrupo}"   value="#{productorIndividualBean.productorGrupalSeleccionado.nombreProductorGrupal}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                            <h:outputText  value="#{productorIndividualBean.msgGrupo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >  
+                                            <p:commandButton   actionListener="#{productorIndividualBean.mostrarGrupos}" disabled="#{!productorIndividualBean.habilitarGrupo}"  oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar" update=":padding" >
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column style=" width: 33%">  
+                                            <p:selectBooleanCheckbox  disabled="#{!productorIndividualBean.habilitarGrupo}"  value="#{productorIndividualBean.productorIndividualSeleccionado.representanteGrupal}"  >
+                                            </p:selectBooleanCheckbox> 
+                                            &nbsp;  &nbsp;&nbsp;  &nbsp;
+                                            <h:outputText value="¿Representante?"/> 
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>  <h:outputText value="Personales"/></b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Apellidos:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca los nombres"  style=" width: 100%" value="#{productorIndividualBean.productorIndividualSeleccionado.nombresProdcutorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  <p:inputText placeholder="Introduzca los apellidos"  style=" width: 100%" value="#{productorIndividualBean.productorIndividualSeleccionado.apellidosProductorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgApellidos}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Fecha de nacimiento:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="DUI:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">
+                                            <p:calendar id="mask" placeholder="Introduzca la fecha de nacimiento"  pattern="dd/MM/yyyy" mask="true" showOn="button" size="34"  onchange="productorIndividualBean.calcularEdad"  value="#{productorIndividualBean.productorIndividualSeleccionado.fechanacimientoProductorIndividual}" /> 
+                                            <br></br>
+                                            <h:outputText value="#{productorIndividualBean.msgFecha}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"><p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%"  value="#{productorIndividualBean.productorIndividualSeleccionado.duiProductorIndividual}" />
+                                            <h:outputText value="#{productorIndividualBean.msgDui}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText  value="NIT:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Sexo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> <p:inputMask placeholder="Introduzca el NIT" mask="9999-999999-999-9"  style=" width: 100%"  value="#{productorIndividualBean.productorIndividualSeleccionado.nitProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgNit}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1"> <p:selectOneRadio id="options" value="#{productorIndividualBean.productorIndividualSeleccionado.sexoProductorIndividual}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Masculino" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino" itemValue="Femenino" />
+                                            </p:selectOneRadio> </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Estado familiar:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Hijos:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"> 
+                                            <p:selectOneMenu id="tipo8" style="width:100%" value="#{productorIndividualBean.productorIndividualSeleccionado.estadoFamiliarProductorIndividual}">
+                                                <f:selectItem itemLabel="[Seleccione]" itemValue="" />
+                                                <f:selectItem itemLabel="Soltero/a" itemValue="Soltero/a" />   
+                                                <f:selectItem itemLabel="Casado/a" itemValue="Casado/a"  />                                                    
+                                                <f:selectItem itemLabel="Viudo/a" itemValue="Viudo/a"  />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{productorIndividualBean.msgEstadoFamiliar}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  
+                                            <p:inputMask  mask="9?9999"
+                                                          maxlength="5"
+                                                          slotChar=" " style=" width: 100%" placeholder="Introduzca el numero de hijos"   value="#{productorIndividualBean.productorIndividualSeleccionado.varonesProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgHijosvarones}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Hijas:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Experiencia crediticia:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">
+                                            <p:inputMask  mask="9?9999"
+                                                          maxlength="5"
+                                                          slotChar=" " style=" width: 100%" placeholder="Introduzca el numero de hijas"    value="#{productorIndividualBean.productorIndividualSeleccionado.ninasProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgHijosninas}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">
+                                            <p:selectBooleanCheckbox id="tipo2" value="#{productorIndividualBean.productorIndividualSeleccionado.experienciaProductorIndividual}" >
+                                                <p:ajax update="opCredencial" listener="#{productorIndividualBean.habilitarModificar}" />
+                                            </p:selectBooleanCheckbox> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Institución financiera:*" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nivel de estudio:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  
+                                            <p:outputPanel id="opCredencial">
+                                                <p:inputText  placeholder="Introduzca el nombre de la institución" style=" width: 100%" disabled="#{!productorIndividualBean.productorIndividualSeleccionado.experienciaProductorIndividual}" value="#{productorIndividualBean.productorIndividualSeleccionado.institucionProductorIndividual}" /> 
+                                            </p:outputPanel>
+                                            <h:outputText value="#{productorIndividualBean.msgInstitucion}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">
+                                            <p:selectOneMenu id="tipo4" value="#{productorIndividualBean.productorIndividualSeleccionado.estudioProductorIndividual}" style="width:100%" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
+                                                <f:selectItem itemLabel="Parvularia" itemValue="Parvularia"  />
+                                                <f:selectItem itemLabel="Basico" itemValue="Basico" />
+                                                <f:selectItem itemLabel="Media" itemValue="Media" />
+                                                <f:selectItem itemLabel="Superior" itemValue="Superior" />
+                                            </p:selectOneMenu> 
+                                            <h:outputText value="#{productorIndividualBean.msgEstudio}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Actividades economicas:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca las actividades economicas" value="#{productorIndividualBean.productorIndividualSeleccionado.actividadesProductorIndividual}"/> 
+                                            <h:outputText value="#{productorIndividualBean.msgActividades}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>   <h:outputText value="Contacto"/> </b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputText  style=" width: 100%" placeholder="Introduzca el correo" value="#{productorIndividualBean.productorIndividualSeleccionado.correoProductorIndividual}" /></p:column>
+                                        <p:column colspan="1">  <p:inputMask  mask="9999-9999" style=" width: 100%" placeholder="Introduzca el teléfono"  value="#{productorIndividualBean.productorIndividualSeleccionado.telefonoProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgTelefono}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column> 
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1">  <p:inputMask placeholder="Introduzca el movil"  mask="9999-9999" style=" width: 100%"  value="#{productorIndividualBean.productorIndividualSeleccionado.movilProductorIndividual}"/>
+                                            <h:outputText value="#{productorIndividualBean.msgMovil}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column colspan="1">  </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca la dirección" value="#{productorIndividualBean.productorIndividualSeleccionado.direccionProductorIndividual}"/> 
+                                            <h:outputText value="#{productorIndividualBean.msgDireccion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{productorIndividualBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{compradorBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{productorIndividualBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{productorIndividualBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este productor?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorIndividualBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}">
+                                            <f:setPropertyActionListener value="#{false}" target="#{productorIndividualBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Buscar grupo de productores" widgetVar="dgBuscarCuenta"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarGrupo"> 
+                                <p:dataTable var="entidades" value="#{productorIndividualBean.listaProductorGrupal}" widgetVar="grupoData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron grupos de productores"
+                                             paginatorPosition="bottom"
+                                             rowIndexVar="No"> 
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('grupoData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.nombreProductorGrupal}" sortBy="#{entidades.nombreProductorGrupal}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.nombreProductorGrupal}"  />  
+                                    </p:column>  
+                                    <p:column filterBy="#{entidades.ubicacionProductorGrupal}" sortBy="#{entidades.ubicacionProductorGrupal}"  
+                                              headerText="Ubicacion"
+                                              filterMatchMode="contains" width="50%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.ubicacionProductorGrupal}"  />  
+                                    </p:column> 
+                                    <p:column  width="7%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" style="#{solicitudCooperBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{productorIndividualBean.productorGrupalSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel> 
+                    <p:outputPanel rendered="#{productorIndividualBean.showData}">
+                        <h:form>        
+                            #{productorIndividualBean.updateListaProductorIndividual()}
+                            <p:panel id="pDatosProductores" header="Administrar productores individuales" style="margin-bottom:20px">
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nuevo productor individual" id="add"  actionListener="#{productorIndividualBean.enableCreate()}" update=":padding"    icon="fa fa-plus" style="#{compradorBean.btnNuevo}"/>
+                                        </div>  
+                                    </p:fieldset>
+                                    <p:dataTable   id="basicDT" var="productoresIndividuales" widgetVar="productorData"  paginator="true" rows="10" value="#{productorIndividualBean.listaProductorIndividual}"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron productores individuales" rowsPerPageTemplate="5,10,15" paginatorPosition="bottom" style="width: 100%;"
+                                                   rowIndexVar="No"
+                                                   >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('productorData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">       
+                                            <h:outputText value="#{No+1}"  />
+                                        </p:column>
+                                        <p:column headerText="Nombre" width="25%" sortBy="#{productoresIndividuales.nombresProdcutorIndividual}" filterBy="#{productoresIndividuales.nombresProdcutorIndividual}" filterStyle="width:100%"   >
+                                            <h:outputText value="#{productoresIndividuales.nombresProdcutorIndividual} #{productoresIndividuales.apellidosProductorIndividual}"  />
+                                        </p:column>
+                                        <p:column headerText="DUI" width="12%" filterBy="#{productoresIndividuales.duiProductorIndividual}" filterStyle="width:100%" sortBy="#{productoresIndividuales.duiProductorIndividual}"  >
+                                            <h:outputText value="#{productoresIndividuales.duiProductorIndividual}" />
+                                        </p:column>
+                                        <p:column headerText="NIT" width="18%" filterBy="#{productoresIndividuales.nitProductorIndividual}" filterStyle="width:100%" sortBy="#{productoresIndividuales.nitProductorIndividual}"  >
+                                            <h:outputText value="#{productoresIndividuales.nitProductorIndividual}" />
+                                        </p:column>
+                                        <p:column headerText="Grupo" width="20%" filterBy="#{productoresIndividuales.TProductorGrupal.nombreProductorGrupal}" filterStyle="width:100%" sortBy="#{productoresIndividuales.TProductorGrupal.nombreProductorGrupal}"  >
+                                            <h:outputText value="#{productoresIndividuales.TProductorGrupal.nombreProductorGrupal}" />
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center">
+                                            <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye" style="#{productoresIndividuales.estadoProductorIndividual eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{productoresIndividuales}" target="#{productorIndividualBean.productorIndividualSeleccionado}"  />
+                                                <f:setPropertyActionListener value="#{productoresIndividuales.TProductorGrupal}" target="#{productorIndividualBean.productorGrupalSeleccionado}" />
+                                                <f:actionListener binding="#{productorIndividualBean.calcularEdad()}"/> 
+                                                <p:menuitem  value="Modificar" update=":padding"     
+                                                             actionListener="#{productorIndividualBean.enableShowUpdate}" icon=" fa fa-pencil">
+                                                    <f:setPropertyActionListener value="#{productoresIndividuales}" target="#{productorIndividualBean.productorIndividualSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{productoresIndividuales.TProductorGrupal}" target="#{productorIndividualBean.productorGrupalSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{productoresIndividuales.duiProductorIndividual}" target="#{productorIndividualBean.duiAux}" />
+                                                  
+                                                    <f:actionListener binding="#{productorIndividualBean.cargarModificar()}"/> 
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{productoresIndividuales.estadoProductorIndividual}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                    <f:setPropertyActionListener value="#{productoresIndividuales}" target="#{productorIndividualBean.productorIndividualSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{!productoresIndividuales.estadoProductorIndividual}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{productoresIndividuales}" target="#{productorIndividualBean.productorIndividualSeleccionado}" />
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este productor?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorIndividualBean.darDeAlta}" oncomplete="PF('pgAlta').hide()" update=":padding" icon="fa fa-check"  style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton   update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid >
+                                        <h:outputText value="¿Desea dar de baja este productor?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorIndividualBean.darDeBaja}" update=":padding" oncomplete="PF('pgBaja').hide()"  icon="fa fa-check"  style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton actionListener="#{productorIndividualBean.enableShowData}" update=":padding" oncomplete="PF('pgBaja').hide()"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog width="70%" header="Datos del productor individual" widgetVar="pgVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel > 
+                                    <p:tabView>
+                                        <p:tab title="Personales">                                            
+                                            <p:panelGrid  style="width: 100%;">   
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Nombres:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.nombresProdcutorIndividual}"/> 
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Apellidos:"/> 
+                                                    </p:column>
+                                                    <p:column style=" width: 25%"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.apellidosProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Fecha de nacimiento:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.fechanacimientoProductorIndividual}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                        </h:outputText>   
+                                                    </p:column>
+                                                    <p:column style=" width: 25%" > 
+                                                        <h:outputText value="Edad:"/>
+                                                    </p:column>
+                                                    <p:column  style=" width: 25%"> 
+                                                        <h:outputText value="#{productorIndividualBean.edad}">
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="DUI:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.duiProductorIndividual}"/> 
+                                                    </p:column>
+                                                    <p:column style=" width: 25%" >
+                                                        <h:outputText value="NIT:"/> 
+                                                    </p:column>
+                                                    <p:column style=" width: 25%" >
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.nitProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Sexo:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.sexoProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Estado familiar:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.estadoFamiliarProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column>
+                                                        <h:outputText value="Hijos:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.varonesProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Hijas:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.ninasProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Experiencia crediticia:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.experienciaProductorIndividual eq 'true'? 'Si':'No'}"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Institución financiera:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.institucionProductorIndividual eq ''? '----': productorIndividualBean.productorIndividualSeleccionado.institucionProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column > 
+                                                        <h:outputText value="Nivel de estudio:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.estudioProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column > 
+                                                        <h:outputText value="Estado:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.estadoProductorIndividual eq true? 'Activo': 'Inactivo'}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                   <p:column> 
+                                                        <h:outputText value="Actividades economicas:"/>
+                                                    </p:column>
+                                                    <p:column colspan="3"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.actividadesProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">                                                  
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Representante del grupo:"/>
+                                                    </p:column>
+                                                    <p:column colspan="3">
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.representanteGrupal eq true? 'Si': 'No'}"/> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Contacto"> 
+                                            <p:panelGrid  style="width: 100%;"> 
+                                                <p:row style=" text-align:  left">
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Correo:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.correoProductorIndividual eq ''? '----':productorIndividualBean.productorIndividualSeleccionado.correoProductorIndividual}"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Teléfono:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.telefonoProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="Móvil:"/>
+                                                    </p:column>
+                                                    <p:column colspan="1"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.movilProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row style=" text-align:  left">
+                                                    <p:column > 
+                                                        <h:outputText value="Dirección:"/>
+                                                    </p:column>
+                                                    <p:column colspan="3"> 
+                                                        <h:outputText value="#{productorIndividualBean.productorIndividualSeleccionado.direccionProductorIndividual}"/>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Grupo"> 
+                                            <p:panelGrid  style="width: 100%;">    
+                                                <p:row style=" text-align:  left">                                                  
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Nombre:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{productorIndividualBean.productorGrupalSeleccionado.nombreProductorGrupal}"/> 
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Ubicación:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="#{productorIndividualBean.productorGrupalSeleccionado.ubicacionProductorGrupal eq null? '----': productorIndividualBean.productorGrupalSeleccionado.ubicacionProductorGrupal}"/> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                    </p:tabView>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{productorIndividualBean.verReporteProductor()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{productorIndividualBean.verReporteProductorPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>                           
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

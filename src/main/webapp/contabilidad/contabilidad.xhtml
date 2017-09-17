@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+
+                <div class="row">
+
+                    <h:link outcome="adminPeriodos.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header " data-background-color="green">
+                                    <i class="material-icons">date_range</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title"> <br></br>Periodos</h3>
+
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar periodos.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+
+                    <h:link outcome="adminCuentas.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">list</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title"><br></br>Cuentas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar Cuentas.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </h:link>
+
+                    <h:link outcome="adminPartidas.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header " data-background-color="blue">
+                                    <i class="material-icons">library_books</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title"><br></br>Partidas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i>Administrar partidas 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+
+                    <h:link outcome="adminProveedores.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">account_balance</i></div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title" > <br></br>Proveedores</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar proveedores.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+                </div>
+
+
+
+                <div class="row">
+                    <h:link outcome="adminTipos.xhtml">
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">devices</i></div>
+
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title" > <br></br>Tipos </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i>Administrar tipos.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+                    <h:link outcome="adminActivos.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">laptop_chromebook</i></div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title" ><br></br>Activo fijo</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar activos.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+
+                    <h:link outcome="adminConfiguracion.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header " data-background-color="blue">
+                                    <i class="material-icons">settings</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title"><br></br>Configuración</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">access_time</i> Administrar Configuración.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+
+                    <h:link outcome="adminReportesContabilidad.xhtml">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header " data-background-color="red">
+                                    <i class="material-icons">find_in_page</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Contabilidad</p>
+                                    <h3 class="title"><br></br>Reportes</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i>Ver reportes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:link>
+                </div>
+            </ui:define>
+
+
+
+            <ui:define name="aux">
+
+                <h:outputScript name="./js/jquery-3.1.0.min.js" />
+
+
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

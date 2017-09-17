@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroMayorSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0bd5ccd3-3730-46c1-8558-133e7f5659bb">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idCuenta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  *  from t_cuenta t  inner join t_detalle_partida d on t.id_cuenta=d.id_cuenta_detalle_partida
+inner join t_partida p on p.id_partida=d.id_partida_detalle_partida
+inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{idEjercicio}  and id_cuenta=$P{idCuenta} and estado_partida=true]]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="codigo_cuenta" class="java.lang.String"/>
+	<field name="nombre_cuenta" class="java.lang.String"/>
+	<field name="id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="id_entidad_cuenta" class="java.lang.Integer"/>
+	<field name="fecha_cuenta" class="java.sql.Date"/>
+	<field name="naturaleza_cuenta" class="java.lang.String"/>
+	<field name="estado_cuenta" class="java.lang.Boolean"/>
+	<field name="id_detalle_partida" class="java.lang.Integer"/>
+	<field name="saldo_detalle_partida" class="java.math.BigDecimal"/>
+	<field name="id_cuenta_detalle_partida" class="java.lang.Integer"/>
+	<field name="id_partida_detalle_partida" class="java.lang.Integer"/>
+	<field name="tipo_saldo_detalle_partida" class="java.lang.String"/>
+	<field name="id_partida" class="java.lang.Integer"/>
+	<field name="fecha_partida" class="java.sql.Date"/>
+	<field name="concepto_partida" class="java.lang.String"/>
+	<field name="id_periodo_partida" class="java.lang.Integer"/>
+	<field name="numero_partida" class="java.lang.Integer"/>
+	<field name="estado_partida" class="java.lang.Boolean"/>
+	<field name="id_periodo" class="java.lang.Integer"/>
+	<field name="id_ejercicio" class="java.lang.Integer"/>
+	<field name="estado_periodo" class="java.lang.Boolean"/>
+	<field name="mes_periodo" class="java.lang.String"/>
+	<variable name="totalDebe" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipo_saldo_detalle_partida}.equals("Debe") ?   $F{saldo_detalle_partida}: BigDecimal.ZERO]]></variableExpression>
+	</variable>
+	<variable name="totalHaber" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipo_saldo_detalle_partida}.equals("Haber") ? $F{saldo_detalle_partida}:BigDecimal.ZERO]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="0" width="61" height="15" uuid="dc9a9f92-620a-41e8-b0ff-f33bcac45085"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_partida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="62" y="0" width="113" height="15" uuid="faa71a04-bc98-4977-a99f-62e920e2c2a3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto_partida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="229" y="0" width="85" height="15" uuid="ed66ab16-078b-4144-a386-8b3635ed06b7"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_saldo_detalle_partida}.equals("Debe")  ? $F{saldo_detalle_partida} : "0.00"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="313" y="0" width="88" height="15" uuid="8d9ae67a-e2e9-49cd-88b9-da5a91d3c8e3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_saldo_detalle_partida}.equals("Haber")  ?$F{saldo_detalle_partida}  : "0.00"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="405" y="0" width="74" height="15" uuid="9fa83557-6d2d-40ec-a4a1-0617d6c77f37"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) >=0 ? $V{totalDebe}.subtract($V{totalHaber}): BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="479" y="0" width="74" height="15" uuid="12974494-9df6-41f7-8c3f-0bcfe6dd9592"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) <=0 ? $V{totalHaber}.subtract($V{totalDebe}): BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="187" y="0" width="42" height="15" uuid="81950438-efa8-4d90-9518-4cac4e1220f1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_partida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="229" y="0" width="84" height="20" uuid="40093b45-85d4-4ddf-8338-1bc1088e68f5"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="314" y="0" width="86" height="20" uuid="4550e7b0-201a-49b1-b653-6b5df7488b62"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalHaber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="0" width="100" height="20" uuid="c6f8a2f7-3703-4456-867b-ec4a328fe472"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALES:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="405" y="0" width="74" height="20" uuid="4d239dd6-d6a4-4144-9556-5e40f99475b6"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) >=0 ? $V{totalDebe}.subtract($V{totalHaber}): BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="479" y="0" width="74" height="20" uuid="30e112ca-abc2-4b0f-9afe-b32ab2643f21"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) <=0 ? $V{totalHaber}.subtract($V{totalDebe}): BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

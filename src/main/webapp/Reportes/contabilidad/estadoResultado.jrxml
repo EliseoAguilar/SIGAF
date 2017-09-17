@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estadoResultado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7567c48a-360e-4a4d-a80e-102f0dde2ccf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreEntidad" class="java.lang.String"/>
+	<parameter name="direccionEntidad" class="java.lang.String"/>
+	<parameter name="telEntidad" class="java.lang.String"/>
+	<parameter name="logoEntidad" class="java.lang.String"/>
+	<parameter name="fechaReporte" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombreCuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreCuenta]]></fieldDescription>
+	</field>
+	<field name="nombreGrupo" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreGrupo]]></fieldDescription>
+	</field>
+	<field name="saldoCuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[saldoCuenta]]></fieldDescription>
+	</field>
+	<field name="saldoGrupo" class="java.lang.String">
+		<fieldDescription><![CDATA[saldoGrupo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="228" y="52" width="23" height="20" uuid="7d54145f-d5a3-44e3-9afa-3bb8e0ace22a"/>
+				<text><![CDATA[Tel.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="52" width="100" height="20" uuid="eb3a2b67-7fb4-45b4-90f5-9f4b78449b4b"/>
+				<textFieldExpression><![CDATA[$P{telEntidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="439" y="52" width="100" height="20" uuid="fe37ef32-5533-47e9-bddc-8fcca839a1d2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="104" y="4" width="339" height="28" uuid="c22f607f-46d9-45c3-bcb9-45a152ab2619"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreEntidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="443" y="32" width="100" height="20" uuid="916f7f3a-e7ec-45ed-aff1-fb5ec1df84a3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="104" y="32" width="339" height="20" uuid="7dfdb128-e813-4c5c-9f4c-9ad820873fa0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{direccionEntidad}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="4" y="4" width="79" height="73" uuid="daf40192-6743-424c-9709-949e1d69c046"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64( $P{logoEntidad}.split(",")[1].getBytes()))]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="352" height="21" uuid="9f858ab5-9181-4a9d-8cee-96385b6d5080"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE RESULTADOS AL ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="20" uuid="30f15d30-2451-4115-a89b-e1442fe934fb"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="355" y="0" width="143" height="20" uuid="16266f28-7e3f-47d1-9fa9-4193c196d583"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaReporte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="81" y="2" width="171" height="13" uuid="743accb0-fe88-4a7f-8093-6f341a23115c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="252" y="0" width="120" height="13" uuid="e4f34574-b199-4801-b04c-c770c59146e7"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldoCuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="378" y="0" width="120" height="13" uuid="9690dec0-7574-4c0b-991a-4e36e7bf6ac5"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldoGrupo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="2" width="194" height="13" uuid="0f139620-6aac-4962-8e66-37d60d42f156"/>
+				<textElement>
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreGrupo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

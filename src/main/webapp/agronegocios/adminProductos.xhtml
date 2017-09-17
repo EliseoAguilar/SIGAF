@@ -1,0 +1,638 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #opMenu td{
+                        border: none !important;
+
+                    }
+                    #opMenu tr{
+                        border: none !important;
+
+                    }
+                </style>
+                <!-- crear -->
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{productoBean.showCreate}" >
+                        <h:form id="fEmpleados" >                            
+                            <p:panel id="basic"  header="Agregar cultivo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:outputPanel id="productores">
+                                    <b> <h:outputText  value="Productor"/></b>
+                                    <hr></hr>
+                                    <p:outputPanel id="productorIndividual" rendered="#{!productoBean.showIndi}" style=" width: 100%">
+                                        <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="DUI:*"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="Nombre:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="1" style=" width: 30%">
+                                                    <p:inputText style=" width: 100%"  value="#{productoBean.productorIndividual.duiProductorIndividual}" readonly="true" /> 
+                                                </p:column>
+                                                <p:column colspan="1" style=" width: 80%">
+                                                    <p:inputText style=" width: 100%"  value="#{productoBean.productorIndividual.nombresProdcutorIndividual} #{productoBean.productorIndividual.apellidosProductorIndividual}" readonly="true"  /> 
+                                                </p:column>
+                                                
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="#{productoBean.msgProductor}" style=" color:  red"  />
+                                                </p:column>
+                                                <p:column>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                </p:outputPanel>
+                                <br></br>
+                                <b>       <h:outputText  value="Cultivo"/></b>
+                                <hr></hr>
+                                <p:outputPanel id="activos">  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Área:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Tipo:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 50%">
+                                                <p:selectOneMenu id="areas" value="#{productoBean.idAreaSeleccionada}" style=" width: 100%;">
+                                                    <p:ajax update="areasFiltradas" listener="#{productoBean.mostrarTipos}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{productoBean.selectOneItemAreas}" />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{productoBean.msgArea}" style=" color: red" />
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 50%">   
+                                                <p:selectOneMenu id="areasFiltradas" value="#{productoBean.idTipoSeleccionado}" style=" width: 100%;">                                                  
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{productoBean.selectOneItemTipos}" /> 
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{productoBean.msgTipo}" style=" color: red" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Nombre:*" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Sistema de riego:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1"> <p:inputText placeholder="Intriduzca el nombre del cultivo" value="#{productoBean.producto.nombre}" style=" width: 100%" />
+                                                <h:outputText value="#{productoBean.msgNombre}" style=" color: red" />
+                                            </p:column>
+                                            <p:column colspan="1"><p:selectOneMenu id="sistema" value="#{productoBean.producto.sistema}" style="width:100%" >
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
+                                                    <f:selectItem itemLabel="Bajo riego" itemValue="Bajo riego"  />
+                                                    <f:selectItem itemLabel="De invierno" itemValue="De invierno" />
+                                                    <f:selectItem itemLabel="Orgánico" itemValue="Organico" /> 
+                                                    <f:selectItem itemLabel="Tradicional" itemValue="Tradicional" /> 
+                                                    <f:selectItem itemLabel="No Aplica" itemValue="No aplica" /> 
+                                                </p:selectOneMenu> 
+                                                <h:outputText value="#{productoBean.msgSistema}" style=" color: red" />
+                                            </p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Asistencia técnica:*" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Organizacion de apoyo técnico:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1">
+                                                <p:selectOneMenu   value="#{productoBean.producto.asistencia}" style="width:100%" >
+                                                    <p:ajax update="opCredencial" listener="#{productoBean.habilitar}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="#{null}" />
+                                                    <f:selectItem itemLabel="Si" itemValue="true"  />
+                                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                                </p:selectOneMenu> 
+                                                <h:outputText value="#{productoBean.msgAsistencia}" style=" color: red" />
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <p:outputPanel id="opCredencial">
+                                                    <p:inputText  placeholder="Introduzca el nombre de la institución" style=" width: 87%" disabled="#{!productoBean.habilitarAsisten}" value="#{productoBean.producto.organizacion}" />  &nbsp; &nbsp;
+                                                    <p:commandButton title="Agregar a la lista"  icon="fa fa-plus" style="#{productoBean.btnNuevo}" actionListener="#{productoBean.llenarProductos}" update=":padding" > 
+                                                    </p:commandButton>
+                                                </p:outputPanel> 
+                                                <h:outputText value="#{productoBean.msgOrganizacion}" style=" color: red" />
+                                            </p:column>
+                                        </p:row> 
+                                    </p:panelGrid>                                               
+                                </p:outputPanel>
+                                <br></br>
+                                <b>  <h:outputText value="Lista de cultivos"  /></b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto; height: auto ">
+                                    <p:row>   
+                                        <p:column>
+                                            <p:dataTable   id="activosData"
+                                                           var="empleados" widgetVar="agregarData" 
+                                                           value="#{productoBean.listaProducto}"
+                                                           rows="10" rowExpandMode="multiple" paginator="true" paginatorPosition="bottom"
+                                                           currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                           emptyMessage="No se encontraron cultivos" rowsPerPageTemplate="5,10,15" rowIndexVar="No" style=" font-size:  small" >
+                                                <f:facet name="header">
+                                                    <p:outputPanel>                                           
+                                                        <p:inputText id="globalFilter" onkeyup="PF('agregarData').filter()" style="width:150px" placeholder="Buscar"/>
+                                                    </p:outputPanel>
+                                                </f:facet>
+                                                <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                                    <h:outputText value=" #{No+1}" />
+                                                </p:column>
+                                                <p:column headerText="Nombre" style=" width: 20%;" filterBy="#{empleados.nombre}" sortBy="#{empleados.nombre}">  
+                                                    <h:outputText value="#{empleados.nombre}"  />
+                                                </p:column>
+                                                <p:column headerText="Sistema" style=" width: 10%;" filterBy="#{empleados.sistema}" sortBy="#{empleados.sistema}">  
+                                                    <h:outputText value="#{empleados.sistema}"  />
+                                                </p:column>
+                                                <p:column headerText="Asistencia" style=" width: 10%;" filterBy="#{productoBean.cambiarAsistencia(empleados.asistencia)}" sortBy="#{productoBean.cambiarAsistencia(empleados.asistencia)}">  
+                                                    <h:outputText value="#{productoBean.cambiarAsistencia(empleados.asistencia)}"  />
+                                                </p:column>
+                                                <p:column headerText="Organización" style=" width: 15%;" filterBy="#{empleados.organizacion}" sortBy="#{empleados.organizacion}">  
+                                                    <h:outputText value="#{empleados.organizacion}"  />
+                                                </p:column>
+                                                <p:column style="width: 5%; text-align: center"  >  
+                                                    <p:commandButton update="activosData"     icon="fa fa-trash" title="Seleccionar" style="#{productoBean.btnCancelar}" actionListener="#{productoBean.removerActivos(No)}" >
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:dataTable>
+                                            <h:outputText value="#{productoBean.msgLista}" style=" color:  red"  />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{productoBean.btnCrear}" actionListener="#{productoBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{empleadoCooperativaBean.btnLimpiar}"  value="Limpiar" id="btnClean"   actionListener="#{productoBean.limpiar()}" update=":padding"  icon="fa fa-fw fa-minus"/>
+                                        <p:commandButton  actionListener="#{productoBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </div>
+                                </center>     
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{productoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este cultivo?"/>                                    
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{productoBean.btnNuevo}" value="Si" actionListener="#{productoBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{productoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{productoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>  
+                        <p:dialog header="Buscar productor" widgetVar="dgBuscarProductor"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta2"> 
+                                <p:dataTable var="entidades" value="#{productoBean.listaProductoresIndividuales}" widgetVar="dataProductor"
+                                             paginator="true"
+                                             rows="5"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron productores" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('dataProductor').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" width="5%" style="text-align: center" >       
+                                        <h:outputText value="#{No+1}"  />
+                                    </p:column>
+                                    <p:column headerText="Nombres" width="25%" filterBy="#{entidades.nombresProdcutorIndividual}" filterStyle="width:100%" sortBy="#{entidades.nombresProdcutorIndividual}"   >
+                                        <h:outputText value="#{entidades.nombresProdcutorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="Apellidos" width="25%" filterBy="#{entidades.apellidosProductorIndividual}" filterStyle="width:100%" sortBy="#{entidades.apellidosProductorIndividual}"  >
+                                        <h:outputText value="#{entidades.apellidosProductorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="DUI" width="12%" filterBy="#{entidades.duiProductorIndividual}" filterStyle="width:100%" sortBy="#{entidades.duiProductorIndividual}"  >
+                                        <h:outputText value="#{entidades.duiProductorIndividual}" />
+                                    </p:column>
+                                    <p:column  width="7%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar productor" >
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{productoBean.productorIndividual}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{productoBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarComprador">
+                            <p:panel id="pModificarComprador" header="Modificar cultivo"  style="width:80%; margin: auto; margin-bottom: 20px">
+                                <p:outputPanel id="activos">  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Área:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Tipo:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 50%">
+                                                <p:selectOneMenu id="areas" value="#{productoBean.idAreaSeleccionada}" style=" width: 100%;">
+                                                    <p:ajax update="areasFiltradas" listener="#{productoBean.mostrarTipos}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{productoBean.selectOneItemAreas}" />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{productoBean.msgArea}" style=" color:  red"  />
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 50%">   
+                                                <p:selectOneMenu id="areasFiltradas" value="#{productoBean.idTipoSeleccionado}" style=" width: 100%;">                                                  
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{productoBean.selectOneItemTipos}" /> 
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{productoBean.msgTipo}" style=" color:  red"  />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Nombre:*" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Sistema de riego:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1"> <p:inputText placeholder="Introduzca el nombre del cultivo o producto" value="#{productoBean.productoSeleccionado.nombre}" style=" width: 100%" />
+                                                <h:outputText value="#{productoBean.msgNombre}" style=" color:  red"  />
+                                            </p:column>
+                                            <p:column colspan="1"><p:selectOneMenu id="sistema" value="#{productoBean.productoSeleccionado.sistema}" style="width:100%" >
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue=""  />
+                                                    <f:selectItem itemLabel="Bajo riego" itemValue="Bajo riego"  />
+                                                    <f:selectItem itemLabel="De invierno" itemValue="De invierno" />
+                                                    <f:selectItem itemLabel="Orgánico" itemValue="Organico" /> 
+                                                    <f:selectItem itemLabel="Tradicional" itemValue="Tradicional" /> 
+                                                    <f:selectItem itemLabel="No aplica" itemValue="No aplica" /> 
+                                                </p:selectOneMenu> 
+                                                <h:outputText value="#{productoBean.msgSistema}" style=" color:  red"  />
+                                            </p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Asistencia técnica:*" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Organizacion de apoyo técnico:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1">
+                                                <p:selectOneMenu   value="#{productoBean.productoSeleccionado.asistencia}" style="width:100%" >
+                                                    <p:ajax update="opCredencial" listener="#{productoBean.habilitarModificar()}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="#{null}" />
+                                                    <f:selectItem itemLabel="Si" itemValue="true"  />
+                                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                                </p:selectOneMenu> 
+                                                <h:outputText value="#{productoBean.msgAsistencia}" style=" color: red" />
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <p:outputPanel id="opCredencial">
+                                                    <p:inputText  placeholder="Introduzca el nombre de la institución" style=" width: 100%" disabled="#{!productoBean.habilitarAsisten}" value="#{productoBean.productoSeleccionado.organizacion}" />                                               
+                                                </p:outputPanel> 
+                                                <h:outputText value="#{productoBean.msgOrganizacion}" style=" color: red" />
+                                            </p:column>
+                                        </p:row> 
+                                    </p:panelGrid>  
+                                </p:outputPanel>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{productoBean.validarFormularioModificar()}"  update=":padding"   icon="fa fa-check" style="#{productoBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{productoBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{productoBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{productoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este cultivo?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productoBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{productoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{productoBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{productoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{productoBean.showData}">
+                        <h:form>     
+                            #{productoBean.updateListaProductos()}
+                            <p:panel id="pDatosCompradores" header="Administrar cultivos" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <p:fieldset>
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="DUI:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Nombre:"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 15%">
+                                                <p:inputText style=" width: 100%" readonly="true"  value="#{productoBean.productorIndividual.duiProductorIndividual}" /> 
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 30%">
+                                                <p:inputText style=" width: 100%" readonly="true"  value="#{productoBean.productorIndividual.nombresProdcutorIndividual} #{productoBean.productorIndividual.apellidosProductorIndividual}" /> 
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 100%">
+                                                <p:commandButton  oncomplete="PF('dgBuscarProductorIndi').show()"  icon="fa fa-search" title="Buscar productor" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                                <br></br>
+                                <p:outputPanel rendered="#{productoBean.mostrarTabla}">                                    
+                                    #{productoBean.updateListaProductosProductor()}
+                                    <div align="center"> 
+                                        <p:fieldset>
+                                            <div align="left">
+                                                <p:commandButton title="Nuevo cultivo" id="add"  actionListener="#{productoBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{agronegocioBean.btnNuevo}"  />
+                                            </div>
+                                        </p:fieldset>
+                                        <p:dataTable  id="basicDT" var="compradores" widgetVar="data"  paginator="true" rows="10" value="#{productoBean.listaProductoFiltrados}"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      paginatorPosition="bottom" style="width: 100%;"
+                                                      currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                      emptyMessage="No se encontraron cultivos"
+                                                      rowIndexVar="No" rowsPerPageTemplate="5,10,15"
+                                                      >
+                                            <f:facet name="header">
+                                                <p:outputPanel>                                           
+                                                    <p:inputText id="globalFilter" onkeyup="PF('data').filter()" style="width:150px" placeholder="Buscar"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+                                            <p:column headerText="Nº" width="5%" style="text-align: center">
+                                                <h:outputText value="#{No+1}"/>
+                                            </p:column>
+                                            <p:column headerText="Nombre" width="30%" filterBy="#{compradores.nombre}" sortBy="#{compradores.nombre}"  filterStyle="width:100%" >
+                                                <h:outputText value="#{compradores.nombre}"/>                                       </p:column>
+                                            <p:column headerText="Sistema" width="15%" filterBy="#{compradores.sistema}" sortBy="#{compradores.sistema}"  filterStyle="width:100%" >
+                                                <h:outputText value="#{compradores.sistema}"/>
+                                            </p:column>
+                                            <p:column headerText="Tipo" width="25%" filterBy="#{productoBean.mostrarTipo(compradores.TTipoCultivo.idTipoCultivo)}" sortBy="#{productoBean.mostrarTipo(compradores.TTipoCultivo.idTipoCultivo)}"  filterStyle="width:100%"  >
+                                                <h:outputText value="#{productoBean.mostrarTipo(compradores.TTipoCultivo.idTipoCultivo)}"/>
+                                            </p:column>
+                                            <p:column headerText="Área" width="15%" filterBy="#{productoBean.mostrarArea(compradores.TTipoCultivo.idTipoCultivo)}" sortBy="#{productoBean.mostrarArea(compradores.TTipoCultivo.idTipoCultivo)}"  filterStyle="width:100%"  >
+                                                <h:outputText value="#{productoBean.mostrarArea(compradores.TTipoCultivo.idTipoCultivo)}"/>
+                                            </p:column>
+                                            <p:column headerText="" width="9%" style="text-align: center" >
+                                                <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye" style="#{compradores.estado eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                    <f:setPropertyActionListener value="#{compradores}" target="#{productoBean.productoSeleccionado}" />
+                                                    <f:actionListener binding="#{productoBean.cargarVista3()}"/> 
+                                                    <p:menuitem  value="Modificar" update=":padding"     
+                                                                 actionListener="#{productoBean.enableShowUpdate}" icon=" fa fa-pencil">
+                                                        <f:setPropertyActionListener  value="#{compradores}" target="#{productoBean.productoSeleccionado}"  />
+                                                        <f:actionListener binding="#{productoBean.cargarVista()}"/>  
+                                                    </p:menuitem>
+                                                   <p:menuitem rendered="#{compradores.estado}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                        <f:setPropertyActionListener value="#{compradores}" target="#{productoBean.productoSeleccionado}" />
+                                                    </p:menuitem>
+                                                    <p:menuitem rendered="#{!compradores.estado}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                        <f:setPropertyActionListener value="#{compradores}" target="#{productoBean.productoSeleccionado}" />
+                                                    </p:menuitem>
+                                                </p:splitButton>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                </p:outputPanel> 
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este cultivo?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productoBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{productoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{productoBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este cultivo?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productoBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{productoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{productoBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>   
+                        <p:dialog header="Buscar productor" widgetVar="dgBuscarProductorIndi"  width="65%" appendTo="@(body)" modal="true" >  
+                            <h:form>
+                                <p:dataTable var="entidades" value="#{productoBean.listaProductoresIndividuales}" widgetVar="companyTable"
+                                             paginator="true"
+                                             rows="5"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontron productores individuales" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" width="5%" style="text-align: center">       
+                                        <h:outputText value="#{No+1}"   />
+                                    </p:column>
+                                    <p:column headerText="Nombres" width="30%" filterBy="#{entidades.nombresProdcutorIndividual}" filterStyle="width:100%" sortBy="#{entidades.nombresProdcutorIndividual}">
+                                        <h:outputText value="#{entidades.nombresProdcutorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="Apellidos" width="30%" filterBy="#{entidades.apellidosProductorIndividual}" filterStyle="width:100%" sortBy="#{entidades.apellidosProductorIndividual}">
+                                        <h:outputText value="#{entidades.apellidosProductorIndividual}"  />
+                                    </p:column>
+                                    <p:column headerText="DUI" width="16%" filterBy="#{entidades.duiProductorIndividual}" filterStyle="width:100%" sortBy="#{entidades.duiProductorIndividual}"  >
+                                        <h:outputText value="#{entidades.duiProductorIndividual}" />
+                                    </p:column>
+                                    <p:column  width="7%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{productoBean.productorIndividual}"  />
+                                            <f:actionListener binding="#{productoBean.mostrarDatosFiltrados()}"/> 
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog  width="65%" header="Datos del cultivo" widgetVar="pgVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <b>  <h:outputText value="Productor"/> </b>
+                                   <hr></hr>
+                               
+                                        <p:panelGrid id="pgVer3"  style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Nombres:"/>
+                                                </p:column>    
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productorIndividual.nombresProdcutorIndividual}" />
+                                                </p:column>   
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Apellidos:"/>
+                                                </p:column> 
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productorIndividual.apellidosProductorIndividual}" />
+                                                </p:column> 
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="DUI:"/>
+                                                </p:column>    
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productorIndividual.duiProductorIndividual}" />
+                                                </p:column>   
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="NIT:"/>
+                                                </p:column> 
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productorIndividual.nitProductorIndividual}" />
+                                                </p:column> 
+                                            </p:row>
+                                          
+                                        </p:panelGrid>
+                                     <br></br>
+                                     <b>  <h:outputText value="Cultivo"/> </b>
+                                   <hr></hr>
+                                  
+                                        <p:panelGrid id="pgVer"   style="width: 100%; margin: auto;"> 
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Nombre:"/>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productoSeleccionado.nombre}"/> 
+                                                </p:column>
+
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Sistema de riego: "/>
+                                                </p:column>
+                                                <p:column style=" width: 15%">
+                                                    <h:outputText value="#{productoBean.productoSeleccionado.sistema}"/> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Asistencia técnica:"/>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productoSeleccionado.asistencia eq true? 'Si':'No' }"/> 
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Organización:"/>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{productoBean.productoSeleccionado.organizacion}"/> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Área:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{productoBean.area.nombreAreaCultivo}"/>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Tipo:"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{productoBean.tipoCultivoSeleccionado.nombreTipoCultivo}"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="Estado:"/>
+                                                </p:column>
+                                                <p:column colspan="3">
+                                                    <h:outputText value="#{productoBean.productoSeleccionado.estado eq true? 'Activo':'Inactivo'}"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                               
+                                <br></br>
+                                <center>
+                                    <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                        <f:actionListener binding="#{productoBean.verReporteProducto()}"/> 
+                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                            <f:actionListener binding="#{productoBean.verReporteProductoPDF()}"/> 
+                                        </p:menuitem>
+                                    </p:splitButton>
+                                </center>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

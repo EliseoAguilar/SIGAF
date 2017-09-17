@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-03-2017 03:09:53 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TTrabajo" table="t_trabajo" schema="public" optimistic-lock="version">
+        <id name="idTrabajo" type="int">
+            <column name="id_trabajo" />
+            <generator class="sequence">
+                <param name="sequence">t_trabajo_id_trabajo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TCliente" class="com.sigaf.pojo.TCliente" fetch="select">
+            <column name="id_cliente" />
+        </many-to-one>
+        <property name="nombreEmpresa" type="string">
+            <column name="nombre_empresa" />
+        </property>
+        <property name="telefonoEmpresa" type="string">
+            <column name="telefono_empresa" />
+        </property>
+        <property name="direccionEmpresa" type="string">
+            <column name="direccion_empresa" />
+        </property>
+        <property name="cargoEmpresa" type="string">
+            <column name="cargo_empresa" />
+        </property>
+        <property name="tiempoEmpresa" type="java.lang.Integer">
+            <column name="tiempo_empresa" />
+        </property>
+        <property name="constancia" type="string">
+            <column name="constancia" />
+        </property>
+    </class>
+</hibernate-mapping>

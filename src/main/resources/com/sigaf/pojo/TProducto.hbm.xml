@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProducto" table="t_producto" schema="public" optimistic-lock="version">
+        <id name="idproducto" type="int">
+            <column name="idproducto" />
+              <generator class="sequence">
+                <param name="sequence">t_producto_id_producto_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TTipoCultivo" class="com.sigaf.pojo.TTipoCultivo" fetch="select">
+            <column name="idtipocultivo" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="sistema" type="string">
+            <column name="sistema" />
+        </property>
+        <property name="asistencia" type="java.lang.Boolean">
+            <column name="asistencia" />
+        </property>
+        <property name="organizacion" type="string">
+            <column name="organizacion" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="TProductoProductors" table="t_producto_productor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproducto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoProductor" />
+        </set>
+        <set name="TProductoCooperativas" table="t_producto_cooperativa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoCooperativa" />
+        </set>
+        <set name="TProductoAgronegocios" table="t_producto_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoAgronegocio" />
+        </set>
+    </class>
+</hibernate-mapping>

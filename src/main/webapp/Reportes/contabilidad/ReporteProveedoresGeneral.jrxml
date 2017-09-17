@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProveedoresGeneral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07953508-6232-43a0-b501-43a7a06b3145">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="288"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEntidad" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_proveedor."id_proveedor" AS t_proveedor_id_proveedor,
+     t_proveedor."nombre_proveedor" AS t_proveedor_nombre_proveedor,
+     t_proveedor."giro_proveedor" AS t_proveedor_giro_proveedor,
+     t_proveedor."correo_proveedor" AS t_proveedor_correo_proveedor,
+     t_proveedor."direccion_proveedor" AS t_proveedor_direccion_proveedor,
+     t_proveedor."nit_proveedor" AS t_proveedor_nit_proveedor,
+     t_proveedor."telefono1_proveedor" AS t_proveedor_telefono1_proveedor,
+     t_proveedor."telefono2_proveedor" AS t_proveedor_telefono2_proveedor,
+     t_proveedor."nrc_proveedor" AS t_proveedor_nrc_proveedor,
+     t_proveedor."estado_proveedor" AS t_proveedor_estado_proveedor,
+     t_proveedor."id_entidad_proveedor" AS t_proveedor_id_entidad_proveedor
+FROM
+     "public"."t_proveedor" t_proveedor where  t_proveedor."id_entidad_proveedor"=$P{idEntidad}]]>
+	</queryString>
+	<field name="t_proveedor_id_proveedor" class="java.lang.Integer"/>
+	<field name="t_proveedor_nombre_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_giro_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_correo_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_direccion_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_nit_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_telefono1_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_telefono2_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_nrc_proveedor" class="java.lang.String"/>
+	<field name="t_proveedor_estado_proveedor" class="java.lang.Boolean"/>
+	<field name="t_proveedor_id_entidad_proveedor" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<subreport>
+				<reportElement x="131" y="0" width="200" height="31" uuid="0aae1225-56d2-498d-8aff-81d7aa3d59d7"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="2" width="801" height="20" uuid="a6faba73-1dcc-4d88-848c-aae9a6a1e453"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE PROVEEDORORES]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="4" width="100" height="20" uuid="48132a6b-ba4a-4851-9569-44353274bd1f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="4" width="100" height="20" uuid="5aa614ce-3777-4376-bcd6-470efa5c8402"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GIRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="518" y="4" width="154" height="20" uuid="0807da04-2217-4a28-9052-9cedf340504a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="4" width="100" height="20" uuid="4bdd2e8d-7c85-4330-b3a5-8233536e8d53"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="4" width="100" height="20" uuid="e517a2b8-fcfb-4fc5-903c-9a0553cf0a79"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NRC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="4" width="100" height="20" uuid="96499be2-48f1-42e3-a672-2c1c55c7cbf5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELÉFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="4" width="100" height="20" uuid="6b968d0d-8f9e-4664-a8cc-0ea7cb1c9e9b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CORREO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="691" y="3" width="100" height="20" uuid="0e73eed1-096c-44ac-a811-12279acb748c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="0" width="799" height="1" uuid="2735cf70-fc5e-4c6f-ae4e-0ca370fdbd74"/>
+			</line>
+			<line>
+				<reportElement x="3" y="24" width="802" height="1" uuid="bb78f818-6e68-4f9f-9459-10028e462b0b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="9" y="3" width="100" height="20" uuid="aa09b637-b14d-4694-92a8-873ea45aee99"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_nombre_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="90" y="3" width="100" height="20" uuid="cf344f1b-e0d6-47d4-97c7-6f11a26c50c3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_giro_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="518" y="3" width="206" height="20" uuid="a7d5fe9e-b680-4f96-8ef7-58c4b59ad6d8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_direccion_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="3" width="100" height="20" uuid="2df94fb8-be99-4fa5-a81e-d3824a39c9a6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_nit_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="3" width="100" height="20" uuid="02006774-d5ee-4c59-af24-c77c92247448"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_nrc_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="3" width="100" height="20" uuid="6976a7ab-9231-4554-91bf-e5f7a20033dd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+"-"+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="420" y="3" width="100" height="20" uuid="a120071e-56d1-4878-a04c-9808c575a92d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_correo_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="691" y="3" width="100" height="20" uuid="bc7fdcfd-b118-4632-9de6-200a12c1de41"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proveedor_estado_proveedor} == true? "ACTIVO":"INACTIVO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="a5ec0f5f-3724-46cd-970e-dd307545c405"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="688" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="04eb611c-52e2-4aff-a9e9-f6c03f723d6d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteActivosFijos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d097d2c0-a3b5-4f37-80c1-22cd8d15ab41">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEntidad" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_activo_fijo."id_activo_fijo" AS t_activo_fijo_id_activo_fijo,
+     t_activo_fijo."codigo_activo_fijo" AS t_activo_fijo_codigo_activo_fijo,
+     t_activo_fijo."id_tipo_activo_activo_fijo" AS t_activo_fijo_id_tipo_activo_activo_fijo,
+     t_activo_fijo."marca_activo_fijo" AS t_activo_fijo_marca_activo_fijo,
+     t_activo_fijo."modelo_activo_fijo" AS t_activo_fijo_modelo_activo_fijo,
+     t_activo_fijo."serie_activo_fijo" AS t_activo_fijo_serie_activo_fijo,
+     t_activo_fijo."descripcion_activo_fijo" AS t_activo_fijo_descripcion_activo_fijo,
+     t_activo_fijo."compra_activo_fijo" AS t_activo_fijo_compra_activo_fijo,
+     t_activo_fijo."registro_activo_fijo" AS t_activo_fijo_registro_activo_fijo,
+     t_activo_fijo."numero_factura_activo_fijo" AS t_activo_fijo_numero_factura_activo_fijo,
+     t_activo_fijo."id_proveedor_activo_fijo" AS t_activo_fijo_id_proveedor_activo_fijo,
+     t_activo_fijo."id_empleado_activo_fijo" AS t_activo_fijo_id_empleado_activo_fijo,
+     t_activo_fijo."estado_activo_fijo" AS t_activo_fijo_estado_activo_fijo,
+     t_valor_activo."id_valor_activo" AS t_valor_activo_id_valor_activo,
+     t_valor_activo."valor_activo" AS t_valor_activo_valor_activo,
+     t_tipo_activo."id_tipo" AS t_tipo_activo_id_tipo,
+     t_tipo_activo."nombre_tipo" AS t_tipo_activo_nombre_tipo,
+     t_tipo_activo."codigo_tipo" AS t_tipo_activo_codigo_tipo,
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_tipo_activo."vida_util_tipo" AS t_tipo_activo_vida_util_tipo,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_area."id_area" AS t_area_id_area,
+     t_area."nombre_area" AS t_area_nombre_area,
+     t_area."codigo_area" AS t_area_codigo_area
+FROM
+     "public"."t_activo_fijo" t_activo_fijo INNER JOIN "public"."t_valor_activo" t_valor_activo ON t_activo_fijo."id_activo_fijo" = t_valor_activo."id_activo_valor_activo"
+     INNER JOIN "public"."t_tipo_activo" t_tipo_activo ON t_activo_fijo."id_tipo_activo_activo_fijo" = t_tipo_activo."id_tipo"
+     INNER JOIN "public"."t_empleado" t_empleado ON t_activo_fijo."id_empleado_activo_fijo" = t_empleado."id_empleado"
+     INNER JOIN "public"."t_empleado_area" t_empleado_area ON t_empleado."id_empleado" = t_empleado_area."id_empleado"
+     INNER JOIN "public"."t_area" t_area ON t_empleado_area."id_area" = t_area."id_area"
+     INNER JOIN "public"."t_entidad" t_entidad ON t_tipo_activo."id_entidad_tipo" = t_entidad."id_entidad" where t_entidad."id_entidad"= $P{idEntidad}]]>
+	</queryString>
+	<field name="t_activo_fijo_id_activo_fijo" class="java.lang.Integer"/>
+	<field name="t_activo_fijo_codigo_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_id_tipo_activo_activo_fijo" class="java.lang.Integer"/>
+	<field name="t_activo_fijo_marca_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_modelo_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_serie_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_descripcion_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_compra_activo_fijo" class="java.sql.Date"/>
+	<field name="t_activo_fijo_registro_activo_fijo" class="java.sql.Date"/>
+	<field name="t_activo_fijo_numero_factura_activo_fijo" class="java.lang.String"/>
+	<field name="t_activo_fijo_id_proveedor_activo_fijo" class="java.lang.Integer"/>
+	<field name="t_activo_fijo_id_empleado_activo_fijo" class="java.lang.Integer"/>
+	<field name="t_activo_fijo_estado_activo_fijo" class="java.lang.String"/>
+	<field name="t_valor_activo_id_valor_activo" class="java.lang.Integer"/>
+	<field name="t_valor_activo_valor_activo" class="java.math.BigDecimal"/>
+	<field name="t_tipo_activo_id_tipo" class="java.lang.Integer"/>
+	<field name="t_tipo_activo_nombre_tipo" class="java.lang.String"/>
+	<field name="t_tipo_activo_codigo_tipo" class="java.lang.String"/>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_tipo_activo_vida_util_tipo" class="java.lang.Integer"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_area_id_area" class="java.lang.Integer"/>
+	<field name="t_area_nombre_area" class="java.lang.String"/>
+	<field name="t_area_codigo_area" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<subreport>
+				<reportElement x="125" y="1" width="640" height="45" uuid="bd8995ff-d03d-443b-b831-1fa30b19ed2d"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" uuid="85293613-53f6-4f30-8bb1-d5447c83fe5b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE ACTIVOS FIJOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="4" y="4" width="788" height="1" uuid="00bf7d69-0d9f-4d8b-98ae-5d7729ea5dcc"/>
+			</line>
+			<staticText>
+				<reportElement x="719" y="6" width="73" height="20" uuid="d4deebcd-db72-42bf-bc15-c839422048e6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="6" width="78" height="20" uuid="39d28503-e43d-41d2-8c67-4a151041a11d"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="6" width="81" height="20" uuid="99cf94bc-185c-4f1d-abde-a06e183a3c49"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="6" width="80" height="20" uuid="265e45c2-1d55-43c1-b722-a4f834538da5"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MARCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="6" width="100" height="20" uuid="1441f6b9-a74d-4503-aabc-164a5a8dfb07"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="73" height="20" uuid="862cd292-9882-45de-a7cc-085a06f50e49"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="29" width="788" height="1" uuid="9ed7fc7a-2744-434d-b086-2b4df68f7786"/>
+			</line>
+			<staticText>
+				<reportElement x="412" y="6" width="74" height="20" uuid="e2298823-e1cc-4c0a-8b78-2dbc662d73e8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="6" width="81" height="20" uuid="e18d29fc-d680-4e8a-9e42-1a6344e62f14"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGISTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="567" y="6" width="65" height="20" uuid="3eede87c-d224-4a35-bfbc-887fa92c405e"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="6" width="87" height="20" uuid="8a4cc36a-bd4d-4cd0-ac4e-b6ba91fc3ff0"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VIDA UTIL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="73" height="20" uuid="ce682d09-ded3-4e9c-8112-551817188b53"/>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}+"-"+$F{t_area_codigo_area}+"-"+$F{t_tipo_activo_codigo_tipo}+"-"+$F{t_activo_fijo_codigo_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="173" y="0" width="80" height="20" uuid="b2678c7f-ebc1-479c-9c64-b4d891748a68"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_marca_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="719" y="0" width="73" height="20" uuid="d70a1f78-7f60-40fe-9763-7d41d47f262d"/>
+				<textFieldExpression><![CDATA[$F{t_valor_activo_valor_activo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="73" y="0" width="100" height="20" uuid="efb805ec-4575-4d80-a73d-f4e30c45f2b3"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_descripcion_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="253" y="0" width="81" height="20" uuid="5efd447c-f1d1-4b43-9c55-2e3e3e802559"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_modelo_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="334" y="0" width="78" height="20" uuid="d3471425-f38f-44c1-af0f-9bbc62bb6ee5"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_serie_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy">
+				<reportElement x="412" y="0" width="74" height="20" uuid="548e4d1d-094a-44ec-83e2-fecf86abc3db"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_compra_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy">
+				<reportElement x="486" y="0" width="81" height="20" uuid="f6838302-1f0c-4ef1-a83c-2ebf90b878c2"/>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_registro_activo_fijo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="567" y="0" width="65" height="20" uuid="13620af3-33ed-42a6-8e8a-71ecfde78d35"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_activo_nombre_tipo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="632" y="0" width="87" height="20" uuid="ebccba06-fce9-4044-baba-38df53662bf7"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_activo_vida_util_tipo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="756" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="88af3bac-91cd-4137-8890-90699caedb05"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="2fe13957-b4fb-4c3f-bac6-9761e03b291d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

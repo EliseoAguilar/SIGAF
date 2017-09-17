@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/bd_sigaf</property>
+    <property name="hibernate.connection.username">user_sigaf</property>
+    <property name="hibernate.connection.password">adminsigaf</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.show_sql">true</property>
+  
+    <mapping resource="com/sigaf/pojo/TUsuario.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TReferencia.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEntidad.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TLisiado.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TAreaCultivo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPagoAgronegocio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEmpleadoCargo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProductorGrupal.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TAsesoria.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TComentario.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TSeguimiento.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TDesembolso.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEmpleado.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProyecto.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPolitica.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TValorActivo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TCapacitacion.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TCargo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPropiedadLisiado.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TComercio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPeriodo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProductoAgronegocio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TActivo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPartida.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEntidadProyecto.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TActivoFijo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TConfiguracion.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProductorIndividual.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEstructura.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEgreso.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TTipoActivo.hbm.xml"/>
+    
+    <mapping resource="com/sigaf/pojo/TAgronegocio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TBitacora.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TCliente.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TDetallePartida.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TIngreso.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TConfiguracionAgronegocio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TAgropecuario.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProveedor.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TTipoCultivo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TTipoGarantia.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TIndividual.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProductoProductor.hbm.xml"/>
+
+    <mapping resource="com/sigaf/pojo/TCuenta.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TOcupacion.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TSugerencia.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPasivo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEjercicio.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TClienteProyecto.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TParametroseguimiento.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TGarantia.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEmpleadoCredito.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProductoCooperativa.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TBajaActivoFijo.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TEmpleadoArea.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TPago.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TDepreciacion.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TProducto.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TCooperativa.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TArea.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TComprador.hbm.xml"/>
+    <mapping resource="com/sigaf/pojo/TTipoCredito.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

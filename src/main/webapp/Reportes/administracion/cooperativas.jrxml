@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cooperativas" printOrder="Horizontal" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0479bc66-5fc0-4f09-b583-dafc3a097bdd">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado_entidad" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_entidad."nombre_entidad" AS t_entidad_nombre_entidad,
+     t_entidad."giro_entidad" AS t_entidad_giro_entidad,
+     t_entidad."correo_entidad" AS t_entidad_correo_entidad,
+     t_entidad."direccion_entidad" AS t_entidad_direccion_entidad,
+     t_entidad."nit_entidad" AS t_entidad_nit_entidad,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."nombre_representante_entidad" AS t_entidad_nombre_representante_entidad,
+     t_entidad."codigo_cliente_entidad" AS t_entidad_codigo_cliente_entidad,
+     t_entidad."telefono_entidad" AS t_entidad_telefono_entidad,
+     t_entidad."celular_entidad" AS t_entidad_celular_entidad,
+     t_entidad."mision_entidad" AS t_entidad_mision_entidad,
+     t_entidad."vision_entidad" AS t_entidad_vision_entidad,
+     t_entidad."acta_entidad" AS t_entidad_acta_entidad,
+     t_entidad."estado_entidad" AS t_entidad_estado_entidad,
+     t_entidad."credencial_entidad" AS t_entidad_credencial_entidad,
+     t_entidad."logo_entidad" AS t_entidad_logo_entidad,
+     t_entidad."dui_representante_entidad" AS t_entidad_dui_representante_entidad,
+     t_entidad."nit_representante_entidad" AS t_entidad_nit_representante_entidad,
+     t_entidad."abreviacion_entidad" AS t_entidad_abreviacion_entidad,
+     t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad
+FROM
+     "public"."t_entidad" t_entidad where  t_entidad."id_entidad"!=1 and t_entidad."estado_entidad"=$P{estado_entidad}]]>
+	</queryString>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_nombre_entidad" class="java.lang.String"/>
+	<field name="t_entidad_giro_entidad" class="java.lang.String"/>
+	<field name="t_entidad_correo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_direccion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nombre_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="t_entidad_telefono_entidad" class="java.lang.String"/>
+	<field name="t_entidad_celular_entidad" class="java.lang.String"/>
+	<field name="t_entidad_mision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_vision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_acta_entidad" class="java.lang.String"/>
+	<field name="t_entidad_estado_entidad" class="java.lang.Boolean"/>
+	<field name="t_entidad_credencial_entidad" class="java.lang.String"/>
+	<field name="t_entidad_logo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="81" width="556" height="20" uuid="801190ca-0f5c-4471-b024-8215b559c87a"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_estado_entidad}.equals( true ) ? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE COOPERATIVAS ACTIVAS </style>": "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE COOPERATIVAS INACTIVAS </style>"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="101" width="556" height="1" uuid="17237ef6-8614-41cb-b944-771dd6868447"/>
+			</line>
+			<subreport>
+				<reportElement x="10" y="0" width="200" height="81" uuid="62d853ca-1658-4314-af16-8117ed736628"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="144" y="4" width="59" height="20" uuid="b7deb9f4-6f53-422c-91cd-62ebbe9e84ba"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="84ed16ec-338c-44ff-9684-38cfef2bb30a"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="d3e8a0e1-867c-484e-a878-1b3bc8bd04ae"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="4" width="59" height="20" uuid="972e800c-3afd-4016-a856-0378e8aa1364"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">GIRO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="4" width="59" height="20" uuid="8cc5d360-eeae-4e47-bb94-617265cb3d33"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TELÉFONO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="4" width="59" height="20" uuid="ae0d222f-cbdc-4a6d-9936-9bd94ea3ee96"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DIRECCIÓN</style>]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="1" width="134" height="20" uuid="3adede55-0ce8-4531-a72c-fe9929fdb3c5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="144" y="1" width="100" height="20" uuid="6d6b5fe7-2fe4-4942-852a-ddb543d31f6e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="244" y="1" width="75" height="20" uuid="e0e79747-dd21-41ff-8f9d-5f51fb5c9d92"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_giro_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="326" y="1" width="60" height="20" uuid="e2f5360d-392f-41d1-b3a0-408c178d649f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_telefono_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="395" y="1" width="159" height="20" uuid="091dfa0b-b369-401b-9e25-b4e4dfe67f0a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="28" width="80" height="20" uuid="60b9256b-30b9-47b7-8475-324c6ee0c9ec"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="28" width="40" height="20" uuid="e9dfccd5-d1be-44fe-b4e3-faf036017938"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

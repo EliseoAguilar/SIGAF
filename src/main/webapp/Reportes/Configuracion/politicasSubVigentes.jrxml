@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PoliticasSub" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e7e4e128-452f-4f95-930c-a277118ffacd">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idTipoCredito" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_politica."id_politica" AS t_politica_id_politica,
+     t_politica."tasa_interes" AS t_politica_tasa_interes,
+     t_politica."edad_maxima" AS t_politica_edad_maxima,
+     t_politica."edad_minima" AS t_politica_edad_minima,
+     t_politica."monto_minimo" AS t_politica_monto_minimo,
+     t_politica."monto_maximo" AS t_politica_monto_maximo,
+     t_politica."tasa_interes_mora" AS t_politica_tasa_interes_mora,
+     t_politica."comision" AS t_politica_comision,
+     t_politica."seguro_deuda" AS t_politica_seguro_deuda,
+     t_politica."capacidad_pago_minimo" AS t_politica_capacidad_pago_minimo,
+     t_politica."capacidad_endeudamiento_minimo" AS t_politica_capacidad_endeudamiento_minimo,
+         t_politica."idtipocredito" AS t_politica_idtipocredito,
+     t_politica."estado" AS t_politica_estado
+FROM
+     "public"."t_politica" t_politica
+WHERE
+     t_politica."idtipocredito" = $P{idTipoCredito} and t_politica."estado"=true]]>
+	</queryString>
+	<field name="t_politica_id_politica" class="java.lang.Integer"/>
+	<field name="t_politica_tasa_interes" class="java.math.BigDecimal"/>
+	<field name="t_politica_edad_maxima" class="java.lang.Integer"/>
+	<field name="t_politica_edad_minima" class="java.lang.Integer"/>
+	<field name="t_politica_monto_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_monto_maximo" class="java.math.BigDecimal"/>
+	<field name="t_politica_tasa_interes_mora" class="java.math.BigDecimal"/>
+	<field name="t_politica_comision" class="java.math.BigDecimal"/>
+	<field name="t_politica_seguro_deuda" class="java.math.BigDecimal"/>
+	<field name="t_politica_capacidad_pago_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_capacidad_endeudamiento_minimo" class="java.math.BigDecimal"/>
+	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_politica_estado" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="###0.00">
+				<reportElement x="0" y="1" width="50" height="20" uuid="5f196eda-ebf9-40fa-b52e-d33f179292ce"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0;-###0">
+				<reportElement x="129" y="1" width="59" height="20" uuid="810e1059-1b78-459b-8602-27ea85513b10"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_edad_maxima}+" años"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0;-###0">
+				<reportElement x="81" y="1" width="48" height="20" uuid="bd5769f6-b25e-41a3-93cc-be2667bc19d6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_edad_minima}+" años"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="243" y="1" width="67" height="20" uuid="d8f04280-90ef-474d-bfe0-f849561e841e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_monto_minimo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="320" y="1" width="64" height="20" uuid="902711e8-77e7-46b8-bbb7-340e0607f377"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_monto_maximo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="384" y="1" width="57" height="20" uuid="f7dc2d91-0eef-4113-980d-0877d39d97bb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes_mora}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="470" y="1" width="43" height="20" uuid="24009579-a59b-4606-92bb-ecef9911fc32"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_comision}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="173" y="1" width="57" height="20" uuid="930f1922-be52-47d5-bdb1-bb452b502238"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_seguro_deuda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="553" y="1" width="40" height="20" uuid="72c6f2bb-ee9e-4a81-a3d9-93885b8e447f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_capacidad_pago_minimo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="636" y="1" width="42" height="20" uuid="5de41d91-cbbd-44ec-8c5d-c24426f85104"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_politica_capacidad_endeudamiento_minimo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="731" y="1" width="100" height="20" uuid="7dc2b235-1a77-4731-a060-1275bdb5cb4e"/>
+				<textFieldExpression><![CDATA[$F{t_politica_estado} == true ? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

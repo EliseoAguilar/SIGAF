@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Material Design Lite -->
+        <h:outputStylesheet name="./css/bootstrap.min.css"/>
+        <h:outputStylesheet name="./css/material-dashboard.css"/>
+        <h:outputStylesheet name="./css/font-awesome.css"/>
+        <h:outputStylesheet name="./css/material-icons.css"/>
+        <h:outputStylesheet name="./css/noBorderPrimeFacesPanelGrid.css"/>
+        <h:outputStylesheet name="./skdSlider/skdslider.css"/>
+        <title>Sigaf V 1.0</title>
+        <script>
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+
+        </script>
+    </h:head>
+    <h:body>
+        <style>
+            .ui-fileupload-buttonbar{
+                background: #eee !important;
+            }
+            .etiqueta{
+                background: #00d49b;
+                color: #fbfbfb;
+                border-radius: 2px;
+                font-weight: bold;
+                padding: 2px 10px;
+            }
+            hr{
+                margin-bottom: 5px !important;
+                margin-top: 0px !important;
+            }
+            .ui-menu.ui-menu-dynamic{
+                width: 15em;
+            }
+            .ui-menu .ui-menuitem-text {
+                float: left;
+                padding-left: 5px;
+            }
+            .ui-selectoneradio label {
+                display: block;
+                margin-top: 4px;
+                color: black;
+                margin-left: 10px;
+            }
+            .ui-widget-header .ui-inputfield{
+                float: right;
+            }
+            .ui-datatable .ui-datatable-header {
+                border-bottom: 0 none;
+                background: #eee;
+            }
+            .ui-selectonemenu ui-widget ui-state-default ui-corner-all{
+                display: none;  
+            }
+            .ui-paginator.ui-paginator-bottom {
+                border-top: 0 none;
+                background: #eee;
+                color: black;
+            }
+            .ui-datatable .ui-column-filter{
+                display: none;
+            }
+            .ui-datepicker .ui-datepicker-title select {
+                font-size: 1em;
+                margin: 1px 0;
+                color: #000;
+            }
+            input:not([type=submit]):focus {
+                border-left-width: 0.5rem;
+            }
+            .ui-selectonemenu{
+                width: 100%; padding-right: 0em;
+            } 
+            .ui-selectonemenu-label{
+
+                width: 100%; padding-right: 0em; 
+            }
+            .ui-selectonemenu .ui-selectonemenu-trigger {
+                border-right: 0;
+                border-top: 0;
+                border-bottom: 0;
+                cursor: pointer;
+                width: 20px;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 0 0px;
+            }
+            .ui-button, .ui-button span, button.ui-button.ui-state-default span, .ui-button.ui-state-default span{
+                font-weight: normal;
+            }
+            .ui-widget-header {
+                background: #455A64;
+                padding: 8px 15px;
+                font-size: 16px;
+                color: white;
+                letter-spacing: 0;
+                font-weight: normal;
+                margin-bottom: 0;
+                overflow: hidden;
+            }
+            .ui-paginator {
+                background-color: #37474F;
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            .ui-datatable thead th.ui-state-highlight {
+                background-color: #66bb6a;
+                color: #212121;
+                border-top-color: #66bb6a;
+            }
+            .ui-dialog.ui-widget-content .ui-dialog-titlebar {
+                padding: 9px 15px;
+                border-bottom: 1px solid #455A64;
+                background-color: #455A64;
+            }
+            .ui-dialog.ui-widget-content .ui-dialog-title {
+                font-size: 18px;
+            }
+            .ui-tabs .ui-tabs-panel {
+                border-width: 0;
+                padding: 1em 1.4em;
+                background: 0;
+                border: 1px solid;
+                border-color: #d2d2d2;
+            }
+            .ui-tabs.ui-tabs-top>.ui-tabs-nav {
+                padding: .2em 0em 0;
+
+            }
+            .ui-accordion .ui-accordion-header.ui-state-active{
+                border: 1px solid #ccc;
+                z-index: 10;
+            }
+            .ui-accordion .ui-accordion-content {
+                padding: 1em 1em;
+                border-top: 0;
+                margin-top: -2px;
+                position: relative;
+                top: 1px;
+                margin-bottom: 2px;
+                overflow: auto;
+                zoom: 1;
+                border: 1px solid #ccc;
+            }
+        </style>
+        <div class="wrapper">
+            <div class="sidebar" data-color="green" data-image="#{resource['img/sidebar-1.jpg']}">
+                <!--
+                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+                Tip 2: you can also add an image using data-image tag
+                -->
+                <div class="logo">
+                    <a  href="" class="simple-text">
+                        <img height="20%"    src="#{resource['img/LOGO_5.png']}" />
+                    </a>
+                </div>
+                <div class="sidebar-wrapper">
+                    <ul class="nav">
+                        <li id="menu" >
+                            <h:link outcome="/index.xhtml" > 
+                                <i class="material-icons ">home</i>
+                                <p>Inicio</p>
+                            </h:link>
+                        </li>
+                        <li id="cont">
+                            <h:link outcome="/contabilidad/contabilidad.xhtml">
+                                <i class="material-icons">account_balance_wallet</i>
+                                <p>Contabilidad</p>
+                            </h:link>
+                        </li>
+                        <li id="fin">
+                            <h:link outcome="/finanzas/finanzas.xhtml">
+                                <i class="material-icons">insert_chart</i>
+                                <p>Finanzas</p>
+                            </h:link>
+                        </li>
+                        <li id="agro">
+                            <h:link outcome="/agronegocios/agronegocios.xhtml">
+                                <i class="material-icons">attach_money</i>
+                                <p>Agronegocios</p>
+                            </h:link>
+                        </li>
+                        <li id="admin">
+                            <h:link outcome="/administracion/administracion.xhtml">
+                                <i class="material-icons">supervisor_account</i>
+                                <p>Administración</p>
+                            </h:link>
+                        </li>
+                        <li id="conf">
+                            <h:link outcome="/configuracion/configuracion.xhtml">
+                                <i class="material-icons">settings</i>
+                                <p>Configuración</p>
+                            </h:link>
+                        </li>
+                        <li id="seg"> 
+                            <h:link outcome="/seguridad/seguridad.xhtml">
+                                <i class="material-icons text-gray">lock</i>
+                                <p>Seguridad</p>
+                            </h:link>
+                        </li>
+                        <li id="ayu"> 
+                            <h:link outcome="/ayuda/ayuda.xhtml">
+                                <i class="material-icons text-gray">info</i>
+                                <p>Ayuda</p>
+                            </h:link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel"  >
+                <h:form >
+                    <nav class="navbar  navbar-absolute navbar-nav"  >
+                        <div class="container-fluid" >
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">Gestión Administrativa, Financiera y Contable </a>
+                            </div>
+                            <div class="collapse navbar-collapse" >
+                                <ul class="nav navbar-nav navbar-right"  >
+                                    <li class="dropdown" style="padding: 0 0 0 0 ;" >
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0 0 0 0 ;">
+                                            <h:outputText value="#{loginBean.usuarioActivo.nombreUsuario}   " />  <h:graphicImage value="#{loginBean.usuarioActivo.TEmpleado.fotoEmpleado} " width="50px" height="50px" style="border-radius: 50%;padding-left: 4px;" />
+                                        </a>
+                                        <ul class="dropdown-menu"  >
+                                            <li><h:commandLink action="/perfil/adminPerfil.xhtml?faces-redirect=true"  onmouseover="this.style.cssText = 'background-color: #5cb85c'"  onmouseout="this.style.cssText = 'background-color: #fff'"> 
+                                                    <f:setPropertyActionListener value="#{loginBean.usuarioActivo}" target="#{usuarioBean.usuarioSelecionado}" />
+                                                    Perfil </h:commandLink>
+                                            </li>
+                                            <li><h:commandLink actionListener="#{loginBean.logout()}" onmouseover="this.style.cssText = 'background-color: #5cb85c'"  onmouseout="this.style.cssText = 'background-color: #fff'"> Salir </h:commandLink></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </h:form>
+                <div class="content">
+                    #{entidadBean.updateDatos()}                    
+                    <div class="container-fluid">
+                        <ui:insert name="content">
+                            <ul id="demo1" >
+                                <li>
+                                    <img src="resources/sliderImg/img1-min.jpg" />
+                                    <!--Slider Description example-->
+                                    <div class="slide-desc">
+                                        <h2>Misión</h2>
+                                        <p><h:outputText value="#{entidadBean.datos.misionEntidad}"></h:outputText></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="resources/sliderImg/img2-min.jpg" />
+                                    <div class="slide-desc">
+                                        <h2>Visión</h2>
+                                        <p><h:outputText value="#{entidadBean.datos.visionEntidad}"></h:outputText></p>  </div>
+                                </li>
+
+                                <li>
+                                    <img src="resources/sliderImg/img3-min.jpg" />
+                                    <!--Slider Description example-->
+                                    <div class="slide-desc">
+                                        <h2>Misión</h2>
+                                        <p><h:outputText value="#{entidadBean.datos.misionEntidad}"></h:outputText></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="resources/sliderImg/img4-min.jpg" />
+                                    <div class="slide-desc">
+                                        <h2>Visión</h2>
+                                        <p> <h:outputText value="#{entidadBean.datos.visionEntidad}"></h:outputText></p>  </div>
+                                </li>
+                            </ul>
+                        </ui:insert>
+                    </div>                
+                </div>
+                <footer class="footer">
+                    <center>
+                        <p class="copyright" >
+                            Copyright © 2017, Universidad de El Salvador - Facultad Multidisciplinaria Paracentral 
+                        </p>
+                    </center>
+                </footer>
+            </div>
+        </div>
+        <!--   Core JS Files   -->
+        <ui:insert name="aux">
+            <h:outputScript name="./js/jquery-3.1.0.min.js" />
+            <h:outputScript name="./skdSlider/skdslider.js" />
+            <script>
+                $(document).ready(function () {
+                    $("#menu").addClass("active");
+                    $('#demo1').skdslider({delay: 4000, animationSpeed: 2000, showNextPrev: true, showPlayButton: true, autoSlide: true, animationType: 'fading'});
+                });
+            </script>
+        </ui:insert>
+        <h:outputScript name="./js/bootstrap.min.js" />
+        <h:outputScript name="./js/material.min.js" />
+        <!--  Notifications Plugin    -->
+        <h:outputScript name="./js/bootstrap-notify.js" />
+        <!-- Material Dashboard javascript methods -->
+        <h:outputScript name="./js/material-dashboard.js" />
+    </h:body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TArea" table="t_area" schema="public" optimistic-lock="version">
+        <id name="idArea" type="int">
+            <column name="id_area" />
+             <generator class="sequence">
+                <param name="sequence">t_departamento_id_departamente_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TEntidad" class="com.sigaf.pojo.TEntidad" fetch="select">
+            <column name="identidad_area" />
+        </many-to-one>
+        <property name="nombreArea" type="string">
+            <column name="nombre_area" />
+        </property>
+        <property name="codigoArea" type="string">
+            <column name="codigo_area" />
+        </property>
+        <property name="estadoArea" type="java.lang.Boolean">
+            <column name="estado_area" />
+        </property>
+        <set name="TEmpleadoAreas" table="t_empleado_area" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_area" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEmpleadoArea" />
+        </set>
+    </class>
+</hibernate-mapping>

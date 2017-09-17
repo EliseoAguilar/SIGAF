@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tiposAreas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b286a86c-1399-45f0-b0e6-56fb99725e5b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\yonat\\Desktop\\sigaf\\src\\main\\webapp\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_area_cultivo."id_area_cultivo" AS t_area_cultivo_id_area_cultivo,
+     t_area_cultivo."nombre_area_cultivo" AS t_area_cultivo_nombre_area_cultivo,
+     t_area_cultivo."estado_area_cultivo" AS t_area_cultivo_estado_area_cultivo,
+     t_tipo_cultivo."id_tipo_cultivo" AS t_tipo_cultivo_id_tipo_cultivo,
+     t_tipo_cultivo."nombre_tipo_cultivo" AS t_tipo_cultivo_nombre_tipo_cultivo,
+     t_tipo_cultivo."estado_tipo_cultivo" AS t_tipo_cultivo_estado_tipo_cultivo,
+     t_tipo_cultivo."id_area_cultivo" AS t_tipo_cultivo_id_area_cultivo
+FROM
+     "public"."t_area_cultivo" t_area_cultivo INNER JOIN "public"."t_tipo_cultivo" t_tipo_cultivo ON t_area_cultivo."id_area_cultivo" = t_tipo_cultivo."id_area_cultivo" where t_area_cultivo."estado_area_cultivo"=$P{estado} and  t_tipo_cultivo."estado_tipo_cultivo"= $P{estado}]]>
+	</queryString>
+	<field name="t_area_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<field name="t_area_cultivo_nombre_area_cultivo" class="java.lang.String"/>
+	<field name="t_area_cultivo_estado_area_cultivo" class="java.lang.Boolean"/>
+	<field name="t_tipo_cultivo_id_tipo_cultivo" class="java.lang.Integer"/>
+	<field name="t_tipo_cultivo_nombre_tipo_cultivo" class="java.lang.String"/>
+	<field name="t_tipo_cultivo_estado_tipo_cultivo" class="java.lang.Boolean"/>
+	<field name="t_tipo_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<group name="AREA">
+		<groupExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<textField>
+					<reportElement x="49" y="0" width="100" height="20" uuid="c5e04289-1546-46b2-9909-521759214862"/>
+					<textFieldExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="24" y="3" width="12" height="10" backcolor="#009900" uuid="bdfdc98f-6010-4b8e-969d-a8f8d0522b9f"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="454" y="36" width="100" height="20" uuid="01385211-2dd9-4876-81c0-b3c2393ee1aa"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="79" uuid="56a4faa1-5ef4-4eb2-a5d5-d9de56452e1a"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="9" width="200" height="20" uuid="80989161-66c0-47e4-86be-c09db5b3899b"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE TIPOS DE CULTIVOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="9" width="89" height="20" uuid="6073703d-bae8-4157-b1bf-f06e1a834c5e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POR ÁREA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="9" width="76" height="20" uuid="208a7abb-c77a-44d6-be7f-3c4cbe18389b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_area_cultivo_estado_area_cultivo}.equals(true)? "ACTIVOS":"INACTIVOS"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="10" width="555" height="1" uuid="4ee78dd2-1419-433b-bb24-e010a27caf90"/>
+			</line>
+			<staticText>
+				<reportElement x="74" y="14" width="126" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL CULTIVO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="34" width="555" height="1" uuid="14f3b0c0-0945-4a6e-9b35-750976b03e96"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="74" y="4" width="100" height="20" uuid="bc3a1453-674d-4d80-a27e-c4e076defbd4"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_cultivo_nombre_tipo_cultivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="16" width="80" height="20" uuid="e7a05cdf-2d4f-4e9b-83b3-c868f42303c5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="16" width="40" height="20" uuid="582f88ba-c108-4666-a4a1-5139b2789dcf"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

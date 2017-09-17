@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    #fPerfil\:main-panel td{
+                        border: none !important;
+                    }
+                    #fPerfil\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fPerfil\:pgLogoCargar td{
+                        border: none !important;
+                    }
+                    #fPerfil\:pgLogoCargar tr{
+                        border: none !important;
+                    }
+                    #fPerfil\:pgLogo td{
+                        border: none !important;
+                    }
+                    #fPerfil\:pgLogo tr{
+                        border: none !important;
+                    }
+                    #fPerfil\:pParte3 td{
+                        border: none !important;
+                    }
+                    #fPerfil\:pParte3 tr{
+                        border: none !important;
+                    }
+                    .ui-fileupload .progress {
+                        display: none;
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel>
+                        <h:form id="fPerfil" enctype="multipart/form-data" > 
+                            #{entidadBean.updateDatos()}
+                                                       <p:panel id="basic" header="Modificar Perfil"  style="width: 80%; margin: auto;">
+                                <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;">                 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:* "/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Código:* "/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:inputText  id="tNombre" value="#{entidadBean.datos.nombreEntidad}" style="width:100%" />
+                                            <h:outputText value="#{entidadBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                         <p:column>
+                                             <p:inputText  id="tCodigo" value="#{entidadBean.datos.codigoEntidad}" style="width:100%" />
+                                            <h:outputText value="#{entidadBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <p:outputPanel rendered="#{entidadBean.showImagen}">
+                                    <p:panelGrid id="pgLogoCargar"  style="width: 100%; margin: auto;" >
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Logo:"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2"  >
+                                                <p:fileUpload   id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{entidadBean.guardarImagen}" update=":padding"/> 
+                                                <p:growl id="messages" />
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{!entidadBean.showImagen}">
+                                    <p:panelGrid id="pgLogo"  style="width: 100%; margin: auto;" >
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Logo: "/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" >
+                                                <center>
+                                                    <h:graphicImage value="#{ entidadBean.datos.logoEntidad}" 
+                                                                    style="width: 40%; height: 10%; margin: auto;" />
+                                                </center>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                                <p:panelGrid id="pParte3"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <center>
+                                                <p:commandButton id="btnMostrarImagen" style="#{!entidadBean.showImagen? entidadBean.btnModificar:entidadBean.btnCancelar}" value="#{!entidadBean.showImagen? 'Cambiar':'Cancelar'}"  actionListener="#{entidadBean.enableShowImagen}"  update=":padding" title="#{!entidadBean.showImagen? 'Cambiar':'Cancelar'}" icon="#{!entidadBean.showImagen? 'fa fa-edit':'fa fa-close'}"/>
+                                            </center>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width:50%">
+                                            <h:outputText value="Misión:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row> 
+                                        <p:column colspan="4" >
+                                            <p:inputTextarea value="#{entidadBean.datos.misionEntidad}" id="taMision" style="width: 100%"/>
+                                            <h:outputText value="#{entidadBean.msgMision}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Visión:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row> 
+                                        <p:column colspan="4">
+                                            <p:inputTextarea value="#{entidadBean.datos.visionEntidad}" id="taVision" style="width: 100%"/>
+                                            <h:outputText value="#{entidadBean.msgVision}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputMask mask="9999-9999" value="#{entidadBean.datos.telefonoEntidad }" id="tTelefono" style="width:100%"/>
+                                            <h:outputText value="#{entidadBean.msgTelefono}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputMask mask="9999-9999" value="#{entidadBean.datos.celularEntidad}" id="tMovil" style="width:100%"/>
+                                            <h:outputText value="#{entidadBean.msgMovil}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row> 
+                                        <p:column>
+                                            <p:inputText value="#{entidadBean.datos.correoEntidad}" id="tCorreo" style="width: 100%"/>
+                                            <h:outputText value="#{entidadBean.msgCorreo}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="4">
+                                            <p:inputTextarea value="#{entidadBean.datos.direccionEntidad}" id="tDireccion" style="width:100%"/>
+                                        <h:outputText value="#{entidadBean.msgDireccion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnModificar" style="#{areaBean.btnCrear }" icon="fa fa-check"   actionListener="#{entidadBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton  value="Cancelar" id="btnCancelar" style="#{areaBean.btnCancelar}" icon="fa fa-close"  actionListener="#{entidadBean.limpiar}"  action="configuracion?faces-redirect=true" > 
+                                        </p:commandButton>
+                                    </div>
+                                </center>
+                            </p:panel> 
+                             </h:form>
+                        <p:dialog header="Confirmar" widgetVar="pgAgregar"  width="25%" modal="true"  visible="#{entidadBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                                                       <br></br>
+                                    <p:panelGrid>
+                                         <h:outputText value="¿Desea modificar el perfil?"/>     
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{entidadBean.modificarPerfil}" style="#{areaBean.btnNuevo}"   update=":padding" oncomplete="PF('pgAgregar').hide()"  title="Cerrar">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgAgregar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
+                                              <f:setPropertyActionListener value="#{false}" target="#{entidadBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                                    </h:form>
+                            </p:dialog>
+                    </p:outputPanel>
+                    <!--tabla-->
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#conf").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,748 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #opMenu td{
+                        border: none !important;
+
+                    }
+                    #opMenu tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{capacitacionBean.showCreate}" >
+                        <h:form id="fEmpleados" >                            
+                            <p:panel id="basic"  header="Agregar capacitación"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column  >
+                                        </p:column>
+                                        <p:column >
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText  value="Fecha:*"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 22%">
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                        </p:column>
+                                        <p:column style=" width: 28%">
+                                            <p:calendar navigator="true" yearRange="1910:" maxdate="#{capacitacionBean.hoy}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{capacitacionBean.capacitacion.fecha}" style="width: 100%;"/><br></br>
+                                            <h:outputText value="#{capacitacionBean.msgFecha}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <p:outputPanel >
+                                    <b>   <h:outputText  value="Proyecto"/> </b>
+                                    <hr></hr>
+                                    <p:panelGrid  styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                        <p:row>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText  value="Código:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText  value="Nombre:*"/>
+                                            </p:column>
+                                            <p:column style=" width: 5%">
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:inputText value="#{capacitacionBean.proyectoSeleccionado.codigoProyecto}" style=" width: 100%" readonly="true" />  
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText value="#{capacitacionBean.proyectoSeleccionado.nombre}" style=" width: 100%" readonly="true" /> 
+                                            </p:column> 
+                                            <p:column>
+                                                <p:commandButton  update=":padding" actionListener="#{capacitacionBean.mostrarProyectos}" oncomplete="PF('dgBuscarProyectoCooperativa').show()" icon="fa fa-search" title="Buscar" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="#{capacitacionBean.msgProyecto}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                                <br></br>
+                                <b>    <h:outputText  value="Capacitación"/> </b>
+                                <hr></hr>
+                                <p:outputPanel id="activos">  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Descripción:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" style=" width: 100%">
+                                                <p:inputTextarea style=" width: 100%" placeholder="Introduzca una descripción" value="#{capacitacionBean.capacitacion.descripcion}" /> 
+                                                <h:outputText value="#{capacitacionBean.msgDescripcion}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Precio ($)*:" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Numero de beneficiarios:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1"> <p:inputNumber minValue="0"  placeholder="Introduzca el precio" value="#{capacitacionBean.capacitacion.precio}" style=" width: 100%" /> 
+                                                <br></br>
+                                                <h:outputText value="#{capacitacionBean.msgPrecio}" style=" color:  red"/>
+
+                                            </p:column>
+                                            <p:column colspan="1"> <p:inputNumber minValue="0" decimalPlaces="0" placeholder="5" value="#{capacitacionBean.capacitacion.beneficiarios}" style=" width: 100%" /> 
+                                                <br></br>
+                                                <h:outputText value="#{capacitacionBean.msgBeneficiarios}" style=" color:  red"/>
+                                            </p:column> 
+                                        </p:row> 
+                                    </p:panelGrid>                                               
+                                </p:outputPanel>
+                                <br></br>
+                                <b>    <h:outputText  value="Buscar encargado"/></b>
+                                <hr></hr>
+                                <p:outputPanel >  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Área:*"/>
+                                            </p:column>
+                                            <p:column>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 30%">
+                                                <p:selectOneMenu id="areasFiltradas" value="#{capacitacionBean.idArea}" style=" width: 100%;">
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{capacitacionBean.listaArea}" var="l" itemLabel="#{l.nombreArea }" itemValue="#{l.idArea}"  />
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            
+                                        </p:row>
+                                    </p:panelGrid>     
+                               
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="DUI:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Nombre:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 30%">
+                                                <p:inputText style=" width: 100%"  value="#{capacitacionBean.empleadoSelecionada.duiEmpleado}" readonly="true" /> 
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 80%">
+                                                <p:inputText style=" width: 100%"  value="#{capacitacionBean.empleadoSelecionada.nombreEmpleado} #{capacitacionBean.empleadoSelecionada.apellidoEmpleado}" readonly="true" /> 
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 100%">
+                                                <p:commandButton  update=":padding" actionListener="#{capacitacionBean.mostrarEmpleados()}" oncomplete="PF('dgBuscarEncargado').show()" icon="fa fa-search" title="Buscar" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText  value="#{capacitacionBean.msgDui}" style=" color:  red"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>     
+                                </p:outputPanel>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{capacitacionBean.btnCrear}" actionListener="#{capacitacionBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{capacitacionBean.btnLimpiar}"  value="Limpiar" id="btnClean"   actionListener="#{capacitacionBean.limpiar}" update=":padding" class="clear" icon="fa fa-fw fa-minus"/>
+                                        <p:commandButton  actionListener="#{capacitacionBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{capacitacionBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </div>
+                                </center>     
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{capacitacionBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta capacitación?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{capacitacionBean.btnNuevo}" value="Si" actionListener="#{capacitacionBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{capacitacionBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{capacitacionBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>  
+                        <p:dialog header="Buscar encargado" widgetVar="dgBuscarEncargado"  width="70%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarEncargado"> 
+                                <p:dataTable var="entidades" value="#{capacitacionBean.listaEmpleados}" widgetVar="empleadosData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron empleados" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('empleadosData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column>                              
+                                    <p:column filterBy="#{entidades.nombreEmpleado}" sortBy="#{entidades.nombreEmpleado}"  
+                                              headerText="Nombres"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.nombreEmpleado}"  />  
+                                    </p:column>
+                                    <p:column filterBy="#{entidades.apellidoEmpleado}" sortBy="#{entidades.apellidoEmpleado}"  
+                                              headerText="Apellidos"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.apellidoEmpleado}"  />  
+                                    </p:column> 
+   <p:column filterBy="#{entidades.duiEmpleado}" sortBy="#{entidades.duiEmpleado}"  
+                                              headerText="DUI"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.duiEmpleado}"  />  
+                                    </p:column>
+                                    <p:column  width="6%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" style="#{solicitudCooperBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{capacitacionBean.empleadoSelecionada}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                        <p:dialog header="Buscar proyecto " widgetVar="dgBuscarProyectoCooperativa"  width="70%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarProyectoCooperativa"> 
+                                <p:dataTable var="entidades" value="#{capacitacionBean.listaEntidadProyecto}" widgetVar="proyectoData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron créditos" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('proyectoData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.TProyecto.codigoProyecto}" sortBy="#{entidades.TProyecto.codigoProyecto}"  
+                                              headerText="Código"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TProyecto.codigoProyecto}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.TEntidad.codigoClienteEntidad}" sortBy="#{entidades.TEntidad.codigoClienteEntidad}" 
+                                              headerText="Cliente"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TEntidad.codigoClienteEntidad}"  />  
+                                    </p:column>  
+                                    <p:column filterBy="#{entidades.TProyecto.nombre}" sortBy="#{entidades.TProyecto.nombre}" 
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="39%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TProyecto.nombre}"  />  
+                                    </p:column> 
+                                    <p:column  width="6%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar">
+                                            <f:setPropertyActionListener value="#{entidades.TProyecto}" target="#{capacitacionBean.proyectoSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{capacitacionBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarAsesoria">
+                            <p:panel id="pModificarAsesoria" header="Modificar capacitación"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column >
+                                        </p:column>
+                                        <p:column >
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText  value="Fecha:*"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 22%">
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                        </p:column>
+                                        <p:column style=" width: 28%">
+                                            <p:calendar navigator="true" yearRange="1910:" maxdate="#{capacitacionBean.hoy}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{capacitacionBean.capacitacionSeleccionada.fecha}" style="width: 100%;"/><br></br>
+                                            <h:outputText value="#{capacitacionBean.msgFecha}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <b>  <h:outputText  value="Proyecto"/> </b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style=" width: 30%">
+                                            <h:outputText  value="Código:*"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText  value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column style=" width: 5%">
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText value="#{capacitacionBean.proyectoSeleccionado.codigo}" style=" width: 100%" readonly="true" />  
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText value="#{capacitacionBean.proyectoSeleccionado.nombre}" style=" width: 100%" readonly="true" /> 
+                                        </p:column> 
+                                        <p:column>
+                                            <p:commandButton  update=":padding" actionListener="#{capacitacionBean.mostrarProyectos}" oncomplete="PF('dgBuscarProyectoCooperativaModificar').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 30%">
+                                            <h:outputText value="#{capacitacionBean.msgProyecto}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>  <h:outputText  value="Capacitación"/></b>
+                                <hr></hr>
+                                <p:outputPanel>  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Descripción:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" style=" width: 100%">
+                                                <p:inputTextarea style=" width: 100%" placeholder="Introduzca la descripción" value="#{capacitacionBean.capacitacionSeleccionada.descripcion}" /> 
+                                                <h:outputText value="#{capacitacionBean.msgDescripcion}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Precio ($):*" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Numero de beneficiarios:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1"> <p:inputNumber minValue="0" value="#{capacitacionBean.capacitacionSeleccionada.precio}" style=" width: 100%" />
+                                                <br></br>
+                                                <h:outputText value="#{capacitacionBean.msgPrecio}" style=" color:  red"/>
+                                            </p:column>
+                                            <p:column colspan="1"> <p:inputNumber decimalPlaces="0" minValue="0" placeholder="5" value="#{capacitacionBean.capacitacionSeleccionada.beneficiarios}" style=" width: 100%" />
+                                                <br></br>
+                                                <h:outputText value="#{capacitacionBean.msgBeneficiarios}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row> 
+                                    </p:panelGrid>                                               
+                                </p:outputPanel>
+                                <br></br>
+                                <b>     <h:outputText  value="Buscar encargado"/></b>
+                                <hr></hr>
+                                <p:outputPanel >  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Área:*"/>
+                                            </p:column>
+                                            <p:column>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 30%">
+                                                <p:selectOneMenu id="areasFiltradas" value="#{capacitacionBean.idArea}" style=" width: 100%;">
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{capacitacionBean.listaArea}" var="l" itemLabel="#{l.nombreArea }" itemValue="#{l.idArea}"  />
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                          
+                                        </p:row>
+                                    </p:panelGrid>  
+                                  
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="DUI:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Nombre:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="1" style=" width: 30%">
+                                                <p:inputText style=" width: 100%"  value="#{capacitacionBean.empleadoSelecionada.duiEmpleado}" readonly="true" /> 
+                                                <h:outputText  value="#{capacitacionBean.msgDui}" style=" color:  red"/> 
+                                            </p:column>
+                                            <p:column colspan="1" style=" width: 80%">
+                                                <p:inputText style=" width: 100%"  value="#{capacitacionBean.empleadoSelecionada.nombreEmpleado} #{capacitacionBean.empleadoSelecionada.apellidoEmpleado}" readonly="true" /> 
+                                            </p:column>
+                                              <p:column colspan="1" style=" width: 100%">
+                                                <p:commandButton  update=":padding" actionListener="#{capacitacionBean.mostrarEmpleados()}" oncomplete="PF('dgBuscarEncargado').show()" icon="fa fa-search" title="Buscar" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText  value="#{capacitacionBean.msgDui}" style=" color:  red"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>   
+                                </p:outputPanel>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{capacitacionBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{capacitacionBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{capacitacionBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{capacitacionBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{capacitacionBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br> 
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar esta capacitación?"/>
+                                    </p:panelGrid>
+                                    <br></br> 
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{capacitacionBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{capacitacionBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{capacitacionBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{capacitacionBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Buscar encargado" widgetVar="dgBuscarEncargadoModificar"  width="70%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarEncargadoModificar"> 
+                                <p:dataTable var="entidades" value="#{capacitacionBean.listaEmpleados}" widgetVar="empleadosData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron empleados" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('empleadosData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.duiEmpleado}" sortBy="#{entidades.duiEmpleado}"  
+                                              headerText="DUI"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.duiEmpleado}"  />  
+                                    </p:column>
+                                    <p:column filterBy="#{entidades.nombreEmpleado}" sortBy="#{entidades.nombreEmpleado}"  
+                                              headerText="Nombres"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.nombreEmpleado}"  />  
+                                    </p:column>
+                                    <p:column filterBy="#{entidades.apellidoEmpleado}" sortBy="#{entidades.apellidoEmpleado}"  
+                                              headerText="Apellidos"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.apellidoEmpleado}"  />  
+                                    </p:column> 
+                                    <p:column  width="6%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" style="#{solicitudCooperBean.btnCrear}">
+                                            <f:setPropertyActionListener value="#{entidades}" target="#{capacitacionBean.empleadoSelecionada}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                        <p:dialog header="Buscar proyecto" widgetVar="dgBuscarProyectoCooperativaModificar"  width="70%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarProyectoCooperativaModificar"> 
+                                <p:dataTable var="entidades" value="#{capacitacionBean.listaEntidadProyecto}" widgetVar="proyectoData"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             emptyMessage="No se encontraron créditos" rowIndexVar="No"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('proyectoData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.TProyecto.codigoProyecto}" sortBy="#{entidades.TProyecto.codigoProyecto}"  
+                                              headerText="Código"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TProyecto.codigoProyecto}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.TEntidad.codigoClienteEntidad}" sortBy="#{entidades.TEntidad.codigoClienteEntidad}" 
+                                              headerText="Cliente"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TEntidad.codigoClienteEntidad}"  />  
+                                    </p:column>  
+                                    <p:column filterBy="#{entidades.TProyecto.nombre}" sortBy="#{entidades.TProyecto.nombre}" 
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="39%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.TProyecto.nombre}"  />  
+                                    </p:column> 
+                                    <p:column  width="6%" style="text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar">
+                                            <f:setPropertyActionListener value="#{entidades.TProyecto}" target="#{capacitacionBean.proyectoSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{capacitacionBean.showData}">
+                        <h:form>       
+                            #{capacitacionBean.updateListaCapacitaciones()}                         
+                            <p:panel id="pDatosCompradores" header="Administrar capacitaciones" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nueva capacitación" id="add"  actionListener="#{capacitacionBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{capacitacionBean.btnNuevo}"  />
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="asesorias" widgetVar="capacitacionData"  paginator="true" rows="10" value="#{capacitacionBean.listaCapacitacion}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  emptyMessage="No se encontraron capacitaciones"    
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15"
+                                                  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('capacitacionData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Crédito" width="15%" filterBy="#{asesorias.TProyecto.codigoProyecto}"  filterStyle="width:100%" sortBy="#{asesorias.TProyecto.codigoProyecto}" >
+                                            <h:outputText value="#{asesorias.TProyecto.codigoProyecto}"/>
+                                        </p:column>
+                                        <p:column headerText="Encargado" width="51%" filterBy="#{asesorias.TEmpleado.nombreEmpleado} #{asesorias.TEmpleado.nombreEmpleado}"  filterStyle="width:100%" sortBy="#{asesorias.TEmpleado.nombreEmpleado} #{asesorias.TEmpleado.nombreEmpleado}" >
+                                            <h:outputText value="#{asesorias.TEmpleado.nombreEmpleado} #{asesorias.TEmpleado.apellidoEmpleado}"/>
+                                        </p:column>
+                                        <p:column headerText="Precio" width="18%" filterBy="#{asesorias.precio}"  filterStyle="width:100%" sortBy="#{asesorias.precio}" >
+                                            <div align="right">   <h:outputText value="$"/>
+                                                <h:outputText value="#{asesorias.precio}">
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Fecha" width="12%" filterBy="#{asesorias.fecha}" sortBy="#{asesorias.fecha}" >
+                                            <h:outputText value="#{asesorias.fecha}">
+                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('pgVer').show()" icon="fa fa-eye"  style="#{asesorias.estado eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener  value="#{asesorias.TEmpleado}" target="#{capacitacionBean.empleadoSelecionada}"  />
+                                                <f:setPropertyActionListener  value="#{asesorias.TProyecto}" target="#{capacitacionBean.proyectoSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{asesorias}" target="#{capacitacionBean.capacitacionSeleccionada}"  />
+                                                <p:menuitem   update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                    <f:setPropertyActionListener  value="#{asesorias.TEmpleado}" target="#{capacitacionBean.empleadoSelecionada}"  />
+                                                    <f:setPropertyActionListener  value="#{asesorias.TProyecto}" target="#{capacitacionBean.proyectoSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{asesorias}" target="#{capacitacionBean.capacitacionSeleccionada}"  />
+                                                    <f:actionListener binding="#{capacitacionBean.cargarCapacitacion()}"/> 
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{asesorias.estado}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja"    >
+                                                    <f:setPropertyActionListener value="#{asesorias}" target="#{capacitacionBean.capacitacionSeleccionada}" />
+                                                </p:menuitem>                                              
+                                                <p:menuitem rendered="#{!asesorias.estado}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{asesorias}" target="#{capacitacionBean.capacitacionSeleccionada}" />
+                                                </p:menuitem>                                              
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta esta capacitación?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{capacitacionBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{capacitacionBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{capacitacionBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja esta capacitación?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{capacitacionBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{capacitacionBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{capacitacionBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>    
+                        <p:dialog width="60%" header="Datos de la capacitación" widgetVar="pgVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel >
+                                    <p:panelGrid   style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Fecha:"/>
+                                            </p:column>
+                                            <p:column  style=" width: 20%">
+                                                <h:outputText value="#{capacitacionBean.capacitacionSeleccionada.fecha}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Crédito:"/>
+                                            </p:column>
+                                            <p:column  style=" width: 20%">
+                                                <h:outputText value="#{capacitacionBean.proyectoSeleccionado.codigoProyecto}"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Nombre proyecto:"/>
+                                            </p:column>
+                                            <p:column colspan="3" style=" width: 25%">
+                                                <h:outputText value="#{capacitacionBean.proyectoSeleccionado.nombre}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Precio:"/>
+                                            </p:column>
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{capacitacionBean.capacitacionSeleccionada.precio}">
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Numero de beneficiarios:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{capacitacionBean.capacitacionSeleccionada.beneficiarios}"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="Descripción:"/>
+                                            </p:column>
+                                            <p:column colspan="3"> 
+                                                <h:outputText value="#{capacitacionBean.capacitacionSeleccionada.descripcion}"/>
+
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="DUI encargado:"/>
+                                            </p:column>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{capacitacionBean.empleadoSelecionada.duiEmpleado}"/> 
+                                            </p:column>
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Nombre encargado:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{capacitacionBean.empleadoSelecionada.nombreEmpleado} #{capacitacionBean.empleadoSelecionada.apellidoEmpleado}"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Estado:"/>
+                                            </p:column>
+                                            <p:column colspan="3" style=" width: 25%">
+                                                <h:outputText value="#{capacitacionBean.capacitacionSeleccionada.estado eq true? 'Activo': 'Inactivo'}"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton   update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{capacitacionBean.verReporteCapacitacion()}"/> 
+                                            <p:menuitem   ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{capacitacionBean.verReporteCapacitacionPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#fin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

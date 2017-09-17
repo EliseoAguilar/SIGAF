@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TPartida" table="t_partida" schema="public" optimistic-lock="version">
+        <id name="idPartida" type="int">
+            <column name="id_partida" />
+             <generator class="sequence">
+                <param name="sequence">t_partida_id_partida_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TPeriodo" class="com.sigaf.pojo.TPeriodo" fetch="select">
+            <column name="id_periodo_partida" />
+        </many-to-one>
+        <property name="fechaPartida" type="date">
+            <column name="fecha_partida" length="13" />
+        </property>
+        <property name="conceptoPartida" type="string">
+            <column name="concepto_partida" />
+        </property>
+        <property name="numeroPartida" type="java.lang.Integer">
+            <column name="numero_partida" />
+        </property>
+        <property name="estadoPartida" type="java.lang.Boolean">
+            <column name="estado_partida" />
+        </property>
+        <set name="TDetallePartidas" table="t_detalle_partida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_partida_detalle_partida" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TDetallePartida" />
+        </set>
+        <set name="TDepreciacions" table="t_depreciacion" inverse="true"  lazy="true" fetch="select">
+            <key>
+                <column name="id_partida_depreacion" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TDepreciacion" />
+        </set>
+        <set name="TBajaActivoFijos" table="t_baja_activo_fijo" inverse="true"  lazy="true" fetch="select">
+            <key>
+                <column name="id_partida_baja_activo_fijo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TBajaActivoFijo" />
+        </set>
+        <set name="TValorActivos" table="t_valor_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_partida_valor_activo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TValorActivo" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ocupaciones" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="20" uuid="e511f797-72bc-4365-81a8-a85042d09d3f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEmpleado" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_ocupacion."nombre_ocupacion" AS t_ocupacion_nombre_ocupacion,
+     t_ocupacion."id_ocupacion" AS t_ocupacion_id_ocupacion,
+     t_ocupacion."id_empleado_ocupacion" AS t_ocupacion_id_empleado_ocupacion,
+     t_ocupacion."estado_ocupacion" AS t_ocupacion_estado_ocupacion,
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_empleado."correo_empleado" AS t_empleado_correo_empleado,
+     t_empleado."dui_empleado" AS t_empleado_dui_empleado,
+     t_empleado."nit_empleado" AS t_empleado_nit_empleado,
+     t_empleado."fechanacimiento_empleado" AS t_empleado_fechanacimiento_empleado,
+     t_empleado."salario_empleado" AS t_empleado_salario_empleado,
+     t_empleado."fechaingreso_empleado" AS t_empleado_fechaingreso_empleado,
+     t_empleado."telefono_empleado" AS t_empleado_telefono_empleado,
+     t_empleado."celular_empleado" AS t_empleado_celular_empleado,
+     t_empleado."sexo_empleado" AS t_empleado_sexo_empleado,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_empleado."estado_empleado" AS t_empleado_estado_empleado,
+     t_empleado."foto_empleado" AS t_empleado_foto_empleado,
+     t_empleado."lugar_nacimiento_empleado" AS t_empleado_lugar_nacimiento_empleado,
+     t_empleado."tipo_empleado" AS t_empleado_tipo_empleado,
+     t_empleado."estado_socio" AS t_empleado_estado_socio
+FROM
+     "public"."t_empleado" t_empleado INNER JOIN "public"."t_ocupacion" t_ocupacion ON t_empleado."id_empleado" = t_ocupacion."id_empleado_ocupacion" where t_empleado."id_empleado" =$P{idEmpleado}]]>
+	</queryString>
+	<field name="t_ocupacion_nombre_ocupacion" class="java.lang.String"/>
+	<field name="t_ocupacion_id_ocupacion" class="java.lang.Integer"/>
+	<field name="t_ocupacion_id_empleado_ocupacion" class="java.lang.Integer"/>
+	<field name="t_ocupacion_estado_ocupacion" class="java.lang.Boolean"/>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_empleado_correo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_dui_empleado" class="java.lang.String"/>
+	<field name="t_empleado_nit_empleado" class="java.lang.String"/>
+	<field name="t_empleado_fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_salario_empleado" class="java.lang.Float"/>
+	<field name="t_empleado_fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_telefono_empleado" class="java.lang.String"/>
+	<field name="t_empleado_celular_empleado" class="java.lang.String"/>
+	<field name="t_empleado_sexo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_empleado_estado_empleado" class="java.lang.Boolean"/>
+	<field name="t_empleado_foto_empleado" class="java.lang.String"/>
+	<field name="t_empleado_lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="t_empleado_tipo_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_estado_socio" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="134" height="20" uuid="1889028f-9e01-48d4-8d50-fc88b41550ac"/>
+				<textFieldExpression><![CDATA[$F{t_ocupacion_nombre_ocupacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="0" width="100" height="20" uuid="d595b1f0-cc61-4f89-ba82-3ec5a3b7fa81"/>
+				<textFieldExpression><![CDATA[$F{t_ocupacion_estado_ocupacion}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

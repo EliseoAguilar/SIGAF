@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TTipoCredito" table="t_tipo_credito" schema="public" optimistic-lock="version">
+        <id name="idTipoCredito" type="int">
+            <column name="id_tipo_credito" />
+          <generator class="sequence">
+                <param name="sequence">t_tipo_credito_id_tipo_credito_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <set name="TProyectos" table="t_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtipocredito" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProyecto" />
+        </set>
+        <set name="TPoliticas" table="t_politica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtipocredito" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPolitica" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TBitacora" table="t_bitacora" schema="public" optimistic-lock="version">
+        <id name="idBitacora" type="int">
+            <column name="id_bitacora" />
+             
+               <generator class="sequence">
+                <param name="sequence">t_bitacora_id_bitacora_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TUsuario" class="com.sigaf.pojo.TUsuario" fetch="select">
+            <column name="id_usuario_bitacora" />
+        </many-to-one>
+        <property name="fechaBitacora" type="date">
+            <column name="fecha_bitacora" length="13" />
+        </property>
+        <property name="horaBitacora" type="time">
+            <column name="hora_bitacora" length="21" />
+        </property>
+        <property name="tableBitacora" type="string">
+            <column name="table_bitacora" />
+        </property>
+        <property name="accionBitacora" type="string">
+            <column name="accion_bitacora" />
+        </property>
+        <property name="idTableBitacora" type="java.lang.Integer">
+            <column name="id_table_bitacora" />
+        </property>
+        <property name="datosBitacora" type="string">
+            <column name="datos_bitacora" />
+        </property>
+    </class>
+</hibernate-mapping>

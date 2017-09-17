@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="constanciaCancelacion" pageWidth="595" pageHeight="842" columnWidth="506" leftMargin="49" rightMargin="40" topMargin="20" bottomMargin="20" uuid="502ec4f8-015f-4284-9132-a5225f62577c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_proyecto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_entidad."nombre_entidad" AS t_entidad_nombre_entidad,
+     t_entidad."giro_entidad" AS t_entidad_giro_entidad,
+     t_entidad."correo_entidad" AS t_entidad_correo_entidad,
+     t_entidad."direccion_entidad" AS t_entidad_direccion_entidad,
+     t_entidad."nit_entidad" AS t_entidad_nit_entidad,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."nombre_representante_entidad" AS t_entidad_nombre_representante_entidad,
+     t_entidad."codigo_cliente_entidad" AS t_entidad_codigo_cliente_entidad,
+     t_entidad."telefono_entidad" AS t_entidad_telefono_entidad,
+     t_entidad."celular_entidad" AS t_entidad_celular_entidad,
+     t_entidad."mision_entidad" AS t_entidad_mision_entidad,
+     t_entidad."vision_entidad" AS t_entidad_vision_entidad,
+     t_entidad."acta_entidad" AS t_entidad_acta_entidad,
+     t_entidad."estado_entidad" AS t_entidad_estado_entidad,
+     t_entidad."credencial_entidad" AS t_entidad_credencial_entidad,
+     t_entidad."logo_entidad" AS t_entidad_logo_entidad,
+     t_entidad."dui_representante_entidad" AS t_entidad_dui_representante_entidad,
+     t_entidad."nit_representante_entidad" AS t_entidad_nit_representante_entidad,
+     t_entidad."abreviacion_entidad" AS t_entidad_abreviacion_entidad,
+     t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad,
+     t_entidad_proyecto."identidadproyecto" AS t_entidad_proyecto_identidadproyecto,
+     t_entidad_proyecto."identidad" AS t_entidad_proyecto_identidad,
+     t_entidad_proyecto."idproyecto" AS t_entidad_proyecto_idproyecto,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_proyecto."fecha_finalizacion_proyecto" AS t_proyecto_fecha_finalizacion_proyecto
+FROM
+     "public"."t_entidad" t_entidad INNER JOIN "public"."t_entidad_proyecto" t_entidad_proyecto ON t_entidad."id_entidad" = t_entidad_proyecto."identidad"
+     INNER JOIN "public"."t_proyecto" t_proyecto ON t_entidad_proyecto."idproyecto" = t_proyecto."idproyecto" where t_proyecto."idproyecto"=$P{id_proyecto}]]>
+	</queryString>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_nombre_entidad" class="java.lang.String"/>
+	<field name="t_entidad_giro_entidad" class="java.lang.String"/>
+	<field name="t_entidad_correo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_direccion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nombre_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="t_entidad_telefono_entidad" class="java.lang.String"/>
+	<field name="t_entidad_celular_entidad" class="java.lang.String"/>
+	<field name="t_entidad_mision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_vision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_acta_entidad" class="java.lang.String"/>
+	<field name="t_entidad_estado_entidad" class="java.lang.Boolean"/>
+	<field name="t_entidad_credencial_entidad" class="java.lang.String"/>
+	<field name="t_entidad_logo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_proyecto_identidadproyecto" class="java.lang.Integer"/>
+	<field name="t_entidad_proyecto_identidad" class="java.lang.Integer"/>
+	<field name="t_entidad_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha_finalizacion_proyecto" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="326" y="19" width="46" height="24" uuid="c7fbd70c-13e3-4319-aa23-e3081190ff36"/>
+				<text><![CDATA[Usulutan,]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="372" y="19" width="134" height="24" uuid="4a0bd5d0-9c51-469c-8366-fbd87f131f66"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="461" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="160" width="155" height="24" uuid="b84ddaea-5d37-4acf-b6a7-65e466f8205a"/>
+				<text><![CDATA[cancelado su crédito de referencia ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="384" width="144" height="24" uuid="0e05e586-4d94-4257-b4e3-1d289f9eef5c"/>
+				<text><![CDATA[Verónica Raxana Montano			]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="408" width="144" height="24" uuid="a7ac4da7-b3db-4f56-a4bb-433ed24da005"/>
+				<text><![CDATA[Contador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="432" width="144" height="24" uuid="cdc865f6-19ce-44bc-97ec-573c2f9df9c8"/>
+				<text><![CDATA[Fundacion Usulután II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="95" width="144" height="24" uuid="8de36354-bf1b-4c32-9e69-6f195f855859"/>
+				<text><![CDATA[Estimado Sr. Apontes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="144" height="24" uuid="f6e3d261-8f2f-493b-9f7d-999e7d5f509e"/>
+				<text><![CDATA[Sr. Marco Antonio Apontes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="144" height="24" uuid="9ae262e5-89ab-4076-902e-ac2dde765d04"/>
+				<text><![CDATA[Tesorero institucional]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="136" width="165" height="24" uuid="b79715f1-bedf-4d90-a95f-445907536eec"/>
+				<text><![CDATA[Por este medio se hace Constar que]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="136" width="169" height="24" uuid="7091d58b-5ba7-4d38-b19f-a1030349e828"/>
+				<text><![CDATA[, cliente de Fundacion Usulutan II, ha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="183" width="73" height="24" uuid="53f23596-4cb1-405c-a0fc-c4d63cb633c9"/>
+				<text><![CDATA[para el plazo de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="183" width="409" height="24" uuid="c446d81c-593f-46e5-a0c6-4b2c5b6d7860"/>
+				<text><![CDATA[meses. Por lo tanto queda sin efecto la orden de descuento emitidad por esta Fundación, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="207" width="507" height="24" uuid="c394a9c6-8799-4076-8f8c-751cd96fb18e"/>
+				<text><![CDATA[para ser aplicada a dicho crédito.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="183" width="24" height="20" uuid="c8534588-87e4-4a4c-9266-6f78c2d72224"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="160" width="78" height="20" uuid="5bf3e3c1-f4df-4562-852e-0265ed914981"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="160" width="274" height="24" uuid="de674770-4f4e-4178-b645-7bc20d020a99"/>
+				<text><![CDATA[, otorgado por la Fundacion, por la cantidad de                         .]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00">
+				<reportElement x="446" y="160" width="58" height="20" uuid="3fd4078d-f5ec-49ee-8947-00ad6a569950"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="258" width="507" height="24" uuid="29b090db-194b-49e4-90bd-25a61719129a"/>
+				<text><![CDATA[Agradeciendo de antemano su atención a la presente me despido de usted.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="136" width="160" height="20" uuid="97cb4c3b-5ef8-41fd-88d8-17144d47efa4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{t_entidad_abreviacion_entidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

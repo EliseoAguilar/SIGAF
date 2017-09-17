@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TConfiguracionAgronegocio" table="t_configuracion_agronegocio" schema="public" optimistic-lock="version">
+        <id name="idConfiguracionAgronegocio" type="int">
+            <column name="id_configuracion_agronegocio" />
+              <generator class="sequence">
+                <param name="sequence">t_configuracion_agronegocio_id_configuracion_agronegocio_seq</param>
+            </generator>
+        </id>
+        <property name="tasaComisionAgronegocio" type="big_decimal">
+            <column name="tasa_comision_agronegocio"  precision="131089" scale="0" />
+        </property>
+        <property name="tasaInteresAgronegocio" type="big_decimal">
+            <column name="tasa_interes_agronegocio"  precision="131089" scale="0" />
+        </property>
+        <property name="tasaMoraAgronegocio" type="big_decimal">
+            <column name="tasa_mora_agronegocio"  precision="131089" scale="0" />
+        </property>
+        <property name="vigenciaAgronegocio" type="date">
+            <column name="vigencia_agronegocio" length="13" />
+        </property>
+        <property name="estadoConfiguracion" type="java.lang.Boolean">
+            <column name="estado_configuracion" />
+        </property>
+        <set name="TAgronegocios" table="t_agronegocio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idconfiguracion" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAgronegocio" />
+        </set>
+    </class>
+</hibernate-mapping>

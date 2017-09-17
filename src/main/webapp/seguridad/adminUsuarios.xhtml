@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <p:outputPanel id="padding"  > 
+
+                    <p:growl id="msg" showDetail="true"  />
+
+                    <p:outputPanel  rendered="#{usuarioBean.showCreate}" id="opCrearUsuario"  >
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.crear()}"     style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        
+                        <!-- Actualiza lista de Areas -->
+                        #{usuarioBean.updateListaArea()}
+                        
+                        <h:form id="fAddUsuario">
+                            <p:panel id="basic" header="Agregar  usuario"  style="width: 80%; margin: auto; margin-bottom: 20px">
+
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder">   
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Area:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Empleado:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="sArea" value="#{usuarioBean.idArea}" style="width:100%" >
+
+
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+                                                <p:ajax update="sEmpleado"></p:ajax>
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgArea}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:selectOneMenu id="sEmpleado" value="#{usuarioBean.idEmpleado}" style="width:100%" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaEmpleados}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}"  />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgEmpleado}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <h:outputText value="Tipo de usuario:*"/>
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText value="Nombre de usuario:*"/>
+                                        </p:column>
+
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="Stipo" value="#{usuarioBean.usuario.tipoUsuario}" style="width:100%" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItem itemLabel="Contador" itemValue="1" />
+                                                <f:selectItem itemLabel="Asesor de crédito" itemValue="2" />
+                                                <f:selectItem itemLabel="Administrador" itemValue="3" />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgTipo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:inputText id="tNombre" style="width: 100%" value="#{usuarioBean.usuario.nombreUsuario}" onkeypress="if ((event.which &lt; 65 || event.which &gt; 90) &amp; &amp; (event.which &lt; 97 || event.which &gt; 122)) return false;" />
+                                            <h:outputText value="#{usuarioBean.msgNombre}"  style=" color:  red"  />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Contraseña:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Confirmar contraseña:*"/>
+                                        </p:column>
+
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPassword" style="width: 100%" value="#{usuarioBean.usuario.claveUsuario}"/>
+                                            <h:outputText value="#{usuarioBean.msgClave}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPasswordConf" style="width: 100%" value="#{usuarioBean.claveConfir}"  />
+                                            <h:outputText value="#{usuarioBean.msgClaveConfir}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormulario()}" update=":opCrearUsuario"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnClean" actionListener="#{usuarioBean.limpiar()}" update=":opCrearUsuario" icon="fa fa-minus"  style="#{usuarioBean.btnLimpiar}" value="Limpiar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancel" actionListener="#{usuarioBean.enableShowDataBean()}" update=":padding"  icon="fa fa-close" style="#{usuarioBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+
+
+                            </p:panel>
+
+                        </h:form>
+
+                    </p:outputPanel>
+
+
+                    <p:outputPanel  rendered="#{usuarioBean.showUpdate}"  id="opActulizarUsuario" >
+
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
+                            <h:form>  
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.actualizar()}"  oncomplete="PF('dialogCrear').hide()"   style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form> 
+                        </p:dialog>
+
+                        <!-- Actualiza lista de Areas -->
+                        #{usuarioBean.updateListaArea()}
+                        <h:form id="fUpdUsuario">
+
+                            <p:panel id="basic" header="Modificar usuario"  style="width: 80%; margin: auto; margin-bottom: 20px">
+
+                                <p:panelGrid id="addPanel" class="noBoder" style="width: 100%;">   
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Area:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Empleado:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="sArea" value="#{usuarioBean.idArea}" style="width:100%" disabled="#{true}" >
+
+
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+
+                                                <p:ajax update="sEmpleado"></p:ajax>
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgArea}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:selectOneMenu id="sEmpleado" value="#{usuarioBean.usuarioSelecionado.TEmpleado.idEmpleado}" style="width:100%"  disabled="#{true}" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaEmpleados}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}"  />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgEmpleado}" style=" color:  red" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <h:outputText value="Tipo de usuario:*"/>
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText value="Nombre de usuario:*"/>
+                                        </p:column>
+
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="Stipo" value="#{usuarioBean.usuarioSelecionado.tipoUsuario}" style="width:100%" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItem itemLabel="Contador" itemValue="1" />
+                                                <f:selectItem itemLabel="Asesor de crédito" itemValue="2" />
+                                                <f:selectItem itemLabel="Administrador" itemValue="3" />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgTipo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:inputText id="tNombre" style="width: 100%" value="#{usuarioBean.usuarioSelecionado.nombreUsuario}" onkeypress="if ((event.which &lt; 65 || event.which &gt; 90) &amp; &amp; (event.which &lt; 97 || event.which &gt; 122)) return false;" />
+                                            <h:outputText value="#{usuarioBean.msgNombre}"  style=" color:  red"  />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectBooleanCheckbox value="#{usuarioBean.editPass}">
+                                                <p:ajax update="fUpdUsuario:tPassword" />
+                                                <p:ajax update="fUpdUsuario:tPasswordConf" />
+                                            </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp; ¿Editar contraseña? "/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Contraseña:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Confirmar contraseña:*"/>
+                                        </p:column>
+
+
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPassword" style="width: 100%" value="#{usuarioBean.clave}" disabled="#{!usuarioBean.editPass}"/>
+                                            <h:outputText value="#{usuarioBean.msgClave}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPasswordConf" style="width: 100%" value="#{usuarioBean.claveConfir}" disabled="#{!usuarioBean.editPass}"  />
+                                            <h:outputText value="#{usuarioBean.msgClaveConfir}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificar()}" update=":opActulizarUsuario"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+
+                                    <p:commandButton id="btnCancel" actionListener="#{usuarioBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{usuarioBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+
+
+                            </p:panel>
+
+                        </h:form>
+                    </p:outputPanel>
+
+               
+                    <p:outputPanel rendered="#{usuarioBean.showData}">
+
+                        <p:panel id="pDatosAreas" header="Administrar Usuarios" style="margin-bottom:20px">
+
+                            <!-- Consultamos Usuarios-->
+                            #{usuarioBean.updateListaUsuarios()}
+                            <!-- Actualiza lista de Areas -->
+                            #{usuarioBean.updateListaArea()}
+                            
+                            <h:form id="datos">
+
+
+                                <p:fieldset>
+                                    <div align="left">
+                                        <p:commandButton title="Nuevo usuario" id="btnNuevo"  actionListener="#{usuarioBean.enableShowCreateBean()}" update=":padding"    icon="fa fa-plus" style="#{usuarioBean.btnNuevo }"  />
+                                    </div>
+                                </p:fieldset>
+
+
+
+
+                                <p:dataTable   id="areasData"
+                                               var="user" 
+                                               value="#{usuarioBean.listaUsuarios}" 
+
+                                               paginator="true"
+                                               rows="10"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                               rowsPerPageTemplate="5,10,15"
+                                               paginatorPosition="bottom"
+                                               emptyMessage="No se encontraron usuarios."
+                                               rowIndexVar="No"
+                                               widgetVar="datosUsu"
+                                               >
+
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <p:inputText id="globalFilter" onkeyup="PF('datosUsu').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+
+
+                                    <p:column headerText="Nº" width="5%" style="text-align: center" >
+                                        <h:outputText value="#{No+1}" />
+                                    </p:column>
+
+                                    <p:column headerText="Empleado" sortBy="#{user.TEmpleado.nombreEmpleado} #{user.TEmpleado.apellidoEmpleado}"   filterBy="#{user.TEmpleado.nombreEmpleado} #{user.TEmpleado.apellidoEmpleado}" filterMatchMode="contains" width="40%" filterStyle="width: 100%" >
+
+                                        <h:outputText value="#{user.TEmpleado.nombreEmpleado} #{user.TEmpleado.apellidoEmpleado}" />
+                                    </p:column>
+                                    <p:column headerText="Usuario" sortBy="#{user.nombreUsuario}" filterBy="#{user.nombreUsuario}" filterMatchMode="contains"  filterStyle="width: 100%" >
+                                        <h:outputText value="#{user.nombreUsuario}" />
+                                    </p:column>
+                                    <p:column headerText="Tipo de usuario" sortBy="#{usuarioBean.tipoUser(user.tipoUsuario)}" filterBy="#{usuarioBean.tipoUser(user.tipoUsuario)}" filterMatchMode="exact" width="25%" filterStyle="width: 100%" >
+
+                                        <h:outputText value="#{usuarioBean.tipoUser(user.tipoUsuario)}" />
+                                    </p:column>
+
+                                    <p:column width="9%">
+                                        <p:splitButton   update=":opDataUsuario" oncomplete="PF('dlVer').show()" icon="fa fa-eye"  
+                                                         style="#{user.estadoUsuario eq true? usuarioBean.btnDarDeAlta :  usuarioBean.btnDarDeBaja}">
+                                            <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuarioSelecionado}" />
+
+                                            <p:menuitem   update=":padding"   icon=" fa fa-pencil" value="Modificar" actionListener="#{usuarioBean.enableShowUpdate}">
+                                                <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuarioSelecionado}" />
+                                            </p:menuitem>
+                                            <p:menuitem  rendered="#{user.estadoUsuario}"  oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down" value="Dar de baja" >
+                                                <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuarioSelecionado}" />
+                                            </p:menuitem>
+                                            <p:menuitem  rendered="#{!user.estadoUsuario}" oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Dar de alta" >
+                                                <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuarioSelecionado}" />
+                                            </p:menuitem>
+                                        </p:splitButton>
+
+                                    </p:column>
+
+
+                                    <f:facet name="footer">
+
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                            
+                            <p:outputPanel id="opDataUsuario">
+                            <p:dialog header="Datos del usuario" widgetVar="dlVer" modal="true" width="50%"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form target="_blank">
+                                        <p:panelGrid id="pgVer"  style=" width: 100%"  >
+
+                                            <p:row>
+                                                <p:column rowspan="5" colspan="2">
+                                                    <h:graphicImage value="#{usuarioBean.usuarioSelecionado.TEmpleado.fotoEmpleado} " width="120px" height="150px" />
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Empleado:" />
+                                                </p:column>  
+                                                <p:column>  
+                                                    <h:outputText value="#{usuarioBean.usuarioSelecionado.TEmpleado.nombreEmpleado} #{usuarioBean.usuarioSelecionado.TEmpleado.apellidoEmpleado}  " />
+                                                </p:column>  
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Usuario:" />
+                                                </p:column>  
+                                                <p:column> 
+                                                    <h:outputText value="#{usuarioBean.usuarioSelecionado.nombreUsuario}" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Tipo:" />
+                                                </p:column>  
+                                                <p:column> 
+                                                    <h:outputText value="#{usuarioBean.tipoUser(usuarioBean.usuarioSelecionado.tipoUsuario)}" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Estado:" />
+                                                </p:column>  
+                                                <p:column> 
+                                                    <h:outputText value="#{usuarioBean.usuarioSelecionado.estadoUsuario? 'Activo' : 'Inactivo'}" />
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <center>
+                                            <p:splitButton id="btnVer"   ajax="false"  actionListener="#{usuarioBean.generarUsuario()}"    value="Ver PDF"> 
+                                                <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{usuarioBean.generarUsuarioPDF}"     value="Descargar PDF"> 
+                                                </p:menuitem> 
+                                            </p:splitButton>
+                                        </center>
+                                </h:form>
+                            </p:dialog>
+                            </p:outputPanel>
+
+                            <p:dialog header="Confirmar" widgetVar="dlBaja" modal="true"   visible="false" width="35%"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form>
+                                    <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+                                 
+
+                                            <h:outputText value="¿Desea dar de baja este usuario?" />
+                                            <br></br>
+                                            <br></br>
+                                    
+                                        <hr></hr>
+                                        <p:commandButton id="btnGuardarBaja" update=":padding" actionListener="#{usuarioBean.darDeBaja}"  style="#{usuarioBean.btnNuevo}"  value="Si"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelBaja"  oncomplete="PF('dlBaja').hide()"  style="#{usuarioBean.btnCancelar}"  value="No" > 
+                                        </p:commandButton>
+
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+
+
+                            <p:dialog header="Confirmar" widgetVar="dlAlta" modal="true" width="35%"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form>
+                                    <p:outputPanel id="dlDarDealta" style="text-align:center; width: 100%">
+                                     
+                                            <h:outputText value="¿Desea dar de alta este usuario?" />
+                                            <br></br> 
+                                            <br></br>
+                                       
+                                        <hr></hr>
+                                        <p:commandButton id="btnGuardarAlta" actionListener="#{usuarioBean.darDeAlta}" update=":padding" style="#{usuarioBean.btnNuevo}"    value="Si"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelAlta"  oncomplete="PF('dlAlta').hide()"  style="#{usuarioBean.btnCancelar}"   value="No"> 
+                                        </p:commandButton>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+
+
+
+                        </p:panel>
+                    </p:outputPanel>
+
+
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+
+
+                <script>
+                    $(document).ready(function () {
+                    $("#seg").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

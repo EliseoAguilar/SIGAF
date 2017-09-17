@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CuentaIndividual" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86dcb251-f7c5-48b8-8188-04b04dedeec8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEntidad" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idCuenta" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_cuenta."id_cuenta" AS t_cuenta_id_cuenta,
+     t_cuenta."codigo_cuenta" AS t_cuenta_codigo_cuenta,
+     t_cuenta."nombre_cuenta" AS t_cuenta_nombre_cuenta,
+     t_cuenta."id_subcuenta_cuenta" AS t_cuenta_id_subcuenta_cuenta,
+     t_cuenta."id_entidad_cuenta" AS t_cuenta_id_entidad_cuenta,
+     t_cuenta."fecha_cuenta" AS t_cuenta_fecha_cuenta,
+     t_cuenta."naturaleza_cuenta" AS t_cuenta_naturaleza_cuenta,
+     t_cuenta."estado_cuenta" AS t_cuenta_estado_cuenta,
+     t_cuenta_A."id_cuenta" AS t_cuenta_A_id_cuenta,
+     t_cuenta_A."codigo_cuenta" AS t_cuenta_A_codigo_cuenta,
+     t_cuenta_A."nombre_cuenta" AS t_cuenta_A_nombre_cuenta,
+     t_cuenta_A."id_subcuenta_cuenta" AS t_cuenta_A_id_subcuenta_cuenta,
+     t_cuenta_A."id_entidad_cuenta" AS t_cuenta_A_id_entidad_cuenta,
+     t_cuenta_A."fecha_cuenta" AS t_cuenta_A_fecha_cuenta,
+     t_cuenta_A."naturaleza_cuenta" AS t_cuenta_A_naturaleza_cuenta,
+     t_cuenta_A."estado_cuenta" AS t_cuenta_A_estado_cuenta
+FROM
+     "public"."t_cuenta" t_cuenta RIGHT JOIN "public"."t_cuenta" t_cuenta_A ON t_cuenta."id_cuenta" = t_cuenta_A."id_subcuenta_cuenta"
+     where t_cuenta_A."id_cuenta"=$P{idCuenta}]]>
+	</queryString>
+	<field name="t_cuenta_id_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_codigo_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_nombre_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_id_entidad_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_fecha_cuenta" class="java.sql.Date"/>
+	<field name="t_cuenta_naturaleza_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_estado_cuenta" class="java.lang.Boolean"/>
+	<field name="t_cuenta_a_id_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_a_codigo_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_a_nombre_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_a_id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_a_id_entidad_cuenta" class="java.lang.Integer"/>
+	<field name="t_cuenta_a_fecha_cuenta" class="java.sql.Date"/>
+	<field name="t_cuenta_a_naturaleza_cuenta" class="java.lang.String"/>
+	<field name="t_cuenta_a_estado_cuenta" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="553" height="79" uuid="5013af97-95b7-483a-aa75-eee8ab4d36cc"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="10" width="552" height="20" uuid="62a2ad1b-d717-4a19-97cd-ec16b6f5bcc0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE  DE CUENTA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="273" splitType="Stretch">
+			<textField>
+				<reportElement x="101" y="150" width="452" height="20" uuid="5b549a63-fda6-4631-b6bf-191555048eec"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_codigo_cuenta} == null? "---" : $F{t_cuenta_codigo_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="197" width="454" height="20" uuid="1105c7ab-68e3-422c-a432-dedc92f197e2"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_nombre_cuenta} == null? "---": $F{t_cuenta_nombre_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="440" y="240" width="113" height="20" uuid="d037c6c6-efa3-4e84-acc9-90fbb550b39e"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_fecha_cuenta}==null ? "---":$F{t_cuenta_fecha_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="240" width="100" height="20" uuid="befc7b10-5227-4527-8bee-69818b790aea"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_naturaleza_cuenta}== null? "---":$F{t_cuenta_naturaleza_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="240" width="73" height="20" uuid="104a950d-8f5e-469c-a92a-100cad765453"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_naturaleza_cuenta}== null? "---":($F{t_cuenta_estado_cuenta} ? "Activo":"Inactivo")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="150" width="100" height="20" uuid="e8f54d78-d466-4b22-b92e-d23d07d1b625"/>
+				<text><![CDATA[CÓDIGO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="197" width="100" height="20" uuid="2359449c-ccfa-4f3a-98ef-c4b4992263ce"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="240" width="115" height="20" uuid="658b5ad5-0cae-431b-b20f-e985e8cbbf1d"/>
+				<text><![CDATA[FECHA DE  CREACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="240" width="100" height="20" uuid="0fff8e55-db33-425f-9a21-bd12211fb223"/>
+				<text><![CDATA[NATURALEZA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="240" width="51" height="20" uuid="a76efb39-647c-4326-9e3f-8cee682c3044"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="260" width="552" height="1" uuid="a7b56b8f-4f1e-41fb-9081-4b3a11622e06"/>
+			</line>
+			<line>
+				<reportElement x="1" y="148" width="552" height="1" uuid="dd1d83a5-709b-4974-bde7-1a6c9eaa8deb"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="127" width="188" height="20" uuid="939e3737-ac60-41d1-a1dd-62bbea61d838"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DE LA CUENTA PRINCIPAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="3" width="188" height="20" uuid="2d8de321-2930-4cbf-85f8-eba5f56db6b5"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DE LA CUENTA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="26" width="100" height="20" uuid="8a496d76-7c07-49f0-9591-a63007ac67db"/>
+				<text><![CDATA[CÓDIGO: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="26" width="452" height="20" uuid="5cfeb95e-3c23-4d6d-8490-6d65c274fbca"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_a_codigo_cuenta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="25" width="552" height="1" uuid="c2b9677e-ea0b-400b-8b4b-f4285ca78550"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="61" width="100" height="20" uuid="466fd34c-ec97-4525-ab1b-bedf7572ea3b"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="61" width="454" height="20" uuid="9683330c-a236-4bee-bb11-fbdaf4b44cd9"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_a_nombre_cuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="100" width="100" height="20" uuid="74300562-5cb5-4e3b-9fab-60ba523422f9"/>
+				<text><![CDATA[NATURALEZA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="100" width="100" height="20" uuid="61acc491-3097-4eff-a419-5e098d4ea28a"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_a_naturaleza_cuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="201" y="100" width="51" height="20" uuid="a3c6a65b-841d-4c94-8c5b-8399dc25b7d5"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="100" width="73" height="20" uuid="0cd38c99-a3bf-47c3-b0c6-3ed303560f15"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_a_estado_cuenta}? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="325" y="100" width="115" height="20" uuid="c62f8494-2ad3-4859-8c11-9abf08f1c6b2"/>
+				<text><![CDATA[FECHA DE  CREACIÓN:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="440" y="100" width="113" height="20" uuid="f3769c32-89d5-4392-a0f6-e0f9a2d70f87"/>
+				<textFieldExpression><![CDATA[$F{t_cuenta_a_fecha_cuenta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="c919db35-e4d4-4544-ac9c-19037ee67152"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="28312deb-83d5-4643-bb3b-f259d28708fd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

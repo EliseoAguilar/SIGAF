@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+                <h:outputScript name="./js/bootstrap.min.js" />
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #fDepartamentos\:main-panel td{
+                        border: none !important;
+                    }
+
+                    #fDepartamentos\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fDepartamentosModifcar\:panelModificar td{
+                        border: none !important;
+                    }
+
+                    #fDepartamentosModifcar\:panelModificar tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msg"/>
+                    <p:outputPanel rendered="#{cargoBean.showData}">
+                        #{cargoBean.updateListaCargos()}
+                        <p:panel id="custom" header="Administrar cargos" style="margin:auto; margin-bottom:20px; width: 100%">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:panelGrid columns="1" cellpadding="10">
+                                    <h:form id="fData">
+                                        <p:fieldset>
+                                            <p:commandButton title="Nuevo cargo" id="add"  actionListener="#{cargoBean.enableShowCreate}" style="#{cargoBean.btnNuevo}" update=":padding"    icon="fa fa-plus" />
+                                        </p:fieldset>
+                                        <p:dataTable   id="departamentosData"
+                                                       var="departamentos" 
+                                                       value="#{cargoBean.listaCargos}" 
+                                                       paginator="true"
+                                                       widgetVar="companyTable"
+                                                       rows="10"
+                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                       rowsPerPageTemplate="5,10,15"
+                                                       paginatorPosition="bottom"
+                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                       emptyMessage="No se encontraron departamentos" rowIndexVar="No" >
+                                            <f:facet name="header">
+                                                <p:outputPanel>                                           
+                                                    <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+                                            <p:column headerText="Nº" style=" width: 5%;text-align: center" >  
+                                                <h:outputText value="#{No+1}"/>
+                                            </p:column> 
+                                            <p:column headerText="Nombre"  filterBy="#{departamentos.nombreCargo}" sortBy="#{departamentos.nombreCargo}" filterMatchMode="contains" width="75%" filterStyle="width: 100%" >  
+                                                <h:outputText value="#{departamentos.nombreCargo}" />
+                                            </p:column>
+                                            <p:column width="9%" style="text-align: center">
+                                                <p:splitButton  update=":padding"  oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{departamentos.estadoCargo eq 1? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                    <f:setPropertyActionListener  value="#{departamentos}" target="#{cargoBean.cargoSeleccionado}"  />
+                                                    <p:menuitem  actionListener="#{cargoBean.enableShowUpdate()}" update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                        <f:setPropertyActionListener  value="#{departamentos}" target="#{cargoBean.cargoSeleccionado}"  />
+                                                        <f:setPropertyActionListener  value="#{departamentos.nombreCargo}" target="#{cargoBean.nombreAux}"  />
+                                                    </p:menuitem>
+                                                    <p:menuitem rendered="#{departamentos.estadoCargo eq 1? true:false}" update=":padding"  oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down" value="Dar de baja"    >
+                                                        <f:setPropertyActionListener value="#{departamentos}" target="#{cargoBean.cargoSeleccionado}" />
+                                                    </p:menuitem>                                              
+                                                    <p:menuitem rendered="#{departamentos.estadoCargo eq 0? true:false}"  oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                        <f:setPropertyActionListener value="#{departamentos}" target="#{cargoBean.cargoSeleccionado}" />
+                                                    </p:menuitem>                                              
+                                                </p:splitButton> 
+                                            </p:column>
+                                            <f:facet name="footer">
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </h:form>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:dialog header="Datos del cargo" widgetVar="dlVer" modal="true" width="50%"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel id="dlVerArea"  >
+                                    <p:panelGrid id="pgVer" columns="4" style=" width: 100%" >
+                                        <h:outputText value="Nombre:" />
+                                        <h:outputText value="#{cargoBean.cargoSeleccionado.nombreCargo}" />
+                                        <h:outputText value="Estado:" />
+                                        <h:outputText value="#{cargoBean.cargoSeleccionado.estadoCargo eq 1? 'Activo':'Inactivo'}" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{cargoBean.verReporteCargo()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{cargoBean.verReporteCargoPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="dlBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este cargo?" />      
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>            
+                                    <p:commandButton id="btnGuardarBaja" actionListener="#{cargoBean.darDeBaja}" update=":padding" style="#{cargoBean.btnNuevo}"  value="Si"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelBaja" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{cargoBean.btnCancelar}"  value="No" > 
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="dlAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel id="dlDarDealta" style="text-align:center; width: 100%">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este cargo?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton id="btnGuardarAlta" actionListener="#{cargoBean.darDeAlta}" update=":padding" style="#{areaBean.btnNuevo}"    value="Si"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelAlta" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{areaBean.btnCancelar}"   value="No"> 
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <!-- Formulario Crear -->
+                    <p:outputPanel rendered="#{cargoBean.showCreate}">
+                        <h:form id="fDepartamentos" >
+                            <p:panel id="basic" header="Agregar cargo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column colspan="1">
+                                            <h:outputText value="Nombre:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText     style="width: 100%;" value="#{cargoBean.cargo.nombreCargo}" placeholder="Introduzca el nombre del cargo" id="tNombre"  >  </p:inputText>
+                                            <h:outputText value="#{cargoBean.msgNombre}" style=" color:  red" />
+                                            <h:outputText value="#{cargoBean.msgNombreRepetido}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <br></br>
+                                            <center>
+                                                <div class="buttons">
+                                                    <p:commandButton value="Guardar" id="btnGuardar"  style="#{cargoBean.btnCrear}" icon="fa fa-check"  action="#{cargoBean.validarFormulario}" update=":padding" > 
+                                                    </p:commandButton>
+                                                    <p:commandButton value="Limpiar" id="btnClean" style="#{cargoBean.btnLimpiar}"  actionListener="#{cargoBean.limpiar(0)}" update=":padding" icon="fa fa-fw fa-minus"/>
+                                                    <p:commandButton value="Cancelar" id="btnCancel"   style="#{cargoBean.btnCancelar}" icon="fa fa-fw fa-close" actionListener="#{cargoBean.limpiar(1)}" update=":padding" />
+                                                </div>
+                                            </center>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{cargoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">                                                                      
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este cargo?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{cargoBean.btnNuevo}" value="Si" actionListener="#{cargoBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{cargoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <!-- fin formulario crear-->
+                    <!-- Actualizar-->
+                    <p:outputPanel rendered="#{cargoBean.showUpdate}">
+                        <h:form id="fDepartamentosModifcar" >
+                            <p:panel id="basic" header="Modificar cargo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="panelModificar"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column colspan="1">
+                                            <h:outputText value="Nombre:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText  id="tNombre"   value="#{cargoBean.cargoSeleccionado.nombreCargo}"  style="width: 100%;">  </p:inputText>
+                                            <h:outputText value="#{cargoBean.msgNombre}" style=" color:  red" />
+                                            <h:outputText value="#{cargoBean.msgNombreRepetido}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <br></br>
+                                            <center>
+                                                <div class="buttons">
+                                                    <p:commandButton value="Guardar" id="btnGuardar"  style="#{cargoBean.btnCrear}" icon="fa fa-check" update=":padding"  action="#{cargoBean.validarFormularioModificar}" > 
+                                                    </p:commandButton>
+                                                    <p:commandButton value="Cancelar" id="btnCancel"   style="#{cargoBean.btnCancelar}" icon="fa fa-fw fa-close" actionListener="#{cargoBean.enableShowData}" update=":padding" />
+                                                </div>
+                                            </center>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true"  visible="#{cargoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <p:outputPanel style="text-align:center;">
+                                <h:form target="_blanck">   
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este cargo?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton  style="#{cargoBean.btnNuevo}" value="Si"  actionListener="#{cargoBean.modificar}" update=":padding"  oncomplete="PF('pgModificar').hide()"  title="Cerrar"  >
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{cargoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </h:form>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#conf").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

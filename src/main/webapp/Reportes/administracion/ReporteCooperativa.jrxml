@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCooperativa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93aab108-8e1a-450f-9920-7eaeea2c82da">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_entidad."nombre_entidad" AS t_entidad_nombre_entidad,
+     t_entidad."giro_entidad" AS t_entidad_giro_entidad,
+     t_entidad."correo_entidad" AS t_entidad_correo_entidad,
+     t_entidad."direccion_entidad" AS t_entidad_direccion_entidad,
+     t_entidad."nit_entidad" AS t_entidad_nit_entidad,
+     t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."nombre_representante_entidad" AS t_entidad_nombre_representante_entidad,
+     t_entidad."codigo_cliente_entidad" AS t_entidad_codigo_cliente_entidad,
+     t_entidad."telefono_entidad" AS t_entidad_telefono_entidad,
+     t_entidad."celular_entidad" AS t_entidad_celular_entidad,
+     t_entidad."mision_entidad" AS t_entidad_mision_entidad,
+     t_entidad."vision_entidad" AS t_entidad_vision_entidad,
+     t_entidad."acta_entidad" AS t_entidad_acta_entidad,
+     t_entidad."estado_entidad" AS t_entidad_estado_entidad,
+     t_entidad."credencial_entidad" AS t_entidad_credencial_entidad,
+     t_entidad."logo_entidad" AS t_entidad_logo_entidad,
+     t_entidad."dui_representante_entidad" AS t_entidad_dui_representante_entidad,
+     t_entidad."nit_representante_entidad" AS t_entidad_nit_representante_entidad,
+     t_entidad."abreviacion_entidad" AS t_entidad_abreviacion_entidad
+FROM
+     "public"."t_entidad" t_entidad WHERE t_entidad."id_entidad" != 1]]>
+	</queryString>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_nombre_entidad" class="java.lang.String"/>
+	<field name="t_entidad_giro_entidad" class="java.lang.String"/>
+	<field name="t_entidad_correo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_direccion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_entidad" class="java.lang.String"/>
+	<field name="t_entidad_calificacion_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nombre_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="t_entidad_telefono_entidad" class="java.lang.String"/>
+	<field name="t_entidad_celular_entidad" class="java.lang.String"/>
+	<field name="t_entidad_mision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_vision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_acta_entidad" class="java.lang.String"/>
+	<field name="t_entidad_estado_entidad" class="java.lang.Boolean"/>
+	<field name="t_entidad_credencial_entidad" class="java.lang.String"/>
+	<field name="t_entidad_logo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="51" uuid="838e1d71-cb46-4401-9324-77699562b5ad"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="62" width="555" height="20" uuid="399d9bf8-ee8d-4b5a-bc52-2402c1b692b9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE COOPERATIVAS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="82" width="555" height="1" uuid="4db56295-48c9-4411-96fa-be6e1ab2c167"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="89" y="2" width="137" height="20" uuid="323a427f-a53f-4b87-9b87-3ab4c52fe6de"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="2" width="100" height="20" uuid="fe838f24-78cd-4d80-8839-25e043882de9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GIRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="2" width="100" height="20" uuid="22386823-d3f5-4f6d-bf18-811c6436935e"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="602aaf45-ae34-4bce-b61c-cc9d1f54d935"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="212bddd0-6cc3-472b-bfc8-62757fc12a5a"/>
+			</line>
+			<staticText>
+				<reportElement x="290" y="2" width="100" height="20" uuid="7e7f6407-1b20-44c6-8ca4-44016fa6f484"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="2" width="100" height="20" uuid="a259349f-72f6-45cd-8e1e-1327be24e230"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELÉFONO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="89" y="4" width="138" height="20" isPrintWhenDetailOverflows="true" uuid="1f952dcb-8fa3-46ec-a79f-966fc721784d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}+'('+$F{t_entidad_abreviacion_entidad}+')']]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="226" y="4" width="58" height="20" uuid="ad874935-6b2a-4a8b-adef-b2e20ba0a131"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_giro_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="476" y="4" width="79" height="20" isPrintWhenDetailOverflows="true" uuid="fb74b9de-857a-4d2c-9cda-83f84dc8afce"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20" uuid="b90cfb8d-85ed-4f26-ad7b-75fbb2848678"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="290" y="4" width="100" height="20" uuid="674fdd6c-2419-4871-9c8e-ff54f022b676"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="4" width="100" height="20" uuid="eaacc5c1-0d26-428b-94fb-523f4892d06b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_telefono_entidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-03-2017 03:09:53 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TCliente" table="t_cliente" schema="public" optimistic-lock="version">
+        <id name="idCliente" type="int">
+            <column name="id_cliente" />
+           <generator class="sequence">
+                <param name="sequence">t_cliente_id_cliente_seq</param>
+            </generator>
+        </id>
+        <property name="nombreCliente" type="string">
+            <column name="nombre_cliente" />
+        </property>
+        <property name="apellidoCliente" type="string">
+            <column name="apellido_cliente" />
+        </property>
+        <property name="duiCliente" type="string">
+            <column name="dui_cliente" />
+        </property>
+        <property name="nitCliente" type="string">
+            <column name="nit_cliente" />
+        </property>
+        <property name="direccionCliente" type="string">
+            <column name="direccion_cliente" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="13" />
+        </property>
+        <property name="estadoFamiliar" type="string">
+            <column name="estado_familiar" />
+        </property>
+        <property name="telefonoCliente" type="string">
+            <column name="telefono_cliente" />
+        </property>
+        <property name="correoCliente" type="string">
+            <column name="correo_cliente" />
+        </property>
+        <property name="celularCliente" type="string">
+            <column name="celular_cliente" />
+        </property>
+        <property name="calificacionCliente" type="string">
+            <column name="calificacion_cliente" />
+        </property>
+        <property name="codigoCliente" type="string">
+            <column name="codigo_cliente" />
+        </property>
+        <property name="duiCopiaCliente" type="string">
+            <column name="dui_copia_cliente" />
+        </property>
+        <property name="nitCopiaCliente" type="string">
+            <column name="nit_copia_cliente" />
+        </property>
+        <property name="sexoCliente" type="string">
+            <column name="sexo_cliente" />
+        </property>
+        <property name="tipoCliente1" type="java.lang.Integer">
+            <column name="tipo_cliente1" />
+        </property>
+        
+         <property name="tipoCliente2" type="java.lang.Integer">
+            <column name="tipo_cliente2" />
+        </property>
+         <property name="tipoCliente3" type="java.lang.Integer">
+            <column name="tipo_cliente3" />
+        </property>
+        <set name="TLisiados" table="t_lisiado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente_lisiado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TLisiado" />
+        </set>
+        <set name="TTrabajos" table="t_trabajo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTrabajo" />
+        </set>
+        <set name="TClienteProyectos" table="t_cliente_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TClienteProyecto" />
+        </set>
+    </class>
+</hibernate-mapping>

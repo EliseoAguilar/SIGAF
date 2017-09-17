@@ -1,0 +1,781 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <p:outputPanel id="padding"  > 
+
+                    <p:growl id="msgs"   />
+
+                    <p:outputPanel rendered="#{tipoActivoBean.showCreate}" id="opCrearTipo" >
+                        
+                        #{tipoActivoBean.updateConfiguracion()}
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{tipoActivoBean.estadoValido}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.crearTipo}"  oncomplete="PF('dialogCrear').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{tipoActivoBean.btnCancelar}">
+                                        <f:setPropertyActionListener value="#{false}" target="#{tipoActivoBean.estadoValido}"  />
+
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        <h:form id="fAgregarTipo">
+                            <p:panel id="pAgregarTipo" header="Agregar tipo de activo"  style="width: 80%; margin: auto; margin-bottom: 20px" class="noBoder">
+                                <br></br>
+                                <b> <h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Nombre:*" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+
+                                        <p:column>
+                                            <p:inputMask id="tCodigo"  mask="#{tipoActivoBean.configuracion.tipoConfiguracion}"  placeholder="#{tipoActivoBean.configuracion.tipoConfiguracion}" value="#{tipoActivoBean.tipoActivo.codigoTipo}" style="width: 100%" />
+                                            <h:outputText value="#{tipoActivoBean.msgCodigo}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="tNombre" value="#{tipoActivoBean.tipoActivo.nombreTipo}" style="width: 100%" placeholder="Introduzca el nombre" />
+                                            <h:outputText value="#{tipoActivoBean.msgNombre}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Tipo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Vida útil:*"/>
+                                        </p:column>
+
+
+                                    </p:row>
+                                    <p:row>
+
+                                        <p:column>
+                                            <p:selectOneMenu  value="#{tipoActivoBean.tipoActivo.calculoTipoActivo}" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="" noSelectionOption="true" />
+                                                <f:selectItem itemLabel="Tangible" itemValue="Tangible" />
+                                                <f:selectItem itemLabel="Intangible" itemValue="Intangible" />
+                                            </p:selectOneMenu>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgTipo}" style="color: red"/>
+                                        </p:column>
+                                        <p:column >
+                                            <p:inputMask mask="9?99" maxlength="3"
+                                                         slotChar="" id="tVidaUtil"   value="#{tipoActivoBean.tipoActivo.vidaUtilTipo}" style="width: 100%" placeholder="Introduzca la vida util" />
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgVidaUtil}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <h:outputText value="Descripción:"/>
+                                        </p:column>
+
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:inputTextarea id="taDescripcion" rows="2" value="#{tipoActivoBean.tipoActivo.descripcionTipo}" cols="90" style="width: 100%" placeholder="Introduzca la Descripción"  />
+                                            <h:outputText value="#{tipoActivoBean.msgDescripcion}" style="color: red"/> 
+                                        </p:column>
+
+                                    </p:row>
+
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Cuentas contables "/></b>
+                                <hr></hr>
+
+                                <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Cuenta del activo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de depreciación:*" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+
+                                        <p:column>
+
+                                            <p:inputText id="tCueActivo"   style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly ="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgActivo}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+
+                                            <p:inputText id="tDepreActivo"   style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly ="true"/>
+                                            <p:commandButton    update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaDepre').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgDepre}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de gastos de depreciación :*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de venta:*"/>
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly ="true"/>
+                                            <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaGasto').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgGastos}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly ="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaVenta').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgVenta}" style="color: red"/> 
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+
+
+                                <center>
+                                    <p:commandButton id="btnCreate"  actionListener="#{tipoActivoBean.validarFormulario()}" update=":opCrearTipo"   icon="fa fa-check" style="#{tipoActivoBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnClean" actionListener="#{tipoActivoBean.limpiar}" update=":opCrearTipo" icon="fa fa-minus"  style="#{tipoActivoBean.btnLimpiar}" value="Limpiar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancel" actionListener="#{tipoActivoBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{tipoActivoBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        
+                    </p:outputPanel>
+
+                    <p:outputPanel id="opDataCuentas" rendered="#{ tipoActivoBean.showCreate? true: (tipoActivoBean.showUpdate? true:false) }">
+                        <!-- actualiza la lista de cuentas que pueden ser elegidas para los tipos-->  
+                        #{tipoActivoBean.updateListaCuentas()}
+
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaActivo"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaActivo"> 
+                                <p:dataTable var="cue" value="#{tipoActivoBean.listaCuentas}" 
+                                             widgetVar="companyTable1"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."> 
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable1').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                              headerText="Código"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton  oncomplete="PF('dgBuscarCuentaActivo').hide()"  update="#{ tipoActivoBean.showCreate? ':opCrearTipo': (tipoActivoBean.showUpdate? ':opActualizarTipo': '' ) }"  icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{tipoActivoBean.cuentaActivo}"  />
+
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+
+                        </p:dialog> 
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaDepre"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaDepre"> 
+
+                                <p:dataTable var="cue" value="#{tipoActivoBean.listaCuentas}" 
+                                             widgetVar="companyTable2"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas.">  
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable2').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet> 
+
+                                    <p:column  sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                               headerText="Código"
+                                               filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton   oncomplete="PF('dgBuscarCuentaDepre').hide()"  update="#{ tipoActivoBean.showCreate? ':opCrearTipo': (tipoActivoBean.showUpdate? ':opActualizarTipo': '' ) }"   icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{tipoActivoBean.cuentaDepre}"  />
+
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+
+                            </h:form> 
+                        </p:dialog> 
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaGasto"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaGasto"> 
+
+                                <p:dataTable var="cue" value="#{tipoActivoBean.listaCuentas}" 
+                                             widgetVar="companyTable3"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."> 
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable3').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column  sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                               headerText="Código"
+                                               filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton   oncomplete="PF('dgBuscarCuentaGasto').hide()" update="#{ tipoActivoBean.showCreate? ':opCrearTipo': (tipoActivoBean.showUpdate? ':opActualizarTipo': '' ) }"  icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{tipoActivoBean.cuentaGasto}"  />
+
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+
+                            </h:form> 
+                        </p:dialog> 
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaVenta"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaVenta"> 
+
+                                <p:dataTable var="cue" value="#{tipoActivoBean.listaCuentas}" 
+                                             widgetVar="companyTable4"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."> 
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable4').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet> 
+
+                                    <p:column  sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                               headerText="Código"
+                                               filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton   oncomplete="PF('dgBuscarCuentaVenta').hide()"  update="#{ tipoActivoBean.showCreate? ':opCrearTipo': (tipoActivoBean.showUpdate? ':opActualizarTipo': '' ) }"   icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{tipoActivoBean.cuentaVenta}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+
+                            </h:form> 
+                        </p:dialog> 
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{tipoActivoBean.showUpdate}" id="opActualizarTipo">
+
+                        #{tipoActivoBean.updateConfiguracion()}
+                          
+                        <p:dialog  header="Confirmar" widgetVar="dialogModificar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{tipoActivoBean.estadoValido}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.actualizar}"  oncomplete="PF('dialogModificar').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{tipoActivoBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{tipoActivoBean.estadoValido}"  />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        <h:form id="fModificarTipo">
+                            <p:panel id="pAgregarTipo" header="Modificar tipo de activo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <br></br>
+                                <b><h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Codigo:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Nombre:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputMask   id="tCodigo"  mask="#{tipoActivoBean.configuracion.tipoConfiguracion}"  placeholder="#{tipoActivoBean.configuracion.tipoConfiguracion}"  value="#{tipoActivoBean.tipoActivoSeleccionado.codigoTipo}" style="width: 100%" />
+                                            <h:outputText value="#{tipoActivoBean.msgCodigo}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="tNombre" value="#{tipoActivoBean.tipoActivoSeleccionado.nombreTipo}" style="width: 100%" />
+                                            <h:outputText value="#{tipoActivoBean.msgNombre}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Tipo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Vida útil:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu  value="#{tipoActivoBean.tipoActivoSeleccionado.calculoTipoActivo}" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="" noSelectionOption="true" />
+                                                <f:selectItem itemLabel="Tangible" itemValue="Tangible" />
+                                                <f:selectItem itemLabel="Intangible" itemValue="Intangible" />
+                                            </p:selectOneMenu>
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgTipo}" style="color: red"/>
+                                        </p:column>
+                                        <p:column >
+                                            <p:inputMask  mask="9?99" maxlength="3"
+                                                          slotChar="" id="tVidaUtil"   value="#{tipoActivoBean.tipoActivoSeleccionado.vidaUtilTipo}" style="width: 100%" readonly="true" />
+                                            <br></br>
+                                            <h:outputText value="#{tipoActivoBean.msgVidaUtil}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <h:outputText value="Descripción:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:inputTextarea id="taDescripcion" rows="2" value="#{tipoActivoBean.tipoActivoSeleccionado.descripcionTipo}" cols="90" style="width: 100%"  />
+                                            <h:outputText value="#{tipoActivoBean.msgDescripcion}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Cuentas contables "/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Cuenta del activo:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de depreciación:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tCueActivo"   style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly="true"/>
+                                            <p:commandButton    update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <h:outputText value="#{tipoActivoBean.msgActivo}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="tDepreActivo"   style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaDepre').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <h:outputText value="#{tipoActivoBean.msgDepre}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de gastos de depreciación :*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Cuenta de venta:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaGasto').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <h:outputText value="#{tipoActivoBean.msgGastos}" style="color: red"/> 
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaVenta').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <h:outputText value="#{tipoActivoBean.msgVenta}" style="color: red"/> 
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnCreate"  actionListener="#{tipoActivoBean.validarFormularioModificar()}" update=":opActualizarTipo"   icon="fa fa-check" style="#{tipoActivoBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancel" actionListener="#{tipoActivoBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{tipoActivoBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+                            </p:panel>
+
+                        </h:form>
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{tipoActivoBean.showData}">
+
+                        <p:panel id="opAdmiPol" header="Administrar tipos de activos" style="margin-bottom:20px">
+                            <!-- -->
+                            #{tipoActivoBean.updateListaEntidades()}
+
+                            <h:form id="fFiltro"> 
+                                <p:fieldset>
+                                    <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder">
+                                        <p:row>
+                                            <p:column style=" width: 60%" >
+                                                <h:outputText value="Entidad:*" /> 
+                                            </p:column>
+                                            <p:column style=" width: 40%" >
+                                                <h:outputText value="" /> 
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>
+
+                                            <p:column >
+                                                <p:outputPanel id="opPrede"  rendered="#{tipoActivoBean.estadoPredeterminado eq true? true:true}">
+                                                    <p:selectOneMenu id="car" disabled="#{tipoActivoBean.estadoPredeterminado}"  value="#{tipoActivoBean.idEntidad}" style=" width: 100%;" > 
+                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                        <f:selectItems  var="end" value="#{tipoActivoBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                                        <p:ajax update=":padding"></p:ajax>
+                                                    </p:selectOneMenu>
+                                                </p:outputPanel>
+                                            </p:column>
+                                            <p:column > 
+
+                                                <p:outputPanel rendered="#{tipoActivoBean.idEntidad eq 0? false : true}">
+                                                    <p:selectBooleanCheckbox value="#{tipoActivoBean.estadoPredeterminado}" >
+                                                        <p:ajax update="opPrede" listener="#{tipoActivoBean.cambiarPredeterminado()}" />
+                                                    </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
+                                                </p:outputPanel>
+
+                                            </p:column> 
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                            </h:form>
+
+                            <br></br>
+
+                            <p:outputPanel rendered="#{tipoActivoBean.idEntidad eq 0 ? false:true}" id="data">
+                                <!-- -->
+                                #{tipoActivoBean.updateListaTipoActivo()}
+                                <h:form >
+
+                                    <p:fieldset>
+                                        <p:commandButton title="Nuevo tipo" id="add"  actionListener="#{tipoActivoBean.enableShowCreate}"  update=":padding"    icon="fa fa-plus"  style="#{tipoActivoBean.btnNuevo}" />
+                                    </p:fieldset>
+                                    
+                                    <p:dataTable   id="polEnero"
+                                                   var="tipo" 
+                                                   value="#{tipoActivoBean.listaTipoActivo}" 
+                                                   rowIndexVar="No"
+                                                   rows="10"
+                                                   paginator="true"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   widgetVar="datosCue"
+                                                   emptyMessage="No se encontraron tipos de activos.">  
+                                        >
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <p:inputText id="globalFilter" onkeyup="PF('datosCue').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:columnGroup type="header">
+                                            <p:row>
+                                                <p:column headerText="Nº" style="width: 5%"   />
+                                                <p:column headerText="Código"  style="width: 20%"  sortBy="#{tipo.codigoTipo}" filterBy="#{tipo.codigoTipo}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="Nombre" sortBy="#{tipo.calculoTipoActivo}" filterBy="#{tipo.calculoTipoActivo}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="Tipo" style="width: 15%"  sortBy="#{tipo.calculoTipoActivo}" filterBy="#{tipo.calculoTipoActivo}" filterMatchMode="contains" filterStyle="width: 100%; ">
+                                                </p:column>
+                                                <p:column headerText="Vida útil" style="width: 10%"  sortBy="#{tipo.vidaUtilTipo}" filterBy="#{tipo.vidaUtilTipo}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="" style="width: 9%" />
+                                            </p:row>
+                                        </p:columnGroup>
+                                        
+                                        <p:column  >
+                                            <h:outputText value="#{No+1}" />
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{tipo.codigoTipo}" />
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{tipo.nombreTipo}"/>
+
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{tipo.calculoTipoActivo}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{tipo.vidaUtilTipo}"/>
+
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:splitButton update=":opDataTipo" oncomplete="PF('dlVer').show()" icon="fa fa-eye" title="Ver" style="#{tipo.estadoTipo eq true? tipoActivoBean.btnDarDeAlta :  tipoActivoBean.btnDarDeBaja}" >
+
+                                                <f:setPropertyActionListener value="#{tipo}" target="#{tipoActivoBean.tipoActivoSeleccionado}"  />
+                                                <f:actionListener binding="#{tipoActivoBean.cargarDatosCeuntas()}" ></f:actionListener>
+
+
+                                                <p:menuitem update=":padding"  icon=" fa fa-pencil" value="Modificar" actionListener="#{tipoActivoBean.enableShowUpdate}">
+                                                    <f:setPropertyActionListener value="#{tipo}" target="#{tipoActivoBean.tipoActivoSeleccionado}"  />
+                                                    <f:actionListener binding="#{tipoActivoBean.cargarDatosCeuntas()}" ></f:actionListener>
+                                                </p:menuitem>
+
+                                                <p:menuitem rendered="#{tipo.estadoTipo}"  oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down"
+                                                            value="Dar de baja" >
+                                                    <f:setPropertyActionListener value="#{tipo}" target="#{tipoActivoBean.tipoActivoSeleccionado}"  />
+
+                                                </p:menuitem>
+
+                                                <p:menuitem rendered="#{!tipo.estadoTipo}"  oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up"
+                                                            value="Dar de alta" >
+                                                    <f:setPropertyActionListener value="#{tipo}" target="#{tipoActivoBean.tipoActivoSeleccionado}"  />
+
+                                                </p:menuitem>
+
+                                            </p:splitButton>
+
+                                        </p:column>
+                                        <f:facet name="footer">
+
+                                        </f:facet>
+                                    </p:dataTable>
+                                </h:form>
+
+                                <p:dialog header="Confirmar" widgetVar="dlBaja" modal="true"   visible="false" width="35%"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                    <h:form>
+                                        <p:outputPanel style="text-align:center;">
+
+                                            <h:outputText value="¿Desea dar de baja este tipo de activo?"  />
+                                            <br></br>
+                                            <br></br>
+                                            <hr></hr>
+                                            <center>
+                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeBaja}" update=":padding" style="#{tipoActivoBean.btnNuevo}">
+                                                </p:commandButton>
+                                                <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()" style="#{tipoActivoBean.btnCancelar}"  value="No"> 
+                                                </p:commandButton>
+                                            </center>
+                                        </p:outputPanel>
+                                    </h:form>
+                                </p:dialog>
+
+                                <p:dialog header="Confirmar" widgetVar="dlAlta" modal="true"   visible="false" width="35%" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                    <h:form>
+                                        <p:outputPanel style="text-align:center;">
+
+                                            <h:outputText value="¿Desea dar de alta este  tipo de activo?" />
+                                            <br></br>
+                                            <br></br>
+                                            <hr></hr>
+                                            <center>
+                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeAlta}" update=":padding"   style="#{tipoActivoBean.btnNuevo}">
+                                                </p:commandButton>
+                                                <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').show()"  value="No" style="#{tipoActivoBean.btnCancelar}"> 
+                                                </p:commandButton>
+                                            </center>
+                                        </p:outputPanel>
+                                    </h:form>
+                                </p:dialog>
+
+
+                                <p:outputPanel id="opDataTipo">
+                                    <p:dialog  width="60%" header="Datos del tipo de activo" widgetVar="dlVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                        <h:form  target="_blank">
+                                            <b><h:outputText value="Generales"/></b>
+                                            <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;">   
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Codigo:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.codigoTipo}"/> 
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Nombre:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.nombreTipo}" /> 
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Vida útil:"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.vidaUtilTipo}" /> 
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Tipo:"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.calculoTipoActivo}" /> 
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Descripción:"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.descripcionTipo}" /> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                            <br></br>
+                                            <b><h:outputText value="Cuentas contables "/></b>
+                                            <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;">   
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Cuenta del activo:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText style="width:100%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Cuenta de depreciación:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Cuenta de gastos de depreciación :"/>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" />
+
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Cuenta de venta:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" />
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                            <br></br>
+                                            <center>
+                                                <p:splitButton  value="Ver PDF" ajax="false" actionListener="#{tipoActivoBean.generarReporteTipo()}" icon="fa fa-eye"  >
+                                                    <p:menuitem value="Descargar PDF"   ajax="false"  
+                                                                actionListener="#{tipoActivoBean.generarReporteTipoPDF()}" icon=" fa fa-download" >
+                                                    </p:menuitem>   
+                                                </p:splitButton>
+                                            </center>
+                                        </h:form>
+                                    </p:dialog>
+                                </p:outputPanel>
+                            </p:outputPanel>
+                        </p:panel>
+
+                    </p:outputPanel>
+                    
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

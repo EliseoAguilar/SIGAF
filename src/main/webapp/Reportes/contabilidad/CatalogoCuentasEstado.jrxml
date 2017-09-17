@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CatalogoCuentas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e4e79d0a-9a51-4eaa-83c7-34ad5ad119ec">
+	<property name="ireport.zoom" value="1.2100000000000029"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEntidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[WITH RECURSIVE cuentas(id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, nivel, orden ,naturaleza_cuenta,estado_cuenta, fecha_cuenta,id_entidad_cuenta) as
+( select id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, 1 as  nivel,
+ CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, naturaleza_cuenta,estado_cuenta,fecha_cuenta,id_entidad_cuenta
+ from t_cuenta where id_subcuenta_cuenta is null and id_entidad_cuenta = $P{idEntidad}
+
+union  all
+select c.id_cuenta, c.codigo_cuenta, c.nombre_cuenta, c.id_subcuenta_cuenta, e.nivel+1,
+CAST(e.orden || CAST(c.id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, c.naturaleza_cuenta,c.estado_cuenta,c.fecha_cuenta,c.id_entidad_cuenta
+from t_cuenta c  inner join cuentas e on  c.id_subcuenta_cuenta=e.id_cuenta)
+
+select * from cuentas where estado_cuenta=$P{estado} order by codigo_cuenta]]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="codigo_cuenta" class="java.lang.String"/>
+	<field name="nombre_cuenta" class="java.lang.String"/>
+	<field name="id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="nivel" class="java.lang.Integer"/>
+	<field name="orden" class="java.lang.String"/>
+	<field name="naturaleza_cuenta" class="java.lang.String"/>
+	<field name="estado_cuenta" class="java.lang.Boolean"/>
+	<field name="fecha_cuenta" class="java.sql.Date"/>
+	<field name="id_entidad_cuenta" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="32" uuid="a8a25978-0927-41c6-aed2-1bdd5a095e4a"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="0" width="291" height="20" uuid="2ac3b8a8-674e-436e-b50d-8d7378dd717a"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATALOGO DE CUENTAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="301" y="0" width="100" height="20" uuid="10cd6ef7-4b7c-4179-bfa4-1e76a72bb5c5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estado}?"ACTIVOS":"INACTIVOS"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="7" width="137" height="20" uuid="cd9a806e-ea9c-448a-a0ee-7a838686d25b"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="7" width="248" height="20" uuid="088e4233-52c9-44ec-a3a8-b8313e4cb66e"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="7" width="83" height="20" uuid="bd7f5a97-2589-4283-8277-cf3113a7e35e"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATURALEZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="497" y="7" width="55" height="20" uuid="42dd3591-3e7f-4b6e-acb9-87c4ff1153d5"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIVEL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="33" width="546" height="1" forecolor="#000000" uuid="a1d556e3-6016-4a3e-99d0-745897e6c71b"/>
+			</line>
+			<line>
+				<reportElement x="6" y="1" width="546" height="1" forecolor="#000000" uuid="2d6683d9-8341-4b32-820e-d5c454bd2b51"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="8" width="137" height="20" uuid="13cef743-7cd0-4e90-8753-1df9cce7588f"/>
+				<textFieldExpression><![CDATA[$F{codigo_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="142" y="8" width="255" height="20" uuid="fec62afa-73e0-4786-84fc-67f39e6111e9"/>
+				<textFieldExpression><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="411" y="8" width="69" height="20" uuid="63e8eb44-6c26-4d9d-9d1f-8a5bdfc985ca"/>
+				<textFieldExpression><![CDATA[$F{naturaleza_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="500" y="8" width="55" height="20" uuid="530887c3-bd69-486b-83bb-5a7a150a4915"/>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="438" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="31b21017-2b8e-4749-892a-c779fac44fb8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="9ca18fc8-4495-4437-90e3-5f84b1cc5fae"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

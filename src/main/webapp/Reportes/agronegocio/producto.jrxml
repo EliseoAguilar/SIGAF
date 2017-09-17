@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="producto" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dd4832b4-20de-4850-90c7-702b71fca236">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="221"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_producto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_producto."idproducto" AS t_producto_idproducto,
+     t_producto."nombre" AS t_producto_nombre,
+     t_producto."idtipocultivo" AS t_producto_idtipocultivo,
+     t_producto."sistema" AS t_producto_sistema,
+     t_producto."asistencia" AS t_producto_asistencia,
+     t_producto."organizacion" AS t_producto_organizacion,
+     t_producto."estado" AS t_producto_estado,
+     t_productor_individual."id_productor_individual" AS t_productor_individual_id_productor_individual,
+     t_productor_individual."codigo_productor_individual" AS t_productor_individual_codigo_productor_individual,
+     t_productor_individual."nombres_prodcutor_individual" AS t_productor_individual_nombres_prodcutor_individual,
+     t_productor_individual."apellidos_productor_individual" AS t_productor_individual_apellidos_productor_individual,
+     t_productor_individual."fechanacimiento_productor_individual" AS t_productor_individual_fechanacimiento_productor_individual,
+     t_productor_individual."dui_productor_individual" AS t_productor_individual_dui_productor_individual,
+     t_productor_individual."nit_productor_individual" AS t_productor_individual_nit_productor_individual,
+     t_productor_individual."sexo_productor_individual" AS t_productor_individual_sexo_productor_individual,
+     t_productor_individual."varones_productor_individual" AS t_productor_individual_varones_productor_individual,
+     t_productor_individual."ninas_productor_individual" AS t_productor_individual_ninas_productor_individual,
+     t_productor_individual."experiencia_productor_individual" AS t_productor_individual_experiencia_productor_individual,
+     t_productor_individual."institucion_productor_individual" AS t_productor_individual_institucion_productor_individual,
+     t_productor_individual."estudio_productor_individual" AS t_productor_individual_estudio_productor_individual,
+     t_productor_individual."actividades_productor_individual" AS t_productor_individual_actividades_productor_individual,
+     t_productor_individual."correo_productor_individual" AS t_productor_individual_correo_productor_individual,
+     t_productor_individual."telefono_productor_individual" AS t_productor_individual_telefono_productor_individual,
+     t_productor_individual."movil_productor_individual" AS t_productor_individual_movil_productor_individual,
+     t_productor_individual."direccion_productor_individual" AS t_productor_individual_direccion_productor_individual,
+     t_productor_individual."estado_productor_individual" AS t_productor_individual_estado_productor_individual,
+     t_productor_individual."calificacion_productor_individual" AS t_productor_individual_calificacion_productor_individual,
+     t_productor_individual."estado_familiar_productor_individual" AS t_productor_individual_estado_familiar_productor_individual,
+     t_productor_individual."id_grupo" AS t_productor_individual_id_grupo,
+     t_productor_individual."representante_grupal" AS t_productor_individual_representante_grupal,
+     t_producto_productor."idproductoproductor" AS t_producto_productor_idproductoproductor,
+     t_producto_productor."idproductor" AS t_producto_productor_idproductor,
+     t_producto_productor."idproducto" AS t_producto_productor_idproducto,
+     t_tipo_cultivo."id_tipo_cultivo" AS t_tipo_cultivo_id_tipo_cultivo,
+     t_tipo_cultivo."nombre_tipo_cultivo" AS t_tipo_cultivo_nombre_tipo_cultivo,
+     t_tipo_cultivo."estado_tipo_cultivo" AS t_tipo_cultivo_estado_tipo_cultivo,
+     t_tipo_cultivo."id_area_cultivo" AS t_tipo_cultivo_id_area_cultivo,
+     t_area_cultivo."id_area_cultivo" AS t_area_cultivo_id_area_cultivo,
+     t_area_cultivo."nombre_area_cultivo" AS t_area_cultivo_nombre_area_cultivo,
+     t_area_cultivo."estado_area_cultivo" AS t_area_cultivo_estado_area_cultivo
+FROM
+     "public"."t_producto" t_producto INNER JOIN "public"."t_producto_productor" t_producto_productor ON t_producto."idproducto" = t_producto_productor."idproducto"
+     INNER JOIN "public"."t_productor_individual" t_productor_individual ON t_producto_productor."idproductor" = t_productor_individual."id_productor_individual"
+     INNER JOIN "public"."t_tipo_cultivo" t_tipo_cultivo ON t_producto."idtipocultivo" = t_tipo_cultivo."id_tipo_cultivo"
+     INNER JOIN "public"."t_area_cultivo" t_area_cultivo ON t_tipo_cultivo."id_area_cultivo" = t_area_cultivo."id_area_cultivo" WHERE t_producto."idproducto" = $P{id_producto}]]>
+	</queryString>
+	<field name="t_producto_idproducto" class="java.lang.Integer"/>
+	<field name="t_producto_nombre" class="java.lang.String"/>
+	<field name="t_producto_idtipocultivo" class="java.lang.Integer"/>
+	<field name="t_producto_sistema" class="java.lang.String"/>
+	<field name="t_producto_asistencia" class="java.lang.Boolean"/>
+	<field name="t_producto_organizacion" class="java.lang.String"/>
+	<field name="t_producto_estado" class="java.lang.Boolean"/>
+	<field name="t_productor_individual_id_productor_individual" class="java.lang.Integer"/>
+	<field name="t_productor_individual_codigo_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_nombres_prodcutor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_apellidos_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_fechanacimiento_productor_individual" class="java.sql.Date"/>
+	<field name="t_productor_individual_dui_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_nit_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_sexo_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_varones_productor_individual" class="java.lang.Integer"/>
+	<field name="t_productor_individual_ninas_productor_individual" class="java.lang.Integer"/>
+	<field name="t_productor_individual_experiencia_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_institucion_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_estudio_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_actividades_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_correo_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_telefono_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_movil_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_direccion_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_estado_productor_individual" class="java.lang.Boolean"/>
+	<field name="t_productor_individual_calificacion_productor_individual" class="java.lang.Integer"/>
+	<field name="t_productor_individual_estado_familiar_productor_individual" class="java.lang.String"/>
+	<field name="t_productor_individual_id_grupo" class="java.lang.Integer"/>
+	<field name="t_productor_individual_representante_grupal" class="java.lang.Boolean"/>
+	<field name="t_producto_productor_idproductoproductor" class="java.lang.Integer"/>
+	<field name="t_producto_productor_idproductor" class="java.lang.Integer"/>
+	<field name="t_producto_productor_idproducto" class="java.lang.Integer"/>
+	<field name="t_tipo_cultivo_id_tipo_cultivo" class="java.lang.Integer"/>
+	<field name="t_tipo_cultivo_nombre_tipo_cultivo" class="java.lang.String"/>
+	<field name="t_tipo_cultivo_estado_tipo_cultivo" class="java.lang.Boolean"/>
+	<field name="t_tipo_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<field name="t_area_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<field name="t_area_cultivo_nombre_area_cultivo" class="java.lang.String"/>
+	<field name="t_area_cultivo_estado_area_cultivo" class="java.lang.Boolean"/>
+	<title>
+		<band height="82" splitType="Stretch">
+			<subreport>
+				<reportElement x="9" y="0" width="200" height="79" uuid="ab91050d-d1b2-4d61-8445-611cfff36a93"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="555" height="20" uuid="2e804a44-e7fd-43b0-b1db-f4d387e8bdf2"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CULTIVO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="555" height="1" uuid="d37d7fb6-16b2-43f3-abc5-e7b14f414672"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="115" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="62" width="105" height="20" uuid="42e6779a-ada0-4e40-b76d-4ae6af3a38fa"/>
+				<text><![CDATA[DUI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="42" width="105" height="20" uuid="c0761939-28f8-488a-b991-a2bd6f6a0fc7"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="125" y="42" width="162" height="20" uuid="2b7f9292-c7eb-4373-a5fb-2edd723e46ee"/>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}+" "+$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="62" width="162" height="20" uuid="0136e71f-53c2-4834-bc35-54e80eb7ac59"/>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_dui_productor_individual}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="7483c1de-a0f7-4ffb-9b38-3d619f921f36"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="20" uuid="a9969d3b-b02b-4325-bb80-3583a7ee062f"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRODUCTOR</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="42" width="115" height="20" uuid="86ef5bd4-1abe-45e8-ab1b-94402a52f57c"/>
+				<text><![CDATA[APELLIDOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="62" width="115" height="20" uuid="21c069c1-98ee-4216-be01-7e861dcf1928"/>
+				<text><![CDATA[NIT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="404" y="62" width="131" height="20" uuid="9454e075-8ea1-4abb-9796-4975342df572"/>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_nit_productor_individual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="42" width="131" height="20" uuid="8b1e6629-d5ec-4e0d-855f-a111603e0d14"/>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="232" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="45" width="110" height="20" uuid="a6865737-1b66-47cb-95e8-3cac11fb15f8"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="85" width="117" height="20" uuid="ac12ecb0-eb94-4d87-b32e-58204ae91861"/>
+				<text><![CDATA[TIPO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="85" width="110" height="20" uuid="f3daf63f-7916-465d-b100-e02fb9f04aea"/>
+				<text><![CDATA[ÁREA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="105" width="110" height="20" uuid="895c9488-119b-44d7-a05d-a346fc0f36a5"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="45" width="156" height="20" uuid="3b9e08e9-4392-4cc8-9f96-c3870159e29a"/>
+				<textFieldExpression><![CDATA[$F{t_producto_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="404" y="45" width="131" height="20" uuid="57d45cd5-0751-4744-998c-87805b32b87c"/>
+				<textFieldExpression><![CDATA[$F{t_producto_sistema}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="65" width="156" height="20" uuid="a874ca44-6f15-4dd6-a9e1-e68e9a97b761"/>
+				<textFieldExpression><![CDATA[$F{t_producto_asistencia}.equals( true )? "Si":"No"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="404" y="65" width="131" height="20" uuid="895020a4-f2f3-4214-a3b2-2ee2ceb5101d"/>
+				<textFieldExpression><![CDATA[$F{t_producto_organizacion}.equals("")? "No aplica":$F{t_producto_organizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="fcf01556-704d-4431-8741-c9554d87a8fa"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CULTIVO</style>]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="404" y="85" width="131" height="20" uuid="86b9d6f1-bcbb-46cc-9438-eed410e9f6f4"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_cultivo_nombre_tipo_cultivo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="85" width="156" height="20" uuid="76275f82-6f60-466b-be13-b4d112756912"/>
+				<textFieldExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="105" width="156" height="20" uuid="62d85b47-a0ec-41d2-b5aa-ad070565e15a"/>
+				<textFieldExpression><![CDATA[$F{t_producto_estado}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="aa534994-b5f5-45d3-89d7-3e2d03523c27"/>
+			</line>
+			<staticText>
+				<reportElement x="287" y="45" width="117" height="20" uuid="cebb1b67-dd8b-49b5-8f74-36f4806626d7"/>
+				<text><![CDATA[SISTEMA DE RIEGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="65" width="110" height="20" uuid="0eeb0ef5-8428-4033-9123-4044f93a687d"/>
+				<text><![CDATA[ASISTENCIA TÉCNICA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="65" width="117" height="20" uuid="34687a11-67e5-4dc5-b42d-5824ce3d3c4e"/>
+				<text><![CDATA[ORGANIZACIÓN:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="19" width="80" height="20" uuid="ebef58a4-05ff-4210-9335-b6a2802b1ca1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="19" width="40" height="20" uuid="9ff38dcd-3d4a-450a-96ec-253d8fda6632"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

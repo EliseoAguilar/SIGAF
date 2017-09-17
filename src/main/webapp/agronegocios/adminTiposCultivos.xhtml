@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">              
+                <style>
+                    #fAgregarArea\:pgAgregar td{
+                        border: none !important;
+                    }
+
+                    #fAgregarArea\:pgAgregar tr{
+                        border: none !important;
+                    }
+                    #fModificarArea\:pgModificar td{
+                        border: none !important;
+                    }
+
+                    #fModificarArea\:pgModificar tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs"  />
+                    <p:outputPanel  rendered="#{tipoCultivoBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarArea">
+                            <p:panel id="pRegistrarTipoCultivo" header="Agregar tipo de cultivo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="Área:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el nombre"  style=" width: 100%" value="#{tipoCultivoBean.tipoCultivo.nombreTipoCultivo}" />
+                                            <h:outputText value="#{tipoCultivoBean.msgNombre}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:selectOneMenu id="car" value="#{tipoCultivoBean.idAreaCultivo}">
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{areaCultivoBean.selecteOneItemAreas}" />
+                                            </p:selectOneMenu>
+                                                    <h:outputText value="#{tipoCultivoBean.msgArea}" style=" color:  red" />                     
+                                    
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{tipoCultivoBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{tipoCultivoBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton  actionListener="#{tipoCultivoBean.limpiar}"  icon="fa fa-minus" title="Cancelar" value="Limpiar" update=":padding" style="#{tipoCultivoBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{tipoCultivoBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{tipoCultivoBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{tipoCultivoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este tipo de cultivo?"/>                                    
+                                    </p:panelGrid>
+                                    <br></br>
+                                     <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{tipoCultivoBean.crear}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{tipoCultivoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{tipoCultivoBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{tipoCultivoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{tipoCultivoBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarArea">
+                            <p:panel id="pModificarTipoCultivo" header="Modificar tipo de cultivo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pgModificar"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Área:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el nombre"  style=" width: 100%" value="#{tipoCultivoBean.tipoCultivoSeleccionado.nombreTipoCultivo}" />
+                                            <h:outputText value="#{tipoCultivoBean.msgNombre}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%"> 
+                                            <p:selectOneMenu id="car" value="#{tipoCultivoBean.idAreaCultivo}">
+                                                <f:selectItem itemLabel="[SELECIONE]" itemValue="0" />
+                                                <f:selectItems value="#{areaCultivoBean.selecteOneItemAreas}" />
+                                            </p:selectOneMenu>
+                                                    <h:outputText value="#{tipoCultivoBean.msgArea}" style=" color:  red" />                     
+                                    
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{tipoCultivoBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{tipoCultivoBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{tipoCultivoBean.enableShowDataBean()}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{tipoCultivoBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{tipoCultivoBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                     <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este tipo de cultivo?"/>                                       
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{tipoCultivoBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{tipoCultivoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{tipoCultivoBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{tipoCultivoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{tipoCultivoBean.showData}">
+                        <h:form>    
+                            #{tipoCultivoBean.updateListaTipos()}
+                            <p:panel id="pDatosCompradores" header="Administrar tipos de cultivo" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nuevo tipo de cultivo" id="add"  actionListener="#{tipoCultivoBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{tipoCultivoBean.btnNuevo}"  />
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="tiposCultivos" widgetVar="companyTable"  paginator="true" rows="10" value="#{tipoCultivoBean.listaTipoCultivo}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  emptyMessage="No se encontraron tipos de cultivos"
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15"
+                                                  >
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre" width="61%" filterBy="#{tiposCultivos.nombreTipoCultivo}" sortBy="#{tiposCultivos.nombreTipoCultivo}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{tiposCultivos.nombreTipoCultivo}"/>
+                                        </p:column>
+                                        <p:column headerText="Área" width="25%" filterBy="#{tiposCultivos.TAreaCultivo.nombreAreaCultivo}" sortBy="#{tiposCultivos.TAreaCultivo.nombreAreaCultivo}" filterStyle="width:100%"  >
+                                            <h:outputText value="#{tiposCultivos.TAreaCultivo.nombreAreaCultivo}"/>
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center"  >
+                                            <p:splitButton  update=":padding" oncomplete="PF('dlVer').show()" icon="fa fa-eye" style="#{tiposCultivos.estadoTipoCultivo eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{tiposCultivos}" target="#{tipoCultivoBean.tipoCultivoSeleccionado}" />
+                                                <p:menuitem  value="Modificar" update=":padding"     
+                                                             actionListener="#{tipoCultivoBean.enableShowUpdate}" icon=" fa fa-pencil">
+                                                    <f:setPropertyActionListener value="#{tiposCultivos}" target="#{tipoCultivoBean.tipoCultivoSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{tiposCultivos.TAreaCultivo.idAreaCultivo}" target="#{tipoCultivoBean.idAreaCultivo}" />                                              
+                                                    <f:setPropertyActionListener value="#{tiposCultivos.nombreTipoCultivo}" target="#{tipoCultivoBean.nombreAux}" />
+                                               
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{tiposCultivos.estadoTipoCultivo}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                    <f:setPropertyActionListener value="#{tiposCultivos}" target="#{tipoCultivoBean.tipoCultivoSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{!tiposCultivos.estadoTipoCultivo}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{tiposCultivos}" target="#{tipoCultivoBean.tipoCultivoSeleccionado}" />
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                     <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este tipo?" />                                      
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{tipoCultivoBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{tipoCultivoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{tipoCultivoBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este tipo?" />                                      
+                                    </p:panelGrid>
+                                    <br></br>
+                                     <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{tipoCultivoBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{tipoCultivoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{tipoCultivoBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog> 
+                        <p:dialog  width="50%" header="Datos del tipo" widgetVar="dlVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel >
+                                    <p:panelGrid  style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Nombre:"/>
+                                            </p:column>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="#{tipoCultivoBean.tipoCultivoSeleccionado.nombreTipoCultivo}"/> 
+                                            </p:column>  
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Área:"/>
+                                            </p:column>
+                                            <p:column style=" width: 30%">
+                                                <h:outputText value="#{tipoCultivoBean.tipoCultivoSeleccionado.TAreaCultivo.nombreAreaCultivo}"/> 
+                                            </p:column>  
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 20%">
+                                                <h:outputText value="Estado:"/>
+                                            </p:column>
+                                            <p:column colspan="3" style=" width: 30%">
+                                                <h:outputText value="#{tipoCultivoBean.tipoCultivoSeleccionado.estadoTipoCultivo eq true? 'Activo': 'Inactivo'}"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{tipoCultivoBean.verReporteTipo()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{tipoCultivoBean.verReporteTipoPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

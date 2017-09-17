@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .borderHidden.ui-panelgrid>*>tr,
+                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    .ui-selectlistbox-item.ui-state-disabled {
+                        display: none;
+                    }
+                </style>
+                <p:outputPanel id="padding"  > 
+                    <p:growl id="msgs"   showDetail="true"/>
+                    <h:form id="fConfiguracion">
+                        <p:dialog  header="Confirmar" width="25%" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{configuracionBean.estadoValido}">
+                            <div align="center">
+                                <br></br>
+                                <p:panelGrid>
+                                    <h:outputText value="¿Desea guardar esta configuración?" />      
+                                </p:panelGrid>
+                                <br></br>
+                                <hr></hr>
+                                <p:commandButton value="Si"  actionListener="#{configuracionBean.registrar}"  oncomplete="PF('dialogCrear').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                <p:commandButton value="No"  oncomplete="PF('dialogCrear').hide()" style="#{configuracionBean.btnCancelar}" >
+                                    <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValido}"/>
+                                </p:commandButton>
+                            </div>
+                        </p:dialog>
+                        <p:panel id="basic" header="Configuración contabilidad "  style="width: 70%; margin: auto; margin-bottom: 20px">
+                            <p:tabView>
+                                <p:tab title="Estructura códigos ">
+                                    <p:panelGrid id="addPanel"   style="width: 100%; margin: auto;"  styleClass="borderHidden" >   
+                                        <p:row>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Estructura codigo cuentas:*" />
+                                            </p:column>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Estructura codigo areas:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:inputText id="tCodigoEntidad" value="#{configuracionBean.configuracion.cuentaConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
+                                                <h:outputText value="#{configuracionBean.msgCuenta}" style="color: red"/> 
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="tCodigoArea" value="#{configuracionBean.configuracion.areaConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
+                                                <h:outputText value="#{configuracionBean.msgArea}" style="color: red"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Estructura codigo tipos de activo:*" />
+                                            </p:column>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Estructura codigo activos:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:inputText id="tCodigoTipo" value="#{configuracionBean.configuracion.tipoConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
+                                                <h:outputText value="#{configuracionBean.msgTipo}" style="color: red"/> 
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="tCodigoActivo" value="#{configuracionBean.configuracion.activoConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
+                                                <h:outputText value="#{configuracionBean.msgActivo}" style="color: red"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton id="btnCreate"  actionListener="#{configuracionBean.validarFormulario()}" update=":padding"   icon="fa fa-check" style="#{configuracionBean.btnCrear}" value="Guardar"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancel" actionListener="#{configuracionBean.limpiar}" update=":padding"  icon="fa fa-close" style="#{configuracionBean.btnCancelar}"  value="Cancelar" action="contabilidad?faces-redirect=true"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:tab>
+                                <p:tab title="Balance general ">
+                                    <p:panelGrid id="addPanelBalace"   style="width: 100%; margin: auto;"  styleClass="borderHidden" > 
+                                        <p:dialog  header="Confirmar" widgetVar="dialogCrearBalance" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{configuracionBean.estadoValidoBalance}">
+                                            <div align="center">
+                                                Estás seguro de guardar?
+                                                <br></br>
+                                                <hr></hr>
+                                                <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarBalance()}"  oncomplete="PF('dialogCrearBalance').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                                <p:commandButton value="No"  oncomplete="PF('dialogCrearBalance').hide()" style="#{configuracionBean.btnCancelar}" >
+                                                    <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValidoBalance}"/>
+                                                </p:commandButton>
+                                            </div>
+                                        </p:dialog>
+
+                                        <p:row>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Cuenta Activo:*" />
+                                            </p:column>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Nivel de detalle:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:selectOneMenu  value="#{configuracionBean.estrucAcivo.TCuenta.idCuenta}" style="width:100%"  >
+                                                    <f:selectItem itemLabel="[Seleccione]" itemValue="0" />
+                                                    <f:selectItems value="#{configuracionBean.listaCuentas}" var="l" itemLabel="#{l.nombreCuenta}" itemValue="#{l.idCuenta}" itemDisabled="#{l.TCuenta.idCuenta eq null ? false : true}" />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{configuracionBean.msgEstActivo}" style=" color:  red" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText  value="#{configuracionBean.estrucAcivo.nivelReporte}"  style="width: 100%" placeholder="" />
+                                                <h:outputText value="#{configuracionBean.msgEstActivoNivel}" style="color: red"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Cuenta Pasivo:*" />
+                                            </p:column>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Nivel de detalle:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:selectOneMenu  value="#{configuracionBean.estrucPasivo.TCuenta.idCuenta}" style="width:100%"  >
+                                                    <f:selectItem itemLabel="[Seleccione]" itemValue="0" />
+                                                    <f:selectItems value="#{configuracionBean.listaCuentas}" var="l" itemLabel="#{l.nombreCuenta}" itemValue="#{l.idCuenta}" itemDisabled="#{l.TCuenta.idCuenta eq null ? false : true}" />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{configuracionBean.msgEstPasivo}" style=" color:  red" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText  value="#{configuracionBean.estrucPasivo.nivelReporte}"  style="width: 100%" placeholder="" />
+                                                <h:outputText value="#{configuracionBean.msgEstPasivoNivel}" style="color: red"/>  
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Cuenta Capital:*" />
+                                            </p:column>
+                                            <p:column style="width: 50%;">
+                                                <h:outputText value="Nivel de detalle:*" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:selectOneMenu  value="#{configuracionBean.estrucCapital.TCuenta.idCuenta}" style="width:100%"  >
+                                                    <f:selectItem itemLabel="[Seleccione]" itemValue="0" />
+                                                    <f:selectItems value="#{configuracionBean.listaCuentas}"  var="l" itemLabel="#{l.nombreCuenta}" itemValue="#{l.idCuenta}" itemDisabled="#{l.TCuenta.idCuenta eq null ? false : true}" />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{configuracionBean.msgEstCapital}" style=" color:  red" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText  value="#{configuracionBean.estrucCapital.nivelReporte}"   style="width: 100%" placeholder="" />
+                                                <h:outputText value="#{configuracionBean.msgEstCapitalNivel}" style="color: red"/> 
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton   actionListener="#{configuracionBean.validarFormularioBalance()}" update="addPanelBalace"   icon="fa fa-check" style="#{configuracionBean.btnCrear}" value="Guardar"> 
+                                        </p:commandButton>
+                                        <p:commandButton actionListener="#{configuracionBean.limpiarBalance}" update=":padding"  icon="fa fa-close" style="#{configuracionBean.btnCancelar}"  value="Cancelar" action="contabilidad?faces-redirect=true"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:tab>
+                            </p:tabView>
+                        </p:panel>
+                    </h:form> 
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

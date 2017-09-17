@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subBalanceGeneral" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8e90648a-e79b-4327-a424-357397d8d316">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Titulos">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{id_subcuenta_cuenta} == null]]></conditionExpression>
+			<style backcolor="#FFFFFF" fontSize="20" isBold="true" isItalic="false" isUnderline="false"/>
+		</conditionalStyle>
+	</style>
+	<style name="Totales">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{id_subcuenta_cuenta} == null]]></conditionExpression>
+			<style fontSize="20" isBold="true" isUnderline="true"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idCuenta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nivelCuenta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idCuentaResultado" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="debeResultado" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="haberResultado" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idCuentaRenta" class="java.lang.Integer"/>
+	<parameter name="haberRenta" class="java.math.BigDecimal"/>
+	<parameter name="debeRenta" class="java.math.BigDecimal"/>
+	<parameter name="idCuentaReserva" class="java.lang.Integer"/>
+	<parameter name="debeReserva" class="java.math.BigDecimal"/>
+	<parameter name="haberReserva" class="java.math.BigDecimal"/>
+	<parameter name="totalPasivoCapital" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[WITH RECURSIVE cuentas(id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, nivel, orden ,naturaleza_cuenta,estado_cuenta, fecha_cuenta,id_entidad_cuenta) as
+( select id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, 1 as  nivel,
+ CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, naturaleza_cuenta,estado_cuenta,fecha_cuenta,id_entidad_cuenta
+from t_cuenta where id_cuenta in( $P{idCuenta})
+union  all
+select c.id_cuenta, c.codigo_cuenta, c.nombre_cuenta, c.id_subcuenta_cuenta, e.nivel+1,
+CAST(e.orden || CAST(c.id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, c.naturaleza_cuenta,c.estado_cuenta,c.fecha_cuenta,c.id_entidad_cuenta
+from t_cuenta c  inner join cuentas e on  c.id_subcuenta_cuenta=e.id_cuenta)
+
+select (
+
+WITH RECURSIVE libro_mayor(id_cuenta, id_subcuenta_cuenta ,codigo_cuenta,nombre_cuenta ,naturaleza_cuenta, orden_cuenta , total_debe  ) as
+(
+select c.id_cuenta, c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS  orden_cuenta,
+
+--consulta para total debe
+COALESCE( (select sum(saldo_detalle_partida)
+from t_detalle_partida dt  inner join t_partida pt on dt.id_partida_detalle_partida= pt.id_partida
+inner join t_periodo pr on pr.id_periodo=pt.id_periodo_partida
+where tipo_saldo_detalle_partida='Debe' and id_cuenta_detalle_partida=c.id_cuenta and id_ejercicio=$P{idEjercicio} and estado_partida=true  group by id_cuenta_detalle_partida), 0) + case c.id_cuenta   when  $P{idCuentaResultado} then  $P{debeResultado}  ELSE 0 end
+
+
++ case c.id_cuenta   when  $P{idCuentaRenta} then   $P{debeRenta} ELSE 0 end
+
++ case c.id_cuenta   when $P{idCuentaReserva} then  $P{debeReserva} ELSE 0 end
+
+  as total_debe
+
+from t_cuenta c
+
+union all
+
+select  c.id_cuenta,c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST( '/' ||  CAST(c.id_cuenta AS VARCHAR(15))  || l.orden_cuenta  AS varchar(900) ) AS orden_cuenta,
+
+l.total_debe
+
+from t_cuenta c inner join libro_mayor l  on  c.id_cuenta=l.id_subcuenta_cuenta
+
+
+)
+
+
+
+
+select   sum(total_debe) from libro_mayor lb where  lb.id_cuenta =cs.id_cuenta group by id_cuenta ) as debe ,
+
+       (
+WITH RECURSIVE libro_mayor(id_cuenta, id_subcuenta_cuenta ,codigo_cuenta,nombre_cuenta ,naturaleza_cuenta, orden_cuenta,total_haber  ) as
+
+(
+
+select c.id_cuenta, c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS  orden_cuenta,
+
+--consulta para total haber
+COALESCE((select sum(saldo_detalle_partida)
+from t_detalle_partida dt  inner join t_partida pt on dt.id_partida_detalle_partida= pt.id_partida
+inner join t_periodo pr on pr.id_periodo=pt.id_periodo_partida
+where tipo_saldo_detalle_partida='Haber' and id_cuenta_detalle_partida=c.id_cuenta and id_ejercicio=$P{idEjercicio} and estado_partida=true  group by id_cuenta_detalle_partida), 0 )
+
++ case c.id_cuenta   when  $P{idCuentaResultado} then  $P{haberResultado}  ELSE 0 end
+
++ case c.id_cuenta   when  $P{idCuentaRenta} then   $P{haberRenta} ELSE 0 end
+
++ case c.id_cuenta   when  $P{idCuentaReserva} then  $P{haberReserva}  ELSE 0 end
+
+ as total_haber
+
+from t_cuenta c
+
+union all
+
+select  c.id_cuenta,c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST( '/' ||  CAST(c.id_cuenta AS VARCHAR(15))  || l.orden_cuenta  AS varchar(900) ) AS orden_cuenta,
+ l.total_haber
+
+from t_cuenta c inner join libro_mayor l  on  c.id_cuenta=l.id_subcuenta_cuenta
+
+)
+
+select   sum(total_haber) from libro_mayor  lb where lb.id_cuenta =cs.id_cuenta  group by id_cuenta) as haber, *
+
+from cuentas cs  where   cs.nivel <= $P{nivelCuenta} order by cs.codigo_cuenta]]>
+	</queryString>
+	<field name="debe" class="java.math.BigDecimal"/>
+	<field name="haber" class="java.math.BigDecimal"/>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="codigo_cuenta" class="java.lang.String"/>
+	<field name="nombre_cuenta" class="java.lang.String"/>
+	<field name="id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="nivel" class="java.lang.Integer"/>
+	<field name="orden" class="java.lang.String"/>
+	<field name="naturaleza_cuenta" class="java.lang.String"/>
+	<field name="estado_cuenta" class="java.lang.Boolean"/>
+	<field name="fecha_cuenta" class="java.sql.Date"/>
+	<field name="id_entidad_cuenta" class="java.lang.Integer"/>
+	<variable name="Total" class="java.math.BigDecimal" calculation="First">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta} == null ? ($F{naturaleza_cuenta}.equals("Deudora") ? ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ).subtract(  ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ) ) : ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ).subtract( ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ) )) : BigDecimal.ZERO]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="Titulo" class="java.lang.String" calculation="First">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta} == null ? $F{nombre_cuenta} : ""]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement style="Totales" x="271" y="3" width="232" height="12" uuid="d1bfea46-c639-4a7d-8f17-59fdc49f6195"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_subcuenta_cuenta} == null ? " ":($F{naturaleza_cuenta}.equals("Deudora") ? ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ).subtract(  ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ) ) : ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ).subtract( ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ) ))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Titulos" mode="Transparent" x="38" y="0" width="233" height="15" uuid="62620bd3-ef3c-4199-9dff-2a2cb3a719c3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="22">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="271" y="0" width="232" height="20" uuid="b84fc72f-c2f6-47bf-ad47-7e0e2e695297"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="0" width="62" height="20" uuid="f6a07d09-acd3-4f13-bbaa-3077f36dff45"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="171" height="20" uuid="b0dbfe64-5588-48b3-a00b-107d89e315e8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

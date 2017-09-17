@@ -1,0 +1,1131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">              
+                <style>
+                    #fAgregarArea\:pgAgregar td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar2 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar2 tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar3 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgAgregar3 tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoR td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoR tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo2 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo2 tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo3 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogo3 tr{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogo3 td{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogo3 tr{
+                        border: none !important;
+                    }
+
+                    #fVerEntidad\:pgLogo td{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogo tr{
+                        border: none !important;
+                    }
+
+
+                    #fAgregarArea\:pgLogoCargar td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargar tr{
+                        border: none !important;
+                    }
+
+                    #fVerEntidad\:pgLogoCargar td{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogoCargar tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargarR td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargaR tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogoCargarR td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargaR tr{
+                        border: none !important;
+                    }
+
+                    #fAgregarArea\:pgLogoCargar2 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargar2 tr{
+                        border: none !important;
+                    }
+
+                    #fAgregarArea\:pgLogoCargar3 td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargar3 tr{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogoCargar3 td{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogoCargar3 tr{
+                        border: none !important;
+                    }
+
+                    #fVerEntidad\:pgLogoR td{
+                        border: none !important;
+                    }
+                    #fVerEntidad\:pgLogoR tr{
+                        border: none !important;
+                    }
+
+
+                    #fModificarEntidad\:pgAgregar td{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogo3 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo3 tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogo td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgAgregar tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgAgregar2 td{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgAgregar2 tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgAgregar3 td{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgAgregar3 tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad:pgLogo td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo2 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo2 tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad:pgLogo3 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogo3 tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogoR td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoR tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargar td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargar tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogoCargar2 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargar2 tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgLogoCargar3 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargar3 tr{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargarR td{
+                        border: none !important;
+                    }
+                    #fAgregarArea\:pgLogoCargarR tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargarR td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgLogoCargarR tr{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgModificar td{
+                        border: none !important;
+                    }
+
+                    #fModificarEntidad\:pgModificar tr{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgModificar2 td{
+                        border: none !important;
+                    }
+                    #fModificarEntidad\:pgModificar2 tr{
+                        border: none !important;
+                    }
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs"  />
+                    <p:outputPanel  rendered="#{cooperativaBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarArea">
+                            <p:panel id="pRegistrarEntidad" header="Agregar cooperativa"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <b><h:outputText value="Cooperativa"/> </b>
+                                <hr></hr>
+                                <p:panelGrid id="pgAgregar"  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el código"  style=" width: 100%" value="#{cooperativaBean.entidad.codigoEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgCodigoE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%"> 
+                                            <p:inputTextarea placeholder="Introduzca el nombre"  style=" width: 100%" value="#{cooperativaBean.entidad.nombreEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgNombreE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre abreviado:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="NIT:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca la abreviación"  style=" width: 100%" value="#{cooperativaBean.entidad.abreviacionEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgAbreviacionE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%"  value="#{cooperativaBean.entidad.nitEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgNitE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Giro:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="Representante legal:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el giro"  style=" width: 100%" value="#{cooperativaBean.entidad.giroEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgGiroE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputText placeholder="Introduzca el nombre del representante legal"  style=" width: 100%" value="#{cooperativaBean.entidad.nombreRepresentanteEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgRepresentanteE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="DUI del representante:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="NIT del representante:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%"  value="#{cooperativaBean.entidad.duiRepresentanteEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgDuiRepresentanteE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%"  value="#{cooperativaBean.entidad.nitRepresentanteEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgNitRepresentanteE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <p:panelGrid id="pgAgregar3"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Misión:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%">  
+                                            <p:inputTextarea placeholder="Introduzca la misión" style=" width: 100%" value="#{cooperativaBean.entidad.misionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgMisionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Visión:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%"> 
+                                            <p:inputTextarea placeholder="Introduzca la visión" style=" width: 100%" value="#{cooperativaBean.entidad.visionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgVisionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b> <h:outputText value="Contacto"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="pgAgregar2"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el correo"  style=" width: 100%" value="#{cooperativaBean.entidad.correoEntidad}" />
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el teléfono"  mask="9999-9999" style=" width: 100%"  value="#{cooperativaBean.entidad.telefonoEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgTelefonoE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el movil"  mask="9999-9999" style=" width: 100%"  value="#{cooperativaBean.entidad.celularEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgMovilE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%">  
+                                            <p:inputTextarea placeholder="Introduzca la dirección" style=" width: 100%" value="#{cooperativaBean.entidad.direccionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgDireccionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b> <h:outputText value="Documentos"/></b>
+                                <hr></hr>
+                                <p:outputPanel id="opActa"> 
+                                    <p:growl id="messages5" />
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenActa}">
+                                        <p:panelGrid id="pgLogoCargar"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Credencial (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActa}" update="opActa"/> 
+                                                    <h:outputText value="#{cooperativaBean.msgCredencial}" style=" color:  red" /> 
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenActa}">
+                                        <p:panelGrid id="pgLogo"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Credencial (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column> 
+                                                    <p:lightBox iframe="true"  width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidad.actaEntidad}" title="Credencial de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="Credencial" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink>
+                                                    </p:lightBox> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton id="btnMostrarImagen5" style="#{cooperativaBean.btnModificar }"  actionListener="#{cooperativaBean.enableShowImagenActa}"  update="opActa" value="#{cooperativaBean.showImagenActa? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                              
+                                </p:outputPanel>
+                                <p:outputPanel id="opNit"> 
+                                    <p:growl id="messagesNit" />
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenCredencial}">
+                                        <p:panelGrid id="pgNit" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="NIT (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencial}" update="opNit"/> 
+                                                    <h:outputText value="#{cooperativaBean.msgNit}" style=" color:  red" /> 
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenCredencial}">
+                                        <p:panelGrid id="pgCargarNit" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="NIT (Imagen.jpeg, jpg, png)"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column> 
+                                                    <p:lightBox iframe="true"  width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidad.credencialEntidad}" title="NIT de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="NIT" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink>
+                                                    </p:lightBox> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton  style="#{cooperativaBean.btnModificar}"  actionListener="#{cooperativaBean.enableShowImagenCredencial()}"  update="opActa" value="#{cooperativaBean.showImagenCredencial? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                              
+                                </p:outputPanel>
+                                <p:outputPanel id="opLogo"> 
+                                    <p:growl id="messages6" />
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenLogo}">
+                                        <p:panelGrid id="pgLogoCargar2"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Logo (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload id="cargar2" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogo}" update="opLogo"/> 
+                                                    <p:growl id="messages2" />
+                                                    <h:outputText value="#{cooperativaBean.msgLogo}" style=" color:  red" /> 
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenLogo}">
+                                        <p:panelGrid id="pgLogo2"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Logo (Imagen.jpeg, jpg, png): "/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:lightBox iframe="true" id="lighboxL" width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidad.logoEntidad}" title="Logo de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="Logo" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink>
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton id="btnMostrarImagen2" style="#{cooperativaBean.btnModificar}"  actionListener="#{cooperativaBean.enableShowImagenLogo}"  update="opLogo" value="#{cooperativaBean.showImagenLogo? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                              
+                                </p:outputPanel>
+
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{cooperativaBean.validarFormularioEntidad}"  update=":padding"   icon="fa fa-check" style="#{cooperativaBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton  actionListener="#{cooperativaBean.limpiar}" type="reset" icon="fa fa-minus" title="Cancelar" value="Limpiar" style="#{cooperativaBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{cooperativaBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{cooperativaBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{cooperativaBean.estadoFormularioE}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta cooperativa?"/>    
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{cooperativaBean.crear}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{cooperativaBean.btnNuevo}">
+
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{cooperativaBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{cooperativaBean.estadoFormularioE}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{cooperativaBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarEntidad">
+                            <p:panel id="pModificarEntidad" header="Modificar cooperativa"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <b>   <h:outputText value="Cooperativa"/></b>
+                                <hr></hr>
+
+                                <p:panelGrid id="pgModificar"  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el código"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.codigoEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgCodigoE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%"> 
+                                            <p:inputTextarea placeholder="Introduzca el nombre"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.nombreEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgNombreE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre abreviado:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="NIT:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca la abreviación"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.abreviacionEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgAbreviacionE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%"  value="#{cooperativaBean.entidadeleccionada.nitEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgNitE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Giro:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="Representante legal:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el giro"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.giroEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgGiroE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputText placeholder="Introduzca el nombre del representante legal"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.nombreRepresentanteEntidad}" />
+                                            <h:outputText value="#{cooperativaBean.msgRepresentanteE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="DUI del representante:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="NIT del representante:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputMask placeholder="Introduzca el DUI"  mask="99999999-9" style=" width: 100%"  value="#{cooperativaBean.entidadeleccionada.duiRepresentanteEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgDuiRepresentanteE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el NIT"  mask="9999-999999-999-9" style=" width: 100%"  value="#{cooperativaBean.entidadeleccionada.nitRepresentanteEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgNitRepresentanteE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Misión:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%">  
+                                            <p:inputTextarea placeholder="Introduzca la misión" style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.misionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgMisionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Visión:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%"> 
+                                            <p:inputTextarea placeholder="Introduzca la visión" style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.visionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgVisionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+                                <b>   <h:outputText value="Contacto"/> </b>
+                                <hr></hr>
+
+                                <p:panelGrid id="pgModificar2"  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Correo:"/>
+                                        </p:column>    
+                                        <p:column>
+                                            <h:outputText value="Teléfono:*"/>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText placeholder="Introduzca el correo"  style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.correoEntidad}" />
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el teléfono"  mask="9999-9999" style=" width: 100%"  value="#{cooperativaBean.entidadeleccionada.telefonoEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgTelefonoE}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                            <p:inputMask placeholder="Introduzca el movil"  mask="9999-9999" style=" width: 100%"  value="#{cooperativaBean.entidadeleccionada.celularEntidad}"/>
+                                            <h:outputText value="#{cooperativaBean.msgMovilE}" style=" color:  red" />                     
+                                        </p:column>
+                                        <p:column colspan="1" style=" width: 50%">  
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>    
+                                        <p:column>
+                                        </p:column>   
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style=" width: 50%">  
+                                            <p:inputTextarea placeholder="Introduzca la dirección" style=" width: 100%" value="#{cooperativaBean.entidadeleccionada.direccionEntidad}"/> 
+                                            <h:outputText value="#{cooperativaBean.msgDireccionE}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b> <h:outputText value="Documentos"/></b>
+                                <hr></hr>
+                                <p:outputPanel id="opActa"> 
+                                    <p:growl id="messages3" />
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenActa}">
+                                        <p:panelGrid id="pgLogoCargar3" styleClass=""  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Credencial (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload id="cargar3" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActaModificar}" update="opActa"/> 
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenActa}">
+                                        <p:panelGrid id="pgLogo3"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Credencial (Imagen.jpeg, jpg, png): "/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:lightBox iframe="true" id="lighbox2" width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidadeleccionada.actaEntidad}" title="Credencial de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="Credencial" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink> 
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton id="btnMostrarImagen3" style="#{cooperativaBean.btnModificar}"  actionListener="#{cooperativaBean.enableShowImagenActa}"  update="opActa" value="#{!cooperativaBean.showImagenActa? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                      
+                                </p:outputPanel>
+                                <p:outputPanel id="opNit"> 
+                                    <p:growl id="messagesModificar" />
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenCredencial}">
+                                        <p:panelGrid id="pgNitModificar" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="NIT (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencialModificar}" update="opNit"/> 
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenCredencial}">
+                                        <p:panelGrid id="pgNitModificarCargar" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="NIT (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:lightBox iframe="true"  width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidadeleccionada.credencialEntidad}" title="NIT de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="NIT" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink>
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton style="#{cooperativaBean.btnModificar}"  actionListener="#{cooperativaBean.enableShowImagenCredencial()}"  update="opNit" value="#{!cooperativaBean.showImagenCredencial? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                      
+                                </p:outputPanel>
+                                <p:outputPanel id="opLogo"> 
+                                    <p:growl id="messages5" />
+                                    <p:outputPanel rendered="#{cooperativaBean.showImagenLogo}">
+                                        <p:panelGrid id="pgLogoCargar2"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Logo (Imagen.jpeg, jpg, png):"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:fileUpload id="cargar2" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogoModificar}" update="opLogo"/> 
+                                                    <p:growl id="messages2" />
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                    <p:outputPanel rendered="#{!cooperativaBean.showImagenLogo}">
+                                        <p:panelGrid id="pgLogo2"  style="width: 100%; margin: auto;" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Logo (Imagen.jpeg, jpg, png): "/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2" >
+                                                    <p:lightBox iframe="true" id="lighbox4" width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidadeleccionada.logoEntidad}" title="Logo de la cooperativa">
+                                                            <ul type="square">
+                                                                <li>
+                                                                    <h:outputText style=" color:  royalblue" value="Logo" />
+                                                                </li>
+                                                            </ul>
+                                                        </h:outputLink>
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                                    <p:commandButton id="btnMostrarImagen2" style="#{cooperativaBean.btnModificar}"  actionListener="#{cooperativaBean.enableShowImagenLogo}"  update="opLogo" value="#{!cooperativaBean.showImagenLogo? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:outputPanel>                              
+                                </p:outputPanel>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{cooperativaBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{cooperativaBean.btnCrear}">
+                                    </p:commandButton> 
+
+                                    <p:commandButton  actionListener="#{cooperativaBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{cooperativaBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>                             
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{cooperativaBean.estadoFormularioE}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar esta cooperativa?"/>    
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{cooperativaBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{cooperativaBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{cooperativaBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{cooperativaBean.estadoFormularioE}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{cooperativaBean.showData}">
+                        #{cooperativaBean.updateListaCooperativas()}
+                        <h:form>        
+                            <p:panel id="pDatosCompradores" header="Administrar cooperativas" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nueva cooperativa" id="add"  actionListener="#{cooperativaBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{cooperativaBean.btnNuevo}"  />
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="companyTable"  paginator="true" rows="10" value="#{cooperativaBean.listaEntidades}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" 
+                                                  rowsPerPageTemplate="5,10,15"
+                                                  emptyMessage="No se encontraron cooperativas" rowIndexVar="No"
+
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Código" width="20%" filterBy="#{entidades.codigoEntidad}" sortBy="#{entidades.codigoEntidad}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{entidades.codigoEntidad}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre" width="35%" filterBy="#{entidades.nombreEntidad}" sortBy="#{entidades.nombreEntidad}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{entidades.nombreEntidad}"/>
+                                        </p:column>
+                                        <p:column headerText="Abreviación" width="20%" filterBy="#{entidades.abreviacionEntidad}" sortBy="#{entidades.abreviacionEntidad}"  filterStyle="width:100%" >
+                                            <h:outputText value="#{entidades.abreviacionEntidad}"/>
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center">
+                                            <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye"  style="#{entidades.estadoEntidad eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{entidades}" target="#{cooperativaBean.entidadeleccionada}" />
+                                                <p:menuitem  actionListener="#{cooperativaBean.enableShowUpdate}" update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                    <f:setPropertyActionListener value="#{entidades}" target="#{cooperativaBean.entidadeleccionada}" />
+                                                    <f:setPropertyActionListener value="#{entidades.codigoEntidad}" target="#{cooperativaBean.codigoAuxiliar}" />
+                                                    <f:actionListener binding="#{cooperativaBean.enableShowUpdateBean()}"></f:actionListener>
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{entidades.estadoEntidad}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-up" value="Dar de baja"    >
+                                                    <f:setPropertyActionListener value="#{entidades}" target="#{cooperativaBean.entidadeleccionada}" />
+                                                </p:menuitem>                                              
+                                                <p:menuitem rendered="#{!entidades.estadoEntidad}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{entidades}" target="#{cooperativaBean.entidadeleccionada}" />
+                                                </p:menuitem>                                              
+                                            </p:splitButton> 
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta esta cooperativa?" />      
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{cooperativaBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{cooperativaBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{cooperativaBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja esta cooperativa?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{cooperativaBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{cooperativaBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{cooperativaBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>               
+                    </p:outputPanel>
+                    <p:dialog header="Datos de la cooperativa" widgetVar="pgVer" modal="true"   visible="false"  resizable="true" responsive="true" width="65%" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                        <h:form id="fVerEntidad" target="_blank">
+                            <p:tabView>
+                                <p:tab title="Cooperativa"> 
+                                    <p:panelGrid id="pgVer"   style="width: 100%; margin: auto;"> 
+                                        <p:row>
+                                            <p:column style=" width: 25%" >                                            
+                                                <h:outputText value="Nombre: " />
+
+                                            </p:column>
+                                            <p:column colspan="3" style=" width: 25%" >
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.nombreEntidad}" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 25%" >                                            
+                                                <h:outputText value="Nombre abreviado: " />
+                                            </p:column>
+                                            <p:column  style=" width: 25%"> 
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.abreviacionEntidad}" />
+                                            </p:column>
+                                            <p:column style=" width: 25%"  > 
+                                                <h:outputText value="NIT:" />
+                                            </p:column>
+                                            <p:column style=" width: 25%"  > 
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.nitEntidad}" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 25%"   > <h:outputText value="Giro:" /></p:column>
+                                            <p:column style=" width: 25%"  > <h:outputText value="#{cooperativaBean.entidadeleccionada.giroEntidad}" /></p:column>
+                                            <p:column style=" width: 25%"   > <h:outputText value="Representante Legal: " /></p:column>
+                                            <p:column style=" width: 25%"  >  <h:outputText value="#{cooperativaBean.entidadeleccionada.nombreRepresentanteEntidad}" /></p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 25%"  > <h:outputText value="DUI: " /></p:column>
+                                            <p:column style=" width: 25%"  > <h:outputText value="#{cooperativaBean.entidadeleccionada.duiRepresentanteEntidad}" /></p:column>
+                                            <p:column  style=" width: 25%" > <h:outputText value="NIT: " /></p:column>
+                                            <p:column  style=" width: 25%" > <h:outputText value="#{cooperativaBean.entidadeleccionada.nitRepresentanteEntidad}" /></p:column>
+                                        </p:row>
+                                        <p:row>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column   > <h:outputText value="Misión:" /></p:column>
+                                            <p:column colspan="3"   > <h:outputText value="#{cooperativaBean.entidadeleccionada.misionEntidad}" /></p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column   > <h:outputText value="Visión:" /></p:column>
+                                            <p:column colspan="3"   > <h:outputText value="#{cooperativaBean.entidadeleccionada.visionEntidad}" /></p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Contacto">
+                                    <p:panelGrid id="pgVer3"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Correo:"/>
+                                            </p:column>    
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.correoEntidad}" />
+                                            </p:column>   
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Teléfono:"/>
+                                            </p:column> 
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.telefonoEntidad}" />
+                                            </p:column> 
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Móvil:"/>
+                                            </p:column>    
+                                            <p:column>
+                                                <h:outputText value="#{cooperativaBean.entidadeleccionada.celularEntidad}" />
+                                            </p:column>  
+                                            <p:column>
+                                            </p:column> 
+                                            <p:column>
+                                            </p:column> 
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <h:outputText value="Dirección: #{cooperativaBean.entidadeleccionada.direccionEntidad}"/>
+                                            </p:column>    
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Documentos">
+                                    <p:outputPanel style=" width: 100%"> 
+                                        <p:panelGrid   style=" width: 100%" > 
+                                            <p:row >                                                           
+                                                <p:column colspan="1" style=" width: 20%">
+                                                    <p:commandLink  target="_blank" ajax="false" actionListener="#{cooperativaBean.verCredencial()}">
+                                                        <h:outputText class="etiqueta" value="Credencial" />
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:row>    
+                                            <p:row >                                                           
+                                                <p:column colspan="1" style=" width: 20%">
+                                                    <p:commandLink  target="_blank" ajax="false" actionListener="#{cooperativaBean.verNit()}">
+                                                        <h:outputText class="etiqueta" value="NIT" />
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:row>    
+                                            <p:row > 
+                                                <p:column colspan="5"  style=" width: 33%"   >
+                                                    <p:lightBox iframe="true" width="700px" height="500px">
+                                                        <h:outputLink value="#{cooperativaBean.entidadeleccionada.logoEntidad}" title="Logo">
+                                                            <h:outputText class="etiqueta" value="Logo" />
+                                                        </h:outputLink>
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid> 
+                                    </p:outputPanel>
+                                </p:tab> 
+                            </p:tabView>
+                            <br></br>
+                            <center>
+                                <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                    <f:actionListener binding="#{cooperativaBean.verReporteCooperativa()}"/> 
+                                    <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                        <f:actionListener binding="#{cooperativaBean.verReporteCooperativaPDF()}"/> 
+                                    </p:menuitem>
+                                </p:splitButton>
+                            </center>
+                        </h:form>
+                    </p:dialog> 
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#admin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

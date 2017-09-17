@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProductorIndividual" table="t_productor_individual" schema="public" optimistic-lock="version">
+        <id name="idProductorIndividual" type="int">
+            <column name="id_productor_individual" />
+                 <generator class="sequence">
+                <param name="sequence">t_productor_individual_id_productor_individual_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProductorGrupal" class="com.sigaf.pojo.TProductorGrupal" fetch="select">
+            <column name="id_grupo" />
+        </many-to-one>
+        <property name="codigoProductorIndividual" type="string">
+            <column name="codigo_productor_individual" />
+        </property>
+        <property name="nombresProdcutorIndividual" type="string">
+            <column name="nombres_prodcutor_individual" />
+        </property>
+        <property name="apellidosProductorIndividual" type="string">
+            <column name="apellidos_productor_individual" />
+        </property>
+        <property name="fechanacimientoProductorIndividual" type="date">
+            <column name="fechanacimiento_productor_individual" length="13" />
+        </property>
+        <property name="duiProductorIndividual" type="string">
+            <column name="dui_productor_individual" />
+        </property>
+        <property name="nitProductorIndividual" type="string">
+            <column name="nit_productor_individual" />
+        </property>
+        <property name="sexoProductorIndividual" type="string">
+            <column name="sexo_productor_individual" />
+        </property>
+        <property name="varonesProductorIndividual" type="java.lang.Integer">
+            <column name="varones_productor_individual" />
+        </property>
+        <property name="ninasProductorIndividual" type="java.lang.Integer">
+            <column name="ninas_productor_individual" />
+        </property>
+        <property name="experienciaProductorIndividual" type="string">
+            <column name="experiencia_productor_individual" />
+        </property>
+        <property name="institucionProductorIndividual" type="string">
+            <column name="institucion_productor_individual" />
+        </property>
+        <property name="estudioProductorIndividual" type="string">
+            <column name="estudio_productor_individual" />
+        </property>
+        <property name="actividadesProductorIndividual" type="string">
+            <column name="actividades_productor_individual" />
+        </property>
+        <property name="correoProductorIndividual" type="string">
+            <column name="correo_productor_individual" />
+        </property>
+        <property name="telefonoProductorIndividual" type="string">
+            <column name="telefono_productor_individual" />
+        </property>
+        <property name="movilProductorIndividual" type="string">
+            <column name="movil_productor_individual" />
+        </property>
+        <property name="direccionProductorIndividual" type="string">
+            <column name="direccion_productor_individual" />
+        </property>
+        <property name="estadoProductorIndividual" type="java.lang.Boolean">
+            <column name="estado_productor_individual" />
+        </property>
+        <property name="calificacionProductorIndividual" type="java.lang.Integer">
+            <column name="calificacion_productor_individual" />
+        </property>
+        <property name="estadoFamiliarProductorIndividual" type="string">
+            <column name="estado_familiar_productor_individual" />
+        </property>
+        <property name="representanteGrupal" type="java.lang.Boolean">
+            <column name="representante_grupal" />
+        </property>
+        <set name="TProductoProductors" table="t_producto_productor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproductor" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductoProductor" />
+        </set>
+    </class>
+</hibernate-mapping>

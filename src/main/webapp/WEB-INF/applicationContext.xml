@@ -1,0 +1,1369 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/jdbc.properties" />
+    
+    
+    <!-- Initialization for data source -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="${jdbc.driverClassName}"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}" />
+
+
+    <!-- Hibernate session factory -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+             
+                <value> com/sigaf/pojo/TEntidadProyecto.hbm.xml</value>
+                <value>com/sigaf/pojo/TPago.hbm.xml</value>
+                <value> com/sigaf/pojo/TArea.hbm.xml</value>
+                <value> com/sigaf/pojo/TComentario.hbm.xml</value>
+                <value> com/sigaf/pojo/TDesembolso.hbm.xml</value>
+                <value> com/sigaf/pojo/TAreaCultivo.hbm.xml</value>
+                <value> com/sigaf/pojo/TPartida.hbm.xml</value>
+                <value> com/sigaf/pojo/TTipoActivo.hbm.xml</value>
+                <value> com/sigaf/pojo/TLisiado.hbm.xml</value>
+                <value> com/sigaf/pojo/TReferencia.hbm.xml</value>
+                <value> com/sigaf/pojo/TSeguimiento.hbm.xml</value>
+                <value> com/sigaf/pojo/TActivoFijo.hbm.xml</value>
+               
+                <value> com/sigaf/pojo/TEmpleadoArea.hbm.xml</value>
+                 <value> com/sigaf/pojo/TProductorGrupal.hbm.xml</value>
+                <value> com/sigaf/pojo/TAgropecuario.hbm.xml</value>
+                <value> com/sigaf/pojo/TEntidad.hbm.xml</value>
+                <value> com/sigaf/pojo/TGarantia.hbm.xml</value>
+                <value> com/sigaf/pojo/TValorActivo.hbm.xml</value>
+                
+                <value> com/sigaf/pojo/TEgreso.hbm.xml</value>
+                <value> com/sigaf/pojo/TPeriodo.hbm.xml</value>
+                <value> com/sigaf/pojo/TProveedor.hbm.xml</value>
+                <value> com/sigaf/pojo/TActivo.hbm.xml</value>
+                <value> com/sigaf/pojo/TConfiguracionAgronegocio.hbm.xml</value>
+                <value> com/sigaf/pojo/TIndividual.hbm.xml</value>
+                <value> com/sigaf/pojo/TClienteProyecto.hbm.xml</value>
+                <value> com/sigaf/pojo/TDetallePartida.hbm.xml</value>
+                <value> com/sigaf/pojo/TEmpleadoCredito.hbm.xml</value>
+                <value> com/sigaf/pojo/TComprador.hbm.xml</value>
+                <value> com/sigaf/pojo/TOcupacion.hbm.xml</value>
+                <value> com/sigaf/pojo/TProyecto.hbm.xml</value>
+                <value> com/sigaf/pojo/TPolitica.hbm.xml</value>
+                <value> com/sigaf/pojo/TCooperativa.hbm.xml</value>
+                <value> com/sigaf/pojo/TConfiguracion.hbm.xml</value>
+                <value> com/sigaf/pojo/TAsesoria.hbm.xml</value>
+                <value> com/sigaf/pojo/TEstructura.hbm.xml</value>
+                <value> com/sigaf/pojo/TIngreso.hbm.xml</value>
+                
+                <value> com/sigaf/pojo/TCuenta.hbm.xml</value>
+                <value> com/sigaf/pojo/TEmpleado.hbm.xml</value>
+                <value> com/sigaf/pojo/TEjercicio.hbm.xml</value>
+              
+                <value> com/sigaf/pojo/TComercio.hbm.xml</value>
+                <value> com/sigaf/pojo/TTipoCultivo.hbm.xml</value>
+                <value> com/sigaf/pojo/TPasivo.hbm.xml</value>
+                <value> com/sigaf/pojo/TCapacitacion.hbm.xml</value>
+                <value> com/sigaf/pojo/TProductorIndividual.hbm.xml</value>
+                <value> com/sigaf/pojo/TTipoCredito.hbm.xml</value>
+                <value> com/sigaf/pojo/TTipoGarantia.hbm.xml</value>
+                <value> com/sigaf/pojo/TCliente.hbm.xml</value>
+                <value> com/sigaf/pojo/TEmpleadoCargo.hbm.xml</value>
+                <value> com/sigaf/pojo/TCargo.hbm.xml</value>
+                <value> com/sigaf/pojo/TSugerencia.hbm.xml</value>
+                <value> com/sigaf/pojo/TParametroseguimiento.hbm.xml</value>
+                <value> com/sigaf/pojo/TParametro.hbm.xml</value>
+                <value> com/sigaf/pojo/TProducto.hbm.xml</value>
+                <value> com/sigaf/pojo/TProductoCooperativa.hbm.xml</value>
+                <value> com/sigaf/pojo/TProductoProductor.hbm.xml</value>
+                <value> com/sigaf/pojo/TProductoAgronegocio.hbm.xml</value>
+                <value> com/sigaf/pojo/TPagoAgronegocio.hbm.xml</value>
+                <value> com/sigaf/pojo/TAgronegocio.hbm.xml</value>
+            
+                <value> com/sigaf/pojo/TPropiedadLisiado.hbm.xml</value>
+                <value> com/sigaf/pojo/TDepreciacion.hbm.xml</value>
+                <value> com/sigaf/pojo/TBajaActivoFijo.hbm.xml</value>
+                <value> com/sigaf/pojo/TBitacora.hbm.xml</value>
+              
+                <value> com/sigaf/pojo/TUsuario.hbm.xml</value>
+                <value> com/sigaf/pojo/TTrabajo.hbm.xml</value>
+               
+               
+                
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Definition for  bean -->
+    
+    <!-- Entidad -->
+    
+    
+    <bean id="entidadDao" 
+          class="com.sigaf.dao.EntidadDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="entidadBo" 
+          class="com.sigaf.bo.EntidadBo">
+        <property name="ientidadDao" ref="entidadDao"></property>   
+    </bean>
+    
+    <bean id="trabajoDao" 
+          class="com.sigaf.dao.TrabajoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="trabajoBo" 
+          class="com.sigaf.bo.TrabajoBo">
+        <property name="itrabajoDao" ref="trabajoDao"></property>   
+    </bean>
+    
+   
+    <bean id="entidadBean" 
+          class="com.sigaf.bean.EntidadBean" init-method="Init">
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="iareaBo" ref="areaBo"></property>
+           <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <bean id="cooperativaBean" 
+           class="com.sigaf.bean.CooperativaBean" init-method="Init">
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="iareaBo" ref="areaBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    
+    
+    <bean id="entidadProyectoDao" 
+          class="com.sigaf.dao.EntidadProyectoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="entidadProyectoBo" 
+          class="com.sigaf.bo.EntidadProyectoBo">
+        <property name="ientidadProyectoDao" ref="entidadProyectoDao"></property>   
+    </bean>
+    
+    <bean id="cooperativaDao" 
+          class="com.sigaf.dao.CooperativaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="cooperativaBo" 
+          class="com.sigaf.bo.CooperativaBo">
+        <property name="icooperativaDao" ref="cooperativaDao"></property>   
+    </bean>
+    
+    <bean id="proyectoDao" 
+          class="com.sigaf.dao.ProyectoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="proyectoBo" 
+          class="com.sigaf.bo.ProyectoBo">
+        <property name="iproyectoDao" ref="proyectoDao"></property>   
+    </bean>
+    
+    <bean id="garantiaDao" 
+          class="com.sigaf.dao.GarantiaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="garantiaBo" 
+          class="com.sigaf.bo.GarantiaBo">
+        <property name="igarantiaDao" ref="garantiaDao"></property>   
+    </bean>
+    
+       
+    <bean id="clienteDao" 
+          class="com.sigaf.dao.ClienteDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="clienteBo" 
+          class="com.sigaf.bo.ClienteBo">
+        <property name="iclienteDao" ref="clienteDao"></property>   
+    </bean> 
+    
+    <bean id="ingresoDao" 
+          class="com.sigaf.dao.IngresoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="ingresoBo" 
+          class="com.sigaf.bo.IngresoBo">
+        <property name="iingresoDao" ref="ingresoDao"></property>   
+    </bean>         
+    
+       <!-- ReporteConfiguracion-->
+    
+        <bean id="reporteConfiguracionBean" 
+          class="com.sigaf.bean.ReporteConfiguracionBean" init-method="init" scope="session" >
+            <property name="bitacoraBo" ref="bitacoraBo"></property>
+          
+    </bean>
+   
+    
+    
+    <bean id="egresoDao" 
+          class="com.sigaf.dao.EgresoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="egresoBo" 
+          class="com.sigaf.bo.EgresoBo">
+        <property name="iegresoDao" ref="egresoDao"></property>   
+    </bean>  
+    
+     
+    <bean id="activoDao" 
+          class="com.sigaf.dao.ActivoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="activoBo" 
+          class="com.sigaf.bo.ActivoBo">
+        <property name="iactivoDao" ref="activoDao"></property>   
+    </bean> 
+    
+    
+    <bean id="referenciaDao" 
+          class="com.sigaf.dao.ReferenciaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="referenciaBo" 
+          class="com.sigaf.bo.ReferenciaBo">
+        <property name="ireferenciaDao" ref="referenciaDao"></property>   
+    </bean> 
+    
+    <bean id="agropecuarioDao" 
+          class="com.sigaf.dao.AgropecuarioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="agropecuarioBo" 
+          class="com.sigaf.bo.AgropecuarioBo">
+        <property name="iagropecuarioDao" ref="agropecuarioDao"></property>   
+    </bean> 
+    
+    
+    
+    <bean id="clienteProyectoDao" 
+          class="com.sigaf.dao.ClienteProyectoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="clienteProyectoBo" 
+          class="com.sigaf.bo.ClienteProyectoBo">
+        <property name="iclienteProyectoDao" ref="clienteProyectoDao"></property>   
+    </bean> 
+    
+    <bean id="comercioDao" 
+          class="com.sigaf.dao.ComercioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="comercioBo" 
+          class="com.sigaf.bo.ComercioBo">
+        <property name="icomercioDao" ref="comercioDao"></property>   
+    </bean> 
+ 
+    
+    
+   
+    
+    <bean id="carteraBean" 
+          class="com.sigaf.bean.CarteraBean" init-method="Init">
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="iareaBo" ref="areaBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
+        <property name="icooperativaBo" ref="cooperativaBo"></property>
+        <property name="iproyectoBo" ref="proyectoBo"></property>
+        <property name="ipoliticaBo" ref="politicaBo"></property>
+        <property name="iclienteBo" ref="clienteBo"></property>
+        <property name="iingresoBo" ref="ingresoBo"></property>
+        <property name="iegresoBo" ref="egresoBo"></property>
+        <property name="iactivoBo" ref="activoBo"></property>
+        <property name="igarantiaBo" ref="garantiaBo"></property>
+        <property name="ireferenciaBo" ref="referenciaBo"></property>
+        <property name="iagropecuarioBo" ref="agropecuarioBo"></property>
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property> 
+        <property name="ipagoBo" ref="pagoBo"></property>      
+        <property name="idesembolsoBo" ref="desembolsoBo"></property> 
+        <property name="ilisiadoBo" ref="lisiadoBo"></property>  
+        <property name="itrabajoBo" ref="trabajoBo"></property>  
+        <property name="bitacoraBo" ref="bitacoraBo"></property>   
+        
+    </bean>
+    
+     
+    <!-- areas definicion-->
+    
+    <bean id="areaDao" 
+          class="com.sigaf.dao.AreaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="areaBo" 
+          class="com.sigaf.bo.AreaBo">
+        <property name="areaDao" ref="areaDao"></property>   
+    </bean>
+     
+   
+    <bean id="areaBean" 
+          class="com.sigaf.bean.AreaBean" init-method="Init">
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="configuracionBo" ref="configuracionBo"></property>
+        <property name="ientidadBo" ref="entidadBo"></property>  
+         <property name="bitacoraBo" ref="bitacoraBo"></property> 
+    </bean>
+    
+    <bean id="ayudaBean" 
+          class="com.sigaf.bean.AyudaBean" init-method="Init">
+     
+    </bean>
+    
+    <!-- Definicion de Cargos-->
+    <bean id="cargoDao" 
+          class="com.sigaf.dao.CargoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="cargoBo" 
+          class="com.sigaf.bo.CargoBo">
+        <property name="cargoDao" ref="cargoDao"></property>   
+    </bean>
+     
+   
+    <bean id="cargoBean" 
+          class="com.sigaf.bean.CargoBean" init-method="Init">
+        <property name="icargoBo" ref="cargoBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    <!--- Definicion de empleado cargo-->
+    <bean id="empleadocargoDao" 
+          class="com.sigaf.dao.EmpleadoCargoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="empleadocargoBo" 
+          class="com.sigaf.bo.EmpleadoCargoBo">
+        <property name="iempleadoCargoDao" ref="empleadocargoDao"></property>   
+    </bean>
+     
+   
+    <bean id="empleadocargoBean" 
+          class="com.sigaf.bean.EmpleadoCargoBean" init-method="Init">
+        <property name="iempleadoCargoBo" ref="empleadocargoBo"></property>
+    </bean>
+    
+      
+    <!-- Ocupacion -->
+    
+    <bean id="ocupacionDao" 
+          class="com.sigaf.dao.OcupacionDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="ocupacionBo" 
+          class="com.sigaf.bo.OcupacionBo">
+        <property name="iocupacionDao" ref="ocupacionDao"></property>   
+    </bean>
+     
+   
+    <bean id="ocupacionBean" 
+          class="com.sigaf.bean.OcupacionBean">
+        <property name="iocupacionBo" ref="ocupacionBo"></property>
+        
+    </bean>
+     
+    <bean id="empleadoAreaDao" 
+          class="com.sigaf.dao.EmpleadoAreaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="empleadoAreaBo" 
+          class="com.sigaf.bo.EmpleadoAreaBo">
+        <property name="EmpleadoAreaDao" ref="empleadoAreaDao"></property>   
+    </bean>
+     
+    <!-- Definicion de Empleados-->
+    <bean id="empleadoDao" 
+          class="com.sigaf.dao.EmpleadoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="empleadoBo" 
+          class="com.sigaf.bo.EmpleadoBo">
+        <property name="iempleadoDao" ref="empleadoDao"></property>   
+    </bean>
+     
+   
+    <bean id="empleadoBean" 
+          class="com.sigaf.bean.EmpleadoBean" init-method="Init">
+        <property name="iempleadoBo" ref="empleadoBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="icargoBo" ref="cargoBo"></property>
+        <property name="iempleadoCargoBo" ref="empleadocargoBo"></property>
+        <property name="iocupacionBo" ref="ocupacionBo"></property>
+        <property name="iempleadoAreaBo" ref="empleadoAreaBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+
+
+    <!-- empleado cooperativa-->
+
+    <bean id="empleadoCooperativaBean" 
+          class="com.sigaf.bean.EmpleadoCooperativaBean" init-method="Init">
+        <property name="iempleadoBo" ref="empleadoBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="icargoBo" ref="cargoBo"></property>
+        <property name="iempleadoCargoBo" ref="empleadocargoBo"></property>
+        <property name="iocupacionBo" ref="ocupacionBo"></property>
+        <property name="iempleadoAreaBo" ref="empleadoAreaBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+
+    <bean id="socioCooperativaBean" 
+          class="com.sigaf.bean.SocioCooperativaBean" init-method="Init">
+        <property name="iempleadoBo" ref="empleadoBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="icargoBo" ref="cargoBo"></property>
+        <property name="iempleadoCargoBo" ref="empleadocargoBo"></property>
+        <property name="iocupacionBo" ref="ocupacionBo"></property>
+        <property name="iempleadoAreaBo" ref="empleadoAreaBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <!-- Productor-->
+    
+    <bean id="productorIndividualDao" 
+          class="com.sigaf.dao.ProductorIndividualDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productorIndividualBo" 
+          class="com.sigaf.bo.ProductorIndividualBo">
+        <property name="productorIndividualDao" ref="productorIndividualDao"></property>   
+    </bean>
+   
+    <bean id="productorIndividualBean" 
+          class="com.sigaf.bean.ProductorIndividualBean" init-method="init">
+        <property name="productorIndividualBo" ref="productorIndividualBo"></property>
+        <property name="productorGrupalBo" ref="productorGrupalBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <!-- Productor Grupal-->
+    <bean id="productorGrupalDao" 
+          class="com.sigaf.dao.ProductorGrupalDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productorGrupalBo" 
+          class="com.sigaf.bo.ProductorGrupalBo">
+        <property name="productorGrupalDao" ref="productorGrupalDao"></property>   
+    </bean>
+   
+    <bean id="productorGrupalBean" 
+          class="com.sigaf.bean.ProductorGrupalBean" init-method="init">
+        <property name="productorGrupalBo" ref="productorGrupalBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    
+    <bean id="productoDao" 
+          class="com.sigaf.dao.ProductoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productoBo" 
+          class="com.sigaf.bo.ProductoBo">
+        <property name="iproductoDao" ref="productoDao"></property>   
+    </bean>
+    
+    <bean id="productoAgronegocioDao" 
+          class="com.sigaf.dao.ProductoAgronegocioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productoAgronegocioBo" 
+          class="com.sigaf.bo.ProductoAgronegocioBo">
+        <property name="iproductoAgronegocioDao" ref="productoAgronegocioDao"></property>   
+    </bean>
+    
+    <bean id="pagoAgronegocioDao" 
+          class="com.sigaf.dao.PagoAgronegocioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="pagoAgronegocioBo" 
+          class="com.sigaf.bo.PagoAgronegocioBo">
+        <property name="ipagoAgronegocioDao" ref="pagoAgronegocioDao"></property>   
+    </bean>
+    
+    
+    
+    <bean id="agronegocioDao" 
+          class="com.sigaf.dao.AgronegocioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="agronegocioBo" 
+          class="com.sigaf.bo.AgronegocioBo">
+        <property name="iagronegocioDao" ref="agronegocioDao"></property>   
+    </bean>
+    
+    
+    <bean id="productoBean" 
+          class="com.sigaf.bean.ProductoBean" init-method="init">
+        <property name="productoBo" ref="productoBo"></property>
+        <property name="productoProductorBo" ref="productoProductorBo"></property>
+        <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
+        <property name="iproductorIndividual" ref="productorIndividualBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+        
+    </bean>
+    
+    <bean id="agronegocioBean" 
+          class="com.sigaf.bean.AgronegocioBean" init-method="init">
+        <property name="productoBo" ref="productoBo"></property>
+        <property name="productoProductorBo" ref="productoProductorBo"></property>
+        <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
+        <property name="compradorBo" ref="compradorBo"></property>
+        <property name="productoAgronegocioBo" ref="productoAgronegocioBo"></property>
+        <property name="pagoAgronegocioBo" ref="pagoAgronegocioBo"></property>
+        <property name="configuracionAgronegocioBo" ref="configuracionAgronegocioBo"></property>
+        <property name="agronegocioBo" ref="agronegocioBo"></property>
+        <property name="iproductorindividual" ref="productorIndividualBo"></property>
+        <property name="ipagoBo" ref="pagoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+        
+    </bean>
+    
+    <bean id="pagoAgronegocioBean" 
+          class="com.sigaf.bean.PagoAgronegocioBean" init-method="init">
+        <property name="productoBo" ref="productoBo"></property>
+        <property name="productoProductorBo" ref="productoProductorBo"></property>
+        <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
+        <property name="compradorBo" ref="compradorBo"></property>
+        <property name="productoAgronegocioBo" ref="productoAgronegocioBo"></property>
+        <property name="pagoAgronegocioBo" ref="pagoAgronegocioBo"></property>
+        <property name="configuracionAgronegocioBo" ref="configuracionAgronegocioBo"></property>
+        <property name="agronegocioBo" ref="agronegocioBo"></property>
+        <property name="iproductorindividual" ref="productorIndividualBo"></property>        
+        <property name="ipagoBo" ref="pagoBo"></property>
+        
+        
+        
+    </bean>
+    
+    
+    <bean id="productoProductorDao" 
+          class="com.sigaf.dao.ProductoProductorDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productoProductorBo" 
+          class="com.sigaf.bo.ProductoProductorBo">
+        <property name="iproductroProductorDao" ref="productoProductorDao"></property>   
+    </bean>
+    
+    <bean id="productoCooperativaDao" 
+          class="com.sigaf.dao.ProductoCooperativaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="productoCooperativaBo" 
+          class="com.sigaf.bo.ProductoCooperativaBo">
+        <property name="iproductoCooperativaDao" ref="productoCooperativaDao"></property>   
+    </bean>
+    
+   
+    <!-- Area cultivo-->
+   
+  
+
+    <bean id="areaCultivoDao" 
+          class="com.sigaf.dao.AreaCultivoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="areaCultivoBo" 
+          class="com.sigaf.bo.AreaCultivoBo">
+        <property name="areaCultivoDao" ref="areaCultivoDao"></property>   
+    </bean>
+   
+    <bean id="areaCultivoBean" 
+          class="com.sigaf.bean.AreaCultivoBean" init-method="init">
+        <property name="areaCultivoBo" ref="areaCultivoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <bean id="tipoCultivoDao" 
+          class="com.sigaf.dao.TipoCultivoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="tipoCultivoBo" 
+          class="com.sigaf.bo.TipoCultivoBo">
+        <property name="tipoCultivoDao" ref="tipoCultivoDao"></property>   
+    </bean>
+   
+    <bean id="tipoCultivoBean" 
+          class="com.sigaf.bean.TipoCultivoBean" init-method="init">
+        <property name="tipoCultivoBo" ref="tipoCultivoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+
+
+     
+    
+    <!-- comprador-->
+    <bean id="compradorDao" 
+          class="com.sigaf.dao.CompradorDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="compradorBo" 
+          class="com.sigaf.bo.CompradorBo">
+        <property name="compradorDao" ref="compradorDao"></property>   
+    </bean>
+    
+    
+    <bean id="asesoriaDao" 
+          class="com.sigaf.dao.AsesoriaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="asesoriaBo" 
+          class="com.sigaf.bo.AsesoriaBo">
+        <property name="iasesoriaDao" ref="asesoriaDao"></property>   
+    </bean>
+    
+    
+   
+    <bean id="compradorBean" 
+          class="com.sigaf.bean.CompradorBean" init-method="init">
+        <property name="compradorBo" ref="compradorBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <bean id="asesoriaBean" 
+          class="com.sigaf.bean.AsesoriaBean" init-method="init">
+        <property name="compradorBo" ref="compradorBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="empleadoBo" ref="empleadoBo"></property>
+        <property name="empleadoAreaBo" ref="empleadoAreaBo"></property>
+        <property name="proyectoBo" ref="proyectoBo"></property>
+        <property name="asesoriaBo" ref="asesoriaBo"></property>
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+         
+    </bean>
+    
+    
+    <bean id="capacitacionDao" 
+          class="com.sigaf.dao.CapacitacionDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="capacitacionBo" 
+          class="com.sigaf.bo.CapacitacionBo">
+        <property name="icapacitacionDao" ref="capacitacionDao"></property>   
+    </bean>
+     
+     
+    <bean id="capacitacionBean" 
+          class="com.sigaf.bean.CapacitacionBean" init-method="init">
+        <property name="compradorBo" ref="compradorBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="empleadoBo" ref="empleadoBo"></property>
+        <property name="empleadoAreaBo" ref="empleadoAreaBo"></property>
+        <property name="proyectoBo" ref="proyectoBo"></property>      
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>        
+        <property name="capacitacionBo" ref="capacitacionBo"></property> 
+        <property name="iempleadoBo" ref="empleadoBo"></property>  
+          <property name="bitacoraBo" ref="bitacoraBo"></property>      
+    </bean>
+     
+     
+    <!-- Politicas -->
+    
+    <bean id="politicaDao" 
+          class="com.sigaf.dao.PoliticaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="politicaBo" 
+          class="com.sigaf.bo.PoliticaBo">
+        <property name="ipoliticaDao" ref="politicaDao"></property>   
+    </bean>
+     
+   
+    <bean id="politicaBean" 
+          class="com.sigaf.bean.PoliticaBean " init-method="Init">
+        <property name="ipoliticaBo" ref="politicaBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+    </bean>
+    
+    <!--  onfiguracion agronegocios-->
+    
+    <bean id="configuracionAgronegocioDao" 
+          class="com.sigaf.dao.ConfiguracionAgronegocioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="configuracionAgronegocioBo" 
+          class="com.sigaf.bo.ConfiguracionAgronegocioBo">
+        <property name="configuracionAgroDao" ref="configuracionAgronegocioDao"></property>   
+    </bean>
+   
+    <bean id="configuracionAgronegocioBean" 
+          class="com.sigaf.bean.ConfiguracionAgronegocioBean" init-method="init">
+        <property name="configuracionAgronegocioBo" ref="configuracionAgronegocioBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+     
+    
+    
+    
+    <!--  Garantia  -->
+    <bean id="garantiaProDao" 
+          class="com.sigaf.dao.GarantiaProDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+    <bean id="garantiaProBo" 
+          class="com.sigaf.bo.GarantiaProBo">
+        <property name="igarantiaProDao" ref="garantiaProDao"></property>   
+    </bean>   
+   
+  
+
+
+
+    <!--  Lisiado -->
+    <bean id="lisiadoDao" 
+          class="com.sigaf.dao.LisiadoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="lisiadoBo" 
+          class="com.sigaf.bo.LisiadoBo">
+        <property name="ilisiadoDao" ref="lisiadoDao"></property>   
+    </bean>
+    
+    <!--  Propiedades -->
+    <bean id="propiedadLisiadoDao" 
+          class="com.sigaf.dao.PropiedadLisiadoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="propiedadLisiadoBo" 
+          class="com.sigaf.bo.PropiedadLisiadoBo">
+        <property name="ipropiedadLisiadoDao" ref="propiedadLisiadoDao"></property>   
+    </bean>
+    
+    
+    <!--  Propiedades -->
+    <bean id="pagoDao" 
+          class="com.sigaf.dao.PagoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="pagoBo" 
+          class="com.sigaf.bo.PagoBo">
+        <property name="ipagoDao" ref="pagoDao"></property>   
+    </bean>
+    
+    
+    <bean id="comentarioDao" 
+          class="com.sigaf.dao.ComentarioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="comentarioBo" 
+          class="com.sigaf.bo.ComentarioBo">
+        <property name="icomentarioDao" ref="comentarioDao"></property>   
+    </bean>
+    
+    <bean id="sugerenciaDao" 
+          class="com.sigaf.dao.SugerenciaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="sugerenciaBo" 
+          class="com.sigaf.bo.SugerenciaBo">
+        <property name="isugerenciaDao" ref="sugerenciaDao"></property>   
+    </bean>
+    
+    <bean id="desembolsoDao" 
+          class="com.sigaf.dao.DesembolsoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="desembolsoBo" 
+          class="com.sigaf.bo.DesembolsoBo">
+        <property name="idesembolsoDao" ref="desembolsoDao"></property>   
+    </bean>
+    
+    
+
+        
+    
+    <bean id="solicitudBean" 
+          class="com.sigaf.bean.SolicitudBean" init-method="Init">
+        <property name="ilisiadoBo" ref="lisiadoBo"></property>
+        <property name="igarantiaProBo" ref="garantiaProBo"></property>      
+        <property name="ipropiedadLisiadoBo" ref="propiedadLisiadoBo"></property>             
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="iareaBo" ref="areaBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
+        <property name="icooperativaBo" ref="cooperativaBo"></property>
+        <property name="iproyectoBo" ref="proyectoBo"></property>
+        <property name="ipoliticaBo" ref="politicaBo"></property>
+        <property name="iclienteBo" ref="clienteBo"></property>
+        <property name="iingresoBo" ref="ingresoBo"></property>
+        <property name="iegresoBo" ref="egresoBo"></property>
+        <property name="iactivoBo" ref="activoBo"></property>
+        <property name="igarantiaBo" ref="garantiaBo"></property>
+        <property name="ireferenciaBo" ref="referenciaBo"></property>
+        <property name="iagropecuarioBo" ref="agropecuarioBo"></property>
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property> 
+        <property name="icomercioBo" ref="comercioBo"></property>  
+        <property name="icomentarioBo" ref="comentarioBo"></property>
+        <property name="isugerenciaBo" ref="sugerenciaBo"></property>
+        <property name="itrabajoBo" ref="trabajoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>          
+        
+    </bean>
+    
+    <bean id="resolucionBean" 
+          class="com.sigaf.bean.ResolucionBean" init-method="Init">
+        <property name="ilisiadoBo" ref="lisiadoBo"></property>
+        <property name="igarantiaProBo" ref="garantiaProBo"></property>      
+        <property name="ipropiedadLisiadoBo" ref="propiedadLisiadoBo"></property>             
+        <property name="ientidadBo" ref="entidadBo"></property>
+        <property name="iareaBo" ref="areaBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
+        <property name="icooperativaBo" ref="cooperativaBo"></property>
+        <property name="iproyectoBo" ref="proyectoBo"></property>
+        <property name="ipoliticaBo" ref="politicaBo"></property>
+        <property name="iclienteBo" ref="clienteBo"></property>
+        <property name="iingresoBo" ref="ingresoBo"></property>
+        <property name="iegresoBo" ref="egresoBo"></property>
+        <property name="iactivoBo" ref="activoBo"></property>
+        <property name="igarantiaBo" ref="garantiaBo"></property>
+        <property name="ireferenciaBo" ref="referenciaBo"></property>
+        <property name="iagropecuarioBo" ref="agropecuarioBo"></property>
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property> 
+        <property name="icomentarioBo" ref="comentarioBo"></property>
+        <property name="isugerenciaBo" ref="sugerenciaBo"></property>   
+        <property name="icomercioBo" ref="comercioBo"></property>  
+         <property name="itrabajoBo" ref="trabajoBo"></property>    
+          <property name="bitacoraBo" ref="bitacoraBo"></property>         
+        
+    </bean>
+    
+    <!-- Definicion parametro-->
+    
+    <bean id="parametroDao" 
+          class="com.sigaf.dao.ParametroDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="parametroBo" 
+          class="com.sigaf.bo.ParametroBo">
+        <property name="iparametroDao" ref="parametroDao"></property>   
+    </bean>
+   
+    <bean id="parametroBean" 
+          class="com.sigaf.bean.ParametroBean" init-method="init">
+        <property name="parametroSeguimientoBo" ref="parametroSeguimientoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+    </bean>
+    
+    
+    <bean id="parametroSeguimientoDao" 
+          class="com.sigaf.dao.ParametroSeguimientoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+    
+    <bean id="parametroSeguimientoBo" 
+          class="com.sigaf.bo.ParametroSeguimientoBo">
+        <property name="iparametroSeguimientoDao" ref="parametroSeguimientoDao"></property>   
+    </bean>
+   
+ 
+    
+    
+    <!--definicion seguimiento -->
+    
+    <bean id="seguimientoDao" 
+          class="com.sigaf.dao.SeguimientoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="seguimientoBo" 
+          class="com.sigaf.bo.SeguimientoBo">
+        <property name="iseguimientoDao" ref="seguimientoDao"></property>   
+    </bean>
+    
+    
+    
+    
+    <bean id="proyectoBean" 
+          class="com.sigaf.bean.ProyectoBean" init-method="Init">
+        <property name="ilisiadoBo" ref="lisiadoBo"></property>
+         <property name="igarantiaProBo" ref="garantiaProBo"></property>
+        
+        <property name="ipropiedadLisiadoBo" ref="propiedadLisiadoBo"></property>                                                       
+        <property name="ientidadBo" ref="entidadBo"></property>                                                                                                                                                                                                                         
+        <property name="iareaBo" ref="areaBo"></property>
+        <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
+        <property name="icooperativaBo" ref="cooperativaBo"></property>
+        <property name="iproyectoBo" ref="proyectoBo"></property>
+        <property name="ipoliticaBo" ref="politicaBo"></property>
+        <property name="iclienteBo" ref="clienteBo"></property>                                                                                                                                                                                                                                                                                                                                      
+        <property name="iingresoBo" ref="ingresoBo"></property>
+        <property name="iegresoBo" ref="egresoBo"></property>
+        <property name="iactivoBo" ref="activoBo"></property>
+        <property name="igarantiaBo" ref="garantiaBo"></property>
+        <property name="ireferenciaBo" ref="referenciaBo"></property>
+        <property name="iagropecuarioBo" ref="agropecuarioBo"></property>
+        <property name="iclienteProyectoBo" ref="clienteProyectoBo"></property> 
+        <property name="idesembolsoBo" ref="desembolsoBo"></property>
+        <property name="ipagoBo" ref="pagoBo"></property>        
+        <property name="iseguimientoBo" ref="seguimientoBo"></property>   
+        <property name="iparametroBo" ref="parametroBo"></property> 
+        <property name="icomercioBo" ref="comercioBo"></property>  
+        <property name="ipagoAgronegociobo" ref="pagoAgronegocioBo"></property>   
+        <property name="itrabajoBo" ref="trabajoBo"></property> 
+        <property name="iparametroSeguimientoBo" ref="parametroSeguimientoBo"></property>   
+          <property name="bitacoraBo" ref="bitacoraBo"></property>    
+               
+        
+    </bean>
+    
+
+    
+    
+    
+    
+    <bean id="reporteAgronegocioBean" 
+          class="com.sigaf.bean.ReporteAgronegocioBean" init-method="init">   
+        <property name="bitacoraBo" ref="bitacoraBo"></property>     
+          
+    </bean>
+    
+    <bean id="reporteAdministracionBean" 
+          class="com.sigaf.bean.ReporteAdministracionBean" init-method="init"> 
+           <property name="bitacoraBo" ref="bitacoraBo"></property>      
+          
+    </bean>
+    
+    <bean id="reporteFinanzaBean" 
+           class="com.sigaf.bean.ReporteFinanzaBean" init-method="init">   
+         <property name="bitacoraBo" ref="bitacoraBo"></property>     
+          
+    </bean>
+    
+<!--  ++++++++++++++++++++++++++++  INICIO Modulo  Contabilidad    ++++++++++++++++++++++++++++ -->
+  
+    
+    <!-- Periodo-->
+    <bean id="periodoDao" 
+          class="com.sigaf.dao.PeriodoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+   
+    <bean id="periodoBo" 
+          class="com.sigaf.bo.PeriodoBo">
+        <property name="periodoDao" ref="periodoDao"></property>   
+    </bean>
+    
+    <!-- Ejercicio-->
+    <bean id="ejercicioDao" 
+          class="com.sigaf.dao.EjercicioDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+   
+    <bean id="ejercicioBo" 
+          class="com.sigaf.bo.EjercicioBo">
+        <property name="ejercicioDao" ref="ejercicioDao"></property>   
+    </bean>
+    
+    
+    <bean id="ejercicioBean" 
+          class="com.sigaf.bean.EjercicioBean" init-method="init"  scope="session" >
+        <property name="entidadBo" ref="entidadBo"></property> 
+        <property name="ejercicioBo" ref="ejercicioBo"></property>
+        <property name="periodoBo" ref="periodoBo"></property> 
+        <property name="tipoActivoBo" ref="tipoActivoBo"></property> 
+        <property name="valorActivoBo" ref="valorActivoBo"></property> 
+        <property name="activoFijoBo" ref="activoFijoBo"></property>
+        <property name="depreciacionBo" ref="depreciacionBo"></property>
+        <property name="partidaBo" ref="partidaBo"></property>
+        <property name="detallePartidaBo" ref="detallePartidaBo"></property>
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="estructuraBo" ref="estructuraBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        
+    </bean>
+   
+   
+   
+    <!-- Depreciacion-->
+    <bean id="depreciacionDao" 
+          class="com.sigaf.dao.DepreciacionDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+   
+    <bean id="depreciacionBo" 
+          class="com.sigaf.bo.DepreciacionBo">
+        <property name="depreciacionDao" ref="depreciacionDao"></property>   
+    </bean>
+ 
+   
+    <!-- Cuentas-->
+    <bean id="cuentaDao" 
+          class="com.sigaf.dao.CuentaDao" >
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+   
+    <bean id="cuentaBo" 
+          class="com.sigaf.bo.CuentaBo">
+        <property name="cuentaDao" ref="cuentaDao"></property>   
+    </bean>
+    
+    <bean id="cuentaBean" 
+          class="com.sigaf.bean.CuentaBean" init-method="init" scope="session" >
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property> 
+        <property name="configuracionBo" ref="configuracionBo"></property>  
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <!-- Proveedor -->
+     
+    <bean id="proveedorDao" 
+          class="com.sigaf.dao.ProveedorDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="proveedorBo" 
+          class="com.sigaf.bo.ProveedorBo">
+        <property name="proveedorDao" ref="proveedorDao"></property>   
+    </bean>
+   
+    <bean id="proveedorBean" 
+          class="com.sigaf.bean.ProveedorBean" init-method="init" scope="session" >
+        <property name="proveedorBo" ref="proveedorBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <!-- Tipo Activo -->
+    <bean id="tipoActivoDao" 
+          class="com.sigaf.dao.TipoActivoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="tipoActivoBo" 
+          class="com.sigaf.bo.TipoActivoBo">
+        <property name="tipoActivoDao" ref="tipoActivoDao"></property>   
+    </bean>
+   
+    <bean id="tipoActivoBean" 
+          class="com.sigaf.bean.TipoActivoBean" init-method="init" scope="session" >
+        <property name="tipoActivoBo" ref="tipoActivoBo"></property>
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="configuracionBo" ref="configuracionBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property> 
+         <property name="bitacoraBo" ref="bitacoraBo"></property> 
+    </bean>
+  
+    
+    <!-- Detalle Partida -->
+    <bean id="detallePartidaDao" 
+          class="com.sigaf.dao.DetallePartidaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="detallePartidaBo" 
+          class="com.sigaf.bo.DetallePartidaBo">
+        <property name="detallePartidaDao" ref="detallePartidaDao"></property>   
+    </bean>
+    
+    <!--  Partida -->
+    <bean id="partidaDao" 
+          class="com.sigaf.dao.PartidaDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="partidaBo" 
+          class="com.sigaf.bo.PartidaBo">
+        <property name="partidaDao" ref="partidaDao"></property>   
+    </bean>
+
+    <bean id="partidaBean" 
+          class="com.sigaf.bean.PartidaBean" init-method="init" scope="session">
+        <property name="partidaBo" ref="partidaBo"></property>
+        <property name="detallePartidaBo" ref="detallePartidaBo"></property>
+        <property name="periodoBo" ref="periodoBo"></property>
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="ejercicioBo" ref="ejercicioBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property>  
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+    </bean>
+    
+  
+    <!--  Activo Fijo -->
+    
+    <bean id="activoFijoDao" 
+          class="com.sigaf.dao.ActivoFijoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="activoFijoBo" 
+          class="com.sigaf.bo.ActivoFijoBo">
+        <property name="activoFijoDao" ref="activoFijoDao"></property>   
+    </bean>
+    
+    <!--  Valor Activo Fijo -->   
+  
+    <bean id="valorActivoDao" 
+          class="com.sigaf.dao.ValorActivoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+      
+    <bean id="valorActivoBo" 
+          class="com.sigaf.bo.ValorActivoBo">
+        <property name="valorActivoDao" ref="valorActivoDao"></property>   
+    </bean>
+    
+    
+    <!-- Baja activo fijo-->
+      
+    <bean id="bajaActivoFijoDao" 
+          class="com.sigaf.dao.BajaActivoFijoDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+   
+    <bean id="bajaActivoFijoBo" 
+          class="com.sigaf.bo.BajaActivoFijoBo">
+        <property name="bajaActivoFijoDao" ref="bajaActivoFijoDao"></property>   
+    </bean>
+    
+    
+    <!-- Activo fijo-->
+     
+    <bean id="activoFijoBean" 
+          class="com.sigaf.bean.ActivoFijoBean" init-method="init">
+        <property name="valorActivoBo" ref="valorActivoBo"></property> 
+        <property name="activoFijoBo" ref="activoFijoBo"></property>
+        <property name="tipoActivoBo" ref="tipoActivoBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property>
+        <property name="proveedorBo" ref="proveedorBo"></property>
+        <property name="configuracionBo" ref="configuracionBo"></property>
+        <property name="partidaBo" ref="partidaBo"></property>
+        <property name="detallePartidaBo" ref="detallePartidaBo"></property>
+        <property name="periodoBo" ref="periodoBo"></property>
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="ejercicioBo" ref="ejercicioBo"></property>
+        <property name="depreciacionBo" ref="depreciacionBo"></property>
+        <property name="bajaActivoFijoBo" ref="bajaActivoFijoBo"></property>
+        <property name="empleadoBo" ref="empleadoBo"></property>
+         <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+
+
+   
+    
+    <!--  Reporte contabilidad  -->   
+  
+    <bean id="reporteContabilidadBean" 
+          class="com.sigaf.bean.ReporteContabilidadBean" init-method="init" scope="session" >
+        <property name="ejercicioBo" ref="ejercicioBo"></property>
+        <property name="entidadBo" ref="entidadBo"></property> 
+        <property name="cuentaBo" ref="cuentaBo"></property> 
+         <property name="estructuraBo" ref="estructuraBo"></property>
+          <property name="bitacoraBo" ref="bitacoraBo"></property>
+          
+    </bean>
+    
+    
+      
+    <!-- Estructura -->
+        
+    <bean id="estructuraDao" 
+          class="com.sigaf.dao.EstructuraDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="estructuraBo" 
+          class="com.sigaf.bo.EstructuraBo">
+        <property name="estructuraDao" ref="estructuraDao"></property>   
+      
+    </bean>
+    
+        
+    <!-- Configuracion -->
+    <bean id="configuracionDao" 
+          class="com.sigaf.dao.ConfiguracionDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+    </bean>
+   
+    <bean id="configuracionBo" 
+          class="com.sigaf.bo.ConfiguracionBo">
+        <property name="configuracionDao" ref="configuracionDao"></property>   
+    </bean>
+   
+   
+    <bean id="configuracionBean" 
+          class="com.sigaf.bean.ConfiguracionBean" init-method="init" scope="session" >
+        <property name="entidadBo" ref="entidadBo"></property>
+        <property name="ejercicioBo" ref="ejercicioBo"></property>
+        <property name="configuracionBo" ref="configuracionBo"></property>
+        <property name="estructuraBo" ref="estructuraBo"></property>
+        <property name="tipoActivoBo" ref="tipoActivoBo"></property>
+        <property name="cuentaBo" ref="cuentaBo"></property>
+        <property name="areaBo" ref="areaBo"></property>
+        <property name="activoFijoBo" ref="activoFijoBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    <!--  ++++++++++++++++++++++++++++  FIN Modulo  Contabilidad    ++++++++++++++++++++++++++++ -->
+
+    
+    
+    
+    <!--  ++++++++++++++++++++++++++++  INICIO Modulo Seguridad   ++++++++++++++++++++++++++++ -->
+
+
+    <!--  Usuario -->   
+  
+    <bean id="usuarioDao" class="com.sigaf.dao.UsuarioDao">
+        
+        <property name="sessionFactory" ref="sessionFactory"></property> 
+          
+    </bean>
+      
+    <bean id="usuarioBo" class="com.sigaf.bo.UsuarioBo">
+        
+        <property name="usuarioDao" ref="usuarioDao"></property> 
+          
+    </bean>
+    
+    <bean id="usuarioBean" class="com.sigaf.bean.UsuarioBean" init-method="init" scope="session">
+         
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+         
+        <property name="areaBo" ref="areaBo"></property>
+        
+  
+        <property name="empleadoBo" ref="empleadoBo"></property>
+        
+        <property name="usuarioBo" ref="usuarioBo"></property>
+        
+    </bean>
+    
+    <bean id="loginBean" class="com.sigaf.bean.LoginBean" init-method="init" scope="session" >
+        
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+         
+        <property name="usuarioBo" ref="usuarioBo"></property>
+        
+    </bean>
+    
+    <!--  Backup -->  
+    <bean id="baseBean"  class="com.sigaf.bean.BaseBean" init-method="init" scope="session">
+        
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+                  
+    </bean>
+    
+    
+    <!--  Bitacora -->   
+  
+    <bean id="bitacoraDao" class="com.sigaf.dao.BitacoraDao">
+        
+        <property name="sessionFactory" ref="sessionFactory"></property>   
+        
+    </bean>
+      
+    <bean id="bitacoraBo"  class="com.sigaf.bo.BitacoraBo">
+        
+        <property name="bitacoraDao" ref="bitacoraDao"></property>  
+         
+    </bean>
+    
+    <bean id="bitacoraBean" class="com.sigaf.bean.BitacoraBean" init-method="init" scope="session">
+     
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+
+        <property name="usuarioBo" ref="usuarioBo"></property>
+        
+    </bean>
+    
+    
+    <!--  Reporte Seguridad --> 
+
+ 
+    <bean id="reporteSeguridadBean" class="com.sigaf.bean.ReporteSeguridadBean" init-method="init" scope="session">
+        
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+        
+        <property name="usuarioBo" ref="usuarioBo"></property>
+        
+    </bean>
+    <!--  ++++++++++++++++++++++++++++  FIN Modulo Seguridad   ++++++++++++++++++++++++++++ -->
+  
+  
+
+
+</beans>
+

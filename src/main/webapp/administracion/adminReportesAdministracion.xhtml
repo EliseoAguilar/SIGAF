@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+                <style>
+
+                    .borderHidden.ui-panelgrid>*>tr,
+                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                </style>
+                <p:outputPanel id="padding"  > 
+                    <h:form id="fReportesContabilidad" target="_blank">
+                        <p:panel id="pReportesContabilidad" header="Reportes administracion"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <f:facet name="actions">
+                                <h:commandLink id="btnAyuda"  styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText styleClass="ui-icon ui-icon-help" /></h:commandLink>
+                                <h:commandLink id="btnVolver" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText styleClass="ui-icon ui-icon-triangle-1-w
+
+                                                                                                                                               " /></h:commandLink>
+                                <p:tooltip id="toolAyuda" for="btnAyuda" value="Ver ayuda" position="top"/>
+                                <p:tooltip id="toolVolver" for="btnVolver" value="Volver al menu" position="top"/>
+                            </f:facet>
+                            <p:fieldset style="margin-bottom:20px">
+                                <p:panelGrid id="pgReporte"  style="width: 100%; margin: auto;" styleClass="borderHidden" >   
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Reporte:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <p:outputPanel id="opAdmi">
+                                                <h:outputText value="Estado:*"/>
+                                            </p:outputPanel>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectOneMenu id="sModulo"  style="width:100%"  value="#{reporteAdministracionBean.idReporte}">
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItem itemLabel="Reporte de cooperativas" itemValue="1" />
+                                                <f:selectItem itemLabel="Reporte de Áreas" itemValue="2" />
+                                                <f:selectItem itemLabel="Reporte de empleados" itemValue="3" />                                                
+                                                <f:selectItem itemLabel="Reporte de socios" itemValue="4" />
+                                                <p:ajax update=":padding"></p:ajax>
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneMenu  id="sEstado" value="#{reporteAdministracionBean.estadoReporte}"  style="width:100%" >
+                                                <f:selectItem itemLabel="[TODOS]" itemValue="0" />
+                                                <f:selectItem itemLabel="Activo" itemValue="1" />
+                                                <f:selectItem itemLabel="Inactivo" itemValue="2" />
+                                            </p:selectOneMenu>
+                                        </p:column>    
+                                    </p:row>     
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <p:outputPanel rendered="#{reporteAdministracionBean.idReporte gt 1? true:false }" >
+                                                <h:outputText value="Entidad:*"/>
+                                            </p:outputPanel>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectOneMenu id="car" rendered="#{reporteAdministracionBean.idReporte gt 1? true:false }" value="#{reporteAdministracionBean.idEntidad}" style=" width: 100%;">
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{entidadBean.selectOneItemEntidades}" />
+                                            </p:selectOneMenu>                                        </p:column>
+                                        <p:column>
+                                        </p:column>    
+                                    </p:row> 
+                                </p:panelGrid>
+                            </p:fieldset>
+                            <center>
+                                <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                    <f:actionListener binding="#{reporteAdministracionBean.llamarTipoReporte()}"/> 
+                                    <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                        <f:actionListener binding="#{reporteAdministracionBean.llamarTipoReportePDF()}"/> 
+                                    </p:menuitem>
+                                </p:splitButton>
+                            </center>
+                        </p:panel>
+                    </h:form>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#admin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="bd_sigaf"/>
+  <table-filter match-name="t_cooperativa"/>
+  <table-filter match-name="t_tipo_credito"/>
+  <table-filter match-name="t_individual"/>
+  <table-filter match-name="t_agropecuario"/>
+  <table-filter match-name="t_depreciacion"/>
+  <table-filter match-name="t_politica"/>
+  <table-filter match-name="t_tipo_cultivo"/>
+  <table-filter match-name="t_asesoria"/>
+  <table-filter match-name="t_baja_activo_fijo"/>
+  <table-filter match-name="t_productor_individual"/>
+  <table-filter match-name="t_producto"/>
+  <table-filter match-name="t_area"/>
+  <table-filter match-name="t_producto_cooperativa"/>
+  <table-filter match-name="t_comercio"/>
+  <table-filter match-name="t_referencia"/>
+  <table-filter match-name="t_comentario"/>
+
+  <table-filter match-name="t_pago_agronegocio"/>
+  <table-filter match-name="t_producto_productor"/>
+  <table-filter match-name="t_productor_grupal"/>
+  <table-filter match-name="t_tipo_garantia"/>
+  <table-filter match-name="t_partida"/>
+  <table-filter match-name="t_cliente_proyecto"/>
+  <table-filter match-name="t_bitacora"/>
+  <table-filter match-name="t_configuracion_agronegocio"/>
+  <table-filter match-name="t_egreso"/>
+  
+  <table-filter match-name="t_seguimiento"/>
+  <table-filter match-name="t_empleado_area"/>
+  <table-filter match-name="t_valor_activo"/>
+  <table-filter match-name="t_ingreso"/>
+  <table-filter match-name="t_capacitacion"/>
+  <table-filter match-name="t_activo"/>
+  <table-filter match-name="t_empleado_cargo"/>
+  <table-filter match-name="t_periodo"/>
+  <table-filter match-name="t_area_cultivo"/>
+  <table-filter match-name="t_cuenta"/>
+  <table-filter match-name="t_detalle_partida"/>
+  <table-filter match-name="t_proyecto"/>
+  <table-filter match-name="t_entidad_proyecto"/>
+  <table-filter match-name="t_configuracion"/>
+  <table-filter match-name="t_propiedad_lisiado"/>
+  <table-filter match-name="t_lisiado"/>
+  <table-filter match-name="t_estructura"/>
+  <table-filter match-name="t_agronegocio"/>
+  <table-filter match-name="t_tipo_activo"/>
+  <table-filter match-name="t_ejercicio"/>
+  <table-filter match-name="t_producto_agronegocio"/>
+  <table-filter match-name="t_cliente"/>
+  <table-filter match-name="t_ocupacion"/>
+  <table-filter match-name="t_activo_fijo"/>
+  <table-filter match-name="t_pasivo"/>
+  <table-filter match-name="t_empleado_credito"/>
+  <table-filter match-name="t_sugerencia"/>
+  <table-filter match-name="t_usuario"/>
+  <table-filter match-name="t_parametroseguimiento"/>
+
+  <table-filter match-name="t_pago"/>
+  <table-filter match-name="t_cargo"/>
+  <table-filter match-name="t_garantia"/>
+  <table-filter match-name="t_entidad"/>
+  <table-filter match-name="t_desembolso"/>
+  <table-filter match-name="t_comprador"/>
+  <table-filter match-name="t_empleado"/>
+  <table-filter match-name="t_proveedor"/>
+</hibernate-reverse-engineering>

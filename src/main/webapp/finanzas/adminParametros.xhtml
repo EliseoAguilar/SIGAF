@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #fEmpleados\:main-panel td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fEmpleados\:panelCenter td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:panelCenter tr{
+                        border: none !important;
+                    }
+                    #fEmpleados\panelButtom td{
+                        border: none !important;
+                    }
+
+                    #fEmpleados\panelButtom tr{
+                        border: none !important;
+                    }
+
+                    .opciones .ui-selectonemenu-list { 
+                        height: 100px;
+                    }
+                    #fEmpleadosModificar\:main-panel td{
+                        border: none !important;
+                    }
+
+                    #fEmpleadosModificar\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\:panelCenter td{
+                        border: none !important;
+                    }
+
+                    #fEmpleadosModificar\:panelCenter tr{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\panelButtom td{
+                        border: none !important;
+                    }
+
+                    #fEmpleadosModificar\panelButtom tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{parametroBean.showCreate}">
+                        <h:form id="fParametros" >                            
+                            <p:panel id="basic"  header="Agregar parámetro"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
+                                    <p:row>
+                                        <p:column style="width: 50%;">
+                                            <h:outputText value="Parámetro:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%;">
+                                            <h:outputText value="Unidad de medida:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column> 
+                                            <p:inputText value="#{parametroBean.parametro.nombre}" style="width: 100%; " placeholder="Ingrese el nombre"/>
+                                            <h:outputText value="#{parametroBean.msgNombre}" style=" color:  red" />
+                                            <h:outputText value="#{parametroBean.msgNombreRepetido}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column> 
+                                            <p:inputText value="#{parametroBean.parametro.unidad}" style="width: 100%" placeholder="Ingrese la unidad de medida"/>
+                                            <h:outputText value="#{parametroBean.msgUnidad}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Descripción:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:inputTextarea value="#{parametroBean.parametro.descripcion}" style="width: 100%" placeholder="Ingrese la descripción"/>
+                                            <h:outputText value="#{parametroBean.msgDescripcion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{empleadoBean.btnCrear}" actionListener="#{parametroBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{empleadoBean.btnLimpiar}"  value="Limpiar" id="btnClean"   actionListener="#{parametroBean.limpiar(0)}" update=":padding" class="clear" icon="fa fa-fw fa-minus"/>
+                                        <p:commandButton style="#{empleadoBean.btnCancelar}" value="Cancelar" id="btnCancel"   class="cancel" icon="fa fa-fw fa-close" actionListener="#{parametroBean.limpiar(0)}"  update=":padding" />
+                                    </div>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{parametroBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este parámetro?"/>                                       
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>                               
+                                    <center>
+                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{parametroBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{empleadoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{parametroBean.showUpdate}">
+                        <h:form id="fParametrosModificar" >                            
+                            <p:panel id="basic"  header="Modificar parámetro"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid id="pUpdate"  style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
+                                    <p:row>
+                                        <p:column style="width: 50%;">
+                                            <h:outputText value="Parámetro:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%;">
+                                            <h:outputText value="Unidad de medida:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column> 
+                                            <p:inputText value="#{parametroBean.parametroSeleccionado.nombre}" style="width: 100%; text-transform: uppercase;  "/>
+                                            <h:outputText value="#{parametroBean.msgNombre}" style=" color:  red" />
+                                            <h:outputText value="#{parametroBean.msgNombreRepetido}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column> 
+                                            <p:inputText value="#{parametroBean.parametroSeleccionado.unidad}" style="width: 100%"/>
+                                            <h:outputText value="#{parametroBean.msgUnidad}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Descripción:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:inputTextarea value="#{parametroBean.parametroSeleccionado.descripcion}" style="width: 100%"/>
+                                            <h:outputText value="#{parametroBean.msgDescripcion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{empleadoBean.btnCrear}" actionListener="#{parametroBean.validarFormularioModificar()}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{empleadoBean.btnCancelar}" value="Cancelar" id="btnCancel"   class="cancel" icon="fa fa-fw fa-close" actionListener="#{parametroBean.limpiar(0)}"  update=":padding" />
+                                    </div>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true"  visible="#{parametroBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este parámetro?"/>                                       
+                                    </p:panelGrid>                                  
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{parametroBean.modificar}"   oncomplete="PF('pgModificar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{parametroBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>  
+                    </p:outputPanel>  
+                    <p:outputPanel rendered="#{parametroBean.showData}">
+                        <p:panel id="custom" header="Administrar Parámetros" style="margin-bottom:20px">                          
+                            #{parametroBean.updateListaParametros()}
+                            <h:form id="fData">
+                                <p:fieldset>
+                                    <div align="left">
+                                        <p:commandButton title="Nuevo parámetro" id="add" style="#{empleadoBean.btnNuevo}" actionListener="#{parametroBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" />
+                                    </div>
+                                </p:fieldset>
+                                <p:dataTable   id="parametrosData"
+                                               var="parametro" widgetVar="parametrosData"
+                                               value="#{parametroBean.listaParametro}" 
+                                               paginator="true"
+                                               rows="10"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               rowsPerPageTemplate="5,10,15"
+                                               paginatorPosition="bottom"
+                                               currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                               emptyMessage="No se encontraron parámetros" rowIndexVar="No" >                                   
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('parametrosData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº"  style="width: 5%; text-align: center">  
+                                        <h:outputText value="#{No+1}"/>
+                                    </p:column>
+                                    <p:column headerText="Nombre" style=" width: 20%"  filterBy="#{parametro.nombre}" filterMatchMode="contains"  filterStyle="width: 100%" sortBy="#{parametro.nombre}"  >  
+                                        <h:outputText value="#{parametro.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="Unidad" style=" width: 15%" filterBy="#{parametro.unidad}" filterMatchMode="contains"  filterStyle="width: 100%" sortBy="#{parametro.unidad}"  >  
+                                        <h:outputText value="#{parametro.unidad}"/>
+                                    </p:column>
+                                    <p:column headerText="Descripción" style=" width: 51%" filterBy="#{parametro.descripcion}" filterMatchMode="contains"  filterStyle="width: 100%" sortBy="#{parametro.descripcion}"  >  
+                                        <h:outputText value="#{parametro.descripcion}"/>
+                                    </p:column>
+                                    <p:column style="width: 9%; text-align: center">
+                                        <p:splitButton  update=":padding"  oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{parametro.estado eq 1? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                            <f:setPropertyActionListener  value="#{parametro}" target="#{parametroBean.parametroSeleccionado}"  />
+                                            <p:menuitem  actionListener="#{parametroBean.enableShowUpdate}" update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                <f:setPropertyActionListener  value="#{parametro}" target="#{parametroBean.parametroSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{parametro.nombre}" target="#{parametroBean.nombreCopia}"  />
+                                            </p:menuitem>
+                                            <p:menuitem rendered="#{parametro.estado eq 1}" update=":padding"  oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-up" value="Dar de baja"    >
+                                                <f:setPropertyActionListener value="#{parametro}" target="#{parametroBean.parametroSeleccionado}" />
+                                            </p:menuitem>                                              
+                                            <p:menuitem rendered="#{parametro.estado eq 0}" update=":padding"  oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                <f:setPropertyActionListener value="#{parametro}" target="#{parametroBean.parametroSeleccionado}" />
+                                            </p:menuitem>                                              
+                                        </p:splitButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </p:panel>
+                        <p:dialog header="Datos del parámetro" widgetVar="dlVer" modal="true"  onHide="#{empleadoBean.limpiar(1)}" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel id="dlVerArea" style="width: 100%"  >
+                                    <p:panelGrid style="width: 100%">
+                                        <p:row>
+                                            <p:column style="width: 25%;">
+                                                <h:outputText value="Parámetro:"/>
+                                            </p:column>
+                                            <p:column> 
+                                                <h:outputText value="#{parametroBean.parametroSeleccionado.nombre}" style="width: 100%;"/>
+                                            </p:column>
+                                            <p:column style="width: 25%;">
+                                                <h:outputText value="Unidad de medida:"/>
+                                            </p:column>
+                                            <p:column> 
+                                                <h:outputText  value="#{parametroBean.parametroSeleccionado.unidad}" style="width: 100%"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column >
+                                                <h:outputText value="Descripción:"/>
+                                            </p:column>
+                                            <p:column colspan="3">
+                                                <h:outputText value="#{parametroBean.parametroSeleccionado.descripcion}" style="width: 100%"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column >
+                                                <h:outputText value="Estado"/>
+                                            </p:column>
+                                            <p:column colspan="3">
+                                                <h:outputText value="#{parametroBean.parametroSeleccionado.estado eq 1? 'Activo': 'Inactivo'}" style="width: 100%"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{parametroBean.generarParametro()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{parametroBean.generarParametroPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="dlBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+                                    <br></br>
+                                    <p:panelGrid id="panelBaja" >
+                                        <h:outputText value="¿Desea dar de baja a este parámetro?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton id="btnGuardarBaja" style="#{empleadoBean.btnNuevo}" actionListener="#{parametroBean.darDeBaja}" update=":padding"  value="Si"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelBaja" style="#{empleadoBean.btnCancelar}" actionListener="#{parametroBean.enableShowData}" update=":padding" value="No"> 
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="dlAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+                                    <br></br>
+                                    <p:panelGrid id="panelBaja" >
+                                        <h:outputText value="¿Desea dar de alta a este parámetro?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton id="btnGuardarBaja" style="#{empleadoBean.btnNuevo}" actionListener="#{parametroBean.darDeAlta()}" update=":padding"  value="Si"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelBaja" style="#{empleadoBean.btnCancelar}" actionListener="#{parametroBean.enableShowData}" update=":padding" value="No"> 
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#fin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminEntidades.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">store
+                                    </i></div>
+                                <div class="card-content">
+                                    <p class="category">Administración</p>
+                                    <h3 class="title" > <br></br>Cooperativas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar cooperativas.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminAreasCooperativas.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">business</i></div>
+                                <div class="card-content">
+                                    <p class="category">Administración</p>
+                                    <h3 class="title" > <br></br>Áreas</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar áreas.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminEmpleadosCooperativas.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">wc</i></div>
+                                <div class="card-content">
+                                    <p class="category">Administración</p>
+                                    <h3 class="title" > <br></br>Empleados</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar empleados.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>               
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminSociosCooperativas.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Administración</p>
+                                    <h3 class="title"><br></br>Socios</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Administrar socios.
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h:link outcome="adminReportesAdministracion.xhtml">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">find_in_page</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Administración</p>
+                                    <h3 class="title"><br></br>Reportes</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Ver reportes
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>                               
+            </ui:define>
+            <ui:define name="aux">
+                <h:outputScript name="./js/jquery-3.1.0.min.js" />
+                <script>
+                    $(document).ready(function () {
+                        $("#admin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

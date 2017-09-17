@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                </style>
+                <p:outputPanel id="padding"> 
+                    <p:growl id="msgs"  />
+                    <p:outputPanel  rendered="#{productorGrupalBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarProductor">
+                            <p:panel id="pRegistrarProductor" header="Agregar grupo de productores"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 50%">  <p:inputText id="text"  style=" width: 100%"  placeholder="Introduzca el nombre"  value="#{productorGrupalBean.productorGrupal.nombreProductorGrupal}" />
+                                            <h:outputText value="#{productorGrupalBean.msgNombre}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>  
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Ubicación:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca la ubicacion" value="#{productorGrupalBean.productorGrupal.ubicacionProductorGrupal}" /> 
+                                            <h:outputText value="#{productorGrupalBean.msgUbicacion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{productorGrupalBean.validarFormulario}"  update=":padding"    style="#{compradorBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton id="btnLimpiar" actionListener="#{productorGrupalBean.limpiar}" type="reset" icon="fa fa-minus" title="Cancelar" value="Limpiar" style="#{compradorBean.btnLimpiar}"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelar" actionListener="#{productorGrupalBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{productorGrupalBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este grupo de productores?"/>
+                                    </p:panelGrid>                                    
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" icon="fa fa-check" actionListener="#{productorGrupalBean.crear}"  update=":padding" oncomplete="PF('pgGuardar').hide()"  style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{productorGrupalBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{productorGrupalBean.showUpdate}" style=" width: 100%">
+                        <h:form id="fModificarProductor">
+                            <p:panel id="pModificarProductor" header="Modificar grupo de productores"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style=" width: 100%">
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1" style=" width: 100%">  <p:inputText id="text"  style=" width: 100%"  placeholder="Introduzca el nombre"  value="#{productorGrupalBean.productorGrupalSeleccionado.nombreProductorGrupal}" />
+                                            <h:outputText value="#{productorGrupalBean.msgNombre}" style=" color:  red" />                     
+                                        </p:column>
+                                    </p:row>  
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Ubicación:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"> 
+                                            <p:inputTextarea style=" width: 100%" placeholder="Introduzca la ubicacion" value="#{productorGrupalBean.productorGrupalSeleccionado.ubicacionProductorGrupal}" /> 
+                                            <h:outputText value="#{productorGrupalBean.msgUbicacion}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton title="Registrar" value="Guardar"  actionListener="#{productorGrupalBean.validarFormularioModificar}"  update=":padding"   icon="fa fa-check" style="#{compradorBean.btnCrear}">
+                                    </p:commandButton>                                    
+                                    <p:commandButton id="btnModificarCancelar" actionListener="#{productorGrupalBean.enableShowDataBean}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{compradorBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true" visible="#{productorGrupalBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este grupo de productores?"/>
+                                    </p:panelGrid>                                    
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorGrupalBean.modificar}"  update=":padding" oncomplete="PF('pgModificar').hide()" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{productorGrupalBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{productorGrupalBean.showData}" >
+                        <h:form>       
+                            #{productorGrupalBean.updateListaGrupos()}
+                            <p:panel id="pDatosProductores" header="Administrar grupos de productores" style="width: 100%; margin: auto; margin-bottom: 20px">
+                                <div align="center"> 
+                                    <p:fieldset>
+                                        <div align="left">
+                                            <p:commandButton title="Nuevo grupo de productores" id="add"  actionListener="#{productorGrupalBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{compradorBean.btnNuevo}"/>
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable  id="basicDT" var="productoresGrupal" widgetVar="gruposData"  paginator="true" rows="10" value="#{productorGrupalBean.listaProductorGrupal}"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  emptyMessage="No se encontraron grupos de productores"
+                                                  rowIndexVar="No" rowsPerPageTemplate="5,10,15"
+                                                  >                                       
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('gruposData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" width="5%" style="text-align: center">
+                                            <h:outputText value="#{No+1}"  />
+                                        </p:column>
+                                        <p:column headerText="Nombre" width="31%" filterBy="#{productoresGrupal.nombreProductorGrupal}" sortBy="#{productoresGrupal.nombreProductorGrupal}" filterStyle="width:100%"  >
+                                            <h:outputText value="#{productoresGrupal.nombreProductorGrupal}"  />
+                                        </p:column>
+                                        <p:column headerText="Ubicación" width="55%" filterBy="#{productoresGrupal.ubicacionProductorGrupal}" sortBy="#{productoresGrupal.ubicacionProductorGrupal}" filterStyle="width:100%"  >
+                                            <h:outputText value="#{productoresGrupal.ubicacionProductorGrupal}"  />
+                                        </p:column>
+                                        <p:column headerText="" width="9%" style="text-align: center"  >
+                                            <p:splitButton  update=":padding" oncomplete="PF('pgVer').show()" icon="fa fa-eye" style="#{productoresGrupal.estadoProductorGrupal eq true? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{productoresGrupal}" target="#{productorGrupalBean.productorGrupalSeleccionado}" />
+                                                <p:menuitem  value="Modificar" update=":padding"     
+                                                             actionListener="#{productorGrupalBean.enableShowUpdate}" icon=" fa fa-pencil">
+                                                    <f:setPropertyActionListener value="#{productoresGrupal}" target="#{productorGrupalBean.productorGrupalSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{productoresGrupal.nombreProductorGrupal}" target="#{productorGrupalBean.nombreAux}" />
+                                               
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{productoresGrupal.estadoProductorGrupal}" update=":padding"  oncomplete="PF('pgBaja').show()" icon="fa fa-arrow-down" value="Dar de baja">
+                                                    <f:setPropertyActionListener value="#{productoresGrupal}" target="#{productorGrupalBean.productorGrupalSeleccionado}" />
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{!productoresGrupal.estadoProductorGrupal}" update=":padding"  oncomplete="PF('pgAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{productoresGrupal}" target="#{productorGrupalBean.productorGrupalSeleccionado}" />
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de alta este grupo de productores?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorGrupalBean.darDeAlta}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea dar de baja este grupo de productores?" />
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{productorGrupalBean.darDeBaja}"  update=":padding" icon="fa fa-check" style="#{compradorBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelCerrar2"  update=":padding"  icon="fa fa-close"  value="No" style="#{compradorBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        <p:dialog  width="50%" header="Datos del grupo de productores" widgetVar="pgVer" modal="true"   visible="false"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel >
+                                    <p:panelGrid  style="width: 100%;"> 
+                                        <p:row style=" text-align:  left">
+                                            <p:column style=" width: 25%">
+                                                <h:outputText value="Nombre:"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{productorGrupalBean.productorGrupalSeleccionado.nombreProductorGrupal}"/> 
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="Estado:"/>
+                                            </p:column>
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="#{productorGrupalBean.productorGrupalSeleccionado.estadoProductorGrupal eq true? 'Activo':'Inactivo'}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row style=" text-align:  left">
+                                            <p:column colspan="1"> 
+                                                <h:outputText value="Ubicación:"/>
+                                            </p:column>
+                                            <p:column colspan="3"> 
+                                                <h:outputText value="#{productorGrupalBean.productorGrupalSeleccionado.ubicacionProductorGrupal}"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{productorGrupalBean.verReporteGrupo()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{productorGrupalBean.verReporteGrupoPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#agro").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

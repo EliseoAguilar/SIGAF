@@ -1,0 +1,762 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <p:outputPanel id="padding"  > 
+
+
+
+                    <p:outputPanel rendered="#{partidaBean.showData}">
+
+
+                        <p:panel id="opAdmiPol" header="Administrar partidas" style="margin-bottom:20px">
+                            <!-- Actualiza la lista de las Entidades -->
+                            #{partidaBean.updateListaEntidades()}
+
+
+
+
+
+                            <h:form id="fFiltro"> 
+                                <p:fieldset>
+                                    <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder" >
+
+                                        <p:row>
+                                            <p:column style=" width: 50%" >
+                                                <h:outputText value="Entidad:*" /> 
+                                            </p:column>
+
+                                            <p:column style=" width: 20%" >
+                                                <h:outputText value="" /> 
+                                            </p:column>
+
+                                            <p:column style=" width: 15%" >
+                                                <h:outputText value="Ejercicio:*" /> 
+                                            </p:column>
+
+                                            <p:column style=" width: 15%" >
+                                                <h:outputText value="Periodo:*" /> 
+                                            </p:column>
+
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column >
+                                                <p:outputPanel id="opPrede" rendered="#{partidaBean.estadoPredeterminado eq true? true:true}" >
+                                                    <p:selectOneMenu id="car" disabled="#{partidaBean.estadoPredeterminado}"  value="#{partidaBean.idEntidad}" style=" width: 100%;" > 
+                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                        <f:selectItems  var="end" value="#{partidaBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                                        <p:ajax update=":padding"></p:ajax>
+                                                    </p:selectOneMenu>
+                                                </p:outputPanel>
+                                            </p:column>
+
+                                            <!-- Actualiza la lista de Ejercicios -->
+                                            #{partidaBean.updateListaEjercicios()}
+
+                                            <!-- Actualiza la lista de Periodos -->
+                                            #{partidaBean.updateListaPeriodos()}
+
+                                            <p:column > 
+
+                                                <p:outputPanel rendered="#{partidaBean.idEntidad eq 0? false : true}">
+                                                    <p:selectBooleanCheckbox value="#{partidaBean.estadoPredeterminado}" >
+                                                        <p:ajax update="opPrede" listener="#{partidaBean.cambiarPredeterminado()}" />
+                                                    </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
+                                                </p:outputPanel>
+
+                                            </p:column>                                            <p:column>
+                                                <p:selectOneMenu id="sArea" value="#{partidaBean.idEjer}" style="width:100%; " >
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{partidaBean.listaEjercicios}" var="l" itemLabel="#{l.ahoEjercicio}" itemValue="#{l.idEjercicio}" />
+                                                    <p:ajax update=":padding"></p:ajax>
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            <p:column>
+                                                <p:selectOneMenu id="sPer" value="#{partidaBean.idPeriodo}" style="width:100%; " >
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{partidaBean.listaPeriodos}" var="l" itemLabel="#{l.mesPeriodo}" itemValue="#{l.idPeriodo}" />
+                                                    <p:ajax update=":padding"></p:ajax>
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                            </h:form>
+
+                            <br></br>
+
+
+                            <p:outputPanel rendered="#{partidaBean.idPeriodo eq 0 ? false:true}" >
+                                <!-- Actualiza la lista de Partidas -->
+                                #{partidaBean.updateListaPartida()}
+
+                                <h:form >
+                                    <p:fieldset rendered="#{partidaBean.idPeriodo eq partidaBean.periodo.idPeriodo? true:false}" >
+                                        <p:commandButton   title="Nueva partida"   actionListener="#{partidaBean.enableShowCreateBean()}" update=":padding"    icon="fa fa-plus"  style="#{partidaBean.btnNuevo}" >
+                                        </p:commandButton>
+                                    </p:fieldset>
+
+                                    <p:dataTable   id="dtDatosPeriodos"
+                                                   var="par" 
+                                                   value="#{partidaBean.listaPartida}" 
+                                                   rowIndexVar="No"
+                                                   rows="10"
+                                                   paginator="true"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   widgetVar="datosPar"
+                                                   emptyMessage="No se encontraron partidas."
+                                                   >
+
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <p:inputText id="globalFilter" onkeyup="PF('datosPar').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:columnGroup type="header">
+
+                                            <p:row>
+                                                <p:column headerText="Nº" width="5%" />
+                                                <p:column width="15%" headerText="No. Partida"  sortBy="#{par.numeroPartida}" filterBy="#{par.numeroPartida}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="Concepto"  sortBy="#{par.conceptoPartida}" filterBy="#{par.conceptoPartida}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column width="15%" headerText="Fecha"   sortBy="#{par.fechaPartida}" filterBy="#{par.fechaPartida}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column width="9%">
+                                                </p:column>
+
+                                            </p:row>
+
+                                        </p:columnGroup>
+
+
+                                        <p:column style="text-align: center">
+                                            <h:outputText value="#{No+1}" />
+                                        </p:column>
+
+                                        <p:column style="text-align: center">
+                                            <h:outputText value="#{par.numeroPartida}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{par.conceptoPartida}"/>
+
+                                        </p:column>
+
+                                        <p:column style="text-align: center">
+                                            <h:outputText  value="#{par.fechaPartida}">
+                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column >
+
+                                            <center>
+
+                                                <p:splitButton  update=":opDataPartida"  oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{partidaBean.btnDarDeAlta}" >
+                                                    <f:setPropertyActionListener value="#{par}" target="#{partidaBean.partidaSeleccionada}"  />
+
+                                                    <p:menuitem value="Modificar" update=":padding" icon="fa fa-pencil"   actionListener="#{partidaBean.enableShowUpdate()}"
+                                                                disabled="#{ (par.TValorActivos.size() eq 0 ? false : true) || (par.TDepreciacions.size() eq 0 ? false: true ) || (par.TBajaActivoFijos.size() eq  0 ? false : true ) }">
+                                                        <f:setPropertyActionListener value="#{par}" target="#{partidaBean.partidaSeleccionada}"  />
+                                                    </p:menuitem>
+
+                                                    <p:menuitem value="Eliminar"  icon="fa fa-trash"  oncomplete="PF('dlBaja').show()"  
+                                                                disabled="#{ (par.TValorActivos.size() eq 0 ? false : true) || (par.TDepreciacions.size() eq 0 ? false: true ) || (par.TBajaActivoFijos.size() eq  0 ? false : true ) }"   >
+                                                        <f:setPropertyActionListener value="#{par}"   target="#{partidaBean.partidaSeleccionada}"  />
+                                                    </p:menuitem>
+
+                                                </p:splitButton>
+
+
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:outputPanel>
+
+
+                        </p:panel>
+
+                    </p:outputPanel>
+
+                    <p:growl id="msgs"   />
+
+                    <p:outputPanel rendered="#{partidaBean.showCreate}" id="opCrearPartida"  >
+
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogPeriodoEjer" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{partidaBean.estadoFormulario}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.crear}"  update=":padding"  style="#{partidaBean.btnNuevo}"> </p:commandButton>
+                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{partidaBean.btnCancelar}"  >
+                                        <f:setPropertyActionListener value="#{false}" target="#{partidaBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+
+                        <h:form id="fAgregarPoliza">
+                            <p:panel id="basic" header="Agregar partida"  style="width: 90%; margin: auto; margin-bottom: 20px">
+                                <br></br>
+                                <b> <h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Numero: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Fecha: *" />
+                                        </p:column>         
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+
+                                            <p:inputText id="tNumero" style="width: 100%" value="#{partidaBean.numPartida}"  readonly="true"/>
+
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                        <p:column>
+
+                                            <p:calendar id="cFechaIngreso" showOn="button" value="#{partidaBean.partida.fechaPartida}"  maxdate="#{partidaBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy" readonly="true"/>
+
+
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b> <h:outputText value="Transacción"/></b>
+                                <hr></hr>
+
+
+                                <p:panelGrid id="addPanelTras"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Código:*" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Destino:*" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Cantidad:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tCodigo"  value="#{partidaBean.cuenta.codigoCuenta}" style="width: 80%; " readonly="true"/> 
+                                            <p:commandButton    update=":opBuscarCuenta" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{partidaBean.msgNo}" style=" color:  red"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="srDestino" value="#{partidaBean.detallePartida.tipoSaldoDetallePartida}" style="width: 100%; ">
+                                                <f:selectItem itemLabel="Debe&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Debe" />
+                                                <f:selectItem itemLabel="Haber&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Haber" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputNumber id="tValor" value="#{partidaBean.detallePartida.saldoDetallePartida}"   style="width:80%; "/>  
+                                            <p:commandButton  update=":opCrearPartida" actionListener="#{partidaBean.addListaDetallePartida()}"  icon="fa fa-plus"  style="#{partidaBean.btnNuevo}" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{partidaBean.msgCantidad}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+
+
+
+                                <br></br>
+                                <p:dataTable   id="dtTras"
+                                               emptyMessage="No se encontraron transacciones."
+                                               var="detPar" 
+                                               value="#{partidaBean.listaDetallePartida}" 
+                                               rowIndexVar="i"
+                                               >
+
+
+                                    <p:columnGroup type="header">
+
+                                        <p:row>
+                                            <p:column headerText="Código" width="20%"/>
+                                            <p:column headerText="Nombre Cuenta"/>
+                                            <p:column headerText="Debe" width="20%"/>
+                                            <p:column headerText="Haber" width="20%"/>
+                                            <p:column headerText="" width="10%"/>
+                                        </p:row>
+
+                                    </p:columnGroup>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right">
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right">
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column>
+                                        <center>
+
+                                            <p:splitButton   icon="fa fa-pencil"  actionListener="#{partidaBean.editListaDetallePartida(i)}" 
+                                                             update=":opCrearPartida">
+
+                                                <p:menuitem value="Eliminar" icon="fa fa-trash"  actionListener="#{partidaBean.removeDetalle(i)}" 
+                                                            update=":opCrearPartida">
+                                                </p:menuitem>
+                                            </p:splitButton>
+
+
+                                        </center>
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+                                <h:outputText value="#{partidaBean.msgDetallePar}" style=" color:  red"/>
+                                <br></br>
+                                <p:panelGrid class="noBoder" style="width: 100%; margin: auto;">       
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <h:outputText value="Concepto:*"/>
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <p:inputTextarea id="taConcepto" rows="2" cols="90" style="width: 100%; " value="#{partidaBean.partida.conceptoPartida}"/>
+                                            <h:outputText value="#{partidaBean.msgConcepto}" style=" color:  red"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Totales"/></b>
+                                <hr></hr>
+                                <h:outputText value="Debe: "/>   <h:outputText value="#{partidaBean.totalDebe}">  <f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText> 
+                                <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{partidaBean.totalHaber}">  <f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText>  
+                                <br></br>
+                                <h:outputText value="#{partidaBean.msgCuadre}" style=" color:  red"/>
+
+                                <br></br>
+
+                                <center>
+                                    <p:commandButton id="btnAgregar"    icon="fa fa-check" style="#{partidaBean.btnCrear}" value="Guardar" actionListener="#{partidaBean.validarFormulario}" update=":opCrearPartida" > 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnLimpiar" actionListener="#{partidaBean.limpiar()}" update=":opCrearPartida"  icon="fa fa-minus"  style="#{partidaBean.btnLimpiar}"  value="Limpiar"> 
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelar" actionListener="#{partidaBean.enableShowDataBean()}"  update=":padding"    icon="fa fa-close" style="#{partidaBean.btnCancelar}"   value="Cancelar" > 
+                                    </p:commandButton>
+                                </center>
+                            </p:panel>
+
+                        </h:form>
+
+
+                    </p:outputPanel>
+
+
+                    <p:outputPanel id="opBuscarCuenta" rendered="#{ partidaBean.showCreate? true: (partidaBean.showUpdate? true:false) }" >
+                        <!-- Actulizando la lista de Cuentas que pueden ser usadas en las partidas -->
+                        #{partidaBean.updateListaCuentas()}
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaActivo"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaActivo"> 
+
+                                <p:dataTable var="cue" value="#{partidaBean.listaCuentas}" 
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas."
+                                             widgetVar="companyTable"
+                                             >  
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                              headerText="Código"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="40%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column> 
+
+                                    <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Cuenta padre"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                    </p:column> 
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton  update="#{ partidaBean.showCreate? ':opCrearPartida': (partidaBean.showUpdate? ':opActualizarPartida': '' ) }" oncomplete="PF('dgBuscarCuentaActivo').hide()"  icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{partidaBean.cuenta}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog> 
+
+                    </p:outputPanel>
+
+
+                    <p:outputPanel rendered="#{partidaBean.showUpdate}" id="opActualizarPartida">
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{partidaBean.estadoFormulario}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.actualizar()}"  oncomplete="PF('dialogActualizar').hide()" update=":padding"  style="#{partidaBean.btnNuevo}"> </p:commandButton>
+                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogActualizar').hide()"   style="#{partidaBean.btnCancelar}"  >
+                                        <f:setPropertyActionListener value="#{false}" target="#{partidaBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        <h:form id="fEditarPoliza">
+                            <p:panel id="basic" header="Modificar partida"  style="width: 90%; margin: auto; margin-bottom: 20px" >
+                                <br></br>
+                                <b><h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Numero: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Fecha: *" />
+                                        </p:column>         
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tNumero" style="width: 100%" value="#{partidaBean.partidaSeleccionada.numeroPartida}"  readonly="true"/>
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                        <p:column>
+                                            <p:calendar id="cFechaIngreso"  showOn="button" value="#{partidaBean.partidaSeleccionada.fechaPartida}"  maxdate="#{partidaBean.partidaSeleccionada.fechaPartida}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy" readonly="true"/>
+                                        </p:column>
+                                    </p:row>
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b>  <h:outputText value="Transacción"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPanelTras"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Código: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Destino: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Cantidad: *"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="tCodigo"  value="#{partidaBean.cuenta.codigoCuenta}" style="width: 80%; " readonly="true"/> 
+                                            <p:commandButton   oncomplete="PF('dgBuscarCuentaActivo').show()" update=":opBuscarCuenta" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{partidaBean.msgNo}" style=" color:  red"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="srDestino" value="#{partidaBean.detallePartida.tipoSaldoDetallePartida}" style="width: 100%; ">
+                                                <f:selectItem itemLabel="Debe&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Debe" />
+                                                <f:selectItem itemLabel="Haber&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Haber" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputNumber id="tValor" value="#{partidaBean.detallePartida.saldoDetallePartida}"   style="width:80%; "/>  
+                                            <p:commandButton  update=":opActualizarPartida" actionListener="#{partidaBean.addListaDetallePartida()}"  icon="fa fa-plus"  style="#{partidaBean.btnNuevo}" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{partidaBean.msgCantidad}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <p:dataTable   id="dtTras"
+                                               var="detPar" 
+                                               emptyMessage="No se encontraron transacciones."
+                                               value="#{partidaBean.listaDetallePartida}" 
+                                               rowIndexVar="i"
+
+                                               >
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="Código" width="20%"/>
+                                            <p:column headerText="Nombre Cuenta "/>
+                                            <p:column headerText="Debe" width="20%"/>
+                                            <p:column headerText="Haber" width="20%"/>
+                                            <p:column headerText="" width="10%"/>
+                                        </p:row>
+                                    </p:columnGroup>
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <center>
+                                            <p:splitButton   icon="fa fa-pencil"  actionListener="#{partidaBean.editListaDetallePartida(i)}" 
+                                                             update=":opActualizarPartida" >
+                                                <p:menuitem value="Eliminar" icon="fa fa-trash"  actionListener="#{partidaBean.removeDetalle(i)}" 
+                                                            update=":opActualizarPartida">
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center>
+                                    </p:column>
+                                </p:dataTable>
+                                <h:outputText value="#{partidaBean.msgDetallePar}" style=" color:  red"/>
+                                <br></br>
+                                <p:panelGrid class="noBoder" style="width: 100%; margin: auto;" >
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <h:outputText value="Concepto: *"/>
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <p:inputTextarea id="taConcepto" rows="2" cols="90" style="width: 100%; " value="#{partidaBean.partidaSeleccionada.conceptoPartida}"/>
+                                            <h:outputText value="#{partidaBean.msgConcepto}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Totales"/></b>
+                                <hr></hr>
+                                <h:outputText value="Debe: "/>   <h:outputText value="#{partidaBean.totalDebe}"><f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText> 
+                                <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Haber: "/>  <h:outputText value="#{partidaBean.totalHaber}"><f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText>  
+                                <br></br>
+                                <h:outputText value="#{partidaBean.msgCuadre}" style=" color:  red"/>
+
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnAgregar"    icon="fa fa-check" style="#{partidaBean.btnCrear}" value="Guardar" actionListener="#{partidaBean.validarFormularioModificar()}" update=":opActualizarPartida" > 
+                                    </p:commandButton>
+
+                                    <p:commandButton id="btnCancelar" actionListener="#{partidaBean.enableShowDataBean()}"  update=":padding"    icon="fa fa-close" style="#{partidaBean.btnCancelar}"   value="Cancelar" > 
+                                    </p:commandButton>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                    </p:outputPanel>
+
+                    <p:dialog header="Confirmar" widgetVar="dlBaja" modal="true"   visible="false"  resizable="true" responsive="true" width="35%" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                        <h:form id="eliminar">                 
+                            <p:outputPanel style="text-align:center;">
+                                <p:panelGrid>
+                                    <h:outputText value="¿Desea eliminar esta partida?"  />
+                                    <br></br>
+                                    <br></br>
+                                </p:panelGrid>
+                                <hr></hr>
+                                <center>
+                                    <p:commandButton value="Si" actionListener="#{partidaBean.eliminar()}" update=":padding" style="#{partidaBean.btnNuevo}">
+                                    </p:commandButton>
+                                    <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"  style="#{partidaBean.btnCancelar}"  value="No"> 
+                                    </p:commandButton>
+                                </center>
+                            </p:outputPanel>
+                        </h:form>
+                    </p:dialog>
+
+                    <p:outputPanel id="opDataPartida">
+                        <p:dialog header="Datos de la partida" width="80%" widgetVar="dlVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form  target="_blank">
+                                <b><h:outputText value="Generales"/></b>
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column style="width: 15%; ">
+                                            <h:outputText value="Numero: " />
+                                        </p:column>
+                                        <p:column>
+
+                                            <h:outputText id="tNumero" style="width: 100%" value="#{partidaBean.partidaSeleccionada.numeroPartida}"  />
+
+                                        </p:column>
+                                        <p:column style="width: 40%; ">
+
+                                        </p:column>
+                                        <p:column style="width: 15%; ">
+                                            <h:outputText value="Fecha: " />
+                                        </p:column>   
+                                        <p:column>
+
+                                            <h:outputText id="cFechaIngreso" value="#{partidaBean.partidaSeleccionada.fechaPartida}"  style="width:100%" >
+                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:row>
+
+
+                                </p:panelGrid>
+                                <br></br>
+
+                                <p:dataTable   id="dtTras"
+
+                                               var="detPar" 
+                                               value="#{partidaBean.listaDetallePartida}" 
+                                               rowIndexVar="i"
+                                               >
+                                    <p:columnGroup type="header">
+
+                                        <p:row>
+                                            <p:column headerText="Código" width="25%"/>
+                                            <p:column headerText="Nombre Cuenta"/>
+                                            <p:column headerText="Debe" width="20%"/>
+                                            <p:column headerText="Haber" width="20%"/>
+
+                                        </p:row>
+
+                                    </p:columnGroup>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h:outputText value="#{partidaBean.msgDetallePar}" style=" color:  red"/>
+                                <br></br>
+                                <p:panelGrid  style="width: 100%; margin: auto;">
+                                    <p:row>
+                                        <p:column >
+                                            <h:outputText value="Concepto:"/>
+                                        </p:column>
+                                        <p:column colspan="5">
+                                            <h:outputText id="taConcepto" style="width: 100%; " value="#{partidaBean.partidaSeleccionada.conceptoPartida}"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b> <h:outputText value="Totales"/></b>
+                                <hr></hr>
+                                <h:outputText value="Debe: "/>   <h:outputText value="#{partidaBean.totalDebe}"><f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText> 
+                                <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{partidaBean.totalHaber}"> <f:convertNumber     pattern=",#00.00" locale="en-US" /></h:outputText> 
+                                <br></br>
+
+
+
+                                <br></br>
+                                <center>
+                                    <p:splitButton  value="Ver PDF" ajax="false" actionListener="#{partidaBean.generarReportePartida()}" icon="fa fa-eye"  >
+                                        <p:menuitem value="Descargar PDF"   ajax="false"  
+                                                    actionListener="#{partidaBean.generarReportePartidaPDF()}" icon=" fa fa-download" >
+                                        </p:menuitem>   
+                                    </p:splitButton>
+                                </center>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TPagoAgronegocio" table="t_pago_agronegocio" schema="public" optimistic-lock="version">
+        <id name="idPagoAgronegocio" type="int">
+            <column name="id_pago_agronegocio" />
+               <generator class="sequence">
+                <param name="sequence">t_pago_agronegocio_id_pago_agronegocio_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TAgronegocio" class="com.sigaf.pojo.TAgronegocio" fetch="select">
+            <column name="idagronegocio" />
+        </many-to-one>
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="131089" scale="0" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="interes" type="big_decimal">
+            <column name="interes" precision="131089" scale="0" />
+        </property>
+        <property name="otrosinteres" type="big_decimal">
+            <column name="otrosinteres" precision="131089" scale="0" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" />
+        </property>
+        <property name="forma" type="string">
+            <column name="forma" />
+        </property>
+        <property name="cheque" type="string">
+            <column name="cheque" />
+        </property>
+        <property name="dias" type="java.lang.Integer">
+            <column name="dias" />
+        </property>
+        <property name="comision" type="big_decimal">
+            <column name="comision" precision="131089" scale="0" />
+        </property>
+         <property name="referencia" type="java.lang.Integer">
+            <column name="referencia" />
+        </property>
+    </class>
+</hibernate-mapping>

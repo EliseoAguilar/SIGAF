@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteAreas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b032029-aa90-4d5c-975f-c481a64fe9ec">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     t_area."id_area" AS t_area_id_area,
+     t_area."nombre_area" AS t_area_nombre_area,
+     t_area."codigo_area" AS t_area_codigo_area,
+     t_area."identidad_area" AS t_area_identidad_area,
+     t_area."estado_area" AS t_area_estado_area
+FROM
+     "public"."t_area" t_area
+WHERE
+     identidad_area = 1 and t_area."estado_area"=$P{estado}
+ORDER BY
+     t_area."nombre_area"]]>
+	</queryString>
+	<field name="id_area" class="java.lang.Integer"/>
+	<field name="nombre_area" class="java.lang.String"/>
+	<field name="codigo_area" class="java.lang.String"/>
+	<field name="identidad_area" class="java.lang.Integer"/>
+	<field name="estado_area" class="java.lang.Boolean"/>
+	<field name="t_area_id_area" class="java.lang.Integer"/>
+	<field name="t_area_nombre_area" class="java.lang.String"/>
+	<field name="t_area_codigo_area" class="java.lang.String"/>
+	<field name="t_area_identidad_area" class="java.lang.Integer"/>
+	<field name="t_area_estado_area" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="104" width="555" height="1" uuid="4701bfda-1cd5-4bdd-99ff-061119b2345f"/>
+			</line>
+			<subreport>
+				<reportElement x="10" y="0" width="200" height="81" uuid="1a900ca1-d750-4fc9-8b1e-4dd948042184"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="0" y="81" width="555" height="20" uuid="57528a5a-819f-4257-9cd3-dc8ca0c54346"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE ÁREAS ACTIVAS </style>":"<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE ÁREAS INACTIVAS </style>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="3" width="100" height="20" uuid="fa9db2c9-7769-4730-a0e7-e4cebfe39faf"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="3" width="100" height="20" uuid="0d86eb04-db63-475c-ae32-e0fb2e51d1bb"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="dc8d81ad-e37e-4a00-b1ca-2955a3d181b5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="17" y="0" width="185" height="20" uuid="c684ed1c-364c-49f5-8109-bf8f2d8fcba7"/>
+				<textFieldExpression><![CDATA[$F{nombre_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="0" width="100" height="20" uuid="e9e1c63b-8641-4c7c-a722-e750626a0561"/>
+				<textFieldExpression><![CDATA[$F{codigo_area}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="18" width="80" height="20" uuid="6c094651-613d-4080-a0d1-cf31dde6a117"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="18" width="40" height="20" uuid="fc54c4d8-51f1-4e34-9292-5921083d4014"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

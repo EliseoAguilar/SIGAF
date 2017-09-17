@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BitacoraSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4eac451d-0ed7-43d3-882d-5ff05d29af6d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha1" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_usuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from t_bitacora b where b.id_usuario_bitacora=$P{id_usuario} and b.fecha_bitacora between $P{fecha1} and $P{fecha2}]]>
+	</queryString>
+	<field name="id_bitacora" class="java.lang.Integer"/>
+	<field name="id_usuario_bitacora" class="java.lang.Integer"/>
+	<field name="fecha_bitacora" class="java.sql.Date"/>
+	<field name="hora_bitacora" class="java.sql.Time"/>
+	<field name="table_bitacora" class="java.lang.String"/>
+	<field name="accion_bitacora" class="java.lang.String"/>
+	<field name="id_table_bitacora" class="java.lang.String"/>
+	<field name="datos_bitacora" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="1cfbc944-1464-43c4-81b4-9a9802928017"/>
+			</line>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="044aee34-2b66-46a6-9b61-5303fb5bf9ba"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="ae5a9647-d3aa-4f76-8735-e34d2b965437"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TABLA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="e1b65762-1769-4309-aeff-240bdb1c921a"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACCIÓN ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="1" width="100" height="20" uuid="9f6dc9ef-1e03-43db-ae9a-e35cd03bdf13"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="2" width="86" height="20" uuid="5c13f050-980f-40c4-9888-68c69c8a349d"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="169" height="20" isPrintWhenDetailOverflows="true" uuid="40a22153-0bf1-413a-8f44-4416060f717b"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="1" width="100" height="20" uuid="fdf8d1cd-8372-4582-a155-610de08d6a7a"/>
+				<textFieldExpression><![CDATA[$F{table_bitacora}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="469" y="0" width="86" height="20" uuid="a5f5b097-3248-42de-8c3d-207c9b571830"/>
+				<textFieldExpression><![CDATA[$F{hora_bitacora}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="369" y="0" width="100" height="20" uuid="f6f15ee7-bd7b-49dd-b7da-4e88a5d48dba"/>
+				<textFieldExpression><![CDATA[$F{fecha_bitacora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="100" y="1" width="100" height="20" uuid="99836e85-b0b7-46d1-adab-e73e5528e094"/>
+				<textFieldExpression><![CDATA[$F{accion_bitacora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="200" y="1" width="169" height="20" uuid="a190dce5-3fc9-45ad-ace2-0f7f6b33749c"/>
+				<textFieldExpression><![CDATA[$F{datos_bitacora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

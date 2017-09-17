@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-07-2017 10:04:28 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TParametroseguimiento" table="t_parametroseguimiento" schema="public" optimistic-lock="version">
+        <id name="idparametro" type="int">
+            <column name="idparametro" />
+             <generator class="sequence">
+                <param name="sequence">t_parametro_seguimiento_id_parametro_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="unidad" type="string">
+            <column name="unidad" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <set name="TParametros" table="t_parametro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_parametro_seguimiento" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TParametro" />
+        </set>
+    </class>
+</hibernate-mapping>

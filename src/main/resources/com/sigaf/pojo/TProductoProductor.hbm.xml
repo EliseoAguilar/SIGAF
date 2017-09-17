@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProductoProductor" table="t_producto_productor" schema="public" optimistic-lock="version">
+        <id name="idproductoproductor" type="int">
+            <column name="idproductoproductor" />
+                    <generator class="sequence">
+                <param name="sequence">t_producto_productor_id_producto_productor_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProducto" class="com.sigaf.pojo.TProducto" fetch="select">
+            <column name="idproducto" />
+        </many-to-one>
+        <many-to-one name="TProductorIndividual" class="com.sigaf.pojo.TProductorIndividual" fetch="select">
+            <column name="idproductor" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

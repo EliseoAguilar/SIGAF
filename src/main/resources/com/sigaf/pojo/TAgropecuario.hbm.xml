@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TAgropecuario" table="t_agropecuario" schema="public" optimistic-lock="version">
+        <id name="idAgropecuario" type="int">
+            <column name="id_agropecuario" />
+            <generator class="sequence">
+                <param name="sequence">t_agropecuario_id_agropecuario_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="id_proyecto" />
+        </many-to-one>
+        <property name="actividadAgropecuario" type="string">
+            <column name="actividad_agropecuario" />
+        </property>
+        <property name="tiempoAgropecuario" type="java.lang.Integer">
+            <column name="tiempo_agropecuario" />
+        </property>
+    </class>
+</hibernate-mapping>

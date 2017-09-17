@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmpleadoGeneral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="818" leftMargin="12" rightMargin="12" topMargin="20" bottomMargin="20" uuid="3387ece1-afa5-44bd-8fdc-7b147b3aaacd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_empleado."correo_empleado" AS t_empleado_correo_empleado,
+     t_empleado."dui_empleado" AS t_empleado_dui_empleado,
+     t_empleado."nit_empleado" AS t_empleado_nit_empleado,
+     t_empleado."fechanacimiento_empleado" AS t_empleado_fechanacimiento_empleado,
+     t_empleado."salario_empleado" AS t_empleado_salario_empleado,
+     t_empleado."fechaingreso_empleado" AS t_empleado_fechaingreso_empleado,
+     t_empleado."telefono_empleado" AS t_empleado_telefono_empleado,
+     t_empleado."celular_empleado" AS t_empleado_celular_empleado,
+     t_empleado."sexo_empleado" AS t_empleado_sexo_empleado,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_empleado."estado_empleado" AS t_empleado_estado_empleado,
+     t_empleado."foto_empleado" AS t_empleado_foto_empleado,
+     t_empleado."lugar_nacimiento_empleado" AS t_empleado_lugar_nacimiento_empleado,
+     t_empleado."tipo_empleado" AS t_empleado_tipo_empleado,
+     t_empleado."estado_socio" AS t_empleado_estado_socio,
+     t_area."id_area" AS t_area_id_area,
+     t_area."nombre_area" AS t_area_nombre_area,
+     t_area."codigo_area" AS t_area_codigo_area,
+     t_area."identidad_area" AS t_area_identidad_area,
+     t_area."estado_area" AS t_area_estado_area,
+     t_empleado_area."id_empleado_area" AS t_empleado_area_id_empleado_area,
+     t_empleado_area."id_empleado" AS t_empleado_area_id_empleado,
+     t_empleado_area."id_area" AS t_empleado_area_id_area,
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_entidad."nombre_entidad" AS t_entidad_nombre_entidad,
+     t_entidad."giro_entidad" AS t_entidad_giro_entidad,
+     t_entidad."correo_entidad" AS t_entidad_correo_entidad,
+     t_entidad."direccion_entidad" AS t_entidad_direccion_entidad,
+     t_entidad."nit_entidad" AS t_entidad_nit_entidad,
+     t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."nombre_representante_entidad" AS t_entidad_nombre_representante_entidad,
+     t_entidad."codigo_cliente_entidad" AS t_entidad_codigo_cliente_entidad,
+     t_entidad."telefono_entidad" AS t_entidad_telefono_entidad,
+     t_entidad."celular_entidad" AS t_entidad_celular_entidad,
+     t_entidad."mision_entidad" AS t_entidad_mision_entidad,
+     t_entidad."vision_entidad" AS t_entidad_vision_entidad,
+     t_entidad."acta_entidad" AS t_entidad_acta_entidad,
+     t_entidad."estado_entidad" AS t_entidad_estado_entidad,
+     t_entidad."credencial_entidad" AS t_entidad_credencial_entidad,
+     t_entidad."logo_entidad" AS t_entidad_logo_entidad,
+     t_entidad."dui_representante_entidad" AS t_entidad_dui_representante_entidad,
+     t_entidad."nit_representante_entidad" AS t_entidad_nit_representante_entidad,
+     t_entidad."abreviacion_entidad" AS t_entidad_abreviacion_entidad
+FROM
+     "public"."t_area" t_area INNER JOIN "public"."t_empleado_area" t_empleado_area ON t_area."id_area" = t_empleado_area."id_area"
+     INNER JOIN "public"."t_empleado" t_empleado ON t_empleado_area."id_empleado" = t_empleado."id_empleado"
+     INNER JOIN "public"."t_entidad" t_entidad ON t_area."identidad_area" = t_entidad."id_entidad" where t_entidad.id_entidad=1
+and t_empleado."estado_empleado" = $P{estado}]]>
+	</queryString>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_empleado_correo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_dui_empleado" class="java.lang.String"/>
+	<field name="t_empleado_nit_empleado" class="java.lang.String"/>
+	<field name="t_empleado_fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_salario_empleado" class="java.lang.Float"/>
+	<field name="t_empleado_fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_telefono_empleado" class="java.lang.String"/>
+	<field name="t_empleado_celular_empleado" class="java.lang.String"/>
+	<field name="t_empleado_sexo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_empleado_estado_empleado" class="java.lang.Boolean"/>
+	<field name="t_empleado_foto_empleado" class="java.lang.String"/>
+	<field name="t_empleado_lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="t_empleado_tipo_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_estado_socio" class="java.lang.Boolean"/>
+	<field name="t_area_id_area" class="java.lang.Integer"/>
+	<field name="t_area_nombre_area" class="java.lang.String"/>
+	<field name="t_area_codigo_area" class="java.lang.String"/>
+	<field name="t_area_identidad_area" class="java.lang.Integer"/>
+	<field name="t_area_estado_area" class="java.lang.Boolean"/>
+	<field name="t_empleado_area_id_empleado_area" class="java.lang.Integer"/>
+	<field name="t_empleado_area_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_area_id_area" class="java.lang.Integer"/>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_nombre_entidad" class="java.lang.String"/>
+	<field name="t_entidad_giro_entidad" class="java.lang.String"/>
+	<field name="t_entidad_correo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_direccion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_entidad" class="java.lang.String"/>
+	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nombre_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="t_entidad_telefono_entidad" class="java.lang.String"/>
+	<field name="t_entidad_celular_entidad" class="java.lang.String"/>
+	<field name="t_entidad_mision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_vision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_acta_entidad" class="java.lang.String"/>
+	<field name="t_entidad_estado_entidad" class="java.lang.Boolean"/>
+	<field name="t_entidad_credencial_entidad" class="java.lang.String"/>
+	<field name="t_entidad_logo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<variable name="t_empleado_foto_empleado_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{t_empleado_foto_empleado}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="145" y="0" width="445" height="79" uuid="095bd823-9d9f-4fb5-9683-5ebf66388cf8"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="0" width="818" height="42" uuid="827414c0-a57c-4a44-8cc4-0117f011b4f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE GENERAL DE EMPLEADOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="1" width="100" height="20" uuid="a6ea1624-0ce7-45d2-a726-cceb39755834"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="2" width="77" height="20" uuid="e40d388b-40af-4ab4-a0c3-8878a17018ad"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="2" width="100" height="20" uuid="d17fb0bc-87ab-4e89-bdee-03f634031854"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="3" uuid="0b1cfbfd-93b7-464b-abc3-21ea0a271346"/>
+			</line>
+			<staticText>
+				<reportElement x="351" y="2" width="100" height="20" uuid="a84cb1c4-da3d-45fa-8828-93dc6a6abbbe"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="637" y="2" width="122" height="20" isPrintWhenDetailOverflows="true" uuid="729bbbed-f71c-458a-aef0-24c48d1b0dcd"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA INGRESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="1" width="100" height="20" uuid="6bc2c255-5145-499b-bba1-59d09e84c308"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARGO(S)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="2" width="100" height="20" uuid="2d817d84-db37-4776-8011-1ad1b2a2b7f4"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ÁREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="726" y="2" width="100" height="20" uuid="1feafcbf-a949-49c1-90b0-0ac382e7984a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="106" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="4" width="156" height="20" uuid="61aba420-4f99-430d-90be-653c2a8a6bad"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_nombre_empleado}+' '+$F{t_empleado_apellido_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="4" width="100" height="20" uuid="cdc596e1-9fd7-44db-b4b6-280a2dbb38c8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_dui_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="4" width="100" height="20" uuid="8802ace8-bbc7-4a21-b6aa-8c34519425ec"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_nit_empleado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="96ce97c8-c31a-4b9f-a51b-84169f22cff6"/>
+			</line>
+			<textField>
+				<reportElement x="644" y="5" width="100" height="20" uuid="6c4abf1c-9a7e-47ad-9704-557fbe863099"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-YYYY").format($F{t_empleado_fechaingreso_empleado})]]></textFieldExpression>
+				<patternExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($F{t_empleado_fechaingreso_empleado})]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="576" y="6" width="100" height="20" uuid="323a0bcd-f6eb-4a43-88c4-492f34a35eae"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_area_nombre_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="726" y="5" width="100" height="20" uuid="d9691b3b-51d4-4fee-8fe1-b54aa0cf0dfb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleado_estado_empleado} == true? "Activo":"Inactio"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="499" y="6" width="200" height="20" uuid="0bfe7563-0f2d-45d0-a7f2-1348250491c6"/>
+				<subreportParameter name="idEmpleado">
+					<subreportParameterExpression><![CDATA[$F{t_empleado_id_empleado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cargos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="351" y="6" width="200" height="20" uuid="a780b212-7cf4-4542-b690-36312e6aad5d"/>
+				<subreportParameter name="idEmpleado">
+					<subreportParameterExpression><![CDATA[$F{t_empleado_id_empleado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "municipioEmpleado.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

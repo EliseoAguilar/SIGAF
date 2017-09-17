@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TPeriodo" table="t_periodo" schema="public" optimistic-lock="version">
+        <id name="idPeriodo" type="int">
+            <column name="id_periodo" />
+              <generator class="sequence">
+                <param name="sequence">t_periodo_id_periodo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TEjercicio" class="com.sigaf.pojo.TEjercicio" fetch="select">
+            <column name="id_ejercicio" />
+        </many-to-one>
+        <property name="estadoPeriodo" type="java.lang.Boolean">
+            <column name="estado_periodo" />
+        </property>
+        <property name="mesPeriodo" type="string">
+            <column name="mes_periodo" />
+        </property>
+        <set name="TPartidas" table="t_partida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_periodo_partida" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPartida" />
+        </set>
+    </class>
+</hibernate-mapping>

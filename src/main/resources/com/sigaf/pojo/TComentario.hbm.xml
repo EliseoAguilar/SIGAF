@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TComentario" table="t_comentario" schema="public" optimistic-lock="version">
+        <id name="idcomentario" type="int">
+            <column name="idcomentario" />
+              <generator class="sequence">
+                <param name="sequence">t_comentario_id_comentario_seq</param>
+          </generator>
+        </id>
+       
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="idproyecto" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+       
+    </class>
+</hibernate-mapping>

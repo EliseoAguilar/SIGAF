@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comprador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="528e91ea-b461-4075-b1b3-97f85fe8c918">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_departamento" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_cargo."id_cargo" AS t_cargo_id_cargo,
+     t_cargo."nombre_cargo" AS t_cargo_nombre_cargo,
+     t_cargo."estado_cargo" AS t_cargo_estado_cargo,
+     t_cargo."tipo_cargo" AS t_cargo_tipo_cargo
+FROM
+     "public"."t_cargo" t_cargo
+WHERE
+     t_cargo."id_cargo"= $P{id_departamento}]]>
+	</queryString>
+	<field name="t_cargo_id_cargo" class="java.lang.Integer"/>
+	<field name="t_cargo_nombre_cargo" class="java.lang.String"/>
+	<field name="t_cargo_estado_cargo" class="java.lang.Integer"/>
+	<field name="t_cargo_tipo_cargo" class="java.lang.Integer"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="12" y="0" width="200" height="79" uuid="dce1fd96-e09a-4dff-a5fb-b4af6e2c71cb"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="20" uuid="56035245-882d-4e83-ae70-76b7236bce49"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CARGO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="36" width="555" height="1" uuid="d6bba73a-7b30-4396-abfb-68f5c1adc079"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="332" splitType="Stretch">
+			<staticText>
+				<reportElement x="38" y="11" width="83" height="20" uuid="fd460325-50d8-4d9b-9371-afb77c8fec49"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="11" width="103" height="20" uuid="89d7e526-88a6-4af2-845e-7fa361bcf4e7"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="11" width="168" height="20" uuid="a6d3ebd2-c040-471a-b0a1-f0a3ff5f6e05"/>
+				<textFieldExpression><![CDATA[$F{t_cargo_nombre_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="11" width="128" height="20" uuid="e532beaa-e6b5-4807-80ea-5631d59d2e64"/>
+				<textFieldExpression><![CDATA[$F{t_cargo_estado_cargo}.equals(1)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="434" y="16" width="80" height="20" uuid="30b175b1-48c1-47d4-9e16-0c9e8aa9e068"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="16" width="40" height="20" uuid="5a021afa-0626-4f43-b531-7232d0751c8a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

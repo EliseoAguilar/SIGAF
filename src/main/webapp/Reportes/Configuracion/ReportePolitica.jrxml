@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePolitica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff5ae368-87bb-4ae8-a515-b8b6c9c2a1c0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idTipoCredito" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_tipo_credito."id_tipo_credito" AS t_tipo_credito_id_tipo_credito,
+     t_tipo_credito."nombre" AS t_tipo_credito_nombre,
+     t_tipo_credito."descripcion" AS t_tipo_credito_descripcion,
+     t_tipo_credito."estado" AS t_tipo_credito_estado
+FROM
+     "public"."t_tipo_credito" t_tipo_credito
+WHERE
+	t_tipo_credito."id_tipo_credito" = $P{idTipoCredito}]]>
+	</queryString>
+	<field name="t_tipo_credito_id_tipo_credito" class="java.lang.Integer"/>
+	<field name="t_tipo_credito_nombre" class="java.lang.String"/>
+	<field name="t_tipo_credito_descripcion" class="java.lang.String"/>
+	<field name="t_tipo_credito_estado" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<subreport>
+				<reportElement x="141" y="0" width="200" height="81" uuid="7ed8450d-3c20-49e0-b09b-8ee0d56a98c2"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="0" y="85" width="802" height="20" uuid="a2ef2b25-0f4c-4a0f-99c0-a515956eedec"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{idTipoCredito}.equals(1)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA EMPLEADOS) </style>": false  || $P{idTipoCredito}.equals(2)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA INVERSIÓN COOPERATIVA) </style>": false || $P{idTipoCredito}.equals(3)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA PRODUCCIÓN COOPERATIVA) </style>": false || $P{idTipoCredito}.equals(4)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA PRODUCCIÓN AGROPECUARIA) </style>": false || $P{idTipoCredito}.equals(5)? "</style>": false || $P{idTipoCredito}.equals(4)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA LISIADOS DE GUERRA) </style>": false || $P{idTipoCredito}.equals(7)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA COMERCIO) </style>": false || $P{idTipoCredito}.equals(9)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA INVERIÓN AGROPECUARIA) </style>": false || $P{idTipoCredito}.equals(8)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE POLÍTICAS (CRÉDITO PARA CAPITAL DE TRABAJO AGROPECUARIO) </style>": false]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="108" width="802" height="1" uuid="a01621f7-d11f-4864-876d-f4c2fe8e16ba"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="52" uuid="b50b469b-e173-40ae-8ded-7e585c6a2e51"/>
+				<subreportParameter name="idTipoCredito">
+					<subreportParameterExpression><![CDATA[$F{t_tipo_credito_id_tipo_credito}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PoliticasSub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="680" y="13" width="80" height="20" uuid="7acf6a3a-3c6f-4f36-af6d-d2fda4d0965f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="760" y="13" width="40" height="20" uuid="c59efff5-8185-4e33-b1e5-86dc7ad93962"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

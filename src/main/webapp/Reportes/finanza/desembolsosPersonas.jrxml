@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="desembolsosPersonas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3107dd6-158f-421a-ae4d-b2218cbad8a1">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
+	<parameter name="id_proyecto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_cliente."id_cliente" AS t_cliente_id_cliente,
+     t_cliente."nombre_cliente" AS t_cliente_nombre_cliente,
+     t_cliente."apellido_cliente" AS t_cliente_apellido_cliente,
+     t_cliente."dui_cliente" AS t_cliente_dui_cliente,
+     t_cliente."nit_cliente" AS t_cliente_nit_cliente,
+     t_cliente."direccion_cliente" AS t_cliente_direccion_cliente,
+     t_cliente."fecha_nacimiento" AS t_cliente_fecha_nacimiento,
+     t_cliente."estado_familiar" AS t_cliente_estado_familiar,
+     t_cliente."telefono_cliente" AS t_cliente_telefono_cliente,
+     t_cliente."correo_cliente" AS t_cliente_correo_cliente,
+     t_cliente."celular_cliente" AS t_cliente_celular_cliente,
+     t_cliente."calificacion_cliente" AS t_cliente_calificacion_cliente,
+     t_cliente."codigo_cliente" AS t_cliente_codigo_cliente,
+     t_cliente."dui_copia_cliente" AS t_cliente_dui_copia_cliente,
+     t_cliente."nit_copia_cliente" AS t_cliente_nit_copia_cliente,
+     t_cliente."sexo_cliente" AS t_cliente_sexo_cliente,
+
+     t_cliente_proyecto."id_cliente_proyecto" AS t_cliente_proyecto_id_cliente_proyecto,
+     t_cliente_proyecto."id_cliente" AS t_cliente_proyecto_id_cliente,
+     t_cliente_proyecto."id_proyecto" AS t_cliente_proyecto_id_proyecto,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_desembolso."id_desembolso" AS t_desembolso_id_desembolso,
+     t_desembolso."fecha_desembolso" AS t_desembolso_fecha_desembolso,
+     t_desembolso."monto_desembolso" AS t_desembolso_monto_desembolso,
+     t_desembolso."id_proyecto" AS t_desembolso_id_proyecto,
+     t_tipo_credito."id_tipo_credito" AS t_tipo_credito_id_tipo_credito,
+     t_tipo_credito."nombre" AS t_tipo_credito_nombre,
+     t_tipo_credito."descripcion" AS t_tipo_credito_descripcion,
+     t_tipo_credito."estado" AS t_tipo_credito_estado
+FROM
+     "public"."t_cliente" t_cliente INNER JOIN "public"."t_cliente_proyecto" t_cliente_proyecto ON t_cliente."id_cliente" = t_cliente_proyecto."id_cliente"
+     INNER JOIN "public"."t_proyecto" t_proyecto ON t_cliente_proyecto."id_proyecto" = t_proyecto."idproyecto"
+     INNER JOIN "public"."t_desembolso" t_desembolso ON t_proyecto."idproyecto" = t_desembolso."id_proyecto"
+     INNER JOIN "public"."t_tipo_credito" t_tipo_credito ON t_proyecto."idtipocredito" = t_tipo_credito."id_tipo_credito"
+WHERE
+     t_proyecto."idproyecto" = $P{id_proyecto}]]>
+	</queryString>
+	<field name="t_cliente_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_nombre_cliente" class="java.lang.String"/>
+	<field name="t_cliente_apellido_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_cliente" class="java.lang.String"/>
+	<field name="t_cliente_direccion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="t_cliente_estado_familiar" class="java.lang.String"/>
+	<field name="t_cliente_telefono_cliente" class="java.lang.String"/>
+	<field name="t_cliente_correo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_celular_cliente" class="java.lang.String"/>
+	<field name="t_cliente_calificacion_cliente" class="java.lang.String"/>
+	<field name="t_cliente_codigo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_dui_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_nit_copia_cliente" class="java.lang.String"/>
+	<field name="t_cliente_sexo_cliente" class="java.lang.String"/>
+	<field name="t_cliente_proyecto_id_cliente_proyecto" class="java.lang.Integer"/>
+	<field name="t_cliente_proyecto_id_cliente" class="java.lang.Integer"/>
+	<field name="t_cliente_proyecto_id_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_desembolso_id_desembolso" class="java.lang.Integer"/>
+	<field name="t_desembolso_fecha_desembolso" class="java.sql.Date"/>
+	<field name="t_desembolso_monto_desembolso" class="java.math.BigDecimal"/>
+	<field name="t_desembolso_id_proyecto" class="java.lang.Integer"/>
+	<field name="t_tipo_credito_id_tipo_credito" class="java.lang.Integer"/>
+	<field name="t_tipo_credito_nombre" class="java.lang.String"/>
+	<field name="t_tipo_credito_descripcion" class="java.lang.String"/>
+	<field name="t_tipo_credito_estado" class="java.lang.Integer"/>
+	<variable name="t_desembolso_monto_desembolso_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_desembolso_monto_desembolso}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="20" y="0" width="200" height="79" uuid="c657c430-6635-4a2f-b61b-686ec8c1fe69"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="5" width="555" height="20" uuid="49295e25-1f33-4b7d-91a3-d902e73f03eb"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE DESEMBOLSOS</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="29" width="555" height="1" uuid="091c4526-6dca-4071-b131-53c3d91ae3d4"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="251" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="226" width="46" height="20" uuid="3a3e246b-d14b-47e0-83d7-af6c46525ec5"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="226" width="42" height="20" uuid="d2a36d18-8b4c-4a4e-a90c-78b7779ce4dc"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="245" width="555" height="1" uuid="7890ea0d-8814-4a5d-995a-5f106c2327fc"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="555" height="20" uuid="354a48de-750c-48b9-b3aa-e44ce77d7409"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CLIENTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="117" width="555" height="20" uuid="60e8dc2c-2491-418a-ae51-2e28ee6ae9a4"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CRÉDITO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="64" width="100" height="20" uuid="d1a4f9bd-9b56-4381-949e-424df5a017fd"/>
+				<text><![CDATA[NOMBRES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="64" width="100" height="20" uuid="e63f9c0c-8b07-4b4b-a5c0-b67078286adc"/>
+				<text><![CDATA[APELLIDOS:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="123" y="64" width="148" height="20" uuid="022eda76-3798-4314-bab4-3d9f950466a9"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_nombre_cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="44" width="100" height="20" uuid="133830ef-2b7d-4f92-83fa-3b1f2f6a08df"/>
+				<text><![CDATA[CÓDIGO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="44" width="100" height="20" uuid="ff86f43e-0369-49a5-9648-25e5a3109dad"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_codigo_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="371" y="64" width="164" height="20" uuid="f15727bd-829d-4b7e-8944-22a027d93150"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_apellido_cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="205" width="555" height="20" uuid="e22357ae-a9bc-4a8e-bd16-39330b41f2b9"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESEMBOLSOS</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="171" width="100" height="20" uuid="a2238ae5-3d2f-41b5-abb8-652b45735469"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="151" width="100" height="20" uuid="4e2e6c6c-f1a7-4e8e-870f-172658599f57"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="171" width="100" height="20" uuid="46e07454-a337-4632-a528-db024ae7ec05"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="151" width="100" height="20" uuid="f84a20d1-1a1a-4b1b-bcae-5df4c42ec582"/>
+				<text><![CDATA[CÓDIGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="171" width="100" height="20" uuid="7c7ca212-59fb-4bb2-9dde-369f31eff2d5"/>
+				<text><![CDATA[PLAZO (meses):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="171" width="100" height="20" uuid="7858946f-3d5d-4724-84b5-f7de49e5d3aa"/>
+				<text><![CDATA[FORMA DE PAGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="151" width="100" height="20" uuid="66df5e53-80ce-486f-91d0-02cc4f8c9fa7"/>
+				<text><![CDATA[MODALIDAD:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="151" width="200" height="20" uuid="b9f61880-e6f1-4c97-97e1-dddd2affaddc"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="20" width="555" height="1" uuid="dbffc6e2-20c0-4915-8de0-f831bb2e231d"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="136" width="555" height="1" uuid="858ae160-07fb-46ee-93a2-10a1e16687e6"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="224" width="555" height="1" uuid="fd8b5482-bb5b-43e6-9461-57c2d4bd676d"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="271" y="44" width="100" height="20" uuid="2b8bceee-30dc-4709-8789-6d34451756de"/>
+				<text><![CDATA[DUI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="44" width="164" height="20" uuid="0d9205b4-9368-470c-9e0d-212d7838e5da"/>
+				<textFieldExpression><![CDATA[$F{t_cliente_dui_cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField pattern="$#,##0.00">
+				<reportElement x="201" y="0" width="100" height="20" uuid="34a2b09a-550b-470d-b762-218949fe286b"/>
+				<textFieldExpression><![CDATA[$F{t_desembolso_monto_desembolso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="99" y="0" width="100" height="20" uuid="4257ea1f-9c65-4a94-8135-d9c0af6d9839"/>
+				<textFieldExpression><![CDATA[$F{t_desembolso_fecha_desembolso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="341" y="25" width="115" height="20" uuid="4261c546-e678-4626-a316-2248f4acdc31"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total de desembolsos:</style>]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="455" y="25" width="100" height="20" uuid="80ec0954-2d0d-45a7-9f18-c9ab0396fe27"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_desembolso_monto_desembolso_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="435" y="16" width="80" height="20" uuid="98797040-7c9b-4079-8ef6-e88ac26f2d23"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página"+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="16" width="40" height="20" uuid="ad38fc75-ace0-4bb5-8737-fddce0b9b11b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

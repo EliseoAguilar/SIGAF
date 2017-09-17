@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                
+               
+                <p:outputPanel id="padding"  > 
+                    <p:growl id="msg" showDetail="true"  />
+                    <p:outputPanel   >
+                         <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
+                             <h:form>  
+                             <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil()}"  oncomplete="PF('dialogCrear').hide()"   style="#{usuarioBean.btnNuevo}" ajax="false"  > </p:commandButton>
+                                    <p:commandButton  value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form> 
+                            </p:dialog>
+                        
+                        
+                        <h:form id="fUpdUsuario">
+
+                            <p:panel id="basic" header="Modificar perfil"  style="width: 80%; margin: auto; margin-bottom: 20px">
+
+                                <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;"  class="noBoder">   
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Area:*"/>
+                                        </p:column>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Empleado:*" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="sArea" value="#{usuarioBean.idArea}" style="width:100%" disabled="#{true}" >
+
+
+                                                <f:selectItem itemLabel="[Seleccione]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+
+                                                <p:ajax update="sEmpleado"></p:ajax>
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgArea}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:selectOneMenu id="sEmpleado" value="#{usuarioBean.usuarioSelecionado.TEmpleado.idEmpleado}" style="width:100%"  disabled="#{true}" >
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems value="#{usuarioBean.listaEmpleados}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}"  />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgEmpleado}" style=" color:  red" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <h:outputText value="Tipo de usuario:*"/>
+                                        </p:column>
+                                        <p:column >
+                                            <h:outputText value="Nombre de usuario:*"/>
+                                        </p:column>
+
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column >
+                                            <p:selectOneMenu id="Stipo" value="#{usuarioBean.usuarioSelecionado.tipoUsuario}" style="width:100%"  disabled="#{true}">
+                                                <f:selectItem itemLabel="[Seleccione]" itemValue="0" />
+                                                <f:selectItem itemLabel="Contador" itemValue="1" />
+                                                <f:selectItem itemLabel="Asesor de crédito" itemValue="2" />
+                                                <f:selectItem itemLabel="Administrador" itemValue="3" />
+                                            </p:selectOneMenu>
+                                            <h:outputText value="#{usuarioBean.msgTipo}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column >
+                                            <p:inputText id="tNombre" style="width: 100%" value="#{usuarioBean.nombrbe}" onkeypress="if ((event.which &lt; 65 || event.which &gt; 90) &amp; &amp; (event.which &lt; 97 || event.which &gt; 122)) return false;" />
+                                            <h:outputText value="#{usuarioBean.msgNombre}"  style=" color:  red"  />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectBooleanCheckbox value="#{usuarioBean.editPass}" >
+                                                <p:ajax update="fUpdUsuario:tPassword" />
+                                                <p:ajax update="fUpdUsuario:tPasswordConf" />
+                                            </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp; ¿Editar contraseña? "/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Contraseña:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Confirmar contraseña:*"/>
+                                        </p:column>
+
+
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPassword" style="width: 100%" value="#{usuarioBean.clave}" disabled="#{!usuarioBean.editPass}"/>
+                                            <h:outputText value="#{usuarioBean.msgClave}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:password redisplay="true" id="tPasswordConf" style="width: 100%" value="#{usuarioBean.claveConfir}" disabled="#{!usuarioBean.editPass}"  />
+                                            <h:outputText value="#{usuarioBean.msgClaveConfir}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificarPerfil()}" update=":padding"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                   
+                                    <p:commandButton  ajax="false" id="btnCancel" action="/inicio/index.xhtml?faces-redirect=true"   icon="fa fa-close" style="#{usuarioBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+
+
+                            </p:panel>
+
+                        </h:form>
+                    </p:outputPanel>
+
+
+
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+
+
+                <script>
+                    $(document).ready(function () {
+                    $("#menu").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

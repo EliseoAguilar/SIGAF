@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TCuenta" table="t_cuenta" schema="public" optimistic-lock="version">
+        <id name="idCuenta" type="int">
+            <column name="id_cuenta" />
+                <generator class="sequence">
+                <param name="sequence">t_catalogo_id_catalogo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TCuenta" class="com.sigaf.pojo.TCuenta" fetch="select">
+            <column name="id_subcuenta_cuenta" />
+        </many-to-one>
+        <many-to-one name="TEntidad" class="com.sigaf.pojo.TEntidad" fetch="select">
+            <column name="id_entidad_cuenta" />
+        </many-to-one>
+        <property name="codigoCuenta" type="string">
+            <column name="codigo_cuenta" />
+        </property>
+        <property name="nombreCuenta" type="string">
+            <column name="nombre_cuenta" />
+        </property>
+        <property name="fechaCuenta" type="date">
+            <column name="fecha_cuenta" length="13" />
+        </property>
+        <property name="naturalezaCuenta" type="string">
+            <column name="naturaleza_cuenta" />
+        </property>
+        <property name="estadoCuenta" type="java.lang.Boolean">
+            <column name="estado_cuenta" />
+        </property>
+        <set name="TTipoActivosForIdCuentaVentaTipo" table="t_tipo_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_venta_tipo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTipoActivo" />
+        </set>
+        <set name="TTipoActivosForIdCuentaDepreciacionTipo" table="t_tipo_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_depreciacion_tipo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTipoActivo" />
+        </set>
+        <set name="TCuentas" table="t_cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_subcuenta_cuenta" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TCuenta" />
+        </set>
+        <set name="TTipoActivosForIdCuentaGastoTipo" table="t_tipo_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_gasto_tipo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTipoActivo" />
+        </set>
+        <set name="TEstructuras" table="t_estructura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_estructura" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEstructura" />
+        </set>
+        <set name="TTipoActivosForIdCuentaActivoTipo" table="t_tipo_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_activo_tipo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TTipoActivo" />
+        </set>
+        <set name="TDetallePartidas" table="t_detalle_partida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta_detalle_partida" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TDetallePartida" />
+        </set>
+    </class>
+</hibernate-mapping>

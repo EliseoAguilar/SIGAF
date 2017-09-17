@@ -1,0 +1,1786 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+
+                <p:outputPanel id="padding"  > 
+
+
+                    <p:growl id="msgs"   />
+
+                    <p:outputPanel  rendered="#{activoFijoBean.showCreate}"  >
+
+                        <!-- Actulizar lista Catalogos -->
+                        #{activoFijoBean.updateListaArea()}
+                        #{activoFijoBean.updateListaProveedor()}
+                        #{activoFijoBean.updateListaTipos()}
+                        #{activoFijoBean.updateConfiguracion()}
+
+
+                        <p:outputPanel id="opCrearActivo"> 
+                            <p:panel id="basic" header="Agregar  activo"  style="width: 80%; margin: auto; margin-bottom: 20px" >
+
+                                <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoValido}">
+                                    <h:form>
+                                        <div align="center">
+                                            ¿Estás seguro de guardar?
+                                            <br></br>
+                                            <br></br>
+                                            <hr></hr>
+                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.crear}"      style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                                <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoValido}" />
+                                            </p:commandButton>
+                                        </div>
+                                    </h:form>
+                                </p:dialog>
+
+                                <h:form id="fAddActivo">
+                                    <p:tabView>
+                                        <p:tab title="Activo">
+
+                                            <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Código:*"/>
+                                                    </p:column>
+                                                    <p:column style="width: 50%" >
+
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column colspan="2" >
+
+                                                        <p:inputText value="#{activoFijoBean.entidad.codigoEntidad}" style="width: 22%" disabled="true"/> - 
+
+                                                        <p:inputText id= "tcodArea" value="#{activoFijoBean.area.codigoArea}" style="width: 22%" disabled="true"/> -
+
+                                                        <p:inputText id="tCodTipo" value="#{activoFijoBean.tipoActivo.codigoTipo}" style="width: 22%" disabled="true"/> -
+
+                                                        <p:inputMask id="tCodigo"  mask="#{activoFijoBean.configuracion.activoConfiguracion}" style="width:22%" value="#{activoFijoBean.activoFijo.codigoActivoFijo}" placeholder="#{activoFijoBean.configuracion.activoConfiguracion}"/>
+
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgCod}" style=" color:  red" />
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Área:*"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="Encargado:*"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column >
+                                                        <p:selectOneMenu id="sArea" value="#{activoFijoBean.idArea}" style="width:100%" >
+                                                            <p:ajax update="sEmpleado"></p:ajax>
+                                                            <p:ajax update="tcodArea"></p:ajax>
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+
+
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgArea}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column >
+                                                        <p:selectOneMenu id="sEmpleado" value="#{activoFijoBean.activoFijo.TEmpleado.idEmpleado}" style="width:100%" >
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}" itemValue="#{l.idEmpleado}" />
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgEmpleado}" style=" color:  red" />
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Tipo:*" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Marca:"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
+
+                                                    <p:column>
+                                                        <p:selectOneMenu id="sTipo" value="#{activoFijoBean.idTipoActivo}" style="width:100%" >
+                                                            <p:ajax update="tCodTipo"></p:ajax>
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}" />
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgTipo}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputText id="tMarca" style="width: 100%" value="#{activoFijoBean.activoFijo.marcaActivoFijo}" />
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="Modelo:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Serie:"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <p:inputText id="tModelo" style="width: 100%" value="#{activoFijoBean.activoFijo.modeloActivoFijo}" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputText id="tSerie" style="width: 100%" value="#{activoFijoBean.activoFijo.serieActivoFijo}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column colspan="2">
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column colspan="2">
+                                                        <p:inputText id="tDescripcion" style="width: 100%" value="#{activoFijoBean.activoFijo.descripcionActivoFijo}"/>
+                                                        <h:outputText value="#{activoFijoBean.msgDesc}" style=" color:  red" />
+                                                        <br></br>
+                                                    </p:column>
+                                                </p:row>
+
+
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Compra">
+                                            <p:panelGrid id="addPanelCon"  style="width: 100%; margin: auto;" class="noBoder">   
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Fecha de compra:*"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Fecha de registro:*" />
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" />
+
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}"/>
+
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Valor del activo:*"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="No. de factura:"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" />
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputText id="tNumFac" style="width: 100%" value="#{activoFijoBean.activoFijo.numeroFacturaActivoFijo}"  />
+
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="Proveedor:*"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+
+                                                    <p:column width="100%">
+                                                        <p:selectOneMenu id="sProv" value="#{activoFijoBean.activoFijo.TProveedor.idProveedor}" style="width:100%" >
+
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaProveedor}" var="l" itemLabel="#{l.nombreProveedor  }" itemValue="#{l.idProveedor}" />
+                                                        </p:selectOneMenu>
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgProv}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid> 
+                                        </p:tab>
+                                    </p:tabView>
+                                    <br></br>
+
+                                    <center>
+                                        <p:commandButton id="btnCreate"  actionListener="#{activoFijoBean.validarFormularioActivo()}" update=":opCrearActivo"   icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnClean" actionListener="#{activoFijoBean.limpiar}" update=":opCrearActivo" icon="fa fa-minus"  style="#{activoFijoBean.btnLimpiar}" value="Limpiar"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancel" actionListener="#{activoFijoBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
+                                        </p:commandButton>
+                                    </center>
+                                </h:form> 
+                            </p:panel>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <p:outputPanel  rendered="#{activoFijoBean.showUpdate}"  >
+
+                        <!-- Actulizar lista Catalogos -->
+                        #{activoFijoBean.updateListaArea()}
+                        #{activoFijoBean.updateListaProveedor()}
+                        #{activoFijoBean.updateListaTipos()}
+                        #{activoFijoBean.updateConfiguracion()}
+
+                        <p:outputPanel id="opModificarActivo">
+
+                            <p:panel  header="Modificar  activo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+
+
+                                <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoValido}">
+                                    <h:form>
+                                        <div align="center">
+                                            ¿Estás seguro de guardar?
+                                            <br></br>
+                                            <hr></hr>
+                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.actualizar()}"   oncomplete="PF('dialogActualizar').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                                <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoValido}" />
+                                            </p:commandButton>
+                                        </div>
+                                    </h:form>
+                                </p:dialog>
+
+
+                                <h:form id="fModificarActivo">
+
+                                    <p:tabView>
+
+                                        <p:tab title="Activo" id="adt">
+
+                                            <p:panelGrid id="modiPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Código:*"/>
+                                                    </p:column>
+                                                    <p:column style="width: 50%" >
+
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column colspan="2" >
+
+                                                        <p:inputText value="#{activoFijoBean.entidad.codigoEntidad}" style="width: 22%" disabled="true"/> - 
+
+                                                        <p:inputText id= "tcodArea" value="#{activoFijoBean.area.codigoArea}" style="width: 22%" disabled="true"/> -
+
+                                                        <p:inputText id="tCodTipo" value="#{activoFijoBean.tipoActivo.codigoTipo}" style="width: 22%" disabled="true"/> -
+
+                                                        <p:inputMask id="tCodigoAct"  mask="#{activoFijoBean.configuracion.activoConfiguracion}" style="width:22%" value="#{activoFijoBean.activoFijoSeleccionado.codigoActivoFijo}" placeholder="#{activoFijoBean.configuracion.activoConfiguracion}"/>
+
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgCod}" style=" color:  red" />
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Area:*"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="Encargado:*"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column >
+                                                        <p:selectOneMenu id="sArea" value="#{activoFijoBean.idArea}" style="width:100%" >
+                                                            <p:ajax update="sEmpleado"></p:ajax>
+                                                            <p:ajax update="tcodArea"></p:ajax>
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+
+
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgArea}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column >
+                                                        <p:selectOneMenu id="sEmpleado" value="#{activoFijoBean.activoFijoSeleccionado.TEmpleado.idEmpleado}" style="width:100%" >
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}" />
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgEmpleado}" style=" color:  red" />
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Tipo:*" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Marca:"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
+
+                                                    <p:column>
+                                                        <p:selectOneMenu id="sTipo" value="#{activoFijoBean.idTipoActivo}" style="width:100%" disabled ="#{activoFijoBean.estadoRegistroContableModificar()}" >
+                                                            <p:ajax update="tCodTipo"></p:ajax>
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}" />
+                                                        </p:selectOneMenu>
+                                                        <h:outputText value="#{activoFijoBean.msgTipo}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputText id="tMarca" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.marcaActivoFijo}" />
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="Modelo:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Serie:"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <p:inputText id="tModelo" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.modeloActivoFijo}" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputText id="tSerie" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.serieActivoFijo}" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column colspan="2">
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column colspan="2">
+                                                        <p:inputText id="tDescripcion" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.descripcionActivoFijo}"/>
+                                                        <h:outputText value="#{activoFijoBean.msgDesc}" style=" color:  red" />
+                                                        <br></br>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:tab>
+
+                                        <p:tab title="Compra" id="Comp">
+                                            <p:panelGrid id="editPanelCon"  style="width: 100%; margin: auto;" class="noBoder">   
+                                                <p:row>
+                                                    <p:column style="width: 50%" >
+                                                        <h:outputText value="Fecha de compra:*"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Fecha de registro:*" />
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" />
+
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
+
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Valor del activo:*"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="No. de factura:"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <p:inputText id="tNumFac" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.numeroFacturaActivoFijo}"  />
+
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="Proveedor:*"/>
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+
+                                                    <p:column>
+                                                        <p:selectOneMenu id="sProv" value="#{activoFijoBean.activoFijoSeleccionado.TProveedor.idProveedor}" style="width:100%" >
+
+                                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                            <f:selectItems value="#{activoFijoBean.listaProveedor}" var="l" itemLabel="#{l.nombreProveedor  }" itemValue="#{l.idProveedor}" />
+                                                        </p:selectOneMenu>
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgProv}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid> 
+
+
+                                        </p:tab>
+                                    </p:tabView>
+                                    <br></br>
+
+                                    <center>
+                                        <p:commandButton id="btnCreate"  actionListener="#{activoFijoBean.validarFormularioActivoModificar()}" update=":opModificarActivo"   icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                        </p:commandButton>
+
+                                        <p:commandButton id="btnCancel" actionListener="#{activoFijoBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
+                                        </p:commandButton>
+                                    </center>
+                                </h:form>
+                            </p:panel>
+                        </p:outputPanel>
+
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{activoFijoBean.showData}">
+
+
+                        <p:panel id="opAdmiPol" header="Administrar Activos" style="margin-bottom:20px">
+
+                            <!-- Actualiza la lista de Entidades-->
+                            #{activoFijoBean.updateListaEntidades()}
+
+
+
+                            <h:form id="fFiltro"> 
+                                <p:fieldset>
+                                    <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder">
+                                        <p:row>
+                                            <p:column style=" width: 60%" >
+                                                <h:outputText value="Entidad:*" /> 
+                                            </p:column>
+
+                                            <p:column style=" width: 40%"  >
+                                                <h:outputText value="" />  
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column >
+                                                <p:outputPanel id="opPrede" rendered="#{activoFijoBean.estadoPredeterminado eq true? true:true}"  >
+                                                    <p:selectOneMenu id="car" disabled="#{activoFijoBean.estadoPredeterminado}"  value="#{activoFijoBean.idEntidad}" style=" width: 100%;" > 
+                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                        <f:selectItems  var="end" value="#{activoFijoBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                                        <p:ajax update=":padding"></p:ajax>
+                                                    </p:selectOneMenu>
+                                                </p:outputPanel>
+                                            </p:column>
+                                            <p:column > 
+
+                                                <p:outputPanel rendered="#{activoFijoBean.idEntidad eq 0? false : true}">
+                                                    <p:selectBooleanCheckbox value="#{activoFijoBean.estadoPredeterminado}" >
+                                                        <p:ajax update="opPrede" listener="#{activoFijoBean.cambiarPredeterminado()}" />
+                                                    </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
+                                                </p:outputPanel>
+
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                            </h:form>
+                            <br></br>
+                            <p:outputPanel rendered="#{activoFijoBean.idEntidad eq 0 ? false:true}" >
+                                <!-- Actualiza la lista de Activos -->
+                                #{activoFijoBean.updateListaActivoFijo()}
+                                #{activoFijoBean.updateListaArea()}
+                                #{activoFijoBean.updateListaTipos()}
+                                <h:form >
+                                    <p:fieldset>
+                                        <p:commandButton title="Nuevo activo" id="add"  actionListener="#{activoFijoBean.enableShowCreateBean}" update=":padding"  icon="fa fa-plus"  style="#{activoFijoBean.btnNuevo}" />                      
+                                    </p:fieldset>
+
+                                    <p:dataTable   id="polEnero"
+                                                   var="act" 
+                                                   value="#{activoFijoBean.listaActivoFijo}"
+                                                   rowIndexVar="No"
+                                                   rows="10"
+                                                   paginator="true"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   widgetVar="datosPar"
+                                                   emptyMessage="No se encontraron activos."
+                                                   >
+
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <p:inputText id="globalFilter" onkeyup="PF('datosPar').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:columnGroup type="header">
+
+                                            <p:row>
+                                                <p:column headerText="Nº" width="5%"   />
+                                                <p:column  width="15%" headerText="Tipo" sortBy="#{act.TTipoActivo.nombreTipo}" filterBy="#{act.TTipoActivo.nombreTipo}" filterMatchMode="contains" filterStyle="width: 100%; ">
+                                                </p:column>
+                                                <p:column  headerText="Código" width="25%"  sortBy="#{activoFijoBean.cogigoActivoFijo( act )}" filterBy="#{activoFijoBean.cogigoGenerar( act )}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column  headerText="Descripción " sortBy="#{act.descripcionActivoFijo}" filterBy="#{act.descripcionActivoFijo}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column width="9%" headerText=""/>
+
+                                            </p:row>
+
+                                        </p:columnGroup>
+
+                                        <p:column>
+                                            <h:outputText value="#{No+1}" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{act.TTipoActivo.nombreTipo}" />
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{activoFijoBean.cogigoActivoFijo(act)}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{act.descripcionActivoFijo}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:splitButton  update=":opDataActivo" oncomplete="PF('dlVer').show()" icon="fa fa-eye" 
+                                                            style="#{act.estadoActivoFijo eq 'Activo'? cuentaBean.btnDarDeAlta :  cuentaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+
+
+
+                                                <p:menuitem value=" Modificar" actionListener="#{activoFijoBean.enableShowUpdate()}"  update=":padding"  icon="fa fa-pencil"  >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+                                                </p:menuitem>
+
+
+                                                <p:menuitem value="Nuevo Reg. contable"  update=":padding"  actionListener="#{activoFijoBean.enableShowRegistro()}"
+                                                            rendered="#{ activoFijoBean.estadoRegistroContable(act.TValorActivos) }" 
+                                                            disabled="#{act.estadoActivoFijo eq 'Activo'? false:true }"   icon="  fa fa-plus"  >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+                                                </p:menuitem>
+
+                                                <p:menuitem value="Modificar Reg. contable"  update=":padding"  actionListener="#{activoFijoBean.enableShowRegistroModificar()}"
+                                                            rendered="#{! activoFijoBean.estadoRegistroContable(act.TValorActivos)}" icon="fa fa-pencil" >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+                                                </p:menuitem>
+
+
+                                                <p:menuitem  value=" Dar de baja" update=":padding" disabled="#{act.estadoActivoFijo eq 'Activo'? false:true }"
+                                                             rendered="#{act.estadoActivoFijo eq 'Activo'?  ! activoFijoBean.estadoRegistroContable(act.TValorActivos)  : false}"
+                                                             actionListener="#{activoFijoBean.enableShowBaja()}" 
+                                                             icon="fa fa-arrow-down" >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+
+                                                </p:menuitem>
+
+                                                <!-- Alta y Baja para Activos sin registro contable -->
+                                                <p:menuitem value=" Dar de baja"  rendered="#{act.estadoActivoFijo eq 'Activo'? activoFijoBean.estadoRegistroContable(act.TValorActivos) :false}"
+                                                            oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down"  >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+
+                                                </p:menuitem>
+
+                                                <p:menuitem value=" Dar de alta"  rendered="#{act.estadoActivoFijo eq 'Activo'? false: activoFijoBean.estadoRegistroContable(act.TValorActivos)}"
+                                                            oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up"  >
+                                                    <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
+                                                </p:menuitem>
+
+                                            </p:splitButton>
+                                        </p:column>
+
+                                        <f:facet name="footer">
+
+                                        </f:facet>
+                                    </p:dataTable>
+
+                                </h:form>
+                            </p:outputPanel>
+                        </p:panel>
+
+
+
+                        <p:dialog header="Confirmar" widgetVar="dlBaja" modal="true"   visible="false"  width="35%" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <h:outputText value="¿Desea dar de baja este activo?"  />
+                                    <br></br>
+                                    <br></br>
+
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeBaja}" update=":padding" style="#{activoFijoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelarCerrar"   oncomplete="PF('dlBaja').hide()" style="#{activoFijoBean.btnCancelar}"  value="No"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+
+                        <p:dialog header="Confirmar" widgetVar="dlAlta" modal="true"   visible="false"   width="35%" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <h:outputText value="¿Desea dar de alta este activo?" />
+                                    <br></br>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeAlta}" update=":padding"   style="#{activoFijoBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').hide()"  value="No" style="#{activoFijoBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+
+                        <p:outputPanel id="opDataActivo" >
+                            <p:dialog    header="Datos del Activo Fijo" width="80%" widgetVar="dlVer" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form  target="_blank">
+                                    <p:tabView>
+                                        <p:tab title="Activo" id="adt">
+
+                                            <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" > 
+                                                <p:row>
+                                                    <p:column style="width: 20%" >
+                                                        <h:outputText value="Código:"/>
+                                                    </p:column>
+                                                    <p:column  colspan="3" >
+                                                        <h:outputText value="#{activoFijoBean.codigoActivoSeleccionado}"/>
+                                                    </p:column>
+
+                                                </p:row>
+
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Area:"/>
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{activoFijoBean.area.nombreArea}"/>
+                                                    </p:column>
+
+
+                                                    <p:column >
+
+                                                        <h:outputText value="Encargado:" />
+                                                    </p:column>
+                                                    <p:column >
+
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.TEmpleado.nombreEmpleado} #{activoFijoBean.activoFijoSeleccionado.TEmpleado.apellidoEmpleado}"  />
+                                                    </p:column>
+
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column  >
+                                                        <h:outputText value="Tipo:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.TTipoActivo.nombreTipo}"/>
+                                                    </p:column>
+                                                    <p:column  >
+                                                        <h:outputText value="Marca:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.marcaActivoFijo}"/>
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column  >
+                                                        <h:outputText value="Modelo:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.modeloActivoFijo}"/>
+                                                    </p:column>
+                                                    <p:column  >
+                                                        <h:outputText value="Serie:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.serieActivoFijo}"/>
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column  >
+                                                        <h:outputText value="Descripción:" />
+                                                    </p:column>
+
+                                                    <p:column colspan="3">
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.descripcionActivoFijo}"/>
+                                                    </p:column>
+                                                </p:row>
+
+
+
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Compra">
+
+                                            <p:panelGrid   style="width: 100%; margin: auto;" > 
+                                                <p:row>
+                                                    <p:column  >
+                                                        <h:outputText value="Fecha de compra:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" >
+                                                            <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                        </h:outputText>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText value="Fecha de registro:" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" >
+                                                            <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="Valor:"/>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.valorActivo.valorActivo}" >
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                        </h:outputText>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText value="No. de factura:"/>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.numeroFacturaActivoFijo}" >
+
+                                                        </h:outputText>
+                                                    </p:column>
+
+
+
+                                                </p:row>
+
+                                                <p:row>
+
+                                                    <p:column >
+                                                        <h:outputText value="Proveedor:"/>
+                                                    </p:column>
+                                                    <p:column colspan="3">
+                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.TProveedor.nombreProveedor}" >
+
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+
+                                            </p:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Registro contable " rendered="#{activoFijoBean.valorActivo.TPartida eq null? false:true}">
+
+                                            <b><h:outputText value="Generales"/></b>
+
+                                            <p:panelGrid id="algo"  style="width: 100%; margin: auto;">   
+                                                <p:row>
+                                                    <p:column style="width: 15%; ">
+                                                        <h:outputText value="Numero: " />
+                                                    </p:column>
+                                                    <p:column>
+
+                                                        <h:outputText id="tNumero" style="width: 100%" value="#{activoFijoBean.partida.numeroPartida}"  />
+
+                                                    </p:column>
+                                                    <p:column style="width: 40%; ">
+
+                                                    </p:column>
+                                                    <p:column style="width: 15%; ">
+                                                        <h:outputText value="Fecha: " />
+                                                    </p:column>   
+                                                    <p:column>
+
+                                                        <h:outputText id="cFechaIngreso" value="#{activoFijoBean.partida.fechaPartida}"   style="width:100%" >
+                                                            <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                        </h:outputText>
+
+
+                                                    </p:column>
+                                                </p:row>
+
+                                                
+
+
+                                            </p:panelGrid>
+
+
+                                            <br></br>
+                                            <p:dataTable   id="dtTrasver"
+
+                                                           var="detPar" 
+                                                           value="#{activoFijoBean.listaDetallePartida}" 
+                                                           rowIndexVar="i"
+                                                           >
+
+
+                                                <p:columnGroup type="header">
+
+                                                    <p:row>
+                                                        <p:column headerText="Código" width="20%"/>
+                                                        <p:column headerText="Nombre Cuenta"/>
+                                                        <p:column headerText="Debe" width="20%"/>
+                                                        <p:column headerText="Haber" width="20%"/>
+
+
+                                                    </p:row>
+
+                                                </p:columnGroup>
+
+                                                <p:column>
+                                                    <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                                </p:column>
+
+                                                <p:column>
+                                                    <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                                </p:column>
+
+                                                <p:column style="text-align: right">
+                                                    <h:outputText   value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                    </h:outputText>
+
+                                                </p:column>
+
+                                                <p:column style="text-align: right">
+                                                    <h:outputText  value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                    </h:outputText>
+                                                </p:column>
+
+
+
+
+                                            </p:dataTable>
+
+                                            
+                                            <br></br> 
+                                            <p:panelGrid style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Concepto: *"/>
+                                                    </p:column>
+                                                    <p:column colspan="5">
+                                                        <h:outputText id="taConcepto" style="width: 100%; " value="#{activoFijoBean.partida.conceptoPartida}"/>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+
+                                            <br></br>   
+                                            <b> <h:outputText value="Totales"/></b>
+                                            <hr></hr>
+
+                                            <h:outputText value="Debe: "/>   <h:outputText value="#{activoFijoBean.totalDebe}"> 
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                            </h:outputText>
+
+
+
+                                            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{activoFijoBean.totalHaber}"> 
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                            </h:outputText>
+                                            <br></br>
+
+
+
+
+                                        </p:tab>
+                                    </p:tabView>
+
+
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton  value="Ver PDF" ajax="false" actionListener="#{activoFijoBean.generarReporteActivo()}" icon="fa fa-eye"  >
+                                            <p:menuitem value="Descargar PDF"   ajax="false"  
+                                                        actionListener="#{activoFijoBean.generarReporteActivoPDF()}" icon=" fa fa-download" >
+                                            </p:menuitem> 
+
+
+                                            <p:menuitem value="#{activoFijoBean.activoFijoSeleccionado.TTipoActivo.calculoTipoActivo eq 'Tangible'? 'Ver Dpre. PDF': 'Ver Amortiz. PDF' }"   ajax="false"   
+                                                        actionListener="#{activoFijoBean.generarReporteActivoDepre()}" icon=" fa fa-eye" >
+                                            </p:menuitem>
+
+                                            <p:menuitem value="#{activoFijoBean.activoFijoSeleccionado.TTipoActivo.calculoTipoActivo eq 'Tangible'? 'Descargar Dpre. PDF': 'Descargar Amortiz. PDF' }"   ajax="false"   
+                                                        actionListener="#{activoFijoBean.generarReporteActivoDeprePDF()}" icon="fa fa-download" >
+                                            </p:menuitem>
+
+
+
+                                        </p:splitButton>
+                                    </center>
+                                </h:form>
+                            </p:dialog>
+                        </p:outputPanel>
+
+                    </p:outputPanel>
+
+
+                    <!-- Contabilidad -->
+
+                    <p:outputPanel id="opDataCuentas">
+                        <!-- actulizamos la lista de cuentas -->
+                        #{activoFijoBean.updateListaCuentas()}
+
+                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaActivo"  width="80%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuentaActivo"> 
+
+                                <p:dataTable var="cue" value="#{activoFijoBean.listaCuentas}"
+                                             widgetVar="companyTable"
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             rowsPerPageTemplate="5,10"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron cuentas.">   
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                              headerText="Código"
+                                              filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.codigoCuenta}"  />  
+                                    </p:column>  
+                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="40%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.nombreCuenta}" />  
+                                    </p:column> 
+
+                                    <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                              headerText="Cuenta padre"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                    </p:column>  
+
+                                    <p:column  width="10%">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar" >
+                                            <f:setPropertyActionListener value="#{cue}" target="#{activoFijoBean.cuenta}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog> 
+                    </p:outputPanel>
+
+                    <p:outputPanel  rendered="#{activoFijoBean.showRegistro}" id="opRegistroContable" >
+
+                        <p:panel  header="Registro contable"  style="width: 90%; margin: auto; margin-bottom: 20px">
+
+
+                            <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoFormulario}">
+
+                                <h:form>
+                                    <div align="center">
+                                        ¿Estás seguro de guardar?
+                                        <br></br>
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registro()}"   oncomplete="PF('dialogActualizar').hide()"    style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                            <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </div>
+                                </h:form>
+
+                            </p:dialog>        
+
+                            <h:form>
+                                <br></br>
+                                <b><h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPartida"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Numero: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Fecha: *" />
+                                        </p:column>         
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+
+                                            <p:inputText id="tNumero" style="width: 100%" value="#{activoFijoBean.numPartida}"  readonly="true"/>
+
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                        <p:column>
+
+                                            <p:calendar id="cFechaIngreso"  showOn="button"  value="#{activoFijoBean.partida.fechaPartida}"  maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+
+
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b><h:outputText value="Transacción"/></b>
+                                <hr></hr>
+
+
+                                <p:panelGrid id="addPanelTras"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Código: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Destino: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Cantidad: *"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText  value="#{activoFijoBean.cuenta.codigoCuenta}" style="width: 80%; " readonly="true"/> 
+                                            <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{activoFijoBean.msgNo}" style=" color:  red"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="srDestino" value="#{activoFijoBean.detallePartida.tipoSaldoDetallePartida}" style="width: 100%; ">
+                                                <f:selectItem itemLabel="Debe&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Debe" />
+                                                <f:selectItem itemLabel="Haber&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Haber" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputNumber id="tValor" value="#{activoFijoBean.detallePartida.saldoDetallePartida}"   style="width:80%; "/>  
+                                            <p:commandButton  update=":opRegistroContable" actionListener="#{activoFijoBean.addListaDetallePartida()}"  icon="fa fa-plus"  style="#{activoFijoBean.btnNuevo}" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{activoFijoBean.msgCantidad}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+
+
+
+                                <br></br>
+                                <p:dataTable   id="dtTras"
+
+                                               var="detPar" 
+                                               value="#{activoFijoBean.listaDetallePartida}" 
+                                               rowIndexVar="i"
+                                               >
+
+
+                                    <p:columnGroup type="header">
+
+                                        <p:row>
+                                            <p:column headerText="Código" width="20%"/>
+                                            <p:column headerText="Nombre Cuenta"/>
+                                            <p:column headerText="Debe" width="20%"/>
+                                            <p:column headerText="Haber" width="20%"/>
+                                            <p:column headerText="" width="10%"/>
+                                        </p:row>
+
+                                    </p:columnGroup>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right"  >
+                                        <h:outputText   value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right" >
+                                        <h:outputText  value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column>
+                                        <center>
+                                            <p:splitButton   icon="fa fa-pencil"  actionListener="#{activoFijoBean.editListaDetallePartida(i)}" 
+                                                             update=":opRegistroContable" rendered="#{i eq 0? false:true}" >
+                                                <p:menuitem value="Eliminar" icon="fa fa-trash"  actionListener="#{activoFijoBean.removeDetalle(i)}" 
+                                                            update=":opRegistroContable">
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center>
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+
+                                <h:outputText value="#{activoFijoBean.msgDetallePar}" style=" color:  red"/>
+                                <br></br> 
+
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder"> 
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <h:outputText value="Concepto: *"/>
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <p:inputTextarea id="taConcepto" rows="2" cols="90" style="width: 100%; " value="#{activoFijoBean.partida.conceptoPartida}"/>
+                                            <h:outputText value="#{activoFijoBean.msgConcepto}" style=" color:  red"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+
+                                <br></br> 
+
+                                <b><h:outputText value="Totales"/></b>
+                                <hr></hr>
+                                <h:outputText value="Debe: "/>   <h:outputText value="#{activoFijoBean.totalDebe}">
+                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                </h:outputText> 
+
+                                <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{activoFijoBean.totalHaber}">
+                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                </h:outputText> 
+                                <br></br>
+                                <h:outputText value="#{activoFijoBean.msgCuadre}" style=" color:  red"/>
+
+
+
+                                <br></br>
+
+                                <center>
+
+
+                                    <p:commandButton id="btnCreate"  update=":opRegistroContable"    actionListener="#{activoFijoBean.validarFormulario()}"   icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+
+                                    <p:commandButton  update=":padding" actionListener="#{activoFijoBean.enableShowDataBean()}"      icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar">                                    
+                                    </p:commandButton>
+
+
+
+                                </center>
+
+                            </h:form>
+
+                        </p:panel>
+
+                    </p:outputPanel>
+
+                    <p:outputPanel  rendered="#{activoFijoBean.showRegistroModificar}"  id="opModificarRegistroContable">
+
+                        <p:panel  header="Modificar registro contable"  style="width: 90%; margin: auto; margin-bottom: 20px">
+
+
+                            <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoFormulario}">
+
+                                <h:form>
+                                    <div align="center">
+                                        ¿Estás seguro de guardar?
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registroActulizar()}"     style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                            <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </div>
+                                </h:form>
+
+                            </p:dialog>        
+
+                            <h:form>
+                                <br></br>
+                                <b><h:outputText value="Generales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="addPartida"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Numero: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Fecha: *" />
+                                        </p:column>         
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+
+                                            <p:inputText id="tNumero" style="width: 100%" value="#{activoFijoBean.partida.numeroPartida}"  readonly="true"/>
+
+                                        </p:column>
+                                        <p:column>
+                                        </p:column>
+                                        <p:column>
+
+                                            <p:calendar id="cFechaIngreso"  showOn="button"   value="#{activoFijoBean.partida.fechaPartida}"   maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+
+
+                                        </p:column>
+                                    </p:row>
+
+
+
+
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b><h:outputText value="Transacción"/></b>
+                                <hr></hr>
+
+
+                                <p:panelGrid id="addPanelTras"  style="width: 100%; margin: auto;" class="noBoder">   
+                                    <p:row>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Código: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Destino: *" />
+                                        </p:column>
+                                        <p:column style="width: 33%; ">
+                                            <h:outputText value="Cantidad: *"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText  value="#{activoFijoBean.cuenta.codigoCuenta}" style="width: 80%; " readonly="true"/> 
+                                            <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{activoFijoBean.msgNo}" style=" color:  red"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="srDestino" value="#{activoFijoBean.detallePartida.tipoSaldoDetallePartida}" style="width: 100%; ">
+                                                <f:selectItem itemLabel="Debe&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Debe" />
+                                                <f:selectItem itemLabel="Haber&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Haber" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputNumber id="tValor" value="#{activoFijoBean.detallePartida.saldoDetallePartida}"   style="width:80%; "/>  
+                                            <p:commandButton  update=":opModificarRegistroContable" actionListener="#{activoFijoBean.addListaDetallePartida()}"  icon="fa fa-plus"  style="#{activoFijoBean.btnNuevo}" >
+                                            </p:commandButton>
+                                            <br></br>
+                                            <h:outputText value="#{activoFijoBean.msgCantidad}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+
+
+
+                                </p:panelGrid>
+
+                                <br></br>
+                                <p:dataTable   id="dtTras"
+
+                                               var="detPar" 
+                                               value="#{activoFijoBean.listaDetallePartida}" 
+                                               rowIndexVar="i"
+                                               >
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="Código" width="20%"/>
+                                            <p:column headerText="Nombre Cuenta"/>
+                                            <p:column headerText="Debe" width="20%"/>
+                                            <p:column headerText="Haber" width="20%"/>
+                                            <p:column headerText="" width="10%"/>
+                                        </p:row>
+
+                                    </p:columnGroup>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right">
+                                        <h:outputText   value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+
+                                    </p:column>
+
+                                    <p:column style="text-align: right">
+                                        <h:outputText   value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column>
+
+                                        <center>
+                                            <p:splitButton   icon="fa fa-pencil"  actionListener="#{activoFijoBean.editListaDetallePartida(i)}" 
+                                                             update=":opModificarRegistroContable" rendered="#{i eq 0? false:true}" >
+                                                <p:menuitem value="Eliminar" icon="fa fa-trash"  actionListener="#{activoFijoBean.removeDetalle(i)}" 
+                                                            update=":opModificarRegistroContable">
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center>
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+                                <h:outputText value="#{activoFijoBean.msgDetallePar}" style=" color:  red"/>
+                                <br></br> 
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder"> 
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <h:outputText value="Concepto: *"/>
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">
+                                            <p:inputTextarea id="taConcepto" rows="2" cols="90" style="width: 100%; " value="#{activoFijoBean.partida.conceptoPartida}"/>
+                                            <h:outputText value="#{activoFijoBean.msgConcepto}" style=" color:  red"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>   
+                                <b><h:outputText value="Totales"/></b>
+                                <hr></hr>
+                                <h:outputText value="Debe: "/>   <h:outputText value="#{activoFijoBean.totalDebe}">
+                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                </h:outputText> 
+
+                                <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{activoFijoBean.totalHaber}">
+                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                </h:outputText> 
+                                <br></br>
+                                <h:outputText value="#{activoFijoBean.msgCuadre}" style=" color:  red"/>
+                                <br></br>
+                                <center>
+                                    <p:commandButton id="btnCreate"  update=":opModificarRegistroContable"    actionListener="#{activoFijoBean.validarFormularioModificar()}"   icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                    <p:commandButton  update=":padding" actionListener="#{activoFijoBean.enableShowDataBean()}"      icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar">                                    
+                                    </p:commandButton>
+                                </center>
+
+                            </h:form>
+
+                        </p:panel>
+
+                    </p:outputPanel>
+
+                    <p:outputPanel  rendered="#{activoFijoBean.showBaja}"   id="opBajaRegistroContable" >
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogBaja" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{activoFijoBean.estadoFormulario}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.darDeBajaContable()}"   oncomplete="PF('dialogBaja').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogBaja').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        <h:form id="fbajaActivo">
+                            <p:panel id="pModificar" header="Dar de baja activo"  style="width: 90%; margin: auto; margin-bottom: 20px">
+
+                                <p:tabView  activeIndex="#{activoFijoBean.idTab}"  >
+
+
+
+                                    <p:tab title="Activo" id="adt">
+
+                                        <p:panelGrid id="modiPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                                            <p:row>
+                                                <p:column style="width: 50%" >
+                                                    <h:outputText value="Código:"/>
+                                                </p:column>
+                                                <p:column style="width: 50%" >
+                                                    <h:outputText value="Descripción:"/>
+                                                </p:column>
+
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column >
+
+                                                    <p:inputText value="#{activoFijoBean.codigoActivoSeleccionado}" style="width: 100%" readonly="true"/>
+                                                </p:column>
+
+                                                <p:column >
+
+                                                    <p:inputText value="#{activoFijoBean.activoFijoSeleccionado.descripcionActivoFijo}" style="width: 100%" readonly="true"/>
+                                                </p:column>
+
+
+                                            </p:row>
+
+                                            <p:row>
+
+                                                <p:column >
+                                                    <h:outputText value="Motivo:*"/>
+                                                </p:column>
+
+                                                <p:column >
+                                                    <h:outputText value="Valor de adquisición:*"/>
+                                                </p:column>
+
+
+                                            </p:row>
+                                            <p:row>
+
+                                                <p:column >
+                                                    <p:selectOneMenu id="sArea" value="#{activoFijoBean.tipoBaja}" style="width:100%" >
+
+                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
+                                                        <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                                                        <f:selectItem itemLabel="Donación" itemValue="Donación" />
+                                                        <f:selectItem itemLabel="Inservible" itemValue="Inservible" />
+                                                        <p:ajax update="tValorV"></p:ajax>
+                                                    </p:selectOneMenu>
+
+                                                    <h:outputText value="#{activoFijoBean.msgTipoBaja}" style=" color:  red" />
+                                                </p:column>
+
+                                                <p:column >
+                                                    <p:inputNumber id="tValorAd" value="#{activoFijoBean.valorActivoBaja}"   style="width:80%; " readonly="true"/>  
+                                                </p:column>
+
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%" >
+                                                    <h:outputText value="Depreciación acumulada:*" />
+                                                </p:column>
+
+                                                <p:column>
+                                                    <h:outputText value="Valor en libros:*"/>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+
+
+
+                                                <p:column>
+                                                    <p:inputNumber id="tValorA" value="#{activoFijoBean.valorDepre}"   style="width:80%; " readonly="true" />  
+
+                                                </p:column>
+
+                                                <p:column>
+                                                    <p:inputNumber id="tValorL" value="#{activoFijoBean.valorLibro}"   style="width:80%; " readonly="true" />  
+
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Venta: *"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputNumber id="tValorV" value="#{activoFijoBean.valorVenta}"  disabled="#{activoFijoBean.tipoBaja eq 'Venta' ? false:true}"  style="width:80%; " />  
+                                                    <br></br>
+                                                    <h:outputText value="#{activoFijoBean.msgValorActivoBaja}" style=" color:  red"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+
+                                        <br></br>
+                                        <center>
+                                            <p:commandButton  actionListener="#{activoFijoBean.siguienteBaja()}"    update=":opBajaRegistroContable"    icon="fa fa-arrow-right" style="#{activoFijoBean.btnModificar}"  value="Siguiente"> 
+                                            </p:commandButton>
+                                            <p:commandButton  actionListener="#{activoFijoBean.enableShowDataBean()}"  update=":padding"    icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
+                                            </p:commandButton>
+                                        </center>
+
+                                    </p:tab>
+
+
+
+                                    <p:tab title="Registro contable" id="Asient" disabled="true">
+                                        <br></br>
+                                        <b><h:outputText value="Generales"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid id="addPartida"  style="width: 100%; margin: auto;" class="noBoder">   
+                                            <p:row>
+                                                <p:column style="width: 33%; ">
+                                                    <h:outputText value="Numero: *" />
+                                                </p:column>
+                                                <p:column style="width: 33%; ">
+
+                                                </p:column>
+                                                <p:column style="width: 33%; ">
+                                                    <h:outputText value="Fecha: *" />
+                                                </p:column>         
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+
+                                                    <p:inputText id="tNumero"   style="width: 100%" value="#{activoFijoBean.numPartida}"  readonly="true"/>
+
+                                                </p:column>
+                                                <p:column>
+                                                </p:column>
+                                                <p:column>
+
+                                                    <p:calendar id="cFechaIngreso" showOn="button" value="#{activoFijoBean.partida.fechaPartida}"  maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+
+
+                                                </p:column>
+                                            </p:row>
+
+
+
+
+                                        </p:panelGrid>
+                                        <br></br>
+
+                                        <b><h:outputText value="Transacción"/></b>
+                                        <hr></hr>
+
+
+                                        <p:panelGrid id="addPanelTras"  style="width: 100%; margin: auto;" class="noBoder">   
+                                            <p:row>
+                                                <p:column style="width: 33%; ">
+                                                    <h:outputText value="Código: *" />
+                                                </p:column>
+                                                <p:column style="width: 33%; ">
+                                                    <h:outputText value="Destino: *" />
+                                                </p:column>
+                                                <p:column style="width: 33%; ">
+                                                    <h:outputText value="Cantidad: *"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText  value="#{activoFijoBean.cuenta.codigoCuenta}" style="width: 80%; " readonly="true"/> 
+                                                    <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                                    </p:commandButton>
+                                                    <br></br>
+                                                    <h:outputText value="#{activoFijoBean.msgNo}" style=" color:  red"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:selectOneRadio id="srDestino" value="#{activoFijoBean.detallePartida.tipoSaldoDetallePartida}" style="width: 100%; ">
+                                                        <f:selectItem itemLabel="Debe&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Debe" />
+                                                        <f:selectItem itemLabel="Haber&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="Haber" />
+                                                    </p:selectOneRadio>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputNumber id="tValor" value="#{activoFijoBean.detallePartida.saldoDetallePartida}"  decimalPlaces="2"   style="width:80%;  "/>  
+                                                    <p:commandButton  update=":opBajaRegistroContable" actionListener="#{activoFijoBean.addListaDetallePartida()}"  icon="fa fa-plus"  style="#{activoFijoBean.btnNuevo}" >
+                                                    </p:commandButton>
+                                                    <br></br>
+                                                    <h:outputText value="#{activoFijoBean.msgCantidad}" style=" color:  red"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <p:dataTable   id="dtTras"
+
+                                                       var="detPar" 
+                                                       value="#{activoFijoBean.listaDetallePartida}" 
+                                                       rowIndexVar="i"
+                                                       >
+                                            <p:columnGroup type="header">
+
+                                                <p:row>
+                                                    <p:column headerText="Código" width="20%"/>
+                                                    <p:column headerText="Nombre Cuenta"/>
+                                                    <p:column headerText="Debe" width="20%"/>
+                                                    <p:column headerText="Haber" width="20%"/>
+                                                    <p:column headerText="" width="10%"/>
+                                                </p:row>
+
+                                            </p:columnGroup>
+
+                                            <p:column>
+                                                <h:outputText value="#{detPar.TCuenta.codigoCuenta}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <h:outputText value="#{detPar.TCuenta.nombreCuenta}"/>
+
+                                            </p:column>
+
+                                            <p:column style="text-align: right">
+                                                <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? detPar.saldoDetallePartida : '' }" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                </h:outputText>
+
+                                            </p:column>
+
+                                            <p:column style="text-align: right">
+                                                <h:outputText value="#{ detPar.tipoSaldoDetallePartida  eq 'Debe' ? '' : detPar.saldoDetallePartida }" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                                </h:outputText>
+                                            </p:column>
+
+                                            <p:column>
+                                                <center>
+                                                    <p:splitButton title="Modificar" icon="fa fa-pencil"  actionListener="#{activoFijoBean.editListaDetallePartida(i)}" 
+                                                                   rendered="#{activoFijoBean.tipoBaja eq 'Venta' ? (i lt 3? false:true) : ( i lt 2? false:true) }" update=":opBajaRegistroContable">
+                                                        <p:menuitem  title="eliminar" icon="fa fa-trash"  actionListener="#{activoFijoBean.removeDetalle(i)}" 
+                                                                     rendered="#{activoFijoBean.tipoBaja eq 'Venta'? (i lt 3? false:true): ( i lt 2? false:true) }" update=":opBajaRegistroContable">
+                                                        </p:menuitem>
+                                                    </p:splitButton>
+                                                </center>
+                                            </p:column>
+                                        </p:dataTable>
+                                        <h:outputText value="#{activoFijoBean.msgDetallePar}" style=" color:  red"/>
+                                        <br></br> 
+                                        <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder"> 
+                                            <p:row>
+                                                <p:column colspan="3">
+                                                    <h:outputText value="Concepto: *"/>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="3">
+                                                    <p:inputTextarea id="taConcepto" rows="2" cols="90" style="width: 100%; " value="#{activoFijoBean.partida.conceptoPartida}"/>
+                                                    <h:outputText value="#{activoFijoBean.msgConcepto}" style=" color:  red"/>
+                                                </p:column>
+
+                                            </p:row>
+                                        </p:panelGrid>
+
+                                        <br></br>   
+                                        <b><h:outputText value="Totales"/></b>
+                                        <hr></hr>
+                                        <h:outputText value="Debe: "/>   <h:outputText value="#{activoFijoBean.totalDebe}">
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText> 
+                                        <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Haber: "/>  <h:outputText value="#{activoFijoBean.totalHaber}">
+                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />
+                                        </h:outputText> 
+                                        <br></br>
+                                        <h:outputText value="#{activoFijoBean.msgCuadre}" style=" color:  red"/>
+                                        <br></br>
+                                        <center>
+                                            <p:commandButton id="btnCreate"  update=":opBajaRegistroContable"    actionListener="#{activoFijoBean.validarFormulario()}"   icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                            </p:commandButton>
+
+                                            <p:commandButton  update=":padding" actionListener="#{activoFijoBean.enableShowDataBean()}"      icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar">                                    
+                                            </p:commandButton>
+                                        </center>
+                                    </p:tab>
+                                </p:tabView>
+
+                            </p:panel>
+
+                        </h:form>
+
+                    </p:outputPanel>
+
+
+                </p:outputPanel>
+
+
+            </ui:define>
+
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#cont").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

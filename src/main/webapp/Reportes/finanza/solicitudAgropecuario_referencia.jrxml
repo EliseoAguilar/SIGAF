@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudAgropecuario_referencia" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b74dbb2e-d39d-492c-a467-91cbe7c47e33">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_proyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_referencia."idreferencia" AS t_referencia_idreferencia,
+     t_referencia."nombre" AS t_referencia_nombre,
+     t_referencia."direccion" AS t_referencia_direccion,
+     t_referencia."correo" AS t_referencia_correo,
+     t_referencia."telefono" AS t_referencia_telefono,
+     t_referencia."celular" AS t_referencia_celular,
+     t_referencia."profesion" AS t_referencia_profesion,
+     t_referencia."estado" AS t_referencia_estado,
+     t_referencia."idproyecto" AS t_referencia_idproyecto,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica
+FROM
+     "public"."t_proyecto" t_proyecto INNER JOIN "public"."t_referencia" t_referencia ON t_proyecto."idproyecto" = t_referencia."idproyecto" where t_proyecto."idproyecto"= $P{id_proyecto}]]>
+	</queryString>
+	<field name="t_referencia_idreferencia" class="java.lang.Integer"/>
+	<field name="t_referencia_nombre" class="java.lang.String"/>
+	<field name="t_referencia_direccion" class="java.lang.String"/>
+	<field name="t_referencia_correo" class="java.lang.String"/>
+	<field name="t_referencia_telefono" class="java.lang.String"/>
+	<field name="t_referencia_celular" class="java.lang.String"/>
+	<field name="t_referencia_profesion" class="java.lang.String"/>
+	<field name="t_referencia_estado" class="java.lang.Integer"/>
+	<field name="t_referencia_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.lang.Float"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="0" width="228" height="20" uuid="85e64e19-dd11-4dad-be92-cc5f2d2029bd"/>
+				<textFieldExpression><![CDATA[$F{t_referencia_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="124" height="20" uuid="bce8bf6f-ad87-464b-8290-d9f29d0c5073"/>
+				<textFieldExpression><![CDATA[$F{t_referencia_telefono}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

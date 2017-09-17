@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroDiario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55add3f3-9b34-460d-b21c-87a6ee28cfe6">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idPartida" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEntidad" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     t."id_partida" AS t_id_partida,
+     t."fecha_partida" AS t_fecha_partida,
+     t."concepto_partida" AS t_concepto_partida,
+     t."id_periodo_partida" AS t_id_periodo_partida,
+     t."numero_partida" AS t_numero_partida,
+     t."estado_partida" AS t_estado_partida
+FROM
+     "t_ejercicio" e INNER JOIN "t_periodo" p ON e."id_ejercicio" = p."id_ejercicio"
+     INNER JOIN "t_partida" t ON p."id_periodo" = t."id_periodo_partida"
+WHERE
+
+      t."id_partida" = $P{idPartida}]]>
+	</queryString>
+	<field name="id_ejercicio" class="java.lang.Integer"/>
+	<field name="estado_ejercicio" class="java.lang.Boolean"/>
+	<field name="id_entidad_ejercicio" class="java.lang.Integer"/>
+	<field name="aho_ejercicio" class="java.lang.Integer"/>
+	<field name="id_periodo" class="java.lang.Integer"/>
+	<field name="estado_periodo" class="java.lang.Boolean"/>
+	<field name="mes_periodo" class="java.lang.String"/>
+	<field name="id_partida" class="java.lang.Integer"/>
+	<field name="fecha_partida" class="java.sql.Date"/>
+	<field name="concepto_partida" class="java.lang.String"/>
+	<field name="id_periodo_partida" class="java.lang.Integer"/>
+	<field name="numero_partida" class="java.lang.Integer"/>
+	<field name="estado_partida" class="java.lang.Boolean"/>
+	<field name="t_id_partida" class="java.lang.Integer"/>
+	<field name="t_fecha_partida" class="java.sql.Date"/>
+	<field name="t_concepto_partida" class="java.lang.String"/>
+	<field name="t_id_periodo_partida" class="java.lang.Integer"/>
+	<field name="t_numero_partida" class="java.lang.Integer"/>
+	<field name="t_estado_partida" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="38" uuid="1193d3df-8f03-4311-acb8-56f5003cc048"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="172" y="0" width="169" height="20" uuid="2cbae5b6-6c93-4857-8f40-8947baf45d7c"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE PARTIDA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="-1" y="8" width="555" height="1" uuid="1f12b7bd-0a04-4401-a5bf-dc43574f4f3a"/>
+			</line>
+			<staticText>
+				<reportElement x="14" y="9" width="61" height="20" uuid="24f3543c-4c5a-4e96-bdf9-985d19d6a824"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="9" width="47" height="20" uuid="66dac57a-a1b0-4283-b6b3-892f97a29acc"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="8" width="52" height="20" uuid="36dd551a-b39c-42b6-8810-89824d5a5315"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HABER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="8" width="64" height="20" uuid="92388e8c-e6b3-48da-8eee-9aa60a87123c"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="10" width="76" height="20" uuid="77ac2349-e6fe-4967-ad14-9573d6cc1ff6"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUENTA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="133" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="ef8b563c-624a-440d-8783-052f1656aed2"/>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="0" y="48" width="60" height="20" uuid="0b7f0488-afe9-42d2-92f2-e1a8f7e8d4c5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_partida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="230" y="13" width="100" height="20" uuid="9955ac70-516c-41ff-ad10-9c1ac2a008dc"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_partida}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="60" y="33" width="494" height="100" uuid="97de54a4-c6a2-410c-a7b3-d4b9c5fd44b7"/>
+				<subreportParameter name="id_partida">
+					<subreportParameterExpression><![CDATA[$F{id_partida}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="concepto_partida">
+					<subreportParameterExpression><![CDATA[$F{concepto_partida}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "LibroDiarioSub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="440" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="56d564b6-d385-4fc5-a74e-b9100ec69dc2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="51c94911-1849-44d7-83a8-13fb7e307379"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

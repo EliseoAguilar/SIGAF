@@ -1,0 +1,2200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .ui-menu.ui-menu-dynamic {
+                        width: 18em;
+                    }
+                    .first-row {
+                        background-color: #ffffff !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .second-row {
+                        background-color: #fff999 !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .borderHidden.ui-panelgrid>*>tr,
+                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    .ui-datalist-content{
+                        border: none;
+                    }
+                    .opciones .ui-selectonemenu-list { 
+                        height: 100px;
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{carteraBean.showCreate}" >
+                        <h:form id="fHistorialCooperativas" target="_blank" > 
+                            <p:panel   header="Historial de créditos"  style="width: 100%; margin: auto; margin-bottom: 20px">
+                                <br></br>
+                                <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                            <center>  <h:outputText value="Cliente"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 10%; ">
+                                            <h:outputText value="Código:"/> <br></br>
+                                            <h:outputText value="Giro:"/> <br></br>
+                                            <h:outputText value="NIT:"/> <br></br>
+
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoClienteEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.giroEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nitEntidad}"/> <br></br>
+
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:15%; ">
+                                            <h:outputText value="Cooperativa:"/>   <br></br>
+                                            <h:outputText value="Nombre:"/>   <br></br>
+                                            <h:outputText value="Representante legal:"/>   <br></br>                                         
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreRepresentanteEntidad}">
+                                            </h:outputText>                                        
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>  <h:outputText value="Lista de créditos"></h:outputText>  </b>
+                                <hr></hr>
+                                <p:dataTable   id="historial"
+                                               var="empleados" 
+                                               value="#{carteraBean.listaEntidadProyectosFiltrada}" 
+                                               paginator="true"
+                                               widgetVar="companyTable"
+                                               rows="10"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               rowsPerPageTemplate="5,10,15"
+                                               paginatorPosition="bottom"
+                                               currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                               emptyMessage="No se encontraron créditos" rowIndexVar="No"   >
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                        <h:outputText value=" #{No+1}" />
+                                    </p:column>
+                                    <p:column headerText="Código" style=" width: 15%" sortBy="#{empleados.TProyecto.codigoProyecto}" filterBy="#{empleados.TProyecto.codigoProyecto}" filterStyle="width:100%" >  
+                                        <h:outputText value=" #{empleados.TProyecto.codigoProyecto}" />
+                                    </p:column>
+                                    <p:column headerText="Modalidad" style=" width: 45%" sortBy="#{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterBy="#{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%"  >  
+                                        <h:outputText value=" #{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                    </p:column>
+
+                                    <p:column headerText="Monto" style=" width: 15%"  sortBy="#{empleados.TProyecto.monto}" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%" >  
+                                        <div align="right"> 
+                                            <h:outputText value="$" />
+                                            <h:outputText value="#{empleados.TProyecto.monto}">                                            
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                            </h:outputText>
+                                        </div>
+                                    </p:column>
+                                    <p:column headerText="Estado" style=" width: 20%"  sortBy="#{carteraBean.cambiarEstado(empleados.TProyecto.estado)}" filterBy="#{carteraBean.cambiarEstado(empleados.TProyecto.estado)}" filterStyle="width:100%">  
+                                        <h:outputText value="#{carteraBean.cambiarEstado(empleados.TProyecto.estado)}" />
+                                    </p:column>
+                                    <p:column  style=" width: 9%; text-align: center" >  
+                                      
+
+
+                                        <p:splitButton  update=":padding" oncomplete="PF('dlVerHistorialCreditoCooperativa').show()"  icon="fa fa-eye"  >
+                                                  <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                            <f:actionListener binding="#{carteraBean.cargarVistaPagos2(1)}"/> 
+                                            <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoCooperativaDesembolsos').show()"  icon="fa fa-book" value="Ver historial de desembolsos">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                <f:actionListener binding="#{carteraBean.cargarVistaPagos2(1)}"/> 
+                                            </p:menuitem>
+                                             <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoCooperativaPagos').show()"  icon="fa fa-book" value="Ver historial de pagos">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                 <f:actionListener binding="#{carteraBean.cargarVistaPagos2(1)}"/> 
+                                            </p:menuitem>
+                                            <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoCooperativaMora').show()"  icon="fa fa-calendar" value="Ver detalles de mora">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                <f:actionListener binding="#{carteraBean.cargarVistaPagos2(1)}"/> 
+                                            </p:menuitem>
+                                           
+                                        </p:splitButton>
+
+
+
+                                    </p:column>
+                                </p:dataTable> 
+                                <br></br>
+                                <center>
+                                    <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                        <f:actionListener binding="#{carteraBean.verReporteHistorialCrediticioCooperativa()}"/> 
+                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                            <f:actionListener binding="#{carteraBean.verReporteHistorialCrediticioCooperativaPDF()}"/> 
+                                        </p:menuitem>
+                                        <p:menuitem   update=":padding" actionListener="#{carteraBean.limpiar}"  icon="fa fa-arrow-left" value="Volver">
+                                        </p:menuitem>
+                                    </p:splitButton>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Datos del crédito"  widgetVar="dlVerHistorialCreditoCooperativa" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%"  appendTo="@(body)">
+                            <h:form target="_blank">
+
+
+
+                                <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                            <center>  <h:outputText value="Cliente"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 10%; ">
+                                            <h:outputText value="Código:"/> <br></br>
+                                            <h:outputText value="Giro:"/> <br></br>
+                                            <h:outputText value="NIT:"/> <br></br>
+
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoClienteEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.giroEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nitEntidad}"/> <br></br>
+
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:15%; ">
+                                            <h:outputText value="Cooperativa:"/>   <br></br>
+                                            <h:outputText value="Nombre:"/>   <br></br>
+                                            <h:outputText value="Representante legal:"/>   <br></br>                                         
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreEntidad}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreRepresentanteEntidad}">
+                                            </h:outputText>                                        
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                            <center>  <h:outputText value="Crédito"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 15%; ">
+                                            <h:outputText value="Código:"/> <br></br>
+                                            <h:outputText value="Modalidad:"/> <br></br>
+                                            <h:outputText value="Destino:"/> <br></br>
+                                            <h:outputText value="Monto:"/> <br></br>
+                                            <h:outputText value="Plazo (meses):"/> <br></br>
+                                            <h:outputText value="Forma de pago:"/> <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.codigoProyecto}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.tipo}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.destinoProyecto}"/> <br></br>
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.monto}">
+                                                <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.plazo}"/>  <br></br>
+                                            <h:outputText value="#{carteraBean.formaPago}"/> <br></br>
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:25%; ">
+                                            <h:outputText value="Tasa de interés (%):"/> <br></br>
+                                            <h:outputText value="Tasa de interés por mora (%):"/> <br></br>
+                                            <h:outputText value="Estado:"/>   <br></br>
+                                            <h:outputText value="Calificación:"/>   <br></br>
+                                            <h:outputText value="Fecha de aprobación:"/> <br></br>
+                                            <h:outputText value="Fecha de vencimiento:"/>   <br></br>
+                                            <h:outputText value="Fecha de finalización:"/>   <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="#{carteraBean.politicaSeleccionada.tasaInteres}">
+                                                <f:convertNumber  pattern=",#0.00" locale="en-US" /> 
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.politicaSeleccionada.tasaInteresMora}">
+                                                <f:convertNumber  pattern=",#0.00" locale="en-US" /> 
+                                            </h:outputText>
+
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.estadoCredito}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.calificacion eq null? '----':carteraBean.proyectoSeleccionado.calificacion}">
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaAprovacion}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaVencimientoProyecto}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                            <br></br>
+                                            <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaFinalizacionProyecto eq null? '--/--/----':carteraBean.proyectoSeleccionado.fechaFinalizacionProyecto}"> 
+                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+
+                                <br></br>      
+
+
+
+                            </h:form>
+
+                        </p:dialog>
+
+
+                        <p:dialog header="Historial de desembolsos"  widgetVar="dlVerHistorialCreditoCooperativaDesembolsos" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+                            <h:form target="_blank">
+                                <p:outputPanel style=" width: 100%;"   >
+
+
+
+                                    <b> <h:outputText value="Lista de desembolsos"/>
+                                    </b>
+                                    <hr></hr>
+                                    <p:dataTable  id="basicDB" var="entidades" widgetVar="desembolsosDataEntidad" value="#{carteraBean.listaDesembolso}"
+                                                  style="width: 100%;"
+                                                  paginator="true"
+                                                  rows="2"
+                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                  rowsPerPageTemplate="2"
+                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  paginatorPosition="bottom"
+                                                  emptyMessage="No se encontraron desembolsos" rowIndexVar="No" 
+                                                  >
+
+                                        <p:column   
+                                            headerText="Nº" width="5%" style="text-align: center" >                                             
+                                            <h:outputText value="#{No+1}"  />  
+                                        </p:column> 
+                                        <p:column   
+                                            headerText="Fecha de realización" width="45%" filterBy="#{entidades.fechaDesembolso}" sortBy="#{entidades.fechaDesembolso}" >                                             
+                                            <div align="center">
+                                                <h:outputText value="#{entidades.fechaDesembolso}">
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column> 
+                                        <p:column headerText="Cantidad" width="50%" filterBy="#{entidades.montoDesembolso}" sortBy="#{entidades.montoDesembolso}"  >  
+                                            <div align="right">
+                                                <h:outputText value="$"/> 
+                                                <h:outputText value="#{entidades.montoDesembolso}"> 
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>  
+                                    </p:dataTable>                                             
+                                    <br></br>
+                                    <p:fieldset>
+                                        <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column style=" width: 10%">
+                                                    <h:outputText value="Total:" /> 
+                                                </p:column>
+                                                <p:column style=" width: 85%"   >
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{carteraBean.totalDesembolsos}">
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </p:fieldset>
+                                    <br></br>
+                                    <div align="center">
+                                        <p:splitButton  update=":padding" value="Ver desembolsos PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{carteraBean.verDesembolsosCooperativa}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar desembolsos PDF">
+                                                <f:actionListener binding="#{carteraBean.verDesembolsosCooperativaPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </div>
+
+                                </p:outputPanel>
+                            </h:form>
+
+                        </p:dialog>
+
+                        <p:dialog header="Historial de pagos"  widgetVar="dlVerHistorialCreditoCooperativaPagos" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="80%"  appendTo="@(body)">
+                            <h:form target="_blank">
+
+                                <b> <h:outputText value="Lista de pagos: #{carteraBean.numeroCuota}/#{carteraBean.cantidadCuotas}"/>
+
+                                </b>
+                                <hr></hr>
+                                <p:dataTable  id="basicDPaogas" var="entidades" widgetVar="produrTable"  paginator="true" rows="4" value="#{carteraBean.listaPago}"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      paginatorPosition="bottom" style="width: 100%; font-size:  small "
+                                                      currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                      rowIndexVar="No"  rowsPerPageTemplate="4" emptyMessage="No se encontraron pagos" 
+                                                      >
+                                            <p:column   
+                                                headerText="Nº" width="4%" style="text-align: center" >                                             
+                                                <h:outputText value="#{No+1}"  />  
+                                            </p:column> 
+                                            <p:column   
+                                                headerText="Fecha" width="8%" >      
+                                                <div style=" text-align: center"> 
+                                                    <h:outputText value="#{entidades.fecha}"  >
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Cuota"  width="7%" sortBy="#{entidades.cuota}" > 
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.cuota}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>  
+                                            <p:column  headerText="Interés"  width="7%" sortBy="#{entidades.interes}"  
+                                                       >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.interes}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Abono a capital"  width="10%" sortBy="#{entidades.abono}" 
+                                                      >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.abono}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Amortizado"  width="10%" sortBy="#{entidades.capitalamortizado}" 
+                                                      >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.capitalamortizado}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            <p:column headerText="Saldo de capital"  width="10%" sortBy="#{entidades.saldocapital}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.saldocapital}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                             <p:column headerText="Mora"  width="7%" sortBy="#{entidades.mora}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.mora}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                             <p:column headerText="Adicional"  width="7%" sortBy="#{entidades.saldoadicional}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.saldoadicional}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            <p:column headerText="Destino"  width="10%" sortBy="#{entidades.destino}">  
+                                                <div style=" text-align: center"> 
+                                             
+                                                    <h:outputText value="#{entidades.destino}">                                            
+                                                                                              
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            
+                                        </p:dataTable>
+                                        <br></br>        
+                                        <p:outputPanel rendered="#{carteraBean.proyectoSeleccionado.estado eq 6 or carteraBean.proyectoSeleccionado.estado eq 7 }">
+                                            <b>
+                                            <p:fieldset >
+                                                <p:panelGrid   style=" width: 55%;" styleClass="borderHidden" >
+                                                    <p:row>
+                                                        <p:column style=" width: 5%">
+                                                            <h:outputText value="Total pagado:" /> 
+                                                        </p:column>
+                                                        <p:column style=" width: 10%"   >
+                                                            <h:outputText value="$" />
+                                                            <h:outputText value="#{carteraBean.totalGeneral}">
+                                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                        <p:column style=" width: 7%">
+                                                            <h:outputText value="Interés generado:" /> 
+                                                        </p:column>
+                                                        <p:column style=" width: 10%"   >
+                                                            <h:outputText value="$" />
+                                                            <h:outputText value="#{carteraBean.totalInteres}">
+                                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:fieldset>  
+                                                </b>
+                                        </p:outputPanel> 
+                                <br></br>
+                                <div align="center">
+
+
+
+                                    <p:splitButton  update=":padding" value="Ver pagos PDF"  ajax="false" icon="fa fa-eye"  >
+                                        <f:actionListener binding="#{carteraBean.verReportePagosCooperativa()}"/> 
+                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar pagos PDF">
+                                            <f:actionListener binding="#{carteraBean.verReportePagosCooperativaPDF()}"/> 
+                                        </p:menuitem>
+                                    </p:splitButton>      
+                                </div>
+
+
+                            </h:form>
+
+                        </p:dialog>
+
+                        <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoCooperativaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%"  appendTo="@(body)">
+                            <h:form target="_blank">
+                                <b> <h:outputText value="Lista de cuotas retrasadas"/>
+                                </b>
+                                <hr></hr>
+                                <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{carteraBean.listaPagosMora}"
+                                              style="width: 100%;"
+                                              paginator="true"
+                                              rows="4"
+                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                              rowsPerPageTemplate="4"
+                                              currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                              paginatorPosition="bottom"
+                                              emptyMessage="No se encontraron cuotas retrasadas" rowIndexVar="No" 
+                                              >
+
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />  
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Fecha de pago" width="15%" filterBy="#{entidades.fecha}" sortBy="#{entidades.fecha}" >                                             
+                                        <div style=" text-align: center">
+                                            <h:outputText value="#{entidades.fecha}">
+                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Dias de retraso" width="15%" filterBy="#{entidades.idpago}" sortBy="#{entidades.idpago}" >                                             
+                                        <div style=" text-align: center">
+                                            <h:outputText value="#{entidades.idpago}">
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Cuota" width="15%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}" >                                             
+                                        <div style=" text-align: right">
+                                            <h:outputText value="$" />
+                                            <h:outputText value="#{entidades.cuota}">
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Mora" width="15%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
+                                        <div style=" text-align: right">
+                                            <h:outputText value="$" />
+                                            <h:outputText value="#{entidades.abono}">
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="total" width="15%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
+                                        <div style=" text-align: right">
+                                            <h:outputText value="$" />
+                                            <h:outputText value="#{entidades.interes}">
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                </p:dataTable>
+                                <br></br>
+                                <p:fieldset>
+                                    <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
+                                        <p:row>
+                                            <p:column style=" width: 10%">
+                                                <h:outputText value="Total:" /> 
+                                            </p:column>
+                                            <p:column style=" width: 90%"   >
+                                                <h:outputText value="$" />
+                                                <h:outputText value="#{carteraBean.totalMoraGenerada}">
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                                <br></br>
+                                <div align="center">
+                                    <p:splitButton  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver detalle de PDF"  ajax="false" icon="fa fa-eye"  >
+                                        <f:actionListener binding="#{carteraBean.verDetalleMoraCooperativa()}"/> 
+                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar detalle de mora PDF">
+                                            <f:actionListener binding="#{carteraBean.verDetalleMoraCooperativaPDF()}"/> 
+                                        </p:menuitem>
+                                    </p:splitButton>
+                                </div>
+
+
+                            </h:form>
+
+                        </p:dialog>
+
+
+
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{carteraBean.showView}" >
+                        <h:form id="fHistorialPersonas" target="_blank" >                            
+                            <p:panel   header="Historial de créditos"  style="width: 100%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    <p:row>
+                                        <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                            <center>  <h:outputText value="Cliente"/> </center> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 25%;">
+                                            <h:outputText value="Código:"/> <br></br>
+                                            <h:outputText value="Nombres:"/>   <br></br>
+                                            <h:outputText value="Apellidos:"/>   <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="#{carteraBean.clienteSeleccionado.codigoCliente}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.clienteSeleccionado.nombreCliente}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.clienteSeleccionado.apellidoCliente}"/> <br></br>
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:25%; ">
+                                            <h:outputText value="DUI:"/> <br></br>
+                                            <h:outputText value="NIT:"/>   <br></br>
+
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                            <h:outputText value="#{carteraBean.clienteSeleccionado.duiCliente}"/> <br></br>
+                                            <h:outputText value="#{carteraBean.clienteSeleccionado.nitCliente}">
+                                            </h:outputText>
+
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b>  <h:outputText value="Lista de créditos"></h:outputText>  </b>
+                                <hr></hr>
+                                <p:dataTable   id="historialPersonas"
+                                               var="empleados" 
+                                               value="#{carteraBean.listaClienteProyectoFiltrada}" 
+                                               paginator="true"
+                                               widgetVar="companyTable"
+                                               rows="10"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               rowsPerPageTemplate="5,10,15"
+                                               paginatorPosition="bottom" 
+                                               currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                               emptyMessage="No se encontraron créditos" rowIndexVar="No"  >
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="Nº" style="width: 4%; text-align: center">  
+                                        <h:outputText value=" #{No+1}" />
+                                    </p:column>
+                                    <p:column headerText="Código" style=" width: 15%" filterBy="#{empleados.TProyecto.codigoProyecto}" filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigoProyecto}" >  
+                                        <h:outputText value=" #{empleados.TProyecto.codigoProyecto}" />
+                                    </p:column>
+                                    <p:column headerText="Modalidad" style=" width: 45%" filterBy="#{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" >  
+                                        <h:outputText value="#{carteraBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                    </p:column>
+
+                                    <p:column headerText="Monto" style="width: 15%;"   sortBy="#{empleados.TProyecto.monto}" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%" >  
+                                        <div style=" text-align: right">
+                                            <h:outputText value="$" />
+                                            <h:outputText value="#{empleados.TProyecto.monto}">                                            
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                            </h:outputText> 
+                                        </div>
+                                    </p:column>
+                                    <p:column headerText="Estado" style=" width: 20%" filterBy="#{empleados.TProyecto.estado}" filterStyle="width:100%" sortBy="#{carteraBean.cambiarEstado(empleados.TProyecto.estado)}">  
+                                        <h:outputText value=" #{carteraBean.cambiarEstado(empleados.TProyecto.estado)}" />
+                                    </p:column>
+                                    <p:column  style="width: 9%; text-align: center"  >  
+
+
+                                      
+                                        
+                                        <p:splitButton  update=":padding" oncomplete="PF('dlVerHistorialCreditoPersona').show()"  icon="fa fa-eye"  >
+                                                  <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                            <f:actionListener binding="#{carteraBean.cargarVistaPagos2(2)}"/> 
+                                            <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoPersonaDesembolsos').show()"  icon="fa fa-book" value="Ver historial de desembolsos">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                <f:actionListener binding="#{carteraBean.cargarVistaPagos2(2)}}"/> 
+                                            </p:menuitem>
+                                             <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoPersonaPagos').show()"  icon="fa fa-book" value="Ver historial de pagos">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                 <f:actionListener binding="#{carteraBean.cargarVistaPagos2(2)}"/> 
+                                            </p:menuitem>
+                                            <p:menuitem  update=":padding" oncomplete="PF('dlVerHistorialCreditoPersonaMora').show()"  icon="fa fa-calendar" value="Ver detalles de mora">
+                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{carteraBean.proyectoSeleccionado}" />
+                                      
+                                                <f:actionListener binding="#{carteraBean.cargarVistaPagos2(2)}"/> 
+                                            </p:menuitem>
+                                           
+                                        </p:splitButton>
+                                        
+                                        
+                                        
+                                        
+                                    </p:column>
+                                </p:dataTable> 
+                                <br></br>
+                                <center>
+                                    <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                        <f:actionListener binding="#{carteraBean.verReporteHistorialCrediticio()}"/> 
+                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                            <f:actionListener binding="#{carteraBean.verReporteHistorialCrediticioPDF()}"/> 
+                                        </p:menuitem>
+                                        <p:menuitem   update=":padding" actionListener="#{carteraBean.limpiar}"  icon="fa fa-arrow-left" value="Volver">
+                                        </p:menuitem>
+                                    </p:splitButton>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Datos del crédito"  widgetVar="dlVerHistorialCreditoPersona" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="65%" appendTo="@(body)">
+
+                            <h:form target="_blank">
+                              
+                                        <p:panelGrid  style="width: 100%; margin: auto;">   
+                                            <p:row>
+                                                <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                                    <center>  <h:outputText value="Cliente"/> </center> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 25%;">
+                                                    <h:outputText value="Código:"/> <br></br>
+                                                    <h:outputText value="Nombres:"/>   <br></br>
+                                                    <h:outputText value="Apellidos:"/>   <br></br>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{carteraBean.clienteSeleccionado.codigoCliente}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.clienteSeleccionado.nombreCliente}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.clienteSeleccionado.apellidoCliente}"/> <br></br>
+                                                </p:column>
+                                                <p:column colspan="2" style=" width:25%; ">
+                                                    <h:outputText value="DUI:"/> <br></br>
+                                                    <h:outputText value="NIT:"/>   <br></br>
+
+                                                </p:column>
+                                                <p:column style=" width: 50%">
+                                                    <h:outputText value="#{carteraBean.clienteSeleccionado.duiCliente}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.clienteSeleccionado.nitCliente}">
+                                                    </h:outputText>
+
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <p:panelGrid  style="width: 100%; margin: auto;">   
+                                            <p:row>
+                                                <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
+                                                    <center>  <h:outputText value="Crédito"/> </center> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style=" width: 15%; ">
+                                                    <h:outputText value="Código:"/> <br></br>
+                                                    <h:outputText value="Modalidad:"/> <br></br>
+                                                    <h:outputText value="Destino:"/> <br></br>
+                                                    <h:outputText value="Monto:"/> <br></br>
+                                                    <h:outputText value="Plazo (meses):"/> <br></br>
+                                                    <h:outputText value="Forma de pago:"/> <br></br>
+                                                </p:column>
+                                                <p:column style=" width: 50%">
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.codigoProyecto}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.tipo}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.destinoProyecto}"/> <br></br>
+                                                    <h:outputText value="$"/>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.monto}">
+                                                        <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.plazo}"/>  <br></br>
+                                                    <h:outputText value="#{carteraBean.formaPago}"/> <br></br>
+                                                </p:column>
+                                                <p:column colspan="2" style=" width:25%; ">
+                                                    <h:outputText value="Tasa de interés (%):"/> <br></br>
+                                                    <h:outputText value="Tasa de interés por mora (%):"/> <br></br>
+                                                    <h:outputText value="Estado:"/>   <br></br>
+                                                    <h:outputText value="Calificación:"/>   <br></br>
+                                                    <h:outputText value="Fecha de aprobación:"/> <br></br>
+                                                    <h:outputText value="Fecha de vencimiento:"/>   <br></br>
+                                                    <h:outputText value="Fecha de finalización:"/>   <br></br>
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{carteraBean.politicaSeleccionada.tasaInteres}">
+                                                        <f:convertNumber  pattern=",#0.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.politicaSeleccionada.tasaInteresMora}">
+                                                        <f:convertNumber  pattern=",#0.00" locale="en-US" /> 
+                                                    </h:outputText>
+
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.estadoCredito}"/> <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.calificacion eq null? '----':carteraBean.proyectoSeleccionado.calificacion}">
+                                                    </h:outputText>
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaAprovacion}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaVencimientoProyecto}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                    <br></br>
+                                                    <h:outputText value="#{carteraBean.proyectoSeleccionado.fechaFinalizacionProyecto eq null? '--/--/----':carteraBean.proyectoSeleccionado.fechaFinalizacionProyecto}"> 
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+
+                                        <br></br>
+
+                            </h:form>
+                        </p:dialog>
+                        
+                        <p:dialog header="Historial de desembolsos"  widgetVar="dlVerHistorialCreditoPersonaDesembolsos" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+                            <h:form target="_blank">                              
+                                        <b> <h:outputText value="Lista de desembolsos"/>
+                                        </b>
+                                        <hr></hr>
+                                        <p:dataTable  id="basicDB" var="entidades" rows="4" widgetVar="desembolsosData"  value="#{carteraBean.listaDesembolso}"
+                                                      style="width: 100%;"
+                                                      rowIndexVar="No" 
+                                                      paginator="true"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      rowsPerPageTemplate="4"
+                                                      paginatorPosition="bottom" 
+                                                      currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                      emptyMessage="No se encontraron desembolsos"
+                                                      >
+                                            <p:column   
+                                                headerText="Nº" width="5%" style="text-align: center" >                                             
+                                                <h:outputText value="#{No+1}"  />  
+                                            </p:column> 
+                                            <p:column   
+                                                headerText="Fecha de realización" width="45%" filterBy="#{entidades.fechaDesembolso}"  sortBy="#{entidades.fechaDesembolso}" >                                             
+                                                <div align="center">
+                                                    <h:outputText value="#{entidades.fechaDesembolso}">
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Cantidad"  width="50%" filterBy="#{entidades.montoDesembolso}" sortBy="#{entidades.montoDesembolso}"  >  
+                                                <div align="right">
+                                                    <h:outputText value="$"/> 
+                                                    <h:outputText value="#{entidades.montoDesembolso}"> 
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>  
+                                        </p:dataTable>                                             
+                                        <br></br>
+                                        <p:fieldset>
+                                            <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
+                                                <p:row>
+                                                    <p:column style=" width: 10%">
+                                                        <h:outputText value="Total:" /> 
+                                                    </p:column>
+                                                    <p:column style=" width: 85%"   >
+                                                        <h:outputText value="$" />
+                                                        <h:outputText value="#{carteraBean.totalDesembolsos}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:fieldset>
+                                        <br></br>
+                                        <div align="center">
+                                            <p:splitButton  update=":padding" value="Ver desembolsos PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{carteraBean.verDesembolsosPersonas()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar desembolsos PDF">
+                                                    <f:actionListener binding="#{carteraBean.verDesembolsosPersonasPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </div>
+                                 </h:form>
+                        </p:dialog>
+
+                       <p:dialog header="Historial de pagos"  widgetVar="dlVerHistorialCreditoPersonaPagos" modal="true" visible="false"  resizable="false" responsive="true" styleClass="ui-panelgrid-blank" width="80%" appendTo="@(body)">
+                            <h:form target="_blank">  
+                                
+                                <b> <h:outputText value="Lista de pagos: #{carteraBean.numeroCuota}/#{carteraBean.cantidadCuotas}"/>
+                                        </b>
+                                        <hr></hr>
+                                        <p:dataTable  id="basicDPaogas" var="entidades" widgetVar="produrTable"  paginator="true" rows="4" value="#{carteraBean.listaPago}"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      paginatorPosition="bottom" style="width: 100%; font-size:  small "
+                                                      currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                      rowIndexVar="No"  rowsPerPageTemplate="4" emptyMessage="No se encontraron pagos" 
+                                                      >
+                                            <p:column   
+                                                headerText="Nº" width="4%" style="text-align: center" >                                             
+                                                <h:outputText value="#{No+1}"  />  
+                                            </p:column> 
+                                            <p:column   
+                                                headerText="Fecha" width="8%" >      
+                                                <div style=" text-align: center"> 
+                                                    <h:outputText value="#{entidades.fecha}"  >
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Cuota"  width="7%" sortBy="#{entidades.cuota}" > 
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.cuota}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>  
+                                            <p:column  headerText="Interés"  width="7%" sortBy="#{entidades.interes}"  
+                                                       >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.interes}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Abono a capital"  width="10%" sortBy="#{entidades.abono}" 
+                                                      >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.abono}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column> 
+                                            <p:column headerText="Amortizado"  width="10%" sortBy="#{entidades.capitalamortizado}" 
+                                                      >  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.capitalamortizado}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            <p:column headerText="Saldo de capital"  width="10%" sortBy="#{entidades.saldocapital}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.saldocapital}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                             <p:column headerText="Mora"  width="7%" sortBy="#{entidades.mora}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.mora}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                             <p:column headerText="Adicional"  width="7%" sortBy="#{entidades.saldoadicional}">  
+                                                <div style=" text-align: right"> 
+                                                    <h:outputText value="$" />
+                                                    <h:outputText value="#{entidades.saldoadicional}">                                            
+                                                        <f:convertNumber     pattern=",#00.00" locale="en-US" />                                             
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            <p:column headerText="Destino"  width="10%" sortBy="#{entidades.destino}">  
+                                                <div style=" text-align: center"> 
+                                             
+                                                    <h:outputText value="#{entidades.destino}">                                            
+                                                                                              
+                                                    </h:outputText>
+                                                </div>
+                                            </p:column>
+                                            
+                                        </p:dataTable>
+                                        <br></br>        
+                                        <p:outputPanel rendered="#{carteraBean.proyectoSeleccionado.estado eq 6 or carteraBean.proyectoSeleccionado.estado eq 7 }">
+                                            <b>
+                                            <p:fieldset >
+                                                <p:panelGrid   style=" width: 55%;" styleClass="borderHidden" >
+                                                    <p:row>
+                                                        <p:column style=" width: 5%">
+                                                            <h:outputText value="Total pagado:" /> 
+                                                        </p:column>
+                                                        <p:column style=" width: 10%"   >
+                                                            <h:outputText value="$" />
+                                                            <h:outputText value="#{carteraBean.totalGeneral}">
+                                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                        <p:column style=" width: 7%">
+                                                            <h:outputText value="Interés generado:" /> 
+                                                        </p:column>
+                                                        <p:column style=" width: 10%"   >
+                                                            <h:outputText value="$" />
+                                                            <h:outputText value="#{carteraBean.totalInteres}">
+                                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:fieldset>  
+                                                </b>
+                                        </p:outputPanel> 
+                                        <br></br>
+                                        <div align="center">
+                                            <p:splitButton  update=":padding" value="Ver pagos PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{carteraBean.verReportePagosPersona()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar pagos PDF">
+                                                    <f:actionListener binding="#{carteraBean.verReportePagosPersonaPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </div>
+                                   
+                                        
+                                 </h:form>
+                       </p:dialog> 
+                        
+                         <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoPersonaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+                            <h:form target="_blank">  
+                                
+                                <b> <h:outputText value="Lista de cuotas retrasadas"/>
+                                            </b>
+                                            <hr></hr>
+                                            <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{carteraBean.listaPagosMora}"
+                                                          style="width: 100%;"
+                                                          paginator="true"
+                                                          rows="4"
+                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                          rowsPerPageTemplate="4"
+                                                          currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                          paginatorPosition="bottom"
+                                                          emptyMessage="No se encontraron cuotas retrasadas" rowIndexVar="No" 
+                                                          >
+                                                <p:column   
+                                                    headerText="Nº" width="5%" style="text-align: center" >                                             
+                                                    <h:outputText value="#{No+1}"  />  
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Fecha de pago" width="15%" filterBy="#{entidades.fecha}" sortBy="#{entidades.fecha}" >                                             
+                                                    <div align="center">
+                                                        <h:outputText value="#{entidades.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                        </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Dias de retraso" width="15%" filterBy="#{entidades.idpago}" sortBy="#{entidades.idpago}" >                                             
+                                                    <div align="center">
+                                                        <h:outputText value="#{entidades.idpago}">
+                                                        </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Cuota" width="15%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}" >                                             
+                                                    <div align="center">
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{entidades.cuota}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Mora" width="15%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
+                                                    <div align="center">
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{entidades.abono}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                                <p:column   
+                                                    headerText="Total" width="15%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
+                                                    <div align="center">
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{entidades.interes}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </div>
+                                                </p:column> 
+                                            </p:dataTable>
+                                            <br></br>
+                                            <p:fieldset>
+                                                <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
+                                                    <p:row>
+                                                        <p:column style=" width: 10%">
+                                                            <h:outputText value="Total:" /> 
+                                                        </p:column>
+                                                        <p:column style=" width: 90%"   >
+                                                            <h:outputText value="$" />
+                                                            <h:outputText value="#{carteraBean.totalMoraGenerada}">
+                                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:fieldset>
+                                            <br></br>
+                                            <div align="center">
+                                                <p:splitButton  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver detalle de mora PDF"  ajax="false" icon="fa fa-eye"  >
+                                                    <f:actionListener binding="#{carteraBean.verDetalleMora()}"/> 
+                                                    <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar detalle de mora PDF">
+                                                        <f:actionListener binding="#{carteraBean.verDetalleMoraPDF()}"/> 
+                                                    </p:menuitem>
+                                                </p:splitButton>
+                                            </div>
+                                        
+                                 </h:form>
+                       </p:dialog> 
+                        
+
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{carteraBean.showUpdate}" >
+                        <h:form id="fModificarLisiado" >                            
+                            <p:panel id="pModificarLisiado"  header="Modificar cliente"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:tabView>
+                                    <p:tab title="Información general">
+                                        <b><h:outputText value="Personal"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid  styleClass="borderHidden"   style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column style="width: 50%"> 
+                                                    <h:outputText value="Nombres:*"/> 
+                                                </p:column>
+                                                <p:column style="width: 50%"> 
+                                                    <h:outputText value="Apellidos:*"/> 
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <p:inputText  placeholder="Introduzca los nombres"    value="#{carteraBean.clienteSeleccionado.nombreCliente}" style="width: 100%;" >  </p:inputText>
+                                                    <h:outputText value="#{carteraBean.msgNombre}" style=" color:  red" />
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <p:inputText placeholder="Introduzca los apellidos"   value="#{carteraBean.clienteSeleccionado.apellidoCliente}" style="width: 100%;">  </p:inputText>
+                                                    <h:outputText value="#{carteraBean.msgApellido}" style=" color:  red"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="DUI:*"/>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="NIT:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <p:inputMask mask="99999999-9" placeholder="Introduzca el DUI"   value="#{carteraBean.clienteSeleccionado.duiCliente}" style="width: 100%;"/>
+                                                    <h:outputText value="#{carteraBean.msgDui}" style=" color:  red" />
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <p:inputMask  mask="9999-999999-999-9" placeholder="Introduzca el NIT"  value="#{carteraBean.clienteSeleccionado.nitCliente}" style="width: 100%;"/>
+                                                    <h:outputText value="#{carteraBean.msgNit}" style=" color:  red" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width:50%">
+                                                    <h:outputText value="Fecha de nacimiento:*" style="width: 50%" />
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="Sexo:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <p:calendar navigator="true" yearRange="1910:"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{carteraBean.clienteSeleccionado.fechaNacimiento      }" style="width: 100%;"/><br></br>
+                                                    <h:outputText value="#{carteraBean.msgFechaNacimiento}" style=" color:  red"/>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <p:selectOneRadio id="srSexo" value="#{carteraBean.clienteSeleccionado.sexoCliente}" style="width: 100%;">
+                                                        <f:selectItem  itemLabel="Másculino" itemValue="Masculino"  /> 
+                                                        <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                                                    </p:selectOneRadio>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value= "Estado familar:*"/>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="Teléfono:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%"> 
+                                                    <p:selectOneMenu id="tipo8" style="width:100%" value="#{carteraBean.clienteSeleccionado.estadoFamiliar}">
+                                                        <f:selectItem itemLabel="[Seleccione]" itemValue="" />
+                                                        <f:selectItem itemLabel="Soltero/a" itemValue="Soltero/a" />   
+                                                        <f:selectItem itemLabel="Casado/a" itemValue="Casado/a"  />                                                    
+                                                        <f:selectItem itemLabel="Viudo/a" itemValue="Viudo/a"  />
+                                                    </p:selectOneMenu>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <p:inputMask mask="9999-9999" placeholder="Introduzca el teléfono"  id="tTelefono"   value="#{carteraBean.clienteSeleccionado.telefonoCliente}" style="width: 100%;"/>
+                                                    <h:outputText value="#{carteraBean.msgTelefono}" style=" color:  red"/>
+                                                </p:column>    
+                                            </p:row>
+
+                                        </p:panelGrid>
+
+                                        <br></br>
+                                        <b><h:outputText value="Contacto"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid  styleClass="borderHidden"   style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="Movil:*"/>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="Correo:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%"> 
+                                                    <p:inputMask mask="9999-9999" placeholder="Introduzca el móvil" id="tMovil" value="#{carteraBean.clienteSeleccionado.celularCliente}"  style="width: 100%;"/> 
+                                                    <h:outputText value="#{carteraBean.msgMovil}" style=" color:  red"/>
+                                                </p:column>
+                                                <p:column style="width: 50%">
+                                                    <p:inputText placeholder="Introduzca el correo"  id="tCorreo" value="#{carteraBean.clienteSeleccionado.correoCliente}" style="width: 100%;"></p:inputText>                                                   
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%">
+                                                    <h:outputText value="Dirección:*"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="4">
+                                                    <p:inputTextarea placeholder="Introduzca la dirección" id="taDireccion" value="#{carteraBean.clienteSeleccionado.direccionCliente}"  style="width: 100%"/>
+                                                    <h:outputText value="#{carteraBean.msgDireccion}" style=" color:  red"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <b> <h:outputText value="Documentos"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;">
+                                            <p:row> 
+                                                <p:column>
+                                                    <h:outputText value="DUI (Imagen.jpeg, jpg, png):*"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <p:outputPanel id="documetoDui"> 
+                                            <p:growl id="messa" />
+                                            <p:outputPanel rendered="#{!carteraBean.showDuiCliente}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column colspan="2" >
+                                                            <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{carteraBean.guardarDuiCliente}" update="documetoDui"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>
+                                            <p:outputPanel rendered="#{carteraBean.showDuiCliente}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column> 
+                                                            <p:lightBox iframe="true"  width="700px" height="500px">
+                                                                <h:outputLink value="#{carteraBean.clienteSeleccionado.duiCopiaCliente}" title="DUI">
+                                                                    <ul type="square">
+                                                                        <li>
+                                                                            <h:outputText style=" color:  royalblue" value="DUI" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </h:outputLink>
+                                                            </p:lightBox> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="2">
+                                                            <p:commandButton style="#{carteraBean.btnModificar }"  actionListener="#{carteraBean.enableShowDuiCliente}"  update="documetoDui" value="#{!carteraBean.showDuiCliente? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>                              
+                                        </p:outputPanel>
+                                        <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;">
+                                            <p:row> 
+                                                <p:column>
+                                                    <h:outputText value="NIT (Imagen.jpeg, jpg, png):*"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <p:outputPanel id="documetoNit"> 
+                                            <p:growl id="mesajenit" />
+                                            <p:outputPanel rendered="#{!carteraBean.showNitCliente}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column colspan="2" >
+                                                            <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{carteraBean.guardarNitCliente}" update="documetoNit"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>
+                                            <p:outputPanel rendered="#{carteraBean.showNitCliente}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column> 
+                                                            <p:lightBox iframe="true"  width="700px" height="500px">
+                                                                <h:outputLink value="#{carteraBean.clienteSeleccionado.nitCopiaCliente}" title="NIT">
+                                                                    <ul type="square">
+                                                                        <li>
+                                                                            <h:outputText style=" color:  royalblue" value="NIT" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </h:outputLink>
+                                                            </p:lightBox> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="2">
+                                                            <p:commandButton style="#{carteraBean.btnModificar }"  actionListener="#{carteraBean.enableShowNitCliente}"  update="documetoNit" value="#{!carteraBean.showNitCliente? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>                              
+                                        </p:outputPanel>                                        
+                                    </p:tab>
+                                    <p:tab rendered="#{carteraBean.lisiadoSeleccionado ne null}" title="Información de lisiado">
+
+                                        <b>             <h:outputText value="Lesión"/>  </b>
+                                        <hr></hr>
+
+                                        <p:panelGrid styleClass="borderHidden" style="width: 100%; margin: auto;">
+                                            <p:row>
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Nombre:*" />
+                                                </p:column><p:column style="width: 50%;">
+                                                    <h:outputText value="Otras enfermedades:*" />
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column style="width: 50%;">
+                                                    <p:inputText  value="#{carteraBean.lisiadoSeleccionado.tipoLesion}" style="width: 100%" placeholder="Introduzca los nombres"/>
+                                                    <h:outputText value="#{carteraBean.msgLesion}" style=" color:  red" />
+
+                                                </p:column>
+                                                <p:column style="width: 50%;">
+                                                    <p:inputText  value="#{carteraBean.lisiadoSeleccionado.otrasEnfermedades}" style="width: 100%" placeholder="Introduzca los apellidos"/>
+
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <p:selectBooleanCheckbox value="#{carteraBean.estadoConyugue}">
+                                            <p:ajax update="infoConyugue"/>
+                                        </p:selectBooleanCheckbox> 
+                                        <b>             <h:outputText value="&nbsp;&nbsp;¿Conyugue?"/>  </b>
+                                        <hr></hr>
+
+
+
+                                        <p:outputPanel id="infoConyugue" >
+                                            <p:panelGrid rendered="#{carteraBean.estadoConyugue}" styleClass="borderHidden" style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Nombres:*" />
+                                                    </p:column><p:column style="width: 50%;">
+                                                        <h:outputText value="Apellidos:*" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputText id="tnombreConyugue" value="#{carteraBean.lisiadoSeleccionado.nombreConyugue}" style="width: 100%" placeholder="Introduzca los nombres"/>
+                                                        <h:outputText value="#{carteraBean.msgNombreConyugue}" style=" color:  red" />
+
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputText id="tApellidoConyugue" value="#{carteraBean.lisiadoSeleccionado.apellidoConyugue}" style="width: 100%" placeholder="Introduzca los apellidos"/>
+                                                        <h:outputText value="#{carteraBean.msgApellidoConyugue}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <h:outputText value="Edad:*"/>
+                                                    </p:column><p:column>
+                                                        <h:outputText value="Téléfono:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column>
+                                                        <p:inputNumber value="#{carteraBean.lisiadoSeleccionado.edadConyugue}" id="tEdadConyugue" style="width:100%" placeholder="25" decimalPlaces="0"/>
+                                                        <h:outputText value="#{carteraBean.msgEdadConyugue}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column>
+                                                        <p:inputMask value="#{carteraBean.lisiadoSeleccionado.telefonoConyugue}" id="tTelefonoConyugue" style="width:100%" mask="9999-9999" placeholder="Introduzca el teléfono"/>
+                                                        <h:outputText value="#{carteraBean.msgTelefonoConyugue}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+
+                                            </p:panelGrid>
+
+                                        </p:outputPanel>
+                                        <br></br>
+                                        <p:selectBooleanCheckbox value="#{carteraBean.estadoHijos}">
+                                            <p:ajax update="infoHijos"/>
+                                        </p:selectBooleanCheckbox> 
+                                        <b>         <h:outputText value="&nbsp;&nbsp;¿Hijos?"/>  </b>
+                                        <hr></hr>
+
+
+
+                                        <p:outputPanel id="infoHijos">
+
+                                            <p:panelGrid rendered="#{carteraBean.estadoHijos}"   styleClass="borderHidden" style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Numero de hijos:*" />
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Nombres del mayor:*" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputText id="tnumeroHijos" value="#{carteraBean.lisiadoSeleccionado.numeroHijos}" style="width: 100%" placeholder="3"/>
+                                                        <h:outputText value="#{carteraBean.msgHijosConyugue}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputText id="tnombreHijo" value="#{carteraBean.lisiadoSeleccionado.nombreHijoMayor}" style="width: 100%" placeholder="Introduzca los nombres"/>
+                                                        <h:outputText value="#{carteraBean.msgNombreMayor}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Apellidos del mayor:*"/>
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Edad del mayor:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputText value="#{carteraBean.lisiadoSeleccionado.apellidoHijo}" id="tApellidoHijo" style="width:100%" placeholder="Introduzca los apellidos"/>
+                                                        <h:outputText value="#{carteraBean.msgApellidoMayor}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputNumber value="#{carteraBean.lisiadoSeleccionado.edadHijo}" id="tEdadHijo" style="width:100%" placeholder="25" decimalPlaces="0"/>
+                                                        <h:outputText value="#{carteraBean.msgEdadMayor}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Teléfono:*"/>
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <h:outputText value="Móvil:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputMask value="#{carteraBean.lisiadoSeleccionado.telefonoHijo}" id="tTelefonoHijo" style="width:100%" mask="9999-9999" placeholder="Introduzca el teléfono"/>
+                                                        <h:outputText value="#{carteraBean.msgTelefonoMayor}" style=" color:  red" />
+                                                    </p:column>
+                                                    <p:column style="width: 50%;">
+                                                        <p:inputMask value="#{carteraBean.lisiadoSeleccionado.celularHijo}" id="tMovilHijo" style="width:100%" mask="9999-9999" placeholder="Introduzca el móvil"/>
+                                                        <h:outputText value="#{carteraBean.msgMovilMayor}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel> <br></br>
+
+
+
+                                        <p:selectBooleanCheckbox value="#{carteraBean.lisiadoSeleccionado.experienciaCrediticia}">
+                                            <p:ajax update="infoCredito"/>
+                                        </p:selectBooleanCheckbox> 
+                                        <b>             <h:outputText value="&nbsp;&nbsp;¿Experiencia crediticia?"/>  </b>
+                                        <hr></hr>
+
+                                        <p:outputPanel  id="infoCredito">
+
+                                            <p:panelGrid rendered="#{carteraBean.lisiadoSeleccionado.experienciaCrediticia}"   styleClass="borderHidden" style="width: 100%; margin: auto;">
+
+                                                <p:row>
+
+                                                    <p:column style="width:50%">
+                                                        <h:outputText value="Monto ($):*"/>
+                                                    </p:column>
+                                                    <p:column style="width: 50%;" >
+                                                        <h:outputText value="Institución:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column style="width: 50%;" >
+                                                        <p:inputNumber value="#{carteraBean.lisiadoSeleccionado.montoCreditoExperiencia}" style="width:100%"  placeholder="2000"/>
+                                                        <br></br>
+                                                        <h:outputText value="#{carteraBean.msgMontoLisiado}" style=" color:  red" />
+                                                    </p:column> 
+                                                    <p:column colspan="2"  >
+                                                        <p:inputText value="#{carteraBean.lisiadoSeleccionado.institucionCrediticia}"  style="width:100%"  placeholder="Introduzca la institución"/>
+                                                        <h:outputText value="#{carteraBean.msgInstitucion}" style=" color:  red" />
+                                                    </p:column>
+                                                </p:row>
+
+
+                                            </p:panelGrid> 
+                                        </p:outputPanel>
+
+
+
+
+
+                                        <br></br> 
+                                        <b>      <h:outputText value="Documentos"/></b>
+                                        <hr></hr> 
+                                        <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;">
+                                            <p:row> 
+                                                <p:column>
+                                                    <h:outputText value="Carta de fondo de lisiado (Imagen.jpeg, jpg, png):*"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <p:outputPanel id="documetoCarta"> 
+                                            <p:growl id="mesajeCarta" />
+                                            <p:outputPanel rendered="#{!carteraBean.showImagenCarta}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column colspan="2" >
+                                                            <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{carteraBean.guardarImagenCarta}" update="documetoCarta"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>
+                                            <p:outputPanel rendered="#{carteraBean.showImagenCarta}">
+                                                <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
+                                                    <p:row>
+                                                        <p:column> 
+                                                            <p:lightBox iframe="true"  width="700px" height="500px">
+                                                                <h:outputLink value="#{carteraBean.lisiadoSeleccionado.cartaLisiado}" title="Carta de fondo de lisiado">
+                                                                    <ul type="square">
+                                                                        <li>
+                                                                            <h:outputText style=" color:  royalblue" value="Carta de fondo de lisiado" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </h:outputLink>
+                                                            </p:lightBox> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="2">
+                                                            <p:commandButton style="#{carteraBean.btnModificar }"  actionListener="#{carteraBean.enableShowImagenCarta}"  update="documetoNit" value="#{!carteraBean.showImagenCarta? 'Cambiar':'Cambiar'}" icon="fa fa-edit"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:outputPanel>                              
+                                        </p:outputPanel>
+                                    </p:tab>
+                                </p:tabView>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{carteraBean.btnCrear}" actionListener="#{carteraBean.validarCliente}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{carteraBean.btnCancelar}" value="Cancelar" id="btnCancel"   class="cancel" icon="fa fa-fw fa-close" actionListener="#{carteraBean.limpiar}"  update=":padding" />
+                                    </div>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{carteraBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta información?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{carteraBean.btnNuevo}" value="Si" actionListener="#{carteraBean.modificarCliente()}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{carteraBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{carteraBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>                       
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{carteraBean.showData}">
+                        <p:panel id="custom" header="Administrar cartera de clientes" style="margin-bottom:20px">
+                            <h:form id="fData" target="_blank">
+                                <br></br>
+                                <p:fieldset>
+                                    <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column style="width: 50%">
+                                                <h:outputText value="Tipo:" />
+                                            </p:column> 
+                                            <p:column style="width: 50%">
+                                                <h:outputText value="Calificación:" />
+                                            </p:column> 
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:selectOneMenu id="car" value="#{carteraBean.tipoCliente}" style=" width: 100%;">
+                                                    <p:ajax update="custom" listener="#{carteraBean.mostrarTipos}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItem itemLabel="Persona natural" itemValue="1" />
+                                                    <f:selectItem itemLabel="Cooperativa" itemValue="2" />
+                                                </p:selectOneMenu>
+                                            </p:column> 
+                                            <p:column>
+                                                <p:selectOneMenu id="mora" value="#{carteraBean.tipoMora}" style=" width: 100%;">
+                                                    <p:ajax update="custom" listener="#{carteraBean.morosos}" />
+                                                    <f:selectItem itemLabel="[TODOS]" itemValue="0" />
+                                                    <f:selectItem itemLabel="Con mora" itemValue="1" />
+                                                    <f:selectItem itemLabel="Sin mora" itemValue="2" />
+                                                </p:selectOneMenu>
+                                            </p:column> 
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                                <br></br>
+                                <p:outputPanel rendered="#{carteraBean.mostrarPersonas}">
+                                    #{carteraBean.updateListaTipos()}
+                                    <p:dataTable   id="empleadosData"
+                                                   var="empleados" 
+                                                   value="#{carteraBean.listaClienteProyectoReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   widgetVar="companyTable"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron clientes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Código" style=" width: 20%" filterBy="#{empleados.TCliente.codigoCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.codigoCliente}">  
+                                            <h:outputText value=" #{empleados.TCliente.codigoCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre" style=" width: 40%" filterBy="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}" />
+                                        </p:column>
+                                        <p:column headerText="DUI" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}"  >  
+                                            <h:outputText value=" #{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="NIT" style=" width: 20%" filterBy="#{empleados.TCliente.nitCliente}"  filterStyle="width:100%"  sortBy="#{empleados.TCliente.nitCliente}"  >  
+                                            <h:outputText value=" #{empleados.TCliente.nitCliente}" />
+                                        </p:column>
+                                        <p:column  style=" width: 9%; text-align: center" >
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerCliente').show()" icon="fa fa-eye"   >
+                                                <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{carteraBean.clienteSeleccionado}"  />
+                                                <f:actionListener binding="#{carteraBean.cargarVistaCliente()}"/> 
+                                                <p:menuitem  update=":padding"  icon="fa fa-list" value="Historial créditicio"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{carteraBean.clienteSeleccionado}"  />
+                                                    <f:actionListener binding="#{carteraBean.cargarVista2()}"/> 
+                                                </p:menuitem>                                              
+                                                <p:menuitem   update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                    <f:setPropertyActionListener value="#{empleados.TCliente}" target="#{carteraBean.clienteSeleccionado}" />
+                                                    <f:setPropertyActionListener value="#{empleados.TCliente.duiCliente}" target="#{carteraBean.duiAux}" />
+                                                    <f:setPropertyActionListener value="#{empleados.TCliente.nitCliente}" target="#{carteraBean.nitAux}" />
+
+                                                    <f:actionListener binding="#{carteraBean.cargarVistaModificar()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{carteraBean.mostrarMorosos}">
+                                    #{carteraBean.updateListaMorosos()}
+                                    <p:dataTable   id="empleadosDataMorosos"
+                                                   var="empleados"
+                                                   value="#{carteraBean.tipoMora eq 1? carteraBean.listaClienteProyectoMorosos: carteraBean.listaClienteProyectoNoMorosos  }" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   widgetVar="companyTable"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron clientes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 4%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Código" style=" width: 20%" filterBy="#{empleados.TCliente.codigoCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.codigoCliente}">  
+                                            <h:outputText value=" #{empleados.TCliente.codigoCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre" style=" width: 30%" filterBy="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.nombreCliente} #{empleados.TCliente.apellidoCliente}" />
+                                        </p:column>
+                                        <p:column headerText="DUI" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}"  >  
+                                            <h:outputText value=" #{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="NIT" style=" width: 15%" filterBy="#{empleados.TCliente.nitCliente}"  filterStyle="width:100%"  sortBy="#{empleados.TCliente.nitCliente}"  >  
+                                            <h:outputText value=" #{empleados.TCliente.nitCliente}" />
+                                        </p:column>
+                                    </p:dataTable> 
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton rendered="#{carteraBean.tipoMora eq 1? true:false}"  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{carteraBean.reporteClientesMorosos()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{carteraBean.reporteClientesMorososPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                        <p:splitButton rendered="#{carteraBean.tipoMora eq 2? true:false}"  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{carteraBean.reporteClientesNoMorosos()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{carteraBean.reporteClientesNoMorososPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{carteraBean.mostrarMorososCooperativas}">
+                                    #{carteraBean.updateListaMorosos()}
+                                    <p:dataTable   id="empleadosDataMorososCooperativas"
+                                                   var="empleados" 
+                                                   value="#{carteraBean.tipoMora eq 1? carteraBean.listaEntidadProyectoMorosos: carteraBean.listaEntidadProyectoNoMorosos}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   widgetVar="companyTable"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron clientes" rowIndexVar="No"  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Código cliente" style=" width: 15%" filterBy="#{empleados.TEntidad.codigoClienteEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoClienteEntidad}">  
+                                            <h:outputText value=" #{empleados.TEntidad.codigoClienteEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="Código cooperativa" style=" width: 20%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}"  >  
+                                            <h:outputText value=" #{empleados.TEntidad.codigoEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre" style=" width: 50%" filterBy="#{empleados.TEntidad.nombreEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.nombreEntidad}">   
+                                            <h:outputText value="#{empleados.TEntidad.nombreEntidad}" />
+                                        </p:column>
+                                    </p:dataTable> 
+                                    <br></br>
+                                    <center>
+                                        <p:splitButton rendered="#{carteraBean.tipoMora eq 1? true:false}"  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{carteraBean.reporteEntidadesMorosos()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{carteraBean.reporteEntidadesMorososPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                        <p:splitButton rendered="#{carteraBean.tipoMora eq 2? true:false}"  update=":padding" styleClass="ui-menu.ui-menu-dynamic" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                            <f:actionListener binding="#{carteraBean.reporteEntidadesNoMorosos()}"/> 
+                                            <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                <f:actionListener binding="#{carteraBean.reporteEntidadesNoMorososPDF()}"/> 
+                                            </p:menuitem>
+                                        </p:splitButton>
+                                    </center>
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{carteraBean.mostrarCooperativas}">
+                                    #{carteraBean.updateListaTipos()}
+                                    <p:dataTable   id="entidadesData"
+                                                   var="empleados" 
+                                                   widgetVar="companyTable"
+                                                   value="#{carteraBean.listaEntidadProyectosReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron clientes" rowIndexVar="No"  >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Código cliente" style=" width: 15%" filterBy="#{empleados.TEntidad.codigoClienteEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TEntidad.codigoClienteEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="Código cooperativa" style=" width: 20%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">  
+                                            <h:outputText value=" #{empleados.TEntidad.codigoEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre" style=" width: 30%" filterBy="#{empleados.TEntidad.nombreEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.nombreEntidad}"  >  
+                                            <h:outputText value=" #{empleados.TEntidad.nombreEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="NIT" style=" width: 15%" filterBy="#{empleados.TEntidad.nombreEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.nombreEntidad}"  >  
+                                            <h:outputText value=" #{empleados.TEntidad.nitEntidad}" />
+                                        </p:column>
+
+                                        <p:column  style=" width: 9%; text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerClienteCooperativa').show()" icon="fa fa-eye">
+                                                <f:setPropertyActionListener  value="#{empleados.TEntidad}" target="#{carteraBean.entidadeleccionada}"  />
+                                                <p:menuitem  update=":padding"  icon="fa fa-list" value="Historial créditicio"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TEntidad}" target="#{carteraBean.entidadeleccionada}"  />
+                                                    <f:actionListener binding="#{carteraBean.cargarVista()}"/> 
+                                                </p:menuitem>                                              
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                            </h:form>
+                            <p:dialog header="Datos del cliente"  widgetVar="dlVerCliente" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                                <h:form target="_blank">
+                                    <p:outputPanel id="dlVerArea" style="width: 100%">   
+                                        <p:tabView>
+                                            <p:tab title="Personales">
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Código:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.codigoCliente}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Nombres:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.nombreCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Apellidos:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.apellidoCliente}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="DUI:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.duiCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="NIT:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.nitCliente}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Fecha de nacimiento:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.fechaNacimiento}">
+                                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Edad (años):"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.edad}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Estado familiar:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.estadoFamiliar}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Sexo:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.sexoCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Contacto">
+                                                <p:panelGrid   style="width: 100%; margin: auto;"> 
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Correo:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.correoCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Teléfono:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.telefonoCliente}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Móvil:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.celularCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column  style=" width: 25%">
+                                                            <h:outputText value="Dirección:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.clienteSeleccionado.direccionCliente}"/> 
+                                                        </p:column>
+                                                    </p:row>  
+                                                </p:panelGrid>
+                                            </p:tab>
+                                            <p:tab rendered="#{carteraBean.lisiadoSeleccionado ne null}" title="Lisiado">
+
+                                                <b>        <h:outputText value="Lesión"/> </b>
+                                                <hr></hr>
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Tipo:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.tipoLesion}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Otras enfermedades:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.otrasEnfermedades}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <b>      <h:outputText value="Conyugue"/> </b>
+                                                <hr></hr>
+
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Nombres:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.nombreConyugue eq ''? '----': carteraBean.lisiadoSeleccionado.nombreConyugue}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Apellidos:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.apellidoConyugue eq ''? '----': carteraBean.lisiadoSeleccionado.apellidoConyugue}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Edad (años):"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.edadConyugue eq ''? '----': carteraBean.lisiadoSeleccionado.edadConyugue}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Teléfono:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.telefonoConyugue eq ''? '----': carteraBean.lisiadoSeleccionado.telefonoConyugue}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <b>      <h:outputText value="Hijos/as"/> </b>
+                                                <hr></hr>
+
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Numero:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.numeroHijos eq null? '----': carteraBean.lisiadoSeleccionado.numeroHijos}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Nombres del mayor:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.nombreHijoMayor eq ''? '----': carteraBean.lisiadoSeleccionado.nombreHijoMayor}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Apellidos del mayor:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.apellidoHijo eq ''? '----': carteraBean.lisiadoSeleccionado.apellidoHijo}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Edad:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.edadHijo eq null? '----': carteraBean.lisiadoSeleccionado.edadHijo}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Teléfono:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.telefonoHijo eq ''? '----': carteraBean.lisiadoSeleccionado.telefonoHijo}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Móvil:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.telefonoHijo eq ''? '----': carteraBean.lisiadoSeleccionado.telefonoHijo}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <b>     <h:outputText value="Experiencia crediticia"/> </b>
+                                                <hr></hr>
+
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Monto:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.montoCreditoExperiencia eq null? '----': carteraBean.lisiadoSeleccionado.montoCreditoExperiencia}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Institucion:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.lisiadoSeleccionado.institucionCrediticia eq null? '----': carteraBean.lisiadoSeleccionado.institucionCrediticia}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Documentos">
+                                                <p:outputPanel style=" width: 100%"> 
+                                                    <p:panelGrid   style=" width: 100%" > 
+                                                        <p:row style=" text-align:  left">
+                                                            <p:column colspan="1" style=" width: 25%">
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{carteraBean.generarDui}">
+                                                                    <h:outputText class="etiqueta" value="DUI cliente" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row style=" text-align:  left">
+                                                            <p:column colspan="2" style=" width: 25%">
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{carteraBean.generarNit}">
+                                                                    <h:outputText class="etiqueta" value="NIT cliente" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row rendered="#{carteraBean.lisiadoSeleccionado ne null}" style=" text-align:  left">
+                                                            <p:column colspan="2" style=" width: 25%">
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{carteraBean.generarCarta}">
+                                                                    <h:outputText class="etiqueta" value="Carta de fondo de lisiado" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                    </p:panelGrid> 
+                                                </p:outputPanel>
+                                            </p:tab>
+                                        </p:tabView>
+                                        <br></br>
+                                        <center>  
+                                            <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{carteraBean.verClienteBasico()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{carteraBean.verClienteBasicoPDF()}"/> 
+                                                </p:menuitem>
+                                                <p:menuitem  ajax="false" rendered="#{carteraBean.clienteSeleccionado.tipoCliente2 eq 1}" update=":padding"  icon="fa fa-download" value="Ver lisiado PDF">
+                                                    <f:actionListener binding="#{carteraBean.verClienteLisiado()}"/> 
+                                                </p:menuitem>
+                                                <p:menuitem  ajax="false" rendered="#{carteraBean.clienteSeleccionado.tipoCliente2 eq 1}" update=":padding"  icon="fa fa-download" value="Descargar lisiado PDF">
+                                                    <f:actionListener binding="#{carteraBean.verClienteLisiadoPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center> 
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog header="Datos del cliente"  widgetVar="dlVerClienteCooperativa" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                                <h:form target="_blank">
+                                    <p:outputPanel id="dlVerCooperativa" style="width: 100%">   
+                                        <p:tabView>
+                                            <p:tab title="Cooperativa">
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Código:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoClienteEntidad}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Cooperativa:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.codigoEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Nombre completo:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="NIT:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.nitEntidad}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Giro:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.giroEntidad}">
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Representante legal:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.nombreRepresentanteEntidad}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="DUI:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.duiRepresentanteEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="NIT:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.nitRepresentanteEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Contacto">
+                                                <p:panelGrid   style="width: 100%; margin: auto;">  
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Correo:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3"  style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.correoEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Teléfono:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.telefonoEntidad}"/> 
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="Móvil:"/>
+                                                        </p:column>
+                                                        <p:column style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.celularEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row style=" text-align:  left">
+                                                        <p:column  style=" width: 25%">
+                                                            <h:outputText value="Dirección:"/>
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 25%">
+                                                            <h:outputText value="#{carteraBean.entidadeleccionada.direccionEntidad}"/> 
+                                                        </p:column>
+                                                    </p:row>  
+                                                </p:panelGrid>
+                                            </p:tab>
+                                        </p:tabView>
+                                        <br></br>
+                                        <center>                               
+                                            <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{carteraBean.verClienteCooperativa()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{carteraBean.verClienteCooperativaPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center> 
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>                                           
+                        </p:panel>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#fin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

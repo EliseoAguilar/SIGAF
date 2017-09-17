@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProyecto" table="t_proyecto" schema="public" optimistic-lock="version">
+        <id name="idproyecto" type="int">
+            <column name="idproyecto" />
+              <generator class="sequence">
+                <param name="sequence">t_proyecto_id_proyecto_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TPolitica" class="com.sigaf.pojo.TPolitica" fetch="select">
+            <column name="id_politica" />
+        </many-to-one>
+        <many-to-one name="TTipoCredito" class="com.sigaf.pojo.TTipoCredito" fetch="select">
+            <column name="idtipocredito" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="131089" scale="0" />
+        </property>
+        <property name="plazo" type="java.lang.Integer">
+            <column name="plazo" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="lugar" type="string">
+            <column name="lugar" />
+        </property>
+        <property name="calificacion" type="string">
+            <column name="calificacion" />
+        </property>
+        <property name="codigoProyecto" type="string">
+            <column name="codigo_proyecto" />
+        </property>
+        <property name="estadoProyecto" type="string">
+            <column name="estado_proyecto" />
+        </property>
+        <property name="razonIncobrabilidad" type="string">
+            <column name="razon_incobrabilidad" />
+        </property>
+        <property name="fechaAprovacion" type="date">
+            <column name="fecha_aprovacion" length="13" />
+        </property>
+        <property name="formaPagoProyecto" type="java.lang.Integer">
+            <column name="forma_pago_proyecto" />
+        </property>
+        <property name="destinoProyecto" type="string">
+            <column name="destino_proyecto" />
+        </property>
+        <property name="fechaVencimientoProyecto" type="date">
+            <column name="fecha_vencimiento_proyecto" length="13" />
+        </property>
+        <property name="fechaFinalizacionProyecto" type="date">
+            <column name="fecha_finalizacion_proyecto" length="13" />
+        </property>
+        <property name="fechaIncobrabilidad" type="date">
+            <column name="fecha_incobrabilidad" length="13" />
+        </property>
+        
+        <set name="TAgropecuarios" table="t_agropecuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAgropecuario" />
+        </set>
+        <set name="TIngresos" table="t_ingreso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TIngreso" />
+        </set>
+        <set name="TSeguimientos" table="t_seguimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TSeguimiento" />
+        </set>
+        <set name="TActivos" table="t_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TActivo" />
+        </set>
+        <set name="TReferencias" table="t_referencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TReferencia" />
+        </set>
+        <set name="TAsesorias" table="t_asesoria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAsesoria" />
+        </set>
+        <set name="TClienteProyectos" table="t_cliente_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TClienteProyecto" />
+        </set>
+        <set name="TIndividuals" table="t_individual" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TIndividual" />
+        </set>
+        <set name="TCapacitacions" table="t_capacitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TCapacitacion" />
+        </set>
+        <set name="TEgresos" table="t_egreso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEgreso" />
+        </set>
+        <set name="TCooperativas" table="t_cooperativa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TCooperativa" />
+        </set>
+        <set name="TPagos" table="t_pago" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPago" />
+        </set>
+        <set name="TComercios" table="t_comercio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TComercio" />
+        </set>
+        <set name="TDesembolsos" table="t_desembolso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TDesembolso" />
+        </set>
+        <set name="TEmpleadoCreditos" table="t_empleado_credito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEmpleadoCredito" />
+        </set>
+        <set name="TSugerencias" table="t_sugerencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TSugerencia" />
+        </set>
+        <set name="TComentarios" table="t_comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TComentario" />
+        </set>
+        <set name="TGarantias" table="t_garantia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TGarantia" />
+        </set>
+        <set name="TPasivos" table="t_pasivo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TPasivo" />
+        </set>
+        <set name="TEntidadProyectos" table="t_entidad_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproyecto" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEntidadProyecto" />
+        </set>
+    </class>
+</hibernate-mapping>

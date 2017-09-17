@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2017 20:31:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TGarantiaSolidaria" table="t_garantia_solidaria" schema="public" optimistic-lock="version">
+        <id name="idGarantiaSolidaria" type="int">
+            <column name="id_garantia_solidaria" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="TLisiado" class="com.sigaf.pojo.TLisiado" fetch="select">
+            <column name="id_lisiado_garantia" />
+        </many-to-one>
+        <many-to-one name="TTipoGarantia" class="com.sigaf.pojo.TTipoGarantia" fetch="select">
+            <column name="id_tipo_garantia" />
+        </many-to-one>
+        <property name="nombreFiador" type="string">
+            <column name="nombre_fiador" />
+        </property>
+        <property name="apellidoFiador" type="string">
+            <column name="apellido_fiador" />
+        </property>
+        <property name="duiFiador" type="string">
+            <column name="dui_fiador" />
+        </property>
+        <property name="telefonoFiador" type="string">
+            <column name="telefono_fiador" />
+        </property>
+        <property name="ingresosFiador" type="string">
+            <column name="ingresos_fiador" />
+        </property>
+        <property name="lugarTrabajo" type="string">
+            <column name="lugar_trabajo" />
+        </property>
+    </class>
+</hibernate-mapping>

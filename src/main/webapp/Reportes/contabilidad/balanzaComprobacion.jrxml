@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanzaComprobacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="537e409f-67c3-4fb3-8012-61ae828584e8">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEntidad" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[WITH RECURSIVE cuentas(id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, nivel, orden ,naturaleza_cuenta,estado_cuenta, fecha_cuenta,id_entidad_cuenta) as
+( select id_cuenta,codigo_cuenta,nombre_cuenta,id_subcuenta_cuenta, 1 as  nivel,
+ CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, naturaleza_cuenta,estado_cuenta,fecha_cuenta,id_entidad_cuenta
+ from t_cuenta where id_subcuenta_cuenta is null and id_entidad_cuenta = $P{idEntidad}
+
+union  all
+select c.id_cuenta, c.codigo_cuenta, c.nombre_cuenta, c.id_subcuenta_cuenta, e.nivel+1,
+CAST(e.orden || CAST(c.id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS orden, c.naturaleza_cuenta,c.estado_cuenta,c.fecha_cuenta,c.id_entidad_cuenta
+from t_cuenta c  inner join cuentas e on  c.id_subcuenta_cuenta=e.id_cuenta)
+
+select (
+
+WITH RECURSIVE libro_mayor(id_cuenta, id_subcuenta_cuenta ,codigo_cuenta,nombre_cuenta ,naturaleza_cuenta, orden_cuenta , total_debe  ) as
+(
+select c.id_cuenta, c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS  orden_cuenta,
+
+--consulta para total debe
+(select sum(saldo_detalle_partida)
+from t_detalle_partida dt  inner join t_partida pt on dt.id_partida_detalle_partida= pt.id_partida
+inner join t_periodo pr on pr.id_periodo=pt.id_periodo_partida
+where tipo_saldo_detalle_partida='Debe' and id_cuenta_detalle_partida=c.id_cuenta and id_ejercicio=$P{idEjercicio} and estado_partida=true  group by id_cuenta_detalle_partida) as total_debe
+
+from t_cuenta c
+
+union all
+
+select  c.id_cuenta,c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST( '/' ||  CAST(c.id_cuenta AS VARCHAR(15))  || l.orden_cuenta  AS varchar(900) ) AS orden_cuenta,
+
+l.total_debe
+
+from t_cuenta c inner join libro_mayor l  on  c.id_cuenta=l.id_subcuenta_cuenta
+
+
+)
+
+
+
+
+select   sum(total_debe) from libro_mayor lb where  lb.id_cuenta =cs.id_cuenta group by id_cuenta ) as debe ,
+
+       (
+WITH RECURSIVE libro_mayor(id_cuenta, id_subcuenta_cuenta ,codigo_cuenta,nombre_cuenta ,naturaleza_cuenta, orden_cuenta,total_haber  ) as
+
+(
+
+select c.id_cuenta, c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST('/' || CAST(id_cuenta AS VARCHAR(15)) || '/' AS varchar(900)) AS  orden_cuenta,
+
+--consulta para total haber
+(select sum(saldo_detalle_partida)
+from t_detalle_partida dt  inner join t_partida pt on dt.id_partida_detalle_partida= pt.id_partida
+inner join t_periodo pr on pr.id_periodo=pt.id_periodo_partida
+where tipo_saldo_detalle_partida='Haber' and id_cuenta_detalle_partida=c.id_cuenta and id_ejercicio=$P{idEjercicio}  and estado_partida=true group by id_cuenta_detalle_partida) as total_haber
+
+from t_cuenta c
+
+union all
+
+select  c.id_cuenta,c.id_subcuenta_cuenta, c.codigo_cuenta,c.nombre_cuenta , c.naturaleza_cuenta,
+
+CAST( '/' ||  CAST(c.id_cuenta AS VARCHAR(15))  || l.orden_cuenta  AS varchar(900) ) AS orden_cuenta,
+ l.total_haber
+
+from t_cuenta c inner join libro_mayor l  on  c.id_cuenta=l.id_subcuenta_cuenta
+
+)
+
+select   sum(total_haber) from libro_mayor  lb where lb.id_cuenta =cs.id_cuenta  group by id_cuenta) as haber, *
+
+from cuentas cs   order by cs.codigo_cuenta]]>
+	</queryString>
+	<field name="debe" class="java.math.BigDecimal"/>
+	<field name="haber" class="java.math.BigDecimal"/>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="codigo_cuenta" class="java.lang.String"/>
+	<field name="nombre_cuenta" class="java.lang.String"/>
+	<field name="id_subcuenta_cuenta" class="java.lang.Integer"/>
+	<field name="nivel" class="java.lang.Integer"/>
+	<field name="orden" class="java.lang.String"/>
+	<field name="naturaleza_cuenta" class="java.lang.String"/>
+	<field name="estado_cuenta" class="java.lang.Boolean"/>
+	<field name="fecha_cuenta" class="java.sql.Date"/>
+	<field name="id_entidad_cuenta" class="java.lang.Integer"/>
+	<variable name="totalDebe" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta}== null ? $F{debe} : 0.00]]></variableExpression>
+	</variable>
+	<variable name="totalHaber" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta}== null ? $F{haber} : 0.00]]></variableExpression>
+	</variable>
+	<variable name="totalDebeSaldo" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta}== null ? ( ($F{debe} == null ? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber}  ).compareTo( BigDecimal.ZERO ) >= 0  ?  ($F{debe}== null? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber} ) : BigDecimal.ZERO ) : BigDecimal.ZERO]]></variableExpression>
+	</variable>
+	<variable name="TotalHaberSaldo" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{id_subcuenta_cuenta}== null ? (($F{debe} == null ? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber}  ).compareTo( BigDecimal.ZERO ) < 0  ?  ($F{debe}== null? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber} ).multiply( new BigDecimal("-1.00")) : BigDecimal.ZERO ): BigDecimal.ZERO]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<subreport>
+				<reportElement x="2" y="0" width="200" height="54" uuid="c43ee1db-de9a-4c09-b83e-709da6d924d2"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="81" y="1" width="258" height="20" uuid="b24ee9ef-513e-4c19-abfe-f2bd4078cb26"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BALANZA DE COMPROBACIÓN AL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="20" uuid="c3eac7d9-3711-4b80-a281-c9b729d5aeff"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="343" y="1" width="126" height="20" uuid="989488ee-d5c8-47e0-a193-a96cf3d0472c"/>
+				<subreportParameter name="id_ejercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fecha_reportes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="84" height="20" uuid="fccbce6d-cac1-46c2-aa4a-04ab57744cd5"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="4" width="149" height="20" uuid="91db1902-81fc-4a7b-8fd1-eaaf2d9ff38a"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="22" width="81" height="20" uuid="62048d57-76eb-475a-93c3-734dc9a54a2a"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="20" width="64" height="20" uuid="fdb06c85-41ab-4d48-8bcd-6cb3aa82942e"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HABER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="20" width="80" height="20" uuid="985cbb76-dda7-4b3d-8722-4db6e0721bbb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACREEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="22" width="76" height="20" uuid="35a65128-0563-47b0-bd12-761419547643"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEUDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="4" width="57" height="20" uuid="ce62cb53-5669-4235-9a0c-2ee8ead501e5"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="42" width="555" height="1" uuid="5d7ad2be-04a6-48a6-a5f9-08374b2e6c6e"/>
+			</line>
+			<line>
+				<reportElement x="2" y="2" width="553" height="1" uuid="d5722389-aeef-4ef0-812a-fdbd39c6f827"/>
+			</line>
+			<staticText>
+				<reportElement x="303" y="4" width="77" height="20" uuid="b8fe466b-3a0c-488a-b990-634abf733d25"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMIENTOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="84" height="15" uuid="88bc07de-dc35-433c-b5b5-050cfecf9e4b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="84" y="0" width="149" height="15" uuid="dc37cd2b-f90e-407d-ae99-690140ad1072"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="233" y="0" width="81" height="15" uuid="d8f11466-ffbc-4194-b568-9f08579561fd"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe} == null ? "0.00" :  $F{debe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="401" y="0" width="74" height="15" uuid="b99e102d-14e2-4832-8e74-5cb03c86960f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{debe} == null ? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber}  ).compareTo( BigDecimal.ZERO ) >= 0  ?  ($F{debe}== null? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber} ) : BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="477" y="0" width="78" height="15" uuid="6a69cdff-1375-44f7-85ee-f32c984a3659"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{debe} == null ? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber}  ).compareTo( BigDecimal.ZERO ) < 0  ?  ($F{debe}== null? BigDecimal.ZERO : $F{debe}).subtract( $F{haber} == null? BigDecimal.ZERO : $F{haber} ).multiply( new BigDecimal("-1.00")) : BigDecimal.ZERO]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="314" y="0" width="86" height="15" uuid="a3e7f091-51cf-4220-9f80-170f09cd5949"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber} == null ? "0.00" :  $F{haber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="507" y="1" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="9d5496c5-c490-486e-b6af-cd5eff396f04"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="1" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="220d4876-36ec-4878-809d-687f7d4437d9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="233" y="0" width="81" height="20" uuid="0e120acd-8175-4b83-a1cc-ca1fb47ee36d"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="133" y="0" width="100" height="20" uuid="1aa41689-a9d8-4d5e-ac16-007b659016f2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="314" y="0" width="85" height="20" uuid="92f3f74f-cbf7-4f56-b96d-35dc9d262e80"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalHaber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="401" y="0" width="74" height="20" uuid="4d6d1069-8ea7-4e54-ae5b-8c3d1c9f9103"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDebeSaldo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="477" y="1" width="78" height="20" uuid="d9a7e0bd-1e3a-45ff-ad18-5bbef44fa41b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalHaberSaldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TProductorGrupal" table="t_productor_grupal" schema="public" optimistic-lock="version">
+        <id name="idProductorGrupal" type="int">
+            <column name="id_productor_grupal" />
+                 <generator class="sequence">
+                <param name="sequence">t_productor_grupal_id_productor_grupal_seq</param>
+            </generator>
+        </id>
+        <property name="codigoProdcutorGrupal" type="string">
+            <column name="codigo_prodcutor_grupal" />
+        </property>
+        <property name="nombreProductorGrupal" type="string">
+            <column name="nombre_productor_grupal" />
+        </property>
+        <property name="hombresProductorGrupal" type="java.lang.Integer">
+            <column name="hombres_productor_grupal" />
+        </property>
+        <property name="mujeresProductorGrupal" type="java.lang.Integer">
+            <column name="mujeres_productor_grupal" />
+        </property>
+        <property name="contactoProductorGrupal" type="string">
+            <column name="contacto_productor_grupal" />
+        </property>
+        <property name="duiProductorGrupal" type="string">
+            <column name="dui_productor_grupal" />
+        </property>
+        <property name="nitProductorGrupal" type="string">
+            <column name="nit_productor_grupal" />
+        </property>
+        <property name="correoProductorGrupal" type="string">
+            <column name="correo_productor_grupal" />
+        </property>
+        <property name="telefonoProductorGrupal" type="string">
+            <column name="telefono_productor_grupal" />
+        </property>
+        <property name="movilProductorGrupal" type="string">
+            <column name="movil_productor_grupal" />
+        </property>
+        <property name="ubicacionProductorGrupal" type="string">
+            <column name="ubicacion_productor_grupal" />
+        </property>
+        <property name="estadoProductorGrupal" type="java.lang.Boolean">
+            <column name="estado_productor_grupal" />
+        </property>
+        <property name="calificacionProductorGrupal" type="java.lang.Integer">
+            <column name="calificacion_productor_grupal" />
+        </property>
+        <set name="TProductorIndividuals" table="t_productor_individual" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_grupo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TProductorIndividual" />
+        </set>
+    </class>
+</hibernate-mapping>

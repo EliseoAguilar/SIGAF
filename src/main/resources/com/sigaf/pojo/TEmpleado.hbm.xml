@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TEmpleado" table="t_empleado" schema="public" optimistic-lock="version">
+        <id name="idEmpleado" type="int">
+            <column name="id_empleado" />
+              <generator class="sequence">
+                <param name="sequence">t_empleado_id_empleado_seq</param>
+            </generator>
+        </id>
+        <property name="nombreEmpleado" type="string">
+            <column name="nombre_empleado" />
+        </property>
+             <property name="direccionEmpleado" type="string">
+            <column name="direccion_empleado" />
+        </property>
+        
+        <property name="correoEmpleado" type="string">
+            <column name="correo_empleado" />
+        </property>
+        <property name="duiEmpleado" type="string">
+            <column name="dui_empleado" />
+        </property>
+        <property name="nitEmpleado" type="string">
+            <column name="nit_empleado" />
+        </property>
+        <property name="fechanacimientoEmpleado" type="date">
+            <column name="fechanacimiento_empleado" length="13" />
+        </property>
+        <property name="salarioEmpleado" type="big_decimal">
+            <column name="salario_empleado" precision="131089" scale="0" />
+        </property>
+        <property name="fechaingresoEmpleado" type="date">
+            <column name="fechaingreso_empleado" length="13" />
+        </property>
+        <property name="telefonoEmpleado" type="string">
+            <column name="telefono_empleado" />
+        </property>
+        <property name="celularEmpleado" type="string">
+            <column name="celular_empleado" />
+        </property>
+        <property name="sexoEmpleado" type="string">
+            <column name="sexo_empleado" />
+        </property>
+        <property name="apellidoEmpleado" type="string">
+            <column name="apellido_empleado" />
+        </property>
+        <property name="estadoEmpleado" type="java.lang.Boolean">
+            <column name="estado_empleado" />
+        </property>
+         <property name="estadoSocio" type="java.lang.Boolean">
+            <column name="estado_socio" />
+        </property>
+        <property name="fotoEmpleado" type="string">
+            <column name="foto_empleado" />
+        </property>
+        <property name="lugarNacimientoEmpleado" type="string">
+            <column name="lugar_nacimiento_empleado" />
+        </property>
+        <property name="tipoEmpleado" type="java.lang.Integer">
+            <column name="tipo_empleado" />
+        </property>
+        <property name="estadoE" type="java.lang.Boolean">
+            <column name="estado_e" />
+        </property>
+         <property name="estadoS" type="java.lang.Boolean">
+            <column name="estado_s" />
+        </property>
+        
+        
+        <set name="TCapacitacions" table="t_capacitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idempleado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TCapacitacion" />
+        </set>
+        <set name="TAsesorias" table="t_asesoria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idempleado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TAsesoria" />
+        </set>
+        <set name="TEmpleadoCargos" table="t_empleado_cargo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idempleado_empleado_cargo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEmpleadoCargo" />
+        </set>
+        <set name="TOcupacions" table="t_ocupacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empleado_ocupacion" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TOcupacion" />
+        </set>
+        <set name="TComentarios" table="t_comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idempleado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TComentario" />
+        </set>
+        <set name="TSugerencias" table="t_sugerencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idempleado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TSugerencia" />
+        </set>
+        <set name="TActivoFijos" table="t_activo_fijo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empleado_activo_fijo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TActivoFijo" />
+        </set>
+   
+        <set name="TUsuarios" table="t_usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empleado_usuario" unique="true" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TUsuario" />
+        </set>
+        <set name="TEmpleadoAreas" table="t_empleado_area" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empleado" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TEmpleadoArea" />
+        </set>
+    </class>
+</hibernate-mapping>

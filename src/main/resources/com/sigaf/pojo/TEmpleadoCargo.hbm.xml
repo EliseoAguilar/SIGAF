@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TEmpleadoCargo" table="t_empleado_cargo" schema="public" optimistic-lock="version">
+        <id name="idEmpleadoCargo" type="int">
+            <column name="id_empleado_cargo" />
+              <generator class="sequence">
+                <param name="sequence">t_empleado_cargo_id_empleado_cargo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TCargo" class="com.sigaf.pojo.TCargo" fetch="select">
+            <column name="idcargo_empleado_cargo" />
+        </many-to-one>
+        <many-to-one name="TEmpleado" class="com.sigaf.pojo.TEmpleado" fetch="select">
+            <column name="idempleado_empleado_cargo" />
+        </many-to-one>
+        <property name="fechainicioEmpleadoCargo" type="date">
+            <column name="fechainicio_empleado_cargo" length="13" />
+        </property>
+        <property name="fechafinEmpleadoCargo" type="date">
+            <column name="fechafin_empleado_cargo" length="13" />
+        </property>
+        <property name="estadoEmpleadoCargo" type="java.lang.Boolean">
+            <column name="estado_empleado_cargo" />
+        </property>
+    </class>
+</hibernate-mapping>

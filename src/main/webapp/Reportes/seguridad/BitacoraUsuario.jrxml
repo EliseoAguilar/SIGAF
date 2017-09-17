@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BitacoraUsuario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab0cf4a3-78c2-4e0a-b9ec-716d8aca6d40">
+	<property name="ireport.zoom" value="1.1000000000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_usuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from t_usuario as u inner join t_empleado as e on
+u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
+	</queryString>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="nombre_usuario" class="java.lang.String"/>
+	<field name="clave_usuario" class="java.lang.String"/>
+	<field name="id_empleado_usuario" class="java.lang.Integer"/>
+	<field name="estado_usuario" class="java.lang.Boolean"/>
+	<field name="tipo_usuario" class="java.lang.Integer"/>
+	<field name="id_empleado" class="java.lang.Integer"/>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="correo_empleado" class="java.lang.String"/>
+	<field name="dui_empleado" class="java.lang.String"/>
+	<field name="nit_empleado" class="java.lang.String"/>
+	<field name="fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="salario_empleado" class="java.lang.Float"/>
+	<field name="fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="telefono_empleado" class="java.lang.String"/>
+	<field name="celular_empleado" class="java.lang.String"/>
+	<field name="sexo_empleado" class="java.lang.String"/>
+	<field name="apellido_empleado" class="java.lang.String"/>
+	<field name="estado_empleado" class="java.lang.Boolean"/>
+	<field name="foto_empleado" class="java.lang.String"/>
+	<field name="lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="tipo_empleado" class="java.lang.Integer"/>
+	<field name="estado_socio" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="79" uuid="480ba989-adbb-4f23-9888-1fac9cd2884f"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="81" y="8" width="139" height="20" uuid="958d615e-684b-4572-8ead-b781a2a33669"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BITACORA DESDE]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="220" y="8" width="84" height="20" uuid="e479edec-9020-40ad-a594-09781896b8b3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="304" y="8" width="55" height="20" uuid="846e8a0b-c671-4e75-9030-37d85300bf1d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="359" y="8" width="100" height="20" uuid="f63fcb73-07f9-4ad7-99cb-13660909fc5c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="272" splitType="Stretch">
+			<textField>
+				<reportElement x="240" y="38" width="315" height="20" uuid="1335a48f-8d18-427b-9fa0-c748f589c3fe"/>
+				<textFieldExpression><![CDATA[$F{nombre_empleado}+" "+$F{apellido_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="67" width="313" height="20" uuid="0a745c94-e2e9-49b4-b45f-c0c7d4d3ac75"/>
+				<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="125" width="313" height="20" uuid="4a2acf96-1fc1-4a18-ac90-c0434fde3ab4"/>
+				<textFieldExpression><![CDATA[$F{estado_usuario}? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="96" width="315" height="20" uuid="426d7420-8e17-4f28-9f04-1aba0cc5908a"/>
+				<textFieldExpression><![CDATA[$F{tipo_usuario} == 1? "Contador": ($F{tipo_usuario} == 2 ? "Asesor de crédito":"Administrador")]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="192" width="555" height="76" uuid="2f267b74-18cf-4646-ab20-7249dafc3ca8"/>
+				<subreportParameter name="fecha1">
+					<subreportParameterExpression><![CDATA[$P{fecha1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha2">
+					<subreportParameterExpression><![CDATA[$P{fecha2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_usuario">
+					<subreportParameterExpression><![CDATA[$P{id_usuario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BitacoraSub.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="165" y="38" width="77" height="20" uuid="0da623a5-e9d2-49b6-86d7-e7a11839f0b2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ EMPLEADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="125" width="74" height="20" uuid="dcc314fb-fc73-4ab3-94d6-8e2420710ed4"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="67" width="75" height="20" uuid="97feebc1-c21e-496b-8737-f9be2acd9f5c"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="28" width="555" height="1" uuid="f6805422-0329-4ca3-9787-799deae8a050"/>
+			</line>
+			<staticText>
+				<reportElement x="166" y="96" width="74" height="20" uuid="85903f9f-2ab7-4753-96d5-326dcd29866a"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="16" y="38" width="108" height="120" uuid="c0f4310f-807b-49d7-a042-1e0a9aa76e14"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($F{foto_empleado}.split(",")[1].getBytes()))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="16" y="4" width="150" height="20" uuid="7c47b7e2-c85b-4743-94c2-a30ca204da05"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="166" width="201" height="20" uuid="500ae911-da63-4263-b4fc-9975b7d56d97"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DE LAS ACCIONES]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="252" y="0" width="52" height="20" uuid="98882a27-8dcd-4a7b-9ca4-003132109f8b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="304" y="0" width="40" height="20" uuid="f6aa480e-651b-4b3a-837d-4b1e61479b4c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

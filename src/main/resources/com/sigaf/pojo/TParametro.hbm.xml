@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-07-2017 10:04:28 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TParametro" table="t_parametro" schema="public" optimistic-lock="version">
+        <id name="idParametro" type="int">
+            <column name="id_parametro" />
+             <generator class="sequence">
+                <param name="sequence">t_parametro_id_parametro_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TParametroseguimiento" class="com.sigaf.pojo.TParametroseguimiento" fetch="select">
+            <column name="id_parametro_seguimiento" />
+        </many-to-one>
+        <many-to-one name="TSeguimiento" class="com.sigaf.pojo.TSeguimiento" fetch="select">
+            <column name="id_seguimiento" />
+        </many-to-one>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="131089" scale="0" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TIndividual" table="t_individual" schema="public" optimistic-lock="version">
+        <id name="idIndividual" type="int">
+            <column name="id_individual" />
+             <generator class="sequence">
+                <param name="sequence">t_cliente_individual_id_cliente_individual_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="id_proyecto" />
+        </many-to-one>
+        <property name="lugarTrabajo" type="string">
+            <column name="lugar_trabajo" />
+        </property>
+        <property name="salarioActual" type="big_decimal">
+            <column name="salario_actual" precision="131089" scale="0" />
+        </property>
+        <property name="tiempoTrabajo" type="java.lang.Integer">
+            <column name="tiempo_trabajo" />
+        </property>
+    </class>
+</hibernate-mapping>

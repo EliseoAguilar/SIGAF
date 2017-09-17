@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UsuariosTodos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="74b41dfd-a4b7-42f4-ba33-9351d72f2a88">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from t_usuario as u inner join t_empleado as e on
+u.id_empleado_usuario=e.id_empleado]]>
+	</queryString>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="nombre_usuario" class="java.lang.String"/>
+	<field name="clave_usuario" class="java.lang.String"/>
+	<field name="id_empleado_usuario" class="java.lang.Integer"/>
+	<field name="estado_usuario" class="java.lang.Boolean"/>
+	<field name="tipo_usuario" class="java.lang.Integer"/>
+	<field name="id_empleado" class="java.lang.Integer"/>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="correo_empleado" class="java.lang.String"/>
+	<field name="dui_empleado" class="java.lang.String"/>
+	<field name="nit_empleado" class="java.lang.String"/>
+	<field name="fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="salario_empleado" class="java.lang.Float"/>
+	<field name="fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="telefono_empleado" class="java.lang.String"/>
+	<field name="celular_empleado" class="java.lang.String"/>
+	<field name="sexo_empleado" class="java.lang.String"/>
+	<field name="apellido_empleado" class="java.lang.String"/>
+	<field name="estado_empleado" class="java.lang.Boolean"/>
+	<field name="foto_empleado" class="java.lang.String"/>
+	<field name="lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="tipo_empleado" class="java.lang.Integer"/>
+	<field name="estado_socio" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="48" uuid="f8a5b6d9-2aa6-4a57-b527-fce780efa2d0"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="10" width="221" height="20" uuid="06e76e50-df63-481a-9a31-c2c65e600fcb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIOS DEL SISTEMA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="faefb02d-88e4-4928-8acf-faf99f27a881"/>
+			</line>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="76d28adc-e786-4577-ac90-aa732709c315"/>
+			</line>
+			<staticText>
+				<reportElement x="229" y="5" width="126" height="20" uuid="35e5d1ca-6158-4596-92ec-d6d89d7673a1"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="229" height="20" uuid="4bd012f6-49f5-4276-81cf-424546ab0462"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ EMPLEADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="5" width="100" height="20" uuid="82fd22d2-10d9-4efa-91f9-534aa890eb4e"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="4" width="100" height="20" uuid="7d700a21-ed1a-4ae4-8c1d-da78b133d6ee"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="7" width="116" height="20" uuid="a92bf8e2-7d10-437b-ae67-038a965f18c0"/>
+				<textFieldExpression><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="7" width="113" height="20" uuid="2a3b8e87-b72a-4253-a16c-04a55737e521"/>
+				<textFieldExpression><![CDATA[$F{apellido_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="7" width="126" height="20" uuid="4fb2b1b4-2b51-4921-b6ad-731df0a47c61"/>
+				<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="7" width="100" height="20" uuid="448a47dd-898b-4fee-9ca2-22609337bfea"/>
+				<textFieldExpression><![CDATA[$F{tipo_usuario} == 1? "Contador": ($F{tipo_usuario} == 2 ? "Asesor de crédito":"Administrador")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="7" width="100" height="20" uuid="38b2a764-b3c8-4ee2-ae8c-b0273c21317d"/>
+				<textFieldExpression><![CDATA[$F{estado_usuario}? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="242" y="3" width="52" height="20" uuid="6a9b8820-c7c6-4c69-89d0-86dda5323618"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="294" y="3" width="40" height="20" uuid="59e2159b-f30e-413b-9bb6-e7acd80576f2"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

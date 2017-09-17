@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="asesoriasEmpleado" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="680bdcc7-4800-484e-8533-710eb48d8ca7">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="5"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicial" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<parameter name="estado" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_asesoria."idasesoria" AS t_asesoria_idasesoria,
+     t_asesoria."descripcion" AS t_asesoria_descripcion,
+     t_asesoria."precio" AS t_asesoria_precio,
+     t_asesoria."fecha" AS t_asesoria_fecha,
+     t_asesoria."beneficiarios" AS t_asesoria_beneficiarios,
+     t_asesoria."idempleado" AS t_asesoria_idempleado,
+     t_asesoria."idproyecto" AS t_asesoria_idproyecto,
+     t_asesoria."estado" AS t_asesoria_estado,
+     t_empleado."id_empleado" AS t_empleado_id_empleado,
+     t_empleado."nombre_empleado" AS t_empleado_nombre_empleado,
+     t_empleado."correo_empleado" AS t_empleado_correo_empleado,
+     t_empleado."dui_empleado" AS t_empleado_dui_empleado,
+     t_empleado."nit_empleado" AS t_empleado_nit_empleado,
+     t_empleado."fechanacimiento_empleado" AS t_empleado_fechanacimiento_empleado,
+     t_empleado."salario_empleado" AS t_empleado_salario_empleado,
+     t_empleado."fechaingreso_empleado" AS t_empleado_fechaingreso_empleado,
+     t_empleado."telefono_empleado" AS t_empleado_telefono_empleado,
+     t_empleado."celular_empleado" AS t_empleado_celular_empleado,
+     t_empleado."sexo_empleado" AS t_empleado_sexo_empleado,
+     t_empleado."apellido_empleado" AS t_empleado_apellido_empleado,
+     t_empleado."estado_empleado" AS t_empleado_estado_empleado,
+     t_empleado."foto_empleado" AS t_empleado_foto_empleado,
+     t_empleado."lugar_nacimiento_empleado" AS t_empleado_lugar_nacimiento_empleado,
+     t_empleado."tipo_empleado" AS t_empleado_tipo_empleado,
+     t_empleado."estado_socio" AS t_empleado_estado_socio,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto
+FROM
+     "public"."t_empleado" t_empleado INNER JOIN "public"."t_asesoria" t_asesoria ON t_empleado."id_empleado" = t_asesoria."idempleado"
+     INNER JOIN "public"."t_proyecto" t_proyecto ON t_asesoria."idproyecto" = t_proyecto."idproyecto" where (t_asesoria."fecha" >= $P{fechaInicial} and t_asesoria."fecha" <=  $P{fechaFin}) and t_asesoria."estado"=$P{estado}]]>
+	</queryString>
+	<field name="t_asesoria_idasesoria" class="java.lang.Integer"/>
+	<field name="t_asesoria_descripcion" class="java.lang.String"/>
+	<field name="t_asesoria_precio" class="java.lang.Float"/>
+	<field name="t_asesoria_fecha" class="java.sql.Date"/>
+	<field name="t_asesoria_beneficiarios" class="java.lang.Integer"/>
+	<field name="t_asesoria_idempleado" class="java.lang.Integer"/>
+	<field name="t_asesoria_idproyecto" class="java.lang.Integer"/>
+	<field name="t_asesoria_estado" class="java.lang.Boolean"/>
+	<field name="t_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_nombre_empleado" class="java.lang.String"/>
+	<field name="t_empleado_correo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_dui_empleado" class="java.lang.String"/>
+	<field name="t_empleado_nit_empleado" class="java.lang.String"/>
+	<field name="t_empleado_fechanacimiento_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_salario_empleado" class="java.lang.Float"/>
+	<field name="t_empleado_fechaingreso_empleado" class="java.sql.Date"/>
+	<field name="t_empleado_telefono_empleado" class="java.lang.String"/>
+	<field name="t_empleado_celular_empleado" class="java.lang.String"/>
+	<field name="t_empleado_sexo_empleado" class="java.lang.String"/>
+	<field name="t_empleado_apellido_empleado" class="java.lang.String"/>
+	<field name="t_empleado_estado_empleado" class="java.lang.Boolean"/>
+	<field name="t_empleado_foto_empleado" class="java.lang.String"/>
+	<field name="t_empleado_lugar_nacimiento_empleado" class="java.lang.String"/>
+	<field name="t_empleado_tipo_empleado" class="java.lang.Integer"/>
+	<field name="t_empleado_estado_socio" class="java.lang.Boolean"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.lang.Float"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<variable name="t_asesoria_precio_1" class="java.lang.Float" resetType="Group" resetGroup="t_empleado_nombre_empleado" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_asesoria_precio}]]></variableExpression>
+	</variable>
+	<variable name="t_asesoria_precio_2" class="java.lang.Float" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_asesoria_precio}]]></variableExpression>
+	</variable>
+	<group name="t_empleado_nombre_empleado">
+		<groupExpression><![CDATA[$F{t_empleado_nombre_empleado}]]></groupExpression>
+		<groupHeader>
+			<band height="34">
+				<textField isBlankWhenNull="true">
+					<reportElement x="85" y="3" width="81" height="20" uuid="c477be80-05e9-45ac-a43d-7c33b5f4c4b1"/>
+					<textFieldExpression><![CDATA[$F{t_empleado_dui_empleado}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="166" y="3" width="319" height="20" uuid="350eb2f9-3f2b-489c-9a36-ac63aa2acca7"/>
+					<textFieldExpression><![CDATA[$F{t_empleado_nombre_empleado}.equals( null )? "" : $F{t_empleado_nombre_empleado}+" "+$F{t_empleado_apellido_empleado}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="1" y="28" width="554" height="1" uuid="fea00d88-254a-4cf5-b76a-d295fe597174"/>
+				</line>
+				<staticText>
+					<reportElement x="22" y="3" width="63" height="20" uuid="53d377b5-cf0e-48d3-8899-e286245d6762"/>
+					<textElement markup="styled">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">EMPLEADO:</style>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<textField pattern="$#,##0.00" isBlankWhenNull="true">
+					<reportElement x="486" y="6" width="67" height="20" uuid="42638a81-ce16-470d-a408-d27cd858242e"/>
+					<textFieldExpression><![CDATA[$V{t_asesoria_precio_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="359" y="6" width="127" height="20" uuid="3a73b6fd-1882-4984-8d66-6ac9b7676fc5"/>
+					<textElement markup="styled">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL POR EMPLEADO:</style>]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="113" splitType="Stretch">
+			<subreport>
+				<reportElement x="11" y="0" width="200" height="79" uuid="5c4bb174-168c-4065-b8bc-789d86c76126"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="110" width="555" height="1" uuid="6f4cdf5b-b472-4afa-b476-923f9415fa85"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="85" width="554" height="20" uuid="a9968831-7577-4ac3-bbfa-d9eb66e0ac3d"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS ACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>":"<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS INACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="1" width="82" height="20" uuid="c4467ae2-4838-4362-b4ee-1dd46deb5bc2"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PROYECTO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="20" width="555" height="1" uuid="c8cc2445-9e72-40e4-b445-4ecaf4660779"/>
+			</line>
+			<staticText>
+				<reportElement x="408" y="1" width="88" height="20" uuid="dc408e91-d7bb-4798-9c10-014a14f29d22"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">BENEFICIARIOS</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="1" width="79" height="20" uuid="0d4fe5ee-3f66-4d8e-84a1-9e08d90e06f3"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESCRIPCIÓN</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="1" width="59" height="20" uuid="40d731a7-a563-4b41-8996-399604031b87"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRECIO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="496" y="1" width="59" height="20" uuid="6196dd26-067a-4309-a4aa-8440ff0f8f2c"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA</style>]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="2" width="82" height="20" uuid="78ca0dd4-cfcf-4cdb-8c44-4ed21952b48b"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="107" y="2" width="240" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<textFieldExpression><![CDATA[$F{t_asesoria_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="408" y="2" width="59" height="20" uuid="9a4f1e7a-a777-446a-b01e-05a749166cbd"/>
+				<textFieldExpression><![CDATA[$F{t_asesoria_beneficiarios}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="496" y="2" width="59" height="20" uuid="3b63c82f-0e80-4656-a1cb-5d72a43e4c49"/>
+				<textFieldExpression><![CDATA[$F{t_asesoria_fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="347" y="2" width="59" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<textFieldExpression><![CDATA[$F{t_asesoria_precio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="486" y="6" width="68" height="20" uuid="eb5b45e9-debe-4df4-b593-f44e3e8fbc4c"/>
+				<textFieldExpression><![CDATA[$V{t_asesoria_precio_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="386" y="6" width="100" height="20" uuid="7eb6e7ed-06eb-41dc-8762-15252fd7db61"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL GENERAL:</style>]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="17" width="80" height="20" uuid="2e860c03-3370-43f1-97e1-7c106de78b85"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="17" width="40" height="20" uuid="5388ee9f-1849-46fb-8e99-17dc8e1fbc9c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

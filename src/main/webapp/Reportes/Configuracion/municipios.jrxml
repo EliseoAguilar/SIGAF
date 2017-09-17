@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="municipios" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4abfa0de-0744-42c3-bd58-6b0da2b1c6b8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idDepartamento" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from t_municipio where iddepartamento_municipio  = $P{idDepartamento}]]>
+	</queryString>
+	<field name="id_municipio" class="java.lang.Integer"/>
+	<field name="nombre_municipio" class="java.lang.String"/>
+	<field name="iddepartamento_municipio" class="java.lang.Integer"/>
+	<field name="estado_municipio" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="214" y="8" width="100" height="20" uuid="4edc7a84-b0a7-4395-bf6c-55729fb6df37"/>
+				<textFieldExpression><![CDATA[$F{nombre_municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="8" width="100" height="20" uuid="41117367-97a1-43fc-9a4a-4a0c387fda9c"/>
+				<textFieldExpression><![CDATA[$F{estado_municipio}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

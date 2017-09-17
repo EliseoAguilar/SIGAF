@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TActivo" table="t_activo" schema="public" optimistic-lock="version">
+        <id name="idactivo" type="int">
+            <column name="idactivo" />
+            <generator class="sequence">
+                <param name="sequence">t_activo_id_activo_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="idproyecto" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="131089" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

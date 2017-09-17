@@ -1,0 +1,1410 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./../index.xhtml">
+            <ui:define name="content">
+                <style>
+                    .borderHidden.ui-panelgrid>*>tr,
+                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    .borderHidden.ui-panelgrid>*>tr,
+                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    .ui-datalist-content{
+                        border: none;
+                    }
+                    .opciones .ui-selectonemenu-list { 
+                        height: 100px;
+                    }
+                    #fLisiados\:main-panel td{
+                        border: none !important;
+                    }
+                    #fLisiados\:main-panel tr{
+                        border: none !important;
+                    }
+                </style>
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel  rendered="#{resolucionBean.showCreate}" style=" width: 100%">
+                        <h:form id="fAgregarResolucionCooperativa">
+                            <p:panel id="pRegistrarResolucionCooperativa"  header="Agregar resolución"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="borderHidden" style=" width: 100%" >
+                                    <p:row>
+                                        <p:column style=" width: 25%"   >
+                                            <h:outputText value="Nº de solicitud: #{resolucionBean.proyectoSeleccionado.codigo}" />
+                                        </p:column>
+                                        <p:column style=" width: 47%"  >
+                                            <h:outputText value="Modalidad: #{resolucionBean.cambiar(resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column style=" width: 28%" >
+                                            <h:outputText value="Fecha de aprobación:*" />
+                                        </p:column>
+                                    </p:row>  
+                                    <p:row>
+                                        <p:column style=" width: 25%"   >
+                                        </p:column>
+                                        <p:column style=" width: 47%"  >
+                                        </p:column>
+                                        <p:column style=" width: 28%" >
+                                            <p:calendar value="#{resolucionBean.proyectoSeleccionado.fechaAprovacion}" maxdate="#{resolucionBean.hoy}" id="cFecha" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                            <h:outputText value="#{resolucionBean.msgFechaAprobacion}" style=" color:  red"/>                                        
+                                        </p:column>
+                                    </p:row> 
+                                </p:panelGrid> 
+                 
+                                <p:tabView  >
+                                    <p:tab title="Análisis">
+                                        <b>   <h:outputText value="Cálculos de las razones financieras"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Capacidad de pago = Activo corriente / Pasivo corriente"/> 
+                                                    <br></br>
+                                                    <h:outputText value="Capacidad de pago= $"/>
+                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.activoCorriente}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <h:outputText value="/ $"/>
+                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.pasivoCorriente}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <br></br>         <h:outputText value="Capacidad de pago = $"/>
+                                                    <h:outputText rendered="#{resolucionBean.resultadoRazonCapacidadPago lt 0}" style=" color:  #e52d27" value="#{resolucionBean.resultadoRazonCapacidadPago}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <h:outputText rendered="#{resolucionBean.resultadoRazonCapacidadPago gt 0}" value="#{resolucionBean.resultadoRazonCapacidadPago}">
+                                                        <f:convertNumber    pattern="#0.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Capacidad de endeudamiento = Pasivos / Activos"/>
+                                                    <br></br>         
+                                                    <h:outputText value="Capacidad de endeudamiento = $"/>
+                                                    <h:outputText value="#{resolucionBean.totalRazonPasivos}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <h:outputText value="/ $"/>
+                                                    <h:outputText value="#{resolucionBean.totalRazonActivos}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <br></br>         <h:outputText value="Capacidad de endeudamiento = $"/>
+                                                    <h:outputText value="#{resolucionBean.resultadoRazonEndeudamiento}">
+                                                        <f:convertNumber    pattern="#0.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <b>   <h:outputText value="Interpretación de las razones financieras"/></b>
+                                        <hr></hr>   
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <p:outputPanel rendered="#{resolucionBean.mensajeAprobado}">
+                                                        <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
+                                                        <h:outputText value="El resultado de la razon es igual o superior a la política establecia, presentando una capacidad de endeudamiento optimo para la fundacion."/>   
+                                                        <br></br><br></br>
+                                                    </p:outputPanel>
+                                                    <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobado}">
+                                                        <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
+                                                        <h:outputText value="El resultado de la razon es inferior a la política establecia, presentando una capacidad de endeudamiento no optima para la fundacion."/>   
+                                                        <br></br><br></br>
+                                                    </p:outputPanel>
+                                                    <p:outputPanel rendered="#{resolucionBean.mensajeAprobadoPago}">
+                                                        <b>   <h:outputText value="Capacidad de pago"/></b>  <br></br> <br></br>
+                                                        <h:outputText value="El resultado es mayor o igual a la política establecida, por cuanto existir un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <br></br><br></br>  
+                                                    </p:outputPanel>
+                                                    <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobadoPago}">
+                                                        <b>   <h:outputText value="Capacidad de pago"/> </b>   <br></br> <br></br>
+                                                        <h:outputText value="El resultado es inferior a la política establecida, por cuanto no existir un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <br></br><br></br>  
+                                                    </p:outputPanel>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <center>
+                                            <p:selectOneRadio id="options" value="#{resolucionBean.aprobar}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aprobar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="true" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No aprobar" itemValue="false" />
+                                            </p:selectOneRadio>
+                                        </center>
+                                    </p:tab>
+                                    <p:tab title="Comentarios">
+                                        <b>   <h:outputText value="Comentario"/></b>
+                                        <hr></hr>
+                                        <p:outputPanel id="comentaios">  
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column colspan="2" style=" width: 100%" >
+                                                        <p:inputTextarea placeholder="Introduzca la descripción"  value="#{resolucionBean.comentario.descripcion}"  style="width: 100%"/>
+                                                        <h:outputText value="#{resolucionBean.msgDescripcionComertario}" style=" color:  red"/>                                          
+                                                        <p:column>
+                                                            <p:commandButton  icon="fa fa-plus" style="#{resolucionBean.btnNuevo}" actionListener="#{resolucionBean.llenarComentario}" update="comentaios" > 
+                                                            </p:commandButton>
+                                                        </p:column> 
+                                                    </p:column>
+                                                </p:row>                                              
+                                            </p:panelGrid>                                               
+                                            <br></br>
+                                            <b>   <h:outputText value="Lista de comentarios"/></b>
+                                            <hr></hr>                                        
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
+                                                <p:row>   
+                                                    <p:column>
+                                                        <p:dataTable   id="comentariosData"
+                                                                       var="empleados" 
+                                                                       value="#{resolucionBean.listaComentarios}" widgetVar="comentarioData"
+                                                                       paginator="true"
+                                                                       rows="5"
+                                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                       rowsPerPageTemplate="5"
+                                                                       paginatorPosition="bottom" 
+                                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                       emptyMessage="No se encontraron comentarios" rowIndexVar="No" >
+                                                            <f:facet name="header">
+                                                                <p:outputPanel>                                           
+                                                                    <p:inputText id="globalFilter" onkeyup="PF('comentarioData').filter()" style="width:150px" placeholder="Buscar"/>
+                                                                </p:outputPanel>
+                                                            </f:facet>
+                                                            <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                                                <h:outputText value=" #{No+1}" />
+                                                            </p:column>
+                                                            <p:column headerText="Descripción"  style=" width: 90%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
+                                                                <h:outputText value="#{empleados.descripcion}" />
+                                                            </p:column>
+                                                            <p:column style=" width: 12%; text-align: center"  >  
+                                                                
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
+                                                                </p:commandButton>
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel>
+                                     
+                                    </p:tab>
+                                    
+                                    <p:tab title="Sugerencias">
+                                        
+                                        <b>    <h:outputText value="Sugerencia"/></b>
+                                        <hr></hr>
+                                        <p:outputPanel id="sugerencias">  
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column colspan="2" style=" width: 100%" >
+                                                        <p:inputTextarea placeholder="Introduzca la descripción"  value="#{resolucionBean.sugerencia.descripcion}"  style="width: 100%"/>
+                                                        <h:outputText value="#{resolucionBean.msgDescripcionSugerencia}" style=" color:  red"/>                                                  
+                                                        <p:column>
+                                                            <p:commandButton  icon="fa fa-plus" style="#{resolucionBean.btnNuevo}" actionListener="#{resolucionBean.llenarSugerencia}" update="sugerencias" > 
+                                                            </p:commandButton>
+                                                        </p:column> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>                                               
+                                            <br></br>
+                                            <b>    <h:outputText value="Lista de sugerencias"/></b>
+                                            <hr></hr>
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
+                                                <p:row>   
+                                                    <p:column>
+                                                        <p:dataTable   id="sugerenciasData"
+                                                                       var="empleados" 
+                                                                       value="#{resolucionBean.listaSugerencia}" widgetVar="sugereciaData"
+                                                                       paginator="true"
+                                                                       rows="5"
+                                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                       rowsPerPageTemplate="5"
+                                                                       paginatorPosition="bottom" 
+                                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                       emptyMessage="No se encontraron sugerencias" rowIndexVar="No" >
+                                                            <f:facet name="header">
+                                                                <p:outputPanel>                                           
+                                                                    <p:inputText id="globalFilter" onkeyup="PF('sugereciaData').filter()" style="width:150px" placeholder="Buscar"/>
+                                                                </p:outputPanel>
+                                                            </f:facet>
+                                                            <p:column headerText="Nº" style="width: 5%; text-align: center">  
+                                                                <h:outputText value=" #{No+1}" />
+                                                            </p:column>
+                                                            <p:column headerText="Descripción"  style=" width: 84%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
+                                                                <h:outputText value="#{empleados.descripcion}" />
+                                                            </p:column>
+                                                              <p:column style=" width: 13%; text-align: center"  >  
+                                                               
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
+                                                                </p:commandButton>
+                                                                   <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel>
+                                    </p:tab>
+                                    
+                                    
+                                </p:tabView>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{resolucionBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                    </p:commandButton>                                   
+                                    <p:commandButton value="Limpiar" id="btnLimpiar" style="#{areaBean.btnLimpiar}" actionListener="#{resolucionBean.limpiarResolucion()}"  icon="fa fa-fw fa-minus"  update=":padding" >
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{resolucionBean.enableShowData}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{resolucionBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{resolucionBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta resolución?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{resolucionBean.createResolucionCooperativa}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{resolucionBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{resolucionBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel  rendered="#{resolucionBean.showCreatePersona}" style=" width: 100%">
+                        <h:form id="fAgregarResolucionPersona">
+                            <p:panel id="pRegistrarResolucionPersona"  header="Agregar resolución"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <p:panelGrid styleClass="borderHidden" style=" width: 100%" >
+                                    <p:row>
+                                        <p:column style=" width: 25%"   >
+                                            <h:outputText value="Solicitud: #{resolucionBean.proyectoSeleccionado.codigo}" />
+                                        </p:column>
+                                        <p:column style=" width: 47%"  >
+                                            <h:outputText value="Modalidad: #{resolucionBean.cambiar(resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column style=" width: 28%" >
+                                            <h:outputText value="Fecha de aprobación:*" />
+                                        </p:column>
+                                    </p:row>  
+                                    <p:row>
+                                        <p:column style=" width: 25%"   >
+                                        </p:column>
+                                        <p:column style=" width: 47%"  >
+                                        </p:column>
+                                        <p:column style=" width: 28%" >
+                                            <p:calendar value="#{resolucionBean.proyectoSeleccionado.fechaAprovacion}" maxdate="#{resolucionBean.hoy}" id="cFecha" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                            <h:outputText value="#{resolucionBean.msgFechaAprobacion}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row> 
+                                </p:panelGrid>  
+                                 <br></br>
+                                <hr></hr>
+                                <p:tabView  style="margin-top: 2%">
+                                    <p:tab title="Análisis">
+                                        <b>   <h:outputText value="Calculos de las razones financieras"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Capacidad de pago = Ingreso mensual - gasto mensual"/>
+                                                    <br></br>         <h:outputText value="Capacidad de pago = $"/>
+                                                    <h:outputText value=" #{resolucionBean.totalIngresoRazon}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" />  
+                                                    </h:outputText>
+                                                    <h:outputText value="- $"/>   
+                                                    <h:outputText value="#{resolucionBean.totalEgresoRazon}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" />  
+                                                    </h:outputText>
+                                                    <br></br>         
+                                                    <h:outputText value="Capacidad de pago = $"/>
+                                                    <h:outputText rendered="#{resolucionBean.resultadoPagoRazon lt 0}" style=" color:  #e52d27" value="#{resolucionBean.resultadoPagoRazon}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <h:outputText rendered="#{resolucionBean.resultadoPagoRazon gt 0}" value="#{resolucionBean.resultadoPagoRazon}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <b>   <h:outputText value="Interpretación de las razones financieras"/></b>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon gt 0}">
+                                                        <b>      <h:outputText value="Capacidad de pago"/> </b>  <br></br><br></br> 
+                                                        <h:outputText value="El sobrante de esta persona es de $"/>                                                              
+                                                        <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
+                                                            <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                        <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, las deudas mensuales de esta persona no pueden ser mayores a esa suma, de lo contrario no tendrá dinero suficiente para pagar futuras deudas."/>     
+                                                        <br></br> <br></br>  
+                                                </p:outputPanel>
+                                                    <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon lt 0}">
+                                                        <b>   <h:outputText value="Capacidad de pago"/></b>   <br></br><br></br>
+                                                        <h:outputText value="El sobrante de esta persona es de $"/>                                                              
+                                                        <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
+                                                            <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                        <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, esta persona no tiene la capacidad de pagar futuras deudas."/>     
+                                                        <br></br> <br></br>  
+                                                    </p:outputPanel>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <center>
+                                            <p:selectOneRadio id="options" value="#{resolucionBean.aprobar}">
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aprobar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" itemValue="true" />
+                                                <f:selectItem itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No aprobar" itemValue="false" />
+                                            </p:selectOneRadio>
+                                        </center>
+                                    </p:tab>
+                                    <p:tab title="Comentarios">
+                                        <b>   <h:outputText value="Comentario"/></b>
+                                        <hr></hr>
+                                        <p:outputPanel id="comentaios">  
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column colspan="2" style=" width: 100%" >
+                                                        <p:inputTextarea placeholder="Introduzca la descripción"  value="#{resolucionBean.comentario.descripcion}"  style="width: 100%"/>
+                                                        <h:outputText value="#{resolucionBean.msgDescripcionComertario}" style=" color:  red"/>
+                                                        <p:column>
+                                                            <p:commandButton  icon="fa fa-plus" style="#{resolucionBean.btnNuevo}" actionListener="#{resolucionBean.llenarComentario}" update="comentaios" > 
+                                                            </p:commandButton>
+                                                        </p:column> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>                                               
+                                            <br></br>
+                                            <b>   <h:outputText value="Lista de comentarios"/></b>
+                                            <hr></hr>
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
+                                                <p:row>   
+                                                    <p:column>
+                                                        <p:dataTable   id="comentariosData"
+                                                                       var="empleados" widgetVar="comentarioData" 
+                                                                       value="#{resolucionBean.listaComentarios}"
+                                                                       paginator="true"
+                                                                       rows="5"
+                                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                       rowsPerPageTemplate="5"
+                                                                       paginatorPosition="bottom" 
+                                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                       emptyMessage="No se encontraron comentarios" rowIndexVar="No" >
+                                                            <f:facet name="header">
+                                                                <p:outputPanel>                                           
+                                                                    <p:inputText id="globalFilter" onkeyup="PF('comentarioData').filter()" style="width:150px" placeholder="Buscar"/>
+                                                                </p:outputPanel>
+                                                            </f:facet>
+                                                            <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                                                <h:outputText value=" #{No+1}" />
+                                                            </p:column>
+                                                            <p:column headerText="Descripción"  style=" width: 84%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
+                                                                <h:outputText value="#{empleados.descripcion}" />
+                                                            </p:column>
+                                                          <p:column style=" width: 13%; text-align: center"  >  
+                                                                
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
+                                                                </p:commandButton>
+                                                              <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel>
+                                  
+                                    </p:tab>
+                                    
+                                    <p:tab title="Sugerencias">
+                                        
+                                        <b>   <h:outputText value="Sugerencia"/></b>
+                                        <hr></hr>
+                                        
+                                        <p:outputPanel id="sugerencias">  
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
+                                                <p:row>
+                                                    <p:column >
+                                                        <h:outputText value="Descripción:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    <p:column colspan="2" style=" width: 100%" >
+                                                        <p:inputTextarea placeholder="Introduzca la descripción"  value="#{resolucionBean.sugerencia.descripcion}"  style="width: 100%"/>
+                                                        <h:outputText value="#{resolucionBean.msgDescripcionSugerencia}" style=" color:  red"/>
+                                                        <p:column>
+                                                            <p:commandButton  icon="fa fa-plus" style="#{resolucionBean.btnNuevo}" actionListener="#{resolucionBean.llenarSugerencia}" update="sugerencias" > 
+                                                            </p:commandButton>
+                                                        </p:column> 
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>                                               
+                                            <br></br>
+                                            <b>   <h:outputText value="Lista de sugerencias"/></b>
+                                            <hr></hr>
+                                            
+                                            <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
+                                                <p:row>   
+                                                    <p:column>
+                                                        <p:dataTable   id="sugerenciasData"
+                                                                       var="empleados" widgetVar="sugerenciaData"
+                                                                       value="#{resolucionBean.listaSugerencia}"
+                                                                       paginator="true"
+                                                                       rows="5"
+                                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                       rowsPerPageTemplate="5"
+                                                                       paginatorPosition="bottom" 
+                                                                       currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                       emptyMessage="No se encontraron sugerencias" rowIndexVar="No" >
+                                                            <f:facet name="header">
+                                                                <p:outputPanel>                                           
+                                                                    <p:inputText id="globalFilter" onkeyup="PF('sugerenciaData').filter()" style="width:150px" placeholder="Buscar"/>
+                                                                </p:outputPanel>
+                                                            </f:facet>
+                                                            <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                                                <h:outputText value=" #{No+1}" />
+                                                            </p:column>
+                                                            <p:column headerText="Descripción"  style=" width: 84%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
+                                                                <h:outputText value="#{empleados.descripcion}" />
+                                                            </p:column>
+                                                            <p:column style=" width: 13%; text-align: center"  >  
+                                                               
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
+                                                                </p:commandButton>
+                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </p:column>
+                                                </p:row>
+                                            </p:panelGrid>
+                                        </p:outputPanel>
+                                    </p:tab>
+                                    
+                                </p:tabView>
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton id="btnCrear" title="Registrar" value="Guardar"  actionListener="#{resolucionBean.validarFormulario}"  update=":padding"   icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                    </p:commandButton> 
+                                    <p:commandButton value="Limpiar" id="btnLimpiar" style="#{areaBean.btnLimpiar}" actionListener="#{resolucionBean.limpiarResolucion()}"  icon="fa fa-fw fa-minus"  update=":padding" >
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{resolucionBean.enableShowData}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{resolucionBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true" visible="#{resolucionBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar esta resolución?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{resolucionBean.createResolucionPersona}"  update=":padding" oncomplete="PF('pgGuardar').hide()" icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()"   icon="fa fa-close"  value="No" style="#{resolucionBean.btnCancelar}"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{resolucionBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{resolucionBean.showData}">
+                        <p:panel id="pAdministrarResoluciones" header="Administración de resoluciones" style="margin-bottom:20px">
+                            <h:form id="fData">
+                                <p:fieldset>
+                                    <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
+                                        <p:row>
+                                            <p:column style=" width: 50%"   >
+                                                <h:outputText value="Tipo de solicitud:" /> 
+                                            </p:column>
+                                            <p:column style=" width: 50%"   >
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column  style=" width: 50%"  >
+                                                <p:selectOneMenu value="#{resolucionBean.tipoCredito}" style=" width: 100%;">
+                                                    <p:ajax update="pAdministrarResoluciones" listener="#{resolucionBean.mostrarSolicitudes}" />
+                                                    <f:selectItem itemLabel="[RESUMEN]" itemValue="0" />
+                                                    <f:selectItem itemLabel="Crédito para cooperativas" itemValue="2" />
+                                                    <f:selectItem itemLabel="Crédito para lisiados" itemValue="5" />
+                                                    <f:selectItem itemLabel="Crédito para comercio" itemValue="1" />
+                                                    <f:selectItem itemLabel="Crédito agropecuario" itemValue="8" />
+                                                    <f:selectItem itemLabel="Crédito para empleado" itemValue="7" />
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            <p:column style=" width: 50%"   >
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:fieldset>
+                                <br></br>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarLisiados}">
+                                    #{resolucionBean.updateListaCreditos()}
+                                    <p:dataTable   id="empleadosData4"
+                                                   var="empleados"  widgetVar="lisiadoData"
+                                                   value="#{resolucionBean.listaClienteProyectoReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   paginatorPosition="bottom"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('lisiadoData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TProyecto.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto"  filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%" sortBy="#{empleados.TProyecto.monto}" >  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.TProyecto.monto}" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro"  filterStyle="width:100%" style=" width: 10%" sortBy="#{empleados.TProyecto.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.TProyecto.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column> 
+                                        <p:column  style=" width: 9%; text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerSolicitud').show()" icon="fa fa-eye"   >
+                                                <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                <f:actionListener binding="#{resolucionBean.cargarVistaLisiado()}"/>
+                                                <p:menuitem  update=":padding"  icon="fa fa-gavel" value="Agregar resolución"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:actionListener binding="#{resolucionBean.cargarResolucionLisiado()}"/>
+                                                </p:menuitem>
+                                                <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucion').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{resolucionBean.clienteProyectoEliminar}"  />
+                                                    <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}" />
+                                                </p:menuitem>   
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarEmpleados}">
+                                    #{resolucionBean.updateListaCreditos()}
+                                    <p:dataTable   id="empleadosDatos"
+                                                   var="empleados" widgetVar="empleadoData" 
+                                                   value="#{resolucionBean.listaClienteProyectoReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   paginatorPosition="bottom"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('empleadoData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TProyecto.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%" sortBy="#{empleados.TProyecto.monto}" >  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.TProyecto.monto}" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro"  filterStyle="width:100%" style=" width: 10%" sortBy="#{empleados.TProyecto.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.TProyecto.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column> 
+                                        <p:column  style=" width: 9%; text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerSolicitud').show()" icon="fa fa-eye"   >
+                                                <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                <f:actionListener binding="#{resolucionBean.cargarVistaEmpleado()}"/>
+                                                <p:menuitem  update=":padding"  icon="fa fa-gavel" value="Agregar resolución"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                    <f:actionListener binding="#{resolucionBean.cargarResolucionEmpleado()}"/> 
+                                                </p:menuitem> 
+                                                <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucion').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{resolucionBean.clienteProyectoEliminar}"  />
+                                                    <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}" />
+                                                </p:menuitem>   
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarComercio}">
+                                    #{resolucionBean.updateListaCreditos()}
+                                    <p:dataTable   id="comercioData"
+                                                   var="empleados"  widgetVar="comercioData"
+                                                   value="#{resolucionBean.listaClienteProyectoReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   paginatorPosition="bottom"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('comercioData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TProyecto.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%;" sortBy="#{empleados.TProyecto.monto}" >  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.TProyecto.monto}" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro"  filterStyle="width:100%" style=" width: 10%" sortBy="#{empleados.TProyecto.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.TProyecto.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column> 
+                                        <p:column  style=" width: 9%; text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerSolicitud').show()" icon="fa fa-eye"   >
+                                                <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                <f:actionListener binding="#{resolucionBean.cargarVistaComercio()}"/>
+                                                <p:menuitem  update=":padding"  icon="fa fa-gavel" value="Agregar resolución"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"/>
+                                                    <f:actionListener binding="#{resolucionBean.cargarResolucionComercio()}"/> 
+                                                </p:menuitem>                                              
+                                                <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucion').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{resolucionBean.clienteProyectoEliminar}"  />
+                                                    <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}" />
+                                                </p:menuitem>   
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarAgropecuarios}">
+                                    #{resolucionBean.updateListaCreditos()}
+                                    <p:dataTable   id="agronegociosData"
+                                                   var="empleados" 
+                                                   value="#{resolucionBean.listaClienteProyectoReducida}" 
+                                                   paginator="true" widgetVar="agroData"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('agroData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center" >  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TProyecto.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
+                                            <h:outputText value="#{empleados.TCliente.duiCliente}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%;" sortBy="#{empleados.TProyecto.monto}" >  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.TProyecto.monto}" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro"  filterStyle="width:100%" style=" width: 10%" sortBy="#{empleados.TProyecto.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.TProyecto.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column> 
+                                        <p:column   style=" width: 9%; text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerSolicitud').show()" icon="fa fa-eye"   >
+                                                <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                <f:actionListener binding="#{resolucionBean.cargarVistaAgropecuario()}"/> 
+                                                <p:menuitem  update=":padding"  icon="fa fa-gavel" value="Agregar resolución"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:actionListener binding="#{resolucionBean.cargarResolucionAgropecuario()}"/>
+                                                </p:menuitem>   
+                                                <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucion').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TCliente}" target="#{resolucionBean.clienteSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{resolucionBean.clienteProyectoEliminar}"  />
+                                                    <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}" />
+                                                </p:menuitem>   
+                                            </p:splitButton>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarCooperativas}">
+                                    #{resolucionBean.updateListaCreditos()}
+                                    <p:dataTable   id="entidadesData"
+                                                   var="empleados" widgetVar="cooperData" 
+                                                   value="#{resolucionBean.listaEntidadProyectosReducida}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('cooperData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 15%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                            <h:outputText value=" #{empleados.TProyecto.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="Codigo cooperativa" style=" width: 18%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">   
+                                            <h:outputText value="#{empleados.TEntidad.codigoEntidad}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 30%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 12%;" sortBy="#{empleados.TProyecto.monto}" >  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.TProyecto.monto}" >
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro" style=" width: 11%" sortBy="#{empleados.TProyecto.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.TProyecto.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column  style=" width: 9%; text-align: center">      
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVerSolicitud').show()" icon="fa fa-eye">
+                                                <f:setPropertyActionListener  value="#{empleados.TEntidad}" target="#{resolucionBean.entidadeleccionada}"  />
+                                                <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                <f:actionListener binding="#{resolucionBean.cargarVistaCooperativa()}"/>  
+                                                <p:menuitem  update=":padding"  icon="fa fa-gavel" value="Agregar resolución"    >
+                                                    <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
+                                                    <f:setPropertyActionListener  value="#{empleados.TEntidad}" target="#{resolucionBean.entidadeleccionada}"  />
+                                                    <f:actionListener binding="#{resolucionBean.cargarResolucionCooperativas()}"/>   </p:menuitem>
+                                                     <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucionCooperativa').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{solicitudBean.proyectoSeleccionado}" />
+                                                <f:setPropertyActionListener  value="#{empleados}" target="#{solicitudBean.entidadProyectoEliminar}"  />
+                                            </p:menuitem>
+                                            </p:splitButton>
+                                              
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{resolucionBean.mostrarResumen}">
+                                    #{resolucionBean.updateListaResumen()}
+                                    <p:dataTable   id="entidadesTodas"
+                                                   var="empleados" widgetVar="resumenData" 
+                                                   value="#{resolucionBean.listaSolicitudesProyectos}" 
+                                                   paginator="true"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron solicitudes" rowIndexVar="No" >
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('resumenData').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style=" width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.codigo}"  filterStyle="width:100%" sortBy="#{empleados.codigo}">  
+                                            <h:outputText value=" #{empleados.codigo}" />
+                                        </p:column>
+                                        <p:column headerText="Modalidad" style=" width: 60%" filterBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}" />
+                                        </p:column>
+                                        <p:column headerText="Monto" style=" width: 15%;" filterBy="#{empleados.monto}"  filterStyle="width:100%" sortBy="#{empleados.monto}">  
+                                            <div align="right">
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{empleados.monto}">
+                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                        <p:column headerText="Registro" style=" width: 10%" sortBy="#{empleados.fecha}">   
+                                            <div align="center">
+                                                <h:outputText value="#{empleados.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                </h:outputText>
+                                            </div>
+                                        </p:column>
+                                    </p:dataTable> 
+                                </p:outputPanel>
+                            </h:form>
+                                   <p:dialog header="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa)': false  or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerSolicitud" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                       <h:form target="_blank">
+                                    <p:outputPanel  style="width: 100%">
+                                        <p:panelGrid styleClass="borderHidden" style=" width: 100%; font-size: small" >
+                                            <p:row>
+                                                <p:column style=" width: 20%"   >
+                                                    <h:outputText value="Código: #{resolucionBean.proyectoSeleccionado.codigo}" />
+                                                </p:column>
+                                                <p:column style=" width: 54%">
+                                                    <h:outputText value="Lugar de elaboración: #{resolucionBean.proyectoSeleccionado.lugar}" />
+                                                </p:column>
+                                                <p:column style=" width: 34%" >
+                                                    <h:outputText value="Fecha de registro: " />
+                                                    <h:outputText value="#{resolucionBean.proyectoSeleccionado.fecha}" >
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:row>  
+                                        </p:panelGrid>
+                                        <hr></hr>
+                                        <p:tabView>
+                                            <p:tab title="Beneficiario">
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
+                                                    <b>  <h:outputText value="Cooperativa" /></b>  
+                                                    <hr></hr>
+                                                    <p:row>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="Código: " />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.codigoEntidad}" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="Nombre abreviado:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.abreviacionEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column  style=" width: 25%"   >
+                                                            <h:outputText value="Nombre completo:" />
+                                                        </p:column>
+                                                        <p:column  colspan="3" style=" width: 50%"   >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.nombreEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="NIT: " />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.nitEntidad}" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="Giro:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.giroEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="Representante legal: " />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.nombreRepresentanteEntidad}" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"   >
+                                                            <h:outputText value="DUI del representante:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 25%"  >
+                                                            <h:outputText value=" #{resolucionBean.entidadeleccionada.duiRepresentanteEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  style=" width: 100%" >
+                                                    <b>  <h:outputText value="Personales" /></b>  
+                                                    <hr></hr>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="Nombres:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.nombreCliente}" />
+                                                        </p:column >
+                                                        <p:column style=" width: 10%"  >
+                                                            <h:outputText value="Apellidos:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.apellidoCliente}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="DUI:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.duiCliente}" />
+                                                        </p:column >
+                                                        <p:column style=" width: 10%"  >
+                                                            <h:outputText value="NIT:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.nitCliente}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="Fecha de nacimiento:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.fechaNacimiento}">
+                                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                            </h:outputText>
+                                                        </p:column >
+                                                        <p:column style=" width: 10%"  >
+                                                            <h:outputText value="Edad (años):" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.edad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="Sexo:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.sexoCliente}" />
+                                                        </p:column >
+                                                        <p:column style=" width: 10%"  >
+                                                            <h:outputText value="Estado familiar:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.estadoFamiliar}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <br></br>
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
+                                                    <b>  <h:outputText value="Contacto" /></b>  
+                                                    <hr></hr>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="Correo:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.correoEntidad eq ''? '----':resolucionBean.entidadeleccionada.correoEntidad}" />
+                                                        </p:column >
+                                                        <p:column style=" width: 10%">
+                                                            <h:outputText value="Teléfono:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.telefonoEntidad}" />
+                                                        </p:column>
+                                                   </p:row>
+                                                   <p:row>
+                                                        <p:column    style=" width: 10%"  >
+                                                            <h:outputText value="Móvil:" />
+                                                        </p:column>
+                                                        <p:column  colspan="3"  style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.celularEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 10%">
+                                                            <h:outputText value="Dirección:" />
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.entidadeleccionada.direccionEntidad}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  >
+                                                    <b>  <h:outputText value="Contacto" /></b>  
+                                                    <hr></hr>
+                                                    <p:row>
+                                                        <p:column style=" width: 13%"   >
+                                                            <h:outputText value="Correo:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%" >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.correoCliente eq ''? '----':resolucionBean.clienteSeleccionado.correoCliente}" />
+                                                        </p:column >
+                                                        <p:column style=" width: 10%">
+                                                            <h:outputText value="Teléfono:" />
+                                                        </p:column>
+                                                        <p:column style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.telefonoCliente}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column    style=" width: 10%"  >
+                                                            <h:outputText value="Móvil:" />
+                                                        </p:column>
+                                                        <p:column  colspan="3"  style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.celularCliente}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style=" width: 10%">
+                                                            <h:outputText value="Dirección:" />
+                                                        </p:column>
+                                                        <p:column colspan="3" style=" width: 20%"  >
+                                                            <h:outputText value="#{resolucionBean.clienteSeleccionado.direccionCliente}" />
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Crédito">
+                                                <p:outputPanel style=" width: 100%"> 
+                                                    <p:panelGrid   style=" width: 100%" >
+                                                        <p:row>
+                                                            <p:column style=" width: 25%"   >
+                                                                <h:outputText value="Modalidad:" />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%"   >
+                                                                <h:outputText value="#{resolucionBean.modalidad}" />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%"  >
+                                                                <h:outputText value="Destino: " />
+                                                            </p:column>
+                                                            <p:column style=" width: 25%"  >
+                                                                <h:outputText value="#{resolucionBean.proyectoSeleccionado.destinoProyecto}" />
+                                                            </p:column>
+                                                        </p:row> 
+                                                        <p:row>
+                                                            <p:column    >
+                                                                <h:outputText value="Monto:" />
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{resolucionBean.proyectoSeleccionado.monto}" >
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="Tasa de interés (%):"  />
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="#{resolucionBean.politicaSeleccionada.tasaInteres}">
+                                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column   >
+                                                                <h:outputText value="Tasa de interés x mora (%):" />
+                                                            </p:column>
+                                                            <p:column    >
+                                                                <h:outputText value="#{resolucionBean.politicaSeleccionada.tasaInteresMora}">
+                                                                    <f:convertNumber     pattern="#0.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="Plazo (meses):"/>
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="#{resolucionBean.proyectoSeleccionado.plazo}"/>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row>
+                                                            <p:column    >
+                                                                <h:outputText value="Forma de pago:" />
+                                                            </p:column>
+                                                            <p:column    >
+                                                                <h:outputText value="#{resolucionBean.formaPagos}" />
+                                                            </p:column>
+                                                            <p:column    >
+                                                                <h:outputText value="Interés:" />
+                                                            </p:column>
+                                                            <p:column    >
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{resolucionBean.intereses}" >
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                        </p:row>    
+                                                        <p:row>
+                                                            <p:column    >
+                                                                <h:outputText value="Total:" />
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{resolucionBean.total}" >
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="Cuota:"/>
+                                                            </p:column>
+                                                            <p:column   >
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{resolucionBean.couto}" >
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                                </h:outputText>
+                                                            </p:column>
+                                                        </p:row>
+                                                    </p:panelGrid>
+                                                </p:outputPanel>
+                                            </p:tab>
+                                            <p:tab title="Documentos">
+                                                <p:outputPanel style=" width: 100%"> 
+                                                    <p:panelGrid   style=" width: 100%" > 
+                                                        <p:row rendered="#{resolucionBean.clienteSeleccionado.duiCopiaCliente ne null}">                                                           
+                                                            <p:column colspan="1" style=" width: 20%">
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarDui}">
+                                                                    <h:outputText class="etiqueta" value="DUI cliente" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>    
+                                                        <p:row rendered="#{resolucionBean.clienteSeleccionado.nitCopiaCliente ne null}"> 
+                                                            <p:column>
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarNit}">
+                                                                    <h:outputText class="etiqueta" value="NIT cliente" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row> 
+                                                        <p:row rendered="#{resolucionBean.cooperativaSeleccionada.balanceGeneral ne null}"> 
+                                                            <p:column colspan="5"  style=" width: 33%"   >
+                                                                <p:lightBox iframe="true" width="700px" height="500px">
+                                                                    <h:outputLink value="#{resolucionBean.cooperativaSeleccionada.balanceGeneral}" title="Balance general">
+                                                                        <h:outputText class="etiqueta" value="Balance general" />
+                                                                    </h:outputLink>
+                                                                </p:lightBox>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row rendered="#{resolucionBean.garantiaSeleccionada.fotocopiaDuiSolidariaGarantia ne null}">
+                                                            <p:column style=" width: 25%"  >
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarDuiFiador}">
+                                                                    <h:outputText class="etiqueta" value="DUI fiador" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row rendered="#{resolucionBean.garantiaSeleccionada.fotocopiaNitSolidariaGarantia ne null}">
+                                                            <p:column colspan="3" style=" width: 25%"  >
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarNitFiador}">
+                                                                    <h:outputText class="etiqueta" value="NIT fiador" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row rendered="#{resolucionBean.cooperativaSeleccionada.presupuesto ne null}" >
+                                                            <p:column colspan="3">
+                                                                <p:lightBox iframe="true" width="700px" height="500px">
+                                                                    <h:outputLink value="#{resolucionBean.cooperativaSeleccionada.presupuesto}" title="Presupuesto o cotización">
+                                                                        <h:outputText class="etiqueta" value="Presupuesto o cotización" />
+                                                                    </h:outputLink>
+                                                                </p:lightBox>  
+                                                            </p:column>
+                                                        </p:row> 
+                                                        <p:row rendered="#{resolucionBean.garantiaSeleccionada.documentoPrendariaGarantia ne null}">
+                                                            <p:column colspan="3" >
+                                                                <p:lightBox iframe="true" width="700px" height="500px">
+                                                                    <h:outputLink value="#{resolucionBean.garantiaSeleccionada.documentoPrendariaGarantia}" title="Comprobante de prenda">
+                                                                        <h:outputText class="etiqueta" value="Comprobante de prenda" />
+                                                                    </h:outputLink>
+                                                                </p:lightBox>
+                                                            </p:column>
+                                                        </p:row> 
+                                                        <p:row rendered="#{resolucionBean.lisiados.cartaLisiado ne null}">
+                                                            <p:column colspan="3" style=" width: 20%"  >
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarCarta}">
+                                                                    <h:outputText class="etiqueta" value="Carta de fondo de lisiado" />
+                                                                </p:commandLink>
+                                                            </p:column>
+                                                        </p:row>
+                                                        <p:row rendered="#{resolucionBean.trabajo.constancia ne null}">
+                                                            <p:column colspan="3" style=" width: 20%" >
+                                                                <p:commandLink  target="_blank" ajax="false" actionListener="#{resolucionBean.generarConstancia}">
+                                                                    <h:outputText class="etiqueta" value="Constancia de trabajo" />
+                                                                </p:commandLink>
+                                                            </p:column >
+                                                        </p:row>
+                                                    </p:panelGrid> 
+                                                </p:outputPanel>
+                                            </p:tab>                                             
+                                        </p:tabView>
+                                        <br></br>
+                                        <center>
+                                            <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true: false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{resolucionBean.verReporteSolicitudCooperativa()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{resolucionBean.verReporteSolicitudCooperativaPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                            <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true: false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{resolucionBean.verReporteSolicitudAgropecuario()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{resolucionBean.verReporteSolicitudAgropecuarioPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                            <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudComercio()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{resolucionBean.verReporteSolicitudComercioPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                            <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudLisiado()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{resolucionBean.verReporteSolicitudLisiadoPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                            <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudEmpleado()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{resolucionBean.verReporteSolicitudEmpleadoPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+                                        </center>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog header="Confirmar" width="25%" widgetVar="pgEliminarResolucion" modal="true" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form>
+                                    <p:outputPanel style="text-align:center;">
+                                        <br></br>
+                                        <p:panelGrid>
+                                            <h:outputText value="¿Desea eliminar esta solicitud?"/>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <hr></hr>
+                                        <center>
+                                            <p:commandButton value="Si" actionListener="#{resolucionBean.eliminarSolicitud()}"  update=":padding" oncomplete="PF('pgEliminarResolucion').hide()" icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                            </p:commandButton>
+                                            <p:commandButton oncomplete="PF('pgEliminarResolucion').hide()"   icon="fa fa-close"  value="No" style="#{resolucionBean.btnCancelar}"> 
+                                                <f:setPropertyActionListener value="#{false}" target="#{resolucionBean.estadoFormulario}" />
+                                            </p:commandButton>
+                                        </center>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog header="Confirmar" width="25%" widgetVar="pgEliminarResolucionCooperativa" modal="true" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form>
+                                    <p:outputPanel style="text-align:center;">
+                                        <br></br>
+                                        <p:panelGrid>
+                                            <h:outputText value="¿Desea eliminar esta solicitud?"/>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <hr></hr>
+                                        <center>
+                                            <p:commandButton value="Si" actionListener="#{resolucionBean.eliminarSolicitudCooperativa()}"  update=":padding" oncomplete="PF('pgEliminarResolucionCooperativa').hide()" icon="fa fa-check" style="#{resolucionBean.btnCrear}">
+                                            </p:commandButton>
+                                            <p:commandButton oncomplete="PF('pgEliminarResolucionCooperativa').hide()"   icon="fa fa-close"  value="No" style="#{resolucionBean.btnCancelar}"> 
+                                            </p:commandButton>
+                                        </center>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                        </p:panel>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#fin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

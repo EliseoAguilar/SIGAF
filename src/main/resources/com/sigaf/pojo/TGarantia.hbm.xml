@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TGarantia" table="t_garantia" schema="public" optimistic-lock="version">
+        <id name="idGarantia" type="int">
+            <column name="id_garantia" />
+              <generator class="sequence">
+                <param name="sequence">t_garantia_id_garantia_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="id_proyecto" />
+        </many-to-one>
+        <many-to-one name="TTipoGarantia" class="com.sigaf.pojo.TTipoGarantia" fetch="select">
+            <column name="idtipogarantia" />
+        </many-to-one>
+        <property name="descripcionPrendariaGarantia" type="string">
+            <column name="descripcion_prendaria_garantia" />
+        </property>
+        <property name="valorPrendariaGarantia" type="big_decimal">
+            <column name="valor_prendaria_garantia" precision="131089" scale="0" />
+        </property>
+        <property name="documentoPrendariaGarantia" type="string">
+            <column name="documento_prendaria_garantia" />
+        </property>
+        <property name="hipotecaHipotecariaGarantia" type="string">
+            <column name="hipoteca_hipotecaria_garantia" />
+        </property>
+        <property name="valorHipotecaGarantia" type="big_decimal">
+            <column name="valor_hipoteca_garantia" precision="131089" scale="0" />
+        </property>
+        <property name="ubicacionHipotecaGarantia" type="string">
+            <column name="ubicacion_hipoteca_garantia" />
+        </property>
+        <property name="documentoHipotecaGarantia" type="string">
+            <column name="documento_hipoteca_garantia" />
+        </property>
+        <property name="nombresSolidariaGarantia" type="string">
+            <column name="nombres_solidaria_garantia" />
+        </property>
+        <property name="apellidosSolidariaGarantia" type="string">
+            <column name="apellidos_solidaria_garantia" />
+        </property>
+        <property name="duiSolidariaGarantia" type="string">
+            <column name="dui_solidaria_garantia" />
+        </property>
+        <property name="nitSolidariaGarantia" type="string">
+            <column name="nit_solidaria_garantia" />
+        </property>
+        <property name="profesionSolidariaGarantia" type="string">
+            <column name="profesion_solidaria_garantia" />
+        </property>
+        <property name="lugarSolidariaGarantia" type="string">
+            <column name="lugar_solidaria_garantia" />
+        </property>
+        <property name="ingresosSolidariaGarantia" type="big_decimal">
+            <column name="ingresos_solidaria_garantia" precision="131089" scale="0" />
+        </property>
+        <property name="telefonotSolidariaGarantia" type="string">
+            <column name="telefonot_solidaria_garantia" />
+        </property>
+        <property name="telefonofSolidariaGarantia" type="string">
+            <column name="telefonof_solidaria_garantia" />
+        </property>
+        <property name="fotocopiaDuiSolidariaGarantia" type="string">
+            <column name="fotocopia_dui_solidaria_garantia" />
+        </property>
+        <property name="fotocopiaNitSolidariaGarantia" type="string">
+            <column name="fotocopia_nit_solidaria_garantia" />
+        </property>
+    </class>
+</hibernate-mapping>

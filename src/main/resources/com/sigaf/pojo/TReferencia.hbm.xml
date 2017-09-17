@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TReferencia" table="t_referencia" schema="public" optimistic-lock="version">
+        <id name="idreferencia" type="int">
+            <column name="idreferencia" />
+               <generator class="sequence">
+                <param name="sequence">t_referencia_id_referencia_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="TProyecto" class="com.sigaf.pojo.TProyecto" fetch="select">
+            <column name="idproyecto" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" />
+        </property>
+        <property name="profesion" type="string">
+            <column name="profesion" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

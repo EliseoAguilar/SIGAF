@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comprador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="528e91ea-b461-4075-b1b3-97f85fe8c918">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_municipio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_departamento."id_departamento" AS t_departamento_id_departamento,
+     t_departamento."nombre_departamento" AS t_departamento_nombre_departamento,
+     t_departamento."estado_departamento" AS t_departamento_estado_departamento,
+     t_municipio."id_municipio" AS t_municipio_id_municipio,
+     t_municipio."nombre_municipio" AS t_municipio_nombre_municipio,
+     t_municipio."iddepartamento_municipio" AS t_municipio_iddepartamento_municipio,
+     t_municipio."estado_municipio" AS t_municipio_estado_municipio
+FROM
+     "public"."t_departamento" t_departamento INNER JOIN "public"."t_municipio" t_municipio ON t_departamento."id_departamento" = t_municipio."iddepartamento_municipio" where t_municipio."id_municipio"=$P{id_municipio}]]>
+	</queryString>
+	<field name="t_departamento_id_departamento" class="java.lang.Integer"/>
+	<field name="t_departamento_nombre_departamento" class="java.lang.String"/>
+	<field name="t_departamento_estado_departamento" class="java.lang.Boolean"/>
+	<field name="t_municipio_id_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_nombre_municipio" class="java.lang.String"/>
+	<field name="t_municipio_iddepartamento_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_estado_municipio" class="java.lang.Boolean"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<subreport>
+				<reportElement x="33" y="0" width="200" height="79" uuid="dce1fd96-e09a-4dff-a5fb-b4af6e2c71cb"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="20" uuid="56035245-882d-4e83-ae70-76b7236bce49"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE MUNICIPIO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="32" width="555" height="1" uuid="d6bba73a-7b30-4396-abfb-68f5c1adc079"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="332" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="125" width="124" height="20" uuid="5dd44ab1-6e43-4a4a-a6b3-b6097bb9a9fa"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="43" width="124" height="20" uuid="fd460325-50d8-4d9b-9371-afb77c8fec49"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="0" width="100" height="20" uuid="3809baf4-c9d3-4df0-be5f-5087c4e2c775"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="88" width="100" height="20" uuid="84d39e5e-e2df-45ff-be12-ec19afcafc0f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICIPIO.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="19" width="517" height="1" uuid="fcf89e89-1966-40a5-881f-0f62a7011c95"/>
+			</line>
+			<line>
+				<reportElement x="17" y="107" width="517" height="1" uuid="aa527f83-41fc-4cc2-9898-19ac2a0db263"/>
+			</line>
+			<textField>
+				<reportElement x="157" y="125" width="132" height="20" uuid="d6923830-2b36-412d-b8aa-517e2862dcec"/>
+				<textFieldExpression><![CDATA[$F{t_municipio_nombre_municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="43" width="346" height="20" uuid="d0c52ee1-69f7-4a7a-80da-2034026ea7dd"/>
+				<textFieldExpression><![CDATA[$F{t_departamento_nombre_departamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="289" y="125" width="108" height="20" uuid="d944da78-21e5-494a-85b8-261d4f30f90e"/>
+				<text><![CDATA[ESTADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="397" y="125" width="106" height="20" uuid="3a43ab14-cbb1-42c0-8a35-4b2434ab76bf"/>
+				<textFieldExpression><![CDATA[$F{t_municipio_estado_municipio}.equals(true)? "Activo": "Inactivo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="434" y="20" width="80" height="20" uuid="30b175b1-48c1-47d4-9e16-0c9e8aa9e068"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="20" width="40" height="20" uuid="5a021afa-0626-4f43-b531-7232d0751c8a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

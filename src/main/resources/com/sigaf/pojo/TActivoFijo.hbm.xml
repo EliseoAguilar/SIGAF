@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-mar-2017 20:43:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sigaf.pojo.TActivoFijo" table="t_activo_fijo" schema="public" optimistic-lock="version">
+        <id name="idActivoFijo" type="int">
+            <column name="id_activo_fijo" />
+              <generator class="sequence">
+                <param name="sequence">t_activo_fijo_id_activo_fijo_seq</param>
+          </generator>
+        </id>
+        <many-to-one name="TEmpleado" class="com.sigaf.pojo.TEmpleado"   fetch="select">
+            <column name="id_empleado_activo_fijo" />
+        </many-to-one>
+        <many-to-one name="TProveedor" class="com.sigaf.pojo.TProveedor"  fetch="select">
+            <column name="id_proveedor_activo_fijo" />
+        </many-to-one>
+        <many-to-one name="TTipoActivo" class="com.sigaf.pojo.TTipoActivo" fetch="select">
+            <column name="id_tipo_activo_activo_fijo" />
+        </many-to-one>
+        <property name="codigoActivoFijo" type="string">
+            <column name="codigo_activo_fijo" />
+        </property>
+        <property name="marcaActivoFijo" type="string">
+            <column name="marca_activo_fijo" />
+        </property>
+        <property name="modeloActivoFijo" type="string">
+            <column name="modelo_activo_fijo" />
+        </property>
+        <property name="serieActivoFijo" type="string">
+            <column name="serie_activo_fijo" />
+        </property>
+        <property name="descripcionActivoFijo" type="string">
+            <column name="descripcion_activo_fijo" />
+        </property>
+        <property name="compraActivoFijo" type="date">
+            <column name="compra_activo_fijo" length="13" />
+        </property>
+        <property name="registroActivoFijo" type="date">
+            <column name="registro_activo_fijo" length="13" />
+        </property>
+        <property name="numeroFacturaActivoFijo" type="string">
+            <column name="numero_factura_activo_fijo" />
+        </property>
+        <property name="estadoActivoFijo" type="string">
+            <column name="estado_activo_fijo" />
+        </property>
+        <set name="TBajaActivoFijos" table="t_baja_activo_fijo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_activo_fijo_baja_activo_fijo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TBajaActivoFijo" />
+        </set>
+        <set name="TDepreciacions" table="t_depreciacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_activo_fijo_depreciacion" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TDepreciacion" />
+        </set>
+        <set name="TValorActivos" table="t_valor_activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_activo_valor_activo" />
+            </key>
+            <one-to-many class="com.sigaf.pojo.TValorActivo" />
+        </set>
+    </class>
+</hibernate-mapping>

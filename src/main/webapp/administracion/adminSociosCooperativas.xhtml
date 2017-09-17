@@ -1,0 +1,972 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../index.xhtml">
+
+            <ui:define name="content">
+                <style>
+
+                    .companyHeaderGrid.ui-panelgrid>*>tr,
+                    .companyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+                        border: none;
+                    }
+                    #fEmpleados\:main-panel td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fEmpleados\:panelCenter td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:panelCenter tr{
+                        border: none !important;
+                    }
+                    #fEmpleados\panelButtom td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:panelButtom tr{
+                        border: none !important;
+                    }
+                    #fEmpleados\:pgEmpleado td{
+                        border: none !important;
+                    }
+                    #fEmpleados\:pgEmpleado tr{
+                        border: none !important;
+                    }
+                    .opciones .ui-selectonemenu-list { 
+                        height: 100px;
+                    }
+                    #fEmpleadosModificar\:main-panel td{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\:main-panel tr{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\:panelCenter td{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\:panelCenter tr{
+                        border: none !important;
+                    }
+                    #fEmpleadosModificar\panelButtom td{
+                        border: none !important;
+                    }
+
+                    #fEmpleadosModificar\panelButtom tr{
+                        border: none !important;
+                    }
+                </style>
+                <!-- crear -->
+                <p:outputPanel id="padding">
+                    <p:growl id="msgs" />
+                    <p:outputPanel rendered="#{socioCooperativaBean.showCreate}">
+                        <h:form id="fEmpleados" >                            
+                            <p:panel id="basic"  header="Agregar socio"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <br></br>
+                                <p:selectBooleanCheckbox value="#{socioCooperativaBean.estadoHabilitar}">
+                                    <p:ajax update=":padding" listener="#{socioCooperativaBean.habilitarDatos}" />
+                                </p:selectBooleanCheckbox> 
+                                <h:outputText value="&nbsp;&nbsp; &nbsp;&nbsp;¿Empleado?"/>  
+                                <hr></hr>
+                                <br></br>
+                                <p:outputPanel rendered="#{socioCooperativaBean.estadoBusqueda}"> 
+                                    <b>  <h:outputText  value="Buscar empleado"/></b>
+                                    <hr></hr>
+                                    <p:panelGrid styleClass="companyHeaderGrid"   style="width: 100%; margin: auto;">
+                                        <p:row>
+                                            <p:column style=" width: 30%" >
+                                                <h:outputText value="Área:"/>
+                                            </p:column>                                                
+                                            <p:column style=" width: 70%" >
+                                            </p:column>                                              
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 30%" >
+                                                <p:selectOneMenu id="areasFiltradas" value="#{socioCooperativaBean.idArea}" style=" width: 100%;">                                                     
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{socioCooperativaBean.listaAreaFiltrada}"  itemDisabled="#{!l.estadoArea}" var="l" itemLabel="#{l.nombreArea }" itemValue="#{l.idArea}"  />
+                                                </p:selectOneMenu>
+
+                                            </p:column>
+                                            <p:column style=" width: 70%" >
+                                            </p:column>  
+
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column style=" width: 30%"> 
+                                                <h:outputText  value="DUI"/>
+                                            </p:column>
+                                            <p:column style=" width: 70%" >
+                                                <h:outputText  value="Nombre"/>
+                                            </p:column>
+                                            <p:column >
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column style=" width: 30%">                                                   
+                                                <p:inputText  value="#{socioCooperativaBean.empleadoSeleccionado.duiEmpleado}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                            </p:column>
+                                            <p:column style=" width: 70%" >
+                                                <p:inputText  value="#{socioCooperativaBean.empleadoSeleccionado.nombreEmpleado} #{socioCooperativaBean.empleadoSeleccionado.apellidoEmpleado}" style="width: 100%;" readonly="true" >  </p:inputText>
+                                            </p:column>
+                                            <p:column >
+                                                <p:commandButton  update=":padding" actionListener="#{socioCooperativaBean.mostrarEmpleadosArea()}" oncomplete="PF('dgBuscarCuenta').show()" icon="fa fa-search" title="Buscar" >
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2">
+                                                <h:outputText value="#{socioCooperativaBean.msgEmpleado}" style=" color:  red" />
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                                <p:outputPanel  rendered="#{socioCooperativaBean.estadoDatos}">
+                                    <b>    <h:outputText value="Personales"/></b>
+                                    <hr></hr>
+                                    <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;"> 
+                                        <p:row>
+                                            <p:column> 
+                                                <h:outputText value="Nombres:*"/> 
+                                            </p:column>
+                                            <p:column> 
+                                                <h:outputText value="Apellidos:*"/> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:inputText  placeholder="Introduzca el nombre" id="tNombre"   value="#{socioCooperativaBean.empleados.nombreEmpleado}" style="width: 100%;" >  </p:inputText>
+                                                <h:outputText value="#{socioCooperativaBean.msgNombre}" style=" color:  red" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText placeholder="Introduzca el apellido" id="tApellidos"   value="#{socioCooperativaBean.empleados.apellidoEmpleado}" style="width: 100%;">  </p:inputText>
+                                                <h:outputText value="#{socioCooperativaBean.msgApellido}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="DUI:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="NIT:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:inputMask mask="99999999-9" placeholder="Introduzca el DUI" id="tDui"   value="#{socioCooperativaBean.empleados.duiEmpleado}" style="width: 100%;"/>
+                                                <h:outputText value="#{socioCooperativaBean.msgDui}" style=" color:  red" />
+                                                <h:outputText value="#{socioCooperativaBean.msgDuiRepetido}" style=" color:  red" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputMask  mask="9999-999999-999-9" placeholder="Introduzca el NIT" id="tnit"   value="#{socioCooperativaBean.empleados.nitEmpleado}" style="width: 100%;"/>
+                                                <h:outputText value="#{socioCooperativaBean.msgNit}" style=" color:  red" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width:50%">
+                                                <h:outputText value="Fecha de nacimiento:*" style="width: 50%" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Sexo:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:calendar navigator="true" yearRange="1910:"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{socioCooperativaBean.empleados.fechanacimientoEmpleado}" style="width: 100%;"/><br></br>
+                                                <h:outputText value="#{socioCooperativaBean.msgFechaNacimiento}" style=" color:  red"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:selectOneRadio id="srSexo" style="width: 100%;" value="#{socioCooperativaBean.empleados.sexoEmpleado}">
+                                                    <f:selectItem  itemLabel="Másculino" itemValue="Másculino"  /> 
+                                                    <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                                                </p:selectOneRadio>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Lugar de nacimiento:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <p:inputTextarea placeholder="Introduzca la dirección" id="taDireccionso" value="#{socioCooperativaBean.empleados.lugarNacimientoEmpleado}"  style="width: 100%"/>
+                                                <h:outputText value="#{socioCooperativaBean.msgLugarNaci}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <b>     <h:outputText value= "Contacto"/></b>
+                                    <hr></hr>
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value= "Teléfono:*"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="Móvil:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column> 
+                                                <p:inputMask mask="9999-9999" placeholder="Introduzca el No. Teléfono"  id="tTelefono"   value="#{socioCooperativaBean.empleados.telefonoEmpleado}" style="width: 100%;"/>
+                                                <h:outputText value="#{socioCooperativaBean.msgTelefono}" style=" color:  red"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputMask mask="9999-9999" placeholder="Introduzca el No. Móvil" id="tMovil" value = "#{socioCooperativaBean.empleados.celularEmpleado}" style="width: 100%;"/> 
+                                                <h:outputText value="#{socioCooperativaBean.msgMovil}" style=" color:  red"/>
+                                            </p:column>    
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputText value="Dirección:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <p:inputTextarea placeholder="Introduzca la dirección" id="taDireccion" value="#{socioCooperativaBean.empleados.direccionEmpleado}"  style="width: 100%"/>
+                                                <h:outputText value="#{socioCooperativaBean.msgDireccion}" style=" color:  red"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                    <b>     <h:outputText value="Ocupación"/></b>
+                                    <hr></hr>
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                        <p:row>
+                                            <p:column style=" width: 50%">
+                                                <h:outputText value="Nombre:*"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 50%">
+                                                <p:inputText placeholder="Ingrese ocupación" value="#{socioCooperativaBean.nombreOcupacion}" style="width: 100%"/>  
+                                            </p:column>
+                                            <p:column style=" width: 50%">
+                                                <p:commandButton title="agregar" icon="fa fa-plus" style="#{socioCooperativaBean.btnNuevo}" actionListener="#{socioCooperativaBean.agregarOcupaciones}"  update=":padding"/>
+
+                                            </p:column>
+                                        </p:row>
+
+
+
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <b>     <h:outputText value="Lista de ocupaciones"/></b>
+                                    <hr></hr>
+
+                                    <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                        <p:row>
+                                            <p:column>
+                                                <p:dataTable   id="ocupacionData"
+                                                               var="ocupaciones" 
+                                                               value="#{socioCooperativaBean.listaOcupacion}" 
+                                                               paginator="false"
+                                                               rows="10"
+                                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                               rowsPerPageTemplate="5,10,15"
+                                                               paginatorPosition="bottom"
+                                                               rowIndexVar="i"
+                                                               emptyMessage="No se encontraron ocupaciones" >
+                                                    <p:column style=" text-align: center" headerText="Nº" width="5%">  
+                                                        <h:outputText value="#{i+1} " />
+                                                    </p:column>
+                                                    <p:column headerText="Nombre" width="80%">  
+                                                        <h:outputText value="#{ocupaciones.nombreOcupacion} " />
+                                                    </p:column>
+                                                    <p:column width="7%">
+                                                        <center>
+                                                            <p:commandButton title="eliminar" icon="fa fa-trash" style="#{socioCooperativaBean.btnCancelar}" actionListener="#{socioCooperativaBean.eliminarDeLista(i)}" 
+                                                                             update=":padding"/></center>
+                                                    </p:column>
+                                                </p:dataTable>
+                                                <h:outputText value="#{socioCooperativaBean.msgOcupacion}" style=" color:  red"/>
+
+                                            </p:column>
+                                        </p:row>
+
+
+
+
+                                    </p:panelGrid>
+
+
+                                </p:outputPanel>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{socioCooperativaBean.btnCrear}" actionListener="#{socioCooperativaBean.validarFormulario}" update=":padding" > 
+                                        </p:commandButton>
+                                        <p:commandButton style="#{socioCooperativaBean.btnLimpiar}"  value="Limpiar" id="btnClean"   actionListener="#{socioCooperativaBean.limpiar(1)}" update=":padding" class="clear" icon="fa fa-fw fa-minus"/>
+                                        <p:commandButton style="#{socioCooperativaBean.btnCancelar}" value="Cancelar" id="btnCancel"   class="cancel" icon="fa fa-fw fa-close" actionListener="#{socioCooperativaBean.limpiar(0)}"  update=":padding" />
+                                    </div>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{socioCooperativaBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este socio?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{socioCooperativaBean.btnNuevo}" value="Si" actionListener="#{socioCooperativaBean.create}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{socioCooperativaBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{socioCooperativaBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form> 
+                        </p:dialog>
+                        <p:dialog header="Buscar empleado" widgetVar="dgBuscarCuenta"  width="60%" appendTo="@(body)" modal="true" >  
+                            <h:form id="fBuscarCuenta"> 
+                                <p:dataTable var="empleados" 
+
+                                             value="#{socioCooperativaBean.listaEmpleadoNoSocios}" 
+
+                                             widgetVar="empleadosData"
+
+                                             paginator="true"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             paginatorPosition="bottom"
+                                             emptyMessage="No se encontraron empleados" rowIndexVar="No"
+
+                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                             > 
+                                    <f:facet name="header">
+                                        <p:outputPanel>                                           
+                                            <p:inputText id="globalFilter" onkeyup="PF('empleadosData').filter()" style="width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>
+
+                                    <p:column style=" text-align: center"   
+                                              headerText="Nº" width="5%" >                                             
+                                        <h:outputText value="#{No+1}"/>  
+                                    </p:column> 
+
+                                    <p:column filterBy="#{empleados.duiEmpleado}" sortBy="#{empleados.duiEmpleado}"  
+                                              headerText="DUI"
+                                              filterMatchMode="contains" width="10%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{empleados.duiEmpleado}" />  
+                                    </p:column> 
+
+                                    <p:column filterBy="#{empleados.nombreEmpleado}" sortBy="#{empleados.nombreEmpleado}"  
+                                              headerText="Nombre"
+                                              filterMatchMode="contains" width="25%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{empleados.nombreEmpleado}"  />  
+                                    </p:column>  
+                                    <p:column filterBy="#{empleados.apellidoEmpleado}" sortBy="#{empleados.apellidoEmpleado}"  
+                                              headerText="Apellido"
+                                              filterMatchMode="contains" width="25%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{empleados.apellidoEmpleado}" />  
+                                    </p:column> 
+                                    <p:column  width="6%" style=" text-align: center">  
+                                        <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar">
+                                            <f:setPropertyActionListener value="#{empleados}" target="#{socioCooperativaBean.empleadoSeleccionado}"  />
+                                        </p:commandButton>
+                                    </p:column> 
+                                </p:dataTable> 
+                            </h:form> 
+                        </p:dialog> 
+                    </p:outputPanel>
+                    <!-- Actualizar-->
+                    <p:outputPanel rendered="#{socioCooperativaBean.showUpdate}">
+                        <h:form id="fEmpleadosModificar" >                            
+                            <p:panel id="basic"  header="Modifcar socio"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                <b><h:outputText value="Personales"/></b>
+                                <hr></hr>
+                                <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column> 
+                                            <h:outputText value="Nombres:*"/> 
+                                        </p:column>
+                                        <p:column> 
+                                            <h:outputText value="Apellidos:*"/> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText  placeholder="Introduzca el nombre" id="tNombre"   value="#{socioCooperativaBean.empleadoSeleccionado.nombreEmpleado}" style="width: 100%;" >  </p:inputText>
+                                            <h:outputText value="#{socioCooperativaBean.msgNombre}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText placeholder="Introduzca el apellido" id="tApellidos"   value="#{socioCooperativaBean.empleadoSeleccionado.apellidoEmpleado}" style="width: 100%;">  </p:inputText>
+                                            <h:outputText value="#{socioCooperativaBean.msgApellido}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="DUI:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="NIT:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputMask mask="99999999-9" placeholder="Introduzca el DUI" id="tDui"   value="#{socioCooperativaBean.empleadoSeleccionado.duiEmpleado}" style="width: 100%;"/>
+                                            <h:outputText value="#{socioCooperativaBean.msgDui}" style=" color:  red" />
+                                            <h:outputText value="#{socioCooperativaBean.msgDuiRepetido}" style=" color:  red" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputMask  mask="9999-999999-999-9" placeholder="Introduzca el NIT" id="tnit"   value="#{socioCooperativaBean.empleadoSeleccionado.nitEmpleado}" style="width: 100%;"/>
+                                            <h:outputText value="#{socioCooperativaBean.msgNit}" style=" color:  red" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width:50%">
+                                            <h:outputText value="Fecha de nacimiento:*" style="width: 50%" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Sexo:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:calendar navigator="true" yearRange="1910:" readonly="true" locale="es" mask="true" pattern="dd/MM/yyyy" showOn="button"  id="cfecha"  value="#{socioCooperativaBean.empleadoSeleccionado.fechanacimientoEmpleado}" style="width: 100%;"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="srSexo" style="width: 100%;" value="#{socioCooperativaBean.empleadoSeleccionado.sexoEmpleado}" >
+                                                <f:selectItem itemLabel="Másculino" itemValue="Másculino" /> 
+                                                <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Lugar de nacimiento:*"/>
+                                        </p:column>
+                                    </p:row>                                
+                                    <p:row>
+                                        <p:column colspan="4">
+                                            <p:inputTextarea placeholder="Introduzca la dirección" id="taDireccionSM"   value="#{socioCooperativaBean.empleadoSeleccionado.lugarNacimientoEmpleado}"  style="width: 100%"/>
+                                            <h:outputText value="#{socioCooperativaBean.msgLugarNaci}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <b>   <h:outputText value= "Contacto"/></b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value= "Teléfono:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Móvil:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column> 
+                                            <p:inputMask mask="9999-9999" placeholder="Introduzca el No. Teléfono"  id="tTelefono"   value="#{socioCooperativaBean.empleadoSeleccionado.telefonoEmpleado}" style="width: 100%;"/>
+                                            <h:outputText value="#{socioCooperativaBean.msgTelefono}" style=" color:  red"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputMask mask="9999-9999" placeholder="Introduzca el No. Móvil" id="tMovil" value = "#{socioCooperativaBean.empleadoSeleccionado.celularEmpleado}" style="width: 100%;"/> 
+                                            <h:outputText value="#{socioCooperativaBean.msgMovil}" style=" color:  red"/>
+                                        </p:column>    
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Dirección:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="4">
+                                            <p:inputTextarea placeholder="Introduzca la dirección" id="taDireccion"   value="#{socioCooperativaBean.empleadoSeleccionado.direccionEmpleado}"  style="width: 100%"/>
+                                            <h:outputText value="#{socioCooperativaBean.msgDireccion}" style=" color:  red"/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <b>   <h:outputText value= "Ocupación"/></b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Nombre:*"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style=" width: 50%">
+                                            <p:inputText placeholder="Ingrese ocupación" value="#{socioCooperativaBean.nombreOcupacion}" style="width: 100%"/>
+                                        </p:column>
+                                        <p:column style=" width: 50%">
+                                            <p:commandButton icon="fa fa-plus" style="#{socioCooperativaBean.btnNuevo}" actionListener="#{socioCooperativaBean.agregarOcupaciones}"  update=":padding"/>
+
+                                        </p:column>
+                                    </p:row>
+                                    
+                                </p:panelGrid>
+                                
+                                  <br></br>
+                                    <b>     <h:outputText value="Lista de ocupaciones"/></b>
+                                    <hr></hr>
+
+                                
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;"> 
+                                    
+                                    <p:row>
+                                        <p:column colspan="2">
+                                          
+                                            <p:dataTable   id="ocupacionData"
+                                                           var="ocupaciones" 
+                                                           value="#{socioCooperativaBean.listaOcupacion}" 
+                                                           paginator="false"
+                                                           rows="10"
+                                                           paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                           rowsPerPageTemplate="5,10"
+                                                           paginatorPosition="bottom"
+                                                           rowIndexVar="i"
+                                                           emptyMessage="No se encontraron ocupaciones" >
+                                                
+                                                <p:column style=" text-align: center" headerText="Nº" width="6%">  
+                                                    <h:outputText value="#{i+1}" />
+                                                </p:column>
+
+                                                <p:column headerText="Nombre" width="80%">  
+                                                    <h:outputText value="#{ocupaciones.nombreOcupacion}" />
+                                                </p:column>
+                                                <p:column width="7%">
+                                                    <center>
+                                                        <p:commandButton title="eliminar" icon="fa fa-trash" style="#{socioCooperativaBean.btnCancelar}" rendered="#{ocupaciones.idOcupacion eq 0}" actionListener="#{socioCooperativaBean.eliminarDeLista(i)}" 
+                                                                         update=":padding"/>
+                                                        <p:commandButton style="#{socioCooperativaBean.btnDarDeBaja}" rendered="#{ocupaciones.estadoOcupacion }" actionListener="#{socioCooperativaBean.darDeAltaOcupacion(i)}"  update=":padding"   icon="fa fa-arrow-down" title="Dar de baja">
+                                                            <f:setPropertyActionListener value="#{false}" target="#{ocupaciones.estadoOcupacion}" />
+
+                                                        </p:commandButton>
+                                                        <p:commandButton  style="#{socioCooperativaBean.btnDarDeAlta}" rendered="#{ocupaciones.estadoOcupacion eq false? true:false and ocupaciones.idOcupacion eq 0? true:false}"
+                                                                          update=":padding"  icon="fa fa-arrow-up" title="Dar de alta">
+                                                            <f:setPropertyActionListener value="#{true}" target="#{ocupaciones.estadoOcupacion}" />
+                                                        </p:commandButton>
+                                                    </center>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <div class="buttons">
+                                        <p:commandButton  value="Guardar" id="btnGuardar" icon="fa fa-check" style="#{socioCooperativaBean.btnCrear}" actionListener="#{socioCooperativaBean.validarFormularioModificar}" update=":padding" > 
+                                        </p:commandButton>
+
+                                        <p:commandButton style="#{socioCooperativaBean.btnCancelar}" value="Cancelar" id="btnCancel"   class="cancel" icon="fa fa-fw fa-close" actionListener="#{socioCooperativaBean.limpiar(0)}"  update=":padding" />
+                                    </div>
+                                </center>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgModificar" modal="true"  visible="#{socioCooperativaBean.estadoFormulario}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea modificar este socio?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton style="#{socioCooperativaBean.btnNuevo}" value="Si" actionListener="#{socioCooperativaBean.modificar}"   oncomplete="PF('pgModificar').hide()"  title="Cerrar" update=":padding">
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{socioCooperativaBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{socioCooperativaBean.estadoFormulario}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                    </p:outputPanel>
+                    <!-- fin actualizar-->
+                    <!--tabla-->
+                    <p:outputPanel rendered="#{socioCooperativaBean.showData}">
+                        <p:panel id="custom" header="Administrar socios" style="margin-bottom:20px">
+                            <h:form id="fData">
+
+                                <p:fieldset >
+                                    <p:panelGrid style=" width: 100%" styleClass="companyHeaderGrid">
+                                        <p:row>
+                                            <p:column >
+                                                <h:outputText value="Cooperativa:" /> 
+                                            </p:column>
+
+                                            <p:column >
+
+                                            </p:column>
+
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style=" width: 50%">
+                                                <p:selectOneMenu id="car" value="#{socioCooperativaBean.idEntidadSeleccionada}" style=" width: 100%;">
+                                                    <p:ajax update="custom" listener="#{socioCooperativaBean.mostrarDatosFiltrados}" />
+                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                    <f:selectItems value="#{areaBean.listaEntidades}" var="l" itemDisabled="#{!l.estadoEntidad}" itemLabel="#{l.nombreEntidad}" itemValue="#{l.idEntidad}" />
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            <p:column >
+
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>                                   
+                                </p:fieldset>
+                                <br></br>
+                                <p:outputPanel rendered="#{socioCooperativaBean.mostrarTabla}">
+
+                                    <p:fieldset>
+                                        <div align="left">
+
+                                            <p:commandButton title="Nuevo socio" id="add" style="#{socioCooperativaBean.btnNuevo}" actionListener="#{socioCooperativaBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" >
+
+
+
+                                            </p:commandButton>
+
+                                        </div>
+                                    </p:fieldset>
+                                    <p:dataTable   id="empleadosData"
+                                                   var="empleados" 
+                                                   value="#{socioCooperativaBean.listaEmpleados}" 
+                                                   paginator="true"
+                                                   widgetVar="companyTable"
+                                                   rows="10"
+                                                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                   rowsPerPageTemplate="5,10,15"
+                                                   paginatorPosition="bottom"
+                                                   currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                   emptyMessage="No se encontraron socios" rowIndexVar="No" >
+
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>                                           
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column headerText="Nº" style="width: 5%; text-align: center">  
+                                            <h:outputText value=" #{No+1}" />
+                                        </p:column>
+
+                                        <p:column headerText="Nombres" filterBy="#{empleados.nombreEmpleado}" filterMatchMode="contains" width="25%" sortBy="#{empleados.nombreEmpleado}" filterStyle="width: 100%" >  
+                                            <h:outputText value=" #{empleados.nombreEmpleado}" />
+                                        </p:column>
+
+                                        <p:column headerText="Apellidos" filterBy="#{empleados.apellidoEmpleado}" filterMatchMode="contains" width="25%" sortBy="#{empleados.apellidoEmpleado}" filterStyle="width: 100%"   >  
+                                            <h:outputText value="#{empleados.apellidoEmpleado}" />
+                                        </p:column>
+                                        <p:column headerText="DUI" filterBy="#{empleados.duiEmpleado}" filterMatchMode="contains" width="15%" sortBy="#{empleados.duiEmpleado}" filterStyle="width: 100%"   >  
+                                            <h:outputText value=" #{empleados.duiEmpleado}" />
+                                        </p:column>
+                                        <p:column headerText="NIT" filterBy="#{empleados.nitEmpleado}" filterMatchMode="contains" width="20%" sortBy="#{empleados.nitEmpleado}" filterStyle="width: 100%"   >  
+                                            <h:outputText value=" #{empleados.nitEmpleado}" />
+                                        </p:column>
+                                        <p:column width="9%" style="text-align: center">
+                                            <p:splitButton  update=":padding"  oncomplete="PF('dlVer').show()" icon="fa fa-eye"  style="#{empleados.estadoS eq true? socioCooperativaBean.btnDarDeAlta :  socioCooperativaBean.btnDarDeBaja}" >
+                                                <f:setPropertyActionListener  value="#{empleados}" target="#{socioCooperativaBean.empleadoSeleccionado}"  />
+                                                <f:actionListener binding="#{socioCooperativaBean.cargarActualizar()}"/>
+                                                <p:menuitem  actionListener="#{socioCooperativaBean.enableShowUpdate}" update=":padding" icon=" fa fa-pencil" value="Modificar">
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{socioCooperativaBean.empleadoSeleccionado}"  />
+                                                    <f:actionListener binding="#{socioCooperativaBean.cargarActualizar()}"/>
+                                                </p:menuitem>
+                                                <p:menuitem rendered="#{empleados.estadoS}" update=":padding"  oncomplete="PF('dlBaja').show()" icon="fa fa-arrow-down" value="Dar de baja"    >
+                                                    <f:setPropertyActionListener value="#{empleados}" target="#{socioCooperativaBean.empleadoSeleccionado}" />
+                                                    <f:actionListener binding="#{socioCooperativaBean.cargarEstado()}"/>
+                                                </p:menuitem>                                              
+                                                <p:menuitem rendered="#{!empleados.estadoS}" update=":padding"  oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up" value="Dar de alta"    >
+                                                    <f:setPropertyActionListener value="#{empleados}" target="#{socioCooperativaBean.empleadoSeleccionado}" />
+                                                    <f:actionListener binding="#{socioCooperativaBean.cargarEstado()}"/>
+                                                </p:menuitem>                                              
+                                            </p:splitButton> 
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:outputPanel> 
+                            </h:form>
+                            <p:dialog header="Datos del socio" widgetVar="dlVer" modal="true"  onHide="#{socioCooperativaBean.limpiar(1)}" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+
+                                <h:form target="_blank">
+                                    <p:outputPanel id="dlVerArea" style="width: 100%">
+                                        
+                                        
+                                                         
+                                <b> <h:outputText value="Personales"/></b>
+                                <hr></hr>
+                                        
+                                        <p:panelGrid id="pgVer" style="width: 100%" >
+
+                                            <p:row>
+
+                                                <p:column  >
+                                                    <h:outputText value="Nombres:" />
+                                                </p:column>
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.nombreEmpleado}" />
+                                                </p:column >
+
+
+                                                <p:column  >
+                                                    <h:outputText value="Apellidos:" />
+                                                </p:column>
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.apellidoEmpleado}" />
+                                                </p:column >
+
+
+
+                                            </p:row>
+
+                                            <p:row>
+
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="DUI:" />
+                                                </p:column>
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.duiEmpleado}" />
+                                                </p:column>
+
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="NIT:" />
+                                                </p:column> 
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.nitEmpleado}" />
+                                                </p:column>
+
+                                            </p:row>
+
+                                            <p:row>
+                                                
+                                                  <p:column style=" width: 25%" >
+                                                    <h:outputText value="Fecha de nacimiento: " />
+                                                </p:column>
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.fechanacimientoEmpleado}" >
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </h:outputText>
+
+
+                                                </p:column>
+                                                 <p:column style=" width: 25%" >
+                                                 <h:outputText value="Edad:" >
+                                                    </h:outputText>
+                                                 </p:column>
+                                                 <p:column style=" width: 25%">
+
+
+                                                    <h:outputText value="#{compradorBean.calcularEdad(socioCooperativaBean.empleadoSeleccionado.fechanacimientoEmpleado)} años"/>
+
+
+                                                </p:column>
+
+                                               
+
+                                              
+
+
+                                            </p:row>
+                                            <p:row>
+  <p:column style=" width: 25%" >
+                                                    <h:outputText value="Sexo:" />
+                                                </p:column>
+
+                                               
+                                                
+                                               
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.sexoEmpleado}" />
+
+                                                </p:column>
+
+                                              
+<p:column style=" width: 25%" >
+                                                    <h:outputText value="Lugar de nacimiento:" />
+                                                </p:column>
+
+                                               
+                                                
+                                               
+                                                <p:column style=" width: 25%">
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.lugarNacimientoEmpleado}" />
+
+                                                </p:column>
+
+
+
+
+                                            </p:row>
+
+                                         
+
+                                        </p:panelGrid>
+                                                   <br></br>
+                                <b> <h:outputText value="Contacto"/></b>
+                                <hr></hr>
+                                
+                                <p:panelGrid  style="width: 100%" >
+
+                                           
+                                           
+
+                                      
+                                            <p:row>
+                                                 <p:column style=" width: 25%">
+                                                    <h:outputText value="Télefono: " />
+                                                </p:column>
+                                                <p:column >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.telefonoEmpleado}" />
+                                                </p:column>
+
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="Móvil: " />
+                                                </p:column>
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.celularEmpleado}" />
+                                                </p:column>
+
+
+                                            </p:row>
+
+
+
+                                            <p:row>
+
+
+
+                                                <p:column style=" width: 25%" >
+                                                    <h:outputText value="Direccion: " />
+                                                </p:column>
+                                                <p:column colspan="3">
+                                                    <h:outputText value="#{socioCooperativaBean.empleadoSeleccionado.direccionEmpleado}"  />
+                                                </p:column>
+
+
+
+                                            </p:row>
+
+
+
+
+
+                                          
+
+                                        </p:panelGrid>
+                                
+                                                     <br></br>
+                                <b> <h:outputText value="Lista de ocupaciones"/></b>
+                                <hr></hr>
+                                <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%" >
+
+                                           
+                                           
+
+                                      
+                                            
+
+                                            <p:row>
+
+
+                                                <p:column  style=" width: 25%">
+                                               
+<p:dataTable   id="ocupacionData"
+                                               var="ocupaciones" 
+                                               value="#{socioCooperativaBean.listaOcupacion}" 
+                                               paginator="true"
+                                               rows="1"
+                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                               rowsPerPageTemplate="1"
+                                               paginatorPosition="bottom"
+                                               rowIndexVar="i"
+                                                currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                  
+                                                emptyMessage="No se encontraron ocupaciones" style=" font-size: smaller" >
+
+                                    <p:column style=" text-align: center" headerText="Nº" width="5%">  
+                                        <h:outputText value="#{i+1}" />
+                                    </p:column>
+                                    <p:column headerText="Nombre" width="89%">  
+                                        <h:outputText value="#{ocupaciones.nombreOcupacion}" />
+                                    </p:column>
+                                   
+                                </p:dataTable>
+                                            
+                                                    
+                                                </p:column>
+
+
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                       <br></br>
+                                        <center>
+
+
+                                            <p:splitButton  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
+                                                <f:actionListener binding="#{socioCooperativaBean.verReporteSocio()}"/> 
+                                                <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
+                                                    <f:actionListener binding="#{socioCooperativaBean.verReporteSocioPDF()}"/> 
+                                                </p:menuitem>
+                                            </p:splitButton>
+
+                                        </center>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog header="Dar de baja" width="25%" widgetVar="dlBaja" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form target="_blank">
+                                    <p:outputPanel id="dlDarDeBaja" style="text-align:center; width: 100%">
+
+
+                                        <br></br>
+                                        <p:panelGrid>
+                                            <h:outputText value="¿Desea dar de baja a este empleado?" />
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <hr></hr>
+                                        <p:commandButton id="btnGuardarBaja" style="#{socioCooperativaBean.btnNuevo}" actionListener="#{socioCooperativaBean.darDeBaja}" update=":padding"  value="Si"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelBaja" style="#{socioCooperativaBean.btnCancelar}" actionListener="#{socioCooperativaBean.enableShowData}" update=":padding" value="No"> 
+                                        </p:commandButton>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog header="Dar de alta" width="25%" widgetVar="dlAlta" modal="true"   visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                <h:form target="_blank">
+                                    <p:outputPanel id="dlDarDealta" style="text-align:center; width: 100%">
+
+
+                                        <br></br>
+                                        <p:panelGrid>
+                                            <h:outputText value="¿Desea dar de alta este empleado?" />
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <hr></hr>
+
+                                        <p:commandButton id="btnGuardarAlta" style="#{socioCooperativaBean.btnNuevo}" actionListener="#{socioCooperativaBean.darDeAlta}" update=":padding" value="Si"> 
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelAlta" style="#{socioCooperativaBean.btnCancelar}" actionListener="#{socioCooperativaBean.enableShowData}" update=":padding" value="No"> 
+                                        </p:commandButton>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>                              
+
+                        </p:panel>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </ui:define>
+            <ui:define name="aux">
+                <script>
+                    $(document).ready(function () {
+                        $("#admin").addClass("active");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+
