@@ -296,11 +296,11 @@ public class ProveedorBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_proveedor");
             auxBitacora.setAccionBitacora("Agregar proveedor");
-            auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
-                    + ", NIT:" + provedorSeleccionado.getNitProveedor() + ", NRC:"
-                    + provedorSeleccionado.getNrcProveedor()
+            auxBitacora.setDatosBitacora("Nombre:" + provedor.getNombreProveedor()
+                    + ", NIT:" + provedor.getNitProveedor() + ", NRC:"
+                    + provedor.getNrcProveedor()
                     + ", Entidad:" + this.idEntidad);
-            auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
+            auxBitacora.setIdTableBitacora(provedor.getIdProveedor());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -314,7 +314,7 @@ public class ProveedorBean extends Actividad {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proveedor registrado correctamente.", ""));
 
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "El  Proveedor no pudo ser registrado.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El  Proveedor no pudo ser registrado.", ""));
         }
     }
 
@@ -493,7 +493,7 @@ public class ProveedorBean extends Actividad {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proveedor modificado correctamente.", ""));
 
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "El proveedor no pudo ser modificado.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El proveedor no pudo ser modificado.", ""));
         }
 
     }

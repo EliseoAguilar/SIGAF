@@ -164,7 +164,7 @@ public class BaseBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Respaldo fue creado correctamente."));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Respaldo fue creado correctamente.", ""));
 
         } catch (Exception e) {
 
@@ -252,12 +252,12 @@ public class BaseBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Respaldo restaurado correctamente."));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Respaldo restaurado correctamente.", ""));
 
         } catch (Exception e) {
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
-                    "El respaldo no pudo ser restaurado."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El respaldo no pudo ser restaurado.",
+                    ""));
 
         }
 
