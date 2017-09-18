@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="9"/>
+	<property name="ireport.y" value="825"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -536,10 +536,10 @@ FROM
 		<band height="757">
 			<staticText>
 				<reportElement mode="Transparent" x="1" y="13" width="554" height="20" backcolor="#E7E7EF" uuid="0d1dc648-0920-467a-a6dc-7f90d07b412a"/>
-				<textElement>
+				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">GARANTIA</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">GARANTÍA</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="191" width="554" height="20" backcolor="#E7E7EF" uuid="3064cb29-f4a6-46ae-8309-c7e60912299a"/>

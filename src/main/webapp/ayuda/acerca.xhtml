@@ -37,28 +37,34 @@
                     <p:outputPanel   style=" width: 100%">
                         <h:form id="fAgregarArea">
 
-                            <p:panel id="pRegistrarComprador" header="Acerca de"  style="width: 85%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pRegistrarComprador" header="Acerca de"  style="width: 75%; margin: auto; margin-bottom: 20px;">
 
 
 
-                                <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;">   
+                                <div style=" align-content: center">
+                                    
+                                    
+                               
+                                    <p:panelGrid  styleClass="borderHidden"    style="width: 100%;">   
 
-                                    <p:row>
-                                        <p:column style=" font-size: medium">
-                                            <h:outputText value="El menu principal muestra una estructura de navegacion clasica, dividida en 8 secciones: Inicio, Contabilidad, Finanzas, Agronegocios, Administracion, Configuracion, seguridad  y ayuda."/>
+                                    <p:row style=" text-align: center">
+                                        <p:column>
+                                            
+                                         <img  src="#{resource['img/acercaDe.png']}" />
                                         </p:column>
-
                                     </p:row>
 
 
                                 </p:panelGrid>
+                                         
+                                </div>
 
                                 
 
 
 
 
-
+                                <br></br>
                          
                             </p:panel>
                         </h:form>
