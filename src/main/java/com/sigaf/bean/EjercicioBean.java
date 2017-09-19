@@ -53,15 +53,15 @@ import javax.servlet.http.HttpServletRequest;
 public class EjercicioBean extends Actividad {
 
     private TArea area;
-    
+
     private IBitacoraBo bitacoraBo;
 
     private TEntidad entidad;
-    
-     private List<TArea> listaArea;
-     
-     private AreaBo areaBo;
-     
+
+    private List<TArea> listaArea;
+
+    private AreaBo areaBo;
+
     /* para estructura Balance General*/
     private TEstructura estructuraActivo;
 
@@ -181,23 +181,22 @@ public class EjercicioBean extends Actividad {
     private List<Integer> listAhos;
 
     private Boolean pasarSaldos;
-    
+
     private List<TActivoFijo> listActios;
-    
+
     private TTipoActivo tipoActivoSeleccionado;
-    
 
     public TTipoActivo getTipoActivoSeleccionado() {
         return tipoActivoSeleccionado;
     }
 
     public void setTipoActivoSeleccionado(TTipoActivo tipoActivoSeleccionado) {
-        
+
         this.tipoActivoSeleccionado = tipoActivoSeleccionado;
-        
+
         this.listActios.clear();
-        
-        this.listActios = this.activoFijoBo.listActivoFijoTipo( this.tipoActivoSeleccionado.getIdTipo());
+
+        this.listActios = this.activoFijoBo.listActivoFijoTipo(this.tipoActivoSeleccionado.getIdTipo());
 
         List<TActivoFijo> activosDeprelista = new ArrayList<>();
 
@@ -206,18 +205,17 @@ public class EjercicioBean extends Actividad {
         Integer mesesVidaUtil = 0;
 
         /* Si la lista no esta vacia calculamos la Vida Util en Meses */
-        if (!this.listActios .isEmpty()) {
+        if (!this.listActios.isEmpty()) {
             mesesVidaUtil = this.tipoActivoSeleccionado.getVidaUtilTipo() * 12;
         }
 
         for (TActivoFijo tActivoFijo : this.listActios) {
 
-           tActivoFijo.setTTipoActivo(tipoActivoSeleccionado);
-           
+            tActivoFijo.setTTipoActivo(tipoActivoSeleccionado);
+
             /*Si el Activo esta ACTIVO y Ya se realizo el Asiento contable*/
             if (tActivoFijo.getEstadoActivoFijo().equals("Activo") && null != this.valorActivoBo.getTValorActivo(tActivoFijo.getIdActivoFijo()).getTPartida()) {
 
-                
                 listaDepre = this.depreciacionBo.listDepreciacion(tActivoFijo.getIdActivoFijo());
 
                 /* Si es la primera depreciacion se verifica segun la politica (Registo <15 aplicar depreciacion) */
@@ -241,8 +239,7 @@ public class EjercicioBean extends Actividad {
 
                     }
 
-                }/* Si aun se puede Depreciar se agrega a la lista para depreciar*/ 
-                else if (listaDepre.size() < mesesVidaUtil) {
+                }/* Si aun se puede Depreciar se agrega a la lista para depreciar*/ else if (listaDepre.size() < mesesVidaUtil) {
                     activosDeprelista.add(tActivoFijo);
                 }
 
@@ -262,8 +259,6 @@ public class EjercicioBean extends Actividad {
         this.listActios = listActios;
     }
 
-    
-    
     public AreaBo getAreaBo() {
         return areaBo;
     }
@@ -272,11 +267,10 @@ public class EjercicioBean extends Actividad {
         this.areaBo = areaBo;
     }
 
-    
-     public void updateListaArea() {
+    public void updateListaArea() {
         listaArea = this.areaBo.listArea(idEntidad);
     }
-     
+
     public List<Integer> getListAhos() {
         return listAhos;
     }
@@ -414,6 +408,7 @@ public class EjercicioBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
             super.enableShowData();
+            this.limpiar();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Periodo registrado correctamente.", ""));
         } catch (Exception ex) {
@@ -496,7 +491,8 @@ public class EjercicioBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
             this.enableShowData();
-
+            this.limpiar();
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Periodo  registrado correctamente.", ""));
 
         } catch (Exception ex) {
@@ -554,15 +550,13 @@ public class EjercicioBean extends Actividad {
         /*Sacando el ejercico que se va a cerrar*/
         this.ejercicioViejo = this.ejercicioBo.getEjercicio(idEjerCierre);
         this.ejercicioViejo.setFechaCierre(new Date());
-        
-        
 
         /*Se saca el periodo viejo desde la bd para tener otra instancia y poder modificarla para el nuevo */
         this.ejercicio = this.ejercicioBo.getEjercicio(idEjerCierre);
         this.ejercicio.setAhoEjercicio(this.ejercicio.getAhoEjercicio() + 1);
-        
+
         this.listAhos.clear();
-        for (int aho = this.ejercicio.getAhoEjercicio() ; aho <= this.ejercicio.getAhoEjercicio() + 5; aho++) {
+        for (int aho = this.ejercicio.getAhoEjercicio(); aho <= this.ejercicio.getAhoEjercicio() + 5; aho++) {
             this.listAhos.add(aho);
         }
 
@@ -592,7 +586,6 @@ public class EjercicioBean extends Actividad {
         return valorDepreActivoFijo;
 
     }
-
 
     /**
      * Llena el detalle de la partida para el Asiento contable
@@ -642,9 +635,7 @@ public class EjercicioBean extends Actividad {
         this.listaDetallePartida.add(detallePartidaDepre);
 
     }
-    
-    
- 
+
     public void buscarEmpleadoArea(TEmpleado emp) {
 
         List<TEmpleadoArea> listEmpleAreAct = new ArrayList(emp.getTEmpleadoAreas());
@@ -697,8 +688,8 @@ public class EjercicioBean extends Actividad {
         this.estadoPredeterminado = false;
         this.listaDepreciacion = new ArrayList<>();
         this.listaDetallePartida = new ArrayList<>();
-        this.listAhos= new ArrayList<>();
-        this.listActios= new ArrayList<>();
+        this.listAhos = new ArrayList<>();
+        this.listActios = new ArrayList<>();
     }
 
     public void limpiar() {
@@ -707,7 +698,7 @@ public class EjercicioBean extends Actividad {
         this.msgEjercicio = "";
         this.periodoNuevo = new TPeriodo();
         this.ejercicio = new TEjercicio();
-       
+
     }
 
     public void validarFormularioInicio() {
@@ -728,9 +719,8 @@ public class EjercicioBean extends Actividad {
         }
 
     }
-    
-    
-        public void validarFormularioCierre() {
+
+    public void validarFormularioCierre() {
 
         this.estadoValido = true;
 
@@ -767,7 +757,6 @@ public class EjercicioBean extends Actividad {
 
     public void setIdEntidad(Integer idEntidad) {
         this.idEntidad = idEntidad;
-       
 
         for (TEntidad tentidad : listaEntidades) {
 
@@ -1809,6 +1798,7 @@ public class EjercicioBean extends Actividad {
                 }
 
                 this.enableShowData();
+                this.limpiar();
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Periodo registrado correctamente.", ""));
 

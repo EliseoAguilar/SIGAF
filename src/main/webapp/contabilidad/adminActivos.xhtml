@@ -92,7 +92,7 @@
                                                             <p:ajax update="sEmpleado"></p:ajax>
                                                             <p:ajax update="tcodArea"></p:ajax>
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" itemDisabled="#{l.estadoArea eq true?false:true }" />
 
 
                                                         </p:selectOneMenu>
@@ -101,7 +101,7 @@
                                                     <p:column >
                                                         <p:selectOneMenu id="sEmpleado" value="#{activoFijoBean.activoFijo.TEmpleado.idEmpleado}" style="width:100%" >
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}" itemValue="#{l.idEmpleado}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}" itemValue="#{l.idEmpleado}" itemDisabled="#{l.estadoE eq true?false:true }" />
                                                         </p:selectOneMenu>
                                                         <h:outputText value="#{activoFijoBean.msgEmpleado}" style=" color:  red" />
                                                     </p:column>
@@ -123,7 +123,7 @@
                                                         <p:selectOneMenu id="sTipo" value="#{activoFijoBean.idTipoActivo}" style="width:100%" >
                                                             <p:ajax update="tCodTipo"></p:ajax>
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}" itemDisabled="#{l.estadoTipo eq true?false:true }" />
                                                         </p:selectOneMenu>
                                                         <h:outputText value="#{activoFijoBean.msgTipo}" style=" color:  red" />
                                                     </p:column>
@@ -330,7 +330,7 @@
                                                             <p:ajax update="sEmpleado"></p:ajax>
                                                             <p:ajax update="tcodArea"></p:ajax>
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaArea}" var="l" itemLabel="#{l.nombreArea}" itemValue="#{l.idArea}" itemDisabled="#{l.estadoArea eq true?false:true }"/>
 
 
                                                         </p:selectOneMenu>
@@ -339,7 +339,7 @@
                                                     <p:column >
                                                         <p:selectOneMenu id="sEmpleado" value="#{activoFijoBean.activoFijoSeleccionado.TEmpleado.idEmpleado}" style="width:100%" >
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaEmpleado}" var="l" itemLabel="#{l.nombreEmpleado} #{l.apellidoEmpleado}  " itemValue="#{l.idEmpleado}" itemDisabled="#{l.estadoE eq true?false:true }" />
                                                         </p:selectOneMenu>
                                                         <h:outputText value="#{activoFijoBean.msgEmpleado}" style=" color:  red" />
                                                     </p:column>
@@ -361,7 +361,7 @@
                                                         <p:selectOneMenu id="sTipo" value="#{activoFijoBean.idTipoActivo}" style="width:100%" disabled ="#{activoFijoBean.estadoRegistroContableModificar()}" >
                                                             <p:ajax update="tCodTipo"></p:ajax>
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}" />
+                                                            <f:selectItems value="#{activoFijoBean.listaTipos}" var="l" itemLabel="#{l.nombreTipo  }" itemValue="#{l.idTipo}"  itemDisabled="#{l.estadoTipo eq true?false:true }"/>
                                                         </p:selectOneMenu>
                                                         <h:outputText value="#{activoFijoBean.msgTipo}" style=" color:  red" />
                                                     </p:column>
@@ -1024,7 +1024,7 @@
                                         <h:outputText value="#{cue.nombreCuenta}" />  
                                     </p:column> 
 
-                                    <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                    <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.TCuenta.nombreCuenta}"  
                                               headerText="Cuenta padre"
                                               filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
                                         <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  

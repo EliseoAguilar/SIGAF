@@ -836,7 +836,6 @@ public class UsuarioBean extends Actividad {
     public void enableShowCreateBean() {
         this.limpiar();
         super.enableShowCreate();
-
     }
 
 }

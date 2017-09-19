@@ -437,6 +437,10 @@ public class ActivoFijoBean extends Actividad {
          */
         if (!this.showBaja) {
 
+            this.totalDebe = BigDecimal.ZERO;
+            
+            this.totalHaber = BigDecimal.ZERO;
+                
             /*
             * si ya tiene registro  se caraga la partida
              */
@@ -444,8 +448,6 @@ public class ActivoFijoBean extends Actividad {
 
                 this.partida = this.partidaBo.getPartida(this.valorActivo.getTPartida().getIdPartida());
 
-                this.totalDebe = BigDecimal.ZERO;
-                this.totalHaber = BigDecimal.ZERO;
                 this.listaDetallePartida = this.detallePartidaBo.listDetallePartida(partida.getIdPartida());
 
                 for (TDetallePartida tDetallePartida : this.listaDetallePartida) {

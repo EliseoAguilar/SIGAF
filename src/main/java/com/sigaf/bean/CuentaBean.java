@@ -364,7 +364,7 @@ public class CuentaBean extends Actividad {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta registrada correctamente.", ""));
 
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "la cuenta no pudo ser registrada.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "la cuenta no pudo ser registrada.", ""));
         }
     }
 

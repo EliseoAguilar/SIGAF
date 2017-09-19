@@ -29,7 +29,7 @@
                                         <br></br>
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.crearCuenta}"     style="#{ejercicioBean.btnNuevo}" update=" :padding"  > </p:commandButton>
+                                        <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.crearCuenta}"     style="#{ejercicioBean.btnNuevo}" update=" :padding" oncomplete="PF('dialogCrear').hide()" > </p:commandButton>
                                         <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{ejercicioBean.btnCancelar}" >
                                             <f:setPropertyActionListener value="#{false}" target="#{cuentaBean.estadoValido}" />
                                         </p:commandButton>
@@ -37,8 +37,6 @@
                                 </h:form>
                             </p:dialog>
                      
-
-                        
                             <h:form id="fAgregarCuenta">
                                 <p:panel id="pCuenta" header="Agregar cuenta"  style="width: 80%; margin: auto; margin-bottom: 20px">
                                     <br></br>
@@ -452,8 +450,6 @@
                                 </p:outputPanel>
                             </h:form>
                         </p:dialog>
-
-
 
                         <p:outputPanel id="opDatosCuenta">
                             <p:dialog   header="Datos de la cuenta" widgetVar="dlVer" modal="true"   visible="false"  resizable="false" width="50%" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">

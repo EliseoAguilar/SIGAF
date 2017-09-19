@@ -601,7 +601,7 @@ public class TipoActivoBean extends Actividad {
             this.limpiar();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de activo registrado correctamente.", ""));
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "El  tipo de activo no pudo ser registrado.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El  tipo de activo no pudo ser registrado.", ""));
         }
     }
 
@@ -632,7 +632,7 @@ public class TipoActivoBean extends Actividad {
             this.enableShowDataBean();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de activo  modificado correctamente.", ""));
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "El  tipo de activo no pudo ser modificado.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El  tipo de activo no pudo ser modificado.", ""));
         }
     }
 
