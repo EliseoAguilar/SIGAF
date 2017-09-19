@@ -3512,8 +3512,12 @@ public class SolicitudBean extends Actividad {
         if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             this.estadoFormulario = false;
-        } else {
-            this.msgPlazo = "";
+        } else if (this.proyecto.getPlazo()%12!=0 || this.proyecto.getPlazo()==0 ){
+           
+             this.msgPlazo = "Debe introducir un plazo multiplo de 12";
+             this.estadoFormulario = false;
+        }else{
+             this.msgPlazo = "";
         }
 
     }
@@ -7112,12 +7116,21 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgFormaPago = "";
         }
-        if (this.proyecto.getPlazo() == null) {
+ 
+            
+        
+         if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             validado = false;
-        } else {
-            this.msgPlazo = "";
+        } else if (this.proyecto.getPlazo()%12!=0 || this.proyecto.getPlazo()==0 ){
+           
+             this.msgPlazo = "Debe introducir un plazo multiplo de 12";
+             validado = false;
+        }else{
+             this.msgPlazo = "";
         }
+        
+        
         if (validado == true) {
             this.mostrarCalculos();
         }else{
@@ -7147,12 +7160,19 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgFormaPago = "";
         }
-        if (this.proyecto.getPlazo() == null) {
+       
+          
+         if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             validado = false;
-        } else {
-            this.msgPlazo = "";
+        } else if (this.proyecto.getPlazo()%12!=0 || this.proyecto.getPlazo()==0 ){
+           
+             this.msgPlazo = "Debe introducir un plazo multiplo de 12";
+             validado = false;
+        }else{
+             this.msgPlazo = "";
         }
+        
         if (validado == true) {
             this.mostrarCalculos();
         }else{
