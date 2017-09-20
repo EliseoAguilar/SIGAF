@@ -38,35 +38,35 @@
 			<staticText>
 				<reportElement x="0" y="2" width="100" height="20" uuid="ae5a9647-d3aa-4f76-8735-e34d2b965437"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TABLA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="2" width="100" height="20" uuid="e1b65762-1769-4309-aeff-240bdb1c921a"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ACCIÓN ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="369" y="1" width="100" height="20" uuid="9f6dc9ef-1e03-43db-ae9a-e35cd03bdf13"/>
+				<reportElement x="398" y="1" width="71" height="20" uuid="9f6dc9ef-1e03-43db-ae9a-e35cd03bdf13"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="469" y="2" width="86" height="20" uuid="5c13f050-980f-40c4-9888-68c69c8a349d"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[HORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="2" width="169" height="20" isPrintWhenDetailOverflows="true" uuid="40a22153-0bf1-413a-8f44-4416060f717b"/>
+				<reportElement x="200" y="2" width="184" height="20" isPrintWhenDetailOverflows="true" uuid="40a22153-0bf1-413a-8f44-4416060f717b"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS]]></text>
 			</staticText>
@@ -83,7 +83,7 @@
 				<textFieldExpression><![CDATA[$F{hora_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="369" y="0" width="100" height="20" uuid="f6f15ee7-bd7b-49dd-b7da-4e88a5d48dba"/>
+				<reportElement x="398" y="0" width="71" height="20" uuid="f6f15ee7-bd7b-49dd-b7da-4e88a5d48dba"/>
 				<textFieldExpression><![CDATA[$F{fecha_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -91,7 +91,7 @@
 				<textFieldExpression><![CDATA[$F{accion_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="200" y="1" width="169" height="20" uuid="a190dce5-3fc9-45ad-ace2-0f7f6b33749c"/>
+				<reportElement x="200" y="1" width="184" height="20" uuid="a190dce5-3fc9-45ad-ace2-0f7f6b33749c"/>
 				<textFieldExpression><![CDATA[$F{datos_bitacora}]]></textFieldExpression>
 			</textField>
 		</band>

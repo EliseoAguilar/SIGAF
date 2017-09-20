@@ -58,30 +58,30 @@ u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="81" y="8" width="139" height="20" uuid="958d615e-684b-4572-8ead-b781a2a33669"/>
+				<reportElement x="86" y="8" width="167" height="20" uuid="958d615e-684b-4572-8ead-b781a2a33669"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[BITACORA DESDE]]></text>
+				<text><![CDATA[REPORTE BITACORA DESDE]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="220" y="8" width="84" height="20" uuid="e479edec-9020-40ad-a594-09781896b8b3"/>
+				<reportElement x="253" y="8" width="84" height="20" uuid="e479edec-9020-40ad-a594-09781896b8b3"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="304" y="8" width="55" height="20" uuid="846e8a0b-c671-4e75-9030-37d85300bf1d"/>
+				<reportElement x="337" y="8" width="55" height="20" uuid="846e8a0b-c671-4e75-9030-37d85300bf1d"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[HASTA]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="359" y="8" width="100" height="20" uuid="f63fcb73-07f9-4ad7-99cb-13660909fc5c"/>
+				<reportElement x="392" y="8" width="100" height="20" uuid="f63fcb73-07f9-4ad7-99cb-13660909fc5c"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha2}]]></textFieldExpression>
 			</textField>
@@ -122,21 +122,21 @@ u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
 			<staticText>
 				<reportElement x="165" y="38" width="77" height="20" uuid="0da623a5-e9d2-49b6-86d7-e7a11839f0b2"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ EMPLEADO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="166" y="125" width="74" height="20" uuid="dcc314fb-fc73-4ab3-94d6-8e2420710ed4"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="165" y="67" width="75" height="20" uuid="97feebc1-c21e-496b-8737-f9be2acd9f5c"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[USUARIO:]]></text>
 			</staticText>
@@ -146,7 +146,7 @@ u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
 			<staticText>
 				<reportElement x="166" y="96" width="74" height="20" uuid="85903f9f-2ab7-4753-96d5-326dcd29866a"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
@@ -157,14 +157,14 @@ u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
 			<staticText>
 				<reportElement x="16" y="4" width="150" height="20" uuid="7c47b7e2-c85b-4743-94c2-a30ca204da05"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DEL USUARIO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="166" width="201" height="20" uuid="500ae911-da63-4263-b4fc-9975b7d56d97"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[DATOS DE LAS ACCIONES]]></text>
 			</staticText>

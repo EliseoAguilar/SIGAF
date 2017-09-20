@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UsuarioIndividual" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f15e63da-7380-458b-a761-d716c6c85baf">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="7"/>
+	<property name="ireport.y" value="0"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -87,11 +87,11 @@ WHERE
 	<pageHeader>
 		<band height="24" splitType="Stretch">
 			<staticText>
-				<reportElement x="155" y="0" width="239" height="20" uuid="d0ba4cb1-b4ec-49c3-9053-f47f4a350979"/>
+				<reportElement x="1" y="0" width="553" height="20" uuid="d0ba4cb1-b4ec-49c3-9053-f47f4a350979"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[  BITÁCORA SEGÚN  ACCIÓN ]]></text>
+				<text><![CDATA[  REPORTE BITÁCORA ]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -104,7 +104,7 @@ WHERE
 			<staticText>
 				<reportElement x="139" y="113" width="64" height="20" uuid="a2724559-a972-4dde-ade7-e2440b87234b"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
@@ -119,14 +119,14 @@ WHERE
 			<staticText>
 				<reportElement x="139" y="79" width="64" height="20" uuid="ddba01a3-bf0b-4ef2-91d1-0badade57e75"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[USUARIO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="139" y="146" width="64" height="20" uuid="cb8b4eee-7f6c-41c2-b99c-d5d65fc90b2e"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
@@ -137,7 +137,7 @@ WHERE
 			<staticText>
 				<reportElement x="139" y="46" width="80" height="20" uuid="73a7d3ad-1ae3-4da6-bad2-97fb26aeb144"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[EMPLEADO:]]></text>
 			</staticText>
@@ -151,14 +151,14 @@ WHERE
 			<staticText>
 				<reportElement x="11" y="11" width="150" height="20" uuid="09fac22a-a17f-40df-89f1-6554c66d82d1"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DEL USUARIO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="18" y="194" width="201" height="20" uuid="bf2b2e86-ff46-44f1-ae7c-de893ad90473"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DE LA ACCIÓN ]]></text>
 			</staticText>
@@ -168,35 +168,35 @@ WHERE
 			<staticText>
 				<reportElement x="16" y="264" width="55" height="20" uuid="2bd6c4e1-b8a6-478d-be15-46675a061f8f"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ACCIÓN :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="364" width="55" height="20" isPrintWhenDetailOverflows="true" uuid="9a2d7485-0f56-43b2-8848-81d7defdb745"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="329" width="55" height="20" uuid="6c09149d-50d7-4d14-8eaa-9f17797d2ba0"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[HORA:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="231" width="55" height="20" uuid="9d227568-a937-4398-80ef-611d1752f83e"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TABLA:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="296" width="55" height="20" uuid="80fd958e-0459-4b09-8b62-45897ef023b6"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[FECHA:]]></text>
 			</staticText>
