@@ -26,7 +26,7 @@ WHERE
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="141" height="20" uuid="b99296d6-3031-44d7-84e8-0d349639299a"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
 			</textField>

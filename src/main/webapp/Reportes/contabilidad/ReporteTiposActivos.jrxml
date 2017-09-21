@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteTiposActivos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02a8fd36-b81a-4abb-b211-fedb11a14430">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -27,6 +27,7 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 	<field name="id_cuenta_venta_tipo" class="java.lang.Integer"/>
 	<field name="id_cuenta_depreciacion_tipo" class="java.lang.Integer"/>
 	<field name="id_entidad_tipo" class="java.lang.Integer"/>
+	<field name="calculo_tipo_activo" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -43,74 +44,85 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="25" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<staticText>
 				<reportElement x="1" y="0" width="554" height="21" uuid="411a4d15-60f7-444b-8a6e-ba52844b9af7"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true" isItalic="false"/>
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE TIPOS DE ACTIVO]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="31" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="8" width="100" height="20" uuid="e30f64f9-c693-45d3-b993-5041123a02c2"/>
+				<reportElement x="71" y="5" width="82" height="20" uuid="e30f64f9-c693-45d3-b993-5041123a02c2"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="151" y="8" width="100" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
+				<reportElement x="21" y="5" width="46" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="7" width="100" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
+				<reportElement x="155" y="4" width="51" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[VIDA ÚTIL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="428" y="8" width="100" height="20" uuid="9dd87f31-7a27-4092-9501-26c5db5f8c23"/>
+				<reportElement x="450" y="4" width="100" height="20" uuid="9dd87f31-7a27-4092-9501-26c5db5f8c23"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="28" width="554" height="1" uuid="aa9b223c-1aae-43dc-b81a-10c53adcf433"/>
+				<reportElement x="0" y="1" width="554" height="1" uuid="270911a3-bdb0-449a-baa4-4b882cd074a5"/>
 			</line>
-			<line>
-				<reportElement x="0" y="5" width="554" height="1" uuid="270911a3-bdb0-449a-baa4-4b882cd074a5"/>
-			</line>
+			<staticText>
+				<reportElement x="235" y="5" width="75" height="20" uuid="7882711e-525e-4539-af5d-1e2ef9694e15"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="4" width="100" height="20" uuid="fa6b07fc-8ad0-4aee-bc41-590706d77706"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCIÓN]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="153" splitType="Stretch">
-			<textField>
-				<reportElement x="20" y="5" width="100" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="7" width="85" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
 				<textFieldExpression><![CDATA[$F{nombre_tipo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="151" y="5" width="100" height="20" uuid="6163a9a2-92d0-45e9-9e53-e41e57a3d6f8"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="20" y="7" width="44" height="20" uuid="6163a9a2-92d0-45e9-9e53-e41e57a3d6f8"/>
 				<textFieldExpression><![CDATA[$F{codigo_tipo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="289" y="7" width="100" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
-				<textFieldExpression><![CDATA[$F{vida_util_tipo}]]></textFieldExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="153" y="7" width="51" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
+				<textFieldExpression><![CDATA[$F{vida_util_tipo} + " Año/s"]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="428" y="7" width="100" height="20" uuid="0970ada3-2a53-4a94-a73b-08532b6ab137"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="450" y="7" width="100" height="20" uuid="0970ada3-2a53-4a94-a73b-08532b6ab137"/>
 				<textFieldExpression><![CDATA[$F{estado_tipo}? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="124" y="56" width="430" height="22" uuid="4f136b8c-a850-4d31-8bfe-3bb6306497f1"/>
+				<reportElement x="124" y="58" width="430" height="22" uuid="4f136b8c-a850-4d31-8bfe-3bb6306497f1"/>
 				<subreportParameter name="idCuenta">
 					<subreportParameterExpression><![CDATA[$F{id_cuenta_depreciacion_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -118,14 +130,14 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="20" y="33" width="100" height="20" uuid="fa22b827-dff8-4836-b424-03de803886ec"/>
+				<reportElement x="20" y="34" width="100" height="20" uuid="fa22b827-dff8-4836-b424-03de803886ec"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CUENTA]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="124" y="80" width="430" height="20" uuid="0e53aeb1-c9f6-4d28-a201-d775eb78c9fa"/>
+				<reportElement x="124" y="82" width="430" height="20" uuid="0e53aeb1-c9f6-4d28-a201-d775eb78c9fa"/>
 				<subreportParameter name="idCuenta">
 					<subreportParameterExpression><![CDATA[$F{id_cuenta_activo_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -133,21 +145,21 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="20" y="56" width="100" height="20" uuid="781bbab3-24cd-431d-b12d-b86510050206"/>
+				<reportElement x="20" y="58" width="100" height="20" uuid="781bbab3-24cd-431d-b12d-b86510050206"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Activo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="101" width="100" height="20" uuid="a33fefd0-68c9-4630-99fa-5b91923790aa"/>
+				<reportElement x="20" y="103" width="100" height="20" uuid="a33fefd0-68c9-4630-99fa-5b91923790aa"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Gasto]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="124" y="102" width="430" height="20" uuid="2bf190f8-0561-419c-b164-042f829f9520"/>
+				<reportElement x="124" y="104" width="430" height="20" uuid="2bf190f8-0561-419c-b164-042f829f9520"/>
 				<subreportParameter name="idCuenta">
 					<subreportParameterExpression><![CDATA[$F{id_cuenta_gasto_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -155,14 +167,14 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="20" y="125" width="100" height="20" uuid="ae2be4cb-3dcc-47b0-b27b-c8971c2b36cb"/>
+				<reportElement x="20" y="127" width="100" height="20" uuid="ae2be4cb-3dcc-47b0-b27b-c8971c2b36cb"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Venta]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="124" y="125" width="430" height="23" uuid="7f6c4a4e-4cc8-4ea7-841c-ccf86754ddf4"/>
+				<reportElement x="124" y="127" width="430" height="23" uuid="7f6c4a4e-4cc8-4ea7-841c-ccf86754ddf4"/>
 				<subreportParameter name="idCuenta">
 					<subreportParameterExpression><![CDATA[$F{id_cuenta_venta_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -170,26 +182,37 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="124" y="33" width="100" height="20" uuid="55435285-1e15-4750-b334-a08b1ae2709e"/>
+				<reportElement x="124" y="34" width="100" height="20" uuid="55435285-1e15-4750-b334-a08b1ae2709e"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="79" width="100" height="20" uuid="21c5158a-4f50-44ba-a8c7-e74a9bb59f24"/>
+				<reportElement x="20" y="81" width="100" height="20" uuid="21c5158a-4f50-44ba-a8c7-e74a9bb59f24"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Depreciación  ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="33" width="100" height="20" uuid="80588463-1f43-488f-9a23-69199c7353ae"/>
+				<reportElement x="290" y="34" width="100" height="20" uuid="80588463-1f43-488f-9a23-69199c7353ae"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="233" y="7" width="75" height="20" uuid="81897493-749b-4da7-ae44-05b4fd305e34"/>
+				<textFieldExpression><![CDATA[$F{calculo_tipo_activo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="310" y="7" width="140" height="20" uuid="d121edc5-1073-4a44-808a-91cef9453f26"/>
+				<textFieldExpression><![CDATA[$F{descripcion_tipo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="554" height="1" uuid="aa9b223c-1aae-43dc-b81a-10c53adcf433"/>
+			</line>
 		</band>
 	</detail>
 	<pageFooter>

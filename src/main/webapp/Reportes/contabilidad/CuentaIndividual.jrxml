@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CuentaIndividual" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86dcb251-f7c5-48b8-8188-04b04dedeec8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="4"/>
 	<parameter name="idEntidad" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -66,9 +66,9 @@ FROM
 			<staticText>
 				<reportElement x="2" y="10" width="552" height="20" uuid="62a2ad1b-d717-4a19-97cd-ec16b6f5bcc0"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[REPORTE  DE CUENTA]]></text>
+				<text><![CDATA[REPORTE  CUENTA]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -96,22 +96,37 @@ FROM
 			</textField>
 			<staticText>
 				<reportElement x="-1" y="150" width="100" height="20" uuid="e8f54d78-d466-4b22-b92e-d23d07d1b625"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[CÓDIGO: ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="197" width="100" height="20" uuid="2359449c-ccfa-4f3a-98ef-c4b4992263ce"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="325" y="240" width="115" height="20" uuid="658b5ad5-0cae-431b-b20f-e985e8cbbf1d"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[FECHA DE  CREACIÓN:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="240" width="100" height="20" uuid="0fff8e55-db33-425f-9a21-bd12211fb223"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[NATURALEZA:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="201" y="240" width="51" height="20" uuid="a76efb39-647c-4326-9e3f-8cee682c3044"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<line>
@@ -123,19 +138,22 @@ FROM
 			<staticText>
 				<reportElement x="1" y="127" width="188" height="20" uuid="939e3737-ac60-41d1-a1dd-62bbea61d838"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DE LA CUENTA PRINCIPAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="3" width="188" height="20" uuid="2d8de321-2930-4cbf-85f8-eba5f56db6b5"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DE LA CUENTA ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="26" width="100" height="20" uuid="8a496d76-7c07-49f0-9591-a63007ac67db"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[CÓDIGO: ]]></text>
 			</staticText>
 			<textField>
@@ -147,6 +165,9 @@ FROM
 			</line>
 			<staticText>
 				<reportElement x="0" y="61" width="100" height="20" uuid="466fd34c-ec97-4525-ab1b-bedf7572ea3b"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<textField>
@@ -155,6 +176,9 @@ FROM
 			</textField>
 			<staticText>
 				<reportElement x="1" y="100" width="100" height="20" uuid="74300562-5cb5-4e3b-9fab-60ba523422f9"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[NATURALEZA:]]></text>
 			</staticText>
 			<textField>
@@ -163,6 +187,9 @@ FROM
 			</textField>
 			<staticText>
 				<reportElement x="201" y="100" width="51" height="20" uuid="a3c6a65b-841d-4c94-8c5b-8399dc25b7d5"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<textField>
@@ -171,6 +198,9 @@ FROM
 			</textField>
 			<staticText>
 				<reportElement x="325" y="100" width="115" height="20" uuid="c62f8494-2ad3-4859-8c11-9abf08f1c6b2"/>
+				<textElement>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[FECHA DE  CREACIÓN:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">

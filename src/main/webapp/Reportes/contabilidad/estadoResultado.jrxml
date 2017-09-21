@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estadoResultado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7567c48a-360e-4a4d-a80e-102f0dde2ccf">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<import value="org.apache.commons.codec.binary.*"/>
@@ -47,7 +47,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="104" y="4" width="339" height="28" uuid="c22f607f-46d9-45c3-bcb9-45a152ab2619"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nombreEntidad}]]></textFieldExpression>
 			</textField>
@@ -69,23 +69,23 @@
 	<pageHeader>
 		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="352" height="21" uuid="9f858ab5-9181-4a9d-8cee-96385b6d5080"/>
+				<reportElement x="7" y="0" width="337" height="21" uuid="9f858ab5-9181-4a9d-8cee-96385b6d5080"/>
 				<textElement textAlignment="Right">
-					<font size="14" isBold="true" isItalic="false"/>
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO DE RESULTADOS AL ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="21" width="555" height="20" uuid="30f15d30-2451-4115-a89b-e1442fe934fb"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font size="12" isBold="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="355" y="0" width="143" height="20" uuid="16266f28-7e3f-47d1-9fa9-4193c196d583"/>
+				<reportElement x="347" y="0" width="143" height="20" uuid="16266f28-7e3f-47d1-9fa9-4193c196d583"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fechaReporte}]]></textFieldExpression>
 			</textField>
@@ -120,7 +120,7 @@
 			<textField>
 				<reportElement x="57" y="2" width="194" height="13" uuid="0f139620-6aac-4962-8e66-37d60d42f156"/>
 				<textElement>
-					<font size="8" isBold="true" isUnderline="false"/>
+					<font size="8" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreGrupo}]]></textFieldExpression>
 			</textField>

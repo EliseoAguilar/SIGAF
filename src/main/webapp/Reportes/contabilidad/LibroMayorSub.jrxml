@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroMayorSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0bd5ccd3-3730-46c1-8558-133e7f5659bb">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="148"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idCuenta" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -104,35 +104,35 @@ inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement x="229" y="0" width="84" height="20" uuid="40093b45-85d4-4ddf-8338-1bc1088e68f5"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalDebe}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement x="314" y="0" width="86" height="20" uuid="4550e7b0-201a-49b1-b653-6b5df7488b62"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalHaber}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="175" y="0" width="100" height="20" uuid="c6f8a2f7-3703-4456-867b-ec4a328fe472"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TOTALES:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement x="405" y="0" width="74" height="20" uuid="4d239dd6-d6a4-4144-9556-5e40f99475b6"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) >=0 ? $V{totalDebe}.subtract($V{totalHaber}): BigDecimal.ZERO]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement x="479" y="0" width="74" height="20" uuid="30e112ca-abc2-4b0f-9afe-b32ab2643f21"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) <=0 ? $V{totalHaber}.subtract($V{totalDebe}): BigDecimal.ZERO]]></textFieldExpression>
 			</textField>

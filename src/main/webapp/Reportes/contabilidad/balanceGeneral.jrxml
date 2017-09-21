@@ -59,7 +59,7 @@ WHERE
 			<staticText>
 				<reportElement x="153" y="0" width="164" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[BALANCE GENERAL AL ]]></text>
 			</staticText>
@@ -133,14 +133,14 @@ WHERE
 			<textField pattern="#,##0.00">
 				<reportElement x="232" y="10" width="272" height="20" uuid="44fbadae-e2ad-46a4-b941-0aac8c8bf5e3"/>
 				<textElement textAlignment="Right">
-					<font size="10" isBold="true" isUnderline="true"/>
+					<font size="10" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{totalPasivoCapital}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="37" y="10" width="195" height="20" uuid="9f924358-309d-4274-938c-20e96bc828c3"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL DE PASIVO MÁS PATRIMONIO ]]></text>
 			</staticText>
