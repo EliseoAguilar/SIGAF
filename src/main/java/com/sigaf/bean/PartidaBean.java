@@ -695,6 +695,9 @@ public class PartidaBean extends Actividad {
             this.msgDetallePar = "";
         }
 
+        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+        
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra";
@@ -723,6 +726,9 @@ public class PartidaBean extends Actividad {
             this.msgDetallePar = "";
         }
 
+        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+        
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra";

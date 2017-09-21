@@ -204,7 +204,7 @@
                                                 </p:row>
                                                 <p:row>
                                                     <p:column>
-                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" />
+                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" decimalPlaces="2" />
                                                         <br></br>
                                                         <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
                                                     </p:column>
@@ -441,7 +441,7 @@
                                                 </p:row>
                                                 <p:row>
                                                     <p:column>
-                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
+                                                        <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" decimalPlaces="2" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
                                                         <br></br>
                                                         <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
                                                     </p:column>
@@ -1573,7 +1573,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column>
-                                                    <p:inputNumber id="tValorV" value="#{activoFijoBean.valorVenta}"  disabled="#{activoFijoBean.tipoBaja eq 'Venta' ? false:true}"  style="width:80%; " />  
+                                                    <p:inputNumber id="tValorV" value="#{activoFijoBean.valorVenta}"  decimalPlaces="2" disabled="#{activoFijoBean.tipoBaja eq 'Venta' ? false:true}"  style="width:80%; " />  
                                                     <br></br>
                                                     <h:outputText value="#{activoFijoBean.msgValorActivoBaja}" style=" color:  red"/>
                                                 </p:column>
@@ -1611,7 +1611,7 @@
                                             <p:row>
                                                 <p:column>
 
-                                                    <p:inputText id="tNumero"   style="width: 100%" value="#{activoFijoBean.numPartida}"  readonly="true"/>
+                                                    <p:inputText id="tNumero"   style="width: 100%" value="#{activoFijoBean.numPartida}"   readonly="true"/>
 
                                                 </p:column>
                                                 <p:column>

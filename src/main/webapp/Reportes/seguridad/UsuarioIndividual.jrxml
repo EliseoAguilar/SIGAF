@@ -50,13 +50,13 @@ WHERE
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="173" y="0" width="239" height="20" uuid="d0ba4cb1-b4ec-49c3-9053-f47f4a350979"/>
-				<textElement>
-					<font size="14" isBold="true"/>
+				<reportElement x="0" y="0" width="554" height="20" uuid="d0ba4cb1-b4ec-49c3-9053-f47f4a350979"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[REPORTE SEGÚN USUARIO ]]></text>
+				<text><![CDATA[REPORTE USUARIO ]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -75,7 +75,7 @@ WHERE
 			<staticText>
 				<reportElement x="138" y="79" width="62" height="20" uuid="a2724559-a972-4dde-ade7-e2440b87234b"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
@@ -90,14 +90,14 @@ WHERE
 			<staticText>
 				<reportElement x="138" y="45" width="64" height="20" uuid="ddba01a3-bf0b-4ef2-91d1-0badade57e75"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[USUARIO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="140" y="112" width="60" height="20" uuid="cb8b4eee-7f6c-41c2-b99c-d5d65fc90b2e"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
@@ -108,7 +108,7 @@ WHERE
 			<staticText>
 				<reportElement x="138" y="12" width="81" height="20" uuid="73a7d3ad-1ae3-4da6-bad2-97fb26aeb144"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[EMPLEADO:]]></text>
 			</staticText>
