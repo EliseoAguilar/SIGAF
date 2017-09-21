@@ -60,7 +60,7 @@ public class ParametroDao implements IParametroDao {
     @Override
     public List<TParametroseguimiento> listParametro() {
         Session session = this.sessionFactory.openSession();
-        List<TParametroseguimiento> listParametro = session.createQuery("from TParametroseguimiento").list();
+        List<TParametroseguimiento> listParametro = session.createQuery("from TParametroseguimiento where estado=1").list();
         session.close();
         return listParametro;
     }

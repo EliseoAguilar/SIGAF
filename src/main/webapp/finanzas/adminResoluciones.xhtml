@@ -63,34 +63,10 @@
                                         </p:column>
                                     </p:row> 
                                 </p:panelGrid> 
-                 
+
                                 <p:tabView  >
                                     <p:tab title="Análisis">
                                         <b>   <h:outputText value="Cálculos de las razones financieras"/></b>
-                                        <hr></hr>
-                                        <p:panelGrid styleClass="borderHidden" >
-                                            <p:row>
-                                                <p:column>
-                                                    <h:outputText value="Capacidad de pago = Activo corriente / Pasivo corriente"/> 
-                                                    <br></br>
-                                                    <h:outputText value="Capacidad de pago= $"/>
-                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.activoCorriente}">
-                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                    </h:outputText>
-                                                    <h:outputText value="/ $"/>
-                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.pasivoCorriente}">
-                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                    </h:outputText>
-                                                    <br></br>         <h:outputText value="Capacidad de pago = $"/>
-                                                    <h:outputText rendered="#{resolucionBean.resultadoRazonCapacidadPago lt 0}" style=" color:  #e52d27" value="#{resolucionBean.resultadoRazonCapacidadPago}">
-                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                    </h:outputText>
-                                                    <h:outputText rendered="#{resolucionBean.resultadoRazonCapacidadPago gt 0}" value="#{resolucionBean.resultadoRazonCapacidadPago}">
-                                                        <f:convertNumber    pattern="#0.00" locale="en-US" /> 
-                                                    </h:outputText>
-                                                </p:column>
-                                            </p:row>
-                                        </p:panelGrid>
                                         <hr></hr>
                                         <p:panelGrid styleClass="borderHidden" >
                                             <p:row>
@@ -105,13 +81,37 @@
                                                     <h:outputText value="#{resolucionBean.totalRazonActivos}">
                                                         <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
-                                                    <br></br>         <h:outputText value="Capacidad de endeudamiento = $"/>
+                                                    <br></br>         <h:outputText value="Capacidad de endeudamiento = "/>
                                                     <h:outputText value="#{resolucionBean.resultadoRazonEndeudamiento}">
                                                         <f:convertNumber    pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
+                                        <hr></hr>
+                                        <p:panelGrid styleClass="borderHidden" >
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Capacidad de pago = Activo corriente / Pasivo corriente"/> 
+                                                    <br></br>
+                                                    <h:outputText value="Capacidad de pago= $"/>
+                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.activoCorriente}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <h:outputText value="/ $"/>
+                                                    <h:outputText value="#{resolucionBean.cooperativaSeleccionada.pasivoCorriente}">
+                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                    </h:outputText>
+                                                    <br></br>         <h:outputText value="Capacidad de pago = "/>
+                                                    <h:outputText  value="#{resolucionBean.resultadoRazonCapacidadPago}">
+                                                        <f:convertNumber    pattern="#0.00" locale="en-US" /> 
+                                                    </h:outputText>
+
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+
+
                                         <br></br>
                                         <b>   <h:outputText value="Interpretación de las razones financieras"/></b>
                                         <hr></hr>   
@@ -120,22 +120,22 @@
                                                 <p:column>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeAprobado}">
                                                         <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
-                                                        <h:outputText value="El resultado de la razon es igual o superior a la política establecia, presentando una capacidad de endeudamiento optimo para la fundacion."/>   
+                                                        <h:outputText  style=" color:  #e52d27" value="El resultado de la razón es igual o superior a la política establecia #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa son financiados a travez de deuda, por lo que no es favorable para la fundación."/>  
                                                         <br></br><br></br>
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobado}">
                                                         <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
-                                                        <h:outputText value="El resultado de la razon es inferior a la política establecia, presentando una capacidad de endeudamiento no optima para la fundacion."/>   
+                                                        <h:outputText value="El resultado de la razón es inferior a la política establecia #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa se financian a travez de acciones, por lo que es favorable para la fundación."/>   
                                                         <br></br><br></br>
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeAprobadoPago}">
                                                         <b>   <h:outputText value="Capacidad de pago"/></b>  <br></br> <br></br>
-                                                        <h:outputText value="El resultado es mayor o igual a la política establecida, por cuanto existir un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <h:outputText value="El resultado de la razón es mayor o igual a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
                                                         <br></br><br></br>  
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobadoPago}">
                                                         <b>   <h:outputText value="Capacidad de pago"/> </b>   <br></br> <br></br>
-                                                        <h:outputText value="El resultado es inferior a la política establecida, por cuanto no existir un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <h:outputText  style=" color:  #e52d27" value="El resultado de la razón es inferior a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto no existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
                                                         <br></br><br></br>  
                                                     </p:outputPanel>
                                                 </p:column>
@@ -197,7 +197,7 @@
                                                                 <h:outputText value="#{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column style=" width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
@@ -208,11 +208,11 @@
                                                 </p:row>
                                             </p:panelGrid>
                                         </p:outputPanel>
-                                     
+
                                     </p:tab>
-                                    
+
                                     <p:tab title="Sugerencias">
-                                        
+
                                         <b>    <h:outputText value="Sugerencia"/></b>
                                         <hr></hr>
                                         <p:outputPanel id="sugerencias">  
@@ -260,11 +260,11 @@
                                                             <p:column headerText="Descripción"  style=" width: 84%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
                                                                 <h:outputText value="#{empleados.descripcion}" />
                                                             </p:column>
-                                                              <p:column style=" width: 13%; text-align: center"  >  
-                                                               
+                                                            <p:column style=" width: 13%; text-align: center"  >  
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
                                                                 </p:commandButton>
-                                                                   <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -273,8 +273,8 @@
                                             </p:panelGrid>
                                         </p:outputPanel>
                                     </p:tab>
-                                    
-                                    
+
+
                                 </p:tabView>
                                 <br></br>
                                 <div align="center">
@@ -333,7 +333,7 @@
                                         </p:column>
                                     </p:row> 
                                 </p:panelGrid>  
-                                 <br></br>
+                                <br></br>
                                 <hr></hr>
                                 <p:tabView  style="margin-top: 2%">
                                     <p:tab title="Análisis">
@@ -344,21 +344,19 @@
                                                 <p:column>
                                                     <h:outputText value="Capacidad de pago = Ingreso mensual - gasto mensual"/>
                                                     <br></br>         <h:outputText value="Capacidad de pago = $"/>
-                                                    <h:outputText value=" #{resolucionBean.totalIngresoRazon}">
+                                                    <h:outputText value="#{resolucionBean.totalIngresoRazon}">
                                                         <f:convertNumber    pattern=",#00.00" locale="en-US" />  
                                                     </h:outputText>
-                                                    <h:outputText value="- $"/>   
+                                                    <h:outputText value=" - $"/>   
                                                     <h:outputText value="#{resolucionBean.totalEgresoRazon}">
                                                         <f:convertNumber    pattern=",#00.00" locale="en-US" />  
                                                     </h:outputText>
                                                     <br></br>         
                                                     <h:outputText value="Capacidad de pago = $"/>
-                                                    <h:outputText rendered="#{resolucionBean.resultadoPagoRazon lt 0}" style=" color:  #e52d27" value="#{resolucionBean.resultadoPagoRazon}">
+                                                    <h:outputText  value="#{resolucionBean.resultadoPagoRazon}">
                                                         <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
-                                                    <h:outputText rendered="#{resolucionBean.resultadoPagoRazon gt 0}" value="#{resolucionBean.resultadoPagoRazon}">
-                                                        <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                    </h:outputText>
+
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
@@ -370,22 +368,28 @@
                                                 <p:column>
                                                     <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon gt 0}">
                                                         <b>      <h:outputText value="Capacidad de pago"/> </b>  <br></br><br></br> 
-                                                        <h:outputText value="El sobrante de esta persona es de $"/>                                                              
-                                                        <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
-                                                            <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                        <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, las deudas mensuales de esta persona no pueden ser mayores a esa suma, de lo contrario no tendrá dinero suficiente para pagar futuras deudas."/>     
-                                                        <br></br> <br></br>  
-                                                </p:outputPanel>
-                                                    <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon lt 0}">
-                                                        <b>   <h:outputText value="Capacidad de pago"/></b>   <br></br><br></br>
-                                                        <h:outputText value="El sobrante de esta persona es de $"/>                                                              
-                                                        <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
-                                                            <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                        <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, esta persona no tiene la capacidad de pagar futuras deudas."/>     
+                                                       
+                                                            <h:outputText value="El sobrante de esta persona es de $"/>                                                              
+                                                            <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
+                                                                <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                            <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, las deudas mensuales de esta persona no pueden ser mayores a esa suma, de lo contrario no tendrá dinero suficiente para pagar futuras deudas."/>     
+                                                    
                                                         <br></br> <br></br>  
                                                     </p:outputPanel>
+
+                                                    <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon lt 0}">
+                                                        <b>   <h:outputText value="Capacidad de pago"/></b>   <br></br><br></br>
+                                                     
+                                                            <h:outputText style=" color:  #e52d27" value="El sobrante de esta persona es de $"/>                                                              
+                                                            <h:outputText style=" color:  #e52d27" value="#{resolucionBean.resultadoPagoRazon}">
+                                                                <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
+                                                            </h:outputText>
+                                                            <h:outputText style=" color:  #e52d27" value=" y representa su capacidad para pagar. Por consiguiente, esta persona no tiene la capacidad de pagar futuras deudas."/>     
+                                                       
+ </p:outputPanel>
+                                                        <br></br> <br></br>  
+                                                  
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
@@ -444,11 +448,11 @@
                                                             <p:column headerText="Descripción"  style=" width: 84%" filterBy="#{empleados.descripcion}" sortBy="#{empleados.descripcion}"  >  
                                                                 <h:outputText value="#{empleados.descripcion}" />
                                                             </p:column>
-                                                          <p:column style=" width: 13%; text-align: center"  >  
-                                                                
+                                                            <p:column style=" width: 13%; text-align: center"  >  
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
                                                                 </p:commandButton>
-                                                              <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -456,14 +460,14 @@
                                                 </p:row>
                                             </p:panelGrid>
                                         </p:outputPanel>
-                                  
+
                                     </p:tab>
-                                    
+
                                     <p:tab title="Sugerencias">
-                                        
+
                                         <b>   <h:outputText value="Sugerencia"/></b>
                                         <hr></hr>
-                                        
+
                                         <p:outputPanel id="sugerencias">  
                                             <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;">
                                                 <p:row>
@@ -485,7 +489,7 @@
                                             <br></br>
                                             <b>   <h:outputText value="Lista de sugerencias"/></b>
                                             <hr></hr>
-                                            
+
                                             <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
                                                 <p:row>   
                                                     <p:column>
@@ -511,10 +515,10 @@
                                                                 <h:outputText value="#{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column style=" width: 13%; text-align: center"  >  
-                                                               
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
                                                                 </p:commandButton>
-                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -523,7 +527,7 @@
                                             </p:panelGrid>
                                         </p:outputPanel>
                                     </p:tab>
-                                    
+
                                 </p:tabView>
                                 <br></br>
                                 <div align="center">
@@ -612,8 +616,8 @@
                                         <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
                                             <h:outputText value="#{empleados.TCliente.duiCliente}" />
                                         </p:column>
-                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
-                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
                                         </p:column>
                                         <p:column headerText="Monto"  filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%" sortBy="#{empleados.TProyecto.monto}" >  
                                             <div align="right">
@@ -675,8 +679,8 @@
                                         <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
                                             <h:outputText value="#{empleados.TCliente.duiCliente}" />
                                         </p:column>
-                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
-                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
                                         </p:column>
                                         <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%" sortBy="#{empleados.TProyecto.monto}" >  
                                             <div align="right">
@@ -738,8 +742,8 @@
                                         <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
                                             <h:outputText value="#{empleados.TCliente.duiCliente}" />
                                         </p:column>
-                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
-                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
                                         </p:column>
                                         <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%;" sortBy="#{empleados.TProyecto.monto}" >  
                                             <div align="right">
@@ -801,8 +805,8 @@
                                         <p:column headerText="DUI cliente" style=" width: 15%" filterBy="#{empleados.TCliente.duiCliente}"  filterStyle="width:100%" sortBy="#{empleados.TCliente.duiCliente}">   
                                             <h:outputText value="#{empleados.TCliente.duiCliente}" />
                                         </p:column>
-                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
-                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        <p:column headerText="Modalidad" style=" width: 25%" filterBy="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
                                         </p:column>
                                         <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 10%;" sortBy="#{empleados.TProyecto.monto}" >  
                                             <div align="right">
@@ -858,14 +862,14 @@
                                         <p:column headerText="Nº" style=" width: 5%; text-align: center">  
                                             <h:outputText value=" #{No+1}" />
                                         </p:column>
-                                        <p:column headerText="Solicitud" style=" width: 15%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
                                             <h:outputText value=" #{empleados.TProyecto.codigo}" />
                                         </p:column>
-                                        <p:column headerText="Codigo cooperativa" style=" width: 18%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">   
+                                        <p:column headerText="Codigo cooperativa" style=" width: 23%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">   
                                             <h:outputText value="#{empleados.TEntidad.codigoEntidad}" />
                                         </p:column>
-                                        <p:column headerText="Modalidad" style=" width: 30%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
-                                            <h:outputText value="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
+                                        <p:column headerText="Modalidad" style=" width: 30%" filterBy="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{resolucionBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
+                                            <h:outputText value="#{resolucionBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" />
                                         </p:column>
                                         <p:column headerText="Monto" filterBy="#{empleados.TProyecto.monto}" filterStyle="width:100%"  style=" width: 12%;" sortBy="#{empleados.TProyecto.monto}" >  
                                             <div align="right">
@@ -891,12 +895,12 @@
                                                     <f:setPropertyActionListener  value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}"  />
                                                     <f:setPropertyActionListener  value="#{empleados.TEntidad}" target="#{resolucionBean.entidadeleccionada}"  />
                                                     <f:actionListener binding="#{resolucionBean.cargarResolucionCooperativas()}"/>   </p:menuitem>
-                                                     <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucionCooperativa').show()"  icon="fa fa-trash" value="Eliminar"    >
-                                                <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{solicitudBean.proyectoSeleccionado}" />
-                                                <f:setPropertyActionListener  value="#{empleados}" target="#{solicitudBean.entidadProyectoEliminar}"  />
-                                            </p:menuitem>
+                                                <p:menuitem  update=":padding" oncomplete="PF('pgEliminarResolucionCooperativa').show()"  icon="fa fa-trash" value="Eliminar"    >
+                                                    <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{resolucionBean.proyectoSeleccionado}" />
+                                                    <f:setPropertyActionListener  value="#{empleados}" target="#{resolucionBean.entidadProyectoEliminar}"  />
+                                                </p:menuitem>
                                             </p:splitButton>
-                                              
+
                                         </p:column>
                                     </p:dataTable> 
                                 </p:outputPanel>
@@ -944,8 +948,8 @@
                                     </p:dataTable> 
                                 </p:outputPanel>
                             </h:form>
-                                   <p:dialog header="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa)': false  or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerSolicitud" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
-                       <h:form target="_blank">
+                            <p:dialog header="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa': false  or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerSolicitud" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                                <h:form target="_blank">
                                     <p:outputPanel  style="width: 100%">
                                         <p:panelGrid styleClass="borderHidden" style=" width: 100%; font-size: small" >
                                             <p:row>
@@ -966,25 +970,25 @@
                                         <hr></hr>
                                         <p:tabView>
                                             <p:tab title="Beneficiario">
-                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
                                                     <b>  <h:outputText value="Cooperativa" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Código: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.codigoEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Nombre abreviado:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.abreviacionEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column  style=" width: 25%"   >
+                                                        <p:column  style=" width: 13%"   >
                                                             <h:outputText value="Nombre completo:" />
                                                         </p:column>
                                                         <p:column  colspan="3" style=" width: 50%"   >
@@ -992,13 +996,13 @@
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 13%"   >
                                                             <h:outputText value="NIT: " />
                                                         </p:column>
                                                         <p:column style=" width: 25%"  >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.nitEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 13%"   >
                                                             <h:outputText value="Giro:" />
                                                         </p:column>
                                                         <p:column style=" width: 25%"  >
@@ -1006,13 +1010,13 @@
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 13%"   >
                                                             <h:outputText value="Representante legal: " />
                                                         </p:column>
                                                         <p:column style=" width: 25%"  >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.nombreRepresentanteEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="DUI del representante:" />
                                                         </p:column>
                                                         <p:column style=" width: 25%"  >
@@ -1020,7 +1024,7 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  style=" width: 100%" >
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
                                                     <b>  <h:outputText value="Personales" /></b>  
                                                     <hr></hr>
                                                     <p:row>
@@ -1083,24 +1087,24 @@
                                                     </p:row>
                                                 </p:panelGrid>
                                                 <br></br>
-                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
                                                     <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 13%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Correo:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%" >
+                                                        <p:column style=" width: 30%" >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.correoEntidad eq ''? '----':resolucionBean.entidadeleccionada.correoEntidad}" />
                                                         </p:column >
-                                                        <p:column style=" width: 10%">
+                                                        <p:column style=" width: 15%">
                                                             <h:outputText value="Teléfono:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{resolucionBean.entidadeleccionada.telefonoEntidad}" />
                                                         </p:column>
-                                                   </p:row>
-                                                   <p:row>
+                                                    </p:row>
+                                                    <p:row>
                                                         <p:column    style=" width: 10%"  >
                                                             <h:outputText value="Móvil:" />
                                                         </p:column>
@@ -1117,7 +1121,7 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  >
+                                                <p:panelGrid rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
                                                     <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
@@ -1335,19 +1339,19 @@
                                                 </p:menuitem>
                                             </p:splitButton>
                                             <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
-                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudComercio()}"/> 
+                                                <f:actionListener binding="#{resolucionBean.verReporteSolicitudComercio()}"/> 
                                                 <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
                                                     <f:actionListener binding="#{resolucionBean.verReporteSolicitudComercioPDF()}"/> 
                                                 </p:menuitem>
                                             </p:splitButton>
                                             <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
-                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudLisiado()}"/> 
+                                                <f:actionListener binding="#{resolucionBean.verReporteSolicitudLisiado()}"/> 
                                                 <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
                                                     <f:actionListener binding="#{resolucionBean.verReporteSolicitudLisiadoPDF()}"/> 
                                                 </p:menuitem>
                                             </p:splitButton>
                                             <p:splitButton rendered="#{resolucionBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true: false}"  update=":padding" value="Ver PDF"  ajax="false" icon="fa fa-eye"  >
-                                                <f:actionListener binding="#{solicitudBean.verReporteSolicitudEmpleado()}"/> 
+                                                <f:actionListener binding="#{resolucionBean.verReporteSolicitudEmpleado()}"/> 
                                                 <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar PDF">
                                                     <f:actionListener binding="#{resolucionBean.verReporteSolicitudEmpleadoPDF()}"/> 
                                                 </p:menuitem>

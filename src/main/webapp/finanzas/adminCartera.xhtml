@@ -481,7 +481,7 @@
 
                         </p:dialog>
 
-                        <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoCooperativaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%"  appendTo="@(body)">
+                        <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoCooperativaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="65%"  appendTo="@(body)">
                             <h:form target="_blank">
                                 <b> <h:outputText value="Lista de cuotas retrasadas"/>
                                 </b>
@@ -548,10 +548,10 @@
                                 <p:fieldset>
                                     <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
                                         <p:row>
-                                            <p:column style=" width: 10%">
-                                                <h:outputText value="Total:" /> 
+                                            <p:column style=" width: 15%">
+                                                <h:outputText value="Total mora:" /> 
                                             </p:column>
-                                            <p:column style=" width: 90%"   >
+                                            <p:column style=" width: 85%"   >
                                                 <h:outputText value="$" />
                                                 <h:outputText value="#{carteraBean.totalMoraGenerada}">
                                                     <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
@@ -1001,7 +1001,7 @@
                                  </h:form>
                        </p:dialog> 
                         
-                         <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoPersonaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="60%" appendTo="@(body)">
+                         <p:dialog header="Detalle de mora"  widgetVar="dlVerHistorialCreditoPersonaMora" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="65%" appendTo="@(body)">
                             <h:form target="_blank">  
                                 
                                 <b> <h:outputText value="Lista de cuotas retrasadas"/>
@@ -1068,10 +1068,10 @@
                                             <p:fieldset>
                                                 <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
                                                     <p:row>
-                                                        <p:column style=" width: 10%">
-                                                            <h:outputText value="Total:" /> 
+                                                        <p:column style=" width: 15%">
+                                                            <h:outputText value="Total mora:" /> 
                                                         </p:column>
-                                                        <p:column style=" width: 90%"   >
+                                                        <p:column style=" width: 85%"   >
                                                             <h:outputText value="$" />
                                                             <h:outputText value="#{carteraBean.totalMoraGenerada}">
                                                                 <f:convertNumber     pattern=",#00.00" locale="en-US" /> 

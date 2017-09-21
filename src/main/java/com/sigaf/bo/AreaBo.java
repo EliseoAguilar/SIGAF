@@ -66,4 +66,10 @@ public class AreaBo implements IAreaBo {
         return areaDao.listArea2(id);
     }
 
+    @Override
+    public List<TArea> listAreaActivas(Integer id) {
+   return  this.areaDao.listAreaActivas(id);
+    
+    }
+
 }

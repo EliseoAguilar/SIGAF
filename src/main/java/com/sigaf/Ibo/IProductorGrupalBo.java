@@ -21,6 +21,8 @@ public interface IProductorGrupalBo {
     public boolean getTProductorGrupalNombre(String nombre);
 
     public List<TProductorGrupal> listProductorGrupal();
+    
+    public List<TProductorGrupal> listProductorGrupalActivo();
 
     public void delete(Integer id);
 

@@ -2919,23 +2919,23 @@ public class ProyectoBean extends Actividad {
     public String cambiar(Integer valor) {
 
         if (valor == 8) {
-            return this.tipo = "Capital de trabajo agropecuario";
+            return this.tipo = "Crédito para capital de trabajo agropecuario";
         } else if (valor == 9) {
-            return this.tipo = "Inversión agropecuario";
+            return this.tipo = "Crédito para inversión agropecuaria";
         } else if (valor == 7) {
-            return this.tipo = "Comercio";
+            return this.tipo = "Crédito para comercio";
         } else if (valor == 6) {
-            return this.tipo = "Personal";
+            return this.tipo = "Crédito personal";
         } else if (valor == 5) {
-            return this.tipo = "Lisiados de guerra";
+            return this.tipo = "Crédito para lisiados de guerra";
         } else if (valor == 4) {
-            return this.tipo = "Producción agropecuario";
+            return this.tipo = "Crédito para producción agropecuaria";
         } else if (valor == 3) {
-            return this.tipo = "Producción cooperativa";
+            return this.tipo = "Crédito para producción cooperativa";
         } else if (valor == 2) {
-            return this.tipo = "Inversión cooperativa";
+            return this.tipo = "Crédito para inversión cooperativa";
         } else {
-            return this.tipo = "Empleados";
+            return this.tipo = "Crédito para empleados";
         }
 
     }
@@ -5019,7 +5019,8 @@ public class ProyectoBean extends Actividad {
         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seguimiento guardado correctamente", null);
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
         this.listaProyectoSeguimiento = this.iseguimientoBo.listaProyectoSeguimiento(this.proyectoSeleccionado.getIdproyecto());
-
+        this.seguimiento= new TSeguimiento();
+        
     }
 
     public void crearParametro() {
@@ -5046,6 +5047,7 @@ public class ProyectoBean extends Actividad {
         LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
         auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
         this.bitacoraBo.create(auxBitacora);
+        this.parametroSeguimiento= new TParametroseguimiento();
 
         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Parámetro guardado correctamente", null);
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
@@ -5333,13 +5335,13 @@ public class ProyectoBean extends Actividad {
     public void createPagoTotal() {
 
         TPago pagoTotal = new TPago();
-        pagoTotal.setCuota((this.pago.getSaldocapital().add(this.mora)));
+        pagoTotal.setCuota((this.pago.getSaldocapital().add(this.totalMoraGenerada)));
         pagoTotal.setInteres(new BigDecimal("0"));
         pagoTotal.setAbono(new BigDecimal("0"));
         pagoTotal.setCapitalamortizado(this.pago.getSaldocapital());
         pagoTotal.setSaldocapital(new BigDecimal("0"));
         pagoTotal.setSaldoadicional(new BigDecimal("0"));
-        pagoTotal.setMora(this.mora);
+        pagoTotal.setMora(this.totalMoraGenerada);
         pagoTotal.setFecha(new Date());
         this.proyectoSeleccionado.setEstado(6);
         this.proyectoSeleccionado.setFechaFinalizacionProyecto(pagoTotal.getFecha());
@@ -5355,7 +5357,7 @@ public class ProyectoBean extends Actividad {
             numero2++;
             pagoTotal.setReferencia(numero2);
         }
-        pagoTotal.setDestino("Liquidacion");
+        pagoTotal.setDestino("Liquidación");
         this.ipagoBo.create(pagoTotal);
         this.estadoFormulario = false;
         this.enableShowSeguimiento();
@@ -5375,7 +5377,7 @@ public class ProyectoBean extends Actividad {
         auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
         this.bitacoraBo.create(auxBitacora);
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Liquidacion guardada correctamente "));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Liquidación agregada correctamente "));
 
     }
 
@@ -5659,6 +5661,7 @@ public class ProyectoBean extends Actividad {
 
     public void cargarPagoTotalPersona() {
 
+        
         this.totalMoraGenerada = new BigDecimal("0");
         this.pago = new TPago();
         this.politicaSeleccionada = this.ipoliticaBo.getPoliticaHistorica(this.proyectoSeleccionado.getTPolitica().getIdPolitica());
@@ -5744,6 +5747,7 @@ public class ProyectoBean extends Actividad {
         if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
             mesesAux = 1;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5753,6 +5757,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5760,6 +5765,7 @@ public class ProyectoBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
             mesesAux = 3;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5769,6 +5775,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5776,6 +5783,7 @@ public class ProyectoBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
             mesesAux = 6;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5785,6 +5793,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5792,6 +5801,7 @@ public class ProyectoBean extends Actividad {
         } else {
             mesesAux = 12;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5801,6 +5811,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5814,12 +5825,19 @@ public class ProyectoBean extends Actividad {
             this.mora = new BigDecimal("0");
             for (int i = 0; i < this.listaPagosMora.size(); i++) {
                 this.mora = this.mora.add(this.listaPagosMora.get(i).getAbono());
+                this.totalMoraGenerada= this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
             }
-            this.totalCapitalMora = this.pago.getSaldocapital().add(this.mora);
+            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada);
         }
-        for (int i = 0; i < this.listaPagosMora.size(); i++) {
-            this.totalMoraGenerada = this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
-        }
+        
+        
+        
+        System.out.println(this.listaPagosMora.size());
+        
+       
+
+        
+        
         this.mostrarCierre = false;
         this.mostrarCierrePersona = false;
         this.mostrarRefinanciamientoPersona = false;
@@ -5899,7 +5917,6 @@ public class ProyectoBean extends Actividad {
             }
         }
         this.fechaEstipulada = calendar.getTime();
-        System.out.println(this.fechaEstipulada);
         DateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd");
         inFormat.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
         Date purchaseDate = new Date();
@@ -5910,8 +5927,6 @@ public class ProyectoBean extends Actividad {
             Logger.getLogger(CarteraBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(this.fechaAplicacion);
-        this.pago.setFecha(this.fechaAplicacion);
-        System.out.println(this.fechaAplicacion);
         System.out.println(this.fechaEstipulada);
         int mesesAux = 0;
         int numeroCuotasRetraso = 0;
@@ -5920,6 +5935,7 @@ public class ProyectoBean extends Actividad {
         if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
             mesesAux = 1;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5929,6 +5945,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5936,6 +5953,7 @@ public class ProyectoBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
             mesesAux = 3;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5945,6 +5963,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5952,6 +5971,7 @@ public class ProyectoBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
             mesesAux = 6;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5961,6 +5981,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5968,6 +5989,7 @@ public class ProyectoBean extends Actividad {
         } else {
             mesesAux = 12;
             while (this.fechaAplicacion.compareTo(calendar.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -5977,11 +5999,13 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
             }
         }
+        //this.totalCapitalMora = this.mora.add(this.pago.getSaldocapital());
         if (this.listaPagosMora.size() == 0) {
             this.mora = new BigDecimal("0");
             this.totalCapitalMora = this.pago.getSaldocapital();
@@ -5989,12 +6013,15 @@ public class ProyectoBean extends Actividad {
             this.mora = new BigDecimal("0");
             for (int i = 0; i < this.listaPagosMora.size(); i++) {
                 this.mora = this.mora.add(this.listaPagosMora.get(i).getAbono());
+                this.totalMoraGenerada= this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
             }
-            this.totalCapitalMora = this.pago.getSaldocapital().add(this.mora);
+            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada);
         }
-        for (int i = 0; i < this.listaPagosMora.size(); i++) {
-            this.totalMoraGenerada = this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
-        }
+        
+        
+        
+        System.out.println(this.listaPagosMora.size());
+        
         this.mostrarCierre = false;
         this.mostrarCierrePersona = false;
         this.mostrarRefinanciamientoPersona = false;

@@ -3494,8 +3494,8 @@ public class SolicitudBean extends Actividad {
             this.msgDestino = "";
         }
         if (this.proyecto.getTTipoCredito().getIdTipoCredito() != 0) {
-            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-                this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+           if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+                 this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
                 this.estadoFormulario = false;
             } else {
                 this.msgMonto = "";
@@ -3808,8 +3808,8 @@ public class SolicitudBean extends Actividad {
             this.msgDestino = "";
         }
         if (this.proyecto.getTTipoCredito().getIdTipoCredito() != 0) {
-            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-                this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+           if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+               this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
                 this.estadoFormulario = false;
             } else {
                 this.msgMonto = "";
@@ -4153,8 +4153,8 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgDestino = "";
         }
-        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+             this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
             this.estadoFormulario = false;
         } else {
             this.msgMonto = "";
@@ -4518,8 +4518,8 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgDestino = "";
         }
-        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+          if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+             this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
             this.estadoFormulario = false;
         } else {
             this.msgMonto = "";
@@ -4819,8 +4819,8 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgDestino = "";
         }
-        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+          if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+               this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
             this.estadoFormulario = false;
         } else {
             this.msgMonto = "";
@@ -5513,7 +5513,7 @@ public class SolicitudBean extends Actividad {
 
     public void mostrarEntidades() {
 
-        this.listaEntidades = ientidadBo.listTEndidad();
+        this.listaEntidades = ientidadBo.listTEndidadActiva();
 
     }
 
@@ -7090,20 +7090,20 @@ public class SolicitudBean extends Actividad {
         Boolean validado = true;
         if (this.proyecto.getTTipoCredito().getIdTipoCredito() == 0) {
             this.msgModalidad = "Debe seleccionar una modalidad";
-            this.estadoFormulario = false;
+            validado = false;
         } else {
             this.msgModalidad = "";
         }
         if (this.proyecto.getDestinoProyecto() == "") {
             this.msgDestino = "Debe introducir el destino";
-            this.estadoFormulario = false;
+            validado = false;
         } else {
             this.msgDestino = "";
         }
         if (this.proyecto.getTTipoCredito().getIdTipoCredito() != 0) {
-            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-                this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
-                this.estadoFormulario = false;
+         if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+                 this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+               validado = false;
             } else {
                 this.msgMonto = "";
             }
@@ -7148,8 +7148,8 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgDestino = "";
         }
-        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().compareTo(this.politica.getMontoMinimo()) <= 0 || this.proyecto.getMonto().compareTo(this.politica.getMontoMaximo()) >= 0)) {
-            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+         if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+             this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
             validado = false;
         } else {
             this.msgMonto = "";

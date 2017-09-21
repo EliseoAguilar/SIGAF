@@ -143,10 +143,25 @@ public class AyudaBean extends Actividad {
         TreeNode node48 = new DefaultTreeNode("Mapa del sitio", node6);
 
     }
+    
+    private String pagina;
+
+    public String getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(String pagina) {
+        this.pagina = pagina;
+    }
 
     public void seleccion() {
 
         this.mostrarDocumento = true;
+        if(this.selectedNode.getData()=="Agronegocios"){
+            
+            this.pagina="108";
+            
+        }
 
     }
 

@@ -57,5 +57,11 @@ public class ProductorGrupalBo implements IProductorGrupalBo {
     return this.productorGrupalDao.getTProductorGrupalNombre(nombre);
     
     }
+
+    @Override
+    public List<TProductorGrupal> listProductorGrupalActivo() {
+    return this.productorGrupalDao.listProductorGrupalActivo();
+    
+    }
     
 }

@@ -24,6 +24,8 @@ public interface IAreaBo {
    
    public List<TArea> listArea(Integer id);
    
+   public List<TArea> listAreaActivas(Integer id);
+   
    public List<TArea> listArea2(Integer id);
 
    public void delete(Integer id);

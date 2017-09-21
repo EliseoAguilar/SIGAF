@@ -36,7 +36,7 @@
                                                 <h:outputText value="Tasa de interés(%):*"/>
                                             </p:column>
                                             <p:column style=" width: 50%">
-                                                <h:outputText value="Tasa de interés x mora(%):*"/>
+                                                <h:outputText value="Tasa de interés por mora(%):*"/>
                                             </p:column>
                                         </p:row>
                                         <p:row>
@@ -132,7 +132,7 @@
                                                 </h:outputText>
                                             </div>
                                         </p:column>
-                                        <p:column headerText="Tasa de interés x mora (%)" width="15%" filterBy="#{configuraciones.tasaMoraAgronegocio}" sortBy="#{configuraciones.tasaMoraAgronegocio}" >
+                                        <p:column headerText="Tasa de interés por mora (%)" width="15%" filterBy="#{configuraciones.tasaMoraAgronegocio}" sortBy="#{configuraciones.tasaMoraAgronegocio}" >
                                             <div align="center">
                                                 <h:outputText value="#{configuraciones.tasaMoraAgronegocio}">
                                                     <f:convertNumber     pattern="#0.00" locale="en-US" /> 
@@ -186,7 +186,7 @@
                                                 </h:outputText>
                                             </p:column>  
                                             <p:column style=" width: 30%">
-                                                <h:outputText value="Tasa de interés x mora (%):"/>
+                                                <h:outputText value="Tasa de interés por mora (%):"/>
                                             </p:column>
                                             <p:column style=" width: 25%">
                                                 <h:outputText value="#{configuracionAgronegocioBean.configuracionSeleccionada.tasaMoraAgronegocio}">

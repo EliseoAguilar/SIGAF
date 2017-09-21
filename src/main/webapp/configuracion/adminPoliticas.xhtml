@@ -104,7 +104,7 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="15%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -181,22 +181,22 @@
                                                     <p:inputText id="globalFilter" onkeyup="PF('dataPoliticasProduccionCooperativa').filter()" style="width:150px" placeholder="Buscar"/>
                                                 </p:outputPanel>
                                             </f:facet>
-                                            <p:column headerText="Nº" width="5%" style=" text-align: center" >
+                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -204,13 +204,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto minimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -231,8 +231,8 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
+                                            
+                                         
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -266,19 +266,19 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -286,13 +286,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto minimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -313,8 +313,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -349,19 +347,19 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -369,13 +367,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto minimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -396,8 +394,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -428,23 +424,22 @@
                                                     <p:inputText id="globalFilter" onkeyup="PF('dataPoliticasComercio').filter()" style="width:150px" placeholder="Buscar"/>
                                                 </p:outputPanel>
                                             </f:facet>
-                                            <p:column headerText="Nº" width="5%" style=" text-align: center" >
+                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
-
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -452,13 +447,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto minimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -479,8 +474,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -511,22 +504,22 @@
                                                     <p:inputText id="globalFilter" onkeyup="PF('dataPoliticasAgroCapital').filter()" style="width:150px" placeholder="Buscar"/>
                                                 </p:outputPanel>
                                             </f:facet>
-                                            <p:column headerText="Nº" width="5%" style=" text-align: center" >
+                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -534,13 +527,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -561,8 +554,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -593,22 +584,22 @@
                                                     <p:inputText id="globalFilter" onkeyup="PF('dataPoliticasAgroInversion').filter()" style="width:150px" placeholder="Buscar"/>
                                                 </p:outputPanel>
                                             </f:facet>
-                                            <p:column headerText="Nº" width="5%" style=" text-align: center" >
+                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -616,13 +607,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -643,8 +634,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -678,19 +667,19 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="10%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  width="15%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
+                                            <p:column  width="20%"  headerText="Interés por mora (%)" filterBy="#{pol.tasaInteresMora}" sortBy="#{pol.tasaInteresMora}">
                                                 <div align="center">     <h:outputText value="#{pol.tasaInteresMora}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto maximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
+                                            <p:column width="15%" headerText="Monto máximo" filterBy="#{pol.montoMaximo}" sortBy="#{pol.montoMaximo}">
                                                 <div align="right"> 
                                                     <h:outputText value="$"/>
                                                     <h:outputText value="#{pol.montoMaximo}"> 
@@ -698,13 +687,13 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="20%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
+                                            <p:column width="15%" headerText="Monto mínimo" filterBy="#{pol.montoMinimo}" sortBy="#{pol.montoMinimo}">
                                                 <div align="right">    <h:outputText value="$"/>    <h:outputText value="#{pol.montoMinimo}">
                                                         <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Fecha de registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
@@ -725,8 +714,6 @@
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
-                                            <f:facet name="footer">
-                                            </f:facet>
                                         </p:dataTable>
                                     </h:panelGrid>
                                 </p:outputPanel>

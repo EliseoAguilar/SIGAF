@@ -25,6 +25,8 @@ public interface IAreaDao {
 
     public List<TArea> listTArea(Integer id);
     
+    public List<TArea> listAreaActivas(Integer id);
+    
     public List<TArea> listArea2(Integer id);
 
     public void delete(Integer id);

@@ -118,7 +118,7 @@ public class EmpleadoDao implements IEmpleadoDao {
 
             Session session = this.sessionFactory.openSession();
            
-            listaEmpleados = session.createQuery("from  TEmpleado e  inner join fetch e.TEmpleadoAreas ea where ea.TArea.idArea =:id and  ea.TArea.nombreArea != 'Socios' and e.estadoEmpleado=true ").setParameter("id", idEmpleadoArea).list();
+            listaEmpleados = session.createQuery("from  TEmpleado e  inner join fetch e.TEmpleadoAreas ea where ea.TArea.idArea =:id and  ea.TArea.nombreArea != 'Socios' and e.estadoE=true ").setParameter("id", idEmpleadoArea).list();
             session.close();       
 
         return listaEmpleados;

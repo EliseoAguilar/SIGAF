@@ -279,7 +279,7 @@ public class ParametroBean extends Actividad {
         } else {
             this.msgNombre = "";
         }
-        if (this.parametro.getUnidad().length() < 3) {
+        if (this.parametro.getUnidad().length() < 1) {
             this.msgUnidad = "La unidad es requerida";
             this.estadoFormulario = false;
         } else {
@@ -309,7 +309,7 @@ public class ParametroBean extends Actividad {
         } else {
             this.msgNombre = "";
         }
-        if (this.parametroSeleccionado.getUnidad().length() < 3) {
+        if (this.parametroSeleccionado.getUnidad().length() < 1) {
             this.msgUnidad = "La unidad debe es requerida";
             this.estadoFormulario = false;
         } else {
