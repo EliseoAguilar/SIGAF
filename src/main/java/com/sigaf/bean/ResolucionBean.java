@@ -1934,25 +1934,10 @@ public class ResolucionBean extends Actividad {
         if (this.aprobar == true) {
             this.proyectoSeleccionado.setEstado(3);
             this.proyectoSeleccionado.setCalificacion("Pendiente");
-            this.listaComprobacioCliente = this.ientidadProyectoBo.listTEndidadProyectosAprovadosClinte(this.Entidadeleccionada.getIdEntidad());
-            if (this.listaComprobacioCliente.size() == 0) {//generamos el codigo del cliente
-                boolean esta = false;
-                this.listaEntidadClienteProyectos = this.ientidadProyectoBo.listTEndidadProyectos();
-                for (int i = 0; i < this.listaEntidadClienteProyectos.size(); i++) {
-                    if (i == 0) {
-                        this.listaEntidadClienteProyectosFiltrada.add(this.listaEntidadClienteProyectos.get(i));
-                    } else {
-                        for (int y = 0; y < this.listaEntidadClienteProyectosFiltrada.size(); y++) {
-                            if (this.listaEntidadClienteProyectos.get(i).getTEntidad().getIdEntidad() == this.listaEntidadClienteProyectosFiltrada.get(y).getTEntidad().getIdEntidad()) {
-                                esta = true;
-                            }
-                        }
-                        if (esta == false) {
-                            this.listaEntidadClienteProyectosFiltrada.add(this.listaEntidadClienteProyectos.get(i));
-                        }
-                    }
-                    esta = false;
-                }
+            
+            
+            if(this.Entidadeleccionada.getCodigoClienteEntidad().equals("")){
+                
                 this.listaEntidadesClientes = this.ientidadBo.listTEndidadCodigo();
                 int correlativo = this.listaEntidadesClientes.size() + 1;
                 if (correlativo < 10) {
@@ -1967,8 +1952,11 @@ public class ResolucionBean extends Actividad {
                     this.Entidadeleccionada.setCodigoClienteEntidad("COP-" + correlativo);
                 }
                 this.ientidadBo.update(this.Entidadeleccionada);
-            } else {
+                
             }
+            
+                
+           
             this.listaAprobado = this.iproyectoBo.listTCreditos();
             int codigoProyecto = this.listaAprobado.size() + 1;
             if (codigoProyecto < 10) {
@@ -2084,17 +2072,11 @@ public class ResolucionBean extends Actividad {
         if (this.aprobar == true) {
             this.proyectoSeleccionado.setEstado(3);
             this.proyectoSeleccionado.setCalificacion("Pendiente");
-            DateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd");
-            inFormat.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
-            Date purchaseDate = new Date();
-            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                this.proyectoSeleccionado.setFechaAprovacion(formatoDelTexto.parse(inFormat.format(purchaseDate)));
-            } catch (ParseException ex) {
-                Logger.getLogger(ResolucionBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.listaCliente = this.iclienteProyectoBo.listTClienteProyectoAprovadosComprabacion(this.clienteSeleccionado.getIdCliente());
-            if (this.listaCliente.size() == 0) {//generamos el codigo del cliente
+           
+            //this.listaCliente = this.iclienteProyectoBo.listTClienteProyectoAprovadosComprabacion(this.clienteSeleccionado.getIdCliente());
+            
+            
+            if (this.clienteSeleccionado.getCodigoCliente().equals("")) {//generamos el codigo del cliente
                 this.listaClientes = this.iclienteBo.listClienteCodigo();
                 int correlativo = this.listaClientes.size() + 1;
                 if (correlativo < 10) {
@@ -2108,11 +2090,12 @@ public class ResolucionBean extends Actividad {
                 } else {
                     this.clienteSeleccionado.setCodigoCliente("PERS-" + correlativo);
                 }
-            } else {
-
+                
+                this.iclienteBo.update(this.clienteSeleccionado);
+                
             }
-            this.iclienteBo.update(this.clienteSeleccionado);
-            this.listaAprobado = this.iproyectoBo.listTProyectoAprobados();
+           
+            this.listaAprobado = this.iproyectoBo.listTCreditos();
             int codigoProyecto = this.listaAprobado.size() + 1;
             if (codigoProyecto < 10) {
                 this.proyectoSeleccionado.setCodigoProyecto("CRED-0000" + codigoProyecto);
@@ -2125,6 +2108,9 @@ public class ResolucionBean extends Actividad {
             } else {
                 this.proyectoSeleccionado.setCodigoProyecto("CRED-" + codigoProyecto);
             }
+            
+            
+            
             this.iproyectoBo.update(this.proyectoSeleccionado);
             TEmpleado empleado = new TEmpleado();
             empleado.setIdEmpleado(24);

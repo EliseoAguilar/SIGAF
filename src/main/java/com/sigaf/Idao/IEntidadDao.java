@@ -25,6 +25,8 @@ public interface IEntidadDao {
     public List<TEntidad> listTEndidadCodigo();
 
     public List<TEntidad> listTEndidadTodos();
+    
+     public List<TEntidad> listTEndidadActiva();
 
     public void delete(Integer id);
 

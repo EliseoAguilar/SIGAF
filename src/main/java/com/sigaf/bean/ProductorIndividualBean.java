@@ -499,7 +499,7 @@ public class ProductorIndividualBean extends Actividad {
 
     public void mostrarGrupos() {
 
-        this.listaProductorGrupal = this.productorGrupalBo.listProductorGrupal();
+        this.listaProductorGrupal = this.productorGrupalBo.listProductorGrupalActivo();
 
     }
 

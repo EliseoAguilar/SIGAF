@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProyectoSeguimiento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="669d977c-beb6-4031-97cf-c28dba5f2d07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="313"/>
+	<property name="ireport.y" value="299"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -116,7 +116,7 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="442" splitType="Stretch">
+		<band height="425" splitType="Stretch">
 			<textField>
 				<reportElement x="112" y="149" width="105" height="20" uuid="079d4a5d-d7ac-454a-ae0f-a68f7b3ef719"/>
 				<textElement>
@@ -174,7 +174,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESCRIPCIÓN</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="309" y="400" width="61" height="20" uuid="d4c6b539-c6be-4b81-a1c6-086e4eca8051"/>
+				<reportElement x="396" y="400" width="61" height="20" uuid="d4c6b539-c6be-4b81-a1c6-086e4eca8051"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -191,7 +191,7 @@ FROM
 				<reportElement x="0" y="420" width="555" height="1" uuid="485f8353-bb5a-4978-94f3-bb8bdc587668"/>
 			</line>
 			<staticText>
-				<reportElement x="398" y="400" width="61" height="20" uuid="62021c6e-768f-4049-a83c-73131f5b3b33"/>
+				<reportElement x="476" y="400" width="61" height="20" uuid="62021c6e-768f-4049-a83c-73131f5b3b33"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -274,23 +274,23 @@ FROM
 		</band>
 	</title>
 	<detail>
-		<band height="22">
+		<band height="30">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="309" y="1" width="88" height="20" uuid="2a1e2c20-f86c-4ba6-8eab-3c657bfd832b"/>
+				<reportElement x="396" y="1" width="80" height="20" uuid="2a1e2c20-f86c-4ba6-8eab-3c657bfd832b"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_seguimiento_fechaseguimiento}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="26" y="1" width="281" height="20" uuid="64d11f04-c1e6-4c1a-989b-0b3cc5f7d358"/>
-				<textElement>
+				<reportElement x="26" y="1" width="359" height="20" uuid="64d11f04-c1e6-4c1a-989b-0b3cc5f7d358"/>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_seguimiento_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="398" y="1" width="61" height="20" uuid="cb804c4c-3354-420a-83b8-5fc5c91ace75"/>
+				<reportElement x="476" y="1" width="61" height="20" uuid="cb804c4c-3354-420a-83b8-5fc5c91ace75"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>

@@ -66,7 +66,13 @@ public class EntidadBo implements IEntidadBo {
 
     @Override
     public List<TEntidad> listTEndidadCodigo() {
-    return this.ientidadDao.listTEndidadCodigo();
+        return this.ientidadDao.listTEndidadCodigo();
+    }
+
+    @Override
+    public List<TEntidad> listTEndidadActiva() {
+        return this.ientidadDao.listTEndidadActiva();
+
     }
 
 }

@@ -53,7 +53,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_comprador_estado_comprador}.equals( true )? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE COMPRADORES DETALLISTAS ACTIVOS</style>": "<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE COMPRADORES DETALLISTAS INACTIVOS</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{estado_comprador}.equals( true )? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE COMPRADORES DETALLISTAS ACTIVOS</style>": "<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE COMPRADORES DETALLISTAS INACTIVOS</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="104" width="555" height="1" uuid="e901f83d-7b30-4359-bdab-f7d99cc28ccf"/>

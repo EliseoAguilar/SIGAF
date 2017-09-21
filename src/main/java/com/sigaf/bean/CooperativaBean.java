@@ -780,7 +780,7 @@ public class CooperativaBean extends Actividad {
         String guardarM = "data:" + tipoM + ";base64," + b64M;
         this.Entidadeleccionada.setCredencialEntidad(guardarM);
         this.showImagenCredencial = false;
-        FacesMessage message = new FacesMessage("Nit cargada");
+        FacesMessage message = new FacesMessage("Nit cargado");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
@@ -810,7 +810,7 @@ public class CooperativaBean extends Actividad {
     public void validarFormulario() {
         this.estadoFormulario = true;
         if (this.datos.getCodigoEntidad().length() == 0) {
-            this.msgCodigoE = "El codigo es requerido";
+            this.msgCodigoE = "El código es requerido";
             this.estadoFormulario = false;
         } else {
             this.msgCodigoE = "";
@@ -913,31 +913,31 @@ public class CooperativaBean extends Actividad {
             this.msgNitRepresentanteE = "";
         }
         if (this.Entidad.getMisionEntidad().length() < 10) {
-            this.msgMisionE = "La mision es requerida";
+            this.msgMisionE = "La misión es requerida";
             this.estadoFormularioE = false;
         } else {
             this.msgMisionE = "";
         }
         if (this.Entidad.getVisionEntidad().length() < 10) {
-            this.msgVisionE = "La vision es requerida";
+            this.msgVisionE = "La visión es requerida";
             this.estadoFormularioE = false;
         } else {
             this.msgVisionE = "";
         }
         if (this.Entidad.getTelefonoEntidad().length() < 8) {
-            this.msgTelefonoE = "El telefono debe contener 8 caracteres";
+            this.msgTelefonoE = "El teléfono debe contener 8 caracteres";
             this.estadoFormularioE = false;
         } else {
             this.msgTelefonoE = "";
         }
         if (this.Entidad.getCelularEntidad().length() < 8) {
-            this.msgMovilE = "El movil debe contener 8 caracteres";
+            this.msgMovilE = "El movíl debe contener 8 caracteres";
             this.estadoFormularioE = false;
         } else {
             this.msgMovilE = "";
         }
         if (this.Entidad.getDireccionEntidad().length() < 8) {
-            this.msgDireccionE = "La direcion es requeridad";
+            this.msgDireccionE = "La direción es requeridad";
             this.estadoFormularioE = false;
         } else {
             this.msgDireccionE = "";

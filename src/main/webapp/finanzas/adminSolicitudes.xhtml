@@ -214,7 +214,7 @@
                                                     </p:row>
                                                     <p:row>
                                                         <p:column> 
-                                                            <p:lightBox iframe="true"  width="700px" height="500px">
+                                                            <p:lightBox iframe="true"  width="900px" height="550px">
                                                                 <h:outputLink value="#{solicitudBean.cooperativa.balanceGeneral}" title="Balance general">
                                                                     <ul type="square">
                                                                         <li>
@@ -626,7 +626,7 @@
                                                 <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;" >
                                                     <p:row>
                                                         <p:column> 
-                                                            <p:lightBox iframe="true"  width="900px" height="600px">
+                                                            <p:lightBox iframe="true"  width="900px" height="550px">
                                                                 <h:outputLink value="#{solicitudBean.cooperativa.presupuesto}" title="Presupuesto o cotización">
                                                                     <ul type="square">
                                                                         <li>
@@ -6821,10 +6821,10 @@
                                         <p:column headerText="Nº" style="width: 5%; text-align: center">  
                                             <h:outputText value=" #{No+1}" />
                                         </p:column>
-                                        <p:column headerText="Solicitud" style=" width: 15%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
+                                        <p:column headerText="Solicitud" style=" width: 10%" filterBy="#{empleados.TProyecto.codigo}"  filterStyle="width:100%" sortBy="#{empleados.TProyecto.codigo}">  
                                             <h:outputText value=" #{empleados.TProyecto.codigo}" />
                                         </p:column>
-                                        <p:column headerText="Código cooperativa" style=" width: 18%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">   
+                                        <p:column headerText="Código cooperativa" style=" width: 23%" filterBy="#{empleados.TEntidad.codigoEntidad}"  filterStyle="width:100%" sortBy="#{empleados.TEntidad.codigoEntidad}">   
                                             <h:outputText value="#{empleados.TEntidad.codigoEntidad}" />
                                         </p:column>
                                         <p:column headerText="Modalidad" style=" width: 30%" filterBy="#{solicitudBean.cambiar(empleados.TProyecto.TTipoCredito.idTipoCredito)}" filterStyle="width:100%" sortBy="#{solicitudBean.cambiar(empleados.TTipoCredito.idTipoCredito)}">   
@@ -7016,7 +7016,7 @@
                                     </p:outputPanel>
                                 </h:form>
                             </p:dialog>
-                            <p:dialog header="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa)': false  or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerSolicitud" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                            <p:dialog header="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa': false  or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerSolicitud" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
                                 <h:form target="_blank">
                                     <p:outputPanel  style="width: 100%">
                                         <p:panelGrid styleClass="borderHidden" style=" width: 100%; font-size: small" >
@@ -7038,25 +7038,25 @@
                                         <hr></hr>
                                         <p:tabView>
                                             <p:tab title="Beneficiario">
-                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
+                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
                                                     <b>  <h:outputText value="Cooperativa" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Código: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.codigoEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Nombre abreviado:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.abreviacionEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column  style=" width: 25%"   >
+                                                        <p:column  style=" width: 15%"   >
                                                             <h:outputText value="Nombre completo:" />
                                                         </p:column>
                                                         <p:column  colspan="3" style=" width: 50%"   >
@@ -7064,35 +7064,35 @@
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="NIT: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.nitEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Giro:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.giroEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Representante legal: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.nombreRepresentanteEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="DUI del representante:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value=" #{solicitudBean.entidadeleccionada.duiRepresentanteEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  style=" width: 100%" >
+                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
                                                     <b>  <h:outputText value="Personales" /></b>  
                                                     <hr></hr>
                                                     <p:row>
@@ -7155,26 +7155,26 @@
                                                     </p:row>
                                                 </p:panelGrid>
                                                 <br></br>
-                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
+                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
                                                     <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 13%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Correo:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%" >
+                                                        <p:column style=" width: 30%" >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.correoEntidad eq ''? '----': solicitudBean.entidadeleccionada.correoEntidad }" />
                                                         </p:column >
-                                                        <p:column style=" width: 10%">
+                                                        <p:column style=" width: 15%">
                                                             <h:outputText value="Teléfono:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.telefonoEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
                                                         <p:column    style=" width: 10%"  >
-                                                            <h:outputText value="Movil:" />
+                                                            <h:outputText value="Móvil:" />
                                                         </p:column>
                                                         <p:column  colspan="3"  style=" width: 20%"  >
                                                             <h:outputText value="#{solicitudBean.entidadeleccionada.celularEntidad}" />
@@ -7189,8 +7189,8 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  >
-                                                    <b>  <h:outputText value="Contacto" /></b>  
+                                          <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
+                                                          <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
                                                         <p:column style=" width: 13%"   >
@@ -7335,7 +7335,7 @@
                                                         </p:row> 
                                                         <p:row rendered="#{solicitudBean.cooperativaSeleccionada.balanceGeneral ne null}"> 
                                                             <p:column colspan="5"  style=" width: 33%"   >
-                                                                <p:lightBox iframe="true" width="700px" height="500px">
+                                                                <p:lightBox iframe="true" width="900px" height="550px">
                                                                     <h:outputLink value="#{solicitudBean.cooperativaSeleccionada.balanceGeneral}" title="Balance general">
                                                                         <h:outputText class="etiqueta" value="Balance general" />
                                                                     </h:outputLink>
@@ -7358,7 +7358,7 @@
                                                         </p:row>
                                                         <p:row rendered="#{solicitudBean.cooperativaSeleccionada.presupuesto ne null}" >
                                                             <p:column colspan="3"   >
-                                                                <p:lightBox iframe="true" width="700px" height="500px">
+                                                                <p:lightBox iframe="true" width="900px" height="550px">
                                                                     <h:outputLink value="#{solicitudBean.cooperativaSeleccionada.presupuesto}" title="Presupuesto o cotización">
                                                                         <h:outputText class="etiqueta" value="Presupuesto o cotización" />
                                                                     </h:outputLink>

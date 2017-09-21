@@ -164,7 +164,7 @@ public class AsesoriaBean extends Actividad {
     }
 
     public List<TArea> getListaArea() {
-        return this.listaArea = this.areaBo.listArea(1);
+        return this.listaArea = this.areaBo.listAreaActivas(1);
     }
 
     public void setListaArea(List<TArea> listaArea) {

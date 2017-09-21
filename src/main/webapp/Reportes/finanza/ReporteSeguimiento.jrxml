@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProyectoSeguimiento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="669d977c-beb6-4031-97cf-c28dba5f2d07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="332"/>
+	<property name="ireport.y" value="331"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -240,14 +240,14 @@ WHERE
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PARÁMETROS</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="243" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
+				<reportElement x="233" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">VALOR</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="313" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
+				<reportElement x="303" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>

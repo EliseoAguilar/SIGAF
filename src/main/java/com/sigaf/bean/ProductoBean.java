@@ -439,7 +439,7 @@ public class ProductoBean extends Actividad {
 
     public void updateListaProductos() {
 
-        this.listaProductoresIndividuales = this.iproductorIndividual.listProductorIndividual();
+        this.listaProductoresIndividuales = this.iproductorIndividual.listProductorIndividualActivos();
 
     }
 

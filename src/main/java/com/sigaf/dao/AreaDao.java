@@ -101,4 +101,11 @@ public class AreaDao implements IAreaDao {
 
     }
 
+    @Override
+    public List<TArea> listAreaActivas(Integer id) {
+    Session session = this.sessionFactory.openSession();
+        List<TArea> listaArea = session.createQuery("select distinct ar from TArea ar left join fetch ar.TEmpleadoAreas arem  where ar.TEntidad.idEntidad =:id and ar.nombreArea != 'Socios' and ar.estadoArea=true order by ar.codigoArea ").setParameter("id", id).list();
+        session.close();
+        return listaArea; }
+
 }

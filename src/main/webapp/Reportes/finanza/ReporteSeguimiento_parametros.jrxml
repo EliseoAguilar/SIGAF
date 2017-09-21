@@ -45,7 +45,7 @@ FROM
 	<field name="t_seguimiento_idproyecto" class="java.lang.Integer"/>
 	<field name="t_seguimiento_fechaseguimiento" class="java.sql.Date"/>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="93baa287-4a4a-4cdb-a110-b1dc0a480a0f"/>
 				<textFieldExpression><![CDATA[$F{t_parametroseguimiento_nombre}]]></textFieldExpression>
@@ -54,12 +54,13 @@ FROM
 				<reportElement x="120" y="0" width="80" height="20" uuid="a0ca7cac-f977-4d8c-931d-f3fe6b853707"/>
 				<textFieldExpression><![CDATA[$F{t_parametroseguimiento_unidad}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="226" y="0" width="74" height="20" uuid="7668c925-6dd3-4064-86a9-adb6a3186418"/>
+			<textField pattern="###0.00">
+				<reportElement x="216" y="0" width="74" height="20" uuid="7668c925-6dd3-4064-86a9-adb6a3186418"/>
 				<textFieldExpression><![CDATA[$F{t_parametro_valor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="300" y="0" width="255" height="20" uuid="410e623b-7df2-4a6c-8925-3d3159dd0d02"/>
+				<reportElement x="291" y="0" width="245" height="20" uuid="410e623b-7df2-4a6c-8925-3d3159dd0d02"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_parametro_descripcion}]]></textFieldExpression>
 			</textField>
 		</band>

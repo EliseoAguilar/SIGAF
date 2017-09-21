@@ -227,7 +227,7 @@ public class ClienteProyectoDao implements IClienteProyectoDao {
     public List<TClienteProyecto> listTClienteProyectoAprovadosComprabacion(Integer id) {
 
         Session session = this.sessionFactory.openSession();
-        List<TClienteProyecto> listaClienteProyecto = session.createQuery("from TClienteProyecto p inner join fetch p.TProyecto f inner join fetch p.TCliente c where f.estado=3 AND p.TCliente.idCliente=:id").setParameter("id", id).list();
+        List<TClienteProyecto> listaClienteProyecto = session.createQuery("from TClienteProyecto p inner join fetch p.TProyecto f inner join fetch p.TCliente c where (f.estado=3 or f.estado=5 or f.estado=6 or f.estado=7) AND p.TCliente.idCliente=:id").setParameter("id", id).list();
         session.close();
         return listaClienteProyecto;
 

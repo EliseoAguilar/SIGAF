@@ -189,7 +189,7 @@
                                             <br></br>
                                             <b>
                                                 <h:outputText value="$"/>
-                                                <h:outputText value="#{proyectoBean.mora}">
+                                                <h:outputText value="#{proyectoBean.totalMoraGenerada}">
                                                     <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
                                                 <p:commandLink id="ajax" oncomplete="PF('dgDetalle').show()"    >
@@ -240,7 +240,7 @@
                                 <b> <h:outputText value="Lista de cuotas retrasadas"/>
                                 </b>
                                 <hr></hr>
-                                <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{carteraBean.listaPagosMora}"
+                                <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{proyectoBean.listaPagosMora}"
                                               style="width: 100%;"
                                               paginator="true"
                                               rows="5"
@@ -287,10 +287,10 @@
                                         </div>
                                     </p:column> 
                                     <p:column   
-                                        headerText="Total" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
+                                        headerText="Total" width="10%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
                                         <div align="center">
                                             <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.abono}">
+                                            <h:outputText value="#{entidades.interes}">
                                                 <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                             </h:outputText>
                                         </div>
@@ -330,7 +330,7 @@
                                         <p:column style=" width: 25%">
                                         </p:column>
                                         <p:column colspan="1" > 
-                                            <p:calendar  id="cFecha" value="#{proyectoBean.proyectoSeleccionado.fechaIncobrabilidad}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                            <p:calendar  id="cFecha" value="#{proyectoBean.proyectoSeleccionado.fechaIncobrabilidad}" maxdate="#{proyectoBean.hoy}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
                                         </p:column>
                                     </p:row> 
                                 </p:panelGrid>                             
@@ -470,7 +470,7 @@
                                         <p:column style=" width: 22%">
                                         </p:column>
                                         <p:column colspan="1" > 
-                                            <p:calendar  id="cFecha" value="#{proyectoBean.proyectoSeleccionado.fechaIncobrabilidad}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                            <p:calendar  id="cFecha" value="#{proyectoBean.proyectoSeleccionado.fechaIncobrabilidad}" maxdate="#{proyectoBean.hoy}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
                                         </p:column>
                                     </p:row> 
                                 </p:panelGrid>                             
@@ -747,7 +747,7 @@
                                             <br></br>
                                             <b>
                                                 <h:outputText value="$"/>
-                                                <h:outputText value="#{proyectoBean.mora}">
+                                                <h:outputText value="#{proyectoBean.totalMoraGenerada}">
                                                     <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
                                                 <p:commandLink  oncomplete="PF('dgDetalle').show()"    >
@@ -813,7 +813,7 @@
                                         headerText="Nº" width="5%" style="text-align: center" >                                             
                                         <h:outputText value="#{No+1}"  />  
                                     </p:column> 
-                                    <p:column   
+                                   <p:column   
                                         headerText="Fecha de pago" width="10%" filterBy="#{entidades.fecha}" sortBy="#{entidades.fecha}" >                                             
                                         <div align="center">
                                             <h:outputText value="#{entidades.fecha}">
@@ -847,10 +847,10 @@
                                         </div>
                                     </p:column> 
                                     <p:column   
-                                        headerText="Total" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
+                                        headerText="Total" width="10%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
                                         <div align="center">
                                             <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.abono}">
+                                            <h:outputText value="#{entidades.interes}">
                                                 <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                             </h:outputText>
                                         </div>
@@ -2207,7 +2207,7 @@
                                 <p:panelGrid  style="width: 100%; margin: auto;">   
                                     <p:row>
                                         <p:column colspan="4"  style=" width: 15%; background-color:#ebedf0">
-                                            <center>  <h:outputText value="Credito"/> </center> 
+                                            <center>  <h:outputText value="Crédito"/> </center> 
                                         </p:column>                                       
                                     </p:row>
                                     <p:row>
@@ -2712,7 +2712,7 @@
                                         </h:outputText>
                                     </p:column> 
                                     <p:column   
-                                        headerText="Unidad" width="20%" filterBy="#{entidades.TParametroseguimiento.idparametro}" sortBy="#{entidades.TParametroseguimiento.idparametro}" >                                             
+                                        headerText="Unidad" width="15%" filterBy="#{entidades.TParametroseguimiento.idparametro}" sortBy="#{entidades.TParametroseguimiento.idparametro}" >                                             
                                         <h:outputText value="#{entidades.TParametroseguimiento.unidad}"  >
                                         </h:outputText>
                                     </p:column> 
@@ -2723,7 +2723,7 @@
                                             <f:convertNumber     pattern=",#0.00" locale="en-US" />
                                         </h:outputText>
                                     </p:column>  
-                                    <p:column  headerText="Descripción" width="65%" filterBy="#{entidades.descripcion}" sortBy="#{entidades.descripcion}"  
+                                    <p:column  headerText="Descripción" width="31%" filterBy="#{entidades.descripcion}" sortBy="#{entidades.descripcion}"  
                                                >  
                                         <h:outputText value="#{entidades.descripcion}"  />  
                                     </p:column> 
@@ -4206,30 +4206,30 @@
                                     </p:dataTable> 
                                 </p:outputPanel>
                             </h:form>
-                            <p:dialog header="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos del crédito para empleados ': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos del crédito para cooperativa': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos del crédito para cooperativa)': false  or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos del crédito agropecuario': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos del crédito para lisiados de guerra': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos del crédito para comercio': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos del crédito agropecuario': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de solicitud credito agropecuai': false}" widgetVar="dlVerCredito" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
+                            <p:dialog header="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? 'Datos de la solicitud de crédito para empleados ': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? 'Datos de la solicitud de crédito para cooperativa': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? 'Datos de la solicitud de crédito para cooperativa': false  or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? 'Datos de la solicitud de crédito agropecuario': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? 'Datos de la solicitud de crédito para lisiados de guerra': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? 'Datos de la solicitud de crédito para comercio': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? 'Datos de la solicitud de crédito agropecuario': false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? 'Datos de la solicitud de crédito agropecuario': false}" widgetVar="dlVerCredito" modal="true" visible="false"  resizable="true" responsive="true" styleClass="ui-panelgrid-blank" width="70%" appendTo="@(body)">
                                 <h:form target="_blank">
                                     <p:outputPanel  style="width: 100%">
                                         <p:tabView>
                                             <p:tab title="Cliente">
-                                                <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
-                                                    <b>  <h:outputText value="Cooperativa" /></b>  
+                                                     <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"    style=" width: 100%" >
+                                               <b>  <h:outputText value="Cooperativa" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Código: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.codigoEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Nombre abreviado:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.abreviacionEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column  style=" width: 25%"   >
+                                                        <p:column  style=" width: 15%"   >
                                                             <h:outputText value="Nombre completo:" />
                                                         </p:column>
                                                         <p:column  colspan="3" style=" width: 50%"   >
@@ -4237,37 +4237,37 @@
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="NIT: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.nitEntidad}" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                            <h:outputText value="Giro:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.giroEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Representante legal: " />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.nombreRepresentanteEntidad}" />
                                                         </p:column>
 
-                                                        <p:column style=" width: 25%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="DUI del representante:" />
                                                         </p:column>
-                                                        <p:column style=" width: 25%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value=" #{proyectoBean.entidadeleccionada.duiRepresentanteEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  style=" width: 100%" >
-                                                    <b>  <h:outputText value="Personales" /></b>  
+                                                <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
+                                                      <b>  <h:outputText value="Personales" /></b>  
                                                     <hr></hr>
                                                     <p:row>
                                                         <p:column style=" width: 13%"   >
@@ -4329,34 +4329,34 @@
                                                     </p:row>
                                                 </p:panelGrid>
                                                 <br></br>
-                                                <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false and proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
-                                                    <b>  <h:outputText value="Contacto" /></b>  
+                                                      <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 2? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 3? true:false}"  >
+                                               <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
-                                                        <p:column style=" width: 13%"   >
+                                                        <p:column style=" width: 15%"   >
                                                             <h:outputText value="Correo:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%" >
+                                                        <p:column style=" width: 30%" >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.correoEntidad eq ''? '----':proyectoBean.entidadeleccionada.correoEntidad}" />
                                                         </p:column >
 
-                                                        <p:column style=" width: 10%">
+                                                        <p:column style=" width: 15%">
                                                             <h:outputText value="Teléfono:" />
                                                         </p:column>
-                                                        <p:column style=" width: 20%"  >
+                                                        <p:column style=" width: 30%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.telefonoEntidad}" />
                                                         </p:column>
                                                     </p:row>
                                                     <p:row>
-                                                        <p:column    style=" width: 10%"  >
-                                                            <h:outputText value="Movil:" />
+                                                        <p:column    style=" width: 15%"  >
+                                                            <h:outputText value="Móvil:" />
                                                         </p:column>
                                                         <p:column  colspan="3"  style=" width: 20%"  >
                                                             <h:outputText value="#{proyectoBean.entidadeleccionada.celularEntidad}" />
                                                        </p:column>
                                                    </p:row>
                                                     <p:row>
-                                                        <p:column style=" width: 10%">
+                                                        <p:column style=" width: 15%">
                                                             <h:outputText value="Dirección:" />
                                                         </p:column>
                                                         <p:column colspan="3" style=" width: 20%"  >
@@ -4364,8 +4364,8 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 2? true:false and proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito ne 3? true:false}"  >
-                                                    <b>  <h:outputText value="Contacto" /></b>  
+                                              <p:panelGrid rendered="#{proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or proyectoBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
+                                                <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
                                                         <p:column style=" width: 13%"   >
@@ -4383,7 +4383,7 @@
                                                     </p:row>
                                                     <p:row>
                                                         <p:column    style=" width: 10%"  >
-                                                            <h:outputText value="Movil:" />
+                                                            <h:outputText value="Móvil:" />
                                                         </p:column>
                                                         <p:column  colspan="3"  style=" width: 20%"  >
                                                             <h:outputText value="#{proyectoBean.clienteSeleccionado.celularCliente}" />
@@ -4429,7 +4429,7 @@
                                                                 <h:outputText value="Fecha de vencimiento: " />
                                                             </p:column>
                                                             <p:column style=" width: 25%"  >
-                                                                <h:outputText value="#{proyectoBean.proyectoSeleccionado.fechaVencimientoProyecto}" >
+                                                                <h:outputText value="#{proyectoBean.proyectoSeleccionado.fechaVencimientoProyecto eq null? '--/--/----': proyectoBean.proyectoSeleccionado.fechaVencimientoProyecto }" >
                                                                     <f:convertDateTime pattern="dd/MM/YYYY"/>
                                                                 </h:outputText>
                                                             </p:column>
@@ -4745,12 +4745,12 @@
                                             </p:column>
                                         </p:dataTable>
                                         <br></br>        
-                                       <p:outputPanel rendered="#{proyectoBean.proyectoSeleccionado.estado eq 6 or proyectoBean.proyectoSeleccionado.estado eq 7 }">
+                                       <p:outputPanel >
                                                 
                                                 <p:fieldset >
                                                     <p:panelGrid   style=" width: 55%;" styleClass="borderHidden" >
                                                         <p:row>
-                                                            <p:column style=" width: 5%">
+                                                            <p:column style=" width: 10%">
                                                                 <h:outputText value="Total pagado:" /> 
                                                             </p:column>
                                                             <p:column style=" width: 10%"   >
@@ -4892,12 +4892,12 @@
                                                     </h:outputText>  </div>  </p:column>
                                         </p:dataTable>
                                         <br></br>        
-                                        <p:outputPanel rendered="#{proyectoBean.proyectoSeleccionado.estado eq 6 or proyectoBean.proyectoSeleccionado.estado eq 7 }">
+                                        <p:outputPanel >
                                                
                                                 <p:fieldset >
                                                     <p:panelGrid   style=" width: 55%;" styleClass="borderHidden" >
                                                         <p:row>
-                                                            <p:column style=" width: 5%">
+                                                            <p:column style=" width: 10%">
                                                                 <h:outputText value="Total pagado:" /> 
                                                             </p:column>
                                                             <p:column style=" width: 10%"   >

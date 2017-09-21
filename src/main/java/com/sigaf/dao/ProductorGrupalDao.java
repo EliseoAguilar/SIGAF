@@ -90,4 +90,17 @@ public class ProductorGrupalDao implements IProductorGrupalDao {
 
     }
 
+    @Override
+    public List<TProductorGrupal> listProductorGrupalActivo() {
+    List<TProductorGrupal> listaProductoresGrupales = null;
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        listaProductoresGrupales = session.createQuery("from TProductorGrupal where idProductorGrupal!=1 and estadoProductorGrupal=true").list();
+        session.getTransaction().commit();
+        session.close();
+        return listaProductoresGrupales;   
+    
+    
+    }
+
 }

@@ -101,5 +101,15 @@ public class EntidadDao implements IEntidadDao {
     
     }
 
+    @Override
+    public List<TEntidad> listTEndidadActiva() {
+        
+    Session session = this.sessionFactory.openSession();
+        List<TEntidad> listaEntidad = session.createQuery("from TEntidad where idEntidad !=1 and estadoEntidad=true").list();
+        session.close();
+        return listaEntidad;
+    
+    }
+
 
 }

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="409"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -239,10 +239,10 @@
 			</staticText>
 			<staticText>
 				<reportElement x="477" y="331" width="50" height="20" uuid="94f7bb27-8177-4aa2-867c-3d1817319c5d"/>
-				<textElement>
+				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CAPITAL]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="110" y="331" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>

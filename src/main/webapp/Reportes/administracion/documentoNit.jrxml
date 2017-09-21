@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudLisiadoH" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34aa5181-76f9-43d2-929b-c599178679b8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="590"/>
+	<property name="ireport.y" value="84"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -67,7 +67,7 @@ WHERE
 	<detail>
 		<band height="681">
 			<image>
-				<reportElement x="127" y="133" width="295" height="403" uuid="a214300b-3445-4ae2-9ed4-1db9447c6d1b"/>
+				<reportElement x="132" y="89" width="409" height="515" uuid="a214300b-3445-4ae2-9ed4-1db9447c6d1b"/>
 				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($F{t_entidad_credencial_entidad}.split(",")[1].getBytes()))]]></imageExpression>
 			</image>
 		</band>

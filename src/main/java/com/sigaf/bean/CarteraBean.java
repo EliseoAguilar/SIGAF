@@ -1806,15 +1806,7 @@ public class CarteraBean extends Actividad {
         this.clienteSeleccionado = new TCliente();
         super.setShowData(true);
 
-        DateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd");
-        inFormat.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
-        Date purchaseDate = new Date();
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            this.fechaAplicacion = formatoDelTexto.parse(inFormat.format(purchaseDate));
-        } catch (ParseException ex) {
-            Logger.getLogger(CarteraBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         this.tipoCredito = 0;
         this.showPresupuesto = true;
         this.showAprobacion = true;
@@ -2173,6 +2165,15 @@ public class CarteraBean extends Actividad {
     public void generarDistribucion() {
 
         BigDecimal cal;
+        DateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd");
+        inFormat.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
+        Date purchaseDate = new Date();
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.fechaAplicacion = formatoDelTexto.parse(inFormat.format(purchaseDate));
+        } catch (ParseException ex) {
+            Logger.getLogger(CarteraBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.totalMoraGenerada = new BigDecimal("0");
         this.monto = this.proyectoSeleccionado.getMonto();
         this.politicaSeleccionada = this.ipoliticaBo.getPolitica(this.proyectoSeleccionado.getTTipoCredito().getIdTipoCredito());
@@ -2198,7 +2199,7 @@ public class CarteraBean extends Actividad {
             if (this.listaPago.size() == 0) {
                 calendar.add(Calendar.MONTH, meses);
             } else {
-                for (int y = 0; y < this.listaPago.size(); y++) {
+                for (int y = 0; y <= this.listaPago.size(); y++) {
                     calendar.add(Calendar.MONTH, meses);
                 }
             }
@@ -2206,7 +2207,7 @@ public class CarteraBean extends Actividad {
             if (this.listaPago.size() == 0) {
                 calendar.add(Calendar.MONTH, meses);
             } else {
-                for (int y = 0; y < this.listaPago.size(); y++) {
+                for (int y = 0; y <= this.listaPago.size(); y++) {
                     calendar.add(Calendar.MONTH, meses);
                 }
             }
@@ -2214,14 +2215,14 @@ public class CarteraBean extends Actividad {
             if (this.listaPago.size() == 0) {
                 calendar.add(Calendar.MONTH, meses);
             } else {
-                for (int y = 0; y < this.listaPago.size(); y++) {
+                for (int y = 0; y <= this.listaPago.size(); y++) {
                     calendar.add(Calendar.MONTH, meses);
                 }
             }
         } else if (this.listaPago.size() == 0) {
             calendar.add(Calendar.MONTH, meses);
         } else {
-            for (int y = 0; y < this.listaPago.size(); y++) {
+            for (int y = 0; y <= this.listaPago.size(); y++) {
                 calendar.add(Calendar.MONTH, meses);
             }
         }
@@ -2235,8 +2236,12 @@ public class CarteraBean extends Actividad {
         if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
             mesesAux = 1;
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
+                this.pagoMora = new TPago();
+                System.out.println(this.fechaEstipulada);
+                System.out.println(this.fechaAplicacion);                
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
+                System.out.println(dia);
                 Double moraGenerada;
                 moraGenerada = ((this.couto.doubleValue()) * ((this.politicaSeleccionada.getTasaInteresMora().doubleValue() / 100) / 30) * (dia));
                 numeroCuotasRetraso++;
@@ -2252,6 +2257,7 @@ public class CarteraBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
             mesesAux = 3;
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -2269,6 +2275,7 @@ public class CarteraBean extends Actividad {
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
             mesesAux = 6;
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -2286,6 +2293,7 @@ public class CarteraBean extends Actividad {
         } else {
             mesesAux = 12;
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
+                this.pagoMora = new TPago();
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
@@ -2550,6 +2558,8 @@ public class CarteraBean extends Actividad {
     }
 
     public void updateListaMorosos() {
+        
+        
 
         if (this.tipoCliente == 1) {
             this.listaClienteProyectoMorosos.clear();

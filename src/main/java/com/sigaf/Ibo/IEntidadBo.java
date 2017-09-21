@@ -26,6 +26,8 @@ public interface IEntidadBo {
 
     public List<TEntidad> listTEndidadTodos();
 
+    public List<TEntidad> listTEndidadActiva();
+    
     public void delete(Integer id);
 
     public void update(TEntidad entidad);
