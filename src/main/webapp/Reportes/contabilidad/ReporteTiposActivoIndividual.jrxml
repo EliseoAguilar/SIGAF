@@ -51,7 +51,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<staticText>
 				<reportElement x="1" y="0" width="554" height="21" uuid="411a4d15-60f7-444b-8a6e-ba52844b9af7"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true" isItalic="false"/>
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE TIPO DE ACTIVO FIJO]]></text>
 			</staticText>
@@ -86,7 +86,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<staticText>
 				<reportElement x="3" y="89" width="100" height="20" uuid="fa22b827-dff8-4836-b424-03de803886ec"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CUENTA]]></text>
 			</staticText>
@@ -101,14 +101,14 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<staticText>
 				<reportElement x="3" y="112" width="100" height="20" uuid="781bbab3-24cd-431d-b12d-b86510050206"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Activo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="157" width="100" height="20" uuid="a33fefd0-68c9-4630-99fa-5b91923790aa"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Gasto]]></text>
 			</staticText>
@@ -123,7 +123,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<staticText>
 				<reportElement x="3" y="181" width="100" height="20" uuid="ae2be4cb-3dcc-47b0-b27b-c8971c2b36cb"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Venta]]></text>
 			</staticText>
@@ -138,56 +138,56 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<staticText>
 				<reportElement x="107" y="89" width="100" height="20" uuid="55435285-1e15-4750-b334-a08b1ae2709e"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="135" width="100" height="20" uuid="21c5158a-4f50-44ba-a8c7-e74a9bb59f24"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Depreciación  ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="273" y="89" width="100" height="20" uuid="80588463-1f43-488f-9a23-69199c7353ae"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="286" y="59" width="100" height="20" uuid="9dd87f31-7a27-4092-9501-26c5db5f8c23"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="58" width="63" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[VIDA ÚTIL:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="286" y="29" width="100" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="29" width="63" height="20" uuid="e30f64f9-c693-45d3-b993-5041123a02c2"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="0" width="188" height="20" uuid="d5e99109-05a5-4ee5-8641-e0c057fcb5be"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DEL TIPO DE ACTIVO FIJO]]></text>
 			</staticText>

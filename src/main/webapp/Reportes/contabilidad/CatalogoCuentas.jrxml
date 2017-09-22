@@ -52,7 +52,7 @@ select * from cuentas   order by codigo_cuenta]]>
 			<staticText>
 				<reportElement x="0" y="0" width="552" height="20" uuid="2ac3b8a8-674e-436e-b50d-8d7378dd717a"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CATALOGO DE CUENTAS]]></text>
 			</staticText>
@@ -63,28 +63,28 @@ select * from cuentas   order by codigo_cuenta]]>
 			<staticText>
 				<reportElement x="6" y="7" width="137" height="20" uuid="cd9a806e-ea9c-448a-a0ee-7a838686d25b"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="149" y="7" width="248" height="20" uuid="088e4233-52c9-44ec-a3a8-b8313e4cb66e"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="397" y="7" width="83" height="20" uuid="bd7f5a97-2589-4283-8277-cf3113a7e35e"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NATURALEZA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="497" y="7" width="55" height="20" uuid="42dd3591-3e7f-4b6e-acb9-87c4ff1153d5"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NIVEL]]></text>
 			</staticText>

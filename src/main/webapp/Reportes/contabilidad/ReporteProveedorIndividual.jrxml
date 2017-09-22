@@ -57,7 +57,7 @@ FROM
 			<staticText>
 				<reportElement x="3" y="3" width="552" height="20" uuid="a6faba73-1dcc-4d88-848c-aae9a6a1e453"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE  PROVEEDOR]]></text>
 			</staticText>
@@ -124,63 +124,63 @@ FROM
 			<staticText>
 				<reportElement x="1" y="59" width="54" height="20" uuid="4bdd2e8d-7c85-4330-b3a5-8233536e8d53"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NIT:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="277" y="60" width="44" height="20" uuid="e517a2b8-fcfb-4fc5-903c-9a0553cf0a79"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NRC:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="277" y="31" width="43" height="20" uuid="5aa614ce-3777-4376-bcd6-470efa5c8402"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[GIRO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="31" width="51" height="20" uuid="48132a6b-ba4a-4851-9569-44353274bd1f"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="87" width="66" height="20" uuid="96499be2-48f1-42e3-a672-2c1c55c7cbf5"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TELÉFONOS:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="277" y="87" width="54" height="20" uuid="6b968d0d-8f9e-4664-a8cc-0ea7cb1c9e9b"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CORREO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="118" width="69" height="20" uuid="0807da04-2217-4a28-9052-9cedf340504a"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DIRECCIÓN:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="148" width="66" height="20" uuid="0e73eed1-096c-44ac-a811-12279acb748c"/>
 				<textElement>
-					<font isBold="false" isItalic="false"/>
+					<font isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="188" height="20" uuid="d448918a-76d6-45cd-94af-2ca5fb38187c"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DEL PROVEEDOR]]></text>
 			</staticText>

@@ -82,36 +82,46 @@ WHERE
 		<band height="51" splitType="Stretch">
 			<staticText>
 				<reportElement x="61" y="3" width="75" height="20" uuid="4e2d8fc7-39b3-4dc8-923d-63cb645d8b7e"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="3" width="61" height="20" uuid="ccd37e7b-fedd-44f6-9feb-f95f255d08d0"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[PERIODO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="148" y="3" width="109" height="20" uuid="6500e543-3e87-48ae-8113-28f7bff86238"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[  MENSUAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="269" y="7" width="116" height="20" uuid="83cfea3f-e9fa-412b-b99d-658055c33a79"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="269" y="3" width="116" height="20" uuid="83cfea3f-e9fa-412b-b99d-658055c33a79"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[ ACUMULADA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="9" width="117" height="20" uuid="9eddfcf1-c3a8-40f8-8307-0aec7af79864"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="407" y="3" width="117" height="20" uuid="9eddfcf1-c3a8-40f8-8307-0aec7af79864"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
 				<text><![CDATA[VALOR NETO]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="407" y="31" width="117" height="20" uuid="5142444c-46b8-4584-a203-3f6e334c0f9e"/>
+				<reportElement x="407" y="25" width="117" height="20" uuid="5142444c-46b8-4584-a203-3f6e334c0f9e"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{valor_activo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="269" y="31" width="116" height="20" uuid="e0b5872b-455f-41d3-9622-c4011ed87b31"/>
+				<reportElement x="269" y="25" width="116" height="20" uuid="e0b5872b-455f-41d3-9622-c4011ed87b31"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[0.00]]></text>
 			</staticText>
@@ -140,7 +150,7 @@ WHERE
 				<textFieldExpression><![CDATA[$V{numeroMes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="269" y="4" width="116" height="20" uuid="1e1e9d1d-e0d3-47f1-b672-a140108ae1a2"/>
+				<reportElement x="269" y="0" width="116" height="20" uuid="1e1e9d1d-e0d3-47f1-b672-a140108ae1a2"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{depreAcumulada}]]></textFieldExpression>
 			</textField>
@@ -155,7 +165,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{valor_depreciacion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="407" y="6" width="117" height="20" uuid="200765c6-941f-4469-8f47-cf50e672cfe4"/>
+				<reportElement x="407" y="2" width="117" height="20" uuid="200765c6-941f-4469-8f47-cf50e672cfe4"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{valor_activo}.subtract( $V{depreAcumulada} )]]></textFieldExpression>
 			</textField>

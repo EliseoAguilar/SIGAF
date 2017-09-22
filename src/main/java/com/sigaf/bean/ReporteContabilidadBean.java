@@ -962,10 +962,10 @@ public class ReporteContabilidadBean extends Actividad {
         idEntidad.put("idEntidad", this.idEntidad);
 
         if (this.idSubReporte == 1) {
-            idEntidad.put("estado", true);
+            idEntidad.put("estado", "Activo");
 
         } else {
-            idEntidad.put("estado", false);
+            idEntidad.put("estado", "Inactivo");
 
         }
 
