@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudLisiadoH" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34aa5181-76f9-43d2-929b-c599178679b8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2339"/>
+	<property name="ireport.y" value="2579"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -434,6 +434,7 @@ FROM
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="150" y="612" width="388" height="20" uuid="c58afbb4-f88a-4927-a7cc-a4c07ae6f225"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_lisiado_institucion_crediticia}.equals("")? "---": $F{t_lisiado_institucion_crediticia}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -503,7 +504,7 @@ FROM
 				<reportElement x="20" y="160" width="129" height="20" uuid="ad97bc60-9bae-4012-a817-747588478326"/>
 				<text><![CDATA[SEXO:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="149" y="140" width="144" height="20" uuid="dccba134-3a4b-42b5-92ac-766e97db8008"/>
 				<textElement>
 					<font size="10"/>
@@ -792,7 +793,7 @@ FROM
 				<reportElement x="3" y="27" width="552" height="1" uuid="9a390b72-9457-493e-9092-ca3b0e9ed7d1"/>
 			</line>
 		</band>
-		<band height="757">
+		<band height="424">
 			<staticText>
 				<reportElement mode="Transparent" x="1" y="3" width="554" height="20" backcolor="#E7E7EF" uuid="73408094-ffbd-4908-a294-b7a97cbab078"/>
 				<textElement markup="styled">
@@ -863,6 +864,7 @@ FROM
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="133" y="235" width="409" height="20" uuid="8590f88d-2fc9-4a38-a349-a322f3ede312"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_destino_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -915,6 +917,7 @@ FROM
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="133" y="66" width="400" height="20" uuid="55562088-7c62-4fad-a1b8-8f5fdff0bd8a"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_garantia_ubicacion_hipoteca_garantia}]]></textFieldExpression>
 			</textField>
 			<staticText>

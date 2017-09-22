@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientePersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e35999d-239d-4b67-a136-4dbdf81ac442">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="138"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -147,63 +147,66 @@ FROM
 				<text><![CDATA[PROYECTO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="96" width="100" height="20" uuid="0be52d02-4ff5-413f-bdbe-fdb4f529feac"/>
+				<reportElement x="17" y="131" width="100" height="20" uuid="0be52d02-4ff5-413f-bdbe-fdb4f529feac"/>
 				<text><![CDATA[PRECIO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="97" width="115" height="20" uuid="38cee90e-d87d-4ea8-9f57-172fe98f9f5c"/>
+				<reportElement x="271" y="132" width="115" height="20" uuid="38cee90e-d87d-4ea8-9f57-172fe98f9f5c"/>
 				<text><![CDATA[BENEFICIARIOS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="119" width="100" height="20" uuid="a1ed5451-8c83-41ee-a232-610c531af094"/>
+				<reportElement x="17" y="154" width="100" height="20" uuid="a1ed5451-8c83-41ee-a232-610c531af094"/>
 				<text><![CDATA[DESCRIPCIÓN:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="163" width="100" height="20" uuid="8f821bdf-e143-4341-a15f-0561670447cb"/>
+				<reportElement x="17" y="213" width="100" height="20" uuid="8f821bdf-e143-4341-a15f-0561670447cb"/>
 				<text><![CDATA[DUI ENCARGADO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="163" width="115" height="20" uuid="e79e53fa-da46-4feb-82ac-5518249fd08d"/>
+				<reportElement x="271" y="213" width="115" height="20" uuid="e79e53fa-da46-4feb-82ac-5518249fd08d"/>
 				<text><![CDATA[NOMBRE ENCARGADO:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="117" y="39" width="143" height="20" uuid="8e8056e9-1f76-4796-8e9b-c43ef985bd59"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_fecha}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="389" y="163" width="147" height="20" uuid="6c4573e7-bf42-4f2a-b634-028222306888"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="389" y="213" width="147" height="20" uuid="6c4573e7-bf42-4f2a-b634-028222306888"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_empleado_nombre_empleado}+" "+$F{t_empleado_apellido_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="163" width="143" height="20" uuid="e381b569-b5a7-4e4f-9ed3-0d1a725b11cc"/>
+				<reportElement x="117" y="213" width="143" height="20" uuid="e381b569-b5a7-4e4f-9ed3-0d1a725b11cc"/>
 				<textFieldExpression><![CDATA[$F{t_empleado_dui_empleado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="117" y="96" width="143" height="20" uuid="d9854955-563e-4705-8764-8d14fd2827ea"/>
+				<reportElement x="117" y="131" width="143" height="20" uuid="d9854955-563e-4705-8764-8d14fd2827ea"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_precio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="389" y="97" width="147" height="20" uuid="873f8058-ef2c-4c28-8606-3c7d1035c9b4"/>
+				<reportElement x="389" y="132" width="147" height="20" uuid="873f8058-ef2c-4c28-8606-3c7d1035c9b4"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_beneficiarios}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="117" y="119" width="419" height="20" uuid="69169f0a-29e4-4daf-b23c-b99226cc7f8d"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="117" y="154" width="419" height="20" uuid="69169f0a-29e4-4daf-b23c-b99226cc7f8d"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="389" y="39" width="147" height="20" uuid="68c7ff56-353e-44c2-a5d1-81bd6c47afda"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="117" y="61" width="419" height="20" uuid="f71c97e2-7ae7-47d8-b638-a81051a2295b"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_descripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="17" y="183" width="100" height="20" uuid="be68c1a5-9a19-4dc8-85ff-26248c031ae8"/>
+				<reportElement x="17" y="233" width="100" height="20" uuid="be68c1a5-9a19-4dc8-85ff-26248c031ae8"/>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="117" y="183" width="143" height="20" uuid="e22b1a9e-c592-4900-ba3e-fda955687ebe"/>
+				<reportElement x="117" y="233" width="143" height="20" uuid="e22b1a9e-c592-4900-ba3e-fda955687ebe"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_estado}.equals(true)? "Activo": "Inactivo"]]></textFieldExpression>
 			</textField>
 		</band>

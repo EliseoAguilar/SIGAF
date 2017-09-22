@@ -830,7 +830,7 @@
                                                 </p:menuitem>
                                                 <p:menuitem rendered="#{agronegocios.estado eq 'Finalizado'}"  ajax="false" update=":padding" value="Generar recibo"  icon="fa fa-file-text-o" >
                                                     <f:setPropertyActionListener  value="#{agronegocios}" target="#{agronegocioBean.agronegocioSeleccionado}"  />
-                                                    <f:actionListener binding="#{agronegocioBean.generarRecibo()}"/> 
+                                                    <f:actionListener binding="#{agronegocioBean.reciboAgronegocio()}"/> 
                                                 </p:menuitem>
                                             </p:splitButton>
                                         </p:column>

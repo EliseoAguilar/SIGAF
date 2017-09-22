@@ -154,13 +154,6 @@ FROM
 	<columnHeader>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="310" y="0" width="51" height="20" uuid="08920375-5277-446c-a1f0-d8452d12c965"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRECIO</style>]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="82" y="0" width="72" height="20" uuid="daaba64e-c478-445b-8a46-80439d5cdf0a"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
@@ -198,6 +191,13 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="40" height="20" uuid="08920375-5277-446c-a1f0-d8452d12c965"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRECIO</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -208,10 +208,12 @@ FROM
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="82" y="3" width="228" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="310" y="3" width="59" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
+				<reportElement x="310" y="3" width="46" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_precio}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

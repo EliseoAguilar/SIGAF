@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="asesoriasEmpleado" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="680bdcc7-4800-484e-8533-710eb48d8ca7">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="5"/>
+	<property name="ireport.y" value="129"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -194,7 +194,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESCRIPCIÓN</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="347" y="1" width="59" height="20" uuid="40d731a7-a563-4b41-8996-399604031b87"/>
+				<reportElement x="358" y="1" width="39" height="20" uuid="40d731a7-a563-4b41-8996-399604031b87"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -216,7 +216,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="107" y="2" width="240" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<reportElement x="107" y="2" width="228" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -228,7 +229,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_asesoria_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="347" y="2" width="59" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<reportElement x="335" y="2" width="51" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_precio}]]></textFieldExpression>
 			</textField>
 		</band>

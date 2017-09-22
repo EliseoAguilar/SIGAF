@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ead269f-2472-4272-bdf6-16f64393d3fd">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="81"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -189,14 +189,14 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Nombre:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="266" y="73" width="42" height="20" uuid="f75ece72-c4fb-47a7-be05-7dd1b0bf0c98"/>
+				<reportElement x="258" y="73" width="42" height="20" uuid="f75ece72-c4fb-47a7-be05-7dd1b0bf0c98"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="266" y="87" width="42" height="20" uuid="73dbfb77-d0c6-47d7-bf1d-bb8f2630930b"/>
+				<reportElement x="258" y="87" width="42" height="20" uuid="73dbfb77-d0c6-47d7-bf1d-bb8f2630930b"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
@@ -252,21 +252,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Saldo actual</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="266" y="116" width="35" height="20" uuid="427a81b6-a799-4cb4-b5c0-10ef92a69433"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Desde:</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="328" y="116" width="36" height="20" uuid="89843aba-1368-44f9-8327-e5de663331cf"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Hasta:</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="369" y="116" width="74" height="20" uuid="c4a181dd-402b-4597-9510-b45fb83ff507"/>
+				<reportElement x="364" y="116" width="74" height="20" uuid="c4a181dd-402b-4597-9510-b45fb83ff507"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
@@ -306,15 +292,9 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TitulorRecibo.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement x="11" y="47" width="535" height="1" uuid="be32845e-fe20-46e6-ba07-4ceb669629b8"/>
+				<reportElement x="11" y="258" width="535" height="1" uuid="be32845e-fe20-46e6-ba07-4ceb669629b8"/>
 				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="11" y="308" width="535" height="1" uuid="aab68dc7-188d-4e18-9e11-32dfb7b3e6a9"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
+					<pen lineWidth="0.1" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<subreport>
@@ -365,25 +345,11 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_pago_saldocapital}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="363" y="136" width="66" height="20" uuid="c9d806b9-c2b8-4d42-929c-abcfdcd6bf3d"/>
+				<reportElement x="358" y="136" width="66" height="20" uuid="c9d806b9-c2b8-4d42-929c-abcfdcd6bf3d"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="246" y="136" width="65" height="20" uuid="bc4a3760-7e4b-4103-a770-61ad270a9937"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="310" y="136" width="65" height="20" uuid="b970c6c5-a1a4-4a14-9b54-ac26d1e37076"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="29" y="207" width="101" height="20" uuid="0d34ac6f-e716-4869-b627-c667bbe65c46"/>
@@ -442,14 +408,14 @@ FROM
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="443" y="116" width="102" height="20" uuid="bd1746c1-65be-44e0-9af2-6767bb702faa"/>
+				<reportElement x="438" y="116" width="108" height="20" uuid="bd1746c1-65be-44e0-9af2-6767bb702faa"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Tasa de interés por mora (%):</style>]]></text>
 			</staticText>
 			<textField pattern="###0.00">
-				<reportElement x="447" y="136" width="81" height="20" uuid="9d503526-b020-4486-8084-27ecae1011e2"/>
+				<reportElement x="442" y="136" width="87" height="20" uuid="9d503526-b020-4486-8084-27ecae1011e2"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -462,36 +428,22 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Su ultimo pago ha sido aplicado a:</style>]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="308" y="399" width="65" height="20" uuid="dede654a-8ddc-4fa0-91dc-fbcb19f058fc"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="266" y="336" width="51" height="20" uuid="2f03b7a1-a5b7-4b28-b472-00b177fc1331"/>
+				<reportElement x="258" y="336" width="51" height="20" uuid="2f03b7a1-a5b7-4b28-b472-00b177fc1331"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia:</style>]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="250" y="399" width="65" height="20" uuid="01010bb5-d7ca-4894-9d32-1671c8156d18"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="366" y="399" width="66" height="20" uuid="a21ba535-fcf2-45e9-8049-ec6a280961ce"/>
+				<reportElement x="361" y="399" width="66" height="20" uuid="a21ba535-fcf2-45e9-8049-ec6a280961ce"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="374" y="379" width="74" height="20" uuid="d992957c-4466-40ad-a2aa-a4abfe36c5fa"/>
+				<reportElement x="369" y="379" width="74" height="20" uuid="d992957c-4466-40ad-a2aa-a4abfe36c5fa"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
@@ -505,14 +457,14 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_cliente_nombre_cliente}+" "+$F{t_cliente_apellido_cliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="266" y="350" width="51" height="20" uuid="d713eb5c-f329-45c1-ba2e-363ffe893bee"/>
+				<reportElement x="258" y="350" width="51" height="20" uuid="d713eb5c-f329-45c1-ba2e-363ffe893bee"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino     :</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="445" y="379" width="102" height="20" uuid="47188248-8064-4fa0-831d-8f74ebbdfbef"/>
+				<reportElement x="442" y="379" width="105" height="20" uuid="47188248-8064-4fa0-831d-8f74ebbdfbef"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
@@ -532,22 +484,8 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Nombre:</style>]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="327" y="379" width="35" height="20" uuid="cd236bea-071d-43b1-b542-1e2183690a5c"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Hasta:</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="267" y="379" width="40" height="20" uuid="8cca1d2e-434f-40ce-893b-4670cad686c7"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Desde:</style>]]></text>
-			</staticText>
 			<textField pattern="###0.00">
-				<reportElement x="454" y="399" width="81" height="20" uuid="dbcd1f23-5ed9-4214-baf6-6c63efed5e43"/>
+				<reportElement x="452" y="399" width="81" height="20" uuid="dbcd1f23-5ed9-4214-baf6-6c63efed5e43"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -701,7 +639,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_pago_destino}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="308" y="87" width="100" height="20" uuid="89177fbc-eaf9-467e-a8bd-c0d2039cc561"/>
+				<reportElement x="308" y="87" width="121" height="20" uuid="89177fbc-eaf9-467e-a8bd-c0d2039cc561"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -712,12 +650,6 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TitulorRecibo.jasper"]]></subreportExpression>
 			</subreport>
-			<line>
-				<reportElement x="12" y="571" width="535" height="1" uuid="b1d1153b-e4de-4544-b151-d60e3de51ff8"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</line>
 			<staticText>
 				<reportElement x="214" y="572" width="136" height="20" uuid="e2f2d6a8-3e02-4a84-8c09-da2363724259"/>
 				<textElement textAlignment="Center" markup="styled">
@@ -761,13 +693,6 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="334" y="638" width="38" height="20" uuid="c5d2f7c4-cd91-4b72-9833-2563ff681b85"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Hasta:</style>]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="27" y="595" width="40" height="20" uuid="81faaec2-d636-4882-a487-b48066f8f5bc"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
@@ -781,13 +706,6 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_interes}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="256" y="658" width="52" height="20" uuid="6678905b-bfb1-43b9-840b-86d487a5b161"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<textField pattern="$#,##0.00">
 				<reportElement x="123" y="657" width="66" height="20" uuid="93dfb070-4d35-4a68-8588-a8d018e75a34"/>
 				<textElement textAlignment="Right">
@@ -796,7 +714,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_pago_abono}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="372" y="658" width="66" height="20" uuid="ca795b21-cd96-4bc5-9f5f-ca92bb33ae2b"/>
+				<reportElement x="365" y="658" width="66" height="20" uuid="ca795b21-cd96-4bc5-9f5f-ca92bb33ae2b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -808,13 +726,6 @@ FROM
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Abono a capital</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="263" y="638" width="30" height="20" uuid="6487bc7b-06d0-4d80-a0fc-50229f91ea61"/>
-				<textElement markup="styled">
-					<font fontName="Calibri" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Desde:</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="26" y="714" width="101" height="20" uuid="2c3a01ee-1fb9-47d2-bd9f-b71bfc7421e3"/>
@@ -845,14 +756,14 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Intereses por mora</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="264" y="609" width="51" height="20" uuid="69841fd5-bb05-441d-87e5-ef40eb7fb767"/>
+				<reportElement x="256" y="609" width="51" height="20" uuid="69841fd5-bb05-441d-87e5-ef40eb7fb767"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino     :</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="376" y="638" width="66" height="20" uuid="98d8ed82-30e7-4d5a-b944-d229e81cc018"/>
+				<reportElement x="369" y="638" width="69" height="20" uuid="98d8ed82-30e7-4d5a-b944-d229e81cc018"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
@@ -866,26 +777,19 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Saldo actual</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="264" y="595" width="51" height="20" uuid="37ec319a-5811-4b53-8518-8511b0717d03"/>
+				<reportElement x="256" y="595" width="51" height="20" uuid="37ec319a-5811-4b53-8518-8511b0717d03"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Referencia:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="445" y="638" width="102" height="20" uuid="34b69209-562b-4d5e-aa74-08c56bd89a84"/>
+				<reportElement x="438" y="638" width="109" height="20" uuid="34b69209-562b-4d5e-aa74-08c56bd89a84"/>
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Tasa de interés por mora (%):</style>]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="321" y="658" width="51" height="20" uuid="04481d2f-4b42-4c9e-a83b-c8b90b98542c"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="26" y="671" width="101" height="20" uuid="b88c8310-6955-4a43-b7dd-7d9df6de639a"/>
 				<textElement markup="styled">
@@ -1054,6 +958,12 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$P{saldo_anterior}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="11" y="522" width="535" height="1" uuid="578f8652-c81e-421b-bbb2-058b556a8954"/>
+				<graphicElement>
+					<pen lineWidth="0.1" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
 		</band>
 	</detail>
 </jasperReport>

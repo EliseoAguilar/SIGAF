@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudComercioH" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99a12233-6bc6-4ced-b283-a79f39fccfbb">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2026"/>
+	<property name="ireport.y" value="2791"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -310,7 +310,7 @@ FROM
 				<reportElement x="396" y="177" width="146" height="20" uuid="32766d32-60a6-4f8d-95d2-2e017196ad8a"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_estado_familiar}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="150" y="156" width="144" height="20" uuid="5a9eb396-7da6-4ab5-a915-d7f82e235d24"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_fecha_nacimiento}]]></textFieldExpression>
 			</textField>
@@ -330,8 +330,9 @@ FROM
 				<reportElement x="150" y="285" width="144" height="20" uuid="ee87ecc4-b28c-450e-9264-5afb78e79434"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_celular_cliente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="150" y="307" width="391" height="20" uuid="ebb3e357-3548-4347-8d0a-af92326cf603"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_direccion_cliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -370,6 +371,7 @@ FROM
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="150" y="513" width="387" height="20" uuid="c8aef89a-d0b7-47bc-bc3f-52cf0af6d24b"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_comercio_direccion_comercio}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -390,10 +392,12 @@ FROM
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="150" y="411" width="144" height="20" uuid="468143d8-89e6-49fc-b459-5273fff80a2c"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_comercio_nombre_comercio}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="404" y="411" width="133" height="20" uuid="5727fe37-deab-4612-b276-7f8b3aa533a5"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_comercio_giro_comercio}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -582,7 +586,7 @@ FROM
 				<reportElement x="0" y="20" width="554" height="1" uuid="edf7b4a3-931a-4332-8130-f3de8c4b8d2f"/>
 			</line>
 		</band>
-		<band height="628">
+		<band height="598">
 			<staticText>
 				<reportElement mode="Transparent" x="1" y="1" width="554" height="20" backcolor="#E7E7EF" uuid="c61e4609-c6f3-4445-b369-d530c8992191"/>
 				<textElement markup="styled">
@@ -747,8 +751,9 @@ FROM
 				<reportElement x="131" y="58" width="108" height="20" uuid="3058fc31-862b-4c56-922d-5e9b223a4e06"/>
 				<text><![CDATA[Prendaria]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="131" y="82" width="402" height="20" uuid="d98c50b3-28ee-4983-a5ad-4b3dd7d42466"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_garantia_descripcion_prendaria_garantia}]]></textFieldExpression>
 			</textField>
 		</band>

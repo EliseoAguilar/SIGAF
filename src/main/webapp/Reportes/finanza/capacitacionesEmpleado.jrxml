@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="capacitacionesEmpleado" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15422010-c642-450d-ad2c-c7e3cf39d5ae">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="147"/>
+	<property name="ireport.y" value="144"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -170,7 +170,7 @@ FROM
 	<columnHeader>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="355" y="1" width="59" height="20" uuid="08920375-5277-446c-a1f0-d8452d12c965"/>
+				<reportElement x="366" y="1" width="47" height="20" uuid="08920375-5277-446c-a1f0-d8452d12c965"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -217,10 +217,12 @@ FROM
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="81" y="11" width="266" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="355" y="11" width="59" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
+				<reportElement x="347" y="11" width="55" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_precio}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

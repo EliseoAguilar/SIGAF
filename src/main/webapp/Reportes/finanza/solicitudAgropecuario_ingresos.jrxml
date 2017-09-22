@@ -75,7 +75,7 @@ FROM
 		<band height="27" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="19" y="0" width="141" height="20" uuid="815f8d79-71f8-41e4-a39d-6b9ef9ae04fe"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_ingreso_nombre}]]></textFieldExpression>
@@ -89,7 +89,7 @@ FROM
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="261" y="0" width="273" height="20" uuid="b565e408-4b35-4d41-b711-b1208d4464b9"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_ingreso_descripcion}]]></textFieldExpression>

@@ -67,14 +67,14 @@ FROM
 		<band height="27" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="22" y="0" width="130" height="20" uuid="5329cc6c-8a7e-4fd8-93f9-b16cd1425546"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_activo_nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="263" y="0" width="282" height="20" uuid="fa8260b3-b0c2-4732-85ff-931cb679a837"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_activo_descripcion}]]></textFieldExpression>

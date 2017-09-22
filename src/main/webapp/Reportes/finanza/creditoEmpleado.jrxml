@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudComercioS" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99a12233-6bc6-4ced-b283-a79f39fccfbb">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2884"/>
+	<property name="ireport.y" value="3853"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -292,7 +292,7 @@ FROM
 				<reportElement x="19" y="102" width="129" height="20" uuid="5c77d016-73de-4ca7-8414-fab45c86ff78"/>
 				<text><![CDATA[NOMBRES:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="148" y="148" width="160" height="20" uuid="212f2fd7-446e-47bf-b33e-bbaf6245635f"/>
 				<textElement>
 					<font size="10"/>
@@ -332,9 +332,9 @@ FROM
 				<reportElement x="19" y="148" width="129" height="20" uuid="61342eca-8cf4-48cb-a53f-7c7b391ba4dd"/>
 				<text><![CDATA[FECHA DE NACIMIENTO:]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="148" y="305" width="391" height="20" uuid="59b91aea-af49-479d-aa61-d411a80fa185"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_cliente_direccion_cliente}]]></textFieldExpression>
@@ -386,9 +386,9 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_cliente_telefono_cliente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="148" y="537" width="160" height="20" uuid="0812d17b-fdd5-430d-8efe-27809814ae95"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_trabajo_cargo_empresa}]]></textFieldExpression>
@@ -410,7 +410,7 @@ FROM
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="148" y="472" width="390" height="20" uuid="567161c3-e3a4-4d50-8cd4-e9cbdfcb285d"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_trabajo_direccion_empresa}]]></textFieldExpression>
@@ -421,7 +421,7 @@ FROM
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="148" y="431" width="160" height="20" uuid="ddb7b56a-693c-41fa-a09e-2c48c9c2d8a3"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_trabajo_nombre_empresa}]]></textFieldExpression>
@@ -611,7 +611,7 @@ FROM
 				<reportElement x="1" y="20" width="554" height="1" uuid="a7b823bc-b139-42e0-80fc-5fc69d9e0785"/>
 			</line>
 		</band>
-		<band height="777">
+		<band height="564">
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="1" width="554" height="20" backcolor="#E7E7EF" uuid="c61e4609-c6f3-4445-b369-d530c8992191"/>
 				<textElement markup="styled">
@@ -775,9 +775,9 @@ FROM
 				<reportElement x="22" y="49" width="107" height="20" uuid="e76e0c00-b72c-43d5-af5b-a6f99885c452"/>
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="130" y="72" width="409" height="20" uuid="78e5d291-9976-47d3-92b3-147e4da3cd2b"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_garantia_descripcion_prendaria_garantia}]]></textFieldExpression>

@@ -64,14 +64,14 @@ FROM
 		<band height="25" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="22" y="0" width="122" height="20" uuid="43f303e2-c335-4ecc-9dea-04b9e85b872f"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_egreso_nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="261" y="0" width="284" height="20" uuid="ac6fe8c0-202c-422e-b756-b05cc350d09d"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_egreso_descripcion}]]></textFieldExpression>

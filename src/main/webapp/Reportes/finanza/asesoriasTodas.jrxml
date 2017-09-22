@@ -178,7 +178,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESCRIPCIÓN</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="298" y="2" width="59" height="20" uuid="40d731a7-a563-4b41-8996-399604031b87"/>
+				<reportElement x="311" y="2" width="45" height="20" uuid="40d731a7-a563-4b41-8996-399604031b87"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -201,13 +201,14 @@ FROM
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="1" y="2" width="72" height="20" uuid="78ca0dd4-cfcf-4cdb-8c44-4ed21952b48b"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="73" y="2" width="225" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<reportElement x="73" y="2" width="215" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -219,7 +220,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_asesoria_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="298" y="2" width="59" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<reportElement x="288" y="2" width="55" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_precio}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

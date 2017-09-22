@@ -1552,7 +1552,7 @@ public class AgronegocioBean extends Actividad {
 
     public void registtrarPago() {
 
-        this.pagoAgro.setMonto(this.total);
+        this.pagoAgro.setMonto(this.monto);
         this.pagoAgro.setTAgronegocio(this.agronegocioSeleccionado);
         Date date = new Date();
         DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
@@ -1724,5 +1724,41 @@ public class AgronegocioBean extends Actividad {
         
 
     }   
+    
+    public void reciboAgronegocio() throws SQLException, JRException, IOException {
+        
+        
+        this.pagoAgro = this.pagoAgronegocioBo.getPagoAgronegocio(this.agronegocioSeleccionado.getIdAgronegocio());
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_pago", this.pagoAgro.getIdPagoAgronegocio());
+         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/reciboAgronegocio.jasper"));
+        
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();        
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_pago");
+        auxBitacora.setAccionBitacora("Generar recibo de pago agronegocio");
+        auxBitacora.setDatosBitacora("Monto:" + this.pagoAgro.getIdPagoAgronegocio()
+               );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.pagoAgro.getIdPagoAgronegocio());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);       
+               
+    }
+    
     
 }

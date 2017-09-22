@@ -7523,6 +7523,138 @@ public class ProyectoBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
+    
+    
+    public void verSeguimiento() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_seguimiento", this.seguimientoSeleccionado.getIdseguimiento());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/seguimiento.jasper"));
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_seguimiento");
+        auxBitacora.setAccionBitacora("Generar reporte de seguimiento");        
+        auxBitacora.setDatosBitacora("Descripción:" + this.seguimientoSeleccionado.getDescripcion()
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.seguimientoSeleccionado.getIdseguimiento());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void verSeguimientoPDF() throws SQLException, JRException, IOException {
+
+         this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_seguimiento", this.seguimientoSeleccionado.getIdseguimiento());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/seguimiento.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Seguimiento.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_seguimiento");
+        auxBitacora.setAccionBitacora("Descargar reporte de seguimiento");        
+        auxBitacora.setDatosBitacora("Descripción:" + this.seguimientoSeleccionado.getDescripcion()
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.seguimientoSeleccionado.getIdseguimiento());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    
+    public void verParametro() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_parametro", this.parametroSeleccionado.getIdParametro());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/ReporteParametro.jasper"));
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_parametro");
+        auxBitacora.setAccionBitacora("Generar reporte de parámetro");        
+        auxBitacora.setDatosBitacora("Nombre:" + this.parametroSeleccionado.getTParametroseguimiento().getNombre()
+                 + ", Valor: " + this.parametroSeleccionado.getValor()
+                 + ", Unidad: " + this.parametroSeleccionado.getTParametroseguimiento().getUnidad()
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.parametroSeleccionado.getIdParametro());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void verParametroPDF() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_parametro", this.parametroSeleccionado.getIdParametro());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/ReporteParametro.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Parametro.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_parametro");
+        auxBitacora.setAccionBitacora("Descargar reporte de parámetro");        
+       auxBitacora.setDatosBitacora("Nombre:" + this.parametroSeleccionado.getTParametroseguimiento().getNombre()
+                 + ", Valor: " + this.parametroSeleccionado.getValor()
+                 + ", Unidad: " + this.parametroSeleccionado.getTParametroseguimiento().getUnidad()
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.parametroSeleccionado.getIdParametro());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    
+    
+    
 
     public void verReportePagosPersonaPDF() throws SQLException, JRException, IOException {
 
