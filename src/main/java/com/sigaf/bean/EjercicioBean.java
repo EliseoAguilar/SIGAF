@@ -307,7 +307,7 @@ public class EjercicioBean extends Actividad {
             this.limpiar();
             Date dateTemp = new Date();
             this.listAhos.clear();
-            for (int aho = dateTemp.getYear() - 5; aho <= dateTemp.getYear() + 5; aho++) {
+            for (int aho = dateTemp.getYear() + 1900 - 5; aho <= dateTemp.getYear() + 1900 + 5; aho++) {
                 this.listAhos.add(aho);
             }
             super.enableShowCreate();
