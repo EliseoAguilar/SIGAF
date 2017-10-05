@@ -12,7 +12,23 @@
 
             <ui:define name="content">
 
+<h:form>
+                            <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                                <p:row>
+                                    <p:column style="padding: 0px;" >
+                                        #{proveedorBean.getContabilidadPredeterminado()}
+                                        <h:outputText class="etiquetaEn" value="#{proveedorBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column style="padding: 0px; text-align: right" >
+                                        <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{proveedorBean.btnCancelar}"  value="Cambiar Entidad"> 
 
+                                        </p:commandButton>   
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </h:form>
+                
                 <p:outputPanel id="padding"  > 
 
                     <p:growl id="msgs" showSummary="true" showDetail="true"  />
@@ -35,7 +51,7 @@
 
 
                         <h:form id="fAddProveedor">
-                            <p:panel id="basic" header="Agregar proveedor"  style="width: 70%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="basic" header="Agregar proveedor"  style="width: 100%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid id="addPanel"   style="width: 100%; margin: auto;" class="noBoder">   
                                     <p:row>
                                         <p:column style="width: 50%;">
@@ -153,7 +169,7 @@
                         </p:dialog>
 
                         <h:form id="fAddProveedorModificar">
-                            <p:panel id="pModificar" header="Modificar proveedor"  style="width: 70%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pModificar" header="Modificar proveedor"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
                                 <p:panelGrid id="pgModificar"   style="width: 100%; margin: auto;" class="noBoder">   
                                     <p:row>
@@ -267,52 +283,10 @@
 
                     <p:outputPanel rendered="#{proveedorBean.showData}">
 
+                        
                         <p:panel id="opAdmiProv" header="Administrar proveedores" style="margin-bottom:20px">
 
-                            <!-- Actulizando lista de Cuentas   -->
-                            #{proveedorBean.updateListaEntidades()}
-                            <h:form id="fFiltro"> 
-                                <p:fieldset>
-                                    <p:panelGrid style=" width: 100%" id="pgfiltro"  class="noBoder">
-                                        <p:row>
-                                            <p:column style=" width: 60%" >
-                                                <h:outputText value="Entidad:*" /> 
-                                            </p:column>
-                                            <p:column style=" width: 40%" >
-                                                <h:outputText value="" /> 
-                                            </p:column>
-
-                                        </p:row>
-
-                                        <p:row>
-
-
-                                            <p:column >
-                                                <p:outputPanel id="opPrede" rendered="#{proveedorBean.estadoPredeterminado eq true? true:true}">
-                                                    <p:selectOneMenu id="car" disabled="#{proveedorBean.estadoPredeterminado}"  value="#{proveedorBean.idEntidad}" style=" width: 100%;" > 
-                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                        <f:selectItems  var="end" value="#{proveedorBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                                        <p:ajax update=":padding"></p:ajax>
-                                                    </p:selectOneMenu>
-                                                </p:outputPanel>
-                                            </p:column>
-                                            <p:column > 
-
-                                                <p:outputPanel rendered="#{proveedorBean.idEntidad eq 0? false : true}">
-                                                    <p:selectBooleanCheckbox value="#{proveedorBean.estadoPredeterminado}" >
-                                                        <p:ajax update="opPrede" listener="#{proveedorBean.cambiarPredeterminado()}" />
-                                                    </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
-                                                </p:outputPanel>
-
-                                            </p:column> 
-
-                                        </p:row>
-                                    </p:panelGrid>
-                                </p:fieldset>
-                            </h:form>
-
-                            <br></br>
-                            <p:outputPanel rendered="#{proveedorBean.idEntidad eq 0 ? false:true}" id="data">
+                            <p:outputPanel  id="data">
                                 <!-- Actulizando lista de Proveedores   -->
                                 #{proveedorBean.updateListaProveedores()}
 
@@ -449,115 +423,115 @@
 
 
                             <p:outputPanel id="opDataProveedor">
-                            <p:dialog   header="Datos del proveedor" widgetVar="dlVer" modal="true"   visible="false" width="60%"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
-                                <h:form  target="_blank">
-                                    <p:panelGrid style="width: 100%;" >
+                                <p:dialog   header="Datos del proveedor" widgetVar="dlVer" modal="true"   visible="false" width="60%"  resizable="false" responsive="false" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                                    <h:form  target="_blank">
+                                        <p:panelGrid style="width: 100%;" >
 
-                                        <p:row>
-                                            <p:column style="width: 20%;">
-                                                <h:outputText value="Nombre:" />
-                                            </p:column>
-
-
-                                            <p:column>
-                                                <h:outputText id="tNombre" value="#{proveedorBean.provedorSeleccionado.nombreProveedor}"  style="width: 100%" />
-
-                                            </p:column>
-
-                                        </p:row>
-                                        <p:row>
-
-                                            <p:column style="width: 50%;">
-                                                <h:outputText value="Giro:" />
-                                            </p:column>
+                                            <p:row>
+                                                <p:column style="width: 20%;">
+                                                    <h:outputText value="Nombre:" />
+                                                </p:column>
 
 
-                                            <p:column>
-                                                <h:outputText id="tGiro" value="#{proveedorBean.provedorSeleccionado.giroProveedor}" style="width: 100%"  />
+                                                <p:column>
+                                                    <h:outputText id="tNombre" value="#{proveedorBean.provedorSeleccionado.nombreProveedor}"  style="width: 100%" />
 
-                                            </p:column>
-                                        </p:row>
-                                        <p:row>
-                                            <p:column>
-                                                <h:outputText value="NIT:"/>
-                                            </p:column>
+                                                </p:column>
 
-                                            <p:column>
-                                                <h:outputText id="tNIT" value="#{proveedorBean.provedorSeleccionado.nitProveedor}"   style="width: 100%"/> 
+                                            </p:row>
+                                            <p:row>
 
-                                            </p:column>
-
-                                        </p:row> 
-                                        <p:row>
-
-                                            <p:column>
-                                                <h:outputText value="NRC:" />
-                                            </p:column>
-                                            <p:column>
-                                                <h:outputText  id="tNRC" value="#{proveedorBean.provedorSeleccionado.nrcProveedor}"  style="width: 100%" /> 
-
-                                            </p:column>
-                                        </p:row>    
-                                        <p:row>
-                                            <p:column>
-                                                <h:outputText value="Tel. Fijo:" />
-                                            </p:column>
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Giro:" />
+                                                </p:column>
 
 
+                                                <p:column>
+                                                    <h:outputText id="tGiro" value="#{proveedorBean.provedorSeleccionado.giroProveedor}" style="width: 100%"  />
 
-                                            <p:column>
-                                                <h:outputText id="tTelF" value="#{proveedorBean.provedorSeleccionado.telefono1Proveedor}"  style="width: 100%"/> 
-                                            </p:column>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="NIT:"/>
+                                                </p:column>
 
-                                        </p:row>
+                                                <p:column>
+                                                    <h:outputText id="tNIT" value="#{proveedorBean.provedorSeleccionado.nitProveedor}"   style="width: 100%"/> 
 
-                                        <p:row>
+                                                </p:column>
 
-                                            <p:column>
-                                                <h:outputText value="Tel. Móvil:"  />
-                                            </p:column>
-                                            <p:column>
-                                                <h:outputText id="tTelM" value="#{proveedorBean.provedorSeleccionado.telefono2Proveedor}"  style="width: 100%" /> 
+                                            </p:row> 
+                                            <p:row>
 
-                                            </p:column>
-                                        </p:row>
+                                                <p:column>
+                                                    <h:outputText value="NRC:" />
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText  id="tNRC" value="#{proveedorBean.provedorSeleccionado.nrcProveedor}"  style="width: 100%" /> 
 
-                                        <p:row>
-                                            <p:column >
-                                                <h:outputText value="Correo:"/>
-                                            </p:column>
-
-
-                                            <p:column >
-                                                <h:outputText id="tCorreo" value="#{proveedorBean.provedorSeleccionado.correoProveedor}" style="width: 100%" />
-
-                                            </p:column>
-
-                                        </p:row>
-
-                                        <p:row>
-                                            <p:column >
-                                                <h:outputText value="Dirección:"/>
-                                            </p:column>
+                                                </p:column>
+                                            </p:row>    
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputText value="Tel. Fijo:" />
+                                                </p:column>
 
 
-                                            <p:column >
-                                                <h:outputText id="taDireccion" value="#{proveedorBean.provedorSeleccionado.direccionProveedor}"   style="width: 100%" />
 
-                                            </p:column>
+                                                <p:column>
+                                                    <h:outputText id="tTelF" value="#{proveedorBean.provedorSeleccionado.telefono1Proveedor}"  style="width: 100%"/> 
+                                                </p:column>
 
-                                        </p:row>
-                                    </p:panelGrid>
-                                    <br></br>
-                                    <center>
-                                        <p:splitButton  value="Ver PDF" ajax="false" actionListener="#{proveedorBean.generarReporteProveedor()}" icon="fa fa-eye"  >
-                                            <p:menuitem value="Descargar PDF"   ajax="false"  
-                                                        actionListener="#{proveedorBean.generarReporteProveedorPDF()}" icon=" fa fa-download" >
-                                            </p:menuitem>   
-                                        </p:splitButton>
-                                    </center>
-                                </h:form>
-                            </p:dialog>
+                                            </p:row>
+
+                                            <p:row>
+
+                                                <p:column>
+                                                    <h:outputText value="Tel. Móvil:"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText id="tTelM" value="#{proveedorBean.provedorSeleccionado.telefono2Proveedor}"  style="width: 100%" /> 
+
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column >
+                                                    <h:outputText value="Correo:"/>
+                                                </p:column>
+
+
+                                                <p:column >
+                                                    <h:outputText id="tCorreo" value="#{proveedorBean.provedorSeleccionado.correoProveedor}" style="width: 100%" />
+
+                                                </p:column>
+
+                                            </p:row>
+
+                                            <p:row>
+                                                <p:column >
+                                                    <h:outputText value="Dirección:"/>
+                                                </p:column>
+
+
+                                                <p:column >
+                                                    <h:outputText id="taDireccion" value="#{proveedorBean.provedorSeleccionado.direccionProveedor}"   style="width: 100%" />
+
+                                                </p:column>
+
+                                            </p:row>
+                                        </p:panelGrid>
+                                        <br></br>
+                                        <center>
+                                            <p:splitButton  value="Ver PDF" ajax="false" actionListener="#{proveedorBean.generarReporteProveedor()}" icon="fa fa-eye"  >
+                                                <p:menuitem value="Descargar PDF"   ajax="false"  
+                                                            actionListener="#{proveedorBean.generarReporteProveedorPDF()}" icon=" fa fa-download" >
+                                                </p:menuitem>   
+                                            </p:splitButton>
+                                        </center>
+                                    </h:form>
+                                </p:dialog>
                             </p:outputPanel>
 
 

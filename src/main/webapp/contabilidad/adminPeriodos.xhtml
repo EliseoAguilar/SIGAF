@@ -11,49 +11,26 @@
 
             <ui:define name="content">
 
+                <h:form>
+                    <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                        <p:row>
+                            <p:column style="padding: 0px;" >
+                                #{ejercicioBean.getContabilidadPredeterminado()}
+                                <h:outputText class="etiquetaEn" value="#{ejercicioBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="padding: 0px; text-align: right" >
+                                <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{ejercicioBean.btnCancelar}"  value="Cambiar Entidad"> 
+                                   
+                                </p:commandButton>   
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
+                
                 <p:outputPanel id="padding"  > 
                     <p:panel  header="Administrar periodos" style="margin-bottom:20px">
-                        <!-- Actualiza la lista de las Entidades -->
-                        #{ejercicioBean.updateListaEntidades()}
-                        <h:form id="fFiltro"> 
-                            <p:fieldset>
-                                <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder" >
-                                    <p:row>
-                                        <p:column style=" width: 60%" >
-                                            <h:outputText value="Entidad:*" /> 
-                                        </p:column>
-
-                                        <p:column style=" width: 40%"  >
-                                            <h:outputText value="" />  
-                                        </p:column>
-                                    </p:row>
-                                    <p:row>
-                                        <p:column >
-                                            <p:outputPanel id="opEntPred" rendered="#{ejercicioBean.estadoPredeterminado eq true? true:true}"  >
-                                                <p:selectOneMenu disabled="#{ejercicioBean.estadoPredeterminado}"  value="#{ejercicioBean.idEntidad}"  style=" width: 100%;"   > 
-                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0"   />
-                                                    <f:selectItems  var="end"  value="#{ejercicioBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                                    <p:ajax update=":padding"></p:ajax>
-                                                </p:selectOneMenu>
-                                            </p:outputPanel>
-                                        </p:column>
-
-                                        <p:column > 
-                                            <p:outputPanel rendered="#{ejercicioBean.idEntidad eq 0? false : true}">
-                                                <p:selectBooleanCheckbox value="#{ejercicioBean.estadoPredeterminado}" >
-                                                    <p:ajax update="opEntPred" listener="#{ejercicioBean.cambiarPredeterminado()}" />
-                                                </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
-                                            </p:outputPanel>
-                                        </p:column>
-
-                                    </p:row>
-                                </p:panelGrid>
-                            </p:fieldset>
-                        </h:form>
-
-                        <br></br>
-
-                        <p:outputPanel rendered="#{ejercicioBean.idEntidad eq 0? false : true}"  id="opDataPer"  >
+                        <p:outputPanel   id="opDataPer"  >
 
                             <!-- Actualiza la lista de Ejercicos -->
                             #{ejercicioBean.updatelistaEjercicios()}
@@ -125,8 +102,8 @@
                                         <p:commandButton id="btnLimpiar" actionListener="#{ejercicioBean.limpiar()}" update=":opAgregarEjerPer"  icon="fa fa-minus"  style="#{ejercicioBean.btnLimpiar}"  value="Limpiar"> 
                                         </p:commandButton>
 
-                                        <p:commandButton id="btnCancelar"  update=":padding"    icon="fa fa-close" style="#{ejercicioBean.btnCancelar}"   value="Cancelar"> 
-                                            <f:setPropertyActionListener value="#{ejercicioBean.tipoCancelar()}" target="#{ejercicioBean.idEntidad}"></f:setPropertyActionListener>
+                                        <p:commandButton id="btnCancelar"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"    icon="fa fa-close" style="#{ejercicioBean.btnCancelar}"   value="Cancelar"> 
+                                            
                                         </p:commandButton>
                                     </center>
                                 </h:form>

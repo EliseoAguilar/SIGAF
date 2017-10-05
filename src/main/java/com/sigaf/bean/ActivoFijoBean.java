@@ -71,8 +71,6 @@ public class ActivoFijoBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private Boolean estadoPredeterminado;
-
     private IBajaActivoFijoBo bajaActivoFijoBo;
 
     private IDepreciacionBo depreciacionBo;
@@ -90,8 +88,6 @@ public class ActivoFijoBean extends Actividad {
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
-
-    private Integer idEntidad;
 
     private IValorActivoBo valorActivoBo;
 
@@ -156,7 +152,7 @@ public class ActivoFijoBean extends Actividad {
     /**
      * Activo datos
      */
-    private TEntidad entidad;
+    private TEntidad entidadSeleccionada;
 
     private TConfiguracion configuracion;
 
@@ -214,6 +210,16 @@ public class ActivoFijoBean extends Actividad {
 
     private String msgValorActivoBaja;
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    
+    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -222,35 +228,30 @@ public class ActivoFijoBean extends Actividad {
         this.bitacoraBo = bitacoraBo;
     }
 
-    /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+   
 
     public void updateConfiguracion() {
-        configuracion = this.configuracionBo.getConfiguracion(idEntidad);
+        configuracion = this.configuracionBo.getConfiguracion(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaProveedor() {
-        listaProveedor = this.proveedorBo.listProveedor(idEntidad);
+        listaProveedor = this.proveedorBo.listProveedor(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaArea() {
-        listaArea = this.areaBo.listArea(idEntidad);
+        listaArea = this.areaBo.listArea(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaTipos() {
-        ListaTipos = this.tipoActivoBo.listTipoActivo(idEntidad);
+        ListaTipos = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaActivoFijo() {
-        this.listaActivoFijo = this.activoFijoBo.listActivoFijo(idEntidad);
+        this.listaActivoFijo = this.activoFijoBo.listActivoFijo(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaCuentas() {
-        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(idEntidad, true);
+        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(entidadSeleccionada.getIdEntidad(), true);
     }
 
     public void setTipoBaja(String tipoBaja) {
@@ -303,46 +304,14 @@ public class ActivoFijoBean extends Actividad {
         this.tipoActivo.setCodigoTipo("");
     }
 
-    /*
-    * Se recorre la lista dado que necesitamos toda la informacion 
-    * de la entidad. 
-     */
-    public void setIdEntidad(Integer idEntidad) {
-
-        this.idEntidad = idEntidad;
-
-        for (TEntidad tentidad : listaEntidades) {
-
-            if (tentidad.getIdEntidad() == idEntidad) {
-                this.entidad = tentidad;
-                return;
-            }
-        }
-
-    }
-
-    public void cambiarPredeterminado() {
+    
+    public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
 
-    }
-
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        estadoPredeterminado = loginBean.getPredeterminado();
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
     /**
@@ -372,13 +341,13 @@ public class ActivoFijoBean extends Actividad {
 
         this.buscarEmpleadoArea(activo.getTEmpleado());
 
-        return this.entidad.getCodigoEntidad() + "-" + this.area.getCodigoArea() + "-" + activo.getTTipoActivo().getCodigoTipo() + "-" + activo.getCodigoActivoFijo();
+        return this.entidadSeleccionada.getCodigoEntidad() + "-" + this.area.getCodigoArea() + "-" + activo.getTTipoActivo().getCodigoTipo() + "-" + activo.getCodigoActivoFijo();
 
     }
 
     public String cogigoActivoFijoSeleccionado() {
 
-        return this.entidad.getCodigoEntidad() + "-" + area.getCodigoArea() + "-" + activoFijoSeleccionado.getTTipoActivo().getCodigoTipo() + "-" + activoFijoSeleccionado.getCodigoActivoFijo();
+        return this.entidadSeleccionada.getCodigoEntidad() + "-" + area.getCodigoArea() + "-" + activoFijoSeleccionado.getTTipoActivo().getCodigoTipo() + "-" + activoFijoSeleccionado.getCodigoActivoFijo();
     }
 
     /*
@@ -490,7 +459,7 @@ public class ActivoFijoBean extends Actividad {
         auxBitacora.setTableBitacora("t_activo_fijo");
         auxBitacora.setAccionBitacora("Ver información de activo fijo");
         auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -555,15 +524,7 @@ public class ActivoFijoBean extends Actividad {
         this.listaDetallePartida.add(detAc);
 
     }
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
-    }
-
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
-
+    
     public IBajaActivoFijoBo getBajaActivoFijoBo() {
         return bajaActivoFijoBo;
     }
@@ -1010,7 +971,7 @@ public class ActivoFijoBean extends Actividad {
     }
 
     public Integer getNumPartida() {
-        this.ejercicio = this.ejercicioBo.getEjercicioAbierto(idEntidad);
+        this.ejercicio = this.ejercicioBo.getEjercicioAbierto(entidadSeleccionada.getIdEntidad());
         numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
         return numPartida;
 
@@ -1112,13 +1073,6 @@ public class ActivoFijoBean extends Actividad {
         this.codTip = codTip;
     }
 
-    public TEntidad getEntidad() {
-        return entidad;
-    }
-
-    public void setEntidad(TEntidad entidad) {
-        this.entidad = entidad;
-    }
 
     public IEntidadBo getEntidadBo() {
         return entidadBo;
@@ -1228,9 +1182,7 @@ public class ActivoFijoBean extends Actividad {
         this.listaDetallePartida = new ArrayList<>();
         this.limpiar();
         this.limpiarRegistro();
-        this.idEntidad = 0;
         this.enableShowDataBean();
-        this.estadoPredeterminado = false;
         try {
             this.getConexion();
         } catch (SQLException ex) {
@@ -1264,7 +1216,7 @@ public class ActivoFijoBean extends Actividad {
             auxBitacora.setTableBitacora("t_partida, t_valor_activo");
             auxBitacora.setAccionBitacora("Agregar registro contable activo fijo");
             auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partida.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1302,7 +1254,7 @@ public class ActivoFijoBean extends Actividad {
             auxBitacora.setTableBitacora("t_partida, t_valor_activo");
             auxBitacora.setAccionBitacora("Modificar registro contable activo fijo");
             auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partida.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1342,7 +1294,7 @@ public class ActivoFijoBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_activo_fijo");
             auxBitacora.setAccionBitacora("Agregar activo fijo");
-            auxBitacora.setDatosBitacora("Descripción:" + activoFijo.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Descripción:" + activoFijo.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(activoFijo.getIdActivoFijo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1381,7 +1333,7 @@ public class ActivoFijoBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_activo_fijo");
             auxBitacora.setAccionBitacora("Modificar activo fijo");
-            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1631,7 +1583,7 @@ public class ActivoFijoBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_activo_fijo");
             auxBitacora.setAccionBitacora("Dar de alta activo fijo");
-            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1659,7 +1611,7 @@ public class ActivoFijoBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_activo_fijo");
             auxBitacora.setAccionBitacora("Dar de baja activo fijo");
-            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1762,7 +1714,7 @@ public class ActivoFijoBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_activo_fijo, t_partida, t_baja_activo_fijo, t_valor_activo");
             auxBitacora.setAccionBitacora("Baja contable  de activo fijo");
-            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1786,14 +1738,14 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivo() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_activo_fijo");
         auxBitacora.setAccionBitacora("Generar reporte de activo fijo");
-        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1816,14 +1768,14 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivoPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_activo_fijo");
         auxBitacora.setAccionBitacora("Descargar reporte de activo fijo");
-        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1845,14 +1797,14 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivoDepre() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoDepreAmort.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_activo_fijo");
         auxBitacora.setAccionBitacora("Generar reporte de depreciación/amortizacion  activo fijo");
-        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1875,14 +1827,14 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivoDeprePDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoDepreAmort.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_activo_fijo");
         auxBitacora.setAccionBitacora("Descargar reporte de depreciación/amortizacion  activo fijo");
-        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Descripción:" + activoFijoSeleccionado.getDescripcionActivoFijo() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(activoFijoSeleccionado.getIdActivoFijo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());

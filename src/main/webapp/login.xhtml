@@ -46,6 +46,7 @@
             </div>
             <div id="video-container" >
                 <video autoplay="treu" loop="true" class="fillWidth" muted="true">
+<<<<<<< HEAD
                     <source src="#{resource['MP4/media.mp4']}" type="video/mp4"/>
                 </video>
             </div><!-- end video-container -->
@@ -133,6 +134,94 @@
 
     </h:body>
     <div class="footer" >
+=======
+                    <source src="http://thenewcode.com/assets/videos/atlantic-light.webm" type="video/mp4"/>
+                </video>
+            </div><!-- end video-container -->
+        </div><!-- end .header-unit -->
+        <div class="landing">
+            <section class="topslot">
+                <div class="wrapper">
+                    <div class="brief">
+                        <h1>SIGAF</h1>
+                        <p>Sistema para la gestión administrativa y financiera, Fundación Usulután II</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="main">
+                    <p:outputPanel rendered="#{ !loginBean.resetPassForm ? !loginBean.reset :false }">
+                        <h:form>
+                            <p:inputText  value="#{loginBean.nombreUsuario}" placeholder="Nombre de Usuario"/>
+                            <br></br>
+                            <p:password  value="#{loginBean.clave}"  placeholder="Contraseña"/>
+                            <br></br>  
+                            <center>
+                                <h:outputText value="#{loginBean.msgValidate}" style=" color:  red" />
+                            </center>
+                            <br></br>  
+                            <h:commandButton  value="Entrar" actionListener="#{loginBean.login()}" />
+                            <div class="extras">
+                                <h:commandLink actionListener="#{loginBean.setReset(true)}" style=" color: green" value="¿Olvido su contraseña?"  ></h:commandLink>
+                            </div>
+                        </h:form>  
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{  !loginBean.resetPassForm ? loginBean.reset:false}">
+
+                        <h:form>
+                            <p:inputText  value="#{loginBean.mail}" placeholder="E-MAIL"/>
+                            <br></br>
+
+                            <center>
+                                <h:outputText value="#{loginBean.msgValidate}" style=" color:  red" />
+                            </center>
+                            <br></br>  
+
+                            <h:commandButton value="Enviar" actionListener="#{loginBean.resetPass()}" />
+                            <br></br> 
+                            <h:commandButton  value="Cancelar" actionListener="#{loginBean.setReset(false)}" />
+                        </h:form>
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{loginBean.resetPassForm}"    >
+
+
+
+                        <h:form >
+                            <p:inputText  value="#{loginBean.usuarioActivo.TEmpleado.correoEmpleado}" readonly="true"/>
+                            <br></br>
+                            <p:password  value="#{loginBean.clave}"  placeholder="Contraseña"/>
+
+                            <br></br>  
+                            <p:password  value="#{loginBean.claveConfir}"  placeholder="Confirmar contraseña"/>
+                            <br></br>
+
+                            <center>
+                                <p:outputLabel value="#{loginBean.msgValidate}"  id="msgValidate" style=" color:  red" />
+                            </center>
+                            <br></br>  
+
+
+                            <h:commandButton  value="Enviar" actionListener="#{loginBean.validar()}" >
+                                <f:param name="token" value="#{loginBean.token}" />
+                            </h:commandButton>
+                            <br></br> 
+                            <h:commandButton  value="Cancelar" actionListener="#{loginBean.setReset(false)}" />
+                        </h:form>
+
+
+                    </p:outputPanel>
+
+
+
+                </div>
+            </section>
+        </div>
+
+    </h:body>
+    <div class="footer">
+>>>>>>> origin/master
         <center>
 
             <p style="text-align: center; color: #ffffff"> Copyright © 2017, Universidad de El Salvador - Facultad Multidisciplinaria Paracentral</p>

@@ -21,10 +21,10 @@
 	<field name="nombreGrupo" class="java.lang.String">
 		<fieldDescription><![CDATA[nombreGrupo]]></fieldDescription>
 	</field>
-	<field name="saldoCuenta" class="java.lang.String">
+	<field name="saldoCuenta" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[saldoCuenta]]></fieldDescription>
 	</field>
-	<field name="saldoGrupo" class="java.lang.String">
+	<field name="saldoGrupo" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[saldoGrupo]]></fieldDescription>
 	</field>
 	<background>
@@ -108,14 +108,14 @@
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{saldoCuenta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreGrupo} ==  "" ? $F{saldoCuenta} : ""]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="378" y="0" width="120" height="13" uuid="9690dec0-7574-4c0b-991a-4e36e7bf6ac5"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="8" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{saldoGrupo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreCuenta} == "" ? $F{saldoGrupo} : ""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="57" y="2" width="194" height="13" uuid="0f139620-6aac-4962-8e66-37d60d42f156"/>

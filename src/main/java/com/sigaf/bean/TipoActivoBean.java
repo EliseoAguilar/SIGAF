@@ -48,13 +48,10 @@ public class TipoActivoBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private Boolean estadoPredeterminado;
-
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
 
-    private Integer idEntidad;
 
     private IConfiguracionBo configuracionBo;
 
@@ -99,7 +96,29 @@ public class TipoActivoBean extends Actividad {
     private String msgDepre;
 
     private String msgTipo;
+   
+    private TEntidad entidadSeleccionada;
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+    
+    
+    
+    public void getContabilidadPredeterminado() {
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
+
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+    }
+
+    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -109,11 +128,11 @@ public class TipoActivoBean extends Actividad {
     }
 
     public void updateConfiguracion() {
-        this.configuracion = this.configuracionBo.getConfiguracion(idEntidad);
+        this.configuracion = this.configuracionBo.getConfiguracion(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaCuentas() {
-        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(idEntidad, true);
+        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(entidadSeleccionada.getIdEntidad(), true);
     }
 
     /**
@@ -124,40 +143,11 @@ public class TipoActivoBean extends Actividad {
     }
 
     public void updateListaTipoActivo() {
-        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(idEntidad);
+        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
     }
 
-    public void cambiarPredeterminado() {
 
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
-
-    }
-
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        estadoPredeterminado = loginBean.getPredeterminado();
-
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
-    }
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
-    }
-
+    
     public String getMsgTipo() {
         return msgTipo;
     }
@@ -182,17 +172,11 @@ public class TipoActivoBean extends Actividad {
         this.listaEntidades = listaEntidades;
     }
 
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
-
-    public void setIdEntidad(Integer idEntidad) {
-        this.idEntidad = idEntidad;
-    }
+   
 
     public void init() {
         super.enableShowData();
-        this.idEntidad = 0;
+    
         try {
             this.getConexion();
         } catch (SQLException ex) {
@@ -327,7 +311,7 @@ public class TipoActivoBean extends Actividad {
                 + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                 + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                 + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -573,7 +557,7 @@ public class TipoActivoBean extends Actividad {
 
     public void crearTipo() {
         try {
-            this.tipoActivo.setTEntidad(new TEntidad(idEntidad));
+            this.tipoActivo.setTEntidad(entidadSeleccionada);
             this.tipoActivo.setTCuentaByIdCuentaVentaTipo(cuentaVenta);
             this.tipoActivo.setTCuentaByIdCuentaActivoTipo(cuentaActivo);
             this.tipoActivo.setTCuentaByIdCuentaDepreciacionTipo(cuentaDepre);
@@ -588,7 +572,7 @@ public class TipoActivoBean extends Actividad {
                     + ", Nombre:" + tipoActivo.getNombreTipo()
                     + ", Tipo:" + tipoActivo.getCalculoTipoActivo()
                     + ", Descripción :" + tipoActivo.getDescripcionTipo()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(tipoActivo.getIdTipo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -619,7 +603,7 @@ public class TipoActivoBean extends Actividad {
             auxBitacora.setDatosBitacora("Código :" + tipoActivoSeleccionado.getCodigoTipo() + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                     + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                     + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -654,7 +638,7 @@ public class TipoActivoBean extends Actividad {
             auxBitacora.setDatosBitacora("Código :" + tipoActivoSeleccionado.getCodigoTipo() + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                     + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                     + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -683,7 +667,7 @@ public class TipoActivoBean extends Actividad {
             auxBitacora.setDatosBitacora("Código :" + tipoActivoSeleccionado.getCodigoTipo() + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                     + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                     + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -702,7 +686,7 @@ public class TipoActivoBean extends Actividad {
     public void generarReporteTipo() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idTipoActivo", this.tipoActivoSeleccionado.getIdTipo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/ReporteTiposActivoIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -719,7 +703,7 @@ public class TipoActivoBean extends Actividad {
         auxBitacora.setDatosBitacora("Código :" + tipoActivoSeleccionado.getCodigoTipo() + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                 + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                 + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + entidadSeleccionada.getIdEntidad());
         auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -735,7 +719,7 @@ public class TipoActivoBean extends Actividad {
     public void generarReporteTipoPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idTipoActivo", this.tipoActivoSeleccionado.getIdTipo());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/ReporteTiposActivoIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -751,7 +735,7 @@ public class TipoActivoBean extends Actividad {
         auxBitacora.setDatosBitacora("Código :" + tipoActivoSeleccionado.getCodigoTipo() + ", Nombre:" + tipoActivoSeleccionado.getNombreTipo()
                 + ", Tipo:" + tipoActivoSeleccionado.getCalculoTipoActivo()
                 + ", Descripción :" + tipoActivoSeleccionado.getDescripcionTipo()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + entidadSeleccionada.getIdEntidad());
         auxBitacora.setIdTableBitacora(tipoActivoSeleccionado.getIdTipo());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());

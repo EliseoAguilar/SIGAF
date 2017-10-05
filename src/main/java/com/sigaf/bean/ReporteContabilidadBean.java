@@ -67,8 +67,7 @@ public class ReporteContabilidadBean extends Actividad {
     //Objeto capa de negocio Entidad
     private IEntidadBo entidadBo;
 
-    //Identificador Entidad
-    private Integer idEntidad;
+    
 
     //Identificador Reporte
     private Integer idReporte;
@@ -76,8 +75,7 @@ public class ReporteContabilidadBean extends Actividad {
     //Identificador SubReporte
     private Integer idSubReporte;
 
-    //Mensaje error reporte filtro Entidad
-    private String msgEntidad;
+    
 
     //Mensaje error reporte filtro Reporte
     private String msgReporte;
@@ -131,6 +129,27 @@ public class ReporteContabilidadBean extends Actividad {
 
     private String msgEjer;
 
+    private TEntidad entidadSeleccionada;
+
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    public void getContabilidadPredeterminado() {
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
+
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+    }
+
+    
+    
     public String getMsgEjer() {
         return msgEjer;
     }
@@ -284,23 +303,9 @@ public class ReporteContabilidadBean extends Actividad {
         this.Renta = Renta;
     }
 
-    /**
-     * Retorna Instancia
-     *
-     * @return msgEntidad
-     */
-    public String getMsgEntidad() {
-        return msgEntidad;
-    }
 
-    /**
-     * Cambia Instancia
-     *
-     * @param msgEntidad
-     */
-    public void setMsgEntidad(String msgEntidad) {
-        this.msgEntidad = msgEntidad;
-    }
+
+    
 
     /**
      * Retorna Instancia
@@ -363,7 +368,6 @@ public class ReporteContabilidadBean extends Actividad {
     public void init() {
 
         idReporte = 0;
-        idEntidad = 0;
         idSubReporte = 0;
         try {
             this.getConexion();
@@ -378,7 +382,7 @@ public class ReporteContabilidadBean extends Actividad {
     }
 
     public void updateListaEjercicio() {
-        this.listaEjercicio = ejercicioBo.listEjercicio(this.idEntidad);
+        this.listaEjercicio = ejercicioBo.listEjercicio(this.entidadSeleccionada.getIdEntidad());
     }
 
     public List<TEntidad> getListaEntidades() {
@@ -413,26 +417,9 @@ public class ReporteContabilidadBean extends Actividad {
         this.entidadBo = entidadBo;
     }
 
-    /**
-     * Retorna Instancia
-     *
-     * @return idEntidad
-     */
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
 
-    /**
-     * Cambia Instancia
-     *
-     * @param idEntidad
-     */
-    public void setIdEntidad(Integer idEntidad) {
-        this.idReporte = 0;
-        this.idSubReporte = 0;
-        this.idEntidad = idEntidad;
-    }
 
+    
     /**
      * Retorna Instancia
      *
@@ -457,7 +444,7 @@ public class ReporteContabilidadBean extends Actividad {
      * @return listaEjercicio
      */
     public List<TEjercicio> getListaEjercicio() {
-        this.listaEjercicio = ejercicioBo.listEjercicio(this.idEntidad);
+        this.listaEjercicio = ejercicioBo.listEjercicio(this.entidadSeleccionada.getIdEntidad());
         return listaEjercicio;
     }
 
@@ -522,13 +509,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         estadoReporte = true;
 
-        if (idEntidad == 0) {
-            this.msgEntidad = "Entidad  requerida";
-            estadoReporte = false;
-        } else {
-            this.msgEntidad = "";
-        }
-
+ 
         if (idReporte == 0) {
             this.msgReporte = "Tipo de reporte requerido";
             estadoReporte = false;
@@ -652,7 +633,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/ReporteProveedoresGeneral.jasper"));
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -685,7 +666,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -704,7 +685,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         if (this.idSubReporte == 1) {
             idEntidad.put("estado", true);
@@ -760,7 +741,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -780,7 +761,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/ReporteTiposActivos.jasper"));
 
@@ -813,7 +794,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -833,7 +814,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         if (this.idSubReporte == 1) {
             idEntidad.put("estado", true);
@@ -887,7 +868,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -907,7 +888,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivosFijos.jasper"));
 
@@ -940,7 +921,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-       auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -959,7 +940,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         if (this.idSubReporte == 1) {
             idEntidad.put("estado", "Activo");
@@ -1016,7 +997,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1036,7 +1017,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/CatalogoCuentas.jasper"));
 
@@ -1072,7 +1053,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1091,7 +1072,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> idEntidad = new HashMap();
 
-        idEntidad.put("idEntidad", this.idEntidad);
+        idEntidad.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         if (this.idSubReporte == 1) {
             idEntidad.put("estado", true);
@@ -1145,7 +1126,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1163,7 +1144,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> parametros = new HashMap();
 
-        parametros.put("idEntidad", this.idEntidad);
+        parametros.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         parametros.put("idEjercicio", this.idEjercicio);
 
@@ -1201,7 +1182,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1220,7 +1201,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         Map<String, Object> parametros = new HashMap();
 
-        parametros.put("idEntidad", this.idEntidad);
+        parametros.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         parametros.put("idEjercicio", this.idEjercicio);
 
@@ -1258,7 +1239,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1280,7 +1261,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         parametros.put("idEjercicio", this.idEjercicio);
 
-        parametros.put("idEntidad", this.idEntidad);
+        parametros.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/balanzaComprobacion.jasper"));
 
@@ -1316,7 +1297,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1380,7 +1361,7 @@ public class ReporteContabilidadBean extends Actividad {
             /* 
             * Datos para el total de Ingresos
              */
-            EstadoResultado grupoIngre = new EstadoResultado("INGRESOS", "", "", "");
+            EstadoResultado grupoIngre = new EstadoResultado("INGRESOS", "", BigDecimal.ZERO, BigDecimal.ZERO);
             BigDecimal totalIngre = BigDecimal.ZERO;
             listEstRe.add(grupoIngre);
 
@@ -1397,16 +1378,16 @@ public class ReporteContabilidadBean extends Actividad {
                 saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
                 totalIngre = totalIngre.add(saldo);
 
-                auxEstado = new EstadoResultado("", ingre.getTCuenta().getNombreCuenta(), saldo.toString(), "");
+                auxEstado = new EstadoResultado("", ingre.getTCuenta().getNombreCuenta(), saldo, BigDecimal.ZERO);
                 listEstRe.add(auxEstado);
             }
             totalIngre = totalIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoIngre.setSaldoGrupo( totalIngre.toString());
+            grupoIngre.setSaldoGrupo( totalIngre);
 
             /* 
             * Datos para el total de Costos
              */
-            EstadoResultado grupoCost = new EstadoResultado("COSTOS", "", "", "");
+            EstadoResultado grupoCost = new EstadoResultado("COSTOS", "",BigDecimal.ZERO , BigDecimal.ZERO);
             BigDecimal totalCost = BigDecimal.ZERO;
             listEstRe.add(grupoCost);
 
@@ -1423,11 +1404,11 @@ public class ReporteContabilidadBean extends Actividad {
                 saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
                 totalCost = totalCost.add(saldo);
 
-                auxEstado = new EstadoResultado("", cost.getTCuenta().getNombreCuenta(),  saldo.toString(), "");
+                auxEstado = new EstadoResultado("", cost.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
                 listEstRe.add(auxEstado);
             }
             totalCost = totalCost.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoCost.setSaldoGrupo( totalCost.toString());
+            grupoCost.setSaldoGrupo( totalCost);
 
             /* 
             * Datos para Utilidad Bruta
@@ -1435,13 +1416,13 @@ public class ReporteContabilidadBean extends Actividad {
             Utilidad = totalIngre.subtract(totalCost);
             Utilidad = Utilidad.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-            EstadoResultado grupoUtiBrut = new EstadoResultado("UTILIDAD BRUTA", "", "",  Utilidad.toString());
+            EstadoResultado grupoUtiBrut = new EstadoResultado("UTILIDAD BRUTA", "", BigDecimal.ZERO,  Utilidad);
             listEstRe.add(grupoUtiBrut);
 
             /* 
             * Datos para el total de Gastos
              */
-            EstadoResultado grupoGast = new EstadoResultado("GASTOS DE OPERACIÓN", "", "", "");
+            EstadoResultado grupoGast = new EstadoResultado("GASTOS DE OPERACIÓN", "", BigDecimal.ZERO, BigDecimal.ZERO);
             BigDecimal totalGast = BigDecimal.ZERO;
             listEstRe.add(grupoGast);
 
@@ -1457,24 +1438,24 @@ public class ReporteContabilidadBean extends Actividad {
                 }
                 saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
                 totalGast = totalGast.add(saldo);
-                auxEstado = new EstadoResultado("", gast.getTCuenta().getNombreCuenta(),  saldo.toString(), "");
+                auxEstado = new EstadoResultado("", gast.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
                 listEstRe.add(auxEstado);
             }
 
             totalGast = totalGast.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoGast.setSaldoGrupo( totalGast.toString());
+            grupoGast.setSaldoGrupo( totalGast);
 
             /* 
             * Datos para Utilidad de Operacion
              */
             Utilidad = Utilidad.subtract(totalGast);
-            EstadoResultado grupoUtiOpe = new EstadoResultado("UTILIDAD DE OPERACIÓN ", "", "",  Utilidad.toString());
+            EstadoResultado grupoUtiOpe = new EstadoResultado("UTILIDAD DE OPERACIÓN ", "", BigDecimal.ZERO,  Utilidad);
             listEstRe.add(grupoUtiOpe);
 
             /* 
             * Datos para Otros Ingresos
              */
-            EstadoResultado grupoOtrIngre = new EstadoResultado("OTROS INGRESOS", "", "", "");
+            EstadoResultado grupoOtrIngre = new EstadoResultado("OTROS INGRESOS", "", BigDecimal.ZERO,BigDecimal.ZERO );
             BigDecimal totalOtrIngre = BigDecimal.ZERO;
             listEstRe.add(grupoOtrIngre);
 
@@ -1490,16 +1471,16 @@ public class ReporteContabilidadBean extends Actividad {
                 }
                 saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
                 totalOtrIngre = totalOtrIngre.add(saldo);
-                auxEstado = new EstadoResultado("", otrIngre.getTCuenta().getNombreCuenta(),  saldo.toString(), "");
+                auxEstado = new EstadoResultado("", otrIngre.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
                 listEstRe.add(auxEstado);
             }
             totalOtrIngre = totalOtrIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoOtrIngre.setSaldoGrupo( totalOtrIngre.toString());
+            grupoOtrIngre.setSaldoGrupo( totalOtrIngre);
 
             /* 
             * Datos para Otros Gastos
              */
-            EstadoResultado grupoOtrGast = new EstadoResultado("OTROS GASTOS", "", "", "");
+            EstadoResultado grupoOtrGast = new EstadoResultado("OTROS GASTOS", "", BigDecimal.ZERO, BigDecimal.ZERO);
             BigDecimal totalOtrGast = BigDecimal.ZERO;
             listEstRe.add(grupoOtrGast);
 
@@ -1515,11 +1496,11 @@ public class ReporteContabilidadBean extends Actividad {
                 }
                 saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
                 totalOtrGast = totalOtrGast.add(saldo);
-                auxEstado = new EstadoResultado("", otrGast.getTCuenta().getNombreCuenta(),  saldo.toString(), "");
+                auxEstado = new EstadoResultado("", otrGast.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
                 listEstRe.add(auxEstado);
             }
             totalOtrGast = totalOtrGast.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoOtrGast.setSaldoGrupo( totalOtrGast.toString());
+            grupoOtrGast.setSaldoGrupo( totalOtrGast);
 
             /* 
             * Datos para Utilidad de Ates de Impuestos
@@ -1535,7 +1516,7 @@ public class ReporteContabilidadBean extends Actividad {
             if (Utilidad.compareTo(BigDecimal.ZERO) > 0) {
                 if (this.rentaEstructura != null) {
 
-                    EstadoResultado grupoUtiAntImp = new EstadoResultado("UTILIDAD ANTES DE IMPUESTOS ", "", "",  Utilidad.toString());
+                    EstadoResultado grupoUtiAntImp = new EstadoResultado("UTILIDAD ANTES DE IMPUESTOS ", "", BigDecimal.ZERO,  Utilidad);
                     listEstRe.add(grupoUtiAntImp);
 
                     BigDecimal porRent;
@@ -1548,11 +1529,11 @@ public class ReporteContabilidadBean extends Actividad {
 
                     Renta = Utilidad.multiply(porRent);
                     Renta = Renta.setScale(2, BigDecimal.ROUND_HALF_UP);
-                    EstadoResultado grupoImp = new EstadoResultado("IMPUESTO DE RENTA", " ", "",  Renta.toString());
+                    EstadoResultado grupoImp = new EstadoResultado("IMPUESTO DE RENTA", " ", BigDecimal.ZERO,  Renta);
                     listEstRe.add(grupoImp);
 
                     Utilidad = Utilidad.subtract(Renta);
-                    EstadoResultado grupoUtiLiq = new EstadoResultado("UTILIDAD LIQUIDA", "", "",  Utilidad.toString());
+                    EstadoResultado grupoUtiLiq = new EstadoResultado("UTILIDAD LIQUIDA", "", BigDecimal.ZERO,  Utilidad);
                     listEstRe.add(grupoUtiLiq);
 
                 }
@@ -1563,13 +1544,13 @@ public class ReporteContabilidadBean extends Actividad {
                     porRese = ReservaEstructura.getPorMinEstructura().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
                     Reserva = Utilidad.multiply(porRese);
                     Reserva = Reserva.setScale(2, BigDecimal.ROUND_HALF_UP);
-                    EstadoResultado grupoRese = new EstadoResultado("RESERVA LEGAL", " ", "",  Reserva.toString());
+                    EstadoResultado grupoRese = new EstadoResultado("RESERVA LEGAL", " ", BigDecimal.ZERO,  Reserva);
                     listEstRe.add(grupoRese);
                     Utilidad = Utilidad.subtract(Reserva);
                 }
             }
 
-            EstadoResultado resulEjer = new EstadoResultado("RESULTADO DEL EJERCICIO", "", "", Utilidad.toString());
+            EstadoResultado resulEjer = new EstadoResultado("RESULTADO DEL EJERCICIO", "", BigDecimal.ZERO, Utilidad);
             listEstRe.add(resulEjer);
 
         }
@@ -1582,7 +1563,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         if (this.estadoResultado()) {
 
-            TEntidad auxEntidad = entidadBo.getTEntidad(idEntidad);
+            TEntidad auxEntidad = entidadBo.getTEntidad(this.entidadSeleccionada.getIdEntidad());
 
             TEjercicio auxEjercicio = ejercicioBo.getEjercicio(idEjercicio);
 
@@ -1638,7 +1619,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             FacesContext.getCurrentInstance().responseComplete();
 
-            auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad + ", Ejercicio:"+this.idEjercicio);
+            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
 
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1661,7 +1642,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             Map<String, Object> parametros = new HashMap();
 
-            parametros.put("idEntidad", this.idEntidad);
+            parametros.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
             parametros.put("idEjercicio", this.idEjercicio);
 
@@ -1784,7 +1765,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             FacesContext.getCurrentInstance().responseComplete();
 
-            auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad + ", Ejercicio:"+this.idEjercicio);
+            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
 
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());

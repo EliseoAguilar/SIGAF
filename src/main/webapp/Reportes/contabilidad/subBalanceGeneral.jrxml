@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subBalanceGeneral" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8e90648a-e79b-4327-a424-357397d8d316">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="253"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Titulos">
 		<conditionalStyle>
@@ -155,14 +155,14 @@ from cuentas cs  where   cs.nivel <= $P{nivelCuenta} order by cs.codigo_cuenta]]
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement style="Totales" x="271" y="3" width="232" height="12" uuid="d1bfea46-c639-4a7d-8f17-59fdc49f6195"/>
+				<reportElement style="Totales" x="361" y="3" width="142" height="12" uuid="d1bfea46-c639-4a7d-8f17-59fdc49f6195"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id_subcuenta_cuenta} == null ? " ":($F{naturaleza_cuenta}.equals("Deudora") ? ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ).subtract(  ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ) ) : ( $F{haber} == null? BigDecimal.ZERO :$F{haber}  ).subtract( ( $F{debe} == null? BigDecimal.ZERO :$F{debe}  ) ))]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Titulos" mode="Transparent" x="38" y="0" width="233" height="15" uuid="62620bd3-ef3c-4199-9dff-2a2cb3a719c3"/>
+				<reportElement style="Titulos" mode="Transparent" x="38" y="0" width="323" height="15" uuid="62620bd3-ef3c-4199-9dff-2a2cb3a719c3"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -173,7 +173,7 @@ from cuentas cs  where   cs.nivel <= $P{nivelCuenta} order by cs.codigo_cuenta]]
 	<summary>
 		<band height="22">
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="271" y="0" width="232" height="20" uuid="b84fc72f-c2f6-47bf-ad47-7e0e2e695297"/>
+				<reportElement x="361" y="0" width="142" height="20" uuid="b84fc72f-c2f6-47bf-ad47-7e0e2e695297"/>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -187,7 +187,7 @@ from cuentas cs  where   cs.nivel <= $P{nivelCuenta} order by cs.codigo_cuenta]]
 				<text><![CDATA[TOTAL DE ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="0" width="171" height="20" uuid="b0dbfe64-5588-48b3-a00b-107d89e315e8"/>
+				<reportElement x="100" y="0" width="261" height="20" uuid="b0dbfe64-5588-48b3-a00b-107d89e315e8"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>

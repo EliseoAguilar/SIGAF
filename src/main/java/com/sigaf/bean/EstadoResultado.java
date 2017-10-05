@@ -18,16 +18,16 @@ public class EstadoResultado {
     
     String NombreCuenta;
     
-    String saldoCuenta;
+    BigDecimal saldoCuenta;
     
-    String  saldoGrupo;
+    BigDecimal  saldoGrupo;
 
     public EstadoResultado() {
     }
 
     
     
-    public EstadoResultado(String NombreGrupo, String NombreCuenta, String saldoCuenta, String saldoGrupo) {
+    public EstadoResultado(String NombreGrupo, String NombreCuenta, BigDecimal saldoCuenta, BigDecimal saldoGrupo) {
         this.NombreGrupo = NombreGrupo;
         this.NombreCuenta = NombreCuenta;
         this.saldoCuenta = saldoCuenta;
@@ -50,19 +50,19 @@ public class EstadoResultado {
         this.NombreCuenta = NombreCuenta;
     }
 
-    public String getSaldoCuenta() {
+    public BigDecimal getSaldoCuenta() {
         return saldoCuenta;
     }
 
-    public void setSaldoCuenta(String saldoCuenta) {
+    public void setSaldoCuenta(BigDecimal saldoCuenta) {
         this.saldoCuenta = saldoCuenta;
     }
 
-    public String getSaldoGrupo() {
+    public BigDecimal getSaldoGrupo() {
         return saldoGrupo;
     }
 
-    public void setSaldoGrupo(String saldoGrupo) {
+    public void setSaldoGrupo(BigDecimal saldoGrupo) {
         this.saldoGrupo = saldoGrupo;
     }
     

@@ -11,28 +11,44 @@
         <ui:composition template="./../index.xhtml">
 
             <ui:define name="content">
-                
+
+
+                <h:form>
+                    <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                        <p:row>
+                            <p:column style="padding: 0px;" >
+                                #{reporteContabilidadBean.getContabilidadPredeterminado()}
+                                <h:outputText class="etiquetaEn" value="#{reporteContabilidadBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="padding: 0px; text-align: right" >
+                                <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{reporteContabilidadBean.btnCancelar}"  value="Cambiar Entidad"> 
+
+                                </p:commandButton>   
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
+
                 <p:outputPanel id="padding"  > 
 
                     <h:form id="fReportesContabilidad" target="_blank">
 
-                        #{reporteContabilidadBean.updateListaEntidades()}
-                        
+
+
                         #{reporteContabilidadBean.updateListaEjercicio()}
-                        
+
                         <p:panel id="pReportesContabilidad" header="Reportes contabilidad"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
                             <p:fieldset style="margin-bottom:20px">
                                 <p:panelGrid id="pgReporte"  style="width: 100%; margin: auto;" class="noBoder" >   
                                     <p:row>
-                                        <p:column style="width: 40%" >
-                                            <h:outputText value="Entidad:*"/>
-                                        </p:column>
-                                        <p:column style="width: 30%" >
+
+                                        <p:column style="width: 50%" >
                                             <h:outputText value="Reporte:*"/>
                                         </p:column>
 
-                                        <p:column style="width: 30%" >
+                                        <p:column style="width: 50%" >
                                             <p:outputPanel id="opAdmi">
                                                 <h:outputText value="Ejercicio:*"  rendered="#{reporteContabilidadBean.idReporte gt 4 }" />
                                                 <h:outputText value="Estado:*" rendered="#{ reporteContabilidadBean.idReporte lt 5  }"/>
@@ -40,15 +56,7 @@
                                         </p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column >
-                                            <p:selectOneMenu id="car" value="#{reporteContabilidadBean.idEntidad}" style=" width: 60%;"  > 
-                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                <f:selectItems  var="end" value="#{reporteContabilidadBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                                <p:ajax update=":padding" ></p:ajax>
-                                            </p:selectOneMenu>
-                                            <br></br>
-                                            <h:outputText value="#{reporteContabilidadBean.msgEntidad}" style=" color:  red" />
-                                        </p:column>
+
                                         <p:column>
                                             <p:selectOneMenu id="sModulo"   value="#{reporteContabilidadBean.idReporte}">
                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
@@ -85,11 +93,11 @@
                                 <br></br>
                                 <center>
                                     <p:splitButton id="btnVer"   ajax="false"  actionListener="#{reporteContabilidadBean.llamarTipoReporte(1)}"    value="Ver PDF"> 
-                                    <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{reporteContabilidadBean.llamarTipoReporte(2)}"    value="Descargar PDF"> 
-                                    </p:menuitem> 
+                                        <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{reporteContabilidadBean.llamarTipoReporte(2)}"    value="Descargar PDF"> 
+                                        </p:menuitem> 
                                     </p:splitButton>
-                                
-                   
+
+
                                 </center>
                             </p:fieldset>
                         </p:panel>
