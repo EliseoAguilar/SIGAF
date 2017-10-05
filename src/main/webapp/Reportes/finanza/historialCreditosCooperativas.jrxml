@@ -82,7 +82,7 @@ FROM
 				<reportElement x="129" y="144" width="100" height="20" uuid="48d8ff93-31e1-4776-8332-7e1e1c9a63f6"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="129" y="164" width="400" height="20" uuid="2c8e5cde-9a7d-4a2b-86a1-77fee08dba6d"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>

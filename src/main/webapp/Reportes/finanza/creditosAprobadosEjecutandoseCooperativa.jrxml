@@ -130,7 +130,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS APROBADOS/EJECUTANDOSE (COOPERATIVAS) ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS APROBADOS/EJECUTÁNDOSE (COOPERATIVAS) ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1" y="108" width="554" height="1" uuid="bf45bf1e-61cd-42f4-b8b7-603a23a56573"/>

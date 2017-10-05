@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1920"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -573,7 +573,7 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="15" y="314" width="112" height="20" uuid="0660a08e-4149-44ba-b2d3-64a54c1a8a82"/>
-				<text><![CDATA[AREA (m²):]]></text>
+				<text><![CDATA[ÁREA (m²):]]></text>
 			</staticText>
 			<textField pattern="###0.00">
 				<reportElement x="128" y="314" width="120" height="20" uuid="beb38488-004a-47db-9264-224e47b8342c"/>

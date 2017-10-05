@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientePersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e35999d-239d-4b67-a136-4dbdf81ac442">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="56"/>
+	<property name="ireport.y" value="91"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -72,21 +72,21 @@ FROM
 			</line>
 			<staticText>
 				<reportElement x="1" y="83" width="553" height="20" uuid="cf3a386d-9da0-460a-bd77-e8da35aeacfd"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[REPORTE DE CLIENTE]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE CLIENTE</style>]]></text>
 			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="394" splitType="Stretch">
 			<staticText>
-				<reportElement x="17" y="57" width="100" height="20" uuid="3397df0f-bad3-4d6f-ad3b-bbc9de82615a"/>
+				<reportElement x="271" y="57" width="118" height="20" uuid="3397df0f-bad3-4d6f-ad3b-bbc9de82615a"/>
 				<text><![CDATA[CÓDIGO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="57" width="118" height="20" uuid="d4e03d75-4416-4941-adf2-761a9a03aab6"/>
+				<reportElement x="17" y="57" width="100" height="20" uuid="d4e03d75-4416-4941-adf2-761a9a03aab6"/>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>

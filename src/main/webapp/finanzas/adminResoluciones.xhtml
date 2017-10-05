@@ -39,7 +39,7 @@
                     <p:growl id="msgs" />
                     <p:outputPanel  rendered="#{resolucionBean.showCreate}" style=" width: 100%">
                         <h:form id="fAgregarResolucionCooperativa">
-                            <p:panel id="pRegistrarResolucionCooperativa"  header="Agregar resolución"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pRegistrarResolucionCooperativa"  header="Agregar resolución"  style="width: 90%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid styleClass="borderHidden" style=" width: 100%" >
                                     <p:row>
                                         <p:column style=" width: 25%"   >
@@ -117,25 +117,29 @@
                                         <hr></hr>   
                                         <p:panelGrid styleClass="borderHidden" >
                                             <p:row>
-                                                <p:column>
-                                                    <p:outputPanel rendered="#{resolucionBean.mensajeAprobado}">
-                                                        <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
-                                                        <h:outputText  style=" color:  #e52d27" value="El resultado de la razón es igual o superior a la política establecia #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa son financiados a travez de deuda, por lo que no es favorable para la fundación."/>  
-                                                        <br></br><br></br>
-                                                    </p:outputPanel>
+                                                <p:column style=" text-align:  justify">
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobado}">
                                                         <b>  <h:outputText value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
-                                                        <h:outputText value="El resultado de la razón es inferior a la política establecia #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa se financian a travez de acciones, por lo que es favorable para la fundación."/>   
+                                                        <h:outputText  style=" color:  #e52d27; text-align:  justify" value="El resultado de la razón es igual o superior a la política establecia #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa son financiados a travez de deudas, por lo que no es favorable para la fundación."/>  
+                                                        <br></br><br></br>
+                                                    </p:outputPanel>
+                                                    <p:outputPanel rendered="#{resolucionBean.mensajeAprobado}">
+                                                        <b>  <h:outputText  value="Capacidad de endeudamiento"/> </b>  <br></br> <br></br>
+                                                        <h:outputText style=" color:  green; text-align:  justify"  value="El resultado de la razón es inferior a la política establecia 
+
+ #{resolucionBean.politicaSeleccionada.capacidadEndeudamientoMinimo}, la mayor parte de los activos de la empresa se financian a travez de acciones, por lo que es favorable para la fundación."/>   
+                                                     
+                                                        
                                                         <br></br><br></br>
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeAprobadoPago}">
                                                         <b>   <h:outputText value="Capacidad de pago"/></b>  <br></br> <br></br>
-                                                        <h:outputText value="El resultado de la razón es mayor o igual a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <h:outputText style=" color:  green; text-align:  justify"  value="El resultado de la razón es mayor o igual a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
                                                         <br></br><br></br>  
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{resolucionBean.mensajeNoAprobadoPago}">
                                                         <b>   <h:outputText value="Capacidad de pago"/> </b>   <br></br> <br></br>
-                                                        <h:outputText  style=" color:  #e52d27" value="El resultado de la razón es inferior a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto no existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
+                                                        <h:outputText  style=" color:  #e52d27; text-align:  justify" value="El resultado de la razón es inferior a la política establecida #{resolucionBean.politicaSeleccionada.capacidadPagoMinimo}, por cuanto no existe un margen adecuado para cubrir las necesidades de pagos inmediatos en los que la empresa incurra."/>   
                                                         <br></br><br></br>  
                                                     </p:outputPanel>
                                                 </p:column>
@@ -309,7 +313,7 @@
                     </p:outputPanel>
                     <p:outputPanel  rendered="#{resolucionBean.showCreatePersona}" style=" width: 100%">
                         <h:form id="fAgregarResolucionPersona">
-                            <p:panel id="pRegistrarResolucionPersona"  header="Agregar resolución"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pRegistrarResolucionPersona"  header="Agregar resolución"  style="width: 90%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid styleClass="borderHidden" style=" width: 100%" >
                                     <p:row>
                                         <p:column style=" width: 25%"   >
@@ -369,11 +373,11 @@
                                                     <p:outputPanel rendered="#{resolucionBean.resultadoPagoRazon gt 0}">
                                                         <b>      <h:outputText value="Capacidad de pago"/> </b>  <br></br><br></br> 
                                                        
-                                                            <h:outputText value="El sobrante de esta persona es de $"/>                                                              
-                                                            <h:outputText value="#{resolucionBean.resultadoPagoRazon}">
+                                                            <h:outputText style=" color: green" value="El sobrante de esta persona es de $"/>                                                              
+                                                            <h:outputText style=" color:  green" value="#{resolucionBean.resultadoPagoRazon}">
                                                                 <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
                                                             </h:outputText>
-                                                            <h:outputText value=" y representa su capacidad para pagar. Por consiguiente, las deudas mensuales de esta persona no pueden ser mayores a esa suma, de lo contrario no tendrá dinero suficiente para pagar futuras deudas."/>     
+                                                            <h:outputText style=" color:  green" value=" y representa su capacidad para pagar. Por consiguiente, las deudas mensuales de esta persona no pueden ser mayores a esa suma, de lo contrario no tendrá dinero suficiente para pagar futuras deudas."/>     
                                                     
                                                         <br></br> <br></br>  
                                                     </p:outputPanel>

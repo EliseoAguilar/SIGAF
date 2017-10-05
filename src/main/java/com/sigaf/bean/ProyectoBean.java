@@ -2488,6 +2488,7 @@ public class ProyectoBean extends Actividad {
         this.seguimientoSeleccionado = new TSeguimiento();
         this.listaEntidadProyectosReducida = new ArrayList<TEntidadProyecto>();
         this.listaParametros = new ArrayList<TParametro>();
+        this.listaParametros2 = new ArrayList<TParametro>();
         this.listaClienteProyectoReducida = new ArrayList<TClienteProyecto>();
         this.calculos = false;
         this.parametrosLista = new TParametro();
@@ -2946,13 +2947,13 @@ public class ProyectoBean extends Actividad {
             this.estadoProyecto = "Aprobado/Proceso";
         }
         if (valor == 5) {
-            this.estadoProyecto = "Aprobado/Ejecutandose";
+            this.estadoProyecto = "Aprobado/Ejecutándose";
         }
         if (valor == 6) {
             this.estadoProyecto = "Finalizado";
         }
         if (valor == 7) {
-            this.estadoProyecto = "Crédito incobrable";
+            this.estadoProyecto = "Incobrable";
         }
         return this.estadoProyecto;
 
@@ -3599,7 +3600,7 @@ public class ProyectoBean extends Actividad {
             this.pago.setCapitalamortizado(saldoAmortizado);
             this.pago.setAbono(abonoCapital);
             this.pago.setSaldocapital(saldoCapital);
-            this.pago.setCuota(this.abonoCuota);
+            this.pago.setCuota(this.abonoCuota.subtract(this.AbonoExtra));
         } else if (this.abonoCuota.compareTo(this.couto.setScale(2, RoundingMode.UP)) < 0) {
             this.pago.setCuota(this.abonoCuota);
         } else {
@@ -4494,6 +4495,11 @@ public class ProyectoBean extends Actividad {
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
         parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        String descripcion= "Por este medio se hace constar que "+ this.clienteSeleccionado.getNombreCliente()+ " "+this.clienteSeleccionado.getApellidoCliente()+", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. Por tanto queda sin efecto la orden de descuento emitida por esta Fundación, para ser aplicada a dicho crédito.";
+        
+        parametros.put("descripcion", descripcion);
+        
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacion.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
         System.out.println(bytes.length);
@@ -4541,6 +4547,10 @@ public class ProyectoBean extends Actividad {
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
         parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        String descripcion= "Por este medio se hace constar que "+ this.Entidadeleccionada.getNombreEntidad()+ ", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. Por tanto queda sin efecto la orden de descuento emitida por esta Fundación, para ser aplicada a dicho crédito.";
+        
+        parametros.put("descripcion", descripcion);
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
         System.out.println(bytes.length);
@@ -4588,6 +4598,11 @@ public class ProyectoBean extends Actividad {
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
         parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+         String descripcion= "Por este medio se hace constar que "+ this.clienteSeleccionado.getNombreCliente()+ " "+this.clienteSeleccionado.getApellidoCliente()+", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. Por tanto queda sin efecto la orden de descuento emitida por esta Fundación, para ser aplicada a dicho crédito.";
+        
+        parametros.put("descripcion", descripcion);
+        
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacion.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -4633,6 +4648,11 @@ public class ProyectoBean extends Actividad {
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
         parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+          String descripcion= "Por este medio se hace constar que "+ this.Entidadeleccionada.getNombreEntidad()+ ", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. Por tanto queda sin efecto la orden de descuento emitida por esta Fundación, para ser aplicada a dicho crédito.";
+        
+        parametros.put("descripcion", descripcion);
+        
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -4927,6 +4947,7 @@ public class ProyectoBean extends Actividad {
 
         this.mostrarParametroSeguimiento = true;
         this.mostrarListaSeguimientoTabla = false;
+        this.listaParametros2.clear();
 
     }
 
@@ -4972,12 +4993,22 @@ public class ProyectoBean extends Actividad {
         } else {
             this.msgDescripcionParametro = "";
         }
+        
+        
+        if(this.estadoParametro==true){
+            
+            this.crearParametro();
+            
+        }
+        
+        
 
     }
 
     public void cargarParametros() {
 
         this.listaParametros2 = this.iparametroBo.listParametro2(this.seguimientoSeleccionado.getIdseguimiento());
+        this.listaParametros= this.listaParametros2;
         this.setShowData(false);
 
     }
@@ -4987,6 +5018,16 @@ public class ProyectoBean extends Actividad {
         this.seguimiento.setTProyecto(this.proyectoSeleccionado);
         this.seguimiento.setEstado(1);
         this.iseguimientoBo.create(this.seguimiento);
+        
+        for(int i=0;i<this.listaParametros2.size();i++){
+            
+            this.listaParametros2.get(i).setTSeguimiento(this.seguimiento);
+            this.iparametroBo.create(this.listaParametros2.get(i));           
+            
+            
+        }     
+        
+        
         this.estadoFormulario = false;
 
         TBitacora auxBitacora = new TBitacora();
@@ -5020,37 +5061,21 @@ public class ProyectoBean extends Actividad {
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
         this.listaProyectoSeguimiento = this.iseguimientoBo.listaProyectoSeguimiento(this.proyectoSeleccionado.getIdproyecto());
         this.seguimiento= new TSeguimiento();
+        limpiarSeguimiento();
         
     }
 
     public void crearParametro() {
 
-        this.parametrosLista.setTParametroseguimiento(new TParametroseguimiento(this.idParametro));
-        this.parametrosLista.setTSeguimiento(this.seguimientoSeleccionado);
+       this.parametrosLista.setTParametroseguimiento(new TParametroseguimiento(this.idParametro));
+       //this.parametrosLista.setTSeguimiento(this.seguimientoSeleccionado);
+        
         this.parametrosLista.setEstado(true);
-        this.iparametroBo.create(this.parametrosLista);
-        this.estadoFormulario = false;
+        this.listaParametros2.add(this.parametrosLista);
         this.parametrosLista = new TParametro();
-        cargarParametros();
+  
 
-        TBitacora auxBitacora = new TBitacora();
-        auxBitacora.setTableBitacora("t_parametro");
-        auxBitacora.setAccionBitacora("Agregar parametro");
-
-        auxBitacora.setDatosBitacora("Valor:" + this.parametrosLista.getValor()
-                + ", Descripción: " + this.parametrosLista.getDescripcion()
-        );
-        auxBitacora.setHoraBitacora(new Date());
-        auxBitacora.setFechaBitacora(new Date());
-        auxBitacora.setIdTableBitacora(this.parametrosLista.getIdParametro());
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
-        this.bitacoraBo.create(auxBitacora);
-        this.parametroSeguimiento= new TParametroseguimiento();
-
-        FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Parámetro guardado correctamente", null);
-        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+       
 
     }
 
@@ -5060,6 +5085,28 @@ public class ProyectoBean extends Actividad {
         this.modificarSeguimiento = false;
         this.listaProyectoSeguimiento = this.iseguimientoBo.listaProyectoSeguimiento(this.proyectoSeleccionado.getIdproyecto());
 
+        System.out.println(this.listaParametros.size());
+        System.out.println(this.listaParametros2.size());
+        
+        for(int i=0;i<this.listaParametros.size();i++){
+            
+            this.iparametroBo.delete(this.listaParametros.get(i));
+            
+            
+            
+        }
+        
+        for(int y=0;y<this.listaParametros2.size();y++){
+            
+            this.listaParametros2.get(y).setTSeguimiento(this.seguimientoSeleccionado);            
+            this.iparametroBo.create(this.listaParametros2.get(y));
+            
+        }
+        
+        this.mostrarListaSeguimiento();
+        
+        
+        
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_seguimiento");
         auxBitacora.setAccionBitacora("Modificar seguimiento");
@@ -5074,6 +5121,7 @@ public class ProyectoBean extends Actividad {
         LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
         auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
         this.bitacoraBo.create(auxBitacora);
+        limpiarSeguimiento();
 
         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seguimiento modificado correctamente", null);
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
@@ -5104,6 +5152,52 @@ public class ProyectoBean extends Actividad {
         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seguimiento dado de baja correctamente", null);
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
 
+    }
+    
+    
+    public void updateSeguimiento(){
+        
+         this.listaProyectoSeguimiento = this.iseguimientoBo.listaProyectoSeguimiento(this.proyectoSeleccionado.getIdproyecto());
+
+    }
+    
+    
+    public void deleteSeguimiento(){
+        
+          this.listaParametros2 = this.iparametroBo.listParametro2(this.seguimientoSeleccionado.getIdseguimiento());
+      
+            for(int i=0;i<this.listaParametros2.size();i++){
+            
+            this.iparametroBo.delete(this.listaParametros2.get(i));
+            
+            
+            
+        }
+       this.iseguimientoBo.delete(this.seguimientoSeleccionado);
+       
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_seguimiento");
+        auxBitacora.setAccionBitacora("Eliminar seguimiento");
+
+        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", Descripción: " + this.seguimientoSeleccionado.getDescripcion()
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.seguimientoSeleccionado.getIdseguimiento());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+        FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seguimiento eliminado correctamente", null);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+            
+          
+          
+        
+        
+        
     }
 
     public void altaSeguimiento() {
@@ -5141,6 +5235,7 @@ public class ProyectoBean extends Actividad {
         this.modificarSeguimiento = false;
         this.msgFechaSeguimiento = "";
         this.msgDescripcionSeguimiento = "";
+        limpiarSeguimiento();
         this.setShowData(false);
 
     }
@@ -6356,9 +6451,14 @@ public class ProyectoBean extends Actividad {
 
     public void cargarModificarSeguimiento() {
 
+        this.listaParametros2 = this.iparametroBo.listParametro2(this.seguimientoSeleccionado.getIdseguimiento());
+        this.listaParametros= this.iparametroBo.listParametro2(this.seguimientoSeleccionado.getIdseguimiento());
+        limpiarSeguimiento();
+        this.setShowData(false);
         this.mostrarListaSeguimientoTabla = false;
-        this.modificarSeguimiento = true;
-
+        this.modificarSeguimiento = true;       
+        
+        
     }
 
     public void cargarModificarParametro() {
@@ -6367,6 +6467,17 @@ public class ProyectoBean extends Actividad {
         this.modificarSeguimiento = false;
         this.mostrarListaSeguimientoTabla = false;
 
+    }
+    
+    
+    public void limpiarSeguimiento(){
+        
+        this.msgParametro = "";
+        this.msgValor = "";
+        this.msgDescripcionParametro = "";
+        this.idParametro=0;
+        
+        
     }
 
     public void limpiarParametro() {
@@ -6549,7 +6660,7 @@ public class ProyectoBean extends Actividad {
                 capitalAM = capital;
                 if (x == i) {
                     BigDecimal diferencia;
-                    if (i == (this.proyectoSeleccionado.getPlazo() - 1)) {
+                    if (i == (this.proyectoSeleccionado.getPlazo())) {
                         capitalAM = new BigDecimal("0");
                     }
                     Calendar calendar = Calendar.getInstance();
@@ -6616,7 +6727,7 @@ public class ProyectoBean extends Actividad {
                 capitalAM = capital;
                 if (x == i) {
                     BigDecimal diferencia;
-                    if (i == (this.proyectoSeleccionado.getPlazo() - 1)) {
+                    if (i == (this.proyectoSeleccionado.getPlazo())) {
                         capitalAM = new BigDecimal("0");
                     }
                     Calendar calendar = Calendar.getInstance();
@@ -6683,7 +6794,7 @@ public class ProyectoBean extends Actividad {
                 capitalAM = capital;
                 if (x == i) {
                     BigDecimal diferencia;
-                    if (i == (this.proyectoSeleccionado.getPlazo() - 1)) {
+                    if (i == (this.proyectoSeleccionado.getPlazo())) {
                         capitalAM = new BigDecimal("0");
                     }
                     Calendar calendar = Calendar.getInstance();
@@ -7987,6 +8098,30 @@ public class ProyectoBean extends Actividad {
             año--;
         }
         this.edad = año;
+    }
+    
+    
+    public String cambiarNombre(int i){
+        
+        
+        return this.iparametroSeguimientoBo.getParametroSeguimientoUnidad(i).getNombre();
+        
+        
+    }
+    
+    public void eliminarParametro(int i){
+        
+        this.listaParametros2.remove(i);
+        
+        
+    }
+    
+    
+    public String cambiarUnidad(int i){
+        
+         return this.iparametroSeguimientoBo.getParametroSeguimientoUnidad(i).getUnidad();
+        
+        
     }
 
 }

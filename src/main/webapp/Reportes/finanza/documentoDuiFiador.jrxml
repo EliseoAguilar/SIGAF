@@ -10,9 +10,7 @@
 	<parameter name="id_proyecto" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
-     t_cliente_proyecto."id_cliente_proyecto" AS t_cliente_proyecto_id_cliente_proyecto,
-     t_cliente_proyecto."id_cliente" AS t_cliente_proyecto_id_cliente,
-     t_cliente_proyecto."id_proyecto" AS t_cliente_proyecto_id_proyecto,
+
      t_proyecto."nombre" AS t_proyecto_nombre,
      t_proyecto."monto" AS t_proyecto_monto,
      t_proyecto."plazo" AS t_proyecto_plazo,
@@ -56,14 +54,11 @@
      t_garantia."fotocopia_dui_solidaria_garantia" AS t_garantia_fotocopia_dui_solidaria_garantia,
      t_garantia."fotocopia_nit_solidaria_garantia" AS t_garantia_fotocopia_nit_solidaria_garantia
 FROM
-     "public"."t_cliente_proyecto" t_cliente_proyecto INNER JOIN "public"."t_proyecto" t_proyecto ON t_cliente_proyecto."id_proyecto" = t_proyecto."idproyecto"
+     "public"."t_proyecto" t_proyecto
      INNER JOIN "public"."t_garantia" t_garantia ON t_proyecto."idproyecto" = t_garantia."id_proyecto"
 WHERE
      t_proyecto."idproyecto" = $P{id_proyecto}]]>
 	</queryString>
-	<field name="t_cliente_proyecto_id_cliente_proyecto" class="java.lang.Integer"/>
-	<field name="t_cliente_proyecto_id_cliente" class="java.lang.Integer"/>
-	<field name="t_cliente_proyecto_id_proyecto" class="java.lang.Integer"/>
 	<field name="t_proyecto_nombre" class="java.lang.String"/>
 	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
 	<field name="t_proyecto_plazo" class="java.lang.Integer"/>

@@ -75,6 +75,17 @@ public class SeguimientoDao implements ISeguimientoDao {
         session.close();
         return listaProyectoSeguimiento;
     }
+
+    @Override
+    public void delete(TSeguimiento seguimiento) {
+  
+     Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(seguimiento);
+        session.getTransaction().commit();
+        session.close();
+    
+    }
     
     
     

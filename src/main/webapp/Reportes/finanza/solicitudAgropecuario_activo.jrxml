@@ -80,8 +80,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_activo_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
-				<reportElement x="163" y="0" width="83" height="20" uuid="ba988b2e-ae4c-4c2f-a09f-44eab8d6a271"/>
-				<textElement>
+				<reportElement x="124" y="0" width="83" height="20" uuid="ba988b2e-ae4c-4c2f-a09f-44eab8d6a271"/>
+				<textElement textAlignment="Right">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_activo_valor}]]></textFieldExpression>
@@ -91,8 +91,8 @@ FROM
 	<columnFooter>
 		<band height="30">
 			<textField pattern="$#,##0.00">
-				<reportElement x="163" y="0" width="83" height="20" uuid="bb3a5716-cf92-45d2-aaa0-49dcbce263cc"/>
-				<textElement>
+				<reportElement x="124" y="0" width="83" height="20" uuid="bb3a5716-cf92-45d2-aaa0-49dcbce263cc"/>
+				<textElement textAlignment="Right">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{t_activo_valor_1}]]></textFieldExpression>

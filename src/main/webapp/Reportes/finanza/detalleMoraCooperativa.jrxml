@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="473"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -131,7 +131,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{codigoCliente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="103" y="169" width="440" height="20" uuid="8519e931-67ca-4610-b899-16cef8fedfac"/>
 				<textElement>
 					<font size="10"/>
@@ -244,21 +244,21 @@
 				<textFieldExpression><![CDATA[$P{forma}.equals(1)? "Mensual": false || $P{forma}.equals(2)? "Trimestral": false  || $P{forma}.equals(3)? "Semestral": false || $P{forma}.equals(4)? "Anual": false]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="261" y="340" width="48" height="20" uuid="ea8e230b-e79b-4713-97e0-6c421ea1dc94"/>
+				<reportElement x="289" y="340" width="37" height="20" uuid="ea8e230b-e79b-4713-97e0-6c421ea1dc94"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTA</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="339" width="54" height="20" uuid="6a794ae0-feb9-4943-a9e6-74c55cbbf73b"/>
+				<reportElement x="380" y="340" width="33" height="20" uuid="6a794ae0-feb9-4943-a9e6-74c55cbbf73b"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MORA</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="399" y="340" width="54" height="20" uuid="be17ba37-d410-494c-82ea-b517e79dc8b4"/>
+				<reportElement x="460" y="340" width="39" height="20" uuid="be17ba37-d410-494c-82ea-b517e79dc8b4"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -274,26 +274,31 @@
 		</band>
 	</title>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="47" y="2" width="99" height="20" uuid="30ba4a5d-b80e-4f62-b75a-951c922cda95"/>
+				<reportElement x="47" y="0" width="99" height="20" uuid="30ba4a5d-b80e-4f62-b75a-951c922cda95"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="156" y="2" width="100" height="20" uuid="f8871f72-049e-4f3a-be41-0c51a7406108"/>
+				<reportElement x="156" y="0" width="104" height="20" uuid="f8871f72-049e-4f3a-be41-0c51a7406108"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{idpago}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="261" y="2" width="48" height="20" uuid="f2457e44-2011-4206-a1e7-1d2c7d5975f2"/>
+				<reportElement x="278" y="0" width="48" height="20" uuid="f2457e44-2011-4206-a1e7-1d2c7d5975f2"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="326" y="2" width="54" height="20" uuid="66999f74-e7a2-4e50-85c7-c60a1d563c68"/>
-				<textFieldExpression><![CDATA[$F{mora}]]></textFieldExpression>
+				<reportElement x="434" y="0" width="65" height="20" uuid="d0f23384-0323-4533-b380-16daf8657420"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="399" y="2" width="100" height="20" uuid="d0f23384-0323-4533-b380-16daf8657420"/>
-				<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
+				<reportElement x="359" y="0" width="54" height="20" uuid="bce5f17a-263b-49e2-8e51-00e39bb1e11e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -313,14 +318,15 @@
 	<summary>
 		<band height="50">
 			<staticText>
-				<reportElement x="326" y="14" width="73" height="20" uuid="9bdf3cf5-aeb7-4f9f-b67e-d5b8eaceab86"/>
+				<reportElement x="359" y="14" width="54" height="20" uuid="9bdf3cf5-aeb7-4f9f-b67e-d5b8eaceab86"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL:</style>]]></text>
 			</staticText>
 			<textField pattern="$#,##0.00">
-				<reportElement x="399" y="14" width="100" height="20" uuid="b18a0d54-7ce3-478b-9798-e3bc49de40ad"/>
+				<reportElement x="434" y="14" width="65" height="20" uuid="b18a0d54-7ce3-478b-9798-e3bc49de40ad"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{interes_1}]]></textFieldExpression>
 			</textField>
 		</band>

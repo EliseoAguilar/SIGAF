@@ -34,7 +34,7 @@ public class EntidadProyectoBo implements IEntidadProyectoBo {
 
     @Override
     public TEntidadProyecto getTEntidadProyecto(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.ientidadProyectoDao.getTEntidadProyecto(id);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EntidadProyectoBo implements IEntidadProyectoBo {
   
     @Override
     public void update(TEntidadProyecto entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    this.ientidadProyectoDao.update(entidad);
     }
 
     @Override

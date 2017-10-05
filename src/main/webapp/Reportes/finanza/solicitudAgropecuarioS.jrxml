@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudAgropecuario" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78a4bc4d-fa6a-4c80-9719-220dabb2d55e">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2234"/>
+	<property name="ireport.y" value="403"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -302,7 +302,7 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="306" y="203" width="99" height="20" uuid="57765b58-058b-4468-a961-e407bf9f0180"/>
-				<text><![CDATA[EDAD:]]></text>
+				<text><![CDATA[EDAD (años):]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="306" y="223" width="99" height="20" uuid="3ad6a5ca-c9f5-4d19-a9b3-f3775b5ccfe1"/>

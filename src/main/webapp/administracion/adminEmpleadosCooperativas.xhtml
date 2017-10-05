@@ -77,7 +77,7 @@
                                     <p:row >
                                         <p:column rendered="#{empleadoCooperativaBean.showImagen}" colspan="2">
                                             <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" 
-                                                          sizeLimit="1000000000000" fileUploadListener="#{empleadoCooperativaBean.guardarImagen}" 
+                                                          sizeLimit="1000000000000" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto"   fileUploadListener="#{empleadoCooperativaBean.guardarImagen}" 
                                                           update=":padding"/> 
                                             <h:outputText value="#{empleadoCooperativaBean.msgImagen}" style=" color:  red"/>
                                         </p:column>
@@ -144,7 +144,7 @@
                                         </p:row>
                                         <p:row>
                                             <p:column>
-                                                <p:calendar navigator="true" yearRange="1910:"  locale="es" pattern="dd/MM/yyyy"  maxdate="#{empleadoCooperativaBean.fechaHoy}"  mask="true" showOn="button"  id="cfecha"  value="#{empleadoCooperativaBean.empleados.fechanacimientoEmpleado}" style="width: 100%;"/><br></br>
+                                                <p:calendar navigator="true"  yearRange="1910:"  locale="es" pattern="dd/MM/yyyy"  maxdate="#{empleadoCooperativaBean.fechaHoy}"  mask="true" showOn="button"  id="cfecha"  value="#{empleadoCooperativaBean.empleados.fechanacimientoEmpleado}" style="width: 100%;"/><br></br>
                                                 <h:outputText value="#{empleadoCooperativaBean.msgFechaNacimiento}" style=" color:  red"/>
                                             </p:column>
                                             <p:column>
@@ -488,7 +488,7 @@
                                     </p:row>
                                     <p:row >
                                         <p:column rendered="#{!empleadoCooperativaBean.showImagen}" colspan="2">
-                                            <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" 
+                                            <p:fileUpload id="cargar" mode="advanced" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" uploadLabel="subir" label="Elegir" 
                                                           sizeLimit="1000000000000" fileUploadListener="#{empleadoCooperativaBean.guardarImagenModificar}" 
                                                           update=":padding"/> 
                                             <p:growl id="messages" />

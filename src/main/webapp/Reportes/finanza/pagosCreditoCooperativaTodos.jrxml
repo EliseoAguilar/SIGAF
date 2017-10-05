@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagosCredito" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91c96e9e-c6ca-40d0-8827-9c6185235fb5">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="128"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -303,7 +303,7 @@ WHERE
 				<reportElement x="128" y="146" width="100" height="20" uuid="97904585-b756-41e7-b0ad-8eea17a51d6f"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="128" y="166" width="402" height="20" uuid="2b02cf81-a98e-456c-ac7c-1504d4c6e6c1"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>

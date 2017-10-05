@@ -407,7 +407,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActa}" update="opActa"/> 
+                                                    <p:fileUpload id="cargar" allowTypes="/(\.|\/)(jpe?g|png)$/i" mode="advanced" invalidFileMessage="El tipo de archivo es incorrecto" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActa}" update="opActa"/> 
                                                     <h:outputText value="#{cooperativaBean.msgCredencial}" style=" color:  red" /> 
                                                 </p:column>
                                             </p:row>
@@ -452,7 +452,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencial}" update="opNit"/> 
+                                                    <p:fileUpload allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto"  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencial}" update="opNit"/> 
                                                     <h:outputText value="#{cooperativaBean.msgNit}" style=" color:  red" /> 
                                                 </p:column>
                                             </p:row>
@@ -497,7 +497,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload id="cargar2" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogo}" update="opLogo"/> 
+                                                    <p:fileUpload allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" id="cargar2" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogo}" update="opLogo"/> 
                                                     <p:growl id="messages2" />
                                                     <h:outputText value="#{cooperativaBean.msgLogo}" style=" color:  red" /> 
                                                 </p:column>
@@ -740,7 +740,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload id="cargar3" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActaModificar}" update="opActa"/> 
+                                                    <p:fileUpload id="cargar3" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarActaModificar}" update="opActa"/> 
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
@@ -784,7 +784,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencialModificar}" update="opNit"/> 
+                                                    <p:fileUpload  mode="advanced" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarCredencialModificar}" update="opNit"/> 
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
@@ -828,7 +828,7 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="2" >
-                                                    <p:fileUpload id="cargar2" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogoModificar}" update="opLogo"/> 
+                                                    <p:fileUpload id="cargar2" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto"  mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{cooperativaBean.guardarLogoModificar}" update="opLogo"/> 
                                                     <p:growl id="messages2" />
                                                 </p:column>
                                             </p:row>

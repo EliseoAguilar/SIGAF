@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1602"/>
+	<property name="ireport.y" value="707"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -320,166 +320,69 @@ FROM
 			<line>
 				<reportElement x="1" y="401" width="553" height="1" uuid="ee918a20-5bdc-4085-8ca4-8fbdce468f54"/>
 			</line>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="389" y="178" width="150" height="20" uuid="006e9054-a72e-4637-9f43-210fe09b0c26"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_nombre_representante_entidad}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="16" y="116" width="111" height="20" uuid="b8cab9fc-d03f-4f06-85fc-a854bf817f10"/>
-				<text><![CDATA[NOMBRE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="278" y="200" width="110" height="20" uuid="cf9fc4c2-1c47-40cc-b3bc-e8ccd2317b2c"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[NIT REPRESENTANTE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="16" y="95" width="111" height="20" uuid="1d816893-0e3d-4f08-ba10-145bd6801066"/>
-				<text><![CDATA[CÓDIGO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="279" y="96" width="110" height="20" uuid="08d5be80-5a97-4124-99fa-35599c62afef"/>
-				<text><![CDATA[ABREVIACIÓN:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="16" y="200" width="111" height="20" uuid="794ae370-89b4-4cac-bc2d-270d0eb71653"/>
-				<text><![CDATA[DUI REPRESENTANTE:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="128" y="200" width="143" height="20" uuid="91afaf22-b67b-4cca-bfde-5259f1619178"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_dui_representante_entidad}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="128" y="116" width="411" height="20" uuid="5345faab-a2f3-4b2a-a697-35e4341c811c"/>
-				<textElement textAlignment="Justified">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="15" y="62" width="525" height="20" backcolor="#E7E7EF" uuid="eb239809-1b40-45cd-a5e9-307c238a0d61"/>
+				<reportElement mode="Transparent" x="16" y="56" width="525" height="20" backcolor="#E7E7EF" uuid="eb239809-1b40-45cd-a5e9-307c238a0d61"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[COOPERATIVA]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="16" y="178" width="111" height="20" uuid="13cb3176-f026-47c3-8676-c65d3275b674"/>
-				<text><![CDATA[NIT:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="388" y="200" width="151" height="20" uuid="522336a4-6540-485e-9fd3-772d98a2cca8"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_nit_representante_entidad}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="128" y="178" width="143" height="20" uuid="acb36c3e-9c5a-4ab3-bfb4-c57dcdba7180"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_nit_entidad}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="278" y="178" width="110" height="20" uuid="9fd8d9d3-2e65-421a-8057-4a35e782f269"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[REPRESENTANTE:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="128" y="95" width="143" height="20" uuid="100b7990-e5da-4147-91b2-72554c055d41"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="391" y="96" width="148" height="20" uuid="7e1cf86f-b838-4f32-bc56-81faa636f1c8"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_abreviacion_entidad}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="16" y="156" width="111" height="20" uuid="3c6204bb-9d2b-44b2-80fd-d05c30b2dcf7"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[GIRO:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="128" y="156" width="411" height="20" uuid="6b7ebd64-cafb-4847-98f4-520bb80f3228"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_giro_entidad}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="16" y="82" width="524" height="1" uuid="e84f1cf1-f955-4bd8-a334-034aec7e36a1"/>
+				<reportElement x="17" y="76" width="524" height="1" uuid="e84f1cf1-f955-4bd8-a334-034aec7e36a1"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="127" y="325" width="412" height="20" uuid="0d4e8300-423e-46a6-9461-21f4c5d1e8a2"/>
+				<reportElement x="127" y="332" width="412" height="20" uuid="0d4e8300-423e-46a6-9461-21f4c5d1e8a2"/>
 				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="282" width="111" height="20" uuid="f4bd4d05-da32-44f3-9621-a2ebf46c4914"/>
+				<reportElement x="15" y="289" width="111" height="20" uuid="f4bd4d05-da32-44f3-9621-a2ebf46c4914"/>
 				<text><![CDATA[CORREO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="325" width="111" height="20" uuid="41d8edf9-d8ba-4aa7-bda5-d000f0c3f39e"/>
+				<reportElement x="15" y="332" width="111" height="20" uuid="41d8edf9-d8ba-4aa7-bda5-d000f0c3f39e"/>
 				<text><![CDATA[DIRECCIÓN:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="303" width="111" height="20" uuid="79b7a607-1511-4e76-a516-a03d3cc6db89"/>
+				<reportElement x="15" y="310" width="111" height="20" uuid="79b7a607-1511-4e76-a516-a03d3cc6db89"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[MÓVIL:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="127" y="303" width="145" height="20" uuid="58c91b1b-7121-481c-9fe2-f0972737958d"/>
+				<reportElement x="127" y="310" width="145" height="20" uuid="58c91b1b-7121-481c-9fe2-f0972737958d"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_celular_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="279" y="283" width="109" height="20" uuid="c089693d-eaeb-412d-bf4f-3556a11e06d5"/>
+				<reportElement x="279" y="290" width="109" height="20" uuid="c089693d-eaeb-412d-bf4f-3556a11e06d5"/>
 				<text><![CDATA[TELÉFONO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="128" y="283" width="144" height="20" uuid="3f2294ca-fa15-427d-bd24-b3acafa431ef"/>
+				<reportElement x="128" y="290" width="144" height="20" uuid="3f2294ca-fa15-427d-bd24-b3acafa431ef"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_correo_entidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="283" width="150" height="20" uuid="854aee9b-32d1-4114-adae-a22e3aa8057c"/>
+				<reportElement x="390" y="290" width="150" height="20" uuid="854aee9b-32d1-4114-adae-a22e3aa8057c"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_telefono_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="252" width="525" height="20" backcolor="#E7E7EF" uuid="de39a251-3fba-44ed-ba12-3f8fb3b321d4"/>
+				<reportElement mode="Transparent" x="15" y="259" width="525" height="20" backcolor="#E7E7EF" uuid="de39a251-3fba-44ed-ba12-3f8fb3b321d4"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CONTACTO</style>]]></text>
 			</staticText>
 			<line>
-				<reportElement x="15" y="271" width="523" height="1" uuid="47145bb0-1615-466c-9006-486e5f2f6670"/>
+				<reportElement x="15" y="278" width="523" height="1" uuid="47145bb0-1615-466c-9006-486e5f2f6670"/>
 			</line>
 			<staticText>
 				<reportElement x="15" y="557" width="125" height="20" uuid="ea83ad4f-f1ce-4f3d-94a7-5b6c068a4cf6"/>
@@ -494,6 +397,111 @@ FROM
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL PATRIMONIO:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="149" width="109" height="20" uuid="ff83cfdd-76ad-4fd0-a73d-0e6a17b40eb1"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[GIRO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="213" width="131" height="20" uuid="8c48db44-6505-4ea1-b275-773293f37565"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_dui_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="191" width="131" height="20" uuid="aaf086fb-1ddd-4ed5-9f5c-76e67d21347a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nit_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="149" width="132" height="20" uuid="9ba77b01-c77b-4e57-87f4-566fb43223be"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_abreviacion_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="191" width="124" height="20" uuid="7df83b1f-2dc5-435a-8780-9eb8f76e4ff0"/>
+				<text><![CDATA[NIT:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="380" y="213" width="159" height="20" uuid="956b7666-4069-41cb-8dc9-5ad62c301029"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nit_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="213" width="124" height="20" uuid="ee6e6e87-04ce-48dc-8622-9e0f45dedde5"/>
+				<text><![CDATA[DUI REPRESENTANTE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="92" width="158" height="20" uuid="dcb97867-5d6e-40b9-9693-32e0886e6a1d"/>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="191" width="110" height="20" uuid="390b0ec0-9c67-47c7-9d79-cb91654cf75b"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="381" y="191" width="158" height="20" uuid="09670fee-8078-4e25-9dd7-eb1a963d9a69"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="91" width="124" height="20" uuid="f01a1764-02bf-43f7-946b-20a222bb3f06"/>
+				<text><![CDATA[CÓDIGO COOPERATIVA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="91" width="131" height="20" uuid="f2452550-e19a-4688-bce4-8b5d0dc20f1f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="112" width="399" height="20" uuid="67fb2a88-4f9f-4b7f-848d-5a916a7aaac9"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="213" width="110" height="20" uuid="b8f21448-e001-4f6e-a9be-a91edc84b73e"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[NIT REPRESENTANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="92" width="109" height="20" uuid="80afa6cb-e8ef-4517-b910-e46ad9029d6a"/>
+				<text><![CDATA[CÓDIGO CLIENTE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="381" y="149" width="157" height="20" uuid="96458ceb-0ec8-4d4a-b4a7-59e19a974bdf"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_giro_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="112" width="124" height="20" uuid="da56d733-5103-448d-88c5-2b49cf62d425"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="149" width="123" height="20" uuid="08a4df92-203c-47bd-aa7c-3aa44671e10c"/>
+				<text><![CDATA[ABREVIACIÓN:]]></text>
 			</staticText>
 		</band>
 		<band height="773">

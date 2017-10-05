@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1145"/>
+	<property name="ireport.y" value="1433"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -519,10 +519,10 @@ FROM
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="15" y="261" width="525" height="20" backcolor="#E7E7EF" uuid="de39a251-3fba-44ed-ba12-3f8fb3b321d4"/>
-				<textElement>
+				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CONTACTO]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CONTACTO</style>]]></text>
 			</staticText>
 			<line>
 				<reportElement x="15" y="280" width="523" height="1" uuid="47145bb0-1615-466c-9006-486e5f2f6670"/>
@@ -582,7 +582,7 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="15" y="432" width="112" height="20" uuid="0660a08e-4149-44ba-b2d3-64a54c1a8a82"/>
-				<text><![CDATA[AREA (m²):]]></text>
+				<text><![CDATA[ÁREA (m²):]]></text>
 			</staticText>
 			<textField pattern="###0.00">
 				<reportElement x="128" y="432" width="120" height="20" uuid="beb38488-004a-47db-9264-224e47b8342c"/>

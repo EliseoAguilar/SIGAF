@@ -124,7 +124,7 @@ ORDER BY
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/ejecutandoce": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/Proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/Ejecutándose": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="331" y="3" width="56" height="20" uuid="56ccb1e1-9c25-4121-86ec-d9e05b45898c"/>

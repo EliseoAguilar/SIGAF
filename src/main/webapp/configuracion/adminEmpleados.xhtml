@@ -31,7 +31,7 @@
                                     </p:row>
                                     <p:row >
                                         <p:column rendered="#{empleadoBean.showImagen}" colspan="2">
-                                            <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" 
+                                            <p:fileUpload id="cargar" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" mode="advanced" uploadLabel="subir" label="Elegir" 
                                                           sizeLimit="1000000000000" fileUploadListener="#{empleadoBean.guardarImagen}" 
                                                           update="foto"/> 
                                             <h:outputText value="#{empleadoBean.msgImagen}" style=" color:  red" />
@@ -385,7 +385,7 @@
                                     </p:row>
                                     <p:row >
                                         <p:column rendered="#{!empleadoBean.showImagen}" colspan="2">
-                                            <p:fileUpload id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" 
+                                            <p:fileUpload id="cargar" invalidFileMessage="El tipo de archivo es incorrecto" allowTypes="/(\.|\/)(jpe?g|png)$/i" mode="advanced" uploadLabel="subir" label="Elegir" 
                                                           sizeLimit="1000000000000" fileUploadListener="#{empleadoBean.guardarImagenModificar}" 
                                                           update="imagen"/> 
                                             <h:outputText value="#{empleadoBean.msgImagen}" style=" color:  red" />

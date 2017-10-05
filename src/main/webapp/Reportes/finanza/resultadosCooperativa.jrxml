@@ -183,7 +183,7 @@ FROM
 				<reportElement x="126" y="148" width="100" height="20" uuid="ab5f4972-8076-4a4f-9fd2-664b30b07be8"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="126" y="168" width="402" height="20" uuid="50bd97d4-14e3-46ba-8142-3189134ed410"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>

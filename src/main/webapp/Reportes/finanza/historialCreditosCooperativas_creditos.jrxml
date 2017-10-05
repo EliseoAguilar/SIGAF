@@ -122,7 +122,7 @@ FROM
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/ejecutandoce": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/Proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/Ejecutándose": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false || $F{t_proyecto_estado}.equals(7)? "Incobrable": false]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="333" y="0" width="53" height="20" uuid="ec79a7b6-ce10-4f99-a171-ae1952cc9a2f"/>

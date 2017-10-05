@@ -155,15 +155,15 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_producto_agronegocio_cantidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="421" y="0" width="64" height="20" uuid="08f22d89-1d14-4076-9177-3db7f555076f"/>
-				<textElement>
+				<reportElement x="398" y="0" width="64" height="20" uuid="08f22d89-1d14-4076-9177-3db7f555076f"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_producto_agronegocio_precio}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="485" y="0" width="70" height="20" uuid="19b009fd-015e-4299-8ff7-11043e209bb3"/>
-				<textElement>
+				<reportElement x="462" y="0" width="70" height="20" uuid="19b009fd-015e-4299-8ff7-11043e209bb3"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_producto_agronegocio_precio}*$F{t_producto_agronegocio_cantidad}]]></textFieldExpression>

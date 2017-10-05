@@ -1806,7 +1806,6 @@ public class CarteraBean extends Actividad {
         this.clienteSeleccionado = new TCliente();
         super.setShowData(true);
 
-       
         this.tipoCredito = 0;
         this.showPresupuesto = true;
         this.showAprobacion = true;
@@ -2096,6 +2095,7 @@ public class CarteraBean extends Actividad {
                 new FacesMessage("Cliente modificado correctamente"));
 
         this.estadoFormulario = false;
+         this.limpiarModificar();
         super.enableShowData();
 
     }
@@ -2235,10 +2235,11 @@ public class CarteraBean extends Actividad {
         this.pagoMora = new TPago();
         if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
             mesesAux = 1;
+            this.couto = this.couto.multiply(new BigDecimal(mesesAux));
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
                 this.pagoMora = new TPago();
                 System.out.println(this.fechaEstipulada);
-                System.out.println(this.fechaAplicacion);                
+                System.out.println(this.fechaAplicacion);
                 int dia = 0;
                 dia = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 System.out.println(dia);
@@ -2256,6 +2257,7 @@ public class CarteraBean extends Actividad {
             }
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
             mesesAux = 3;
+            this.couto = this.couto.multiply(new BigDecimal(mesesAux));
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
                 this.pagoMora = new TPago();
                 int dia = 0;
@@ -2274,6 +2276,7 @@ public class CarteraBean extends Actividad {
             }
         } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
             mesesAux = 6;
+            this.couto = this.couto.multiply(new BigDecimal(mesesAux));
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
                 this.pagoMora = new TPago();
                 int dia = 0;
@@ -2292,6 +2295,7 @@ public class CarteraBean extends Actividad {
             }
         } else {
             mesesAux = 12;
+            this.couto = this.couto.multiply(new BigDecimal(mesesAux));
             while (this.fechaAplicacion.compareTo(calendar2.getTime()) >= 0) {
                 this.pagoMora = new TPago();
                 int dia = 0;
@@ -2367,6 +2371,40 @@ public class CarteraBean extends Actividad {
             for (int i = 0; i < this.listaDesembolso.size(); i++) {
                 this.totalDesembolsos = this.totalDesembolsos.add(this.listaDesembolso.get(i).getMontoDesembolso());
             }
+
+            this.numeroPagos = 0;
+
+            this.listaPago = this.ipagoBo.listTPago(this.proyectoSeleccionado.getIdproyecto());
+            this.numeroPagos = this.listaPago.size();
+            TDesembolso desembolsoInicial = this.idesembolsoBo.getDesembolso(this.proyectoSeleccionado.getIdproyecto());
+
+            this.fechaIncial = desembolsoInicial.getFechaDesembolso();
+
+            Integer cuotasMora = 0;
+
+            for (int x = 0; x < this.listaPago.size(); x++) {
+
+                if (this.listaPago.get(x).getMora().doubleValue() != 0.0) {
+                    cuotasMora++;
+                }
+
+            }
+            this.cuotasMora = cuotasMora;
+
+            this.politicaSeleccionada = this.ipoliticaBo.getPolitica(this.proyectoSeleccionado.getTTipoCredito().getIdTipoCredito());
+            Double aux = Math.exp(-this.proyectoSeleccionado.getPlazo() * Math.log((1 + (this.politicaSeleccionada.getTasaInteres().doubleValue() / 100.0) / 12.0)));
+            Double cuota = ((((this.politicaSeleccionada.getTasaInteres().doubleValue() / 100.0) / 12.0) / (1.0 - aux)) * this.proyectoSeleccionado.getMonto().doubleValue());
+
+            if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+                this.couto = new BigDecimal(cuota * 1);
+            } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+                this.couto = new BigDecimal(cuota * 3);
+            } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+                this.couto = new BigDecimal(cuota * 6);
+            } else {
+                this.couto = new BigDecimal(cuota * 12);
+            }
+
             generarDistribucion();
             if (tipo == 1) {
                 this.mostrarHistorialCooperativa = true;
@@ -2408,17 +2446,17 @@ public class CarteraBean extends Actividad {
         if (valor == 1) {
             return this.estadoCredito = "Solicitud";
         } else if (valor == 2) {
-            return this.estadoCredito = "Resolucion";
+            return this.estadoCredito = "Resolución";
         } else if (valor == 3) {
             return this.estadoCredito = "Aprobado/proceso";
         } else if (valor == 4) {
-            return this.estadoCredito = "No aprovado";
+            return this.estadoCredito = "No aprobado";
         } else if (valor == 5) {
-            return this.estadoCredito = "Aprobado/ejecutandose";
+            return this.estadoCredito = "Aprobado/ejecutándose";
         } else if (valor == 6) {
             return this.estadoCredito = "Finalizado";
         } else {
-            return this.estadoCredito = "Credito incobrable";
+            return this.estadoCredito = "Incobrable";
         }
 
     }
@@ -2558,8 +2596,6 @@ public class CarteraBean extends Actividad {
     }
 
     public void updateListaMorosos() {
-        
-        
 
         if (this.tipoCliente == 1) {
             this.listaClienteProyectoMorosos.clear();
@@ -2781,10 +2817,23 @@ public class CarteraBean extends Actividad {
             }
 
         }
-
+        
+               
         this.setShowUpdate(true);
         this.setShowData(false);
+        
+        this.limpiarModificar();
+        
+        
 
+    }
+    
+    
+    public void limpiarModificar(){
+        
+         this.showImagenCarta=true;
+        this.showDuiCliente=true;
+        this.showNitCliente=true;
     }
 
     public void cargarVistaEmpleado() {
@@ -4426,5 +4475,204 @@ public class CarteraBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
+
+    private Integer cuotasMora;
+    private Integer numeroPagos;
+    private Date fechaIncial;
+
+    public Integer getCuotasMora() {
+        return cuotasMora;
+    }
+
+    public void setCuotasMora(Integer cuotasMora) {
+        this.cuotasMora = cuotasMora;
+    }
+
+    public Integer getNumeroPagos() {
+        return numeroPagos;
+    }
+
+    public void setNumeroPagos(Integer numeroPagos) {
+        this.numeroPagos = numeroPagos;
+    }
+
+    public Date getFechaIncial() {
+        return fechaIncial;
+    }
+
+    public void setFechaIncial(Date fechaIncial) {
+        this.fechaIncial = fechaIncial;
+    }
+
+  
+
+    public void datosCredito() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        parametros.put("fechaInicio", this.fechaIncial);
+        parametros.put("numeroPagos", this.numeroPagos);
+
+        parametros.put("cuota", this.couto.doubleValue());
+
+        parametros.put("pagosMora", cuotasMora);
+
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/verCreditoCooperativa.jasper"));
+         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar reporte de crédito");
+        auxBitacora.setDatosBitacora("Codigo:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", cliente: " + this.clienteSeleccionado.getCodigoCliente()
+              
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.Entidadeleccionada.getIdEntidad());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    public void datosCreditoPersona() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        parametros.put("fechaInicio", this.fechaIncial);
+        parametros.put("numeroPagos", this.numeroPagos);
+
+        parametros.put("cuota", this.couto.doubleValue());
+
+        parametros.put("pagosMora", cuotasMora);
+
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/verCreditoPersona.jasper"));
+         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar reporte de crédito");
+        auxBitacora.setDatosBitacora("Codigo:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", cliente: " + this.clienteSeleccionado.getCodigoCliente()
+              
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.Entidadeleccionada.getIdEntidad());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    public void datosCreditoPDF() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        parametros.put("fechaInicio", this.fechaIncial);
+        parametros.put("numeroPagos", this.numeroPagos);
+
+        parametros.put("cuota", this.couto.doubleValue());
+
+        parametros.put("pagosMora", cuotasMora);
+
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/verCreditoCooperativa.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Crédito.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Descargar reporte de crédito");
+        auxBitacora.setDatosBitacora("Codigo:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", cliente: " + this.clienteSeleccionado.getCodigoCliente()
+              
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.Entidadeleccionada.getIdEntidad());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    public void datosCreditoPersonaPDF() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        parametros.put("fechaInicio", this.fechaIncial);
+        parametros.put("numeroPagos", this.numeroPagos);
+
+        parametros.put("cuota", this.couto.doubleValue());
+
+        parametros.put("pagosMora", cuotasMora);
+
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/verCreditoPersona.jasper"));
+          JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Crédito.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Descargar reporte de crédito");
+        auxBitacora.setDatosBitacora("Codigo:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", cliente: " + this.clienteSeleccionado.getCodigoCliente()
+              
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.Entidadeleccionada.getIdEntidad());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    
+    
+    
 
 }

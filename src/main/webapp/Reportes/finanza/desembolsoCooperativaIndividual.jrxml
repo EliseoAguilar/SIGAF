@@ -218,7 +218,7 @@ WHERE
 				<reportElement x="29" y="54" width="114" height="20" uuid="63ec699c-85d1-4233-9fe4-881229a00c30"/>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="143" y="54" width="394" height="20" uuid="031c08b6-e584-44ef-9c3b-5169b813de3d"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>
