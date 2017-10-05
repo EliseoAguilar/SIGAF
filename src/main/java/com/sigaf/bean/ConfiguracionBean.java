@@ -63,13 +63,28 @@ public class ConfiguracionBean extends Actividad {
     private Boolean considerarReserva;
 
     /* objeto para la renta*/
+    private TEstructura ingresosEstructura;
+
+    /* objeto para  la reserva legal*/
+    private TEstructura costosEstructura;
+
+    /*Para  Utilidad*/
+    private TEstructura gastosEstructura;
+
+    /* objeto para la renta*/
+    private TEstructura otroIngEstructura;
+
+    /* objeto para  la reserva legal*/
+    private TEstructura otroGasEstructura;
+
+    /*Para  Utilidad*/
+    private TEstructura utilidadEstructura;
+
+    /* objeto para la renta*/
     private TEstructura rentaEstructura;
 
     /* objeto para  la reserva legal*/
     private TEstructura ReservaEstructura;
-
-    /*Para  Utilidad*/
-    private TEstructura utilidadEstructura;
 
     /*Lista para ingresos */
     private List<TEstructura> listaEstructuraIngresos;
@@ -88,8 +103,6 @@ public class ConfiguracionBean extends Actividad {
 
     /*Para  guardar temporalmente la cuenta*/
     private TCuenta cuentaAuxEstado;
-
-   
 
     /*para indicar grupo de cuentas*/
     private Integer idGrupo;
@@ -189,7 +202,107 @@ public class ConfiguracionBean extends Actividad {
 
     private String msgEstCapitalNivel;
 
+    private String msgIngre;
+
+    private String msgIngreNivel;
+
+    private String msgCost;
+
+    private String msgCostNivel;
+
+    private String msgGast;
+
+    private String msgGastNivel;
+
+    private String msgOtroIng;
+
+    private String msgOtroIngNivel;
+
+    private String msgOtroGas;
+
+    private String msgOtroGasNivel;
+
     private Integer idTab;
+
+    public String getMsgIngre() {
+        return msgIngre;
+    }
+
+    public void setMsgIngre(String msgIngre) {
+        this.msgIngre = msgIngre;
+    }
+
+    public String getMsgIngreNivel() {
+        return msgIngreNivel;
+    }
+
+    public void setMsgIngreNivel(String msgIngreNivel) {
+        this.msgIngreNivel = msgIngreNivel;
+    }
+
+    public String getMsgCost() {
+        return msgCost;
+    }
+
+    public void setMsgCost(String msgCost) {
+        this.msgCost = msgCost;
+    }
+
+    public String getMsgCostNivel() {
+        return msgCostNivel;
+    }
+
+    public void setMsgCostNivel(String msgCostNivel) {
+        this.msgCostNivel = msgCostNivel;
+    }
+
+    public String getMsgGast() {
+        return msgGast;
+    }
+
+    public void setMsgGast(String msgGast) {
+        this.msgGast = msgGast;
+    }
+
+    public String getMsgGastNivel() {
+        return msgGastNivel;
+    }
+
+    public void setMsgGastNivel(String msgGastNivel) {
+        this.msgGastNivel = msgGastNivel;
+    }
+
+    public String getMsgOtroIng() {
+        return msgOtroIng;
+    }
+
+    public void setMsgOtroIng(String msgOtroIng) {
+        this.msgOtroIng = msgOtroIng;
+    }
+
+    public String getMsgOtroIngNivel() {
+        return msgOtroIngNivel;
+    }
+
+    public void setMsgOtroIngNivel(String msgOtroIngNivel) {
+        this.msgOtroIngNivel = msgOtroIngNivel;
+    }
+
+    public String getMsgOtroGas() {
+        return msgOtroGas;
+    }
+
+    public void setMsgOtroGas(String msgOtroGas) {
+        this.msgOtroGas = msgOtroGas;
+    }
+
+    public String getMsgOtroGasNivel() {
+        return msgOtroGasNivel;
+    }
+
+    public void setMsgOtroGasNivel(String msgOtroGasNivel) {
+        this.msgOtroGasNivel = msgOtroGasNivel;
+    }
 
     public TEntidad getEntidadSeleccionada() {
         return entidadSeleccionada;
@@ -206,11 +319,10 @@ public class ConfiguracionBean extends Actividad {
         ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
 
         this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
-        
+
         setIdEntidad(entidadSeleccionada.getIdEntidad());
     }
 
-    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -262,8 +374,6 @@ public class ConfiguracionBean extends Actividad {
         this.msgEstCapitalNivel = msgEstCapitalNivel;
     }
 
-    
-
     public void setIdEntidad(Integer idEntidad) {
 
         this.ejerAbierto = this.ejercicioBo.getEjercicioAbierto(idEntidad);
@@ -272,7 +382,11 @@ public class ConfiguracionBean extends Actividad {
 
             /* Accesando a datos de configuracion Estado de Resultado*/
             List<TEstructura> auxEst = this.estructuraBo.listEstructura(this.ejerAbierto.getIdEjercicio(), 1);
-
+            this.ingresosEstructura = new TEstructura();
+            this.gastosEstructura = new TEstructura();
+            this.costosEstructura = new TEstructura();
+            this.otroGasEstructura = new TEstructura();
+            this.otroIngEstructura = new TEstructura();
             this.listaEstructuraCostos = new ArrayList<>();
             this.listaEstructuraGastos = new ArrayList<>();
             this.listaEstructuraIngresos = new ArrayList<>();
@@ -360,7 +474,6 @@ public class ConfiguracionBean extends Actividad {
 
         }
 
-       
         this.idTab = 0;
     }
 
@@ -379,6 +492,46 @@ public class ConfiguracionBean extends Actividad {
 
     public String getMsgValorRef() {
         return msgValorRef;
+    }
+
+    public TEstructura getIngresosEstructura() {
+        return ingresosEstructura;
+    }
+
+    public void setIngresosEstructura(TEstructura ingresosEstructura) {
+        this.ingresosEstructura = ingresosEstructura;
+    }
+
+    public TEstructura getCostosEstructura() {
+        return costosEstructura;
+    }
+
+    public void setCostosEstructura(TEstructura costosEstructura) {
+        this.costosEstructura = costosEstructura;
+    }
+
+    public TEstructura getGastosEstructura() {
+        return gastosEstructura;
+    }
+
+    public void setGastosEstructura(TEstructura gastosEstructura) {
+        this.gastosEstructura = gastosEstructura;
+    }
+
+    public TEstructura getOtroIngEstructura() {
+        return otroIngEstructura;
+    }
+
+    public void setOtroIngEstructura(TEstructura otroIngEstructura) {
+        this.otroIngEstructura = otroIngEstructura;
+    }
+
+    public TEstructura getOtroGasEstructura() {
+        return otroGasEstructura;
+    }
+
+    public void setOtroGasEstructura(TEstructura otroGasEstructura) {
+        this.otroGasEstructura = otroGasEstructura;
     }
 
     public void setMsgValorRef(String msgValorRef) {
@@ -595,19 +748,19 @@ public class ConfiguracionBean extends Actividad {
 
         switch (this.idGrupo) {
             case 1:
-                this.listaEstructuraIngresos.add(tempEst);
+                this.ingresosEstructura = tempEst;
                 break;
             case 2:
-                this.listaEstructuraCostos.add(tempEst);
+                this.costosEstructura = tempEst;
                 break;
             case 3:
-                this.listaEstructuraGastos.add(tempEst);
+                this.gastosEstructura = tempEst;
                 break;
             case 4:
-                this.listaEstructuraOtrosIngresos.add(tempEst);
+                this.otroIngEstructura = tempEst;
                 break;
             case 5:
-                this.listaEstructuraOtrosGastos.add(tempEst);
+                this.otroGasEstructura = tempEst;
                 break;
 
             case 6:
@@ -838,9 +991,6 @@ public class ConfiguracionBean extends Actividad {
 
     }
 
-
-   
-    
     /**
      * Metodos Entidad predeterminada FIN
      */
@@ -1409,6 +1559,33 @@ public class ConfiguracionBean extends Actividad {
         }
 
         return codigo + complementoAux;
+
+    }
+
+    public void validarCuentaEstado(int idGrupo) {
+
+        Boolean estado = true;
+        
+        if (idGrupo == 1) {
+
+            if (this.ingresosEstructura.getTCuenta() == null) {
+                msgIngre = "Seleccione la cuenta";
+                estado = false;
+            } else {
+                msgIngre = "";
+            }
+
+            if (this.ingresosEstructura.getNivelReporte() == null || this.ingresosEstructura.getNivelReporte() < 1) {
+                msgIngreNivel = "El nivel de detalle invalido";
+                 estado = false;
+            } else {
+                msgEstCapitalNivel = "";
+            }
+            
+            if(estado){
+            this.listaEstructuraIngresos.add(ingresosEstructura);
+            }
+        }
 
     }
 

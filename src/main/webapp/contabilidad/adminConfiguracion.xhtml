@@ -11,7 +11,7 @@
         <ui:composition template="./../index.xhtml">
 
             <ui:define name="content">
-<h:form>
+                <h:form>
                     <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
                         <p:row>
                             <p:column style="padding: 0px;" >
@@ -21,23 +21,23 @@
                             </p:column>
                             <p:column style="padding: 0px; text-align: right" >
                                 <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{configuracionBean.btnCancelar}"  value="Cambiar Entidad"> 
-                                   
+
                                 </p:commandButton>   
                             </p:column>
                         </p:row>
                     </p:panelGrid>
                 </h:form>
-     
+
 
                 <p:outputPanel id="padding"  > 
 
                     <p:growl id="msgs"   />
 
                     <p:panel id="basic" header="Configuración contabilidad "  style="width: 100%; margin: auto; margin-bottom: 20px">
-                      
+
 
                         <p:outputPanel  id="data">
-                            
+
                             <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValido}">
                                 <h:form>
                                     <div align="center">
@@ -51,7 +51,7 @@
                                     </div>
                                 </h:form>
                             </p:dialog>
-                            
+
                             <p:dialog  header="Confirmar" widgetVar="dialogCrearBalance" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValidoBalance}">
                                 <h:form>
                                     <div align="center">
@@ -65,7 +65,7 @@
                                     </div>
                                 </h:form>
                             </p:dialog>
-                            
+
                             <p:dialog  header="Confirmar" widgetVar="dialogCrearEstado" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValidoEstado}">
                                 <h:form>
                                     <div align="center">
@@ -79,11 +79,11 @@
                                     </div>
                                 </h:form>
                             </p:dialog>
-                            
+
                             <h:form>
-                                
+
                                 <p:tabView dynamic="true"  activeIndex="#{configuracionBean.idTab}"  >
-                                    
+
                                     <p:ajax event="tabChange" listener="#{configuracionBean.onTabChange}" />
 
                                     <p:tab title="Estructura códigos ">
@@ -167,17 +167,17 @@
 
                                             <p:row>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.codigoCuenta}" style="width: 85%" disabled ="true"  />
+                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.codigoCuenta}" style="width: 85%" readonly ="true"  />
                                                     <p:commandButton title="Activo" update=":opDataCuentasBala"    oncomplete="PF('dgBuscarCuentaBala').show()"  actionListener="#{configuracionBean.setIdGrupo(11)}"   icon="fa fa-search" /> 
                                                     <h:outputText value="#{configuracionBean.msgEstActivo}" style="color: red"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.nombreCuenta}" style="width: 100%" disabled ="true" />
+                                                    <p:inputText value="#{configuracionBean.estructuraActivo.TCuenta.nombreCuenta}" style="width: 100%" readonly ="true" />
 
                                                 </p:column>
                                                 <p:column>
                                                     <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.estructuraActivo.nivelReporte}"  />
-                                                     <br></br>
+                                                    <br></br>
                                                     <h:outputText value="#{configuracionBean.msgEstActivoNivel}" style="color: red"/>
                                                 </p:column>
                                             </p:row>
@@ -204,18 +204,18 @@
 
                                             <p:row>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.codigoCuenta}" style="width: 85%"  disabled="true" />
+                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.codigoCuenta}" style="width: 85%"  readonly ="true" />
                                                     <p:commandButton title="Pasivo"   update=":opDataCuentasBala" actionListener="#{configuracionBean.setIdGrupo(12)}" oncomplete="PF('dgBuscarCuentaBala').show()"    icon="fa fa-search" />
                                                     <h:outputText value="#{configuracionBean.msgEstPasivo}" style="color: red"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.nombreCuenta}" style="width: 100%" disabled="true"  />
+                                                    <p:inputText value="#{configuracionBean.estructuraPasivo.TCuenta.nombreCuenta}" style="width: 100%" readonly ="true"  />
 
                                                 </p:column>
                                                 <p:column>
-                                                        <p:inputMask mask="9?" maxlength="1"  value="#{configuracionBean.estructuraPasivo.nivelReporte}"   />
-                                                        <br></br>
-                                                       <h:outputText value="#{configuracionBean.msgEstPasivoNivel}" style="color: red"/>
+                                                    <p:inputMask mask="9?" maxlength="1"  value="#{configuracionBean.estructuraPasivo.nivelReporte}"   />
+                                                    <br></br>
+                                                    <h:outputText value="#{configuracionBean.msgEstPasivoNivel}" style="color: red"/>
                                                 </p:column>
                                             </p:row>
 
@@ -240,17 +240,17 @@
 
                                             <p:row>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.codigoCuenta}" style="width: 85%"   disabled="true"/>
+                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.codigoCuenta}" style="width: 85%"   readonly ="true"/>
                                                     <p:commandButton title="Patrimonio"  update=":opDataCuentasBala" actionListener="#{configuracionBean.setIdGrupo(13)}"  oncomplete="PF('dgBuscarCuentaBala').show()"    icon="fa fa-search" />
                                                 </p:column>
                                                 <p:column>
-                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.nombreCuenta}" style="width: 100%"  disabled="true" />
+                                                    <p:inputText value="#{configuracionBean.estructuraCapital.TCuenta.nombreCuenta}" style="width: 100%"  readonly ="true" />
 
                                                 </p:column>
                                                 <p:column>
-                                                         <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.estructuraCapital.nivelReporte}"  />
-                                                         <br></br>
-                                                         <h:outputText value="#{configuracionBean.msgEstCapitalNivel}" style="color: red"/>
+                                                    <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.estructuraCapital.nivelReporte}"  />
+                                                    <br></br>
+                                                    <h:outputText value="#{configuracionBean.msgEstCapitalNivel}" style="color: red"/>
                                                 </p:column>
                                             </p:row>
 
@@ -271,22 +271,60 @@
                                     <p:tab title="Estado de resultado" rendered="#{configuracionBean.ejerAbierto eq null? false:true}">
                                         <p:accordionPanel >
                                             <p:tab title="Ingresos">
-                                                <p:fieldset>
-                                                    <p:commandButton title="Agregar cuenta ingreso"  update=":opDataCuentasEst"   oncomplete="PF('dgBuscarCuenta').show()"  actionListener="#{configuracionBean.setIdGrupo(1)}"   icon="fa fa-plus"  style="#{configuracionBean.btnNuevo}" > 
 
-                                                    </p:commandButton>
-                                                </p:fieldset>  
+
+                                                <p:panelGrid class="noBoder" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                                    <p:row>
+                                                        <p:column width="30%">
+                                                            <h:outputText value="Código:"  />
+                                                        </p:column>
+                                                        <p:column width="40%">
+                                                            <h:outputText value="Nombre:"/>
+                                                        </p:column>
+                                                        <p:column width="30%">
+                                                            <h:outputText value="Nivel de detalle:"/>
+                                                        </p:column>
+                                                       
+                                                    </p:row>
+
+                                                    <p:row>
+
+                                                        <p:column>
+                                                            <p:inputText value="#{configuracionBean.ingresosEstructura.TCuenta.codigoCuenta}" style="width: 85%" readonly ="true"/>
+                                                            <p:commandButton title="Ingreso"  update=":opDataCuentasEst"   oncomplete="PF('dgBuscarCuenta').show()"  actionListener="#{configuracionBean.setIdGrupo(1)}"   icon="fa fa-search"   > </p:commandButton>     </p:column>
+                                                            <br></br>
+                                                             <h:outputText value="#{configuracionBean.msgIngre}" style="color: red"/> 
+                                                            <p:column>
+                                                                <p:inputText value="#{configuracionBean.msgIngre}" style="width: 100%" readonly ="true" />
+
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.ingresosEstructura.nivelReporte}"  />
+                                                            <p:commandButton title="Agregar"  update=":opDataCuentasEst"  style="#{configuracionBean.btnCrear}"   actionListener="#{configuracionBean.validarCuentaEstado(1)}"  icon="fa fa-plus"   > </p:commandButton> 
+                                                             <br></br>
+                                                             <h:outputText value="#{configuracionBean.msgIngreNivel}" style="color: red"/>        
+                                                        </p:column>
+                                                      
+                                                    </p:row>
+
+                                                </p:panelGrid>
+
+
+
 
                                                 <p:dataTable var="cue" value="#{configuracionBean.listaEstructuraIngresos}" rowIndexVar="i" emptyMessage="No se a seleccionado ninguna cuenta.">  
                                                     <p:columnGroup type="header">
                                                         <p:row>
                                                             <p:column headerText="Código"  width="30%" />
 
-                                                            <p:column headerText="Cuenta"  width="60%" />
+                                                            <p:column headerText="Cuenta"  width="40%" />
+
+                                                            <p:column headerText="Nivel"  width="20%" />
 
                                                             <p:column headerText=""  width="10%" />
                                                         </p:row>
                                                     </p:columnGroup>
+
                                                     <p:column>  
                                                         <h:outputText value="#{cue.TCuenta.codigoCuenta}"  />  
                                                     </p:column>  
@@ -294,6 +332,10 @@
                                                     <p:column>  
                                                         <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
                                                     </p:column> 
+
+                                                    <p:column>  
+                                                        <h:outputText value="#{cue.nivelReporte}" />  
+                                                    </p:column>
 
                                                     <p:column> 
 
@@ -605,99 +647,99 @@
                         </p:outputPanel>
 
                         <p:outputPanel id="opDataCuentasEst">
-                            
-                        #{configuracionBean.updateListaCuentas()}
-                            
-                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuenta"  width="50%" appendTo="@(body)" modal="true" >  
-                            <h:form id="fBuscarCuenta"> 
 
-                                <p:dataTable var="cue" value="#{configuracionBean.listaCuentas}" widgetVar="companyTable"
-                                             paginator="true"
-                                             rows="10"
-                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
-                                             rowsPerPageTemplate="5,10"
-                                             paginatorPosition="bottom"
-                                             emptyMessage="No se encontraron cuentas."
-                                             >  
+                            #{configuracionBean.updateListaCuentas()}
+
+                            <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuenta"  width="50%" appendTo="@(body)" modal="true" >  
+                                <h:form id="fBuscarCuenta"> 
+
+                                    <p:dataTable var="cue" value="#{configuracionBean.listaCuentas}" widgetVar="companyTable"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                 rowsPerPageTemplate="5,10"
+                                                 paginatorPosition="bottom"
+                                                 emptyMessage="No se encontraron cuentas."
+                                                 >  
 
 
-                                    <f:facet name="header">
-                                        <p:outputPanel>
+                                        <f:facet name="header">
+                                            <p:outputPanel>
 
-                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
-                                        </p:outputPanel>
-                                    </f:facet>
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
 
-                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
-                                              headerText="Codigo"
-                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
-                                        <h:outputText value="#{cue.codigoCuenta}"  />  
-                                    </p:column>  
-                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
-                                              headerText="Nombre"
-                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
-                                        <h:outputText value="#{cue.nombreCuenta}" />  
-                                    </p:column>  
+                                        <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                                  headerText="Codigo"
+                                                  filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                            <h:outputText value="#{cue.codigoCuenta}"  />  
+                                        </p:column>  
+                                        <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                                  headerText="Nombre"
+                                                  filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                            <h:outputText value="#{cue.nombreCuenta}" />  
+                                        </p:column>  
 
-                                    <p:column  width="10%">  
-                                        <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuenta').hide()" style="#{configuracionBean.btnCrear}">
-                                            <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
-                                        </p:commandButton>
-                                    </p:column> 
-                                </p:dataTable> 
+                                        <p:column  width="10%">  
+                                            <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuenta').hide()" style="#{configuracionBean.btnCrear}">
+                                                <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
+                                            </p:commandButton>
+                                        </p:column> 
+                                    </p:dataTable> 
 
-                            </h:form> 
-                        </p:dialog> 
-                            
+                                </h:form> 
+                            </p:dialog> 
+
                         </p:outputPanel>
 
                         <p:outputPanel id="opDataCuentasBala">
-                            
-                        #{configuracionBean.updateListaCuentasBalance()}
-                        
-                        <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaBala"  width="50%" appendTo="@(body)" modal="true" >  
-                            <h:form id="fBuscarCuenta2"> 
 
-                                <p:dataTable var="cue" value="#{configuracionBean.getListaCuentasBalance()}" widgetVar="companyTable2"
-                                             paginator="true"
-                                             rows="10"
-                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
-                                             rowsPerPageTemplate="5,10"
-                                             paginatorPosition="bottom"
-                                             emptyMessage="No se encontraron cuentas."
-                                             >  
+                            #{configuracionBean.updateListaCuentasBalance()}
+
+                            <p:dialog header="Buscar cuenta" widgetVar="dgBuscarCuentaBala"  width="50%" appendTo="@(body)" modal="true" >  
+                                <h:form id="fBuscarCuenta2"> 
+
+                                    <p:dataTable var="cue" value="#{configuracionBean.getListaCuentasBalance()}" widgetVar="companyTable2"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                 rowsPerPageTemplate="5,10"
+                                                 paginatorPosition="bottom"
+                                                 emptyMessage="No se encontraron cuentas."
+                                                 >  
 
 
-                                    <f:facet name="header">
-                                        <p:outputPanel>
+                                        <f:facet name="header">
+                                            <p:outputPanel>
 
-                                            <p:inputText id="globalFilter" onkeyup="PF('companyTable2').filter()" style="width:150px" placeholder="Buscar"/>
-                                        </p:outputPanel>
-                                    </f:facet>
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable2').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
 
-                                    <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
-                                              headerText="Codigo"
-                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
-                                        <h:outputText value="#{cue.codigoCuenta}"  />  
-                                    </p:column>  
-                                    <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
-                                              headerText="Nombre"
-                                              filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
-                                        <h:outputText value="#{cue.nombreCuenta}" />  
-                                    </p:column>  
+                                        <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
+                                                  headerText="Codigo"
+                                                  filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                            <h:outputText value="#{cue.codigoCuenta}"  />  
+                                        </p:column>  
+                                        <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
+                                                  headerText="Nombre"
+                                                  filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                            <h:outputText value="#{cue.nombreCuenta}" />  
+                                        </p:column>  
 
-                                    <p:column  width="10%">  
-                                        <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuentaBala').hide()" style="#{configuracionBean.btnCrear}">
-                                            <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
-                                        </p:commandButton>
-                                    </p:column> 
-                                </p:dataTable> 
+                                        <p:column  width="10%">  
+                                            <p:commandButton  update=":data"  icon="fa fa-check" title="Seleccionar"  oncomplete="PF('dgBuscarCuentaBala').hide()" style="#{configuracionBean.btnCrear}">
+                                                <f:setPropertyActionListener value="#{cue}" target="#{configuracionBean.cuentaAuxEstado}"/>
+                                            </p:commandButton>
+                                        </p:column> 
+                                    </p:dataTable> 
 
-                            </h:form> 
-                        </p:dialog> 
-                            
+                                </h:form> 
+                            </p:dialog> 
+
                         </p:outputPanel>
 
                     </p:panel>
