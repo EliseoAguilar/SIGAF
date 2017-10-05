@@ -40,7 +40,14 @@ public class EntidadProyectoDao implements IEntidadProyectoDao {
 
     @Override
     public TEntidadProyecto getTEntidadProyecto(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        Session session = this.sessionFactory.openSession();
+        TEntidadProyecto garantia = (TEntidadProyecto) session.createQuery("from TEntidadProyecto where TProyecto.idproyecto =:id").setParameter("id", id).uniqueResult();
+        session.close();
+        return garantia;
+
+
+    
     }
 
     @Override
@@ -54,7 +61,13 @@ public class EntidadProyectoDao implements IEntidadProyectoDao {
 
     @Override
     public void update(TEntidadProyecto entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+        Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(entidad);
+        session.getTransaction().commit();
+        session.clear();
+    
     }
 
     @Override

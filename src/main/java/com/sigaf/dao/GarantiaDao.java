@@ -56,7 +56,12 @@ public class GarantiaDao implements IGarantiaDao {
 
     @Override
     public void update(TGarantia entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+         Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(entidad);
+        session.getTransaction().commit();
+        session.clear();
     }
 
     @Override

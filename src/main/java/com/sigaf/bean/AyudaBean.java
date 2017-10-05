@@ -157,12 +157,44 @@ public class AyudaBean extends Actividad {
     public void seleccion() {
 
         this.mostrarDocumento = true;
-        if(this.selectedNode.getData()=="Agronegocios"){
+        if(this.selectedNode.getData()=="Contabilidad"){
+            
+            this.pagina="16";
+            
+        }
+        
+         if(this.selectedNode.getData()=="Finanzas"){
+            
+            this.pagina="18";
+            
+        }
+        
+            if(this.selectedNode.getData()=="Agronegocios"){
             
             this.pagina="108";
             
         }
+                     if(this.selectedNode.getData()=="Administración"){
+            
+            this.pagina="150";
+            
+        }
 
+               if(this.selectedNode.getData()=="Configuración"){
+            
+            this.pagina="181";
+            
+        }
+                  if(this.selectedNode.getData()=="Seguridad"){
+            
+            this.pagina="204";
+            
+        }
+                     if(this.selectedNode.getData()=="Ayuda"){
+            
+            this.pagina="217";
+            
+        }
     }
 
 }

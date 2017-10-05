@@ -21,6 +21,8 @@ public interface ISeguimientoDao {
     public List<TSeguimiento> listSeguimiento();
 
     public void delete(Integer id);
+    
+     public void delete(TSeguimiento seguimiento);
 
     public void update(TSeguimiento seguimiento);
     

@@ -56,5 +56,11 @@ public class SeguimientoBo implements ISeguimientoBo {
     public List<TSeguimiento> listaProyectoSeguimiento(int i) {
         return this.iseguimientoDao.listaProyectoSeguimiento(i);
     }
+
+    @Override
+    public void delete(TSeguimiento seguimiento) {
+        this.iseguimientoDao.delete(seguimiento);
+    
+    }
     
 }

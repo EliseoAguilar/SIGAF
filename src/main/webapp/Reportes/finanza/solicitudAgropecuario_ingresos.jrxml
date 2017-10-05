@@ -81,6 +81,241 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_ingreso_nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
+				<reportElement x="101" y="0" width="100" height="20" uuid="de2a8007-6dbc-49a4-85ae-861639a63dc1"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="261" y="0" width="273" height="20" uuid="b565e408-4b35-4d41-b711-b1208d4464b9"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22">
+			<textField pattern="$#,##0.00">
+				<reportElement x="101" y="0" width="100" height="20" uuid="0845b47d-3e8f-49c8-b2e1-3f7eedd061a4"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_ingreso_valor_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="0" width="100" height="20" uuid="6d512a69-e3fc-4a11-bfce-d977f08543a0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudAgropecuario_ingresos" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4561a7cd-d55e-4ab6-9ea9-cd9b67249e3c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_proyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_ingreso."idingreso" AS t_ingreso_idingreso,
+     t_ingreso."nombre" AS t_ingreso_nombre,
+     t_ingreso."descripcion" AS t_ingreso_descripcion,
+     t_ingreso."valor" AS t_ingreso_valor,
+     t_ingreso."estado" AS t_ingreso_estado,
+     t_ingreso."idproyecto" AS t_ingreso_idproyecto,
+     t_ingreso."salario_actual" AS t_ingreso_salario_actual,
+     t_ingreso."tiempo_trabajar" AS t_ingreso_tiempo_trabajar,
+     t_ingreso."monto_pension" AS t_ingreso_monto_pension,
+     t_ingreso."otros_ingresos" AS t_ingreso_otros_ingresos
+FROM
+     "public"."t_proyecto" t_proyecto INNER JOIN "public"."t_ingreso" t_ingreso ON t_proyecto."idproyecto" = t_ingreso."idproyecto" where t_proyecto."idproyecto"= $P{id_proyecto}]]>
+	</queryString>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.lang.Float"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_ingreso_idingreso" class="java.lang.Integer"/>
+	<field name="t_ingreso_nombre" class="java.lang.String"/>
+	<field name="t_ingreso_descripcion" class="java.lang.String"/>
+	<field name="t_ingreso_valor" class="java.lang.Float"/>
+	<field name="t_ingreso_estado" class="java.lang.Integer"/>
+	<field name="t_ingreso_idproyecto" class="java.lang.Integer"/>
+	<field name="t_ingreso_salario_actual" class="java.lang.Float"/>
+	<field name="t_ingreso_tiempo_trabajar" class="java.lang.Integer"/>
+	<field name="t_ingreso_monto_pension" class="java.lang.Float"/>
+	<field name="t_ingreso_otros_ingresos" class="java.lang.Float"/>
+	<variable name="t_ingreso_valor_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_ingreso_valor}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="19" y="0" width="141" height="20" uuid="815f8d79-71f8-41e4-a39d-6b9ef9ae04fe"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
+				<reportElement x="160" y="0" width="100" height="20" uuid="de2a8007-6dbc-49a4-85ae-861639a63dc1"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="261" y="0" width="273" height="20" uuid="b565e408-4b35-4d41-b711-b1208d4464b9"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22">
+			<textField pattern="$#,##0.00">
+				<reportElement x="160" y="0" width="100" height="20" uuid="0845b47d-3e8f-49c8-b2e1-3f7eedd061a4"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_ingreso_valor_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="0" width="100" height="20" uuid="6d512a69-e3fc-4a11-bfce-d977f08543a0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudAgropecuario_ingresos" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4561a7cd-d55e-4ab6-9ea9-cd9b67249e3c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_proyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_ingreso."idingreso" AS t_ingreso_idingreso,
+     t_ingreso."nombre" AS t_ingreso_nombre,
+     t_ingreso."descripcion" AS t_ingreso_descripcion,
+     t_ingreso."valor" AS t_ingreso_valor,
+     t_ingreso."estado" AS t_ingreso_estado,
+     t_ingreso."idproyecto" AS t_ingreso_idproyecto,
+     t_ingreso."salario_actual" AS t_ingreso_salario_actual,
+     t_ingreso."tiempo_trabajar" AS t_ingreso_tiempo_trabajar,
+     t_ingreso."monto_pension" AS t_ingreso_monto_pension,
+     t_ingreso."otros_ingresos" AS t_ingreso_otros_ingresos
+FROM
+     "public"."t_proyecto" t_proyecto INNER JOIN "public"."t_ingreso" t_ingreso ON t_proyecto."idproyecto" = t_ingreso."idproyecto" where t_proyecto."idproyecto"= $P{id_proyecto}]]>
+	</queryString>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.lang.Float"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_ingreso_idingreso" class="java.lang.Integer"/>
+	<field name="t_ingreso_nombre" class="java.lang.String"/>
+	<field name="t_ingreso_descripcion" class="java.lang.String"/>
+	<field name="t_ingreso_valor" class="java.lang.Float"/>
+	<field name="t_ingreso_estado" class="java.lang.Integer"/>
+	<field name="t_ingreso_idproyecto" class="java.lang.Integer"/>
+	<field name="t_ingreso_salario_actual" class="java.lang.Float"/>
+	<field name="t_ingreso_tiempo_trabajar" class="java.lang.Integer"/>
+	<field name="t_ingreso_monto_pension" class="java.lang.Float"/>
+	<field name="t_ingreso_otros_ingresos" class="java.lang.Float"/>
+	<variable name="t_ingreso_valor_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_ingreso_valor}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="19" y="0" width="141" height="20" uuid="815f8d79-71f8-41e4-a39d-6b9ef9ae04fe"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_ingreso_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
 				<reportElement x="160" y="0" width="100" height="20" uuid="de2a8007-6dbc-49a4-85ae-861639a63dc1"/>
 				<textElement>
 					<font size="10"/>

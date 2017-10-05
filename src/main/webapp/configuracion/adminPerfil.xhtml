@@ -72,7 +72,7 @@
                                         </p:row>
                                         <p:row>
                                             <p:column colspan="2"  >
-                                                <p:fileUpload   id="cargar" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{entidadBean.guardarImagen}" update=":padding"/> 
+                                                <p:fileUpload   id="cargar" allowTypes="/(\.|\/)(jpe?g|png)$/i" invalidFileMessage="El tipo de archivo es incorrecto" mode="advanced" uploadLabel="subir" label="Elegir" sizeLimit="1000000000000" fileUploadListener="#{entidadBean.guardarImagen}" update=":padding"/> 
                                                 <p:growl id="messages" />
                                             </p:column>
                                         </p:row>

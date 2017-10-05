@@ -1930,16 +1930,22 @@ public class ResolucionBean extends Actividad {
     }
 
     public void createResolucionCooperativa() {
+        
+        
 
         if (this.aprobar == true) {
             this.proyectoSeleccionado.setEstado(3);
             this.proyectoSeleccionado.setCalificacion("Pendiente");
             
             
-            if(this.Entidadeleccionada.getCodigoClienteEntidad().equals("")){
+            if(this.Entidadeleccionada.getCodigoClienteEntidad()==null){
                 
                 this.listaEntidadesClientes = this.ientidadBo.listTEndidadCodigo();
                 int correlativo = this.listaEntidadesClientes.size() + 1;
+                
+                System.out.println(correlativo);
+                System.out.println(this.Entidadeleccionada.getNombreEntidad());
+               
                 if (correlativo < 10) {
                     this.Entidadeleccionada.setCodigoClienteEntidad("COP-0000" + correlativo);
                 } else if (correlativo < 100) {
@@ -1951,6 +1957,7 @@ public class ResolucionBean extends Actividad {
                 } else {
                     this.Entidadeleccionada.setCodigoClienteEntidad("COP-" + correlativo);
                 }
+                
                 this.ientidadBo.update(this.Entidadeleccionada);
                 
             }
@@ -2076,7 +2083,7 @@ public class ResolucionBean extends Actividad {
             //this.listaCliente = this.iclienteProyectoBo.listTClienteProyectoAprovadosComprabacion(this.clienteSeleccionado.getIdCliente());
             
             
-            if (this.clienteSeleccionado.getCodigoCliente().equals("")) {//generamos el codigo del cliente
+            if (this.clienteSeleccionado.getCodigoCliente()==null) {//generamos el codigo del cliente
                 this.listaClientes = this.iclienteBo.listClienteCodigo();
                 int correlativo = this.listaClientes.size() + 1;
                 if (correlativo < 10) {
@@ -2333,7 +2340,7 @@ public class ResolucionBean extends Actividad {
         this.totalRazonActivos = totalActivos;
         this.totalRazonPasivos = totalPasivos;
         this.resultadoRazonEndeudamiento = razonEndeudamiento;
-        if (this.resultadoRazonEndeudamiento.compareTo(this.politicaSeleccionada.getCapacidadEndeudamientoMinimo()) >= 0) {//mayor que el 60% por ejemplo
+        if (this.resultadoRazonEndeudamiento.compareTo(this.politicaSeleccionada.getCapacidadEndeudamientoMinimo()) < 0) {//mayor que el 60% por ejemplo
             this.mensajeAprobado = true;
             this.mensajeNoAprobado = false;
         } else {

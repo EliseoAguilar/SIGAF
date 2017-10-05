@@ -47,7 +47,7 @@ public class GarantiaBo implements IGarantiaBo {
 
     @Override
     public void update(TGarantia entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.igarantiaDao.update(entidad);
     }
 
     @Override

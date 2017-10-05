@@ -367,6 +367,24 @@ public class SolicitudBean extends Actividad {
     private Boolean estadoConyugue;
     private Boolean estadoHijos;
     private String msgEdad;
+    private Boolean modificarCooperativa;
+    private Boolean modificarComercio;
+
+    public Boolean getModificarCooperativa() {
+        return modificarCooperativa;
+    }
+
+    public void setModificarCooperativa(Boolean modificarCooperativa) {
+        this.modificarCooperativa = modificarCooperativa;
+    }
+
+    public Boolean getModificarComercio() {
+        return modificarComercio;
+    }
+
+    public void setModificarComercio(Boolean modificarComercio) {
+        this.modificarComercio = modificarComercio;
+    }
 
     public String getMsgEdad() {
         return msgEdad;
@@ -436,6 +454,8 @@ public class SolicitudBean extends Actividad {
     public BigDecimal getCuotaPago() {
         return cuotaPago;
     }
+    
+   
 
     public void setCuotaPago(BigDecimal cuotaPago) {
         this.cuotaPago = cuotaPago;
@@ -2766,6 +2786,7 @@ public class SolicitudBean extends Actividad {
         this.limpiarVer();
         this.estadoFormulario = false;
         this.mostrarCooperativas = true;
+        this.modificarCooperativa=false;
         this.msgCooperativaActivoCo = "";
         this.msgCooperativaActivoNo = "";
         this.msgCooperativaPasivoCo = "";
@@ -2860,6 +2881,7 @@ public class SolicitudBean extends Actividad {
         mostrarSolicitudes();
         this.msgBalance = "";
         this.politicaSeleccionada = new TPolitica();
+        this.politica= new TPolitica();
         this.correlativo();
 
     }
@@ -6288,6 +6310,7 @@ public class SolicitudBean extends Actividad {
             this.mostrarPersonas = false;
             this.mostrarAgropecuarios = false;
             this.mostrarLisiados = false;
+            this.modificarCooperativa=false;
         }
         if (estaPersona == 8) {
             this.mostrarAgropecuarios = true;
@@ -7957,5 +7980,101 @@ public class SolicitudBean extends Actividad {
         this.listaReferencia.remove(posicion);
 
     }
+    
+    
+    //INICIA PROCESO DE MODIFICACION
+    
+    private TTipoCredito tipoCreditoSeleccionado;
+
+    public TTipoCredito getTipoCreditoSeleccionado() {
+        return tipoCreditoSeleccionado;
+    }
+
+    public void setTipoCreditoSeleccionado(TTipoCredito tipoCreditoSeleccionado) {
+        this.tipoCreditoSeleccionado = tipoCreditoSeleccionado;
+    }
+    
+    private Integer idtipoCredito;
+
+    public Integer getIdtipoCredito() {
+        return idtipoCredito;
+    }
+
+    public void setIdtipoCredito(Integer idtipoCredito) {
+        this.idtipoCredito = idtipoCredito;
+    }
+    
+    
+    public void cargarPoliticaModificar(){
+        
+        
+        this.politica= this.ipoliticaBo.getPolitica(this.idtipoCredito);
+        System.out.println(this.tipoCreditoSeleccionado.getIdTipoCredito());
+    }
+    
+    public void cargarActualizacionCooperativa(){
+        
+      
+        this.setShowData(false);
+        this.idtipoCredito= this.proyecto.getTTipoCredito().getIdTipoCredito();
+                
+        this.politica= this.ipoliticaBo.getPolitica(this.idtipoCredito);
+        this.modificarCooperativa=true;
+        this.cooperativa= this.icooperativaBo.getTCooperativa(this.proyecto.getIdproyecto());
+        this.garantia= this.igarantiaBo.getTGarantia(this.proyecto.getIdproyecto());
+    
+        
+        if(this.garantia.getValorPrendariaGarantia()!=null){
+            
+            this.estadoPrendaria=true;
+            this.estadoHipotecaria=false;
+            this.estadoSolidaria=false;
+        }
+        
+         if(this.garantia.getValorHipotecaGarantia()!=null){
+             this.estadoPrendaria=false;
+            this.estadoHipotecaria=true;
+            this.estadoSolidaria=false;
+            
+        }
+         
+           if(this.garantia.getIngresosSolidariaGarantia()!=null){
+             this.estadoPrendaria=false;
+            this.estadoHipotecaria=false;
+            this.estadoSolidaria=true;
+            
+        }
+         
+         
+      
+        
+      
+        
+        
+    }
+    
+    
+      public void modificarSolicitudCooperativa(){
+          
+          
+          this.tipoCreditoSeleccionado= new  TTipoCredito(this.idtipoCredito);
+            
+            this.entidadProyecto= this.ientidadProyectoBo.getTEntidadProyecto(this.proyecto.getIdproyecto());
+            this.proyecto.setTTipoCredito(tipoCreditoSeleccionado);
+            this.entidadProyecto.setTEntidad(this.Entidadeleccionada);
+            this.ientidadProyectoBo.update(this.entidadProyecto);               
+            this.iproyectoBo.update(proyecto);
+            this.igarantiaBo.update(garantia);
+            this.icooperativaBo.update(cooperativa);
+            this.modificarCooperativa=false;
+            this.enableShowData();
+            this.politica= new TPolitica();
+            
+            
+        }
+    
+    //TERMINA PROCESO DE MODIFICACION
 
 }
+
+
