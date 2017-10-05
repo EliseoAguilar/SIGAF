@@ -999,7 +999,7 @@ public class SocioCooperativaBean extends Actividad {
                 this.msgEmpleado = "";
             }
             if (this.empleadoSeleccionado != null) {
-                if (this.empleadoSeleccionado.getEstadoSocio() != null) {
+                if (this.empleadoSeleccionado.getEstadoSocio() == true) {
                     this.msgEmpleado = "El empleado seleccionado ya es socio de la cooperativa";
                     this.estadoFormulario = false;
                 }
