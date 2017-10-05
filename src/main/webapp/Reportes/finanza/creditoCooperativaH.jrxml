@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
 	<property name="ireport.zoom" value="2.0"/>
@@ -1462,4 +1461,730 @@ FROM
 		</band>
 	</pageFooter>
 </jasperReport>
->>>>>>> origin/master
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d95a84-7253-444b-bc2f-f82adc268613">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="interes" class="java.lang.Double"/>
+	<parameter name="cuota" class="java.lang.Double"/>
+	<parameter name="id_proyecto" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     t_cooperativa."id_cooperativa" AS t_cooperativa_id_cooperativa,
+     t_cooperativa."id_proyecto" AS t_cooperativa_id_proyecto,
+     t_cooperativa."area_producida" AS t_cooperativa_area_producida,
+     t_cooperativa."credito_anterior" AS t_cooperativa_credito_anterior,
+     t_cooperativa."presupuesto" AS t_cooperativa_presupuesto,
+     t_cooperativa."balance_general" AS t_cooperativa_balance_general,
+     t_cooperativa."acuerdo_solicitud" AS t_cooperativa_acuerdo_solicitud,
+     t_cooperativa."activo_corriente" AS t_cooperativa_activo_corriente,
+     t_cooperativa."activo_nocorriente" AS t_cooperativa_activo_nocorriente,
+     t_cooperativa."pasivo_corriente" AS t_cooperativa_pasivo_corriente,
+     t_cooperativa."pasivo_nocorriente" AS t_cooperativa_pasivo_nocorriente,
+     t_cooperativa."patrimonio" AS t_cooperativa_patrimonio,
+     t_garantia."id_garantia" AS t_garantia_id_garantia,
+     t_garantia."id_proyecto" AS t_garantia_id_proyecto,
+     t_garantia."idtipogarantia" AS t_garantia_idtipogarantia,
+     t_garantia."descripcion_prendaria_garantia" AS t_garantia_descripcion_prendaria_garantia,
+     t_garantia."valor_prendaria_garantia" AS t_garantia_valor_prendaria_garantia,
+     t_garantia."documento_prendaria_garantia" AS t_garantia_documento_prendaria_garantia,
+     t_garantia."hipoteca_hipotecaria_garantia" AS t_garantia_hipoteca_hipotecaria_garantia,
+     t_garantia."valor_hipoteca_garantia" AS t_garantia_valor_hipoteca_garantia,
+     t_garantia."ubicacion_hipoteca_garantia" AS t_garantia_ubicacion_hipoteca_garantia,
+     t_garantia."documento_hipoteca_garantia" AS t_garantia_documento_hipoteca_garantia,
+     t_garantia."nombres_solidaria_garantia" AS t_garantia_nombres_solidaria_garantia,
+     t_garantia."apellidos_solidaria_garantia" AS t_garantia_apellidos_solidaria_garantia,
+     t_garantia."dui_solidaria_garantia" AS t_garantia_dui_solidaria_garantia,
+     t_garantia."nit_solidaria_garantia" AS t_garantia_nit_solidaria_garantia,
+     t_garantia."profesion_solidaria_garantia" AS t_garantia_profesion_solidaria_garantia,
+     t_garantia."lugar_solidaria_garantia" AS t_garantia_lugar_solidaria_garantia,
+     t_garantia."ingresos_solidaria_garantia" AS t_garantia_ingresos_solidaria_garantia,
+     t_garantia."telefonot_solidaria_garantia" AS t_garantia_telefonot_solidaria_garantia,
+     t_garantia."telefonof_solidaria_garantia" AS t_garantia_telefonof_solidaria_garantia,
+     t_garantia."fotocopia_dui_solidaria_garantia" AS t_garantia_fotocopia_dui_solidaria_garantia,
+     t_garantia."fotocopia_nit_solidaria_garantia" AS t_garantia_fotocopia_nit_solidaria_garantia,
+     t_politica."id_politica" AS t_politica_id_politica,
+     t_politica."tasa_interes" AS t_politica_tasa_interes,
+     t_politica."edad_maxima" AS t_politica_edad_maxima,
+     t_politica."edad_minima" AS t_politica_edad_minima,
+     t_politica."monto_minimo" AS t_politica_monto_minimo,
+     t_politica."monto_maximo" AS t_politica_monto_maximo,
+     t_politica."tasa_interes_mora" AS t_politica_tasa_interes_mora,
+     t_politica."comision" AS t_politica_comision,
+     t_politica."seguro_deuda" AS t_politica_seguro_deuda,
+     t_politica."capacidad_pago_minimo" AS t_politica_capacidad_pago_minimo,
+     t_politica."capacidad_endeudamiento_minimo" AS t_politica_capacidad_endeudamiento_minimo,
+     t_politica."idtipocredito" AS t_politica_idtipocredito,
+     t_politica."estado" AS t_politica_estado,
+     t_proyecto."nombre" AS t_proyecto_nombre,
+     t_proyecto."monto" AS t_proyecto_monto,
+     t_proyecto."plazo" AS t_proyecto_plazo,
+     t_proyecto."fecha" AS t_proyecto_fecha,
+     t_proyecto."estado" AS t_proyecto_estado,
+     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
+     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
+     t_proyecto."codigo" AS t_proyecto_codigo,
+     t_proyecto."descripcion" AS t_proyecto_descripcion,
+     t_proyecto."lugar" AS t_proyecto_lugar,
+     t_proyecto."calificacion" AS t_proyecto_calificacion,
+     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
+     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
+     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
+     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
+     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
+     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
+     t_proyecto."id_politica" AS t_proyecto_id_politica,
+     t_entidad."id_entidad" AS t_entidad_id_entidad,
+     t_entidad."nombre_entidad" AS t_entidad_nombre_entidad,
+     t_entidad."giro_entidad" AS t_entidad_giro_entidad,
+     t_entidad."correo_entidad" AS t_entidad_correo_entidad,
+     t_entidad."direccion_entidad" AS t_entidad_direccion_entidad,
+     t_entidad."nit_entidad" AS t_entidad_nit_entidad,
+     t_entidad."codigo_entidad" AS t_entidad_codigo_entidad,
+     t_entidad."nombre_representante_entidad" AS t_entidad_nombre_representante_entidad,
+     t_entidad."codigo_cliente_entidad" AS t_entidad_codigo_cliente_entidad,
+     t_entidad."telefono_entidad" AS t_entidad_telefono_entidad,
+     t_entidad."celular_entidad" AS t_entidad_celular_entidad,
+     t_entidad."mision_entidad" AS t_entidad_mision_entidad,
+     t_entidad."vision_entidad" AS t_entidad_vision_entidad,
+     t_entidad."acta_entidad" AS t_entidad_acta_entidad,
+     t_entidad."estado_entidad" AS t_entidad_estado_entidad,
+     t_entidad."credencial_entidad" AS t_entidad_credencial_entidad,
+     t_entidad."logo_entidad" AS t_entidad_logo_entidad,
+     t_entidad."dui_representante_entidad" AS t_entidad_dui_representante_entidad,
+     t_entidad."nit_representante_entidad" AS t_entidad_nit_representante_entidad,
+     t_entidad."abreviacion_entidad" AS t_entidad_abreviacion_entidad,
+     t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad,
+     t_entidad_proyecto."identidadproyecto" AS t_entidad_proyecto_identidadproyecto,
+     t_entidad_proyecto."identidad" AS t_entidad_proyecto_identidad,
+     t_entidad_proyecto."idproyecto" AS t_entidad_proyecto_idproyecto,
+     t_tipo_credito."id_tipo_credito" AS t_tipo_credito_id_tipo_credito,
+     t_tipo_credito."nombre" AS t_tipo_credito_nombre,
+     t_tipo_credito."descripcion" AS t_tipo_credito_descripcion,
+     t_tipo_credito."estado" AS t_tipo_credito_estado
+FROM
+     "public"."t_politica" t_politica INNER JOIN "public"."t_proyecto" t_proyecto ON t_politica."id_politica" = t_proyecto."id_politica"
+     INNER JOIN "public"."t_cooperativa" t_cooperativa ON t_proyecto."idproyecto" = t_cooperativa."id_proyecto"
+     INNER JOIN "public"."t_garantia" t_garantia ON t_proyecto."idproyecto" = t_garantia."id_proyecto"
+     INNER JOIN "public"."t_entidad_proyecto" t_entidad_proyecto ON t_proyecto."idproyecto" = t_entidad_proyecto."idproyecto"
+     INNER JOIN "public"."t_tipo_credito" t_tipo_credito ON t_proyecto."idtipocredito" = t_tipo_credito."id_tipo_credito"
+     AND t_tipo_credito."id_tipo_credito" = t_politica."idtipocredito"
+     INNER JOIN "public"."t_entidad" t_entidad ON t_entidad_proyecto."identidad" = t_entidad."id_entidad" where t_proyecto."idproyecto"=$P{id_proyecto}]]>
+	</queryString>
+	<field name="t_cooperativa_id_cooperativa" class="java.lang.Integer"/>
+	<field name="t_cooperativa_id_proyecto" class="java.lang.Integer"/>
+	<field name="t_cooperativa_area_producida" class="java.lang.Double"/>
+	<field name="t_cooperativa_credito_anterior" class="java.lang.Double"/>
+	<field name="t_cooperativa_presupuesto" class="java.lang.String"/>
+	<field name="t_cooperativa_balance_general" class="java.lang.String"/>
+	<field name="t_cooperativa_acuerdo_solicitud" class="java.lang.String"/>
+	<field name="t_cooperativa_activo_corriente" class="java.lang.Double"/>
+	<field name="t_cooperativa_activo_nocorriente" class="java.lang.Double"/>
+	<field name="t_cooperativa_pasivo_corriente" class="java.lang.Double"/>
+	<field name="t_cooperativa_pasivo_nocorriente" class="java.lang.Double"/>
+	<field name="t_cooperativa_patrimonio" class="java.lang.Double"/>
+	<field name="t_garantia_id_garantia" class="java.lang.Integer"/>
+	<field name="t_garantia_id_proyecto" class="java.lang.Integer"/>
+	<field name="t_garantia_idtipogarantia" class="java.lang.Integer"/>
+	<field name="t_garantia_descripcion_prendaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_valor_prendaria_garantia" class="java.lang.Double"/>
+	<field name="t_garantia_documento_prendaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_hipoteca_hipotecaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_valor_hipoteca_garantia" class="java.lang.Double"/>
+	<field name="t_garantia_ubicacion_hipoteca_garantia" class="java.lang.String"/>
+	<field name="t_garantia_documento_hipoteca_garantia" class="java.lang.String"/>
+	<field name="t_garantia_nombres_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_apellidos_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_dui_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_nit_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_profesion_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_lugar_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_ingresos_solidaria_garantia" class="java.lang.Double"/>
+	<field name="t_garantia_telefonot_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_telefonof_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_fotocopia_dui_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_garantia_fotocopia_nit_solidaria_garantia" class="java.lang.String"/>
+	<field name="t_politica_id_politica" class="java.lang.Integer"/>
+	<field name="t_politica_tasa_interes" class="java.lang.Float"/>
+	<field name="t_politica_edad_maxima" class="java.lang.Integer"/>
+	<field name="t_politica_edad_minima" class="java.lang.Integer"/>
+	<field name="t_politica_monto_minimo" class="java.lang.Float"/>
+	<field name="t_politica_monto_maximo" class="java.lang.Float"/>
+	<field name="t_politica_tasa_interes_mora" class="java.lang.Float"/>
+	<field name="t_politica_comision" class="java.lang.Float"/>
+	<field name="t_politica_seguro_deuda" class="java.lang.Float"/>
+	<field name="t_politica_capacidad_pago_minimo" class="java.lang.Float"/>
+	<field name="t_politica_capacidad_endeudamiento_minimo" class="java.lang.Float"/>
+	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_politica_estado" class="java.lang.Boolean"/>
+	<field name="t_proyecto_nombre" class="java.lang.String"/>
+	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
+	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
+	<field name="t_proyecto_fecha" class="java.sql.Date"/>
+	<field name="t_proyecto_estado" class="java.lang.Integer"/>
+	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
+	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_codigo" class="java.lang.String"/>
+	<field name="t_proyecto_descripcion" class="java.lang.String"/>
+	<field name="t_proyecto_lugar" class="java.lang.String"/>
+	<field name="t_proyecto_calificacion" class="java.lang.String"/>
+	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
+	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
+	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
+	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
+	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<field name="t_entidad_id_entidad" class="java.lang.Integer"/>
+	<field name="t_entidad_nombre_entidad" class="java.lang.String"/>
+	<field name="t_entidad_giro_entidad" class="java.lang.String"/>
+	<field name="t_entidad_correo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_direccion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nombre_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_codigo_cliente_entidad" class="java.lang.String"/>
+	<field name="t_entidad_telefono_entidad" class="java.lang.String"/>
+	<field name="t_entidad_celular_entidad" class="java.lang.String"/>
+	<field name="t_entidad_mision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_vision_entidad" class="java.lang.String"/>
+	<field name="t_entidad_acta_entidad" class="java.lang.String"/>
+	<field name="t_entidad_estado_entidad" class="java.lang.Boolean"/>
+	<field name="t_entidad_credencial_entidad" class="java.lang.String"/>
+	<field name="t_entidad_logo_entidad" class="java.lang.String"/>
+	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
+	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<field name="t_entidad_proyecto_identidadproyecto" class="java.lang.Integer"/>
+	<field name="t_entidad_proyecto_identidad" class="java.lang.Integer"/>
+	<field name="t_entidad_proyecto_idproyecto" class="java.lang.Integer"/>
+	<field name="t_tipo_credito_id_tipo_credito" class="java.lang.Integer"/>
+	<field name="t_tipo_credito_nombre" class="java.lang.String"/>
+	<field name="t_tipo_credito_descripcion" class="java.lang.String"/>
+	<field name="t_tipo_credito_estado" class="java.lang.Integer"/>
+	<variable name="variable1" class="java.lang.Float"/>
+	<variable name="variable2" class="java.lang.Double"/>
+	<variable name="variable3" class="java.lang.Double"/>
+	<variable name="variable4" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="109" splitType="Stretch">
+			<subreport>
+				<reportElement x="20" y="0" width="200" height="79" uuid="2a0ed78e-1ca1-488d-947c-42825f3d53db"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="83" width="553" height="20" uuid="9ed07f11-7d75-48bc-8cef-92ef4d62a1e6"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CRÉDITO PARA COOPERATIVA</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="107" width="555" height="1" uuid="573d64e8-e3c7-4bb5-a2c9-5028ddb2d18b"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="645" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="18" width="555" height="20" backcolor="#E7E7EF" uuid="5d257949-aa0a-41d9-94b1-93deaed3ae1a"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CLIENTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="381" width="554" height="20" backcolor="#E7E7EF" uuid="2f83f43d-b449-48d0-af4a-9f71876ba1ad"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">BALANCE GENERAL</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="427" width="125" height="20" uuid="da9d3c36-9f69-4827-815d-4e89e7c944e1"/>
+				<text><![CDATA[ACTIVO CORRIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="450" width="125" height="20" uuid="241258c0-40a8-4a8c-97ef-8c12c94fffa4"/>
+				<text><![CDATA[ACTIVO NO CORRIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="509" width="125" height="20" uuid="4d688e62-dc55-4e87-8b19-cf67a3394c91"/>
+				<text><![CDATA[PASIVO CORRIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="532" width="125" height="20" uuid="16efeda3-80fc-496e-a068-440cca2d7205"/>
+				<text><![CDATA[PASIVO NO CORRIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="591" width="125" height="20" uuid="fb8d8d19-a638-4323-b3f3-4d7350faf5a4"/>
+				<text><![CDATA[PATRIMONIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="476" width="125" height="20" uuid="f0d62382-a318-4506-bb0d-fabfefb531de"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL ACTIVO:</style>]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="427" width="78" height="20" uuid="756eb58b-3916-420c-8baa-d00ff0d25c12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_activo_corriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="450" width="78" height="20" uuid="69a1f4c6-d1e8-44ac-b875-e77a8b3a6aa8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_activo_nocorriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="509" width="78" height="20" uuid="ff8443b2-5b54-47a0-a3f1-00d2d21590bf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_pasivo_corriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="532" width="78" height="20" uuid="2503decf-323a-445b-b5e6-d0b7b25b06d7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_pasivo_nocorriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="591" width="78" height="20" uuid="085024f6-f471-40b3-b00a-15076c516541"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_patrimonio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="476" width="78" height="20" uuid="4ad007dd-0e4c-4863-87c9-2c8d2d91bfa9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_activo_corriente}+$F{t_cooperativa_activo_nocorriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="557" width="78" height="20" uuid="c7867c7b-9277-482e-98c5-676597f599b9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_pasivo_corriente}+$F{t_cooperativa_pasivo_nocorriente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="133" y="612" width="78" height="20" uuid="1784e48b-370a-4cdc-aa94-92d400c77410"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_patrimonio}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="38" width="554" height="1" uuid="2cde1ac1-fa6f-4383-bb34-b193027bec38"/>
+			</line>
+			<line>
+				<reportElement x="1" y="401" width="553" height="1" uuid="ee918a20-5bdc-4085-8ca4-8fbdce468f54"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="390" y="174" width="150" height="20" uuid="006e9054-a72e-4637-9f43-210fe09b0c26"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="113" width="111" height="20" uuid="b8cab9fc-d03f-4f06-85fc-a854bf817f10"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="196" width="110" height="20" uuid="cf9fc4c2-1c47-40cc-b3bc-e8ccd2317b2c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[NIT REPRESENTANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="92" width="111" height="20" uuid="1d816893-0e3d-4f08-ba10-145bd6801066"/>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="93" width="110" height="20" uuid="08d5be80-5a97-4124-99fa-35599c62afef"/>
+				<text><![CDATA[ABREVIACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="196" width="111" height="20" uuid="794ae370-89b4-4cac-bc2d-270d0eb71653"/>
+				<text><![CDATA[DUI REPRESENTANTE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="196" width="143" height="20" uuid="91afaf22-b67b-4cca-bfde-5259f1619178"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_dui_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="113" width="411" height="20" uuid="5345faab-a2f3-4b2a-a697-35e4341c811c"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="16" y="59" width="525" height="20" backcolor="#E7E7EF" uuid="eb239809-1b40-45cd-a5e9-307c238a0d61"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="174" width="111" height="20" uuid="13cb3176-f026-47c3-8676-c65d3275b674"/>
+				<text><![CDATA[NIT:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="389" y="196" width="151" height="20" uuid="522336a4-6540-485e-9fd3-772d98a2cca8"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nit_representante_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="174" width="143" height="20" uuid="acb36c3e-9c5a-4ab3-bfb4-c57dcdba7180"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_nit_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="174" width="110" height="20" uuid="9fd8d9d3-2e65-421a-8057-4a35e782f269"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="92" width="143" height="20" uuid="100b7990-e5da-4147-91b2-72554c055d41"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="392" y="93" width="148" height="20" uuid="7e1cf86f-b838-4f32-bc56-81faa636f1c8"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_abreviacion_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="152" width="111" height="20" uuid="3c6204bb-9d2b-44b2-80fd-d05c30b2dcf7"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[GIRO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="152" width="411" height="20" uuid="6b7ebd64-cafb-4847-98f4-520bb80f3228"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_giro_entidad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="17" y="79" width="524" height="1" uuid="e84f1cf1-f955-4bd8-a334-034aec7e36a1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="127" y="314" width="412" height="20" uuid="0d4e8300-423e-46a6-9461-21f4c5d1e8a2"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="271" width="111" height="20" uuid="f4bd4d05-da32-44f3-9621-a2ebf46c4914"/>
+				<text><![CDATA[CORREO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="314" width="111" height="20" uuid="41d8edf9-d8ba-4aa7-bda5-d000f0c3f39e"/>
+				<text><![CDATA[DIRECCIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="292" width="111" height="20" uuid="79b7a607-1511-4e76-a516-a03d3cc6db89"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[MÓVIL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="292" width="145" height="20" uuid="58c91b1b-7121-481c-9fe2-f0972737958d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_celular_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="272" width="109" height="20" uuid="c089693d-eaeb-412d-bf4f-3556a11e06d5"/>
+				<text><![CDATA[TELÉFONO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="272" width="144" height="20" uuid="3f2294ca-fa15-427d-bd24-b3acafa431ef"/>
+				<textFieldExpression><![CDATA[$F{t_entidad_correo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="272" width="150" height="20" uuid="854aee9b-32d1-4114-adae-a22e3aa8057c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_telefono_entidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="15" y="241" width="525" height="20" backcolor="#E7E7EF" uuid="de39a251-3fba-44ed-ba12-3f8fb3b321d4"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CONTACTO</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="260" width="523" height="1" uuid="47145bb0-1615-466c-9006-486e5f2f6670"/>
+			</line>
+			<staticText>
+				<reportElement x="15" y="557" width="125" height="20" uuid="ea83ad4f-f1ce-4f3d-94a7-5b6c068a4cf6"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL PASIVO:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="612" width="125" height="20" uuid="b6eeebcf-470b-4400-b9f4-0829833d2883"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL PATRIMONIO:</style>]]></text>
+			</staticText>
+		</band>
+		<band height="705">
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="13" width="554" height="20" backcolor="#E7E7EF" uuid="0d1dc648-0920-467a-a6dc-7f90d07b412a"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">GARANTÍA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="198" width="554" height="20" backcolor="#E7E7EF" uuid="3064cb29-f4a6-46ae-8309-c7e60912299a"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PROYECTO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="377" width="554" height="20" backcolor="#E7E7EF" uuid="e68d4214-acdd-4fc7-bdcd-cd623916c233"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CRÉDITO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="236" width="112" height="20" uuid="8a805043-27b5-4cdf-8c55-e601121c3d4e"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="258" width="112" height="20" uuid="74fa519e-e9e6-4133-8d31-23a1c3e13fad"/>
+				<text><![CDATA[DESCRIPCIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="321" width="112" height="20" uuid="0660a08e-4149-44ba-b2d3-64a54c1a8a82"/>
+				<text><![CDATA[ÁREA (m²):]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="132" y="321" width="116" height="20" uuid="beb38488-004a-47db-9264-224e47b8342c"/>
+				<textFieldExpression><![CDATA[$F{t_cooperativa_area_producida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="132" y="258" width="401" height="20" uuid="b2dacbcd-352e-471b-8279-783901ba3c74"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="132" y="236" width="401" height="20" uuid="c922d08d-14e3-41c8-89b0-83e6caef54f7"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="33" width="554" height="1" uuid="df1e9682-097c-4e95-9508-d2e9e40385cf"/>
+			</line>
+			<line>
+				<reportElement x="2" y="218" width="554" height="1" uuid="fd7b462e-32a8-45bc-9e22-8944886074f9"/>
+			</line>
+			<line>
+				<reportElement x="0" y="397" width="554" height="1" uuid="39cc5714-c947-415b-b1e0-d632f5583482"/>
+			</line>
+			<staticText>
+				<reportElement x="279" y="612" width="116" height="20" uuid="77ea4c27-e90a-438f-ad32-a0f7d7942760"/>
+				<text><![CDATA[CUOTA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="554" width="110" height="34" uuid="1b5799e5-00fd-45a4-aef4-d45ceb574020"/>
+				<text><![CDATA[TASA DE INTERÉS POR MORA (%):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="395" y="568" width="138" height="20" uuid="70790066-90a3-4a94-a9a3-f4372aad66ef"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false  || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="132" y="532" width="139" height="20" uuid="104b964a-b487-4054-a1cb-8c898651340e"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="16" y="634" width="517" height="1" uuid="e0ec3282-88aa-4702-9f0d-ca4383f0abb4"/>
+			</line>
+			<staticText>
+				<reportElement x="16" y="498" width="108" height="20" uuid="ebb61240-bbf2-43ad-b7b7-fba177cccdf0"/>
+				<text><![CDATA[DESTINO:]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00">
+				<reportElement x="395" y="612" width="138" height="20" uuid="7b9de988-e1bc-4f80-b231-e780d6871ee8"/>
+				<textFieldExpression><![CDATA[$P{cuota}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="132" y="612" width="139" height="20" uuid="0347015b-ebf5-4de4-af12-3e9cabcc8e71"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_monto}.add(new BigDecimal($P{interes}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="445" width="107" height="20" uuid="7a578826-5fdc-4488-968c-5f778f1cf0c0"/>
+				<text><![CDATA[FECHA APROBACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="445" width="116" height="20" uuid="b0ee62dd-a271-4de1-80bf-38a295f64deb"/>
+				<text><![CDATA[FECHA VENCIMIENTO:]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="132" y="567" width="139" height="20" uuid="287d7596-4bb1-4ea3-9ba3-2ff23e0f297a"/>
+				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes_mora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="422" width="116" height="20" uuid="84871161-9e56-48d8-83cb-304f012094c2"/>
+				<text><![CDATA[SOLICITUD:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="419" width="518" height="1" uuid="a578ae83-8de6-41b7-be21-a5e8178bb990"/>
+			</line>
+			<staticText>
+				<reportElement x="16" y="478" width="108" height="20" uuid="df7b4970-bc78-4a4c-a416-1e5955899e45"/>
+				<text><![CDATA[MODALIDAD:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="529" width="517" height="1" uuid="a1e237c1-0e75-4c99-9d2b-0f520a0f1ee7"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="132" y="498" width="401" height="20" uuid="81972829-4397-41c3-a89d-d6b6ed0d7f63"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_destino_proyecto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="591" width="110" height="20" uuid="4fb4f82f-0f21-4eaa-a34f-72ecf0778f4d"/>
+				<text><![CDATA[PLAZO (meses):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="422" width="108" height="20" uuid="dec08cc3-90c4-4f66-b6e3-f81099f194bb"/>
+				<text><![CDATA[CÓDIGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="568" width="116" height="20" uuid="ce60c072-7ba4-4c74-af7c-e509b5e9904a"/>
+				<text><![CDATA[FORMA DE PAGO:]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00">
+				<reportElement x="395" y="591" width="138" height="20" uuid="e8c56d5b-f623-44d6-81f0-8989340d7ae3"/>
+				<textFieldExpression><![CDATA[$P{interes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="591" width="139" height="20" uuid="0e84258c-32ec-46d0-86b5-92fa38764c12"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="612" width="110" height="20" uuid="a674218d-023c-4c60-8923-26fbe0b1e94f"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="591" width="116" height="20" uuid="c7ee27ba-2263-47ec-b2b3-b608aa729bc2"/>
+				<text><![CDATA[INTERÉS:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="132" y="478" width="401" height="20" uuid="1e9ff771-d8f9-4fd7-bb4b-a0d03a9d9a85"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="532" width="110" height="20" uuid="5b7a800f-204e-4849-8ddf-cf021f5a0c06"/>
+				<text><![CDATA[MONTO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="468" width="517" height="1" uuid="3e8c1676-ca35-46cd-89db-9c5f204e5a1b"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="393" y="445" width="140" height="20" uuid="cd079a81-5bfa-4e7b-bd48-874d0d918eb6"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="422" width="139" height="20" uuid="5d57ef11-f622-4f4c-a0db-8d6d625da79c"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="131" y="445" width="139" height="20" uuid="f629501b-e138-44cf-a7f1-6195ab7d47a3"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_aprovacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="532" width="116" height="20" uuid="6bc7ade9-bbcb-4484-b5d8-7b944200dc2a"/>
+				<text><![CDATA[TASA DE INTERÉS (%):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="393" y="422" width="140" height="20" uuid="7e5f9854-f684-4ea9-b5d2-3fde361414d3"/>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="395" y="532" width="138" height="20" uuid="1173d0c2-5ce8-482a-a2cc-eab531960a08"/>
+				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="131" y="147" width="114" height="20" uuid="29e4b108-dfdf-46ea-bdf5-cffb6702ed74"/>
+				<textFieldExpression><![CDATA[$F{t_garantia_valor_hipoteca_garantia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="63" width="111" height="20" uuid="86f5c328-b741-45ca-8f04-043a7d250446"/>
+				<text><![CDATA[TIPO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="63" width="103" height="20" uuid="438fc014-1175-4aee-ac3a-c7f4be5e24e9"/>
+				<text><![CDATA[Hipotecaria]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="85" width="402" height="20" uuid="a202b6f8-e6bd-45df-8ac9-7c375df20d49"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{t_garantia_ubicacion_hipoteca_garantia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="63" width="89" height="20" uuid="ef76003b-496c-4886-bfc7-c1a1774bfbea"/>
+				<text><![CDATA[TIPO HIPOTECA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="147" width="111" height="20" uuid="4b56fdaf-96c1-4913-a435-e46a46a08a86"/>
+				<text><![CDATA[VALOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="85" width="111" height="20" uuid="1b16b0cc-49f1-4197-8f0c-723966191bd2"/>
+				<text><![CDATA[DESCRIPCIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="366" y="63" width="167" height="20" uuid="10602d5b-9dfc-422d-ac9c-03f40b3ca60f"/>
+				<textFieldExpression><![CDATA[$F{t_garantia_hipoteca_hipotecaria_garantia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="29">
+			<textField>
+				<reportElement x="435" y="0" width="80" height="20" uuid="b084d59c-66aa-4e96-83d0-00a3cbb8529e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="ae89e22d-c9a4-40de-841d-3304b5b8d482"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
