@@ -392,7 +392,7 @@ public class EntidadBean extends Actividad {
     }
 
     public void updateDatos() {
-        this.datos = this.ientidadBo.getTEntidad(1);
+       // this.datos = this.ientidadBo.getTEntidad(1);
 
     }
 
@@ -403,6 +403,7 @@ public class EntidadBean extends Actividad {
         super.setShowData(false);
         super.setShowUpdate(false);
         //PERFIL
+        this.datos = this.ientidadBo.getTEntidad(1);
         this.datosFundacion = new TEntidad();
         //this.img = new UploadedFile();
         this.showImagen = false;
@@ -568,6 +569,7 @@ public class EntidadBean extends Actividad {
         //Copies bytes to destination.
         this.showImagen = false;
         try {
+            
             this.ientidadBo.update(datos);
             this.estadoFormulario = false;
             TBitacora auxBitacora = new TBitacora();
