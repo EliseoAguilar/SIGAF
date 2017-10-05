@@ -89,8 +89,7 @@ public class ConfiguracionBean extends Actividad {
     /*Para  guardar temporalmente la cuenta*/
     private TCuenta cuentaAuxEstado;
 
-    /*Para la entidad predeterminada*/
-    private Boolean estadoPredeterminado;
+   
 
     /*para indicar grupo de cuentas*/
     private Integer idGrupo;
@@ -129,8 +128,7 @@ public class ConfiguracionBean extends Actividad {
     /* Atributos para configuracion codigos*/
     private IActivoFijoBo activoFijoBo;
 
-    /* id entidad seleccionada*/
-    private Integer idEntidad;
+    private TEntidad entidadSeleccionada;
 
     /* Acceso para  datos  estructura*/
     private IEstructuraBo estructuraBo;
@@ -193,6 +191,26 @@ public class ConfiguracionBean extends Actividad {
 
     private Integer idTab;
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    public void getContabilidadPredeterminado() {
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
+
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+        
+        setIdEntidad(entidadSeleccionada.getIdEntidad());
+    }
+
+    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -206,7 +224,7 @@ public class ConfiguracionBean extends Actividad {
     }
 
     public void updateListaCuentas() {
-        this.listaCuentas = this.cuentaBo.listCuentaEnt(idEntidad);
+        this.listaCuentas = this.cuentaBo.listCuentaEnt(entidadSeleccionada.getIdEntidad());
     }
 
     public void updateListaCuentasBalance() {
@@ -244,9 +262,7 @@ public class ConfiguracionBean extends Actividad {
         this.msgEstCapitalNivel = msgEstCapitalNivel;
     }
 
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
+    
 
     public void setIdEntidad(Integer idEntidad) {
 
@@ -344,7 +360,7 @@ public class ConfiguracionBean extends Actividad {
 
         }
 
-        this.idEntidad = idEntidad;
+       
         this.idTab = 0;
     }
 
@@ -803,7 +819,7 @@ public class ConfiguracionBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_estructura");
             auxBitacora.setAccionBitacora("Configurar estado de resultados");
-            auxBitacora.setDatosBitacora("Ejercicio :" + ejerAbierto.getAhoEjercicio() + "Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Ejercicio :" + ejerAbierto.getAhoEjercicio() + "Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -822,43 +838,9 @@ public class ConfiguracionBean extends Actividad {
 
     }
 
-    /**
-     * Metodos Configuracion Estado de Resultado FIN
-     */
-    /**
-     * Metodos Entidad predeterminada
-     */
-    public void cambiarPredeterminado() {
 
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        loginBean.setIdEntidad(this.idEntidad);
-
-        loginBean.setPredeterminado(estadoPredeterminado);
-    }
-
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        estadoPredeterminado = loginBean.getPredeterminado();
-
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
-    }
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
-    }
-
+   
+    
     /**
      * Metodos Entidad predeterminada FIN
      */
@@ -1056,7 +1038,6 @@ public class ConfiguracionBean extends Actividad {
     }
 
     public void init() {
-        idEntidad = 0;
         idTab = 0;
         this.estadoValido = false;
         this.estadoValidoBalance = false;
@@ -1100,7 +1081,7 @@ public class ConfiguracionBean extends Actividad {
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_estructura");
             auxBitacora.setAccionBitacora("Configurar balance general");
-            auxBitacora.setDatosBitacora("Ejercicio :" + ejerAbierto.getAhoEjercicio() + "Entidad:" + this.idEntidad);
+            auxBitacora.setDatosBitacora("Ejercicio :" + ejerAbierto.getAhoEjercicio() + "Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1186,7 +1167,7 @@ public class ConfiguracionBean extends Actividad {
 
                 if (!this.configuracionActual.getCuentaConfiguracion().equals(this.configuracion.getCuentaConfiguracion())) {
 
-                    List<TCuenta> listaCuentas = this.cuentaBo.listCuentaEnt(idEntidad);
+                    List<TCuenta> listaCuentas = this.cuentaBo.listCuentaEnt(entidadSeleccionada.getIdEntidad());
 
                     for (TCuenta listaCuenta : listaCuentas) {
                         listaCuenta.setCodigoCuenta(this.cambiaCodigo(listaCuenta.getCodigoCuenta(), this.configuracion.getCuentaConfiguracion()));
@@ -1196,7 +1177,7 @@ public class ConfiguracionBean extends Actividad {
 
                 if (!this.configuracionActual.getAreaConfiguracion().equals(this.configuracion.getAreaConfiguracion())) {
 
-                    List<TArea> listaAreas = this.areaBo.listArea(idEntidad);
+                    List<TArea> listaAreas = this.areaBo.listArea(entidadSeleccionada.getIdEntidad());
 
                     for (TArea listaArea : listaAreas) {
                         listaArea.setCodigoArea(this.cambiaCodigo(listaArea.getCodigoArea(), this.configuracion.getAreaConfiguracion()));
@@ -1206,7 +1187,7 @@ public class ConfiguracionBean extends Actividad {
 
                 if (!this.configuracionActual.getTipoConfiguracion().equals(this.configuracion.getTipoConfiguracion())) {
 
-                    List<TTipoActivo> listaTipoActivos = this.tipoActivoBo.listTipoActivo(idEntidad);
+                    List<TTipoActivo> listaTipoActivos = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
 
                     for (TTipoActivo listaTipoActivo : listaTipoActivos) {
                         listaTipoActivo.setCodigoTipo(this.cambiaCodigo(listaTipoActivo.getCodigoTipo(), this.configuracion.getTipoConfiguracion()));
@@ -1216,7 +1197,7 @@ public class ConfiguracionBean extends Actividad {
 
                 if (!this.configuracionActual.getActivoConfiguracion().equals(this.configuracion.getActivoConfiguracion())) {
 
-                    List<TActivoFijo> listaActivos = this.activoFijoBo.listActivoFijo(idEntidad);
+                    List<TActivoFijo> listaActivos = this.activoFijoBo.listActivoFijo(entidadSeleccionada.getIdEntidad());
 
                     for (TActivoFijo Activo : listaActivos) {
                         Activo.setCodigoActivoFijo(this.cambiaCodigo(Activo.getCodigoActivoFijo(), this.configuracion.getActivoConfiguracion()));
@@ -1228,7 +1209,7 @@ public class ConfiguracionBean extends Actividad {
                 TBitacora auxBitacora = new TBitacora();
                 auxBitacora.setTableBitacora("t_configuracion");
                 auxBitacora.setAccionBitacora("Agregar estructura de códigos: cuentas, tipos de activos, áreas y activos");
-                auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+                auxBitacora.setDatosBitacora("Entidad:" + entidadSeleccionada.getNombreEntidad());
                 auxBitacora.setHoraBitacora(new Date());
                 auxBitacora.setFechaBitacora(new Date());
                 HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1239,12 +1220,12 @@ public class ConfiguracionBean extends Actividad {
 
                 this.limpiar();
             } else {
-                this.configuracion.setTEntidad(new TEntidad(idEntidad));
+                this.configuracion.setTEntidad(entidadSeleccionada);
                 this.configuracionBo.create(configuracion);
                 TBitacora auxBitacora = new TBitacora();
                 auxBitacora.setTableBitacora("t_configuracion");
                 auxBitacora.setAccionBitacora("Modificar estructura de códigos: cuentas, tipos de activos, áreas y activos");
-                auxBitacora.setDatosBitacora("Entidad:" + this.idEntidad);
+                auxBitacora.setDatosBitacora("Entidad:" + entidadSeleccionada.getNombreEntidad());
                 auxBitacora.setHoraBitacora(new Date());
                 auxBitacora.setFechaBitacora(new Date());
                 HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();

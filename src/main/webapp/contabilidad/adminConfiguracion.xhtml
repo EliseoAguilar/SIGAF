@@ -4,15 +4,29 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../index.xhtml">
 
             <ui:define name="content">
-
+<h:form>
+                    <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                        <p:row>
+                            <p:column style="padding: 0px;" >
+                                #{configuracionBean.getContabilidadPredeterminado()}
+                                <h:outputText class="etiquetaEn" value="#{configuracionBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="padding: 0px; text-align: right" >
+                                <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{configuracionBean.btnCancelar}"  value="Cambiar Entidad"> 
+                                   
+                                </p:commandButton>   
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
      
 
                 <p:outputPanel id="padding"  > 
@@ -20,50 +34,9 @@
                     <p:growl id="msgs"   />
 
                     <p:panel id="basic" header="Configuración contabilidad "  style="width: 100%; margin: auto; margin-bottom: 20px">
-                        <!-- Actualiza la lista de las Entidades -->
-                        #{configuracionBean.updateListaEntidades()}
-                        
-                        <h:form id="fFiltro"> 
-                            <p:fieldset>
-                                <p:panelGrid style=" width: 100%" id="pgfiltro"  class="noBoder">
-                                    <p:row>
-                                        <p:column style=" width: 60%" >
-                                            <h:outputText value="Entidad:*" /> 
-                                        </p:column>
-                                        <p:column style=" width: 40%"  >
-                                            <h:outputText value="" />  
-                                        </p:column>
-                                    </p:row>
+                      
 
-                                    <p:row>
-
-                                        <p:column >
-                                            <p:outputPanel id="opPrede" rendered="#{configuracionBean.estadoPredeterminado eq true? true:true}">
-                                                <p:selectOneMenu id="car" disabled="#{configuracionBean.estadoPredeterminado}"  value="#{configuracionBean.idEntidad}" style=" width: 100%;" > 
-                                                    <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                    <f:selectItems  var="end" value="#{configuracionBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                                    <p:ajax update=":padding"></p:ajax>
-                                                </p:selectOneMenu>
-                                            </p:outputPanel>
-                                        </p:column>
-                                        <p:column > 
-
-                                            <p:outputPanel rendered="#{configuracionBean.idEntidad eq 0? false : true}">
-                                                <p:selectBooleanCheckbox value="#{configuracionBean.estadoPredeterminado}" >
-                                                    <p:ajax update="opPrede" listener="#{configuracionBean.cambiarPredeterminado()}" />
-                                                </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
-                                            </p:outputPanel>
-
-                                        </p:column>
-
-
-                                    </p:row>
-                                </p:panelGrid>
-                            </p:fieldset>
-                        </h:form>
-                        <br></br>
-
-                        <p:outputPanel rendered="#{configuracionBean.idEntidad eq 0 ? false:true}" id="data">
+                        <p:outputPanel  id="data">
                             
                             <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{configuracionBean.estadoValido}">
                                 <h:form>

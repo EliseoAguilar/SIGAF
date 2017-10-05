@@ -1276,6 +1276,14 @@
         <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
     
+    
+    <bean id="contablidadPredeterminarBean" 
+          class="com.sigaf.bean.ContablidadPredeterminarBean" init-method="init" scope="session" >
+        <property name="entidadBo" ref="entidadBo"></property>
+        <property name="bitacoraBo" ref="bitacoraBo"></property>
+    </bean>
+    
+    
     <!--  ++++++++++++++++++++++++++++  FIN Modulo  Contabilidad    ++++++++++++++++++++++++++++ -->
 
     

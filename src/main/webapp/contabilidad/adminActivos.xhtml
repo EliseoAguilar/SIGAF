@@ -13,6 +13,27 @@
 
             <ui:define name="content">
 
+
+
+                <h:form>
+                    <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                        <p:row>
+                            <p:column style="padding: 0px;" >
+                                #{activoFijoBean.getContabilidadPredeterminado()}
+                                <h:outputText class="etiquetaEn" value="#{activoFijoBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="padding: 0px; text-align: right" >
+                                <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{activoFijoBean.btnCancelar}"  value="Cambiar Entidad"> 
+                                   
+                                </p:commandButton>   
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
+
+
+
                 <p:outputPanel id="padding"  > 
 
 
@@ -21,6 +42,7 @@
                     <p:outputPanel  rendered="#{activoFijoBean.showCreate}"  >
 
                         <!-- Actulizar lista Catalogos -->
+
                         #{activoFijoBean.updateListaArea()}
                         #{activoFijoBean.updateListaProveedor()}
                         #{activoFijoBean.updateListaTipos()}
@@ -28,7 +50,7 @@
 
 
                         <p:outputPanel id="opCrearActivo"> 
-                            <p:panel id="basic" header="Agregar  activo"  style="width: 80%; margin: auto; margin-bottom: 20px" >
+                            <p:panel id="basic" header="Agregar  activo"  style="width: 100%; margin: auto; margin-bottom: 20px" >
 
                                 <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoValido}">
                                     <h:form>
@@ -63,7 +85,7 @@
                                                 <p:row>
                                                     <p:column colspan="2" >
 
-                                                        <p:inputText value="#{activoFijoBean.entidad.codigoEntidad}" style="width: 22%" disabled="true"/> - 
+                                                        <p:inputText value="#{activoFijoBean.entidadSeleccionada.codigoEntidad}" style="width: 22%" disabled="true"/> - 
 
                                                         <p:inputText id= "tcodArea" value="#{activoFijoBean.area.codigoArea}" style="width: 22%" disabled="true"/> -
 
@@ -185,11 +207,11 @@
                                                 <p:row>
 
                                                     <p:column>
-                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" />
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
 
                                                     </p:column>
                                                     <p:column>
-                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}"/>
+                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
 
                                                     </p:column>
                                                 </p:row>
@@ -256,6 +278,7 @@
                     <p:outputPanel  rendered="#{activoFijoBean.showUpdate}"  >
 
                         <!-- Actulizar lista Catalogos -->
+
                         #{activoFijoBean.updateListaArea()}
                         #{activoFijoBean.updateListaProveedor()}
                         #{activoFijoBean.updateListaTipos()}
@@ -263,7 +286,7 @@
 
                         <p:outputPanel id="opModificarActivo">
 
-                            <p:panel  header="Modificar  activo"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <p:panel  header="Modificar  activo"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
 
                                 <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoValido}">
@@ -301,7 +324,7 @@
                                                 <p:row>
                                                     <p:column colspan="2" >
 
-                                                        <p:inputText value="#{activoFijoBean.entidad.codigoEntidad}" style="width: 22%" disabled="true"/> - 
+                                                        <p:inputText value="#{activoFijoBean.entidadSeleccionada.codigoEntidad}" style="width: 22%" disabled="true"/> - 
 
                                                         <p:inputText id= "tcodArea" value="#{activoFijoBean.area.codigoArea}" style="width: 22%" disabled="true"/> -
 
@@ -422,11 +445,11 @@
                                                 <p:row>
 
                                                     <p:column>
-                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" />
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
 
                                                     </p:column>
                                                     <p:column>
-                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
+                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" locale="es" navigator="true"    pattern="dd/MM/yyyy"/>
 
                                                     </p:column>
                                                 </p:row>
@@ -495,52 +518,13 @@
                     <p:outputPanel rendered="#{activoFijoBean.showData}">
 
 
+
+
                         <p:panel id="opAdmiPol" header="Administrar Activos" style="margin-bottom:20px">
 
-                            <!-- Actualiza la lista de Entidades-->
-                            #{activoFijoBean.updateListaEntidades()}
-
-
-
-                            <h:form id="fFiltro"> 
-                                <p:fieldset>
-                                    <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder">
-                                        <p:row>
-                                            <p:column style=" width: 60%" >
-                                                <h:outputText value="Entidad:*" /> 
-                                            </p:column>
-
-                                            <p:column style=" width: 40%"  >
-                                                <h:outputText value="" />  
-                                            </p:column>
-                                        </p:row>
-
-                                        <p:row>
-                                            <p:column >
-                                                <p:outputPanel id="opPrede" rendered="#{activoFijoBean.estadoPredeterminado eq true? true:true}"  >
-                                                    <p:selectOneMenu id="car" disabled="#{activoFijoBean.estadoPredeterminado}"  value="#{activoFijoBean.idEntidad}" style=" width: 100%;" > 
-                                                        <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                        <f:selectItems  var="end" value="#{activoFijoBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                                        <p:ajax update=":padding"></p:ajax>
-                                                    </p:selectOneMenu>
-                                                </p:outputPanel>
-                                            </p:column>
-                                            <p:column > 
-
-                                                <p:outputPanel rendered="#{activoFijoBean.idEntidad eq 0? false : true}">
-                                                    <p:selectBooleanCheckbox value="#{activoFijoBean.estadoPredeterminado}" >
-                                                        <p:ajax update="opPrede" listener="#{activoFijoBean.cambiarPredeterminado()}" />
-                                                    </p:selectBooleanCheckbox> <h:outputText value="&nbsp;&nbsp;&nbsp; ¿Predeterminar?"/> 
-                                                </p:outputPanel>
-
-                                            </p:column>
-                                        </p:row>
-                                    </p:panelGrid>
-                                </p:fieldset>
-                            </h:form>
-                            <br></br>
-                            <p:outputPanel rendered="#{activoFijoBean.idEntidad eq 0 ? false:true}" >
+                            <p:outputPanel >
                                 <!-- Actualiza la lista de Activos -->
+
                                 #{activoFijoBean.updateListaActivoFijo()}
                                 #{activoFijoBean.updateListaArea()}
                                 #{activoFijoBean.updateListaTipos()}
@@ -578,6 +562,8 @@
                                                 </p:column>
                                                 <p:column  headerText="Código" width="25%"  sortBy="#{activoFijoBean.cogigoActivoFijo( act )}" filterBy="#{activoFijoBean.cogigoGenerar( act )}" filterMatchMode="contains" filterStyle="width: 100%"/>
                                                 <p:column  headerText="Descripción " sortBy="#{act.descripcionActivoFijo}" filterBy="#{act.descripcionActivoFijo}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column  headerText="Reg. Contable" width="15%"   sortBy="#{activoFijoBean.estadoRegistroContable(act.TValorActivos)? 'Pendiente':'Hecho'}" filterBy="#{activoFijoBean.estadoRegistroContable(act.TValorActivos)? 'Pendiente':'Hecho'}" filterMatchMode="contains" filterStyle="width: 100%"/>
+
                                                 <p:column width="9%" headerText=""/>
 
                                             </p:row>
@@ -597,6 +583,13 @@
 
                                         <p:column>
                                             <h:outputText value="#{act.descripcionActivoFijo}"/>
+                                        </p:column>
+
+                                        <p:column  style="text-align: center">
+
+                                            <h:outputText class="etiquetaSi" rendered="#{!activoFijoBean.estadoRegistroContable(act.TValorActivos)}" value="Hecho" />
+                                            <h:outputText class="etiquetaNo" rendered="#{activoFijoBean.estadoRegistroContable(act.TValorActivos)}"  value="Pendiente" />
+
                                         </p:column>
 
                                         <p:column>
@@ -630,7 +623,7 @@
                                                     <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
 
                                                 </p:menuitem>
-                                                
+
                                                 <p:menuitem  value=" Dar de baja" update=":padding" disabled="#{act.estadoActivoFijo eq 'Activo'? false:true }"
                                                              rendered="#{act.estadoActivoFijo eq 'Inactivo'?  !activoFijoBean.estadoRegistroContable(act.TValorActivos)  : false}"
                                                              actionListener="#{activoFijoBean.enableShowBaja()}" 
@@ -638,7 +631,7 @@
                                                     <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
 
                                                 </p:menuitem>
-                                                
+
 
                                                 <!-- Alta y Baja para Activos sin registro contable -->
                                                 <p:menuitem value=" Dar de baja"  rendered="#{act.estadoActivoFijo eq 'Activo'? activoFijoBean.estadoRegistroContable(act.TValorActivos) :false}"
@@ -879,7 +872,7 @@
                                                     </p:column>
                                                 </p:row>
 
-                                                
+
 
 
                                             </p:panelGrid>
@@ -934,10 +927,10 @@
 
                                             </p:dataTable>
 
-                                            
+
                                             <br></br> 
                                             <p:panelGrid style="width: 100%; margin: auto;">
-                                            <p:row>
+                                                <p:row>
                                                     <p:column >
                                                         <h:outputText value="Concepto: *"/>
                                                     </p:column>
@@ -1051,7 +1044,7 @@
 
                     <p:outputPanel  rendered="#{activoFijoBean.showRegistro}" id="opRegistroContable" >
 
-                        <p:panel  header="Registro contable"  style="width: 90%; margin: auto; margin-bottom: 20px">
+                        <p:panel  header="Registro contable"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
 
                             <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoFormulario}">
@@ -1269,7 +1262,7 @@
 
                     <p:outputPanel  rendered="#{activoFijoBean.showRegistroModificar}"  id="opModificarRegistroContable">
 
-                        <p:panel  header="Modificar registro contable"  style="width: 90%; margin: auto; margin-bottom: 20px">
+                        <p:panel  header="Modificar registro contable"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
 
                             <p:dialog  header="Confirmar" widgetVar="dialogActualizar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{activoFijoBean.estadoFormulario}">
@@ -1485,7 +1478,7 @@
                         </p:dialog>
 
                         <h:form id="fbajaActivo">
-                            <p:panel id="pModificar" header="Dar de baja activo"  style="width: 90%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pModificar" header="Dar de baja activo"  style="width: 100%; margin: auto; margin-bottom: 20px">
 
                                 <p:tabView  activeIndex="#{activoFijoBean.idTab}"  >
 

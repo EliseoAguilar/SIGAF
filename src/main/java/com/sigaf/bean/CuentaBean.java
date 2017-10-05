@@ -14,8 +14,6 @@ import com.sigaf.pojo.TConfiguracion;
 import com.sigaf.pojo.TCuenta;
 import com.sigaf.pojo.TEntidad;
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,13 +45,11 @@ public class CuentaBean extends Actividad {
 
     private String codigo;
 
-    private Boolean estadoPredeterminado;
+    private TEntidad entidadSeleccionada;
 
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
-
-    private Integer idEntidad;
 
     private IConfiguracionBo configuracionBo;
 
@@ -105,11 +101,28 @@ public class CuentaBean extends Actividad {
         this.bitacoraBo = bitacoraBo;
     }
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    public void getContabilidadPredeterminado() {
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
+
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+    }
+
+    
     /*
     *Metodo que inicializa el bean
      */
     public void init() {
-        this.idEntidad = 0;
         this.limpiar();
         try {
             this.getConexion();
@@ -147,7 +160,7 @@ public class CuentaBean extends Actividad {
      * Metodo que actuliza la lista de Cuentas consultado a la Base de Datos
      */
     public void updateListaCuentas() {
-        this.listaCuentas = this.cuentaBo.listCuentaEnt(idEntidad);
+        this.listaCuentas = this.cuentaBo.listCuentaEnt(entidadSeleccionada.getIdEntidad());
     }
 
     /**
@@ -156,7 +169,7 @@ public class CuentaBean extends Actividad {
      *
      */
     public void updateListaCuentasAct() {
-        this.listaCuentasAct = this.cuentaBo.listCuentaEntAct(idEntidad, true);
+        this.listaCuentasAct = this.cuentaBo.listCuentaEntAct(entidadSeleccionada.getIdEntidad(), true);
 
     }
 
@@ -166,36 +179,11 @@ public class CuentaBean extends Actividad {
      *
      */
     public void updateConfiguracion() {
-        this.configuracion = configuracionBo.getConfiguracion(idEntidad);
+        this.configuracion = configuracionBo.getConfiguracion(entidadSeleccionada.getIdEntidad());
 
     }
 
-    public void cambiarPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
-
-    }
-
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        estadoPredeterminado = loginBean.getPredeterminado();
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-        return estadoPredeterminado;
-
-    }
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
-    }
+  
 
     /**
      * Metodo que limpia la cuenta padre al desaccitvar el check ¿Subcuenta?
@@ -225,14 +213,7 @@ public class CuentaBean extends Actividad {
         this.listaEntidades = listaEntidades;
     }
 
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
-
-    public void setIdEntidad(Integer idEntidad) {
-        this.idEntidad = idEntidad;
-    }
-
+   
     public List<TCuenta> getListaCuentasAct() {
         return listaCuentasAct;
     }
@@ -318,7 +299,7 @@ public class CuentaBean extends Actividad {
         auxBitacora.setTableBitacora("t_cuenta");
         auxBitacora.setAccionBitacora("Ver información de cuenta");
         auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -332,7 +313,7 @@ public class CuentaBean extends Actividad {
     public void crearCuenta() {
 
         try {
-            this.cuenta.setTEntidad(new TEntidad(idEntidad));
+            this.cuenta.setTEntidad(new TEntidad(this.entidadSeleccionada.getIdEntidad()));
             if (this.principal) {
                 this.cuenta.setEstadoCuenta(true);
                 this.cuenta.setTCuenta(cuentaSeleccionaPadre);
@@ -351,7 +332,7 @@ public class CuentaBean extends Actividad {
             auxBitacora.setTableBitacora("t_cuenta");
             auxBitacora.setAccionBitacora("Agregar cuenta");
             auxBitacora.setDatosBitacora("Código:" + cuenta.getCodigoCuenta() + ", Nombre:" + cuenta.getNombreCuenta()
-                    + ", Naturaleza:" + cuenta.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                    + ", Naturaleza:" + cuenta.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(cuenta.getIdCuenta());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -384,7 +365,7 @@ public class CuentaBean extends Actividad {
             auxBitacora.setTableBitacora("t_cuenta");
             auxBitacora.setAccionBitacora("Dar de alta cuenta");
             auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -413,7 +394,7 @@ public class CuentaBean extends Actividad {
             auxBitacora.setTableBitacora("t_cuenta");
             auxBitacora.setAccionBitacora("Dar de baja cuenta");
             auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -467,7 +448,7 @@ public class CuentaBean extends Actividad {
                 strDe += partsDe[i];
             }
 
-            this.cuentaBo.updateCode(idEntidad, strOr, strDe);
+            this.cuentaBo.updateCode(this.entidadSeleccionada.getIdEntidad(), strOr, strDe);
 
             this.enableShowDataBean();
 
@@ -475,8 +456,8 @@ public class CuentaBean extends Actividad {
             auxBitacora.setTableBitacora("t_cuenta");
             auxBitacora.setAccionBitacora("Modificar cuenta");
             auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() 
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta()
+                    + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -639,7 +620,7 @@ public class CuentaBean extends Actividad {
         if (this.cuenta.getCodigoCuenta().length() == 0) {
             this.msgNumero = "Código requerido";
             this.estadoValido = false;
-        } else if (this.cuentaBo.getCuentaRep(idEntidad, this.cuenta.getCodigoCuenta()) != null) {
+        } else if (this.cuentaBo.getCuentaRep(this.entidadSeleccionada.getIdEntidad(), this.cuenta.getCodigoCuenta()) != null) {
             this.msgNumero = "El código ya fue asignado a otra cuenta";
             this.estadoValido = false;
         } else if (!vericarCodigoPadreHijo()) {
@@ -765,7 +746,7 @@ public class CuentaBean extends Actividad {
         if (this.cuentaSelecciona.getCodigoCuenta().length() == 0) {
             this.msgNumero = "Código requerido.";
             this.estadoValido = false;
-        } else if (this.cuentaBo.getCuentaRepAct(idEntidad, this.cuentaSelecciona.getIdCuenta(), this.cuentaSelecciona.getCodigoCuenta()) != null) {
+        } else if (this.cuentaBo.getCuentaRepAct(this.entidadSeleccionada.getIdEntidad(), this.cuentaSelecciona.getIdCuenta(), this.cuentaSelecciona.getCodigoCuenta()) != null) {
             this.msgNumero = "El código ya fue asignado a otra cuenta";
             this.estadoValido = false;
         } else if (!vericarCodigoPadreHijoModificar()) {
@@ -784,7 +765,7 @@ public class CuentaBean extends Actividad {
     public void generarReporteCuenta() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idCuenta", this.cuentaSelecciona.getIdCuenta());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/CuentaIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 
@@ -792,7 +773,7 @@ public class CuentaBean extends Actividad {
         auxBitacora.setTableBitacora("t_cuenta");
         auxBitacora.setAccionBitacora("Generar reporte de cuenta");
         auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -815,7 +796,7 @@ public class CuentaBean extends Actividad {
     public void generarReporteCuentaPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idCuenta", this.cuentaSelecciona.getIdCuenta());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/CuentaIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
 
@@ -823,7 +804,7 @@ public class CuentaBean extends Actividad {
         auxBitacora.setTableBitacora("t_cuenta");
         auxBitacora.setAccionBitacora("Descargar reporte de cuenta");
         auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
-                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.idEntidad);
+                + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());

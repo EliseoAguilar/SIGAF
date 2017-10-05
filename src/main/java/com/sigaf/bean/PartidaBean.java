@@ -58,15 +58,11 @@ public class PartidaBean extends Actividad {
      */
     private IBitacoraBo bitacoraBo;
 
-    private Boolean estadoPredeterminado;
-
     private List<TCuenta> listaCuentas;
 
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
-
-    private Integer idEntidad;
 
     private TPeriodo periodo;
 
@@ -120,6 +116,8 @@ public class PartidaBean extends Actividad {
 
     private Integer numPartida;
 
+    private TEntidad entidadSeleccionada;
+
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -147,7 +145,7 @@ public class PartidaBean extends Actividad {
      * Metodo que actuliza la lista de Ejercicios consultado a la Base de Datos
      */
     public void updateListaEjercicios() {
-        this.listaEjercicios = this.ejercicioBo.listEjercicio(idEntidad);
+        this.listaEjercicios = this.ejercicioBo.listEjercicio(entidadSeleccionada.getIdEntidad());
     }
 
     /**
@@ -161,7 +159,7 @@ public class PartidaBean extends Actividad {
      * Metodo que actuliza la lista de Periodos consultado a la Base de Datos
      */
     public void updateListaCuentas() {
-        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(idEntidad, true);
+        this.listaCuentas = this.cuentaBo.listCuentaEntActTip(entidadSeleccionada.getIdEntidad(), true);
     }
 
     public void editListaDetallePartida(Integer i) {
@@ -235,36 +233,24 @@ public class PartidaBean extends Actividad {
 
     }
 
-    public void cambiarPredeterminado() {
+    public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
 
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
-
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        estadoPredeterminado = loginBean.getPredeterminado();
-
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
     }
 
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
     }
+
+    
 
     public TPeriodo getPeriodo() {
         return periodo;
@@ -289,20 +275,6 @@ public class PartidaBean extends Actividad {
 
     public void setEntidadBo(IEntidadBo entidadBo) {
         this.entidadBo = entidadBo;
-    }
-
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
-
-    public void setIdEntidad(Integer idEntidad) {
-
-        if (!estadoPredeterminado) {
-            this.idEjer = 0;
-            this.idPeriodo = 0;
-        }
-
-        this.idEntidad = idEntidad;
     }
 
     public Integer getIdPeriodo() {
@@ -499,7 +471,7 @@ public class PartidaBean extends Actividad {
         auxBitacora.setTableBitacora("t_partida");
         auxBitacora.setAccionBitacora("Ver información de partida");
         auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
-                + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -555,7 +527,6 @@ public class PartidaBean extends Actividad {
         super.enableShowData();
         listaDetallePartida = new ArrayList<>();
         this.idEjer = 0;
-        this.idEntidad = 0;
         this.idPeriodo = 0;
         this.limpiar();
         try {
@@ -563,7 +534,6 @@ public class PartidaBean extends Actividad {
         } catch (SQLException ex) {
             Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }
 
@@ -580,13 +550,11 @@ public class PartidaBean extends Actividad {
                 this.detallePartidaBo.create(tDetallePartida);
             }
 
-            
-
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_partida");
             auxBitacora.setAccionBitacora("Agregar partida");
             auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partida.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -597,7 +565,7 @@ public class PartidaBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
             this.limpiar();
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Partida registrada correctamente.", ""));
 
         } catch (Exception ex) {
@@ -620,14 +588,12 @@ public class PartidaBean extends Actividad {
 
             }
 
-            
-
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_partida");
             auxBitacora.setAccionBitacora("Modificar partida");
             auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
-                    + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + this.idEntidad);
-            auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida() );
+                    + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
+            auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -695,9 +661,9 @@ public class PartidaBean extends Actividad {
             this.msgDetallePar = "";
         }
 
-        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
-        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
-        
+        this.totalDebe = this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber = this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra";
@@ -726,9 +692,9 @@ public class PartidaBean extends Actividad {
             this.msgDetallePar = "";
         }
 
-        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
-        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
-        
+        this.totalDebe = this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber = this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra";
@@ -751,7 +717,7 @@ public class PartidaBean extends Actividad {
             auxBitacora.setTableBitacora("t_partida");
             auxBitacora.setAccionBitacora("Eliminar partida");
             auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
-                    + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -773,12 +739,10 @@ public class PartidaBean extends Actividad {
         limpiar();
     }
 
-
-
     public void generarReportePartida() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idPartida", this.partidaSeleccionada.getIdPartida());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/LibroDiarioIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 
@@ -786,7 +750,7 @@ public class PartidaBean extends Actividad {
         auxBitacora.setTableBitacora("t_partida");
         auxBitacora.setAccionBitacora("Generar reporte de partida");
         auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
-                + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -809,24 +773,24 @@ public class PartidaBean extends Actividad {
     public void generarReportePartidaPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idPartida", this.partidaSeleccionada.getIdPartida());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getNombreEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/LibroDiarioIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
-        
+
         TBitacora auxBitacora = new TBitacora();
-            auxBitacora.setTableBitacora("t_partida");
-            auxBitacora.setAccionBitacora("Descargar reporte de partida");
-            auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
-                    + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + this.idEntidad);
-            auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
-            auxBitacora.setHoraBitacora(new Date());
-            auxBitacora.setFechaBitacora(new Date());
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            // Get the loginBean from session attribute
-            LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-            auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
-            bitacoraBo.create(auxBitacora);
-            
+        auxBitacora.setTableBitacora("t_partida");
+        auxBitacora.setAccionBitacora("Descargar reporte de partida");
+        auxBitacora.setDatosBitacora("Numero:" + partidaSeleccionada.getNumeroPartida()
+                + ", Concepto:" + partidaSeleccionada.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
+        auxBitacora.setIdTableBitacora(partidaSeleccionada.getIdPartida());
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        bitacoraBo.create(auxBitacora);
+
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.addHeader("Content-disposition", "attachment; filename=Partida-" + partidaSeleccionada.getNumeroPartida() + ".pdf");
         ServletOutputStream stream = response.getOutputStream();

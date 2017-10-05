@@ -53,14 +53,14 @@ WHERE
 					<text><![CDATA[TOTALES:]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
-					<reportElement x="260" y="16" width="102" height="20" uuid="2d85533f-6fc1-44cf-82ee-14dca55660b0"/>
+					<reportElement x="325" y="16" width="76" height="20" uuid="2d85533f-6fc1-44cf-82ee-14dca55660b0"/>
 					<textElement textAlignment="Right">
 						<font size="8" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{total_debe}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
-					<reportElement x="369" y="16" width="102" height="20" uuid="5b0ad2a9-20e9-4fa5-ba65-ca7376ab6b12"/>
+					<reportElement x="401" y="16" width="81" height="20" uuid="5b0ad2a9-20e9-4fa5-ba65-ca7376ab6b12"/>
 					<textElement textAlignment="Right">
 						<font size="8" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 					</textElement>
@@ -96,7 +96,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="369" y="0" width="102" height="15" uuid="aaec8da1-3ac9-4911-85c4-fc831236d1aa"/>
+				<reportElement x="401" y="0" width="81" height="15" uuid="aaec8da1-3ac9-4911-85c4-fc831236d1aa"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
@@ -110,7 +110,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{codigo_cuenta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="260" y="0" width="102" height="15" uuid="bfca2c94-2969-4bc8-8a9b-50e7ab035a8b"/>
+				<reportElement x="325" y="0" width="76" height="15" uuid="bfca2c94-2969-4bc8-8a9b-50e7ab035a8b"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>

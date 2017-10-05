@@ -44,13 +44,11 @@ public class ProveedorBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private Boolean estadoPredeterminado;
-
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
 
-    private Integer idEntidad;
+    private TEntidad entidadSeleccionada;
 
     private IProveedorBo proveedorBo;
 
@@ -78,6 +76,15 @@ public class ProveedorBean extends Actividad {
 
     private String msgCorreo;
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -97,40 +104,19 @@ public class ProveedorBean extends Actividad {
      * Metodo que actuliza la lista de proveedores
      */
     public void updateListaProveedores() {
-        this.ListaProveedores = this.proveedorBo.listProveedor(idEntidad);
+        this.ListaProveedores = this.proveedorBo.listProveedor(entidadSeleccionada.getIdEntidad());
     }
 
-    public void cambiarPredeterminado() {
+    public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
 
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
-
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        estadoPredeterminado = loginBean.getPredeterminado();
-
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
-    }
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
-    }
-
+    
     public String getMsgCorreo() {
         return msgCorreo;
     }
@@ -155,18 +141,12 @@ public class ProveedorBean extends Actividad {
         this.listaEntidades = listaEntidades;
     }
 
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
-
-    public void setIdEntidad(Integer idEntidad) {
-        this.idEntidad = idEntidad;
-    }
+ 
 
     public void init() {
 
         this.limpiar();
-        this.idEntidad = 0;
+        
         super.enableShowData();
         try {
             this.getConexion();
@@ -242,7 +222,7 @@ public class ProveedorBean extends Actividad {
         auxBitacora.setTableBitacora("t_proveedor");
         auxBitacora.setAccionBitacora("Ver información proveedor");
         auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
-                + ", NIT:" + provedorSeleccionado.getNitProveedor() + ", NRC:" + provedorSeleccionado.getNrcProveedor() + ", Entidad:" + this.idEntidad);
+                + ", NIT:" + provedorSeleccionado.getNitProveedor() + ", NRC:" + provedorSeleccionado.getNrcProveedor() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -289,7 +269,7 @@ public class ProveedorBean extends Actividad {
 
         try {
 
-            this.provedor.setTEntidad(new TEntidad(idEntidad));
+            this.provedor.setTEntidad(entidadSeleccionada);
             provedor.setEstadoProveedor(true);
             this.proveedorBo.create(provedor);
 
@@ -299,7 +279,7 @@ public class ProveedorBean extends Actividad {
             auxBitacora.setDatosBitacora("Nombre:" + provedor.getNombreProveedor()
                     + ", NIT:" + provedor.getNitProveedor() + ", NRC:"
                     + provedor.getNrcProveedor()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(provedor.getIdProveedor());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -339,7 +319,7 @@ public class ProveedorBean extends Actividad {
         if (this.provedor.getNitProveedor().length() == 0) {
             this.msgNIT = "NIT requerido";
             this.estadoValido = false;
-        } else if (this.proveedorBo.getProveedorRepNit(idEntidad, this.provedor.getNitProveedor()) != null) {
+        } else if (this.proveedorBo.getProveedorRepNit(entidadSeleccionada.getIdEntidad(), this.provedor.getNitProveedor()) != null) {
             this.msgNIT = "El NIT ya fue asignado a otro proveedor";
             this.estadoValido = false;
         } else {
@@ -349,7 +329,7 @@ public class ProveedorBean extends Actividad {
         if (this.provedor.getNrcProveedor().length() == 0) {
             this.msgNRC = "NRC requrido.";
             this.estadoValido = false;
-        } else if (this.proveedorBo.getProveedorRepNrc(idEntidad, this.provedor.getNrcProveedor()) != null) {
+        } else if (this.proveedorBo.getProveedorRepNrc(entidadSeleccionada.getIdEntidad(), this.provedor.getNrcProveedor()) != null) {
             this.msgNRC = "El NRC ya fue asignado a otro proveedor";
             this.estadoValido = false;
         } else {
@@ -374,7 +354,7 @@ public class ProveedorBean extends Actividad {
             this.msgCorreo = "El correo debe contener como mínimo 10 caracteres";
             this.estadoValido = false;
         } else {
-            if (this.proveedorBo.getProveedorRepCorreo(idEntidad, this.provedor.getCorreoProveedor()) != null) {
+            if (this.proveedorBo.getProveedorRepCorreo(entidadSeleccionada.getIdEntidad(), this.provedor.getCorreoProveedor()) != null) {
                 this.msgCorreo = "El correo ya fue asignado a otro proveedor";
                 this.estadoValido = false;
             } else {
@@ -405,7 +385,7 @@ public class ProveedorBean extends Actividad {
         if (this.provedorSeleccionado.getNitProveedor().length() == 0) {
             this.msgNIT = "NIT requerido";
             this.estadoValido = false;
-        } else if (this.proveedorBo.getProveedorRepActNit(idEntidad, this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getNitProveedor()) != null) {
+        } else if (this.proveedorBo.getProveedorRepActNit(entidadSeleccionada.getIdEntidad(), this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getNitProveedor()) != null) {
             this.msgNIT = "ElNIT ya fue asignado a otro proveedor";
             this.estadoValido = false;
         } else {
@@ -415,7 +395,7 @@ public class ProveedorBean extends Actividad {
         if (this.provedorSeleccionado.getNrcProveedor().length() == 0) {
             this.msgNRC = "NRC requrido";
             this.estadoValido = false;
-        } else if (this.proveedorBo.getProveedorRepActNrc(idEntidad, this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getNrcProveedor()) != null) {
+        } else if (this.proveedorBo.getProveedorRepActNrc(entidadSeleccionada.getIdEntidad(), this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getNrcProveedor()) != null) {
             this.msgNRC = "El NRC ya fue asignado a otro proveedor";
             this.estadoValido = false;
         } else {
@@ -440,7 +420,7 @@ public class ProveedorBean extends Actividad {
             this.msgCorreo = "El correo debe contener como mínimo 10 caracteres";
             this.estadoValido = false;
         } else {
-            if (this.proveedorBo.getProveedorRepActCorreo(idEntidad, this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getCorreoProveedor()) != null) {
+            if (this.proveedorBo.getProveedorRepActCorreo(entidadSeleccionada.getIdEntidad(), this.provedorSeleccionado.getIdProveedor(), this.provedorSeleccionado.getCorreoProveedor()) != null) {
                 this.msgCorreo = "El correo ya fue asignado a otro proveedor";
                 this.estadoValido = false;
             } else {
@@ -478,7 +458,7 @@ public class ProveedorBean extends Actividad {
             auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
                     + ", NIT:" + provedorSeleccionado.getNitProveedor()
                     + ", NRC:" + provedorSeleccionado.getNrcProveedor()
-                    + ", Entidad:" + this.idEntidad
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad()
             );
             auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
             auxBitacora.setHoraBitacora(new Date());
@@ -508,7 +488,7 @@ public class ProveedorBean extends Actividad {
             auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
                     + ", NIT:" + provedorSeleccionado.getNitProveedor()
                     + ", NRC:" + provedorSeleccionado.getNrcProveedor()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -539,7 +519,7 @@ public class ProveedorBean extends Actividad {
             auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
                     + ", NIT:" + provedorSeleccionado.getNitProveedor()
                     + ", NRC:" + provedorSeleccionado.getNrcProveedor()
-                    + ", Entidad:" + this.idEntidad);
+                    + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -560,7 +540,7 @@ public class ProveedorBean extends Actividad {
     public void generarReporteProveedor() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idProveedor", this.provedorSeleccionado.getIdProveedor());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext()
                 .getRealPath("/Reportes/contabilidad/ReporteProveedorIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
@@ -571,7 +551,7 @@ public class ProveedorBean extends Actividad {
         auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
                 + ", NIT:" + provedorSeleccionado.getNitProveedor()
                 + ", NRC:" + provedorSeleccionado.getNrcProveedor()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -594,7 +574,7 @@ public class ProveedorBean extends Actividad {
     public void generarReporteProveedorPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idProveedor", this.provedorSeleccionado.getIdProveedor());
-        estadoUsuario.put("idEntidad", this.idEntidad);
+        estadoUsuario.put("idEntidad", entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext()
                 .getRealPath("/Reportes/contabilidad/ReporteProveedorIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
@@ -605,7 +585,7 @@ public class ProveedorBean extends Actividad {
         auxBitacora.setDatosBitacora("Nombre:" + provedorSeleccionado.getNombreProveedor()
                 + ", NIT:" + provedorSeleccionado.getNitProveedor()
                 + ", NRC:" + provedorSeleccionado.getNrcProveedor()
-                + ", Entidad:" + this.idEntidad);
+                + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
         auxBitacora.setIdTableBitacora(provedorSeleccionado.getIdProveedor());
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());

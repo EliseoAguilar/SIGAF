@@ -56,7 +56,7 @@ public class EjercicioBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private TEntidad entidad;
+    private TEntidad entidadSeleccionada;
 
     private List<TArea> listaArea;
 
@@ -141,7 +141,7 @@ public class EjercicioBean extends Actividad {
 
     private IEntidadBo entidadBo;
 
-    private Integer idEntidad;
+
 
     private IEjercicioBo ejercicioBo;
 
@@ -186,6 +186,25 @@ public class EjercicioBean extends Actividad {
 
     private TTipoActivo tipoActivoSeleccionado;
 
+    public TEntidad getEntidadSeleccionada() {
+        return entidadSeleccionada;
+    }
+
+    public void setEntidadSeleccionada(TEntidad entidadSeleccionada) {
+        this.entidadSeleccionada = entidadSeleccionada;
+    }
+
+    
+    public void getContabilidadPredeterminado() {
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        // Get the loginBean from session attribute
+        ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
+
+        this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+    }
+
+    
     public TTipoActivo getTipoActivoSeleccionado() {
         return tipoActivoSeleccionado;
     }
@@ -268,7 +287,7 @@ public class EjercicioBean extends Actividad {
     }
 
     public void updateListaArea() {
-        listaArea = this.areaBo.listArea(idEntidad);
+        listaArea = this.areaBo.listArea(entidadSeleccionada.getIdEntidad());
     }
 
     public List<Integer> getListAhos() {
@@ -301,7 +320,7 @@ public class EjercicioBean extends Actividad {
      */
     public void updatelistaEjercicios() {
 
-        this.listaEjercicios = this.ejercicioBo.listEjercicio(idEntidad);
+        this.listaEjercicios = this.ejercicioBo.listEjercicio(entidadSeleccionada.getIdEntidad());
 
         if (this.listaEjercicios.isEmpty()) {
             this.limpiar();
@@ -385,9 +404,9 @@ public class EjercicioBean extends Actividad {
 
         try {
 
-            TEntidad auxEnt = new TEntidad(idEntidad);
+            
             ejercicio.setEstadoEjercicio(true);
-            ejercicio.setTEntidad(auxEnt);
+            ejercicio.setTEntidad(entidadSeleccionada);
             this.ejercicioBo.create(ejercicio);
             this.periodoNuevo.setTEjercicio(ejercicio);
             this.periodoNuevo.setEstadoPeriodo(true);
@@ -397,7 +416,7 @@ public class EjercicioBean extends Actividad {
             auxBitacora.setTableBitacora("t_ejercicio, t_periodo ");
             auxBitacora.setAccionBitacora("Agregar ejercicio y periodo");
             auxBitacora.setDatosBitacora("Ejercicio:" + ejercicio.getAhoEjercicio()
-                    + ", Periodo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + this.idEntidad);
+                    + ", Periodo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(ejercicio.getIdEjercicio());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -444,7 +463,7 @@ public class EjercicioBean extends Actividad {
             auxBitacora.setTableBitacora("t_partida, t_depreciacion");
             auxBitacora.setAccionBitacora("Agregar partida");
             auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partida.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -480,7 +499,7 @@ public class EjercicioBean extends Actividad {
             auxBitacora.setTableBitacora("t_periodo");
             auxBitacora.setAccionBitacora("Cerrar y agregar periodo");
             auxBitacora.setDatosBitacora("Periodo cierre:" + periodoViejo.getMesPeriodo()
-                    + ", Periodo nuevo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + this.idEntidad);
+                    + ", Periodo nuevo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(periodoViejo.getIdPeriodo());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -526,7 +545,7 @@ public class EjercicioBean extends Actividad {
         this.llenarMesPeriodoAux(periodoViejo.getMesPeriodo());
 
         /*Consulta de tipos de activos que  tienen la entidad*/
-        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(idEntidad);
+        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
 
         this.idEjer = idEjer;
 
@@ -564,7 +583,7 @@ public class EjercicioBean extends Actividad {
         this.periodoNuevo.setMesPeriodo("Enero");
 
         /*Consulta de tipos de activos que  tienen la entidad*/
-        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(idEntidad);
+        this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
 
         this.idEjerCierre = idEjerCierre;
 
@@ -655,24 +674,12 @@ public class EjercicioBean extends Actividad {
 
         this.buscarEmpleadoArea(activo.getTEmpleado());
 
-        return this.entidad.getCodigoEntidad() + "-" + this.area.getCodigoArea() + "-" + activo.getTTipoActivo().getCodigoTipo() + "-" + activo.getCodigoActivoFijo();
+        return entidadSeleccionada.getCodigoEntidad() + "-" + this.area.getCodigoArea() + "-" + activo.getTTipoActivo().getCodigoTipo() + "-" + activo.getCodigoActivoFijo();
 
     }
 
-    /**
-     * Metodo para Saber que accion ejecutar al cancelar la creacion de un nuevo
-     * ejercicio (Nueva contabilidad), tomando en cuenta que si se a establecido
-     * una entidad predeterminada dejara esa selecciona, sino establecera
-     * [SELECCIONE]
-     */
-    public Integer tipoCancelar() {
-        if (estadoPredeterminado) {
-            return idEntidad;
-        } else {
-            return 0;
-        }
 
-    }
+ 
 
     /*
     * Actualiza la lista de Periodos por Ejercicio
@@ -684,7 +691,7 @@ public class EjercicioBean extends Actividad {
     }
 
     public void init() {
-        this.idEntidad = 0;
+   
         this.estadoPredeterminado = false;
         this.listaDepreciacion = new ArrayList<>();
         this.listaDetallePartida = new ArrayList<>();
@@ -755,17 +762,7 @@ public class EjercicioBean extends Actividad {
         this.listaPeriodoEjercicio = listaPeriodoEjercicio;
     }
 
-    public void setIdEntidad(Integer idEntidad) {
-        this.idEntidad = idEntidad;
 
-        for (TEntidad tentidad : listaEntidades) {
-
-            if (tentidad.getIdEntidad() == idEntidad) {
-                this.entidad = tentidad;
-                return;
-            }
-        }
-    }
 
     public List<TDepreciacion> getListaDepreciacion() {
         return listaDepreciacion;
@@ -775,28 +772,7 @@ public class EjercicioBean extends Actividad {
         this.listaDepreciacion = listaDepreciacion;
     }
 
-    public void cambiarPredeterminado() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        loginBean.setIdEntidad(this.idEntidad);
-        loginBean.setPredeterminado(estadoPredeterminado);
-    }
-
-    public Boolean getEstadoPredeterminado() {
-
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-        estadoPredeterminado = loginBean.getPredeterminado();
-
-        if (estadoPredeterminado) {
-            setIdEntidad(loginBean.getIdEntidad());
-        }
-
-        return estadoPredeterminado;
-
-    }
+    
 
     public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
         this.estadoPredeterminado = estadoPredeterminado;
@@ -822,9 +798,7 @@ public class EjercicioBean extends Actividad {
         this.ejercicioViejo = ejercicioViejo;
     }
 
-    public Integer getIdEntidad() {
-        return idEntidad;
-    }
+ 
 
     public IEmpleadoAreaBo getEmpleadoAreaBo() {
         return empleadoAreaBo;
@@ -1508,7 +1482,7 @@ public class EjercicioBean extends Actividad {
             auxBitacora.setTableBitacora("t_partida");
             auxBitacora.setAccionBitacora("Agregar partida");
             auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                    + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
             auxBitacora.setIdTableBitacora(partida.getIdPartida());
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1548,7 +1522,7 @@ public class EjercicioBean extends Actividad {
                 TBitacora auxBitacora = new TBitacora();
                 auxBitacora.setTableBitacora("t_ejercicio, t_periodo");
                 auxBitacora.setAccionBitacora("Cerrar ejercicio y  periodo");
-                auxBitacora.setDatosBitacora("Ejercicio:" + ejercicioViejo.getAhoEjercicio() + ", Periodo:" + periodoViejo.getMesPeriodo() + ", Entidad:" + this.idEntidad);
+                auxBitacora.setDatosBitacora("Ejercicio:" + ejercicioViejo.getAhoEjercicio() + ", Periodo:" + periodoViejo.getMesPeriodo() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
                 auxBitacora.setIdTableBitacora(ejercicioViejo.getIdEjercicio());
                 auxBitacora.setHoraBitacora(new Date());
                 auxBitacora.setFechaBitacora(new Date());
@@ -1667,7 +1641,7 @@ public class EjercicioBean extends Actividad {
                     auxBitacora.setTableBitacora("t_ejercicio, t_periodo");
                     auxBitacora.setAccionBitacora("Agregar ejercicio y periodo");
                     auxBitacora.setDatosBitacora("Ejercicio:" + ejercicio.getAhoEjercicio()
-                            + ", Periodo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + this.idEntidad);
+                            + ", Periodo:" + periodoNuevo.getMesPeriodo() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
                     auxBitacora.setIdTableBitacora(ejercicio.getIdEjercicio());
                     auxBitacora.setHoraBitacora(new Date());
                     auxBitacora.setFechaBitacora(new Date());
@@ -1745,7 +1719,7 @@ public class EjercicioBean extends Actividad {
                         auxBitacora.setTableBitacora("t_partida");
                         auxBitacora.setAccionBitacora("Agregar partida");
                         auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                                + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                                + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
                         auxBitacora.setIdTableBitacora(partida.getIdPartida());
                         auxBitacora.setHoraBitacora(new Date());
                         auxBitacora.setFechaBitacora(new Date());
@@ -1785,7 +1759,7 @@ public class EjercicioBean extends Actividad {
                     auxBitacora.setTableBitacora("t_partida");
                     auxBitacora.setAccionBitacora("Agregar partida");
                     auxBitacora.setDatosBitacora("Numero:" + partida.getNumeroPartida()
-                            + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + this.idEntidad);
+                            + ", Concepto:" + partida.getConceptoPartida() + ", Entidad:" + entidadSeleccionada.getNombreEntidad());
                     auxBitacora.setIdTableBitacora(partida.getIdPartida());
                     auxBitacora.setHoraBitacora(new Date());
                     auxBitacora.setFechaBitacora(new Date());
