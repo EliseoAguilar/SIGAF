@@ -239,6 +239,7 @@ public class ProductorGrupalBean extends Actividad {
     public void init() {
 
         this.productorGrupal = new TProductorGrupal();
+        this.ProductorGrupalSeleccionado= new TProductorGrupal();
         super.enableShowData();
 
     }
