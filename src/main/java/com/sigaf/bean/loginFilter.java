@@ -51,7 +51,7 @@ public class loginFilter implements Filter {
         
          System.out.println(loginURL);
          */
-        boolean loggedIn = loginBean != null && loginBean.getUsuarioActivo() != null;
+        boolean loggedIn = loginBean != null && loginBean.getUsuarioActivo() != null && !loginBean.getReset() ;
 
         boolean loginRequest = reqURI.equals(loginURL);
 

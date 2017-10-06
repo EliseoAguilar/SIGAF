@@ -44,6 +44,8 @@ public class LoginBean extends Actividad {
     private TUsuario usuarioActivo;
 
     private String msgValidate;
+    
+     private String msgValidateReset;
 
     private Boolean reset;
 
@@ -61,6 +63,16 @@ public class LoginBean extends Actividad {
     
     private Boolean predeterminado;
 
+    public String getMsgValidateReset() {
+        return msgValidateReset;
+    }
+
+    public void setMsgValidateReset(String msgValidateReset) {
+        this.msgValidateReset = msgValidateReset;
+    }
+
+    
+    
     public Boolean getPredeterminado() {
         return predeterminado;
     }
@@ -135,6 +147,8 @@ public class LoginBean extends Actividad {
         this.nombreUsuario = "";
         this.clave = "";
         this.reset = reset;
+        this.usuarioActivo=null;
+        this.msgValidateReset="";
     }
 
     public TUsuario getUsuarioActivo() {
@@ -205,6 +219,8 @@ public class LoginBean extends Actividad {
             } else {
 
                 this.usuarioActivo = null;
+                this.nombreUsuario = "";
+                this.clave = "";
                 this.msgValidate = "Usuario  inactivo, comuníquese con el administrador del sistema.";
 
             }
@@ -232,7 +248,8 @@ public class LoginBean extends Actividad {
         bitacoraBo.create(auxBitacora);
 
         this.usuarioActivo = null;
-
+        this.nombreUsuario = "";
+        this.clave = "";
         this.limpiar();
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -266,10 +283,12 @@ public class LoginBean extends Actividad {
                 this.msgValidate = "Correo para restablecer su contraseña enviado con éxito ";
             } catch (Exception e) {
                 numeroRandom = 0;
+                this.usuarioActivo = null;
                 this.msgValidate = "Correo para restablecer su contraseña no pudo ser enviado";
             }
 
         } else {
+            
             this.msgValidate = "El correo no corresponde a ninguno de nuestros registros";
         }
 
@@ -279,10 +298,13 @@ public class LoginBean extends Actividad {
 
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         Map params = ec.getRequestParameterMap();
-
-        if (params.get("token") != null) {
+       
+        
+        if (params.get("token") != null && usuarioActivo !=null ) {
+             this.msgValidate = "";
             token = params.get("token").toString();
             resetPassForm = token.equals(numeroRandom.toString());
+             
 
         } else {
 
@@ -331,11 +353,11 @@ public class LoginBean extends Actividad {
     public void validar() {
 
         if (this.clave.length() < 8) {
-            this.msgValidate = "La contraseña debe contener nimimo 8 caracteres";
+            this.msgValidateReset = "La contraseña debe contener nimimo 8 caracteres";
             estadoFormulario = false;
         } else {
             if (!this.clave.equals(this.claveConfir)) {
-                this.msgValidate = "Las contraseña deben ser iguales";
+                this.msgValidateReset = "Las contraseña deben ser iguales";
                 estadoFormulario = false;
             } else {
                 this.actualizar();
@@ -360,6 +382,10 @@ public class LoginBean extends Actividad {
         this.claveConfir = "";
         this.numeroRandom = 0;
         this.token = "";
+        this.reset=false;
+        this.resetPassForm=false;
+        this.msgValidateReset="";
+        
         
     }
 

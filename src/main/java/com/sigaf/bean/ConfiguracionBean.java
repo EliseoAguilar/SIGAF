@@ -1579,14 +1579,16 @@ public class ConfiguracionBean extends Actividad {
                 msgIngreNivel = "El nivel de detalle invalido";
                  estado = false;
             } else {
-                msgEstCapitalNivel = "";
+                msgIngreNivel = "";
             }
             
             if(estado){
             this.listaEstructuraIngresos.add(ingresosEstructura);
+            ingresosEstructura = new TEstructura();
             }
         }
-
+                     
+               
     }
 
 }

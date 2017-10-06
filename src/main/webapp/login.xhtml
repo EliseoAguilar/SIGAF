@@ -109,16 +109,16 @@
                             <br></br>
 
                             <center>
-                                <p:outputLabel value="#{loginBean.msgValidate}"  id="msgValidate" style=" color:  red" />
+                                <p:outputLabel value="#{loginBean.msgValidateReset}"  id="msgValidate" style=" color:  red" />
                             </center>
                             <br></br>  
 
 
-                            <h:commandButton  value="Enviar" actionListener="#{loginBean.validar()}" >
+                            <h:commandButton  value="CAMBIAR" actionListener="#{loginBean.validar()}" >
                                 <f:param name="token" value="#{loginBean.token}" />
                             </h:commandButton>
                             <br></br> 
-                            <h:commandButton  value="Cancelar" actionListener="#{loginBean.setReset(false)}" />
+                            <h:commandButton  value="VOLVER" actionListener="#{loginBean.setReset(false)}" />
                         </h:form>
 
 

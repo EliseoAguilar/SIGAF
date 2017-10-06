@@ -269,6 +269,7 @@
                                     </p:tab>
 
                                     <p:tab title="Estado de resultado" rendered="#{configuracionBean.ejerAbierto eq null? false:true}">
+                                        
                                         <p:accordionPanel >
                                             <p:tab title="Ingresos">
 
@@ -291,16 +292,16 @@
 
                                                         <p:column>
                                                             <p:inputText value="#{configuracionBean.ingresosEstructura.TCuenta.codigoCuenta}" style="width: 85%" readonly ="true"/>
-                                                            <p:commandButton title="Ingreso"  update=":opDataCuentasEst"   oncomplete="PF('dgBuscarCuenta').show()"  actionListener="#{configuracionBean.setIdGrupo(1)}"   icon="fa fa-search"   > </p:commandButton>     </p:column>
+                                                            <p:commandButton title="Ingreso"  update=":opDataCuentasEst"   oncomplete="PF('dgBuscarCuenta').show()"  actionListener="#{configuracionBean.setIdGrupo(1)}"   icon="fa fa-search"   > </p:commandButton>    
                                                             <br></br>
                                                              <h:outputText value="#{configuracionBean.msgIngre}" style="color: red"/> 
-                                                            <p:column>
-                                                                <p:inputText value="#{configuracionBean.msgIngre}" style="width: 100%" readonly ="true" />
-
+                                                             </p:column>
+                                                             <p:column>
+                                                                 <p:inputText value="#{configuracionBean.ingresosEstructura.TCuenta.nombreCuenta}" style="width: 100%" readonly ="true" />
                                                         </p:column>
                                                         <p:column>
                                                             <p:inputMask mask="9?" maxlength="1" value="#{configuracionBean.ingresosEstructura.nivelReporte}"  />
-                                                            <p:commandButton title="Agregar"  update=":opDataCuentasEst"  style="#{configuracionBean.btnCrear}"   actionListener="#{configuracionBean.validarCuentaEstado(1)}"  icon="fa fa-plus"   > </p:commandButton> 
+                                                            <p:commandButton title="Agregar"  update=":data"  style="#{configuracionBean.btnCrear}"   actionListener="#{configuracionBean.validarCuentaEstado(1)}"  icon="fa fa-plus"   > </p:commandButton> 
                                                              <br></br>
                                                              <h:outputText value="#{configuracionBean.msgIngreNivel}" style="color: red"/>        
                                                         </p:column>

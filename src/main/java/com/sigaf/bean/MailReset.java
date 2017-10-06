@@ -20,7 +20,7 @@ import org.apache.commons.mail.SimpleEmail;
  */
 public class MailReset {
 
-    private static final String HOSTNAME = "smtp.gmail.com";
+   private static final String HOSTNAME = "smtp.gmail.com";
     private static final String USERNAME = "sistemapass@gmail.com";
     private static final String PASSWORD = "P@ssw0rdZOR";
     private static final String EMAILORIGEM = "sistemapass@gmail.com";
@@ -29,6 +29,7 @@ public class MailReset {
         HtmlEmail email = new HtmlEmail();
         email.setHostName(HOSTNAME);
         email.setSmtpPort(587);
+        email.setSSL(true);
         email.setAuthenticator(new DefaultAuthenticator(USERNAME, PASSWORD));
         email.setTLS(true);
         email.setFrom(EMAILORIGEM);
