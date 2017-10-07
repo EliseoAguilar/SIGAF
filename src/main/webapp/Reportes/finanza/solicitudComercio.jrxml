@@ -202,7 +202,7 @@ FROM
 	<title>
 		<band height="93" splitType="Stretch">
 			<subreport>
-				<reportElement x="10" y="0" width="200" height="68" uuid="0aa6b5a7-6393-4eaf-b81e-30ab9d0e75eb"/>
+				<reportElement x="11" y="0" width="200" height="68" uuid="0aa6b5a7-6393-4eaf-b81e-30ab9d0e75eb"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
