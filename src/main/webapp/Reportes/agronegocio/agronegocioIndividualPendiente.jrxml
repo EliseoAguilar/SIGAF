@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agronegocio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12ce936e-f98d-4b7d-9622-99c676635df1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1288"/>
+	<property name="ireport.y" value="1250"/>
 	<parameter name="id_agronegocio" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -286,8 +286,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_agronegocio_fechapago}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="false">
-				<reportElement x="396" y="83" width="142" height="20" uuid="4e849126-0d7a-4081-b673-78270b6c48cc"/>
-				<textElement>
+				<reportElement x="396" y="83" width="52" height="20" uuid="4e849126-0d7a-4081-b673-78270b6c48cc"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_agronegocio_total}]]></textFieldExpression>
@@ -486,7 +486,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_agronegocio_interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="396" y="103" width="142" height="20" uuid="b0f3e729-52a2-44f6-8897-f4afac778ea3"/>
+				<reportElement x="396" y="103" width="52" height="20" uuid="b0f3e729-52a2-44f6-8897-f4afac778ea3"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_agronegocio_comision}]]></textFieldExpression>
 			</textField>
 		</band>
