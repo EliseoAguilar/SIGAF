@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroDiario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55add3f3-9b34-460d-b21c-87a6ee28cfe6">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="243"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -63,8 +63,8 @@ WHERE
 	<pageHeader>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="172" y="0" width="169" height="20" uuid="2cbae5b6-6c93-4857-8f40-8947baf45d7c"/>
-				<textElement textAlignment="Right">
+				<reportElement x="0" y="0" width="554" height="20" uuid="2cbae5b6-6c93-4857-8f40-8947baf45d7c"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[REPORTE PARTIDA]]></text>

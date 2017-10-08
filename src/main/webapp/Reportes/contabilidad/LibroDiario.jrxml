@@ -74,7 +74,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="12" isBold="false" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+				<text><![CDATA[(Expresado en   Dólares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<subreport>
 				<reportElement x="313" y="0" width="126" height="20" uuid="04221d57-9814-4851-a1c8-2288e0ea0935"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanzaComprobacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="537e409f-67c3-4fb3-8012-61ae828584e8">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="229"/>
+	<property name="ireport.x" value="80"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -139,7 +139,7 @@ from cuentas cs   order by cs.codigo_cuenta]]>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="false" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+				<text><![CDATA[(Expresado en  Dólares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<subreport>
 				<reportElement x="363" y="1" width="126" height="20" uuid="989488ee-d5c8-47e0-a193-a96cf3d0472c"/>

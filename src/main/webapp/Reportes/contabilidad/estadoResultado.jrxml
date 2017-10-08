@@ -70,7 +70,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
+				<text><![CDATA[(Expresado en Dólares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<subreport>
 				<reportElement x="320" y="0" width="235" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
@@ -137,8 +137,7 @@ $F{grupo_reporte}.equals(8)? $P{valor8}:""]]></textFieldExpression>
 			<printWhenExpression><![CDATA[$F{grupo_reporte}.equals(2)? true :
 $F{grupo_reporte}.equals(3)? true :
 $F{grupo_reporte}.equals(5)? ( $P{valor6}.compareTo(BigDecimal.ZERO) > 0 ? true : false) :
-$F{grupo_reporte}.equals(6)? ( $P{valor7}.compareTo(BigDecimal.ZERO) > 0 ? true : false) :  false
-]]></printWhenExpression>
+$F{grupo_reporte}.equals(6)? ( $P{valor7}.compareTo(BigDecimal.ZERO) > 0 ? true : false) :  false]]></printWhenExpression>
 			<textField>
 				<reportElement x="349" y="2" width="168" height="20" uuid="8fc49531-e406-438a-8bf9-0b42ae03940c"/>
 				<textElement textAlignment="Right">

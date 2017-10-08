@@ -54,7 +54,7 @@ select * from cuentas   order by codigo_cuenta]]>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[CATALOGO DE CUENTAS]]></text>
+				<text><![CDATA[ CATÁLOGO DE CUENTAS]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

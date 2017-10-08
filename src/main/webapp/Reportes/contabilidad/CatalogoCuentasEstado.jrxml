@@ -53,14 +53,14 @@ select * from cuentas where estado_cuenta=$P{estado} order by codigo_cuenta]]>
 	<pageHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="6" y="0" width="291" height="20" uuid="2ac3b8a8-674e-436e-b50d-8d7378dd717a"/>
+				<reportElement x="36" y="0" width="291" height="20" uuid="2ac3b8a8-674e-436e-b50d-8d7378dd717a"/>
 				<textElement textAlignment="Right">
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[CATALOGO DE CUENTAS]]></text>
+				<text><![CDATA[CATÁLOGO DE CUENTAS]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="301" y="0" width="100" height="20" uuid="10cd6ef7-4b7c-4179-bfa4-1e76a72bb5c5"/>
+				<reportElement x="331" y="0" width="100" height="20" uuid="10cd6ef7-4b7c-4179-bfa4-1e76a72bb5c5"/>
 				<textElement>
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
