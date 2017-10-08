@@ -61,11 +61,11 @@ WHERE
 		<groupFooter>
 			<band height="50" splitType="Stretch">
 				<textField evaluationTime="Report">
-					<reportElement x="289" y="13" width="40" height="20" uuid="a080b13e-86e3-4caf-acec-24613f1114e0"/>
+					<reportElement x="513" y="13" width="40" height="20" uuid="a080b13e-86e3-4caf-acec-24613f1114e0"/>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="237" y="13" width="52" height="20" uuid="98606ae6-aea7-4389-9c6e-a80b73a30285"/>
+					<reportElement x="461" y="13" width="52" height="20" uuid="98606ae6-aea7-4389-9c6e-a80b73a30285"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 				</textField>
@@ -212,7 +212,7 @@ WHERE
 				<reportElement x="71" y="231" width="462" height="20" uuid="20c5f184-cbda-4f0b-9e7d-d048fd593a77"/>
 				<textFieldExpression><![CDATA[$F{t_bitacora_table_bitacora}]]></textFieldExpression>
 			</textField>
-			<textField pattern="MM/dd/yyyy">
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="71" y="296" width="145" height="20" uuid="c5e3e7b0-3dcd-4538-b007-2058290dfdb9"/>
 				<textFieldExpression><![CDATA[$F{t_bitacora_fecha_bitacora}]]></textFieldExpression>
 			</textField>

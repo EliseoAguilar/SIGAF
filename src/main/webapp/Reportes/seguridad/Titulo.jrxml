@@ -58,6 +58,10 @@
 				<reportElement x="455" y="28" width="100" height="20" uuid="1da6c92d-efe7-4319-94e7-546c2136c793"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="455" y="48" width="100" height="20" uuid="c20fe920-7bdf-4195-8c6b-b7b3da4998ac"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

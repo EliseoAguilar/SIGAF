@@ -14,7 +14,10 @@ import com.sigaf.pojo.TBitacora;
 import com.sigaf.pojo.TEmpleado;
 import com.sigaf.pojo.TEmpleadoArea;
 import com.sigaf.pojo.TUsuario;
+import com.sun.mail.iap.Response;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,6 +42,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperRunManager;
+import org.primefaces.event.FileUploadEvent;
 
 /**
  *
@@ -51,6 +55,8 @@ public class UsuarioBean extends Actividad {
     private IBitacoraBo bitacoraBo;
 
     private TUsuario usuario;
+
+    private TEmpleado empleado;
 
     private TUsuario usuarioSelecionado;
 
@@ -81,6 +87,8 @@ public class UsuarioBean extends Actividad {
     private String msgClave;
 
     private String msgClaveConfir;
+    
+    private String msgImagen;
 
     private Boolean estadoFormulario;
 
@@ -92,13 +100,17 @@ public class UsuarioBean extends Actividad {
 
     private Boolean editPass;
 
+    private Boolean showImagen;
+    
+    private Boolean imagenEmpty;
+
     public void updateListaUsuarios() {
         this.listaUsuarios = this.usuarioBo.listUsuario();
     }
 
     public void updateListaArea() {
         /* Dado que la fundacion tiene el ID 1 */
-        listaArea = this.areaBo.listArea(1);
+        this.listaArea = this.areaBo.listArea(1);
     }
 
     public void setIdArea(Integer idArea) {
@@ -137,6 +149,8 @@ public class UsuarioBean extends Actividad {
         this.clave = "";
 
         this.Nombrbe = usuarioSelecionado.getNombreUsuario();
+        
+        this.empleado = this.usuarioSelecionado.getTEmpleado();
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_usuario");
@@ -157,6 +171,30 @@ public class UsuarioBean extends Actividad {
 
         bitacoraBo.create(auxBitacora);
 
+    }
+    
+    public String getMsgImagen() {
+        return msgImagen;
+    }
+
+    public void setMsgImagen(String msgImagen) {
+        this.msgImagen = msgImagen;
+    }
+
+    public Boolean getImagenEmpty() {
+        return imagenEmpty;
+    }
+
+    public void setImagenEmpty(Boolean imagenEmpty) {
+        this.imagenEmpty = imagenEmpty;
+    }
+
+    public TEmpleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(TEmpleado empleado) {
+        this.empleado = empleado;
     }
 
     public IBitacoraBo getBitacoraBo() {
@@ -329,10 +367,23 @@ public class UsuarioBean extends Actividad {
         this.listaEmpleados = listaEmpleados;
     }
 
+    public Boolean getShowImagen() {
+        return showImagen;
+    }
+
+    public void setShowImagen(Boolean showImagen) {
+        this.showImagen = showImagen;
+    }
+
     public void init() {
         super.enableShowData();
         this.usuario = new TUsuario();
-         try {
+        this.empleado = new TEmpleado();
+        this.showImagen = true;
+        this.imagenEmpty = false;
+        this.estadoFormulario = false;
+        
+        try {
             this.getConexion();
         } catch (SQLException ex) {
             Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -463,6 +514,25 @@ public class UsuarioBean extends Actividad {
 
     }
 
+    public void enableShowImagen() {
+        this.estadoFormulario = false;
+        this.imagenEmpty = true;
+        this.setShowImagen(!this.getShowImagen());
+        if(this.getShowImagen() == true) this.imagenEmpty = false;
+    }
+
+    public void guardarImagen(FileUploadEvent event) throws IOException {
+        String tipo = event.getFile().getContentType();
+        byte[] content = event.getFile().getContents();
+        String b64 = Base64.encode(content);
+        String guardar = "data:" + tipo + ";base64," + b64;
+        this.empleado.setFotoEmpleado(guardar);
+        this.showImagen = true;
+        this.imagenEmpty = false;
+        FacesMessage message = new FacesMessage("Foto Cargada");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
     public void darDeAlta() {
 
         try {
@@ -500,7 +570,7 @@ public class UsuarioBean extends Actividad {
     public void limpiar() {
 
         this.usuario = new TUsuario();
-        this.idArea = 0;
+        
         this.idEmpleado = 0;
         this.msgArea = "";
         this.msgClave = "";
@@ -508,9 +578,12 @@ public class UsuarioBean extends Actividad {
         this.msgEmpleado = "";
         this.msgNombre = "";
         this.msgTipo = "";
+        this.msgImagen = "";
         this.estadoFormulario = false;
+        this.editPass = false;
         this.clave = "";
         this.claveConfir = "";
+        this.updateListaArea();
 
     }
 
@@ -529,6 +602,8 @@ public class UsuarioBean extends Actividad {
             }
 
             this.usuarioBo.update(usuarioSelecionado);
+           
+           
 
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_usuario");
@@ -565,9 +640,10 @@ public class UsuarioBean extends Actividad {
             usuarioSelecionado.setEstadoUsuario(this.usuarioBo.getUsuario(usuarioSelecionado.getIdUsuario()).getEstadoUsuario());
 
             usuarioSelecionado.setNombreUsuario(Nombrbe);
-
+            this.empleado.setIdEmpleado(this.usuarioSelecionado.getTEmpleado().getIdEmpleado()); 
+            this.empleadoBo.update(empleado);
             this.usuarioBo.update(usuarioSelecionado);
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario modificado correctamente.", ""));
             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_usuario");
             auxBitacora.setAccionBitacora("Modificar perfil usuario");
@@ -586,13 +662,12 @@ public class UsuarioBean extends Actividad {
             auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
 
             bitacoraBo.create(auxBitacora);
-
             this.limpiar();
+               
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario modificado correctamente.", ""));
 
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El  usuario no pudo ser modificado.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ".", ""));
         }
 
     }
@@ -657,6 +732,13 @@ public class UsuarioBean extends Actividad {
 
         estadoFormulario = true;
 
+        if(this.imagenEmpty == true){
+            this.msgImagen = "Imágen requerida";
+            estadoFormulario = false;
+        }
+        else{
+            this.msgImagen = "";
+        }
         if (this.usuarioSelecionado.getTipoUsuario() == 0) {
             this.msgTipo = "Tipo requerido";
             estadoFormulario = false;
@@ -685,6 +767,7 @@ public class UsuarioBean extends Actividad {
                 } else {
 
                     this.msgNombre = "";
+                     
 
                 }
 
@@ -710,6 +793,7 @@ public class UsuarioBean extends Actividad {
             this.msgClaveConfir = "";
             this.clave = "";
             this.claveConfir = "";
+           
         }
 
     }
@@ -748,8 +832,6 @@ public class UsuarioBean extends Actividad {
         }
         return null;
     }
-
-
 
     public void generarUsuario() throws Exception {
 
@@ -800,7 +882,7 @@ public class UsuarioBean extends Actividad {
 
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/seguridad/UsuarioIndividual.jasper"));
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario,this.getConn());
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
 
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.addHeader("Content-disposition", "attachment; filename=Usuario.pdf");

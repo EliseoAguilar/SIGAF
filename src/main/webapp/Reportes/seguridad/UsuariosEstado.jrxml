@@ -82,11 +82,11 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 				<text><![CDATA[USUARIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="4" width="229" height="20" uuid="4bd012f6-49f5-4276-81cf-424546ab0462"/>
+				<reportElement x="23" y="4" width="229" height="20" uuid="4bd012f6-49f5-4276-81cf-424546ab0462"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ EMPLEADO]]></text>
+				<text><![CDATA[ EMPLEADO DEL EMPLEADO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="398" y="3" width="100" height="20" uuid="82fd22d2-10d9-4efa-91f9-534aa890eb4e"/>
@@ -100,12 +100,8 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 	<detail>
 		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="7" width="127" height="20" uuid="a92bf8e2-7d10-437b-ae67-038a965f18c0"/>
-				<textFieldExpression><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="127" y="7" width="125" height="20" uuid="2a3b8e87-b72a-4253-a16c-04a55737e521"/>
-				<textFieldExpression><![CDATA[$F{apellido_empleado}]]></textFieldExpression>
+				<reportElement x="23" y="7" width="200" height="20" uuid="a92bf8e2-7d10-437b-ae67-038a965f18c0"/>
+				<textFieldExpression><![CDATA[$F{nombre_empleado}+" "+$F{apellido_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="252" y="7" width="126" height="20" uuid="4fb2b1b4-2b51-4921-b6ad-731df0a47c61"/>
@@ -120,12 +116,12 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 	<pageFooter>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="242" y="3" width="52" height="20" uuid="6a9b8820-c7c6-4c69-89d0-86dda5323618"/>
+				<reportElement x="461" y="3" width="52" height="20" uuid="6a9b8820-c7c6-4c69-89d0-86dda5323618"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="294" y="3" width="40" height="20" uuid="59e2159b-f30e-413b-9bb6-e7acd80576f2"/>
+				<reportElement x="513" y="3" width="40" height="20" uuid="59e2159b-f30e-413b-9bb6-e7acd80576f2"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

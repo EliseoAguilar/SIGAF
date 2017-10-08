@@ -8,37 +8,82 @@
 
     <body>
 
-        <ui:composition template="./../index.xhtml">
+        <ui:composition template="./../index.xhtml" id="exter">
 
-            <ui:define name="content">
-
-                
-                <!-- Actualiza lista de Areas -->
-                        #{usuarioBean.updateListaArea()}
+            <ui:define name="content" id="super">
+                <script>
+                    function recargar(){
+                        setTimeout(esperar, 1000);
+                    }
+                    function esperar(){
+                        
+                        location.href="adminPerfil.xhtml";
+                    }
+                </script>
+                    #{usuarioBean.updateListaArea()}
+                    
+                 
                 <p:outputPanel id="padding"  > 
-                    <p:growl id="msg" showDetail="true"  />
-                    <p:outputPanel   >
-                         <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
+                   
+                     
+                   <p:growl id="msg"></p:growl>
+                    <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
                              <h:form>  
+                                 <p:outputPanel>
                              <div align="center">
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil()}"  oncomplete="PF('dialogCrear').hide()"   style="#{usuarioBean.btnNuevo}" ajax="false"  > </p:commandButton>
+                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}"  style="#{usuarioBean.btnNuevo}" oncomplete="recargar()" update=":padding" > 
+                                    <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
+                                    </p:commandButton>
                                     <p:commandButton  value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
                                         <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>
+                                 </p:outputPanel>
                             </h:form> 
                             </p:dialog>
-                        
-                        
+                  
+                    
+                    <p:outputPanel   >
                         <h:form id="fUpdUsuario">
+<!-- Actualiza lista de Areas -->
+                      
+                        <p:panel id="basic" header="Modificar perfil"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <p:panelGrid id="fotoCambiar"   style="width: 100%; margin: auto;" class="noBoder" >
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Foto de Perfil:*"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2" rendered="#{!usuarioBean.showImagen}"  >
+                                        <p:fileUpload   id="cargar" allowTypes="/(\.|\/)(jpe?g|png)$/i" 
+                                                        invalidFileMessage="El tipo de archivo es incorrecto" mode="advanced" 
+                                                        uploadLabel="subir" label="Elegir" sizeLimit="1000000000000"
+                                                        fileUploadListener="#{usuarioBean.guardarImagen}" update="fotoCambiar"/> 
+                                        <h:outputText value="#{usuarioBean.msgImagen}" style=" color:  red" />
 
-                            <p:panel id="basic" header="Modificar perfil"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                                    </p:column>
+                                    <p:column style="width: 50%" rendered="#{usuarioBean.showImagen}" >
 
+                                        <center>
+                                            <h:graphicImage value="#{usuarioBean.empleado.fotoEmpleado}" 
+                                                            style="width: 200px; height: 150px; margin: auto;" />
+                                        </center>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <center>
+                                            <p:commandButton id="btnMostrarImagen" style="#{usuarioBean.showImagen? usuarioBean.btnModificar:usuarioBean.btnCancelar}" value="#{usuarioBean.showImagen? 'Cambiar':'Cancelar'}"  actionListener="#{usuarioBean.enableShowImagen}"  update=":padding" title="#{usuarioBean.showImagen? 'Cambiar':'Cancelar'}" icon="#{usuarioBean.showImagen? 'fa fa-edit':'fa fa-close'}"/>
+                                        </center>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                                 <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;"  class="noBoder">   
-
+                                   
                                     <p:row>
                                         <p:column style="width: 50%" >
                                             <h:outputText value="Area:*"/>
@@ -135,7 +180,7 @@
                                 </p:panelGrid>
                                 <br></br>
                                 <center>
-                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificarPerfil()}" update=":padding"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar"> 
+                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificarPerfil()}" update=":padding"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar" ajax="false"> 
                                     </p:commandButton>
                                    
                                     <p:commandButton  ajax="false" id="btnCancel" action="/inicio/index.xhtml?faces-redirect=true"   icon="fa fa-close" style="#{usuarioBean.btnCancelar}"  value="Cancelar"> 
@@ -146,6 +191,7 @@
                             </p:panel>
 
                         </h:form>
+                         
                     </p:outputPanel>
 
 
