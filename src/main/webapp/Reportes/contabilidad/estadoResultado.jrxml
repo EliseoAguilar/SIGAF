@@ -1,132 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estadoResultado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7567c48a-360e-4a4d-a80e-102f0dde2ccf">
-	<property name="ireport.zoom" value="1.3310000000000004"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanceGeneral" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2ecc2a4-5771-4b19-9e7c-2600f20058b6">
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<import value="org.apache.commons.codec.binary.*"/>
+	<parameter name="idEntidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idEjercicio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="nombreEntidad" class="java.lang.String"/>
-	<parameter name="direccionEntidad" class="java.lang.String"/>
-	<parameter name="telEntidad" class="java.lang.String"/>
-	<parameter name="logoEntidad" class="java.lang.String"/>
-	<parameter name="fechaReporte" class="java.util.Date"/>
+	<parameter name="valor1" class="java.math.BigDecimal"/>
+	<parameter name="valor2" class="java.math.BigDecimal"/>
+	<parameter name="valor3" class="java.math.BigDecimal"/>
+	<parameter name="valor4" class="java.math.BigDecimal"/>
+	<parameter name="valor5" class="java.math.BigDecimal"/>
+	<parameter name="valor6" class="java.math.BigDecimal"/>
+	<parameter name="valor7" class="java.math.BigDecimal"/>
+	<parameter name="valor8" class="java.math.BigDecimal"/>
+	<parameter name="valor9" class="java.math.BigDecimal"/>
+	<parameter name="valor10" class="java.math.BigDecimal"/>
+	<parameter name="valor11" class="java.math.BigDecimal"/>
+	<parameter name="valor12" class="java.math.BigDecimal"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[SELECT
+     *
+FROM
+      t_estructura e
+WHERE
+     e.id_ejercicio_estructura =$P{idEjercicio} AND  e.tipo_reporte = 1 order by e.grupo_reporte]]>
 	</queryString>
-	<field name="nombreCuenta" class="java.lang.String">
-		<fieldDescription><![CDATA[nombreCuenta]]></fieldDescription>
-	</field>
-	<field name="nombreGrupo" class="java.lang.String">
-		<fieldDescription><![CDATA[nombreGrupo]]></fieldDescription>
-	</field>
-	<field name="saldoCuenta" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[saldoCuenta]]></fieldDescription>
-	</field>
-	<field name="saldoGrupo" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[saldoGrupo]]></fieldDescription>
-	</field>
+	<field name="id_estructura" class="java.lang.Integer"/>
+	<field name="id_cuenta_estructura" class="java.lang.Integer"/>
+	<field name="grupo_reporte" class="java.lang.Integer"/>
+	<field name="tipo_reporte" class="java.lang.Integer"/>
+	<field name="id_ejercicio_estructura" class="java.lang.Integer"/>
+	<field name="nivel_reporte" class="java.lang.Integer"/>
+	<field name="por_max_estructura" class="java.math.BigDecimal"/>
+	<field name="por_min_estructura" class="java.math.BigDecimal"/>
+	<field name="valor_rango" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="228" y="52" width="23" height="20" uuid="7d54145f-d5a3-44e3-9afa-3bb8e0ace22a"/>
-				<text><![CDATA[Tel.:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="252" y="52" width="100" height="20" uuid="eb3a2b67-7fb4-45b4-90f5-9f4b78449b4b"/>
-				<textFieldExpression><![CDATA[$P{telEntidad}]]></textFieldExpression>
-			</textField>
-			<textField pattern="h:mm:ss a">
-				<reportElement x="439" y="52" width="100" height="20" uuid="fe37ef32-5533-47e9-bddc-8fcca839a1d2"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="104" y="4" width="339" height="28" uuid="c22f607f-46d9-45c3-bcb9-45a152ab2619"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{nombreEntidad}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="443" y="32" width="100" height="20" uuid="916f7f3a-e7ec-45ed-aff1-fb5ec1df84a3"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="104" y="32" width="339" height="20" uuid="7dfdb128-e813-4c5c-9f4c-9ad820873fa0"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$P{direccionEntidad}]]></textFieldExpression>
-			</textField>
-			<image>
-				<reportElement x="4" y="4" width="79" height="73" uuid="daf40192-6743-424c-9709-949e1d69c046"/>
-				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64( $P{logoEntidad}.split(",")[1].getBytes()))]]></imageExpression>
-			</image>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="79" uuid="4d1dfe22-2611-49fa-98f1-b3f62f2a8eb7"/>
+				<subreportParameter name="idEntidad">
+					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Titulo.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="42" splitType="Stretch">
+		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="7" y="0" width="337" height="21" uuid="9f858ab5-9181-4a9d-8cee-96385b6d5080"/>
-				<textElement textAlignment="Right">
-					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				<reportElement x="111" y="0" width="206" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
+				<textElement>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO DE RESULTADOS AL ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="21" width="555" height="20" uuid="30f15d30-2451-4115-a89b-e1442fe934fb"/>
+				<reportElement x="0" y="23" width="555" height="20" uuid="6e7bac28-7615-404c-948a-6747d3371b89"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="false" isPdfEmbedded="false"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[(Expresado en  Dolares de los Estados Unidos de América)]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="347" y="0" width="143" height="20" uuid="16266f28-7e3f-47d1-9fa9-4193c196d583"/>
-				<textElement>
-					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{fechaReporte}]]></textFieldExpression>
-			</textField>
+			<subreport>
+				<reportElement x="320" y="0" width="235" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
+				<subreportParameter name="id_ejercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fecha_reportes.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="12" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField>
-				<reportElement x="81" y="2" width="171" height="13" uuid="743accb0-fe88-4a7f-8093-6f341a23115c"/>
+				<reportElement x="25" y="3" width="255" height="20" uuid="9e00b5aa-ce34-4c08-a6f9-7b359c53e2f6"/>
 				<textElement>
-					<font size="8"/>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreCuenta}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="252" y="0" width="120" height="13" uuid="e4f34574-b199-4801-b04c-c770c59146e7"/>
-				<textElement textAlignment="Right">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreGrupo} ==  "" ? $F{saldoCuenta} : ""]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="378" y="0" width="120" height="13" uuid="9690dec0-7574-4c0b-991a-4e36e7bf6ac5"/>
-				<textElement textAlignment="Right">
-					<font size="8" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreCuenta} == "" ? $F{saldoGrupo} : ""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{grupo_reporte}.equals(1)? "Ingresos" :
+$F{grupo_reporte}.equals(2)? "Costos" :
+$F{grupo_reporte}.equals(3)? "Gastos de Operación" :
+$F{grupo_reporte}.equals(4)? "Otros Ingresos" :
+$F{grupo_reporte}.equals(5)? "Otros Gastos" :
+$F{grupo_reporte}.equals(6)? "Impuestos de Renta" :
+$F{grupo_reporte}.equals(7)? "Reserva Legal" :
+$F{grupo_reporte}.equals(8)? "Resultado del Ejercicio" : ""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="2" width="194" height="13" uuid="0f139620-6aac-4962-8e66-37d60d42f156"/>
-				<textElement>
-					<font size="8" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				<reportElement x="349" y="3" width="168" height="20" uuid="b63ef752-a82a-43b6-90d1-3e2d1cb65022"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreGrupo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{grupo_reporte}.equals(1)? $P{valor1}:
+$F{grupo_reporte}.equals(2)? $P{valor2}:
+$F{grupo_reporte}.equals(3)? $P{valor3} :
+$F{grupo_reporte}.equals(4)? $P{valor4}:
+$F{grupo_reporte}.equals(5)? $P{valor5}:
+$F{grupo_reporte}.equals(6)? $P{valor6}:
+$F{grupo_reporte}.equals(7)? $P{valor7}:
+$F{grupo_reporte}.equals(8)? $P{valor8}:""]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="23" width="555" height="0" uuid="ae9d0f51-7191-4762-a386-a0f9082547bd"/>
+				<subreportParameter name="nivelCuenta">
+					<subreportParameterExpression><![CDATA[$F{nivel_reporte}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="valor">
+					<subreportParameterExpression><![CDATA[1]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="grupo_reporte">
+					<subreportParameterExpression><![CDATA[1]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idEjercicio">
+					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idCuenta">
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_estructura}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subEstadoResultado.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{grupo_reporte}.equals(2)? true :
+$F{grupo_reporte}.equals(3)? true :
+$F{grupo_reporte}.equals(5)? ( $P{valor6}.compareTo(BigDecimal.ZERO) > 0 ? true : false) :
+$F{grupo_reporte}.equals(6)? ( $P{valor7}.compareTo(BigDecimal.ZERO) > 0 ? true : false) :  false
+]]></printWhenExpression>
+			<textField>
+				<reportElement x="349" y="2" width="168" height="20" uuid="8fc49531-e406-438a-8bf9-0b42ae03940c"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grupo_reporte}.equals(2)? $P{valor9} :
+$F{grupo_reporte}.equals(3)? $P{valor10} :
+$F{grupo_reporte}.equals(5)? $P{valor11} :
+$F{grupo_reporte}.equals(6)? $P{valor12} :  ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="3" width="255" height="20" uuid="b7453853-dc02-44df-a118-27159b6cbaaf"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grupo_reporte}.equals(2)? "Utilidad Bruta" :
+$F{grupo_reporte}.equals(3)? "Utilidad de Operación" :
+$F{grupo_reporte}.equals(5)? "Utilidad Antes de Impuestos" :
+$F{grupo_reporte}.equals(6)? "Utilidad Liquida"   :  ""]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="25" splitType="Stretch"/>
+		<band height="21">
+			<textField>
+				<reportElement x="436" y="0" width="71" height="20" isPrintWhenDetailOverflows="true" uuid="56609320-df97-4f40-ad38-6984fd62d1d4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="871a9c33-08b9-4554-8c3c-0aa357d857fd"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 </jasperReport>

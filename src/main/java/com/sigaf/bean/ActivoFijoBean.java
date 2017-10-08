@@ -42,6 +42,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -210,6 +211,26 @@ public class ActivoFijoBean extends Actividad {
 
     private String msgValorActivoBaja;
 
+    private Date fechaMinima;
+
+    private Date fechaMaxima;
+
+    public Date getFechaMaxima() {
+        return fechaMaxima;
+    }
+
+    public void setFechaMaxima(Date fechaMaxima) {
+        this.fechaMaxima = fechaMaxima;
+    }
+
+    public Date getFechaMinima() {
+        return fechaMinima;
+    }
+
+    public void setFechaMinima(Date fechaMinima) {
+        this.fechaMinima = fechaMinima;
+    }
+
     public TEntidad getEntidadSeleccionada() {
         return entidadSeleccionada;
     }
@@ -218,8 +239,6 @@ public class ActivoFijoBean extends Actividad {
         this.entidadSeleccionada = entidadSeleccionada;
     }
 
-    
-    
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
     }
@@ -227,8 +246,6 @@ public class ActivoFijoBean extends Actividad {
     public void setBitacoraBo(IBitacoraBo bitacoraBo) {
         this.bitacoraBo = bitacoraBo;
     }
-
-   
 
     public void updateConfiguracion() {
         configuracion = this.configuracionBo.getConfiguracion(entidadSeleccionada.getIdEntidad());
@@ -304,7 +321,6 @@ public class ActivoFijoBean extends Actividad {
         this.tipoActivo.setCodigoTipo("");
     }
 
-    
     public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -407,9 +423,9 @@ public class ActivoFijoBean extends Actividad {
         if (!this.showBaja) {
 
             this.totalDebe = BigDecimal.ZERO;
-            
+
             this.totalHaber = BigDecimal.ZERO;
-                
+
             /*
             * si ya tiene registro  se caraga la partida
              */
@@ -427,6 +443,20 @@ public class ActivoFijoBean extends Actividad {
                         this.totalHaber = this.totalHaber.add(tDetallePartida.getSaldoDetallePartida());
                     }
                 }
+
+                this.perido = this.periodoBo.getPeriodo(partida.getTPeriodo().getIdPeriodo());
+
+                this.ejercicio = this.ejercicioBo.getEjercicio(this.perido.getTEjercicio().getIdEjercicio());
+
+                numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
+
+                int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
+
+                int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
+
+                this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
+
+                this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
 
             } else {
 
@@ -487,6 +517,69 @@ public class ActivoFijoBean extends Actividad {
 
         this.listaDetallePartida.add(0, det);
 
+        this.prepararGeneral();
+
+    }
+
+    /**
+     * Asigna el nombre del mes al periodo nuevo segun el perido acual
+     */
+    public int llenarMesPeriodoAux(String mes) {
+
+        switch (mes) {
+            case "Enero":
+                return 0;
+            case "Febrero":
+                return 1;
+            case "Marzo":
+                return 2;
+            case "Abril":
+                return 3;
+            case "Mayo":
+                return 4;
+            case "Junio":
+                return 5;
+            case "Julio":
+                return 6;
+            case "Agosto":
+                return 7;
+            case "Septiembre":
+                return 8;
+            case "Octubre":
+                return 9;
+            case "Noviembre":
+                return 10;
+            default:
+                return 11;
+        }
+
+    }
+
+    public int obtenerUltimoDiaMes(int anio, int mes) {
+
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(anio, mes, 1);
+        return calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+    }
+
+    public void prepararGeneral() {
+
+        this.ejercicio = this.ejercicioBo.getEjercicioAbierto(entidadSeleccionada.getIdEntidad());
+
+        this.perido = this.periodoBo.getPeriodoAbierto(this.ejercicio.getIdEjercicio());
+
+        numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
+
+        int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
+
+        int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
+
+        this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
+
+        this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
+
+        partida.setFechaPartida(this.fechaMinima);
     }
 
     public void prepararRegistroBAja() {
@@ -523,8 +616,9 @@ public class ActivoFijoBean extends Actividad {
 
         this.listaDetallePartida.add(detAc);
 
+        this.prepararGeneral();
     }
-    
+
     public IBajaActivoFijoBo getBajaActivoFijoBo() {
         return bajaActivoFijoBo;
     }
@@ -971,10 +1065,7 @@ public class ActivoFijoBean extends Actividad {
     }
 
     public Integer getNumPartida() {
-        this.ejercicio = this.ejercicioBo.getEjercicioAbierto(entidadSeleccionada.getIdEntidad());
-        numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
         return numPartida;
-
     }
 
     public void setNumPartida(Integer numPartida) {
@@ -1072,7 +1163,6 @@ public class ActivoFijoBean extends Actividad {
     public void setCodTip(String codTip) {
         this.codTip = codTip;
     }
-
 
     public IEntidadBo getEntidadBo() {
         return entidadBo;
@@ -1196,8 +1286,6 @@ public class ActivoFijoBean extends Actividad {
         try {
 
             this.partida.setEstadoPartida(true);
-
-            this.perido = this.periodoBo.getPeriodoAbierto(this.ejercicio.getIdEjercicio());
 
             this.partida.setNumeroPartida(numPartida);
             this.partida.setTPeriodo(perido);
@@ -1378,7 +1466,6 @@ public class ActivoFijoBean extends Actividad {
     public void limpiarRegistro() {
 
         partida = new TPartida();
-        partida.setFechaPartida(new Date());
 
         detallePartida = new TDetallePartida();
         detallePartida.setSaldoDetallePartida(BigDecimal.ZERO);
@@ -1530,9 +1617,9 @@ public class ActivoFijoBean extends Actividad {
             this.msgDetallePar = "";
         }
 
-        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
-        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
-        
+        this.totalDebe = this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber = this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra";
@@ -1561,9 +1648,9 @@ public class ActivoFijoBean extends Actividad {
             this.msgDetallePar = "";
         }
 
-        this.totalDebe=this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
-        this.totalHaber=this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
-        
+        this.totalDebe = this.totalDebe.setScale(2, BigDecimal.ROUND_HALF_UP);
+        this.totalHaber = this.totalHaber.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         if (!this.totalDebe.equals(this.totalHaber)) {
             this.estadoFormulario = false;
             this.msgCuadre = "La transacción no cuadra ";
@@ -1682,8 +1769,6 @@ public class ActivoFijoBean extends Actividad {
             this.activoFijoBo.update(activoFijoSeleccionado);
 
             this.partida.setEstadoPartida(true);
-
-            this.perido = this.periodoBo.getPeriodoAbierto(this.ejercicio.getIdEjercicio());
 
             this.partida.setNumeroPartida(numPartida);
 

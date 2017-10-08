@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -64,7 +65,7 @@ public class PartidaBean extends Actividad {
 
     private IEntidadBo entidadBo;
 
-    private TPeriodo periodo;
+    private TPeriodo periodoSelecionado;
 
     private Integer idPeriodo;
 
@@ -79,6 +80,10 @@ public class PartidaBean extends Actividad {
     private List<TEjercicio> listaEjercicios;
 
     private Integer idEjer;
+
+    private TEjercicio ejercicioSelecionado;
+
+    private TPeriodo periodoAbierto;
 
     private ICuentaBo cuentaBo;
 
@@ -117,6 +122,34 @@ public class PartidaBean extends Actividad {
     private Integer numPartida;
 
     private TEntidad entidadSeleccionada;
+
+    private Date fechaMinima;
+
+    private Date fechaMaxima;
+
+    public Date getFechaMaxima() {
+        return fechaMaxima;
+    }
+
+    public void setFechaMaxima(Date fechaMaxima) {
+        this.fechaMaxima = fechaMaxima;
+    }
+
+    public Date getFechaMinima() {
+        return fechaMinima;
+    }
+
+    public void setFechaMinima(Date fechaMinima) {
+        this.fechaMinima = fechaMinima;
+    }
+
+    public TPeriodo getPeriodoAbierto() {
+        return periodoAbierto;
+    }
+
+    public void setPeriodoAbierto(TPeriodo periodoAbierto) {
+        this.periodoAbierto = periodoAbierto;
+    }
 
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
@@ -250,15 +283,20 @@ public class PartidaBean extends Actividad {
         this.entidadSeleccionada = entidadSeleccionada;
     }
 
-    
-
-    public TPeriodo getPeriodo() {
-        return periodo;
+    public TPeriodo getPeriodoSelecionado() {
+        return periodoSelecionado;
     }
 
-    public void setPeriodo(TPeriodo periodo) {
+    public void setPeriodoSelecionado(TPeriodo periodoSelecionado) {
+        this.periodoSelecionado = periodoSelecionado;
+    }
 
-        this.periodo = periodo;
+    public TEjercicio getEjercicioSelecionado() {
+        return ejercicioSelecionado;
+    }
+
+    public void setEjercicioSelecionado(TEjercicio ejercicioSelecionado) {
+        this.ejercicioSelecionado = ejercicioSelecionado;
     }
 
     public List<TEntidad> getListaEntidades() {
@@ -281,11 +319,68 @@ public class PartidaBean extends Actividad {
         return idPeriodo;
     }
 
+    /**
+     * Asigna el nombre del mes al periodo nuevo segun el perido acual
+     */
+    public int llenarMesPeriodoAux(String mes) {
+
+        switch (mes) {
+            case "Enero":
+                return 0;
+            case "Febrero":
+                return 1;
+            case "Marzo":
+                return 2;
+            case "Abril":
+                return 3;
+            case "Mayo":
+                return 4;
+            case "Junio":
+                return 5;
+            case "Julio":
+                return 6;
+            case "Agosto":
+                return 7;
+            case "Septiembre":
+                return 8;
+            case "Octubre":
+                return 9;
+            case "Noviembre":
+                return 10;
+            default:
+                return 11;
+        }
+
+    }
+
+    public int obtenerUltimoDiaMes(int anio, int mes) {
+
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(anio, mes, 1);
+        return calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+    }
+  
+
     public void setIdPeriodo(Integer idPeriodo) {
         /* se saca el periodo abierto cuando se selecciona el que se 
         * desea ver, para decidir si se muestra el boton Agregar Partida
          */
-        this.periodo = this.periodoBo.getPeriodoAbierto(idEjer);
+        this.periodoAbierto = this.periodoBo.getPeriodoAbierto(idEjer);
+        for (TPeriodo per : listaPeriodos) {
+            if (per.getIdPeriodo() == idPeriodo) {
+                this.periodoSelecionado = per;
+            }
+        }
+        
+        int mes = llenarMesPeriodoAux(periodoSelecionado.getMesPeriodo());
+        
+        int dia = obtenerUltimoDiaMes(ejercicioSelecionado.getAhoEjercicio() ,mes);
+        
+        this.fechaMaxima = new Date(ejercicioSelecionado.getAhoEjercicio() - 1900, mes , dia);
+        
+        this.fechaMinima = new Date(ejercicioSelecionado.getAhoEjercicio() - 1900, mes, 1);
+        
         this.idPeriodo = idPeriodo;
     }
 
@@ -325,7 +420,13 @@ public class PartidaBean extends Actividad {
     }
 
     public void setIdEjer(Integer idEjer) {
+
         this.idPeriodo = 0;
+        for (TEjercicio ejer : listaEjercicios) {
+            if (ejer.getIdEjercicio() == idEjer) {
+                this.ejercicioSelecionado = ejer;
+            }
+        }
 
         this.idEjer = idEjer;
     }
@@ -616,7 +717,7 @@ public class PartidaBean extends Actividad {
         this.estadoFormulario = false;
 
         partida = new TPartida();
-        partida.setFechaPartida(new Date());
+        partida.setFechaPartida(fechaMinima);
 
         detallePartida = new TDetallePartida();
         detallePartida.setSaldoDetallePartida(BigDecimal.ZERO);

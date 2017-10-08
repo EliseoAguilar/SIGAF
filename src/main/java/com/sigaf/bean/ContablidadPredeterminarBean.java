@@ -19,7 +19,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class ContablidadPredeterminarBean implements Serializable {
+public class ContablidadPredeterminarBean {
 
     /**
      * Creates a new instance of ContablidadPredeterminarBean

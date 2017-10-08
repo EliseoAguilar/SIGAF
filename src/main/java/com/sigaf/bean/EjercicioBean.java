@@ -36,6 +36,7 @@ import com.sigaf.pojo.TTipoActivo;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -79,19 +80,19 @@ public class EjercicioBean extends Actividad {
     private TEstructura utilidadEstructura;
 
     /*Lista para ingresos */
-    private List<TEstructura> listaEstructuraIngresos;
+    private TEstructura listaEstructuraIngresos;
 
     /*Lista para costos */
-    private List<TEstructura> listaEstructuraCostos;
-
+    private TEstructura listaEstructuraCostos;
+    
     /*Lista para Gastos */
-    private List<TEstructura> listaEstructuraGastos;
+    private TEstructura listaEstructuraGastos;
 
     /*Lista para Otros  Gastos */
-    private List<TEstructura> listaEstructuraOtrosGastos;
+    private TEstructura listaEstructuraOtrosGastos;
 
     /*Lista para Otros  Ingresos */
-    private List<TEstructura> listaEstructuraOtrosIngresos;
+    private TEstructura listaEstructuraOtrosIngresos;
 
     /* Acceso para  datos  estructura*/
     private IEstructuraBo estructuraBo;
@@ -100,8 +101,6 @@ public class EjercicioBean extends Actividad {
     private List<TDepreciacion> listaDepreciacion;
 
     List<TPeriodo> listaPeriodoEjercicio;
-
-    private Boolean estadoPredeterminado;
 
     private IEmpleadoAreaBo empleadoAreaBo;
 
@@ -140,8 +139,6 @@ public class EjercicioBean extends Actividad {
     private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
-
-
 
     private IEjercicioBo ejercicioBo;
 
@@ -186,6 +183,26 @@ public class EjercicioBean extends Actividad {
 
     private TTipoActivo tipoActivoSeleccionado;
 
+    private Date fechaMinima;
+
+    private Date fechaMaxima;
+
+    public Date getFechaMaxima() {
+        return fechaMaxima;
+    }
+
+    public void setFechaMaxima(Date fechaMaxima) {
+        this.fechaMaxima = fechaMaxima;
+    }
+
+    public Date getFechaMinima() {
+        return fechaMinima;
+    }
+
+    public void setFechaMinima(Date fechaMinima) {
+        this.fechaMinima = fechaMinima;
+    }
+
     public TEntidad getEntidadSeleccionada() {
         return entidadSeleccionada;
     }
@@ -194,7 +211,8 @@ public class EjercicioBean extends Actividad {
         this.entidadSeleccionada = entidadSeleccionada;
     }
 
-    
+  
+
     public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -204,7 +222,6 @@ public class EjercicioBean extends Actividad {
         this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
-    
     public TTipoActivo getTipoActivoSeleccionado() {
         return tipoActivoSeleccionado;
     }
@@ -258,7 +275,9 @@ public class EjercicioBean extends Actividad {
 
                     }
 
-                }/* Si aun se puede Depreciar se agrega a la lista para depreciar*/ else if (listaDepre.size() < mesesVidaUtil) {
+                }
+                /* Si aun se puede Depreciar se agrega a la lista para depreciar*/ 
+                else if (listaDepre.size() < mesesVidaUtil) {
                     activosDeprelista.add(tActivoFijo);
                 }
 
@@ -267,6 +286,9 @@ public class EjercicioBean extends Actividad {
 
         if (!activosDeprelista.isEmpty()) {
             this.cargarParida(activosDeprelista);
+            this.listActios = activosDeprelista;
+        }else{
+        this.listActios.clear();
         }
     }
 
@@ -404,7 +426,6 @@ public class EjercicioBean extends Actividad {
 
         try {
 
-            
             ejercicio.setEstadoEjercicio(true);
             ejercicio.setTEntidad(entidadSeleccionada);
             this.ejercicioBo.create(ejercicio);
@@ -511,7 +532,7 @@ public class EjercicioBean extends Actividad {
 
             this.enableShowData();
             this.limpiar();
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Periodo  registrado correctamente.", ""));
 
         } catch (Exception ex) {
@@ -521,6 +542,49 @@ public class EjercicioBean extends Actividad {
 
     }
 
+      /**
+     * Asigna el nombre del mes al periodo nuevo segun el perido acual
+     */
+    public int llenarMesPeriodoAuxFecha(String mes) {
+
+        switch (mes) {
+            case "Enero":
+                return 0;
+            case "Febrero":
+                return 1;
+            case "Marzo":
+                return 2;
+            case "Abril":
+                return 3;
+            case "Mayo":
+                return 4;
+            case "Junio":
+                return 5;
+            case "Julio":
+                return 6;
+            case "Agosto":
+                return 7;
+            case "Septiembre":
+                return 8;
+            case "Octubre":
+                return 9;
+            case "Noviembre":
+                return 10;
+            default:
+                return 11;
+        }
+
+    }
+
+    public int obtenerUltimoDiaMes(int anio, int mes) {
+
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(anio, mes, 1);
+        return calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+    }
+
+  
     /**
      * Metodo para preparar la apertura de un nuevo periodo y cierre del
      * anterior
@@ -532,7 +596,7 @@ public class EjercicioBean extends Actividad {
 
         this.partida = new TPartida();
         this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjer));
-        this.partida.setFechaPartida(new Date());
+        
         this.partida.setTPeriodo(periodoViejo);
 
         this.partida.setConceptoPartida("Depreciación/Amortización " + periodoViejo.getMesPeriodo());
@@ -547,6 +611,18 @@ public class EjercicioBean extends Actividad {
         /*Consulta de tipos de activos que  tienen la entidad*/
         this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
 
+        this.ejercicio = this.ejercicioBo.getEjercicioAbierto(entidadSeleccionada.getIdEntidad());
+
+        int mes = llenarMesPeriodoAuxFecha(periodoViejo.getMesPeriodo());
+
+        int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
+
+        this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
+
+        this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
+
+        this.partida.setFechaPartida(fechaMaxima);
+        
         this.idEjer = idEjer;
 
     }
@@ -558,7 +634,7 @@ public class EjercicioBean extends Actividad {
         this.pasarSaldos = true;
         this.partida = new TPartida();
         this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjerCierre));
-        this.partida.setFechaPartida(new Date());
+        
         this.partida.setTPeriodo(periodoViejo);
 
         this.partida.setConceptoPartida("Depreciación/Amortización " + periodoViejo.getMesPeriodo());
@@ -568,7 +644,7 @@ public class EjercicioBean extends Actividad {
         this.totalHaber = BigDecimal.ZERO;
         /*Sacando el ejercico que se va a cerrar*/
         this.ejercicioViejo = this.ejercicioBo.getEjercicio(idEjerCierre);
-        this.ejercicioViejo.setFechaCierre(new Date());
+       
 
         /*Se saca el periodo viejo desde la bd para tener otra instancia y poder modificarla para el nuevo */
         this.ejercicio = this.ejercicioBo.getEjercicio(idEjerCierre);
@@ -584,7 +660,18 @@ public class EjercicioBean extends Actividad {
 
         /*Consulta de tipos de activos que  tienen la entidad*/
         this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
+        
+        
+        int mes = llenarMesPeriodoAuxFecha(periodoViejo.getMesPeriodo());
 
+        int dia = obtenerUltimoDiaMes(ejercicioViejo.getAhoEjercicio(), mes);
+
+        this.fechaMaxima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, dia);
+
+        this.fechaMinima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, 1);
+        
+        this.partida.setFechaPartida(fechaMaxima);
+        this.ejercicioViejo.setFechaCierre(fechaMaxima);
         this.idEjerCierre = idEjerCierre;
 
     }
@@ -678,9 +765,6 @@ public class EjercicioBean extends Actividad {
 
     }
 
-
- 
-
     /*
     * Actualiza la lista de Periodos por Ejercicio
      */
@@ -691,8 +775,7 @@ public class EjercicioBean extends Actividad {
     }
 
     public void init() {
-   
-        this.estadoPredeterminado = false;
+
         this.listaDepreciacion = new ArrayList<>();
         this.listaDetallePartida = new ArrayList<>();
         this.listAhos = new ArrayList<>();
@@ -762,20 +845,12 @@ public class EjercicioBean extends Actividad {
         this.listaPeriodoEjercicio = listaPeriodoEjercicio;
     }
 
-
-
     public List<TDepreciacion> getListaDepreciacion() {
         return listaDepreciacion;
     }
 
     public void setListaDepreciacion(List<TDepreciacion> listaDepreciacion) {
         this.listaDepreciacion = listaDepreciacion;
-    }
-
-    
-
-    public void setEstadoPredeterminado(Boolean estadoPredeterminado) {
-        this.estadoPredeterminado = estadoPredeterminado;
     }
 
     public IEstructuraBo getEstructuraBo() {
@@ -797,8 +872,6 @@ public class EjercicioBean extends Actividad {
     public void setEjercicioViejo(TEjercicio ejercicioViejo) {
         this.ejercicioViejo = ejercicioViejo;
     }
-
- 
 
     public IEmpleadoAreaBo getEmpleadoAreaBo() {
         return empleadoAreaBo;
@@ -1055,11 +1128,11 @@ public class EjercicioBean extends Actividad {
 
     public void estadoResultado() {
 
-        this.listaEstructuraCostos = new ArrayList<>();
-        this.listaEstructuraGastos = new ArrayList<>();
-        this.listaEstructuraIngresos = new ArrayList<>();
-        this.listaEstructuraOtrosGastos = new ArrayList<>();
-        this.listaEstructuraOtrosIngresos = new ArrayList<>();
+        this.listaEstructuraCostos = null;
+        this.listaEstructuraGastos = null;
+        this.listaEstructuraIngresos = null;
+        this.listaEstructuraOtrosGastos = null;
+        this.listaEstructuraOtrosIngresos = null;
         this.rentaEstructura = null;
         this.ReservaEstructura = null;
         this.utilidadEstructura = null;
@@ -1069,20 +1142,19 @@ public class EjercicioBean extends Actividad {
             for (TEstructura tEstructura : auxEstado) {
                 switch (tEstructura.getGrupoReporte()) {
                     case 1:
-                        this.listaEstructuraIngresos.add(tEstructura);
-
+                        this.listaEstructuraIngresos = tEstructura;
                         break;
                     case 2:
-                        this.listaEstructuraCostos.add(tEstructura);
+                        this.listaEstructuraCostos = tEstructura;
                         break;
                     case 3:
-                        this.listaEstructuraGastos.add(tEstructura);
+                        this.listaEstructuraGastos = tEstructura;
                         break;
                     case 4:
-                        this.listaEstructuraOtrosIngresos.add(tEstructura);
+                        this.listaEstructuraOtrosIngresos = tEstructura;
                         break;
                     case 5:
-                        this.listaEstructuraOtrosGastos.add(tEstructura);
+                        this.listaEstructuraOtrosGastos = tEstructura;
                         break;
                     case 6:
                         this.rentaEstructura = tEstructura;
@@ -1107,53 +1179,49 @@ public class EjercicioBean extends Actividad {
              */
             BigDecimal totalIngre = BigDecimal.ZERO;
 
-            for (TEstructura ingre : listaEstructuraIngresos) {
+            List<TCuenta> CuentasIngre = this.cuentaBo.listCuentaSubDet(listaEstructuraIngresos.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(listaEstructuraIngresos.getTCuenta().getCodigoCuenta()));
 
-                List<TCuenta> CuentasIngre = this.cuentaBo.listCuentaSubDet(ingre.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(ingre.getTCuenta().getCodigoCuenta()));
+            for (TCuenta CuentaIngre : CuentasIngre) {
 
-                for (TCuenta CuentaIngre : CuentasIngre) {
+                debe = this.cuentaBo.saldoCuenta(CuentaIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
 
-                    debe = this.cuentaBo.saldoCuenta(CuentaIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
+                haber = this.cuentaBo.saldoCuenta(CuentaIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
 
-                    haber = this.cuentaBo.saldoCuenta(CuentaIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
+                detallePartidaDepre = new TDetallePartida();
 
-                    detallePartidaDepre = new TDetallePartida();
+                detallePartidaDepre.setTCuenta(CuentaIngre);
 
-                    detallePartidaDepre.setTCuenta(CuentaIngre);
+                BigDecimal saldo;
 
-                    BigDecimal saldo;
+                if (CuentaIngre.getNaturalezaCuenta().equals("Deudora")) {
+                    saldo = debe.subtract(haber);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
 
-                    if (CuentaIngre.getNaturalezaCuenta().equals("Deudora")) {
-                        saldo = debe.subtract(haber);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
-                    } else {
-                        saldo = haber.subtract(debe);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
                     }
 
-                    totalIngre = totalIngre.add(saldo);
+                } else {
+                    saldo = haber.subtract(debe);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
+
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    }
+
                 }
 
+                totalIngre = totalIngre.add(saldo);
             }
 
             totalIngre = totalIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -1163,52 +1231,49 @@ public class EjercicioBean extends Actividad {
              */
             BigDecimal totalCost = BigDecimal.ZERO;
 
-            for (TEstructura cost : listaEstructuraCostos) {
+            List<TCuenta> CuentasCost = this.cuentaBo.listCuentaSubDet(listaEstructuraCostos.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(listaEstructuraCostos.getTCuenta().getCodigoCuenta()));
 
-                List<TCuenta> CuentasCost = this.cuentaBo.listCuentaSubDet(cost.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(cost.getTCuenta().getCodigoCuenta()));
+            for (TCuenta CuentaCost : CuentasCost) {
 
-                for (TCuenta CuentaCost : CuentasCost) {
+                debe = this.cuentaBo.saldoCuenta(CuentaCost.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
 
-                    debe = this.cuentaBo.saldoCuenta(CuentaCost.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
+                haber = this.cuentaBo.saldoCuenta(CuentaCost.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
 
-                    haber = this.cuentaBo.saldoCuenta(CuentaCost.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
+                detallePartidaDepre = new TDetallePartida();
 
-                    detallePartidaDepre = new TDetallePartida();
+                detallePartidaDepre.setTCuenta(CuentaCost);
 
-                    detallePartidaDepre.setTCuenta(CuentaCost);
+                BigDecimal saldo;
 
-                    BigDecimal saldo;
+                if (CuentaCost.getNaturalezaCuenta().equals("Deudora")) {
+                    saldo = debe.subtract(haber);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
 
-                    if (CuentaCost.getNaturalezaCuenta().equals("Deudora")) {
-                        saldo = debe.subtract(haber);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
-                    } else {
-                        saldo = haber.subtract(debe);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
                     }
-                    totalCost = totalCost.add(saldo);
+
+                } else {
+                    saldo = haber.subtract(debe);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
+
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    }
 
                 }
+                totalCost = totalCost.add(saldo);
+
             }
             totalCost = totalCost.setScale(2, BigDecimal.ROUND_HALF_UP);
 
@@ -1223,51 +1288,48 @@ public class EjercicioBean extends Actividad {
              */
             BigDecimal totalGast = BigDecimal.ZERO;
 
-            for (TEstructura gast : listaEstructuraGastos) {
+            List<TCuenta> CuentasGast = this.cuentaBo.listCuentaSubDet(listaEstructuraGastos.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(listaEstructuraGastos.getTCuenta().getCodigoCuenta()));
 
-                List<TCuenta> CuentasGast = this.cuentaBo.listCuentaSubDet(gast.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(gast.getTCuenta().getCodigoCuenta()));
+            for (TCuenta CuentaGast : CuentasGast) {
 
-                for (TCuenta CuentaGast : CuentasGast) {
+                debe = this.cuentaBo.saldoCuenta(CuentaGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
 
-                    debe = this.cuentaBo.saldoCuenta(CuentaGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
+                haber = this.cuentaBo.saldoCuenta(CuentaGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
 
-                    haber = this.cuentaBo.saldoCuenta(CuentaGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
+                detallePartidaDepre = new TDetallePartida();
 
-                    detallePartidaDepre = new TDetallePartida();
+                detallePartidaDepre.setTCuenta(CuentaGast);
 
-                    detallePartidaDepre.setTCuenta(CuentaGast);
+                BigDecimal saldo;
 
-                    BigDecimal saldo;
+                if (CuentaGast.getNaturalezaCuenta().equals("Deudora")) {
+                    saldo = debe.subtract(haber);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
 
-                    if (CuentaGast.getNaturalezaCuenta().equals("Deudora")) {
-                        saldo = debe.subtract(haber);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
-                    } else {
-                        saldo = haber.subtract(debe);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
                     }
-                    totalGast = totalGast.add(saldo);
+
+                } else {
+                    saldo = haber.subtract(debe);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
+
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    }
+
                 }
+                totalGast = totalGast.add(saldo);
             }
 
             totalGast = totalGast.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -1282,51 +1344,48 @@ public class EjercicioBean extends Actividad {
              */
             BigDecimal totalOtrIngre = BigDecimal.ZERO;
 
-            for (TEstructura otrosIngre : listaEstructuraOtrosIngresos) {
+            List<TCuenta> CuentasOtrosIngre = this.cuentaBo.listCuentaSubDet(listaEstructuraOtrosIngresos.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(listaEstructuraOtrosIngresos.getTCuenta().getCodigoCuenta()));
 
-                List<TCuenta> CuentasOtrosIngre = this.cuentaBo.listCuentaSubDet(otrosIngre.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(otrosIngre.getTCuenta().getCodigoCuenta()));
+            for (TCuenta CuentaOtroIngre : CuentasOtrosIngre) {
 
-                for (TCuenta CuentaOtroIngre : CuentasOtrosIngre) {
+                debe = this.cuentaBo.saldoCuenta(CuentaOtroIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
 
-                    debe = this.cuentaBo.saldoCuenta(CuentaOtroIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
+                haber = this.cuentaBo.saldoCuenta(CuentaOtroIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
 
-                    haber = this.cuentaBo.saldoCuenta(CuentaOtroIngre.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
+                detallePartidaDepre = new TDetallePartida();
 
-                    detallePartidaDepre = new TDetallePartida();
+                detallePartidaDepre.setTCuenta(CuentaOtroIngre);
 
-                    detallePartidaDepre.setTCuenta(CuentaOtroIngre);
+                BigDecimal saldo;
 
-                    BigDecimal saldo;
+                if (CuentaOtroIngre.getNaturalezaCuenta().equals("Deudora")) {
+                    saldo = debe.subtract(haber);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
 
-                    if (CuentaOtroIngre.getNaturalezaCuenta().equals("Deudora")) {
-                        saldo = debe.subtract(haber);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
-                    } else {
-                        saldo = haber.subtract(debe);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
                     }
-                    totalOtrIngre = totalOtrIngre.add(saldo);
+
+                } else {
+                    saldo = haber.subtract(debe);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
+
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    }
+
                 }
+                totalOtrIngre = totalOtrIngre.add(saldo);
             }
 
             totalOtrIngre = totalOtrIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -1336,52 +1395,49 @@ public class EjercicioBean extends Actividad {
              */
             BigDecimal totalOtrGast = BigDecimal.ZERO;
 
-            for (TEstructura otrGast : listaEstructuraOtrosGastos) {
+            List<TCuenta> CuentasOtrosGast = this.cuentaBo.listCuentaSubDet(listaEstructuraOtrosGastos.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(listaEstructuraOtrosGastos.getTCuenta().getCodigoCuenta()));
 
-                List<TCuenta> CuentasOtrosGast = this.cuentaBo.listCuentaSubDet(otrGast.getTCuenta().getIdCuenta(), ejercicioViejo.getTEntidad().getIdEntidad(), ejercicioViejo.getIdEjercicio(), this.subCodidoCuenta(otrGast.getTCuenta().getCodigoCuenta()));
+            for (TCuenta CuentaOtroGast : CuentasOtrosGast) {
 
-                for (TCuenta CuentaOtroGast : CuentasOtrosGast) {
+                debe = this.cuentaBo.saldoCuenta(CuentaOtroGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
 
-                    debe = this.cuentaBo.saldoCuenta(CuentaOtroGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Debe");
+                haber = this.cuentaBo.saldoCuenta(CuentaOtroGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
 
-                    haber = this.cuentaBo.saldoCuenta(CuentaOtroGast.getIdCuenta(), ejercicioViejo.getIdEjercicio(), "Haber");
+                detallePartidaDepre = new TDetallePartida();
 
-                    detallePartidaDepre = new TDetallePartida();
+                detallePartidaDepre.setTCuenta(CuentaOtroGast);
 
-                    detallePartidaDepre.setTCuenta(CuentaOtroGast);
+                BigDecimal saldo;
 
-                    BigDecimal saldo;
+                if (CuentaOtroGast.getNaturalezaCuenta().equals("Deudora")) {
+                    saldo = debe.subtract(haber);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
 
-                    if (CuentaOtroGast.getNaturalezaCuenta().equals("Deudora")) {
-                        saldo = debe.subtract(haber);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
-                    } else {
-                        saldo = haber.subtract(debe);
-                        if (saldo.compareTo(BigDecimal.ZERO) == 1) {
-
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
-                            detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
-                            detallePartidaDepre.setSaldoDetallePartida(saldo);
-                            listaDetallePartida.add(detallePartidaDepre);
-                        }
-
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
                     }
-                    totalOtrGast = totalOtrGast.add(saldo);
+
+                } else {
+                    saldo = haber.subtract(debe);
+                    if (saldo.compareTo(BigDecimal.ZERO) == 1) {
+
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Debe");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    } else if (saldo.compareTo(BigDecimal.ZERO) == -1) {
+                        detallePartidaDepre.setTipoSaldoDetallePartida("Haber");
+                        detallePartidaDepre.setSaldoDetallePartida(saldo);
+                        listaDetallePartida.add(detallePartidaDepre);
+                    }
 
                 }
+                totalOtrGast = totalOtrGast.add(saldo);
+
             }
 
             totalOtrGast = totalOtrGast.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -1664,30 +1720,20 @@ public class EjercicioBean extends Actividad {
                     this.estructuraPatrimonio.setTEjercicio(ejercicio);
                     this.estructuraBo.create(this.estructuraPatrimonio);
 
-                    for (TEstructura listaEstructuraIngreso : listaEstructuraIngresos) {
-                        listaEstructuraIngreso.setTEjercicio(ejercicio);
-                        this.estructuraBo.create(listaEstructuraIngreso);
-                    }
+                    listaEstructuraIngresos.setTEjercicio(ejercicio);
+                    this.estructuraBo.create(listaEstructuraIngresos);
 
-                    for (TEstructura listaEstructuraCost : listaEstructuraCostos) {
-                        listaEstructuraCost.setTEjercicio(ejercicio);
-                        this.estructuraBo.create(listaEstructuraCost);
-                    }
+                    listaEstructuraCostos.setTEjercicio(ejercicio);
+                    this.estructuraBo.create(listaEstructuraCostos);
 
-                    for (TEstructura listaEstructuraGast : listaEstructuraGastos) {
-                        listaEstructuraGast.setTEjercicio(ejercicio);
-                        this.estructuraBo.create(listaEstructuraGast);
-                    }
+                    listaEstructuraGastos.setTEjercicio(ejercicio);
+                    this.estructuraBo.create(listaEstructuraGastos);
 
-                    for (TEstructura listaEstructuraOtIn : listaEstructuraOtrosIngresos) {
-                        listaEstructuraOtIn.setTEjercicio(ejercicio);
-                        this.estructuraBo.create(listaEstructuraOtIn);
-                    }
+                    listaEstructuraOtrosIngresos.setTEjercicio(ejercicio);
+                    this.estructuraBo.create(listaEstructuraOtrosIngresos);
 
-                    for (TEstructura listaEstructuraOtroGas : listaEstructuraOtrosGastos) {
-                        listaEstructuraOtroGas.setTEjercicio(ejercicio);
-                        this.estructuraBo.create(listaEstructuraOtroGas);
-                    }
+                    listaEstructuraOtrosGastos.setTEjercicio(ejercicio);
+                    this.estructuraBo.create(listaEstructuraOtrosGastos);
 
                     this.rentaEstructura.setTEjercicio(ejercicio);
                     this.estructuraBo.create(this.rentaEstructura);

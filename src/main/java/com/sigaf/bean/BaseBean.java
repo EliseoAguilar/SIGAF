@@ -123,6 +123,24 @@ public class BaseBean extends Actividad {
         String path = "C:\\backupSigaf\\bd_sigaf_" + dateFormat.format(date) + "_.sql";
 
         try {
+            
+            
+            TBitacora auxBitacora = new TBitacora();
+            auxBitacora.setTableBitacora("---");
+            auxBitacora.setAccionBitacora("Crear respaldo");
+            auxBitacora.setDatosBitacora("Ruta: " + path);
+            auxBitacora.setHoraBitacora(date);
+            auxBitacora.setFechaBitacora(date);
+
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            // Get the loginBean from session attribute
+            LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+
+            auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+
+            bitacoraBo.create(auxBitacora);
+            
+            
             Runtime r = Runtime.getRuntime();
             //PostgreSQL variables            
             
@@ -148,20 +166,7 @@ public class BaseBean extends Actividad {
                 System.out.println(line);
             }
 
-            TBitacora auxBitacora = new TBitacora();
-            auxBitacora.setTableBitacora("---");
-            auxBitacora.setAccionBitacora("Crear respaldo");
-            auxBitacora.setDatosBitacora("Ruta: " + path);
-            auxBitacora.setHoraBitacora(date);
-            auxBitacora.setFechaBitacora(date);
-
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            // Get the loginBean from session attribute
-            LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-
-            auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
-
-            bitacoraBo.create(auxBitacora);
+            
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Respaldo fue creado correctamente.", ""));

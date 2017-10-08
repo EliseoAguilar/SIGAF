@@ -1090,7 +1090,7 @@
                                         </p:column>
                                         <p:column>
 
-                                            <p:calendar id="cFechaIngreso"  showOn="button"  value="#{activoFijoBean.partida.fechaPartida}"  maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+                                            <p:calendar id="cFechaIngreso"  showOn="button"  value="#{activoFijoBean.partida.fechaPartida}"  mindate="#{activoFijoBean.fechaMinima}" maxdate="#{activoFijoBean.fechaMaxima}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy"/>
 
 
                                         </p:column>
@@ -1272,7 +1272,7 @@
                                         ¿Estás seguro de guardar?
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registroActulizar()}"     style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registroActulizar()}"    oncomplete="PF('dialogActualizar').hide()"  style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
                                         <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
                                             <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
                                         </p:commandButton>
@@ -1307,7 +1307,7 @@
                                         </p:column>
                                         <p:column>
 
-                                            <p:calendar id="cFechaIngreso"  showOn="button"   value="#{activoFijoBean.partida.fechaPartida}"   maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+                                            <p:calendar id="cFechaIngreso"  showOn="button"   value="#{activoFijoBean.partida.fechaPartida}"   mindate="#{activoFijoBean.fechaMinima}" maxdate="#{activoFijoBean.fechaMaxima}"   style="width:100%" locale="es" navigator="true" pattern="dd/MM/yyyy"/>
 
 
                                         </p:column>
@@ -1620,7 +1620,7 @@
                                                 </p:column>
                                                 <p:column>
 
-                                                    <p:calendar id="cFechaIngreso" showOn="button" value="#{activoFijoBean.partida.fechaPartida}"  maxdate="#{activoFijoBean.partida.fechaPartida}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy"/>
+                                                    <p:calendar id="cFechaIngreso" showOn="button" value="#{activoFijoBean.partida.fechaPartida}"   style="width:100%" locale="es" navigator="true"   mindate="#{activoFijoBean.fechaMinima}" maxdate="#{activoFijoBean.fechaMaxima}" pattern="dd/MM/yyyy"/>
 
 
                                                 </p:column>

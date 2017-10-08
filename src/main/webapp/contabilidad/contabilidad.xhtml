@@ -16,201 +16,217 @@
                         #{contablidadPredeterminarBean.updateListaEntidades()}
 
                         <h:form id="fFiltro"> 
-                           
-                                <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder">
-                                    <p:row>
-                                        <p:column style=" width: 60%" >
-                                            <h:outputText value="Entidad:*" /> 
-                                        </p:column>
-                                    </p:row>
-                                    <p:row>
-                                        <p:column>
-                                            <p:selectOneMenu id="car"  value="#{contablidadPredeterminarBean.idEntidad}" style=" width: 100%;" > 
-                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                <f:selectItems  var="end" value="#{contablidadPredeterminarBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
-                                            </p:selectOneMenu>
-                                            <br></br>
-                                            <p:outputLabel value="#{contablidadPredeterminarBean.msgEntidad}" style=" color:  red"></p:outputLabel>
-                                        </p:column>
-                                    </p:row>
-                                </p:panelGrid>
-                            
+
+                            <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder">
+                                <p:row>
+                                    <p:column style=" width: 60%" >
+                                        <h:outputText value="Entidad:*" /> 
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:selectOneMenu id="car"  value="#{contablidadPredeterminarBean.idEntidad}" style=" width: 100%;" > 
+                                            <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                            <f:selectItems  var="end" value="#{contablidadPredeterminarBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                        </p:selectOneMenu>
+                                        <br></br>
+                                        <p:outputLabel value="#{contablidadPredeterminarBean.msgEntidad}" style=" color:  red"></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+
                             <center>
                                 <p:commandButton id="btnCreate"   ajax="false"  icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
-                                        </p:commandButton>
-                                        <p:commandButton id="btnCancel"   action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
-                                        </p:commandButton>
-                                    </center>
+                                </p:commandButton>
+                                <p:commandButton id="btnCancel"   action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
+                                </p:commandButton>
+                            </center>
                         </h:form>
                     </p:panel>
-                    
+
                 </p:outputPanel>
-                
-                 <p:outputPanel  rendered="#{contablidadPredeterminarBean.idEntidad == 0? false : true }">
-                <div class="row">
 
-                    <h:link outcome="adminPeriodos.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header " data-background-color="green">
-                                    <i class="material-icons">date_range</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title"> <br></br>Periodos</h3>
+                <p:outputPanel  rendered="#{contablidadPredeterminarBean.idEntidad == 0? false : true }">
+                    <h:form>
+                        <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
+                            <p:row>
+                                <p:column style="padding: 0px;" >
+                                    #{cuentaBean.getContabilidadPredeterminado()}
+                                    <h:outputText class="etiquetaEn" value="#{cuentaBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                    </h:outputText>
+                                </p:column>
+                                <p:column style="padding: 0px; text-align: right" >
+                                    <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{cuentaBean.btnCancelar}"  value="Cambiar Entidad"> 
 
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i> Administrar periodos.
+                                    </p:commandButton>   
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                    <div class="row">
+
+                        <h:link outcome="adminPeriodos.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header " data-background-color="green">
+                                        <i class="material-icons">date_range</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title"> <br></br>Periodos</h3>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i> Administrar periodos.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </h:link>
+                        </h:link>
 
-                    <h:link outcome="adminCuentas.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="orange">
-                                    <i class="material-icons">list</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title"><br></br>Cuentas</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i> Administrar Cuentas.
+                        <h:link outcome="adminCuentas.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="orange">
+                                        <i class="material-icons">list</i>
                                     </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </h:link>
-
-                    <h:link outcome="adminPartidas.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header " data-background-color="blue">
-                                    <i class="material-icons">library_books</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title"><br></br>Partidas</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i>Administrar partidas 
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title"><br></br>Cuentas</h3>
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i> Administrar Cuentas.
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                    </h:link>
+                        </h:link>
 
-                    <h:link outcome="adminProveedores.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="red">
-                                    <i class="material-icons">account_balance</i></div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title" > <br></br>Proveedores</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i> Administrar proveedores.
+                        <h:link outcome="adminPartidas.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header " data-background-color="blue">
+                                        <i class="material-icons">library_books</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title"><br></br>Partidas</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i>Administrar partidas 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </h:link>
-                </div>
-                <div class="row">
-                    <h:link outcome="adminTipos.xhtml">
+                        </h:link>
 
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="green">
-                                    <i class="material-icons">devices</i></div>
-
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title" > <br></br>Tipos </h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i>Administrar tipos.
+                        <h:link outcome="adminProveedores.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="red">
+                                        <i class="material-icons">account_balance</i></div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title" > <br></br>Proveedores</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i> Administrar proveedores.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </h:link>
-                    <h:link outcome="adminActivos.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="orange">
-                                    <i class="material-icons">laptop_chromebook</i></div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title" ><br></br>Activo fijo</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i> Administrar activos.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </h:link>
+                        </h:link>
+                    </div>
+                    <div class="row">
+                        <h:link outcome="adminTipos.xhtml">
 
-                    <h:link outcome="adminConfiguracion.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header " data-background-color="blue">
-                                    <i class="material-icons">settings</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title"><br></br>Configuración</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">access_time</i> Administrar Configuración.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </h:link>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green">
+                                        <i class="material-icons">devices</i></div>
 
-                    <h:link outcome="adminReportesContabilidad.xhtml">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header " data-background-color="red">
-                                    <i class="material-icons">find_in_page</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Contabilidad</p>
-                                    <h3 class="title"><br></br>Reportes</h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">info</i>Ver reportes.
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title" > <br></br>Tipos </h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i>Administrar tipos.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </h:link>
-                </div>
-                 </p:outputPanel>
-                
+                        </h:link>
+                        <h:link outcome="adminActivos.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="orange">
+                                        <i class="material-icons">laptop_chromebook</i></div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title" ><br></br>Activo fijo</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i> Administrar activos.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+
+                        <h:link outcome="adminConfiguracion.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header " data-background-color="blue">
+                                        <i class="material-icons">settings</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title"><br></br>Configuración</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">access_time</i> Administrar Configuración.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+
+                        <h:link outcome="adminReportesContabilidad.xhtml">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header " data-background-color="red">
+                                        <i class="material-icons">find_in_page</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Contabilidad</p>
+                                        <h3 class="title"><br></br>Reportes</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">info</i>Ver reportes.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:link>
+                    </div>
+                </p:outputPanel>
+
             </ui:define>
 
 
 
             <ui:define name="aux">
 
-                
+
 
 
                 <script>

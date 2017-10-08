@@ -67,15 +67,11 @@ public class ReporteContabilidadBean extends Actividad {
     //Objeto capa de negocio Entidad
     private IEntidadBo entidadBo;
 
-    
-
     //Identificador Reporte
     private Integer idReporte;
 
     //Identificador SubReporte
     private Integer idSubReporte;
-
-    
 
     //Mensaje error reporte filtro Reporte
     private String msgReporte;
@@ -96,19 +92,19 @@ public class ReporteContabilidadBean extends Actividad {
     private TEstructura utilidadEstructura;
 
     /*Lista para ingresos */
-    private List<TEstructura> listaEstructuraIngresos;
+    private TEstructura listaEstructuraIngresos;
 
     /*Lista para costos */
-    private List<TEstructura> listaEstructuraCostos;
+    private TEstructura listaEstructuraCostos;
 
     /*Lista para Gastos */
-    private List<TEstructura> listaEstructuraGastos;
+    private TEstructura listaEstructuraGastos;
 
     /*Lista para Otros  Gastos */
-    private List<TEstructura> listaEstructuraOtrosGastos;
+    private TEstructura listaEstructuraOtrosGastos;
 
     /*Lista para Otros  Ingresos */
-    private List<TEstructura> listaEstructuraOtrosIngresos;
+    private TEstructura listaEstructuraOtrosIngresos;
 
     /* para estructura  Activos*/
     private TEstructura estructuraActivo;
@@ -119,15 +115,22 @@ public class ReporteContabilidadBean extends Actividad {
     /* para estructura  Capital*/
     private TEstructura estructuraPatrimonio;
 
-    private List<EstadoResultado> listEstRe;
-
-    private BigDecimal Utilidad;
-
-    private BigDecimal Reserva;
-
-    private BigDecimal Renta;
+   
 
     private String msgEjer;
+
+    private BigDecimal valor1;
+    private BigDecimal valor2;
+    private BigDecimal valor3;
+    private BigDecimal valor4;
+    private BigDecimal valor5;
+    private BigDecimal valor6;
+    private BigDecimal valor7;
+    private BigDecimal valor8;
+    private BigDecimal valor9;
+    private BigDecimal valor10;
+    private BigDecimal valor11;
+    private BigDecimal valor12;
 
     private TEntidad entidadSeleccionada;
 
@@ -148,8 +151,6 @@ public class ReporteContabilidadBean extends Actividad {
         this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
-    
-    
     public String getMsgEjer() {
         return msgEjer;
     }
@@ -223,46 +224,6 @@ public class ReporteContabilidadBean extends Actividad {
         this.utilidadEstructura = utilidadEstructura;
     }
 
-    public List<TEstructura> getListaEstructuraIngresos() {
-        return listaEstructuraIngresos;
-    }
-
-    public void setListaEstructuraIngresos(List<TEstructura> listaEstructuraIngresos) {
-        this.listaEstructuraIngresos = listaEstructuraIngresos;
-    }
-
-    public List<TEstructura> getListaEstructuraCostos() {
-        return listaEstructuraCostos;
-    }
-
-    public void setListaEstructuraCostos(List<TEstructura> listaEstructuraCostos) {
-        this.listaEstructuraCostos = listaEstructuraCostos;
-    }
-
-    public List<TEstructura> getListaEstructuraGastos() {
-        return listaEstructuraGastos;
-    }
-
-    public void setListaEstructuraGastos(List<TEstructura> listaEstructuraGastos) {
-        this.listaEstructuraGastos = listaEstructuraGastos;
-    }
-
-    public List<TEstructura> getListaEstructuraOtrosGastos() {
-        return listaEstructuraOtrosGastos;
-    }
-
-    public void setListaEstructuraOtrosGastos(List<TEstructura> listaEstructuraOtrosGastos) {
-        this.listaEstructuraOtrosGastos = listaEstructuraOtrosGastos;
-    }
-
-    public List<TEstructura> getListaEstructuraOtrosIngresos() {
-        return listaEstructuraOtrosIngresos;
-    }
-
-    public void setListaEstructuraOtrosIngresos(List<TEstructura> listaEstructuraOtrosIngresos) {
-        this.listaEstructuraOtrosIngresos = listaEstructuraOtrosIngresos;
-    }
-
     public ICuentaBo getCuentaBo() {
         return cuentaBo;
     }
@@ -270,43 +231,6 @@ public class ReporteContabilidadBean extends Actividad {
     public void setCuentaBo(ICuentaBo cuentaBo) {
         this.cuentaBo = cuentaBo;
     }
-
-    public List<EstadoResultado> getListEstRe() {
-        return listEstRe;
-    }
-
-    public void setListEstRe(List<EstadoResultado> listEstRe) {
-        this.listEstRe = listEstRe;
-    }
-
-    public BigDecimal getUtilidad() {
-        return Utilidad;
-    }
-
-    public void setUtilidad(BigDecimal Utilidad) {
-        this.Utilidad = Utilidad;
-    }
-
-    public BigDecimal getReserva() {
-        return Reserva;
-    }
-
-    public void setReserva(BigDecimal Reserva) {
-        this.Reserva = Reserva;
-    }
-
-    public BigDecimal getRenta() {
-        return Renta;
-    }
-
-    public void setRenta(BigDecimal Renta) {
-        this.Renta = Renta;
-    }
-
-
-
-    
-
     /**
      * Retorna Instancia
      *
@@ -417,9 +341,6 @@ public class ReporteContabilidadBean extends Actividad {
         this.entidadBo = entidadBo;
     }
 
-
-
-    
     /**
      * Retorna Instancia
      *
@@ -509,7 +430,6 @@ public class ReporteContabilidadBean extends Actividad {
 
         estadoReporte = true;
 
- 
         if (idReporte == 0) {
             this.msgReporte = "Tipo de reporte requerido";
             estadoReporte = false;
@@ -795,7 +715,7 @@ public class ReporteContabilidadBean extends Actividad {
         FacesContext.getCurrentInstance().responseComplete();
 
         auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
-        
+
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -869,7 +789,7 @@ public class ReporteContabilidadBean extends Actividad {
         FacesContext.getCurrentInstance().responseComplete();
 
         auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad());
-        
+
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1182,7 +1102,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:" + this.idEjercicio);
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -1239,7 +1159,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:" + this.idEjercicio);
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1297,7 +1217,7 @@ public class ReporteContabilidadBean extends Actividad {
 
         FacesContext.getCurrentInstance().responseComplete();
 
-        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
+        auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:" + this.idEjercicio);
 
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());
@@ -1313,13 +1233,13 @@ public class ReporteContabilidadBean extends Actividad {
 
         /* Accesando a datos de configuracion Estado de Resultado*/
         List<TEstructura> auxEst = this.estructuraBo.listEstructura(this.idEjercicio, 1);
-        this.listEstRe = new ArrayList<>();
+       
 
-        this.listaEstructuraCostos = new ArrayList<>();
-        this.listaEstructuraGastos = new ArrayList<>();
-        this.listaEstructuraIngresos = new ArrayList<>();
-        this.listaEstructuraOtrosGastos = new ArrayList<>();
-        this.listaEstructuraOtrosIngresos = new ArrayList<>();
+        this.listaEstructuraCostos = null;
+        this.listaEstructuraGastos = null;
+        this.listaEstructuraIngresos = null;
+        this.listaEstructuraOtrosGastos = null;
+        this.listaEstructuraOtrosIngresos = null;
         this.rentaEstructura = null;
         this.ReservaEstructura = null;
         this.utilidadEstructura = null;
@@ -1329,19 +1249,19 @@ public class ReporteContabilidadBean extends Actividad {
             for (TEstructura tEstructura : auxEst) {
                 switch (tEstructura.getGrupoReporte()) {
                     case 1:
-                        this.listaEstructuraIngresos.add(tEstructura);
+                        this.listaEstructuraIngresos = tEstructura;
                         break;
                     case 2:
-                        this.listaEstructuraCostos.add(tEstructura);
+                        this.listaEstructuraCostos = tEstructura;
                         break;
                     case 3:
-                        this.listaEstructuraGastos.add(tEstructura);
+                        this.listaEstructuraGastos = tEstructura;
                         break;
                     case 4:
-                        this.listaEstructuraOtrosIngresos.add(tEstructura);
+                        this.listaEstructuraOtrosIngresos = tEstructura;
                         break;
                     case 5:
-                        this.listaEstructuraOtrosGastos.add(tEstructura);
+                        this.listaEstructuraOtrosGastos = tEstructura;
                         break;
                     case 6:
                         this.rentaEstructura = tEstructura;
@@ -1355,186 +1275,146 @@ public class ReporteContabilidadBean extends Actividad {
                 }
             }
 
-            Utilidad = BigDecimal.ZERO;
+           
             BigDecimal debe;
             BigDecimal haber;
             /* 
             * Datos para el total de Ingresos
              */
-            EstadoResultado grupoIngre = new EstadoResultado("INGRESOS", "", BigDecimal.ZERO, BigDecimal.ZERO);
-            BigDecimal totalIngre = BigDecimal.ZERO;
-            listEstRe.add(grupoIngre);
+            valor1 = BigDecimal.ZERO;
+            
 
-            for (TEstructura ingre : listaEstructuraIngresos) {
-                EstadoResultado auxEstado;
-                debe = this.cuentaBo.saldoCuenta(ingre.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
-                haber = this.cuentaBo.saldoCuenta(ingre.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
-                BigDecimal saldo;
-                if (ingre.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
-                    saldo = debe.subtract(haber);
-                } else {
-                    saldo = haber.subtract(debe);
-                }
-                saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
-                totalIngre = totalIngre.add(saldo);
+            debe = this.cuentaBo.saldoCuenta(listaEstructuraIngresos.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
+            haber = this.cuentaBo.saldoCuenta(listaEstructuraIngresos.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
 
-                auxEstado = new EstadoResultado("", ingre.getTCuenta().getNombreCuenta(), saldo, BigDecimal.ZERO);
-                listEstRe.add(auxEstado);
+            if (listaEstructuraIngresos.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
+                valor1 = debe.subtract(haber);
+            } else {
+                valor1 = haber.subtract(debe);
             }
-            totalIngre = totalIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoIngre.setSaldoGrupo( totalIngre);
+            valor1 = valor1.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
 
             /* 
             * Datos para el total de Costos
              */
-            EstadoResultado grupoCost = new EstadoResultado("COSTOS", "",BigDecimal.ZERO , BigDecimal.ZERO);
-            BigDecimal totalCost = BigDecimal.ZERO;
-            listEstRe.add(grupoCost);
+          
+            valor2 = BigDecimal.ZERO;
+            debe = this.cuentaBo.saldoCuenta(listaEstructuraCostos.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
+            haber = this.cuentaBo.saldoCuenta(listaEstructuraCostos.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
 
-            for (TEstructura cost : listaEstructuraCostos) {
-                EstadoResultado auxEstado;
-                debe = this.cuentaBo.saldoCuenta(cost.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
-                haber = this.cuentaBo.saldoCuenta(cost.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
-                BigDecimal saldo;
-                if (cost.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
-                    saldo = debe.subtract(haber);
-                } else {
-                    saldo = haber.subtract(debe);
-                }
-                saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
-                totalCost = totalCost.add(saldo);
-
-                auxEstado = new EstadoResultado("", cost.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
-                listEstRe.add(auxEstado);
+            if (listaEstructuraCostos.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
+                valor2 = debe.subtract(haber);
+            } else {
+                valor2 = haber.subtract(debe);
             }
-            totalCost = totalCost.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoCost.setSaldoGrupo( totalCost);
+            valor2 = valor2.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
+
 
             /* 
             * Datos para Utilidad Bruta
              */
-            Utilidad = totalIngre.subtract(totalCost);
-            Utilidad = Utilidad.setScale(2, BigDecimal.ROUND_HALF_UP);
-
-            EstadoResultado grupoUtiBrut = new EstadoResultado("UTILIDAD BRUTA", "", BigDecimal.ZERO,  Utilidad);
-            listEstRe.add(grupoUtiBrut);
+            valor9 = valor1.subtract(valor2);
+            
+            valor9 = valor9.setScale(2, BigDecimal.ROUND_HALF_UP);
 
             /* 
             * Datos para el total de Gastos
              */
-            EstadoResultado grupoGast = new EstadoResultado("GASTOS DE OPERACIÓN", "", BigDecimal.ZERO, BigDecimal.ZERO);
-            BigDecimal totalGast = BigDecimal.ZERO;
-            listEstRe.add(grupoGast);
+        
+            valor3 = BigDecimal.ZERO;
+            
+            debe = this.cuentaBo.saldoCuenta(listaEstructuraGastos.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
+            haber = this.cuentaBo.saldoCuenta(listaEstructuraGastos.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
 
-            for (TEstructura gast : listaEstructuraGastos) {
-                EstadoResultado auxEstado;
-                debe = this.cuentaBo.saldoCuenta(gast.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
-                haber = this.cuentaBo.saldoCuenta(gast.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
-                BigDecimal saldo;
-                if (gast.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
-                    saldo = debe.subtract(haber);
-                } else {
-                    saldo = haber.subtract(debe);
-                }
-                saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
-                totalGast = totalGast.add(saldo);
-                auxEstado = new EstadoResultado("", gast.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
-                listEstRe.add(auxEstado);
+            if (listaEstructuraGastos.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
+                valor3 = debe.subtract(haber);
+            } else {
+                valor3 = haber.subtract(debe);
             }
-
-            totalGast = totalGast.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoGast.setSaldoGrupo( totalGast);
-
+            valor3 = valor3.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
+            
             /* 
             * Datos para Utilidad de Operacion
              */
-            Utilidad = Utilidad.subtract(totalGast);
-            EstadoResultado grupoUtiOpe = new EstadoResultado("UTILIDAD DE OPERACIÓN ", "", BigDecimal.ZERO,  Utilidad);
-            listEstRe.add(grupoUtiOpe);
+            valor10 = valor9.subtract(valor3);
+           
+            valor10 = valor10.setScale(2, BigDecimal.ROUND_HALF_UP);
+   
 
             /* 
             * Datos para Otros Ingresos
-             */
-            EstadoResultado grupoOtrIngre = new EstadoResultado("OTROS INGRESOS", "", BigDecimal.ZERO,BigDecimal.ZERO );
-            BigDecimal totalOtrIngre = BigDecimal.ZERO;
-            listEstRe.add(grupoOtrIngre);
+            */
+            
+            valor4 = BigDecimal.ZERO;
+             
+            debe = this.cuentaBo.saldoCuenta(listaEstructuraOtrosIngresos.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
+            haber = this.cuentaBo.saldoCuenta(listaEstructuraOtrosIngresos.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
 
-            for (TEstructura otrIngre : listaEstructuraOtrosIngresos) {
-                EstadoResultado auxEstado;
-                debe = this.cuentaBo.saldoCuenta(otrIngre.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
-                haber = this.cuentaBo.saldoCuenta(otrIngre.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
-                BigDecimal saldo;
-                if (otrIngre.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
-                    saldo = debe.subtract(haber);
-                } else {
-                    saldo = haber.subtract(debe);
-                }
-                saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
-                totalOtrIngre = totalOtrIngre.add(saldo);
-                auxEstado = new EstadoResultado("", otrIngre.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
-                listEstRe.add(auxEstado);
+            if (listaEstructuraOtrosIngresos.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
+                valor4 = debe.subtract(haber);
+            } else {
+                valor4 = haber.subtract(debe);
             }
-            totalOtrIngre = totalOtrIngre.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoOtrIngre.setSaldoGrupo( totalOtrIngre);
+            valor4 = valor4.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
+            
 
             /* 
             * Datos para Otros Gastos
              */
-            EstadoResultado grupoOtrGast = new EstadoResultado("OTROS GASTOS", "", BigDecimal.ZERO, BigDecimal.ZERO);
-            BigDecimal totalOtrGast = BigDecimal.ZERO;
-            listEstRe.add(grupoOtrGast);
+           valor5 = BigDecimal.ZERO;
+             
+           
+            debe = this.cuentaBo.saldoCuenta(listaEstructuraOtrosGastos.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
+            haber = this.cuentaBo.saldoCuenta(listaEstructuraOtrosGastos.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
 
-            for (TEstructura otrGast : listaEstructuraOtrosGastos) {
-                EstadoResultado auxEstado;
-                debe = this.cuentaBo.saldoCuenta(otrGast.getTCuenta().getIdCuenta(), idEjercicio, "Debe");
-                haber = this.cuentaBo.saldoCuenta(otrGast.getTCuenta().getIdCuenta(), idEjercicio, "Haber");
-                BigDecimal saldo;
-                if (otrGast.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
-                    saldo = debe.subtract(haber);
-                } else {
-                    saldo = haber.subtract(debe);
-                }
-                saldo = saldo.setScale(2, BigDecimal.ROUND_HALF_UP);
-                totalOtrGast = totalOtrGast.add(saldo);
-                auxEstado = new EstadoResultado("", otrGast.getTCuenta().getNombreCuenta(),  saldo, BigDecimal.ZERO);
-                listEstRe.add(auxEstado);
+            if (listaEstructuraOtrosGastos.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
+                valor5 = debe.subtract(haber);
+            } else {
+                valor5 = haber.subtract(debe);
             }
-            totalOtrGast = totalOtrGast.setScale(2, BigDecimal.ROUND_HALF_UP);
-            grupoOtrGast.setSaldoGrupo( totalOtrGast);
-
+            valor5 = valor5.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
             /* 
-            * Datos para Utilidad de Ates de Impuestos
-             */
-            Utilidad = Utilidad.add(totalOtrIngre).subtract(totalOtrGast);
-
-            Renta = BigDecimal.ZERO;
-            Reserva = BigDecimal.ZERO;
+            * Datos para Utilidad  antes de Impuestos
+            
+            */
+            valor11 = valor10.add(valor4.subtract(valor5));
+            
+            valor11 = valor11.setScale(2, BigDecimal.ROUND_HALF_UP);
+            
+            valor8 = valor11;
+        
+            valor6= BigDecimal.ZERO;
+            valor7= BigDecimal.ZERO;
+            valor12 = BigDecimal.ZERO;
+       
 
             /*
             Si hay perdida no se paga inpuestos se hace ni reserva
              */
-            if (Utilidad.compareTo(BigDecimal.ZERO) > 0) {
+            
+            if (valor8.compareTo(BigDecimal.ZERO) > 0) {
+                
                 if (this.rentaEstructura != null) {
 
-                    EstadoResultado grupoUtiAntImp = new EstadoResultado("UTILIDAD ANTES DE IMPUESTOS ", "", BigDecimal.ZERO,  Utilidad);
-                    listEstRe.add(grupoUtiAntImp);
-
+                   
                     BigDecimal porRent;
 
-                    if (Utilidad.compareTo(rentaEstructura.getValorRango()) <= 0) {
+                    if (valor8.compareTo(rentaEstructura.getValorRango()) <= 0) {
                         porRent = rentaEstructura.getPorMinEstructura().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
                     } else {
                         porRent = rentaEstructura.getPorMaxEstructura().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
                     }
 
-                    Renta = Utilidad.multiply(porRent);
-                    Renta = Renta.setScale(2, BigDecimal.ROUND_HALF_UP);
-                    EstadoResultado grupoImp = new EstadoResultado("IMPUESTO DE RENTA", " ", BigDecimal.ZERO,  Renta);
-                    listEstRe.add(grupoImp);
-
-                    Utilidad = Utilidad.subtract(Renta);
-                    EstadoResultado grupoUtiLiq = new EstadoResultado("UTILIDAD LIQUIDA", "", BigDecimal.ZERO,  Utilidad);
-                    listEstRe.add(grupoUtiLiq);
+                    valor6 = valor8.multiply(porRent);
+                    valor6 = valor6.setScale(2, BigDecimal.ROUND_HALF_UP);
+                    
+                    valor8 = valor11.subtract(valor6);
+                    valor12 = valor8;
 
                 }
 
@@ -1542,17 +1422,11 @@ public class ReporteContabilidadBean extends Actividad {
 
                     BigDecimal porRese;
                     porRese = ReservaEstructura.getPorMinEstructura().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
-                    Reserva = Utilidad.multiply(porRese);
-                    Reserva = Reserva.setScale(2, BigDecimal.ROUND_HALF_UP);
-                    EstadoResultado grupoRese = new EstadoResultado("RESERVA LEGAL", " ", BigDecimal.ZERO,  Reserva);
-                    listEstRe.add(grupoRese);
-                    Utilidad = Utilidad.subtract(Reserva);
+                    valor7 = valor8.multiply(porRese);
+                    valor7 = valor7.setScale(2, BigDecimal.ROUND_HALF_UP);
+                    valor8 = valor8.subtract(valor7);
                 }
             }
-
-            EstadoResultado resulEjer = new EstadoResultado("RESULTADO DEL EJERCICIO", "", BigDecimal.ZERO, Utilidad);
-            listEstRe.add(resulEjer);
-
         }
 
         return !auxEst.isEmpty();
@@ -1563,27 +1437,35 @@ public class ReporteContabilidadBean extends Actividad {
 
         if (this.estadoResultado()) {
 
-            TEntidad auxEntidad = entidadBo.getTEntidad(this.entidadSeleccionada.getIdEntidad());
-
-            TEjercicio auxEjercicio = ejercicioBo.getEjercicio(idEjercicio);
-
             Map<String, Object> parametros = new HashMap();
 
-            parametros.put("nombreEntidad", auxEntidad.getNombreEntidad());
+            parametros.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
 
-            parametros.put("direccionEntidad", auxEntidad.getDireccionEntidad());
+            parametros.put("idEjercicio", this.idEjercicio);
 
-            parametros.put("telEntidad", auxEntidad.getTelefonoEntidad());
+            parametros.put("valor1", this.valor1);
 
-            parametros.put("logoEntidad", auxEntidad.getLogoEntidad());
+            parametros.put("valor2", this.valor2);
 
-            if (auxEjercicio.getEstadoEjercicio()) {
-                parametros.put("fechaReporte", new Date());
-            } else {
-                parametros.put("fechaReporte", auxEjercicio.getFechaCierre());
-            }
+            parametros.put("valor3", this.valor3);
 
-            JRDataSource dataSource = new JRBeanCollectionDataSource(this.listEstRe);
+            parametros.put("valor4", this.valor4);
+
+            parametros.put("valor5", this.valor5);
+
+            parametros.put("valor6", this.valor6);
+
+            parametros.put("valor7", this.valor7);
+
+            parametros.put("valor8", this.valor8);
+
+            parametros.put("valor9", this.valor9);
+
+            parametros.put("valor10", this.valor10);
+
+            parametros.put("valor11", this.valor11);
+
+            parametros.put("valor12", this.valor12);
 
             File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/estadoResultado.jasper"));
 
@@ -1594,7 +1476,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             if (type == 1) {
 
-                byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, dataSource);
+                byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
 
                 response.setContentType("application/pdf");
                 response.setContentLength(bytes.length);
@@ -1607,7 +1489,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             } else {
 
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, dataSource);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
                 response.addHeader("Content-disposition", "attachment; filename=EstadoResultado.pdf");
                 ServletOutputStream stream = response.getOutputStream();
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
@@ -1619,7 +1501,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             FacesContext.getCurrentInstance().responseComplete();
 
-            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
+            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:" + this.idEjercicio);
 
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());
@@ -1648,43 +1530,43 @@ public class ReporteContabilidadBean extends Actividad {
 
             parametros.put("idCuentaResultado", this.utilidadEstructura.getTCuenta().getIdCuenta());
 
-            if (this.Utilidad.compareTo(BigDecimal.ZERO) > 0) {
+            if (this.valor8.compareTo(BigDecimal.ZERO) > 0) {
                 parametros.put("debeResultado", BigDecimal.ZERO);
-                parametros.put("haberResultado", this.Utilidad);
-            } else if (this.Utilidad.compareTo(BigDecimal.ZERO) < 0) {
-                parametros.put("debeResultado", this.Utilidad.multiply(Utilidad.multiply(new BigDecimal(-1))));
+                parametros.put("haberResultado", this.valor8);
+            } else if (this.valor8.compareTo(BigDecimal.ZERO) < 0) {
+                parametros.put("debeResultado", this.valor8.multiply(valor8.multiply(new BigDecimal(-1))));
                 parametros.put("haberResultado", BigDecimal.ZERO);
             }
 
-            if (this.Renta.compareTo(BigDecimal.ZERO) > 0 && this.rentaEstructura != null) {
+            if (this.valor6.compareTo(BigDecimal.ZERO) > 0 && this.rentaEstructura != null) {
                 parametros.put("idCuentaRenta", rentaEstructura.getTCuenta().getIdCuenta());
 
                 if (rentaEstructura.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
                     parametros.put("haberRenta", BigDecimal.ZERO);
-                    parametros.put("debeRenta", this.Renta);
+                    parametros.put("debeRenta", this.valor6);
                 } else {
                     parametros.put("debeRenta", BigDecimal.ZERO);
-                    parametros.put("haberRenta", this.Renta);
+                    parametros.put("haberRenta", this.valor6);
                 }
 
             }
 
-            if (this.Reserva.compareTo(BigDecimal.ZERO) > 0 && this.ReservaEstructura != null) {
+            if (this.valor7.compareTo(BigDecimal.ZERO) > 0 && this.ReservaEstructura != null) {
 
                 parametros.put("idCuentaReserva", ReservaEstructura.getTCuenta().getIdCuenta());
 
                 if (ReservaEstructura.getTCuenta().getNaturalezaCuenta().equals("Deudora")) {
                     parametros.put("haberReserva", BigDecimal.ZERO);
-                    parametros.put("debeReserva", this.Reserva);
+                    parametros.put("debeReserva", this.valor7);
                 } else {
                     parametros.put("debeReserva", BigDecimal.ZERO);
-                    parametros.put("haberReserva", this.Reserva);
+                    parametros.put("haberReserva", this.valor7);
                 }
 
             }
-        
 
- /*
+
+            /*
                 * Parte donde se procesa el cierre y la apertura 
              */
             for (TEstructura tauxEstBalace : auxEst) {
@@ -1725,9 +1607,9 @@ public class ReporteContabilidadBean extends Actividad {
                 saldo = saldo.add(haber.subtract(debe));
             }
 
-            saldo = saldo.add(this.Utilidad);
-            saldo = saldo.add(this.Renta);
-            saldo = saldo.add(this.Reserva);
+            saldo = saldo.add(this.valor8);
+            saldo = saldo.add(this.valor6);
+            saldo = saldo.add(this.valor7);
 
             parametros.put("totalPasivoCapital", saldo);
 
@@ -1765,7 +1647,7 @@ public class ReporteContabilidadBean extends Actividad {
 
             FacesContext.getCurrentInstance().responseComplete();
 
-            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:"+this.idEjercicio);
+            auxBitacora.setDatosBitacora("Entidad:" + this.entidadSeleccionada.getNombreEntidad() + ", Ejercicio:" + this.idEjercicio);
 
             auxBitacora.setHoraBitacora(new Date());
             auxBitacora.setFechaBitacora(new Date());

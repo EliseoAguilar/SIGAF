@@ -16,11 +16,9 @@ import org.hibernate.SessionFactory;
  *
  * @author Eliseo
  */
-public class PeriodoDao  implements IPeriodoDao{
-   
-    
+public class PeriodoDao implements IPeriodoDao {
+
     private SessionFactory sessionFactory;
-    
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
@@ -29,6 +27,7 @@ public class PeriodoDao  implements IPeriodoDao{
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public void create(TPeriodo periodo) {
         Session session = sessionFactory.openSession();
@@ -42,10 +41,11 @@ public class PeriodoDao  implements IPeriodoDao{
 
     @Override
     public TPeriodo getPeriodo(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = this.sessionFactory.openSession();
+        TPeriodo periodo = (TPeriodo) session.createQuery("from TPeriodo where idPeriodo=:id ").setParameter("id", id).uniqueResult();
+        session.close();
+        return periodo;
     }
-
-
 
     @Override
     public void delete(Integer id) {
@@ -68,23 +68,17 @@ public class PeriodoDao  implements IPeriodoDao{
         Session session = this.sessionFactory.openSession();
         List<TPeriodo> listPeriodos = session.createQuery("from TPeriodo where TEjercicio.idEjercicio=:id order by idPeriodo DESC").setParameter("id", id).list();
         session.close();
-      
-        return listPeriodos; 
-    }
-    
-    
 
-       
-    
+        return listPeriodos;
+    }
+
     @Override
     public TPeriodo getPeriodoAbierto(Integer id) {
-    Session session = this.sessionFactory.openSession();
-    TPeriodo periodo = (TPeriodo) session.createQuery("from TPeriodo where estadoPeriodo=true and TEjercicio.idEjercicio=:id ").setParameter("id", id).uniqueResult();
-    session.close();  
-    return periodo; 
-        
-    } 
-    
-    
+        Session session = this.sessionFactory.openSession();
+        TPeriodo periodo = (TPeriodo) session.createQuery("from TPeriodo where estadoPeriodo=true and TEjercicio.idEjercicio=:id ").setParameter("id", id).uniqueResult();
+        session.close();
+        return periodo;
+
+    }
 
 }
