@@ -86,14 +86,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="2" width="114" height="20" uuid="e9ee83b0-f204-4789-9b50-9c6691b25047"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[REPRESENTANTE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="371" y="2" width="69" height="20" uuid="b3dd2873-b96f-4848-84d8-7fa5fb92c016"/>
+				<reportElement x="474" y="0" width="80" height="20" uuid="b3dd2873-b96f-4848-84d8-7fa5fb92c016"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -107,7 +100,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="181" y="2" width="128" height="20" uuid="20a0e7f6-b8d6-4aa7-a284-038879cb0448"/>
+				<reportElement x="185" y="2" width="128" height="20" uuid="20a0e7f6-b8d6-4aa7-a284-038879cb0448"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -135,25 +128,18 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="181" y="0" width="189" height="20" uuid="77ed4d67-e535-4441-a894-56817226d104"/>
+				<reportElement x="185" y="0" width="282" height="20" uuid="77ed4d67-e535-4441-a894-56817226d104"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="371" y="0" width="69" height="20" uuid="b3cca99e-3c9e-4178-8eec-4b1031315d4b"/>
+			<textField>
+				<reportElement x="474" y="0" width="81" height="20" uuid="803c5f2e-8e96-4edf-9d8f-970f4d5b4922"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_telefono_entidad}+", "+$F{t_entidad_celular_entidad}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="440" y="0" width="115" height="20" uuid="d38f5037-d0a5-47a9-9720-e0c95bd26123"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_entidad_nit_entidad}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
