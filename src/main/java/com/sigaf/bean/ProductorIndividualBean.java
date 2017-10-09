@@ -373,12 +373,12 @@ public class ProductorIndividualBean extends Actividad {
         TProductorGrupal productorGrupal;
         productorGrupal = this.productorGrupalBo.getProductorGrupal(1);
         if (this.habilitarGrupo == true) {
-            this.productorIndividual.setTProductorGrupal(productorGrupal);
-        } else {
             this.productorIndividual.setTProductorGrupal(productorGrupalSeleccionado);
+        } else {
+            this.productorIndividual.setTProductorGrupal(productorGrupal);
         }
         if (this.productorIndividual.getRepresentanteGrupal() == true) {
-            this.ProductorIndividualSeleccionado = this.productorIndividualBo.getProdcutorIndividualRepre();
+            this.ProductorIndividualSeleccionado = this.productorIndividualBo.getProdcutorIndividualRepre(this.productorGrupalSeleccionado.getIdProductorGrupal());
             if (this.ProductorIndividualSeleccionado != null) {
                 this.ProductorIndividualSeleccionado.setRepresentanteGrupal(false);
                 this.productorIndividualBo.update(this.ProductorIndividualSeleccionado);
@@ -412,10 +412,15 @@ public class ProductorIndividualBean extends Actividad {
         TProductorGrupal productorGrupal;
         productorGrupal = this.productorGrupalBo.getProductorGrupal(1);
         if (this.ProductorIndividualSeleccionado.getRepresentanteGrupal() == true) {
-            this.ProductorIndividualSeleccionadoModificar = this.productorIndividualBo.getProdcutorIndividualRepre();
+           
+            this.ProductorIndividualSeleccionadoModificar = this.productorIndividualBo.getProdcutorIndividualRepre(this.productorGrupalSeleccionado.getIdProductorGrupal());
             if (this.ProductorIndividualSeleccionadoModificar != null) {
                 this.ProductorIndividualSeleccionadoModificar.setRepresentanteGrupal(false);
                 this.productorIndividualBo.update(this.ProductorIndividualSeleccionadoModificar);
+            }else{
+                
+                
+                this.ProductorIndividualSeleccionado.setRepresentanteGrupal(true);
             }
         }
         if (this.habilitarGrupo == true) {
@@ -802,10 +807,13 @@ public class ProductorIndividualBean extends Actividad {
         this.productorIndividual = new TProductorIndividual();
         this.productorIndividual.setNombresProdcutorIndividual("");
         this.productorIndividual.setSexoProductorIndividual("Masculino");
+        this.productorIndividual.setRepresentanteGrupal(false);
 
     }
 
     public void enableCreate() {
+        
+        this.productorIndividual.setRepresentanteGrupal(false);
 
         this.limpiar();
         super.enableShowCreate();
@@ -843,8 +851,8 @@ public class ProductorIndividualBean extends Actividad {
 
     public void cargarModificar() {
 
-        if (this.productorGrupalSeleccionado.getNombreProductorGrupal() == "Ninguno") {
-            this.habilitarGrupo = true;
+        if ("Sin grupo".equals(this.productorGrupalSeleccionado.getNombreProductorGrupal())) {
+            this.habilitarGrupo = false;
         } else {
             this.habilitarGrupo = true;
         }

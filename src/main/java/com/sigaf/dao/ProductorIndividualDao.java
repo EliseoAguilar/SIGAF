@@ -98,10 +98,10 @@ public class ProductorIndividualDao implements IProductorIndividualDao {
     }
 
     @Override
-    public TProductorIndividual getProdcutorIndividualRepre() {
+    public TProductorIndividual getProdcutorIndividualRepre(Integer id) {
         Session session = this.sessionFactory.openSession();
 
-        TProductorIndividual productor = (TProductorIndividual) session.createQuery("from TProductorIndividual where representanteGrupal=true").uniqueResult();
+        TProductorIndividual productor = (TProductorIndividual) session.createQuery("from TProductorIndividual t inner join fetch t.TProductorGrupal p where t.representanteGrupal=true and p.idProductorGrupal=:id").setParameter("id", id).uniqueResult();
         session.close();
 
         return productor;

@@ -24,7 +24,7 @@ public interface IProductorIndividualBo {
 
     public boolean getProdcutorIndividual(String dui);
 
-    public TProductorIndividual getProdcutorIndividualRepre();
+    public TProductorIndividual getProdcutorIndividualRepre(Integer id);
 
     public TProductorIndividual getProdcutorIndividual(Integer id);
 

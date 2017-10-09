@@ -362,9 +362,13 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{productoBean.showData}">
-                        <h:form>     
+                        <h:form target="_blank">     
                             #{productoBean.updateListaProductos()}
                             <p:panel id="pDatosCompradores" header="Administrar cultivos" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                                
+                                <b>    <h:outputText value="Buscar productor individual"/> </b>
+                                 <hr></hr>
+                                 <br></br>
                                 <p:fieldset>
                                     <p:panelGrid styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
                                         <p:row>
@@ -390,13 +394,20 @@
                                     </p:panelGrid>
                                 </p:fieldset>
                                 <br></br>
+                                <b>  <h:outputText value="Lista de cultivos"/> </b>
+                                 <hr></hr>
                                 <p:outputPanel rendered="#{productoBean.mostrarTabla}">                                    
                                     #{productoBean.updateListaProductosProductor()}
                                     <div align="center"> 
                                         <p:fieldset>
-                                            <div align="left">
+                                            <div style=" float: left">
                                                 <p:commandButton title="Nuevo cultivo" id="add"  actionListener="#{productoBean.enableShowCreate}" update=":padding"    icon="fa fa-plus" style="#{agronegocioBean.btnNuevo}"  />
                                             </div>
+                                            
+                                            <div style=" float:  right">
+                                                <p:commandButton title="Generar reporte de cultivos" ajax="false"   actionListener="#{productoBean.verReporteProductos()}" update=":padding"    icon="fa fa-file-pdf-o"   />
+                                            </div>
+                                            
                                         </p:fieldset>
                                         <p:dataTable  id="basicDT" var="compradores" widgetVar="data"  paginator="true" rows="10" value="#{productoBean.listaProductoFiltrados}"
                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

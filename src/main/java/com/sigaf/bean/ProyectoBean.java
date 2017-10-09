@@ -2637,10 +2637,28 @@ public class ProyectoBean extends Actividad {
             this.msgDesembolso = "";
         }
         if (this.desembolso.getFechaDesembolso() == null) {
+            
+           
             this.msgFecha = "Debe introducir una fecha";
             this.estadoFormularioDesembolso = false;
         } else {
-            this.msgFecha = "";
+            
+            Calendar c = Calendar.getInstance();
+            c.setTime(this.desembolso.getFechaDesembolso());
+            
+             int dia= c.get(c.DATE);
+             
+             if(dia>28){
+                 
+                this.msgFecha = "La fecha deber ser inferior al dia 29";
+                 this.estadoFormularioDesembolso = false; 
+             }else{
+                 
+                 this.msgFecha = "";
+             }
+           
+            
+            
         }
 
     }

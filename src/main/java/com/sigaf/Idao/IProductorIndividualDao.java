@@ -26,7 +26,7 @@ public interface IProductorIndividualDao {
 
     public TProductorIndividual getProdcutorIndividual(Integer id);
 
-    public TProductorIndividual getProdcutorIndividualRepre();
+    public TProductorIndividual getProdcutorIndividualRepre(Integer id);
 
     public void delete(Integer id);
 

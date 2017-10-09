@@ -64,8 +64,8 @@ public class ProductorIndividualBo implements IProductorIndividualBo {
     }
 
     @Override
-    public TProductorIndividual getProdcutorIndividualRepre() {
-    return this.productorIndividualDao.getProdcutorIndividualRepre();
+    public TProductorIndividual getProdcutorIndividualRepre(Integer id) {
+    return this.productorIndividualDao.getProdcutorIndividualRepre(id);
     
     }
 

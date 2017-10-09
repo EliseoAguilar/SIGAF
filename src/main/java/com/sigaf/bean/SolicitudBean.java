@@ -369,6 +369,15 @@ public class SolicitudBean extends Actividad {
     private String msgEdad;
     private Boolean modificarCooperativa;
     private Boolean modificarComercio;
+    private String mensajePolitica;
+
+    public String getMensajePolitica() {
+        return mensajePolitica;
+    }
+
+    public void setMensajePolitica(String mensajePolitica) {
+        this.mensajePolitica = mensajePolitica;
+    }
 
     public Boolean getModificarCooperativa() {
         return modificarCooperativa;
@@ -2648,6 +2657,7 @@ public class SolicitudBean extends Actividad {
         this.mostrarTipoCreditoCooper = true;
         this.mostrarTabla = false;
         this.ingresos = new TIngreso();
+         this.mensajePolitica= "Seleccione un modalidad";
         this.egresos = new TEgreso();
         this.lisiados = new TLisiado();
         this.trabajo.setConstancia("");
@@ -6362,6 +6372,17 @@ public class SolicitudBean extends Actividad {
     public void enableShowLisiadoBean() {
 
         this.politica = this.ipoliticaBo.getPolitica(5);
+        
+        if(this.politica==null){
+            
+             this.mensajePolitica= "Seleccione un modalidad";
+   
+        }else{
+             this.mensajePolitica= ""+this.politica.getMontoMinimo()+" a "+ this.politica.getMontoMaximo();
+   
+            
+        }
+        
         this.limpiarLisiado();
         correlativo();
         this.enableShowCreateLisiados();
@@ -6371,6 +6392,16 @@ public class SolicitudBean extends Actividad {
     public void enableShowComercioBean() {
 
         this.politica = this.ipoliticaBo.getPolitica(7);
+        if(this.politica==null){
+            
+             this.mensajePolitica= "Seleccione un modalidad";
+   
+        }else{
+             this.mensajePolitica= ""+this.politica.getMontoMinimo()+" a "+ this.politica.getMontoMaximo();
+   
+            
+        }
+        
         this.limpiarComercio();
         correlativo();
         this.enableShowCreateComercio();
@@ -6380,6 +6411,15 @@ public class SolicitudBean extends Actividad {
     public void enableShowEmpleadosBean() {
 
         this.politica = this.ipoliticaBo.getPolitica(1);
+        if(this.politica==null){
+            
+             this.mensajePolitica= "Seleccione un modalidad";
+   
+        }else{
+             this.mensajePolitica= ""+this.politica.getMontoMinimo()+" a "+ this.politica.getMontoMaximo();
+   
+            
+        }
         correlativo();
         this.mostrarCrearEmpleado = true;
         this.setShowData(false);
@@ -6405,8 +6445,18 @@ public class SolicitudBean extends Actividad {
     public void cargarPolitica() {
 
         this.politica = this.ipoliticaBo.getPolitica(this.proyecto.getTTipoCredito().getIdTipoCredito());
+        
+        if(this.politica==null){
+            
+             this.mensajePolitica= "Seleccione un modalidad";
+   
+        }else{
+             this.mensajePolitica= ""+this.politica.getMontoMinimo()+" a "+ this.politica.getMontoMaximo();
+   
+            
+        }
 
-    }
+        }
 
     public void mostrarResolucion() {
 

@@ -35,7 +35,10 @@
                                             <p:selectOneMenu id="sModulo"  style="width:100%"  value="#{reporteAgronegocioBean.idReporte}">
                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
                                                 <f:selectItem itemLabel="Reporte de productores indivuduales por grupo" itemValue="1" />
-                                                <f:selectItem itemLabel="Reporte productores sin grupo" itemValue="2" />
+                                                <f:selectItem itemLabel="Reporte de productores individuales sin grupo" itemValue="2" />
+                                                <f:selectItem itemLabel="Reporte de grupos productores" itemValue="10" />
+                                                <f:selectItem itemLabel="Reporte de representantes grupales" itemValue="11" />
+                                               
                                                 <f:selectItem itemLabel="Reporte de compradores detallistas" itemValue="3" />
                                                 <f:selectItem itemLabel="Reporte de compradores Mayoristas" itemValue="4" />
                                                 <f:selectItem itemLabel="Reporte de cultivos" itemValue="5" />
@@ -47,12 +50,12 @@
                                             </p:selectOneMenu>
                                         </p:column>
                                         <p:column>
-                                           <p:selectOneMenu  id="sEstado" rendered="#{reporteAgronegocioBean.idReporte lt 8? true:false }" value="#{reporteAgronegocioBean.estadoReporte}"  style="width:100%" >
+                                           <p:selectOneMenu  id="sEstado" rendered="#{reporteAgronegocioBean.idReporte lt 8? true:false or reporteAgronegocioBean.idReporte eq 10? true:false}" value="#{reporteAgronegocioBean.estadoReporte}"  style="width:100%" >
                                                 <f:selectItem itemLabel="[TODOS]" itemValue="0"/>
                                                 <f:selectItem itemLabel="Activo" itemValue="1" /> 
                                                 <f:selectItem itemLabel="Inactivo" itemValue="2" />
                                             </p:selectOneMenu>                                           
-                                            <p:selectOneMenu  rendered="#{reporteAgronegocioBean.idReporte eq 8? true:false}"  value="#{reporteAgronegocioBean.estadoReporte}"  style="width:100%" >
+                                            <p:selectOneMenu  rendered="#{reporteAgronegocioBean.idReporte eq 8? true:false or reporteAgronegocioBean.idReporte eq 11? true:false}"  value="#{reporteAgronegocioBean.estadoReporte}"  style="width:100%" >
                                                 <f:selectItem itemLabel="[TODOS]" itemValue="0"/>
                                                 </p:selectOneMenu>                                       
                                             <p:selectOneMenu  rendered="#{reporteAgronegocioBean.idReporte ==9}" value="#{reporteAgronegocioBean.estadoMensual}"  style="width:100%" >
@@ -61,7 +64,7 @@
                                             </p:selectOneMenu>
                                         </p:column>    
                                     </p:row>
-                                    <p:outputPanel id="opMes" rendered="#{reporteAgronegocioBean.idReporte gt 8? true:false }">
+                                    <p:outputPanel id="opMes" rendered="#{reporteAgronegocioBean.idReporte eq 9? true:false }">
                                         <p:row>
                                             <p:column>
                                                 <h:outputText value="Fecha inicial:*"/>

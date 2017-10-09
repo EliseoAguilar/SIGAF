@@ -3231,7 +3231,9 @@
                                         <p:column style=" width: 77%">
                                         </p:column>
                                         <p:column>
-                                            <p:calendar  id="cFecha" value="#{proyectoBean.desembolso.fechaDesembolso}" locale="es" maxdate="#{solicitudBean.hoy}" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                            <p:calendar  id="cFecha" value="#{proyectoBean.desembolso.fechaDesembolso}" locale="es" maxdate="#{solicitudBean.hoy}"  pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                         <br></br>
+                                            <h:outputText value="#{proyectoBean.msgFecha}" style=" color:  red" />
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
@@ -3423,8 +3425,9 @@
                                         </p:column>
                                         <p:column>
                                             <p:calendar  id="cFecha" maxdate="#{solicitudBean.hoy}" value="#{proyectoBean.desembolso.fechaDesembolso}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button" navigator="true" style="width: 100%"/>
+                                       <br></br>
                                             <h:outputText value="#{proyectoBean.msgFecha}" style=" color:  red" />
-                                        </p:column>
+                                         </p:column>
                                     </p:row>
                                     <div align="right">
                                     </div> 

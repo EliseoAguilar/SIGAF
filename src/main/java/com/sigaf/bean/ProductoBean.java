@@ -877,7 +877,7 @@ public class ProductoBean extends Actividad {
         FacesContext.getCurrentInstance().responseComplete();
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_producto");
-        auxBitacora.setAccionBitacora("Generar reporte de producto");
+        auxBitacora.setAccionBitacora("Generar reporte de cultivo");
         auxBitacora.setDatosBitacora("Nombre:" + this.ProductoSeleccionado.getNombre()
                 + ", Sistema: " + this.ProductoSeleccionado.getSistema()
                 + ", Asistencia: " + this.ProductoSeleccionado.getAsistencia()
@@ -901,7 +901,7 @@ public class ProductoBean extends Actividad {
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/producto.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        response.addHeader("Content-disposition", "attachment; filename=Producto.pdf");
+        response.addHeader("Content-disposition", "attachment; filename=Cultivo.pdf");
         ServletOutputStream stream = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
         stream.flush();
@@ -910,7 +910,7 @@ public class ProductoBean extends Actividad {
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_producto");
-        auxBitacora.setAccionBitacora("Descargar reporte de producto");
+        auxBitacora.setAccionBitacora("Descargar reporte de cultivo");
         auxBitacora.setDatosBitacora("Nombre:" + this.ProductoSeleccionado.getNombre()
                 + ", Sistema: " + this.ProductoSeleccionado.getSistema()
                 + ", Asistencia: " + this.ProductoSeleccionado.getAsistencia()
@@ -925,5 +925,73 @@ public class ProductoBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
+    
+    
+     public void verReporteProductos() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_productor", this.productorIndividual.getIdProductorIndividual());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/productosProductorIndividual.jasper"));
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_producto");
+        auxBitacora.setAccionBitacora("Generar reporte de cultivo");
+        auxBitacora.setDatosBitacora("Nombre:" + this.productorIndividual.getNombresProdcutorIndividual()+" "+ this.productorIndividual.getApellidosProductorIndividual()
+               
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.ProductoSeleccionado.getIdproducto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+
+    public void verReporteProductosPDF() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_producto", this.ProductoSeleccionado.getIdproducto());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/producto.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Cultivo.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_producto");
+        auxBitacora.setAccionBitacora("Descargar reporte cultivos");
+        auxBitacora.setDatosBitacora("Nombre:" + this.productorIndividual.getNombresProdcutorIndividual()+" "+ this.productorIndividual.getApellidosProductorIndividual()
+               
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.ProductoSeleccionado.getIdproducto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+
+    
+    
+    
 
 }

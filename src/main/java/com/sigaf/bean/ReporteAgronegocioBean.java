@@ -202,6 +202,20 @@ public class ReporteAgronegocioBean extends Actividad {
                 }
             }
         }
+         if (idReporte == 10) {
+            try {
+                this.generarGrupos();
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+          if (idReporte == 11) {
+            try {
+                this.generarRepresentantes();
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
 
@@ -277,6 +291,20 @@ public class ReporteAgronegocioBean extends Actividad {
                 } catch (Exception ex) {
                     Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+          if (idReporte == 10) {
+            try {
+                this.generarGruposPDF();
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+          if (idReporte == 11) {
+            try {
+                this.generarRepresentantesPDF();
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -994,5 +1022,151 @@ public class ReporteAgronegocioBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
+    
+    public void generarGrupos() throws Exception {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        if (this.estadoReporte == 1) {
+            parametros.put("estado", true);
+        } else if (this.estadoReporte == 2) {
+            parametros.put("estado", false);
+        } else {
+        }
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        if (this.estadoReporte == 1) {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        } else if (this.estadoReporte == 2) {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        } else {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductoresTodos.jasper"));
+        }
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_productor_Grupal");
+        auxBitacora.setAccionBitacora("Generar reporte de grupos");
+        auxBitacora.setDatosBitacora(""
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void generarRepresentantes() throws Exception {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+       
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/representantes.jasper"));
+        
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_productor_Individual");
+        auxBitacora.setAccionBitacora("Generar reporte de representantes");
+        auxBitacora.setDatosBitacora(""
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void generarGruposPDF() throws Exception {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        if (this.estadoReporte == 1) {
+            parametros.put("estado", true);
+        } else if (this.estadoReporte == 2) {
+            parametros.put("estado", false);
+        } else {
+        }
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        if (this.estadoReporte == 1) {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        } else if (this.estadoReporte == 2) {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductores.jasper"));
+        } else {
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductoresTodos.jasper"));
+        }
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Grupos.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_productor_Grupal");
+        auxBitacora.setAccionBitacora("Descargar reporte de grupos");
+        auxBitacora.setDatosBitacora(""
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void generarRepresentantesPDF() throws Exception {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+       
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/representantes.jasper"));
+        
+         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Representantes.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+
+         TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_productor_Individual");
+        auxBitacora.setAccionBitacora("Descargar reporte de representantes");
+        auxBitacora.setDatosBitacora(""
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+    }
+    
+    
+    
+    
 
 }

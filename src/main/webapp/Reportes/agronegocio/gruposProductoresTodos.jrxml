@@ -24,7 +24,7 @@
      t_productor_grupal."estado_productor_grupal" AS t_productor_grupal_estado_productor_grupal,
      t_productor_grupal."calificacion_productor_grupal" AS t_productor_grupal_calificacion_productor_grupal
 FROM
-     "public"."t_productor_grupal" t_productor_grupal where  t_productor_grupal."nombre_productor_grupal"!='Ninguno' and  t_productor_grupal."estado_productor_grupal"=$P{estado}]]>
+     "public"."t_productor_grupal" t_productor_grupal where  t_productor_grupal."nombre_productor_grupal"!='Ninguno']]>
 	</queryString>
 	<field name="t_productor_grupal_id_productor_grupal" class="java.lang.Integer"/>
 	<field name="t_productor_grupal_codigo_prodcutor_grupal" class="java.lang.String"/>
@@ -47,22 +47,22 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="105" splitType="Stretch">
+		<band height="101" splitType="Stretch">
 			<subreport>
 				<reportElement x="19" y="0" width="200" height="79" uuid="5355cd8d-dea0-4ff9-85b9-0a241340c4da"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
-			<line>
-				<reportElement x="0" y="103" width="555" height="1" uuid="9a569298-a130-4716-8da2-e6a8847a5ca7"/>
-			</line>
-			<textField>
-				<reportElement x="2" y="78" width="553" height="20" uuid="88169d15-f0b9-438b-902b-b3cf6565d2e4"/>
+			<staticText>
+				<reportElement x="0" y="79" width="555" height="20" uuid="5e1e540a-bb0d-461b-97d9-23c989697ad0"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{estado}.equals( true )? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE GRUPOS PRODUCTORES ACTIVOS</style>": "<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE GRUPOS PRODUCTORES INACTIVOS</style>"]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>REPORTE DE GRUPOS PRODUCTORES</style>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="98" width="555" height="1" uuid="9a569298-a130-4716-8da2-e6a8847a5ca7"/>
+			</line>
 		</band>
 	</title>
 	<columnHeader>
@@ -84,6 +84,13 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>GRUPO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="485" y="1" width="70" height="20" uuid="cb52cc4c-3852-41df-88de-987ab9abe72f"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -95,6 +102,10 @@ FROM
 			<textField isStretchWithOverflow="true">
 				<reportElement x="143" y="0" width="300" height="20" uuid="7083c28a-47f5-40e4-9cac-672dfad63adc"/>
 				<textFieldExpression><![CDATA[$F{t_productor_grupal_ubicacion_productor_grupal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="70" height="20" uuid="513851c0-9248-41a0-af32-9e63e7d2dba9"/>
+				<textFieldExpression><![CDATA[$F{t_productor_grupal_estado_productor_grupal}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

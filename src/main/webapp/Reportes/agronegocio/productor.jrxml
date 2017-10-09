@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="productor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f71b959-8a58-40bc-92ab-8492c2114562">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="16"/>
+	<property name="ireport.y" value="189"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -122,7 +122,7 @@ FROM
 				<text><![CDATA[NOMBRES:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="47" width="100" height="20" uuid="bbbdfcce-2eb6-49f3-8837-5566e41b45e8"/>
+				<reportElement x="284" y="47" width="100" height="20" uuid="bbbdfcce-2eb6-49f3-8837-5566e41b45e8"/>
 				<text><![CDATA[APELLIDOS:]]></text>
 			</staticText>
 			<staticText>
@@ -130,7 +130,7 @@ FROM
 				<text><![CDATA[DUI:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="67" width="100" height="20" uuid="a9cc71bd-68c4-47c9-8ae7-23c08296372a"/>
+				<reportElement x="284" y="67" width="100" height="20" uuid="a9cc71bd-68c4-47c9-8ae7-23c08296372a"/>
 				<text><![CDATA[NIT:]]></text>
 			</staticText>
 			<staticText>
@@ -138,7 +138,7 @@ FROM
 				<text><![CDATA[FECHA DE NACIMIENTO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="87" width="100" height="20" uuid="535a2254-0479-4bad-ad31-833f11745f0f"/>
+				<reportElement x="284" y="87" width="100" height="20" uuid="535a2254-0479-4bad-ad31-833f11745f0f"/>
 				<text><![CDATA[EDAD (años):]]></text>
 			</staticText>
 			<staticText>
@@ -154,7 +154,7 @@ FROM
 				<text><![CDATA[MÓVIL:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="168" width="100" height="20" uuid="215d14c6-bb86-43c8-8d01-5120910e6b38"/>
+				<reportElement x="284" y="168" width="100" height="20" uuid="215d14c6-bb86-43c8-8d01-5120910e6b38"/>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<staticText>
@@ -170,7 +170,7 @@ FROM
 				<text><![CDATA[HIJOS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="128" width="100" height="20" uuid="8cbf7352-7565-4255-a54f-fbc5e52af9f1"/>
+				<reportElement x="284" y="128" width="100" height="20" uuid="8cbf7352-7565-4255-a54f-fbc5e52af9f1"/>
 				<text><![CDATA[HIJAS:]]></text>
 			</staticText>
 			<staticText>
@@ -178,7 +178,7 @@ FROM
 				<text><![CDATA[EXPERIENCIA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="148" width="100" height="20" uuid="ab018b86-9feb-4100-9083-345b7aa752b1"/>
+				<reportElement x="284" y="148" width="100" height="20" uuid="ab018b86-9feb-4100-9083-345b7aa752b1"/>
 				<text><![CDATA[INSTITUCIÓN:]]></text>
 			</staticText>
 			<staticText>
@@ -186,11 +186,11 @@ FROM
 				<text><![CDATA[NIVEL DE ESTUDIO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="196" width="153" height="20" uuid="1c22bbec-1e56-4da1-98f9-4df0013b67d5"/>
+				<reportElement x="13" y="208" width="153" height="20" uuid="1c22bbec-1e56-4da1-98f9-4df0013b67d5"/>
 				<text><![CDATA[ACTIVIDADES ECONOMICAS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="108" width="100" height="20" uuid="6cf6a288-3eac-4dcf-845d-aea6fe770588"/>
+				<reportElement x="284" y="108" width="100" height="20" uuid="6cf6a288-3eac-4dcf-845d-aea6fe770588"/>
 				<text><![CDATA[ESTADO FAMILIAR:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -198,7 +198,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="47" width="137" height="20" uuid="2747a8db-a14d-4a54-8949-46b451a9a5bc"/>
+				<reportElement x="384" y="47" width="163" height="20" uuid="2747a8db-a14d-4a54-8949-46b451a9a5bc"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
@@ -210,7 +210,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_dui_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="67" width="137" height="20" uuid="ee940e8b-4892-4a87-a5d6-37928f1821c5"/>
+				<reportElement x="384" y="67" width="163" height="20" uuid="ee940e8b-4892-4a87-a5d6-37928f1821c5"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_nit_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -222,7 +222,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_varones_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="128" width="137" height="20" uuid="543ac72d-5791-4d50-b7d8-62462b6ceee5"/>
+				<reportElement x="384" y="128" width="163" height="20" uuid="543ac72d-5791-4d50-b7d8-62462b6ceee5"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_ninas_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -230,7 +230,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_experiencia_productor_individual}.equals("true")? "Si":"No"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="148" width="137" height="20" uuid="c635e095-0686-4551-96ce-ac60c4758c71"/>
+				<reportElement x="384" y="148" width="163" height="20" uuid="c635e095-0686-4551-96ce-ac60c4758c71"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_institucion_productor_individual}.equals("")? "----":$F{t_productor_individual_institucion_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -238,7 +238,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estudio_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="108" width="137" height="20" uuid="71e63bcc-46a7-4c5b-a8e4-2ea098bd9c23"/>
+				<reportElement x="384" y="108" width="163" height="20" uuid="71e63bcc-46a7-4c5b-a8e4-2ea098bd9c23"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estado_familiar_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -254,7 +254,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_telefono_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="166" y="196" width="370" height="20" uuid="749dc92c-66f2-4986-a9f0-201b1e4a61db"/>
+				<reportElement x="166" y="208" width="370" height="20" uuid="749dc92c-66f2-4986-a9f0-201b1e4a61db"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_actividades_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -262,7 +262,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_productor_individual_direccion_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="168" width="137" height="20" uuid="48f6ecd0-ece1-49a5-9a86-365cdb07a5bd"/>
+				<reportElement x="384" y="168" width="163" height="20" uuid="48f6ecd0-ece1-49a5-9a86-365cdb07a5bd"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estado_productor_individual}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -293,10 +293,10 @@ FROM
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="135" y="470" width="401" height="20" uuid="6d0dc645-18ed-4364-9791-c2a868e8d7ce"/>
-				<textFieldExpression><![CDATA[$F{t_productor_grupal_ubicacion_productor_grupal}.equals("")? "----":$F{t_productor_grupal_ubicacion_productor_grupal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_productor_grupal_nombre_productor_grupal}.equals("Sin grupo")? "----":$F{t_productor_grupal_ubicacion_productor_grupal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="399" y="87" width="137" height="20" uuid="12d070e4-8035-47c7-9911-b87e4aad346d"/>
+				<reportElement x="384" y="87" width="163" height="20" uuid="12d070e4-8035-47c7-9911-b87e4aad346d"/>
 				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -316,12 +316,12 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CONTACTO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="225" width="153" height="20" uuid="3113aa7d-d30e-4be5-9a9b-d3da897d56ba"/>
+				<reportElement x="13" y="228" width="153" height="20" uuid="3113aa7d-d30e-4be5-9a9b-d3da897d56ba"/>
 				<text><![CDATA[REPRESENTANTE DEL GRUPO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="166" y="225" width="100" height="20" uuid="f050f598-9334-4cd0-ae97-5308014cd97e"/>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_representante_grupal}.equals(true)? "Si":"No"]]></textFieldExpression>
+				<reportElement x="166" y="228" width="100" height="20" uuid="f050f598-9334-4cd0-ae97-5308014cd97e"/>
+				<textFieldExpression><![CDATA[$F{t_productor_grupal_nombre_productor_grupal}.equals("Sin grupo")? "No aplica":$F{t_productor_individual_representante_grupal}.equals(true)? "Si":"No"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

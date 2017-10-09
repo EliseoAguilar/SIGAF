@@ -286,7 +286,7 @@
                                         <p:panelGrid id="pgEmpleado3" styleClass="companyHeaderGrid"  style="width: 100%; margin: auto;">
                                             <p:row>                                              
                                                 <p:column style=" width: 60%">
-                                                    <h:outputText value="Unidades:*"/>
+                                                    <h:outputText value="Unidad:*"/>
                                                 </p:column>
                                                 <p:column style=" width: 20%">
                                                     <h:outputText value="Precio ($):*"/>
@@ -305,7 +305,7 @@
                                                     <h:outputText value="#{agronegocioBean.msgPrecio}" style=" color:  red" />
                                                 </p:column>
                                                 <p:column >  
-                                                    <p:inputNumber   value="#{agronegocioBean.productoAgronegocio.cantidad}" minValue="1"    style="width: 100%;" >  </p:inputNumber>
+                                                    <p:inputNumber   value="#{agronegocioBean.productoAgronegocio.cantidad}" minValue="0"    style="width: 100%;" >  </p:inputNumber>
                                                     <h:outputText value="#{agronegocioBean.msgCantidad}" style=" color:  red" />
                                                 </p:column>
                                                 <p:column colspan="1" style=" width: 100%">
@@ -315,7 +315,7 @@
                                             </p:row>
                                         </p:panelGrid>
                                     </p:tab>
-                                    <p:tab title="Detalles">    
+                                    <p:tab title="Detalle">    
                                         <p:outputPanel id="busqueda">
                                             <b>     <h:outputText  value="Comprador"/>  </b>
                                             <hr></hr>
@@ -598,7 +598,7 @@
                                                                  
                                                                 
                                                                 <p:column style=" width: 25%" >
-                                                                    <p:calendar navigator="true" yearRange="1910:2100"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{agronegocioBean.agronegocio.fechapago}" /><br></br>
+                                                                    <p:calendar navigator="true" yearRange="1910:2100"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{agronegocioBean.fechaPagoAux}" /><br></br>
                                                                     <h:outputText value="#{agronegocioBean.msgFechaEstipulada}" style=" color:  red" />
                                                                 </p:column>
                                                                     
@@ -716,6 +716,7 @@
                                     <p:column  width="6%">  
                                         <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar productor" style="#{solicitudCooperBean.btnCrear}">
                                             <f:setPropertyActionListener value="#{entidades}" target="#{agronegocioBean.productorIndividualSeleccionado}"  />
+                                            <f:actionListener binding="#{agronegocioBean.limpiarListaDetalle()}"/> 
                                         </p:commandButton>
                                     </p:column> 
                                 </p:dataTable> 
@@ -754,6 +755,11 @@
                                               headerText="DUI"
                                               filterMatchMode="contains" width="12%" filterStyle="width: 100%">  
                                         <h:outputText value="#{entidades.duiComprador}"  />  
+                                    </p:column> 
+                                    <p:column filterBy="#{entidades.tipoComprador}" sortBy="#{entidades.tipoComprador}"  
+                                              headerText="Tipo"
+                                              filterMatchMode="contains" width="12%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{entidades.tipoComprador}"  />  
                                     </p:column> 
                                     <p:column  width="6%">  
                                         <p:commandButton  update=":padding"  icon="fa fa-check" title="Seleccionar comprador" >
@@ -880,30 +886,38 @@
                                     <p:tabView>
                                         
                                         <p:tab title="Registro"> 
+                                            
+                                            <b>  <h:outputText value="Datos generales"/> </b>
+                                            <hr></hr>
                                             <p:panelGrid  style="width: 100%;"> 
-                                                <p:row style=" text-align:  left">
+                                                <p:row >
                                                     <p:column style=" width: 25%">
                                                         <h:outputText value="Código: "/>
                                                     </p:column>
-                                                    <p:column style=" width: 25%">
+                                                    <p:column style=" width: 25%; text-align:  right">
                                                         <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.codigo}"/>
                                                     </p:column>
+                                                  
+                                                    
                                                     <p:column>
-                                                        <h:outputText value="Fecha: "/>
+                                                        <h:outputText value="Tipo: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.tipo}"/>
+                                                    </p:column>
+                                                    
+                                                </p:row>
+                                                <p:row >
+                                                    
+                                                      <p:column>
+                                                        <h:outputText value="Fecha de registro: "/>
                                                     </p:column>
                                                     <p:column style=" width: 25%; text-align:  right" >
                                                         <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.fecha}">
                                                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                         </h:outputText>
                                                     </p:column>
-                                                </p:row>
-                                                <p:row >
-                                                    <p:column>
-                                                        <h:outputText value="Tipo: "/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%">
-                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.tipo}"/>
-                                                    </p:column>
+                                                    
                                                     <p:column >
                                                         <h:outputText value="Fecha de pago: "/>
                                                     </p:column>
@@ -914,14 +928,37 @@
                                                     </p:column>
                                                 </p:row>
                                                 <p:row >
-                                                    <p:column >
+                                                    <p:column style=" width: 25%" >
                                                         <h:outputText value="Plazo: "/>
                                                     </p:column>
-                                                    <p:column style=" width: 25%" >
+                                                    <p:column style=" width: 25%; text-align:  right" >
                                                         <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.plazo} meses"/>
                                                     </p:column>
+                                                    
                                                     <p:column>
-                                                        <h:outputText value="Total:"/>
+                                                        <h:outputText value="Estado:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right" >
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estadoregistro eq true? 'Activo': 'Inactivo'}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                  
+                                                </p:row>
+                                              
+                                            </p:panelGrid>
+                                              <br></br>
+                                              
+                                              
+                                              
+                                              
+                                            <b>   <h:outputText value="Datos del pago"/></b>
+                                             <hr></hr>
+                                             <p:panelGrid  style="width: 100%;"> 
+                                                <p:row >
+                                                    
+                                                      <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto de la deuda:"/>
                                                     </p:column>
                                                     <p:column style=" width: 25%; text-align:  right">
                                                         <h:outputText value="$"/>
@@ -929,19 +966,52 @@
                                                             <f:convertNumber     pattern=",#00.00" locale="en-US" />  
                                                         </h:outputText>
                                                     </p:column>
-                                                </p:row>
-                                                <p:row >
-                                                    <p:column>
+                                                   
+                                                    <p:column style=" width: 25%">
                                                         <h:outputText value="Interés:"/>
                                                     </p:column>
-                                                    <p:column style=" width: 25%">
+                                                    <p:column style=" width: 25%; text-align:  right">
                                                         <h:outputText value="$"/>
                                                         <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.interes}">
                                                             <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                         </h:outputText>
                                                     </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Comisión:"/>
+                                                   
+                                                </p:row>
+                                                    <p:row >  
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Total (monto + interés ):"/>
+                                                    </p:column>
+                                                    <p:column  style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{agronegocioBean.totalDeuda}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                </p:row>
+                                             
+                                            </p:panelGrid>
+                                             
+                                             
+                                               <br></br>
+                                             <b>   <h:outputText value="Distribucion del pago total"/></b>
+                                             <hr></hr>
+                                             <p:panelGrid  style="width: 100%;"> 
+                                                <p:row >
+                                                    
+                                                      <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto para el productor:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="$"/>
+                                                        <h:outputText value="#{agronegocioBean.totalProductor }">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto para la fundación (Comisión):"/>
                                                     </p:column>
                                                     <p:column style=" width: 25%; text-align:  right">
                                                         <h:outputText value="$"/>
@@ -949,18 +1019,11 @@
                                                             <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                         </h:outputText>
                                                     </p:column>
+                                                   
                                                 </p:row>
-                                                <p:row >
-                                                    <p:column>
-                                                        <h:outputText value="Estado:"/>
-                                                    </p:column>
-                                                    <p:column  colspan="3">
-                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estadoregistro eq true? 'Activo': 'Inactivo'}">
-                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                    </p:column>
-                                                </p:row>
+                                                 
                                             </p:panelGrid>
+                                            
                                             
                                             
                                         </p:tab>
@@ -1076,86 +1139,7 @@
                                                 </p:row>
                                             </p:panelGrid>
                                         </p:tab>
-                                        
-                                        
-                                        
-                                       
-                                        
-                                        <p:tab title="Pago"> 
-                                            <p:panelGrid  style="width: 100%;" > 
-                                                <p:row >
-                                                    <p:column style=" width: 25%">
-                                                        <h:outputText value="Estado: "/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Fecha de pago: "/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.fecha eq null? '--/--/----': agronegocioBean.pagoAgro.fecha }">
-                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                                        </h:outputText>
-                                                    </p:column>
-                                                </p:row>
-                                                <p:row >
-                                                    <p:column style=" width: 25%">
-                                                        <h:outputText value="Interés:"/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '':'$' }"/>
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '----': agronegocioBean.pagoAgro.interes}">
-                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Otro interés (#{agronegocioBean.pagoAgro.dias} dias):"/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '':'$' }"/>
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '----': agronegocioBean.pagoAgro.otrosinteres}">
-                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                    </p:column>
-                                                </p:row>
-                                                <p:row >
-                                                    <p:column style=" width: 25%">
-                                                        <h:outputText value="Total pagado:"/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '':'$' }"/>
-                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '----': agronegocioBean.totales}">
-                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Comisión:"/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '':'$' }"/>
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '----': agronegocioBean.pagoAgro.comision}">
-                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                        </h:outputText>
-                                                    </p:column>
-                                                </p:row>
-                                                <p:row >
-                                                    <p:column style=" width: 25%">
-                                                        <h:outputText value="Forma de pago: "/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.forma eq null? '----':agronegocioBean.pagoAgro.forma}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Numeo de cheque: "/>
-                                                    </p:column>
-                                                    <p:column style=" width: 25%; text-align:  right">
-                                                        <h:outputText value="#{agronegocioBean.pagoAgro.cheque eq null? '----':agronegocioBean.pagoAgro.cheque }"/>
-                                                    </p:column>
-                                                </p:row>
-                                            </p:panelGrid>
-                                        </p:tab>
-                                         <p:tab title="Cultivos"> 
+                                           <p:tab title="Cultivos"> 
                                             
                                             <p:dataTable  id="basicDT" var="entidades" widgetVar="produrTable3"  paginator="true" rows="5" value="#{agronegocioBean.listaProductoAgronegocio}"
                                                           paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -1202,6 +1186,141 @@
                                             
                                             
                                               </p:tab>
+                                        
+                                        
+                                       
+                                        
+                                        <p:tab title="Pago"> 
+                                            
+                                            <b>  <h:outputText value="Datos generales"/> </b>
+                                            <hr></hr>
+                                            <p:panelGrid  style="width: 100%;"> 
+                                                <p:row >
+                                                     <p:column style=" width: 25%">
+                                                        <h:outputText value="Estado: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Fecha de pago: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.fecha eq null? '--/--/----': agronegocioBean.pagoAgro.fecha }">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    
+                                                </p:row>
+                                                <p:row >
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Forma de pago: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.forma eq null? '----':agronegocioBean.pagoAgro.forma}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Numeo de cheque: "/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.cheque eq null? '----':agronegocioBean.pagoAgro.cheque }"/>
+                                                    </p:column>
+                                                   
+                                                </p:row>
+                                                <p:row >
+                                                    
+                                                  
+                                                </p:row>
+                                              
+                                            </p:panelGrid>
+                                            <br></br>
+                                            <b>   <h:outputText value="Datos del pago"/></b>
+                                             <hr></hr>
+                                             <p:panelGrid  style="width: 100%;"> 
+                                                <p:row >
+                                                    
+                                                      <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.monto  eq null? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.monto  eq null? '----': agronegocioBean.pagoAgro.monto}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Interés:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.interes  eq 0? '----': agronegocioBean.pagoAgro.interes}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                </p:row>
+                                                    <p:row > 
+                                                       
+                                                      <p:column>
+                                                        <h:outputText value="Mora (#{agronegocioBean.pagoAgro.dias} dias):"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.otrosinteres  eq 0? '----': agronegocioBean.pagoAgro.otrosinteres}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>   
+                                                        
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Total (monto + interés + mora):"/>
+                                                    </p:column>
+                                                    <p:column  style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.totales  eq 0? '----': agronegocioBean.totales}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                </p:row>
+                                             
+                                            </p:panelGrid>
+                                            
+                                            
+                                               <br></br>
+                                             <b>   <h:outputText value="Distribucion del pago total"/></b>
+                                             <hr></hr>
+                                             <p:panelGrid  style="width: 100%;"> 
+                                                <p:row >
+                                                    
+                                                      <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto para el productor:"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado eq 'Pendiente'? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado eq 'Pendiente'? '----': agronegocioBean.totalProductor }">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                    <p:column style=" width: 25%">
+                                                        <h:outputText value="Monto para la fundación (Comisión):"/>
+                                                    </p:column>
+                                                    <p:column style=" width: 25%; text-align:  right">
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '':'$' }"/>
+                                                        <h:outputText value="#{agronegocioBean.pagoAgro.comision  eq 0? '----': agronegocioBean.pagoAgro.comision}">
+                                                            <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                        </h:outputText>
+                                                    </p:column>
+                                                   
+                                                </p:row>
+                                                 
+                                            </p:panelGrid>
+                                            
+                                            
+                                           
+                                        </p:tab>
+                                      
                                     </p:tabView>
                                     <br></br>
                                     <center>
