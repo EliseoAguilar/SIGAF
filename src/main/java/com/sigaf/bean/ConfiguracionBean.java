@@ -439,7 +439,7 @@ public class ConfiguracionBean extends Actividad {
             this.configuracion.setTEntidad(configuracionActual.getTEntidad());
             this.configuracion.setCuentaConfiguracion(configuracionActual.getCuentaConfiguracion());
             this.configuracion.setTipoConfiguracion(configuracionActual.getTipoConfiguracion());
-            this.configuracion.setAreaConfiguracion(configuracionActual.getAreaConfiguracion());
+          
             this.configuracion.setActivoConfiguracion(configuracionActual.getActivoConfiguracion());
 
         }
@@ -1221,15 +1221,7 @@ public class ConfiguracionBean extends Actividad {
                     }
                 }
 
-                if (!this.configuracionActual.getAreaConfiguracion().equals(this.configuracion.getAreaConfiguracion())) {
-
-                    List<TArea> listaAreas = this.areaBo.listArea(entidadSeleccionada.getIdEntidad());
-
-                    for (TArea listaArea : listaAreas) {
-                        listaArea.setCodigoArea(this.cambiaCodigo(listaArea.getCodigoArea(), this.configuracion.getAreaConfiguracion()));
-                        this.areaBo.update(listaArea);
-                    }
-                }
+         
 
                 if (!this.configuracionActual.getTipoConfiguracion().equals(this.configuracion.getTipoConfiguracion())) {
 
@@ -1300,11 +1292,7 @@ public class ConfiguracionBean extends Actividad {
                 this.estadoValido = false;
             }
 
-            this.msgArea = this.validaCodigo(this.configuracionActual.getAreaConfiguracion(), this.configuracion.getAreaConfiguracion());
-            if (!this.msgArea.equals("")) {
-                this.estadoValido = false;
-            }
-
+           
             this.msgTipo = this.validaCodigo(this.configuracionActual.getTipoConfiguracion(), this.configuracion.getTipoConfiguracion());
             if (!this.msgTipo.equals("")) {
                 this.estadoValido = false;
@@ -1322,10 +1310,7 @@ public class ConfiguracionBean extends Actividad {
                 this.estadoValido = false;
             }
 
-            this.msgArea = this.validaCodigo(" ", this.configuracion.getAreaConfiguracion());
-            if (!this.msgArea.equals("")) {
-                this.estadoValido = false;
-            }
+           
 
             this.msgTipo = this.validaCodigo(" ", this.configuracion.getTipoConfiguracion());
             if (!this.msgTipo.equals("")) {

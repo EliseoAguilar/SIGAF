@@ -57,8 +57,7 @@ public class AreaBean extends Actividad {
     private String msgNombre;
     private String msgCodigo;
     private List<TEntidad> listaEntidades;
-    private IConfiguracionBo configuracionBo;
-    private TConfiguracion configuracion;
+  
     private Integer idEntidadSeleccionada;
     private boolean mostrarTabla;
     private IBitacoraBo bitacoraBo;
@@ -169,23 +168,7 @@ public class AreaBean extends Actividad {
         super.enableShowData();
     }
 
-    public IConfiguracionBo getConfiguracionBo() {
 
-        return configuracionBo;
-    }
-
-    public void setConfiguracionBo(IConfiguracionBo configuracionBo) {
-        this.configuracionBo = configuracionBo;
-    }
-
-    public TConfiguracion getConfiguracion() {
-        this.configuracion = this.configuracionBo.getConfiguracion(1);
-        return configuracion;
-    }
-
-    public void setConfiguracion(TConfiguracion configuracion) {
-        this.configuracion = configuracion;
-    }
 
     public IAreaBo getAreaBo() {
         return areaBo;

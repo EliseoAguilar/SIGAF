@@ -6,7 +6,9 @@
 package com.sigaf.bean;
 
 import com.sigaf.Ibo.IBitacoraBo;
+import com.sigaf.Ibo.IConfiguracionBo;
 import com.sigaf.Ibo.IEntidadBo;
+import com.sigaf.pojo.TConfiguracion;
 import com.sigaf.pojo.TEntidad;
 import java.io.Serializable;
 import java.util.List;
@@ -19,11 +21,13 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class ContablidadPredeterminarBean {
+public class ContablidadPredeterminarBean extends Actividad {
 
     /**
      * Creates a new instance of ContablidadPredeterminarBean
      */
+    private IConfiguracionBo configuracionBo;
+
     private IBitacoraBo bitacoraBo;
 
     private IEntidadBo entidadBo;
@@ -33,22 +37,40 @@ public class ContablidadPredeterminarBean {
     private TEntidad entidadSeleccionada;
 
     private Integer idEntidad;
-   
+
     private String msgEntidad;
-    
-    public void init() {
-    this.idEntidad = 0;
-    this.msgEntidad="";
+
+    private Boolean confiEstado;
+
+    public IConfiguracionBo getConfiguracionBo() {
+        return configuracionBo;
     }
-    
+
+    public void setConfiguracionBo(IConfiguracionBo configuracionBo) {
+        this.configuracionBo = configuracionBo;
+    }
+
+    public Boolean getConfiEstado() {
+        this.confiEstado = configuracionBo.getConfiguracion(idEntidad) != null;
+
+        return confiEstado;
+    }
+
+    public void setConfiEstado(Boolean confiEstado) {
+        this.confiEstado = confiEstado;
+    }
+
+    public void init() {
+        this.idEntidad = 0;
+        this.msgEntidad = "";
+    }
+
     /**
-    * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-    */
+     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
+     */
     public void updateListaEntidades() {
         this.listaEntidades = this.entidadBo.listTEndidadTodos();
     }
-
-    
 
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
@@ -82,7 +104,7 @@ public class ContablidadPredeterminarBean {
         this.entidadSeleccionada = entidadSeleccionada;
     }
 
-  /*
+    /*
     * Se recorre la lista dado que necesitamos toda la informacion 
     * de la entidad. 
      */
@@ -90,13 +112,12 @@ public class ContablidadPredeterminarBean {
 
         this.idEntidad = idEntidad;
 
-        if(idEntidad == 0 ){
-        msgEntidad ="Entidad requerida";
-        }else{
-        msgEntidad ="";
+        if (idEntidad == 0) {
+            msgEntidad = "Entidad requerida";
+        } else {
+            msgEntidad = "";
         }
-            
-          
+
         for (TEntidad tentidad : listaEntidades) {
 
             if (tentidad.getIdEntidad() == idEntidad) {
@@ -110,10 +131,10 @@ public class ContablidadPredeterminarBean {
     public Integer getIdEntidad() {
         return idEntidad;
     }
-    
-    public void limpiar(){
-    this.idEntidad = 0;
-    this.msgEntidad="";
+
+    public void limpiar() {
+        this.idEntidad = 0;
+        this.msgEntidad = "";
     }
 
     public String getMsgEntidad() {
@@ -123,9 +144,5 @@ public class ContablidadPredeterminarBean {
     public void setMsgEntidad(String msgEntidad) {
         this.msgEntidad = msgEntidad;
     }
-    
-   
-    
-    
-    
+
 }

@@ -13,7 +13,7 @@ public class TConfiguracion  implements java.io.Serializable {
      private TEntidad TEntidad;
      private String tipoConfiguracion;
      private String activoConfiguracion;
-     private String areaConfiguracion;
+ 
      private String cuentaConfiguracion;
 
     public TConfiguracion() {
@@ -23,12 +23,12 @@ public class TConfiguracion  implements java.io.Serializable {
     public TConfiguracion(int idConfiguracion) {
         this.idConfiguracion = idConfiguracion;
     }
-    public TConfiguracion(int idConfiguracion, TEntidad TEntidad, String tipoConfiguracion, String activoConfiguracion, String areaConfiguracion, String cuentaConfiguracion) {
+    public TConfiguracion(int idConfiguracion, TEntidad TEntidad, String tipoConfiguracion, String activoConfiguracion,  String cuentaConfiguracion) {
        this.idConfiguracion = idConfiguracion;
        this.TEntidad = TEntidad;
        this.tipoConfiguracion = tipoConfiguracion;
        this.activoConfiguracion = activoConfiguracion;
-       this.areaConfiguracion = areaConfiguracion;
+      
        this.cuentaConfiguracion = cuentaConfiguracion;
     }
    
@@ -60,13 +60,7 @@ public class TConfiguracion  implements java.io.Serializable {
     public void setActivoConfiguracion(String activoConfiguracion) {
         this.activoConfiguracion = activoConfiguracion;
     }
-    public String getAreaConfiguracion() {
-        return this.areaConfiguracion;
-    }
-    
-    public void setAreaConfiguracion(String areaConfiguracion) {
-        this.areaConfiguracion = areaConfiguracion;
-    }
+
     public String getCuentaConfiguracion() {
         return this.cuentaConfiguracion;
     }

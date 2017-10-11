@@ -36,9 +36,9 @@
                             </p:panelGrid>
 
                             <center>
-                                <p:commandButton id="btnCreate"   ajax="false"  icon="fa fa-check" style="#{activoFijoBean.btnCrear}" value="Guardar"> 
+                                <p:commandButton id="btnCreate"   ajax="false"  icon="fa fa-check" style="#{contablidadPredeterminarBean.btnCrear}" value="Guardar"> 
                                 </p:commandButton>
-                                <p:commandButton id="btnCancel"   action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{activoFijoBean.btnCancelar}"  value="Cancelar"> 
+                                <p:commandButton id="btnCancel"   action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{contablidadPredeterminarBean.btnCancelar}"  value="Cancelar"> 
                                 </p:commandButton>
                             </center>
                         </h:form>
@@ -63,6 +63,26 @@
                             </p:row>
                         </p:panelGrid>
                     </h:form>
+                
+
+                <p:outputPanel rendered="#{!contablidadPredeterminarBean.confiEstado}">
+
+                    <h:form>
+                        <p:panel id="pAgregarTipo" header="Alerta"  style="width: 100%; margin: auto; margin-bottom: 20px" class="noBoder">
+                            <center>
+                                <br></br>
+                                <b><h:outputText value="Es necesario configurar la estructura de códigos para: Cuentas, Activos, Tipos de Activos y Áreas."/></b>
+                                <hr></hr>
+                                <br></br>
+
+                                <p:commandButton id="btnCreate" action="/contabilidad/adminConfiguracion.xhtml?faces-redirect=true"   icon="fa fa-check" style="#{contablidadPredeterminarBean.btnCrear}" value="Configurar"> 
+                                </p:commandButton>
+                            </center>
+                        </p:panel>
+                    </h:form>
+
+                </p:outputPanel>
+                <p:outputPanel rendered="#{contablidadPredeterminarBean.confiEstado}">
                     <div class="row">
 
                         <h:link outcome="adminPeriodos.xhtml">
@@ -219,7 +239,7 @@
                         </h:link>
                     </div>
                 </p:outputPanel>
-
+               </p:outputPanel>
             </ui:define>
 
 

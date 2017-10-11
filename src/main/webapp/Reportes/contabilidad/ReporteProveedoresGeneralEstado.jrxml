@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProveedoresGeneral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07953508-6232-43a0-b501-43a7a06b3145">
 	<property name="ireport.zoom" value="1.3286707500000006"/>
-	<property name="ireport.x" value="367"/>
+	<property name="ireport.x" value="449"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idEntidad" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -75,28 +75,28 @@ FROM
 				<reportElement x="3" y="0" width="799" height="1" uuid="2735cf70-fc5e-4c6f-ae4e-0ca370fdbd74"/>
 			</line>
 			<staticText>
-				<reportElement x="402" y="2" width="125" height="20" uuid="c240c688-4123-4ed4-bc94-e4a4cb658c74"/>
+				<reportElement x="412" y="2" width="115" height="20" uuid="c240c688-4123-4ed4-bc94-e4a4cb658c74"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CORREO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="196" y="2" width="79" height="20" uuid="57ba08ba-5019-4280-a419-b271f56e6b97"/>
+				<reportElement x="194" y="2" width="79" height="20" uuid="57ba08ba-5019-4280-a419-b271f56e6b97"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[NIT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="338" y="3" width="64" height="20" uuid="05532267-ed2d-4da2-ace5-88d1a259c59b"/>
+				<reportElement x="341" y="3" width="64" height="20" uuid="05532267-ed2d-4da2-ace5-88d1a259c59b"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TELÉFONO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="97" y="2" width="89" height="20" uuid="2cd9e544-2fba-4dcd-b7e1-1589298438ae"/>
+				<reportElement x="100" y="2" width="89" height="20" uuid="2cd9e544-2fba-4dcd-b7e1-1589298438ae"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -110,7 +110,7 @@ FROM
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="525" y="2" width="170" height="20" uuid="77a072ea-4c8d-4b1d-877c-7ae02845218c"/>
+				<reportElement x="539" y="2" width="156" height="20" uuid="77a072ea-4c8d-4b1d-877c-7ae02845218c"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -127,7 +127,7 @@ FROM
 				<text><![CDATA[NRC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="695" y="4" width="100" height="20" uuid="1a62f359-115f-4457-9677-f8ebb2e8b322"/>
+				<reportElement x="695" y="2" width="100" height="20" uuid="1a62f359-115f-4457-9677-f8ebb2e8b322"/>
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -138,21 +138,21 @@ FROM
 	<detail>
 		<band height="26" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="196" y="5" width="79" height="20" isPrintWhenDetailOverflows="true" uuid="862cbdef-2cd5-4c6d-b537-0a4bd7e33870"/>
+				<reportElement x="194" y="5" width="79" height="20" isPrintWhenDetailOverflows="true" uuid="862cbdef-2cd5-4c6d-b537-0a4bd7e33870"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proveedor_nit_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="338" y="5" width="64" height="20" isPrintWhenDetailOverflows="true" uuid="7e41904d-b07c-4131-a124-eb2222cd724c"/>
+				<reportElement x="341" y="5" width="64" height="20" isPrintWhenDetailOverflows="true" uuid="7e41904d-b07c-4131-a124-eb2222cd724c"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+"-"+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="97" y="5" width="89" height="20" isPrintWhenDetailOverflows="true" uuid="ad23fa1b-dbe5-4367-9736-aacd5de212e3"/>
+				<reportElement x="100" y="5" width="89" height="20" isPrintWhenDetailOverflows="true" uuid="ad23fa1b-dbe5-4367-9736-aacd5de212e3"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -166,14 +166,14 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proveedor_nrc_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="402" y="5" width="125" height="20" isPrintWhenDetailOverflows="true" uuid="af3c1fee-6f67-4275-a464-0fa521f882f6"/>
+				<reportElement x="412" y="5" width="115" height="20" isPrintWhenDetailOverflows="true" uuid="af3c1fee-6f67-4275-a464-0fa521f882f6"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proveedor_correo_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="527" y="5" width="173" height="20" isPrintWhenDetailOverflows="true" uuid="212596d1-f792-49ea-ab0f-56d443c5b721"/>
+				<reportElement x="539" y="5" width="161" height="20" isPrintWhenDetailOverflows="true" uuid="212596d1-f792-49ea-ab0f-56d443c5b721"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

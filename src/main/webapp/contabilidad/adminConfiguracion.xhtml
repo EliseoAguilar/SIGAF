@@ -88,26 +88,7 @@
 
                                     <p:tab title="Estructura códigos ">
                                         <p:panelGrid id="addPanel"   style="width: 100%; margin: auto;"  class="noBoder" >   
-                                            <p:row>
-                                                <p:column style="width: 50%;">
-                                                    <h:outputText value="Cuentas:*" />
-                                                </p:column>
-
-                                                <p:column style="width: 50%;">
-                                                    <h:outputText value="Areas:*" />
-                                                </p:column>
-                                            </p:row>
-                                            <p:row>
-                                                <p:column>
-                                                    <p:inputText id="tCodigoEntidad" value="#{configuracionBean.configuracion.cuentaConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
-                                                    <h:outputText value="#{configuracionBean.msgCuenta}" style="color: red"/> 
-                                                </p:column>
-
-                                                <p:column>
-                                                    <p:inputText id="tCodigoArea" value="#{configuracionBean.configuracion.areaConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
-                                                    <h:outputText value="#{configuracionBean.msgArea}" style="color: red"/> 
-                                                </p:column>
-                                            </p:row>
+                               
                                             <p:row>
                                                 <p:column style="width: 50%;">
                                                     <h:outputText value="Tipos de activo:*" />
@@ -127,6 +108,21 @@
                                                     <p:inputText id="tCodigoActivo" value="#{configuracionBean.configuracion.activoConfiguracion}"  style="width: 100%" placeholder="Introduzca la estructura" />
                                                     <h:outputText value="#{configuracionBean.msgActivo}" style="color: red"/> 
                                                 </p:column>
+                                            </p:row>
+                                                         <p:row>
+                                                <p:column style="width: 50%;">
+                                                    <h:outputText value="Cuentas:*" />
+                                                </p:column>
+
+                                                
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p:inputText id="tCodigoEntidad" value="#{configuracionBean.configuracion.cuentaConfiguracion}" style="width: 100%" placeholder="Introduzca la estructura" />
+                                                    <h:outputText value="#{configuracionBean.msgCuenta}" style="color: red"/> 
+                                                </p:column>
+
+                                             
                                             </p:row>
 
                                         </p:panelGrid>

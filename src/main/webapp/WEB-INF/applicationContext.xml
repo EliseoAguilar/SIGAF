@@ -338,8 +338,7 @@
     <bean id="areaBean" 
           class="com.sigaf.bean.AreaBean" init-method="Init">
         <property name="areaBo" ref="areaBo"></property>
-        <property name="configuracionBo" ref="configuracionBo"></property>
-        <property name="ientidadBo" ref="entidadBo"></property>  
+         <property name="ientidadBo" ref="entidadBo"></property>  
          <property name="bitacoraBo" ref="bitacoraBo"></property> 
     </bean>
     
@@ -1281,6 +1280,7 @@
           class="com.sigaf.bean.ContablidadPredeterminarBean" init-method="init" scope="session" >
         <property name="entidadBo" ref="entidadBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
+         <property name="configuracionBo" ref="configuracionBo"></property>
     </bean>
     
     

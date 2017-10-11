@@ -59,7 +59,7 @@ WHERE
 	<pageHeader>
 		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="111" y="0" width="206" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
+				<reportElement x="151" y="0" width="189" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
 				<textElement>
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -73,7 +73,7 @@ WHERE
 				<text><![CDATA[(Expresado en Dólares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="320" y="0" width="235" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
+				<reportElement x="337" y="0" width="218" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
 				<subreportParameter name="id_ejercicio">
 					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
 				</subreportParameter>

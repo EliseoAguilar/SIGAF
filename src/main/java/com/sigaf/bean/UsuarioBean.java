@@ -150,7 +150,7 @@ public class UsuarioBean extends Actividad {
 
         this.Nombrbe = usuarioSelecionado.getNombreUsuario();
         
-        this.empleado = this.usuarioSelecionado.getTEmpleado();
+        this.empleado.setFotoEmpleado( this.usuarioSelecionado.getTEmpleado().getFotoEmpleado());
 
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_usuario");
@@ -570,7 +570,6 @@ public class UsuarioBean extends Actividad {
     public void limpiar() {
 
         this.usuario = new TUsuario();
-        
         this.idEmpleado = 0;
         this.msgArea = "";
         this.msgClave = "";
@@ -640,8 +639,11 @@ public class UsuarioBean extends Actividad {
             usuarioSelecionado.setEstadoUsuario(this.usuarioBo.getUsuario(usuarioSelecionado.getIdUsuario()).getEstadoUsuario());
 
             usuarioSelecionado.setNombreUsuario(Nombrbe);
+            usuarioSelecionado.getTEmpleado().setFotoEmpleado(empleado.getFotoEmpleado());
+         
             this.empleado.setIdEmpleado(this.usuarioSelecionado.getTEmpleado().getIdEmpleado()); 
-            this.empleadoBo.update(empleado);
+            this.empleadoBo.update(usuarioSelecionado.getTEmpleado());
+            
             this.usuarioBo.update(usuarioSelecionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario modificado correctamente.", ""));
             TBitacora auxBitacora = new TBitacora();

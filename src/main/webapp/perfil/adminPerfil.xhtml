@@ -11,15 +11,7 @@
         <ui:composition template="./../index.xhtml" id="exter">
 
             <ui:define name="content" id="super">
-                <script>
-                    function recargar(){
-                        setTimeout(esperar, 1000);
-                    }
-                    function esperar(){
-                        
-                        location.href="adminPerfil.xhtml";
-                    }
-                </script>
+                
                     #{usuarioBean.updateListaArea()}
                     
                  
@@ -34,7 +26,7 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}"  style="#{usuarioBean.btnNuevo}" oncomplete="recargar()" update=":padding" > 
+                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnNuevo}"  ajax="false" > 
                                     <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                     <p:commandButton  value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
@@ -180,7 +172,7 @@
                                 </p:panelGrid>
                                 <br></br>
                                 <center>
-                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificarPerfil()}" update=":padding"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar" ajax="false"> 
+                                    <p:commandButton id="btnCreate"  actionListener="#{usuarioBean.validarFormularioModificarPerfil()}" update=":padding"   icon="fa fa-check" style="#{usuarioBean.btnCrear}" value="Guardar" > 
                                     </p:commandButton>
                                    
                                     <p:commandButton  ajax="false" id="btnCancel" action="/inicio/index.xhtml?faces-redirect=true"   icon="fa fa-close" style="#{usuarioBean.btnCancelar}"  value="Cancelar"> 

@@ -19,9 +19,6 @@
         <property name="activoConfiguracion" type="string">
             <column name="activo_configuracion" />
         </property>
-        <property name="areaConfiguracion" type="string">
-            <column name="area_configuracion" />
-        </property>
         <property name="cuentaConfiguracion" type="string">
             <column name="cuenta_configuracion" />
         </property>
