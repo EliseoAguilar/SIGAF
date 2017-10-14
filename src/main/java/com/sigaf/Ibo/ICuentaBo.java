@@ -43,4 +43,6 @@ public interface ICuentaBo {
 
     public BigDecimal saldoCuentaCierre(Integer idCuenta, Integer idEjercicio, String tipoSaldo);
 
+    public Integer numeroCuenta(Integer id, Integer strOr);
+            
 }

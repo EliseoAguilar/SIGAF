@@ -448,8 +448,7 @@ public class ActivoFijoBean extends Actividad {
 
                 this.ejercicio = this.ejercicioBo.getEjercicio(this.perido.getTEjercicio().getIdEjercicio());
 
-                numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
-
+               
                 int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
 
                 int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
@@ -457,6 +456,9 @@ public class ActivoFijoBean extends Actividad {
                 this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
 
                 this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
+                
+                 numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
+
 
             } else {
 
@@ -569,8 +571,7 @@ public class ActivoFijoBean extends Actividad {
 
         this.perido = this.periodoBo.getPeriodoAbierto(this.ejercicio.getIdEjercicio());
 
-        numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
-
+       
         int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
 
         int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
@@ -578,6 +579,8 @@ public class ActivoFijoBean extends Actividad {
         this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
 
         this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
+
+         numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
 
         partida.setFechaPartida(this.fechaMinima);
     }
@@ -1823,7 +1826,7 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivo() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 
@@ -1853,7 +1856,7 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivoPDF() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), estadoUsuario, this.getConn());
 
@@ -1882,7 +1885,7 @@ public class ActivoFijoBean extends Actividad {
     public void generarReporteActivoDepre() throws Exception {
         Map<String, Object> estadoUsuario = new HashMap();
         estadoUsuario.put("idActivoFijo", this.activoFijoSeleccionado.getIdActivoFijo());
-        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getNombreEntidad());
+        estadoUsuario.put("idEntidad", this.entidadSeleccionada.getIdEntidad());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/contabilidad/reporteActivoFijoDepreAmort.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), estadoUsuario, this.getConn());
 

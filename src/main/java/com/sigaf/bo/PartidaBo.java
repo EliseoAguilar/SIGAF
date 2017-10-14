@@ -8,6 +8,7 @@ package com.sigaf.bo;
 import com.sigaf.Ibo.IPartidaBo;
 import com.sigaf.Idao.IPartidaDao;
 import com.sigaf.pojo.TPartida;
+import java.util.Date;
 import java.util.List;
 
 

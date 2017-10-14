@@ -84,7 +84,7 @@ public class EjercicioBean extends Actividad {
 
     /*Lista para costos */
     private TEstructura listaEstructuraCostos;
-    
+
     /*Lista para Gastos */
     private TEstructura listaEstructuraGastos;
 
@@ -211,8 +211,6 @@ public class EjercicioBean extends Actividad {
         this.entidadSeleccionada = entidadSeleccionada;
     }
 
-  
-
     public void getContabilidadPredeterminado() {
 
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -275,9 +273,7 @@ public class EjercicioBean extends Actividad {
 
                     }
 
-                }
-                /* Si aun se puede Depreciar se agrega a la lista para depreciar*/ 
-                else if (listaDepre.size() < mesesVidaUtil) {
+                } /* Si aun se puede Depreciar se agrega a la lista para depreciar*/ else if (listaDepre.size() < mesesVidaUtil) {
                     activosDeprelista.add(tActivoFijo);
                 }
 
@@ -287,8 +283,8 @@ public class EjercicioBean extends Actividad {
         if (!activosDeprelista.isEmpty()) {
             this.cargarParida(activosDeprelista);
             this.listActios = activosDeprelista;
-        }else{
-        this.listActios.clear();
+        } else {
+            this.listActios.clear();
         }
     }
 
@@ -542,7 +538,7 @@ public class EjercicioBean extends Actividad {
 
     }
 
-      /**
+    /**
      * Asigna el nombre del mes al periodo nuevo segun el perido acual
      */
     public int llenarMesPeriodoAuxFecha(String mes) {
@@ -584,7 +580,6 @@ public class EjercicioBean extends Actividad {
 
     }
 
-  
     /**
      * Metodo para preparar la apertura de un nuevo periodo y cierre del
      * anterior
@@ -595,8 +590,7 @@ public class EjercicioBean extends Actividad {
          */
 
         this.partida = new TPartida();
-        this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjer));
-        
+
         this.partida.setTPeriodo(periodoViejo);
 
         this.partida.setConceptoPartida("Depreciación/Amortización " + periodoViejo.getMesPeriodo());
@@ -622,7 +616,9 @@ public class EjercicioBean extends Actividad {
         this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
 
         this.partida.setFechaPartida(fechaMaxima);
-        
+
+        this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjer));
+
         this.idEjer = idEjer;
 
     }
@@ -633,8 +629,7 @@ public class EjercicioBean extends Actividad {
     public void setIdEjerCierre(Integer idEjerCierre) {
         this.pasarSaldos = true;
         this.partida = new TPartida();
-        this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjerCierre));
-        
+
         this.partida.setTPeriodo(periodoViejo);
 
         this.partida.setConceptoPartida("Depreciación/Amortización " + periodoViejo.getMesPeriodo());
@@ -644,7 +639,7 @@ public class EjercicioBean extends Actividad {
         this.totalHaber = BigDecimal.ZERO;
         /*Sacando el ejercico que se va a cerrar*/
         this.ejercicioViejo = this.ejercicioBo.getEjercicio(idEjerCierre);
-       
+
 
         /*Se saca el periodo viejo desde la bd para tener otra instancia y poder modificarla para el nuevo */
         this.ejercicio = this.ejercicioBo.getEjercicio(idEjerCierre);
@@ -660,8 +655,7 @@ public class EjercicioBean extends Actividad {
 
         /*Consulta de tipos de activos que  tienen la entidad*/
         this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
-        
-        
+
         int mes = llenarMesPeriodoAuxFecha(periodoViejo.getMesPeriodo());
 
         int dia = obtenerUltimoDiaMes(ejercicioViejo.getAhoEjercicio(), mes);
@@ -669,8 +663,11 @@ public class EjercicioBean extends Actividad {
         this.fechaMaxima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, dia);
 
         this.fechaMinima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, 1);
-        
+
         this.partida.setFechaPartida(fechaMaxima);
+
+        this.partida.setNumeroPartida(this.partidaBo.numeroPartida(idEjerCierre));
+
         this.ejercicioViejo.setFechaCierre(fechaMaxima);
         this.idEjerCierre = idEjerCierre;
 
@@ -1522,7 +1519,7 @@ public class EjercicioBean extends Actividad {
 
             this.partida = new TPartida();
             this.partida.setNumeroPartida(this.partidaBo.numeroPartida(this.ejercicioViejo.getIdEjercicio()));
-            this.partida.setFechaPartida(new Date());
+            this.partida.setFechaPartida(fechaMaxima);
             this.partida.setConceptoPartida("Traspaso de saldos para determinar resultados del ejercicio" + this.ejercicioViejo.getAhoEjercicio());
             this.partida.setEstadoPartida(false);
             this.partida.setTPeriodo(periodoViejo);
@@ -1746,8 +1743,10 @@ public class EjercicioBean extends Actividad {
 
                     if (!listaDetallePartida.isEmpty()) {
 
+                        int mes = llenarMesPeriodoAuxFecha(periodoNuevo.getMesPeriodo());
+                        this.fechaMinima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, 1);
                         this.partida = new TPartida();
-                        this.partida.setFechaPartida(new Date());
+                        this.partida.setFechaPartida(fechaMinima);
                         this.partida.setConceptoPartida("Inicio de operaciones del ejercicio " + this.ejercicio.getAhoEjercicio());
                         this.partida.setEstadoPartida(true);
                         /*Directamente es la partida Numero 1*/
@@ -1783,7 +1782,7 @@ public class EjercicioBean extends Actividad {
 
                     this.partida = new TPartida();
                     this.partida.setNumeroPartida(this.partidaBo.numeroPartida(this.ejercicioViejo.getIdEjercicio()));
-                    this.partida.setFechaPartida(new Date());
+                    this.partida.setFechaPartida(fechaMaxima);
                     this.partida.setConceptoPartida("Cierre de operaciones del ejercicio " + this.ejercicioViejo.getAhoEjercicio());
                     this.partida.setEstadoPartida(false);
                     this.partida.setTPeriodo(periodoViejo);

@@ -262,4 +262,13 @@ public class CuentaDao implements ICuentaDao {
         return saldo;
 
     }
+    
+    @Override
+    public Integer numeroCuenta(Integer id, Integer strOr) {
+        Session session = this.sessionFactory.openSession();
+        Integer numero = (Integer) session.createSQLQuery("select  COALESCE(max( CAST( split_part(codigo_cuenta, '-', :strOr) AS integer ) ), 0)  from t_cuenta  where id_subcuenta_cuenta  = :id").setParameter("id", id).setParameter("strOr", strOr).uniqueResult();
+        session.close();
+        return numero + 1;
+
+    }
 }

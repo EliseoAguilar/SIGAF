@@ -389,7 +389,9 @@ public class PartidaBean extends Actividad {
     }
 
     public Integer getNumPartida() {
+        
         numPartida = this.partidaBo.numeroPartida(idEjer);
+        
         return numPartida;
 
     }
@@ -642,7 +644,7 @@ public class PartidaBean extends Actividad {
         try {
             this.partida.setEstadoPartida(true);
             this.partida.setNumeroPartida(numPartida);
-            this.partida.setTPeriodo(new TPeriodo(idPeriodo));
+            this.partida.setTPeriodo(this.periodoSelecionado);
             this.partidaBo.create(this.partida);
 
             for (TDetallePartida tDetallePartida : listaDetallePartida) {

@@ -106,7 +106,7 @@
                                         <p:row>
                                             <p:column>
                                                 <p:inputMask id="tCodigo"  mask="#{cuentaBean.configuracion.cuentaConfiguracion}" style="width:100%" value="#{cuentaBean.cuenta.codigoCuenta}" />
-                                                <h:outputText value="#{cuentaBean.msgNumero}" style="color: red"/> 
+                                                <h:outputText   id="tCodigo1" value="#{cuentaBean.msgNumero}" style="color: red"/> 
                                             </p:column>
                                             <p:column>
                                                 <p:calendar id="cFechaIngreso" value="#{cuentaBean.cuenta.fechaCuenta}"   maxdate="#{cuentaBean.cuenta.fechaCuenta}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy" showOn="button"/>
@@ -173,20 +173,26 @@
 
                                         <p:column sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}"  
                                                   headerText="Código"
-                                                  filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                                  filterMatchMode="contains" width="20%" filterStyle="width: 100%">  
                                             <h:outputText value="#{cue.codigoCuenta}"  />  
                                         </p:column>  
                                         <p:column sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}"  
                                                   headerText="Nombre"
-                                                  filterMatchMode="contains" width="65%" filterStyle="width: 100%">  
+                                                  filterMatchMode="contains" width="40%" filterStyle="width: 100%">  
                                             <h:outputText value="#{cue.nombreCuenta}" />  
                                         </p:column>  
+                                        
+                                         <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.TCuenta.nombreCuenta}"  
+                                              headerText="Cuenta padre"
+                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                    </p:column> 
 
                                         <p:column  width="10%">  
                                             <p:commandButton  update="opAgregarCuenta" oncomplete="PF('dgBuscarCuenta').hide()"  icon="fa fa-check" title="Seleccionar" >
                                                 <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSeleccionaPadre}"  />
                                                 <f:setPropertyActionListener value="#{cue.naturalezaCuenta}" target="#{cuentaBean.cuenta.naturalezaCuenta}"  />
-                                                <f:setPropertyActionListener value="#{cue.codigoCuenta}" target="#{cuentaBean.cuenta.codigoCuenta}"  />
+                                               
                                             </p:commandButton>
                                         </p:column> 
                                     </p:dataTable> 

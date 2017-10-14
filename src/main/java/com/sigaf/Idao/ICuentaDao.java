@@ -42,4 +42,6 @@ public interface ICuentaDao {
     public List<TCuenta> listCuentaSubDet(Integer idCuenta, Integer idEntidad, Integer idEjercicio, String strCod);
 
     public BigDecimal saldoCuentaCierre(Integer idCuenta, Integer idEjercicio, String tipoSaldo);
+    
+    public Integer numeroCuenta(Integer id, Integer strOr);
 }

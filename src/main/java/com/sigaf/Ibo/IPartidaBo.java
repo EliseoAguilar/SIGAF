@@ -6,6 +6,7 @@
 package com.sigaf.Ibo;
 
 import com.sigaf.pojo.TPartida;
+import java.util.Date;
 import java.util.List;
 
 /**

@@ -118,7 +118,6 @@ public class CuentaBean extends Actividad {
         this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
     }
 
-    
     /*
     *Metodo que inicializa el bean
      */
@@ -183,8 +182,6 @@ public class CuentaBean extends Actividad {
 
     }
 
-  
-
     /**
      * Metodo que limpia la cuenta padre al desaccitvar el check ¿Subcuenta?
      * Este metodo se llama antes que cambie el valor por lo cual se Verifica
@@ -213,7 +210,6 @@ public class CuentaBean extends Actividad {
         this.listaEntidades = listaEntidades;
     }
 
-   
     public List<TCuenta> getListaCuentasAct() {
         return listaCuentasAct;
     }
@@ -254,6 +250,78 @@ public class CuentaBean extends Actividad {
 
     public void setCuentaSeleccionaPadre(TCuenta cuentaSeleccionaPadre) {
         this.cuentaSeleccionaPadre = cuentaSeleccionaPadre;
+        this.msgNumero = "";
+        if (this.principal) {
+
+            boolean fin = true;
+            String srtOr = this.cuentaSeleccionaPadre.getCodigoCuenta();
+            String[] partsOr = srtOr.split("-");
+            int inicioOr = 0;
+
+            for (int i = partsOr.length - 1; i >= 0; i--) {
+                inicioOr++;
+                for (int j = 0; j < partsOr[i].length(); j++) {
+                    if (partsOr[i].charAt(j) != '0') {
+                        fin = false;
+                        break;
+                    }
+                }
+                if (!fin) {
+                    break;
+                }
+
+            }
+
+            int seg = (partsOr.length - inicioOr) + 1;
+
+            if (seg >= partsOr.length) {
+
+                this.msgNumero = "La configuración actual no soporta más subcuentas.";
+
+                this.cuenta.setCodigoCuenta("");
+
+            } else {
+
+                String numero = this.cuentaBo.numeroCuenta(this.cuentaSeleccionaPadre.getIdCuenta(), seg + 1).toString();
+
+                if (partsOr[seg].length() < numero.length()) {
+
+                    this.msgNumero = "La configuración actual no soporta más subcuentas.";
+
+                    this.cuenta.setCodigoCuenta("");
+
+                } else {
+
+                    String ceros = "";
+
+                    int cantidad = partsOr[seg].length() - numero.length();
+
+                    for (int i = 0; i < cantidad; i++) {
+                        ceros += "0";
+                    }
+
+                    ceros = ceros + numero;
+
+                    String strDe = partsOr[0];
+
+                    for (int i = 1; i <= (partsOr.length - 1); i++) {
+
+                        if (seg == i) {
+                            strDe += "-";
+                            strDe += ceros;
+                        } else {
+                            strDe += "-";
+                            strDe += partsOr[i];
+                        }
+                    }
+
+                    this.cuenta.setCodigoCuenta(strDe);
+                }
+
+            }
+
+        }
+
     }
 
     public IEntidadBo getEntidadBo() {

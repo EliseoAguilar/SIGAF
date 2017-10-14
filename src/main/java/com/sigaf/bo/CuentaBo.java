@@ -99,4 +99,10 @@ public class CuentaBo implements ICuentaBo {
         return this.cuentaDao.saldoCuentaCierre(idCuenta, idEjercicio, tipoSaldo);
     }
 
+    @Override
+    public Integer numeroCuenta(Integer id, Integer strOr) {
+            
+    return this.cuentaDao.numeroCuenta(id, strOr);
+    }
+
 }

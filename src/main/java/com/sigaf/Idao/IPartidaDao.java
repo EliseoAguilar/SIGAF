@@ -6,6 +6,7 @@
 package com.sigaf.Idao;
 
 import com.sigaf.pojo.TPartida;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,5 +26,6 @@ public interface IPartidaDao {
     public void update(TPartida partida);
     
    public Integer numeroPartida(Integer id);
+   
     
 }

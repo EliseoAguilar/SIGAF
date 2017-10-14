@@ -95,7 +95,7 @@
                                 #{partidaBean.updateListaPartida()}
 
                                 <h:form >
-                                    <p:fieldset rendered="#{partidaBean.idPeriodo eq partidaBean.periodoAbierto.idPeriodo? true:false}" >
+                                    <p:fieldset rendered="#{partidaBean.ejercicioSelecionado.estadoEjercicio}" >
                                         <p:commandButton   title="Nueva partida"   actionListener="#{partidaBean.enableShowCreateBean()}" update=":padding"    icon="fa fa-plus"  style="#{partidaBean.btnNuevo}" >
                                         </p:commandButton>
                                     </p:fieldset>
@@ -234,7 +234,9 @@
                                         </p:column>
                                         <p:column>
 
-                                            <p:calendar id="cFechaIngreso" showOn="button" value="#{partidaBean.partida.fechaPartida}" mindate="#{partidaBean.fechaMinima}"  maxdate="#{partidaBean.fechaMaxima}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
+                                            <p:calendar id="cFechaIngreso" showOn="button" value="#{partidaBean.partida.fechaPartida}" mindate="#{partidaBean.fechaMinima}"  maxdate="#{partidaBean.fechaMaxima}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy"  >
+                                            
+                                            </p:calendar>
 
 
                                         </p:column>
