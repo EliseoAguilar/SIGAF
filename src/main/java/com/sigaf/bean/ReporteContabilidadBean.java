@@ -61,8 +61,7 @@ public class ReporteContabilidadBean extends Actividad {
     //Identificador de Ejercicio Contable
     private Integer idEjercicio;
 
-    //Lista de Entidades
-    private List<TEntidad> listaEntidades;
+    
 
     //Objeto capa de negocio Entidad
     private IEntidadBo entidadBo;
@@ -301,27 +300,15 @@ public class ReporteContabilidadBean extends Actividad {
 
     }
 
-    public void updateListaEntidades() {
-        listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+
 
     public void updateListaEjercicio() {
         this.listaEjercicio = ejercicioBo.listEjercicio(this.entidadSeleccionada.getIdEntidad());
     }
 
-    public List<TEntidad> getListaEntidades() {
 
-        return listaEntidades;
-    }
 
-    /**
-     * Cambia Instancia
-     *
-     * @param listaEntidades
-     */
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
+
 
     /**
      * Retorna Instancia

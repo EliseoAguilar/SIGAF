@@ -47,7 +47,7 @@ public class CuentaBean extends Actividad {
 
     private TEntidad entidadSeleccionada;
 
-    private List<TEntidad> listaEntidades;
+    
 
     private IEntidadBo entidadBo;
 
@@ -148,12 +148,7 @@ public class CuentaBean extends Actividad {
         this.msgTipo = "";
     }
 
-    /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+
 
     /**
      * Metodo que actuliza la lista de Cuentas consultado a la Base de Datos
@@ -202,13 +197,7 @@ public class CuentaBean extends Actividad {
         this.codigo = codigo;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
 
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
 
     public List<TCuenta> getListaCuentasAct() {
         return listaCuentasAct;

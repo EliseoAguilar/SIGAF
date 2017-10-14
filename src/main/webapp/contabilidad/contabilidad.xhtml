@@ -51,12 +51,12 @@
                         <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
                             <p:row>
                                 <p:column style="padding: 0px;" >
-                                    #{cuentaBean.getContabilidadPredeterminado()}
-                                    <h:outputText class="etiquetaEn" value="#{cuentaBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                   
+                                    <h:outputText class="etiquetaEn" value="#{contablidadPredeterminarBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
                                     </h:outputText>
                                 </p:column>
                                 <p:column style="padding: 0px; text-align: right" >
-                                    <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{cuentaBean.btnCancelar}"  value="Cambiar Entidad"> 
+                                    <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{contablidadPredeterminarBean.btnCancelar}"  value="Cambiar Entidad"> 
 
                                     </p:commandButton>   
                                 </p:column>

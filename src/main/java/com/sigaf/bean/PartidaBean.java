@@ -61,7 +61,7 @@ public class PartidaBean extends Actividad {
 
     private List<TCuenta> listaCuentas;
 
-    private List<TEntidad> listaEntidades;
+   
 
     private IEntidadBo entidadBo;
 
@@ -160,13 +160,6 @@ public class PartidaBean extends Actividad {
     }
 
     /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
-
-    /**
      * Metodo que actuliza la lista de Partidas consultado a la Base de Datos
      */
     public void updateListaPartida() {
@@ -185,7 +178,11 @@ public class PartidaBean extends Actividad {
      * Metodo que actuliza la lista de Periodos consultado a la Base de Datos
      */
     public void updateListaPeriodos() {
+        if(idEjer!=0){
         this.listaPeriodos = this.periodoBo.listPeriodo(idEjer);
+        }else{
+        this.listaPeriodos.clear();
+        }
     }
 
     /**
@@ -299,13 +296,7 @@ public class PartidaBean extends Actividad {
         this.ejercicioSelecionado = ejercicioSelecionado;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
 
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
 
     public IEntidadBo getEntidadBo() {
         return entidadBo;

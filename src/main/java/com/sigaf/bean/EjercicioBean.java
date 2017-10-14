@@ -136,7 +136,7 @@ public class EjercicioBean extends Actividad {
 
     private List< TTipoActivo> listaTipoActivo;
 
-    private List<TEntidad> listaEntidades;
+   
 
     private IEntidadBo entidadBo;
 
@@ -324,12 +324,7 @@ public class EjercicioBean extends Actividad {
         this.bitacoraBo = bitacoraBo;
     }
 
-    /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+
 
     /**
      * Metodo que actuliza la lista de ejercicos por Entidad y determina si se
@@ -966,13 +961,7 @@ public class EjercicioBean extends Actividad {
         this.listaTipoActivo = listaTipoActivo;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
 
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
 
     public IEntidadBo getEntidadBo() {
         return entidadBo;
