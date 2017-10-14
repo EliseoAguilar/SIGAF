@@ -44,7 +44,7 @@ public class ProveedorBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private List<TEntidad> listaEntidades;
+   
 
     private IEntidadBo entidadBo;
 
@@ -93,12 +93,7 @@ public class ProveedorBean extends Actividad {
         this.bitacoraBo = bitacoraBo;
     }
 
-    /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+
 
     /**
      * Metodo que actuliza la lista de proveedores
@@ -133,13 +128,7 @@ public class ProveedorBean extends Actividad {
         this.entidadBo = entidadBo;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
-
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
+  
 
  
 

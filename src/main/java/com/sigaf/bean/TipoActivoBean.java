@@ -48,7 +48,7 @@ public class TipoActivoBean extends Actividad {
 
     private IBitacoraBo bitacoraBo;
 
-    private List<TEntidad> listaEntidades;
+    
 
     private IEntidadBo entidadBo;
 
@@ -135,12 +135,6 @@ public class TipoActivoBean extends Actividad {
         this.listaCuentas = this.cuentaBo.listCuentaEntActTip(entidadSeleccionada.getIdEntidad(), true);
     }
 
-    /**
-     * Metodo que actuliza la lista de entidades consultado a la Base de Datos
-     */
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
 
     public void updateListaTipoActivo() {
         this.listaTipoActivo = this.tipoActivoBo.listTipoActivo(entidadSeleccionada.getIdEntidad());
@@ -164,13 +158,7 @@ public class TipoActivoBean extends Actividad {
         this.entidadBo = entidadBo;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
-
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
+    
 
    
 

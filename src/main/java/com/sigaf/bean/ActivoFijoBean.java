@@ -86,7 +86,7 @@ public class ActivoFijoBean extends Actividad {
 
     private BigDecimal valorActivoBaja;
 
-    private List<TEntidad> listaEntidades;
+   
 
     private IEntidadBo entidadBo;
 
@@ -792,13 +792,6 @@ public class ActivoFijoBean extends Actividad {
         this.showRegistro = showRegistro;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
-
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
 
     public Boolean getShowBaja() {
         return showBaja;

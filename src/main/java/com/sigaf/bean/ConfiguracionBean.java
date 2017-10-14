@@ -107,8 +107,7 @@ public class ConfiguracionBean extends Actividad {
 
     private String msgUtilidad;
 
-    /* lista de entidades*/
-    private List<TEntidad> listaEntidades;
+   
 
     /*Acceso a datos de las entidades*/
     private IEntidadBo entidadBo;
@@ -306,9 +305,7 @@ public class ConfiguracionBean extends Actividad {
         this.bitacoraBo = bitacoraBo;
     }
 
-    public void updateListaEntidades() {
-        this.listaEntidades = this.entidadBo.listTEndidadTodos();
-    }
+    
 
     public void updateListaCuentas() {
         this.listaCuentas = this.cuentaBo.listCuentaEnt(entidadSeleccionada.getIdEntidad());
@@ -906,13 +903,6 @@ public class ConfiguracionBean extends Actividad {
         this.activoFijoBo = activoFijoBo;
     }
 
-    public List<TEntidad> getListaEntidades() {
-        return listaEntidades;
-    }
-
-    public void setListaEntidades(List<TEntidad> listaEntidades) {
-        this.listaEntidades = listaEntidades;
-    }
 
     public IEntidadBo getEntidadBo() {
         return entidadBo;
