@@ -118,6 +118,16 @@ public class CuentaBean extends Actividad {
 
     private String msgEstructura;
 
+    private List<TCuenta> listaDestino;
+
+    public List<TCuenta> getListaDestino() {
+        return listaDestino;
+    }
+
+    public void setListaDestino(List<TCuenta> listaDestino) {
+        this.listaDestino = listaDestino;
+    }
+
     public String getMsgEntidad() {
         return msgEntidad;
     }
@@ -145,9 +155,11 @@ public class CuentaBean extends Actividad {
         this.estadoValido = false;
 
         if (idEntidad != 0) {
-            if (this.cuentaBo.listCuentaEnt(idEntidad).isEmpty()) {
+            listaDestino = this.cuentaBo.listCuentaEnt(idEntidad);
+            if (listaDestino.isEmpty()) {
                 this.msgEntidad = "La entidad no dispone de cuentas";
                 this.msgEstructura = "";
+                this.configuracionDestino = new TConfiguracion();
             } else {
                 this.msgEntidad = "";
                 this.configuracionDestino = configuracionBo.getConfiguracion(idEntidad);
@@ -158,6 +170,7 @@ public class CuentaBean extends Actividad {
         } else {
             this.msgEntidad = "";
             this.msgEstructura = "";
+            this.configuracionDestino = new TConfiguracion();
 
         }
 
@@ -166,6 +179,8 @@ public class CuentaBean extends Actividad {
     public void limpiarCopia() {
 
         this.idEntidad = 0;
+        this.configuracionDestino = new TConfiguracion();
+        listaDestino.clear();
         this.msgEstructura = "";
         this.msgEntidad = "";
     }
@@ -183,20 +198,18 @@ public class CuentaBean extends Actividad {
             List<TCuenta> listaCuentasInser = new ArrayList<>();
 
             /*Lo que dice destino, es en realidad el origen*/
-            List<TCuenta> listaCuentasDestino = this.cuentaBo.listCuentaEnt(idEntidad);
-
-            for (TCuenta tCuenta : listaCuentasDestino) {
+            for (TCuenta tCuenta : listaDestino) {
 
                 if (tCuenta.getTCuenta() != null) {
                     for (TCuenta tCuenta1 : listaCuentasInser) {
                         if (tCuenta1.getCodigoCuenta().equals(tCuenta.getTCuenta().getCodigoCuenta())) {
-                        tCuenta.setTCuenta(tCuenta1);
+                            tCuenta.setTCuenta(tCuenta1);
                         }
                     }
                 }
-                
+
                 tCuenta.setFechaCuenta(new Date());
-                
+
                 tCuenta.setTEntidad(entidadSeleccionada);
 
                 this.cuentaBo.create(tCuenta);
@@ -205,7 +218,6 @@ public class CuentaBean extends Actividad {
 
             }
 
-            
             this.limpiarCopia();
             this.enableShowDataBean();
             TBitacora auxBitacora = new TBitacora();
@@ -280,6 +292,7 @@ public class CuentaBean extends Actividad {
     *Metodo que inicializa el bean
      */
     public void init() {
+        this.listaDestino = new ArrayList<>();
         this.limpiar();
         try {
             this.getConexion();

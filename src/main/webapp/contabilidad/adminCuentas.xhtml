@@ -31,15 +31,16 @@
 
                     <p:growl id="msgs" showSummary="true"  showDetail="true" />
 
-                    
+
                     <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" appendTo="@(body)">
                         <p:graphicImage name="/img/loader.gif" height="30px" width="150px" />
                     </p:dialog>
-                    
+
                     <p:outputPanel rendered="#{cuentaBean.showCreateAgropecuario}" id="opDuplicar">
 
                         #{cuentaBean.updateConfiguracion()}
                         #{cuentaBean.updateListaEntidades()}
+
 
                         <p:dialog  header="Confirmar" widgetVar="dialogDuplicar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{cuentaBean.estadoValido}">
                             <h:form>
@@ -65,23 +66,27 @@
                                 <p:panelGrid   style="width: 100%; margin: auto;" class="noBoder">
                                     <p:row>
                                         <p:column width="50%"><h:outputText value="Entidad:"/></p:column>
+
                                         <p:column><h:outputText value="Estructura Cuentas:"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column  style="width: 50%;">
 
-                                            <p:selectOneMenu id="car"  value="#{cuentaBean.idEntidad}"  style=" width: 100%;" > 
+                                            <p:selectOneMenu id="car"  value="#{cuentaBean.idEntidad}"  style=" width: 85%;" > 
                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
                                                 <f:selectItems  var="end" value="#{cuentaBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{ !end.estadoEntidad ?  false :  (end.idEntidad eq cuentaBean.entidadSeleccionada.idEntidad ) }" />
+
+
                                                 <p:ajax update=":opDuplicar"></p:ajax>
                                             </p:selectOneMenu>
-
                                             <p:outputLabel value="#{cuentaBean.msgEntidad}" style=" color:  red"></p:outputLabel>
+
                                         </p:column>
                                         <p:column>
-                                            <p:inputText  value="#{cuentaBean.configuracionDestino.cuentaConfiguracion}" style="width: 100%"  readonly="true"   >
+                                            <p:inputText  value="#{cuentaBean.configuracionDestino.cuentaConfiguracion}" style="width: 60%"  readonly="true"   >
                                             </p:inputText>
-
+                                            <p:commandButton  oncomplete="PF('dgVCuentas').show()" icon="fa fa-eye" title="Ver cuentas" disabled="#{cuentaBean.listaDestino.isEmpty()}">
+                                            </p:commandButton>
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
@@ -115,6 +120,62 @@
 
                             </p:panel>
                         </h:form>
+
+
+                        <p:outputPanel  >
+                            <p:dialog header="Listado de cuentas" widgetVar="dgVCuentas"  width="80%" appendTo="@(body)" modal="true" >  
+                                <!-- Actulizando lista de Cuentas  que pueden ser principales -->
+
+                                <h:form > 
+                                    <p:dataTable var="cue" value="#{cuentaBean.listaDestino}" widgetVar="companyTable"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                 rowsPerPageTemplate="5,10"
+                                                 paginatorPosition="bottom"
+                                                 emptyMessage="No se encontraron cuentas.">  
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+
+                                                <p:inputText id="globalFilter" onkeyup="PF('companyTable').filter()" style="width:150px" placeholder="Buscar"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:columnGroup type="header">
+                                            <p:row>
+                                                <p:column headerText="Nº" style="width: 5%"   />
+                                                <p:column headerText="Código" style="width: 25%"  sortBy="#{cue.codigoCuenta}" filterBy="#{cue.codigoCuenta}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="Nombre"   sortBy="#{cue.nombreCuenta}" filterBy="#{cue.nombreCuenta}" filterMatchMode="contains" filterStyle="width: 100%"/>
+                                                <p:column headerText="Naturaleza" style="width: 15%"  sortBy="#{cue.naturalezaCuenta}" filterBy="#{cue.naturalezaCuenta}" filterMatchMode="contains" filterStyle="width: 100%; ">
+                                                </p:column>
+
+                                            </p:row>
+                                        </p:columnGroup>
+
+                                        <p:column  style="text-align: center"  >
+                                            <h:outputText value="#{No+1}"/>
+                                        </p:column>
+
+                                        <p:column >
+                                            <h:outputText value="#{cue.codigoCuenta}" />
+                                        </p:column>
+
+                                        <p:column>
+                                            <h:outputText value="#{cue.nombreCuenta}"/>
+
+                                        </p:column>
+
+                                        <p:column  style="text-align: center" >
+                                            <h:outputText value="#{cue.naturalezaCuenta}"/>
+                                        </p:column>
+
+
+                                    </p:dataTable> 
+                                </h:form> 
+                            </p:dialog> 
+                        </p:outputPanel>
 
                     </p:outputPanel>
 
