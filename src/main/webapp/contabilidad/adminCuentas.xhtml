@@ -31,6 +31,93 @@
 
                     <p:growl id="msgs" showSummary="true"  showDetail="true" />
 
+                    
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" appendTo="@(body)">
+                        <p:graphicImage name="/img/loader.gif" height="30px" width="150px" />
+                    </p:dialog>
+                    
+                    <p:outputPanel rendered="#{cuentaBean.showCreateAgropecuario}" id="opDuplicar">
+
+                        #{cuentaBean.updateConfiguracion()}
+                        #{cuentaBean.updateListaEntidades()}
+
+                        <p:dialog  header="Confirmar" widgetVar="dialogDuplicar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{cuentaBean.estadoValido}">
+                            <h:form>
+                                <div align="center">
+                                    ¿Estás seguro de guardar?
+                                    <br></br>
+                                    <br></br>
+                                    <hr></hr>
+                                    <p:commandButton value="Si" onstart="PF('statusDialog').show()" onsuccess=" PF('statusDialog').hide()" id="withI" actionListener="#{cuentaBean.duplicarCatalog()}"     style="#{ejercicioBean.btnNuevo}" update=" :padding" oncomplete="PF('dialogDuplicar').hide()" > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogDuplicar').hide()" style="#{ejercicioBean.btnCancelar}" >
+                                        <f:setPropertyActionListener value="#{false}" target="#{cuentaBean.estadoValido}" />
+                                    </p:commandButton>
+                                </div>
+                            </h:form>
+                        </p:dialog>
+
+                        <h:form >
+                            <p:panel  header="Duplicar Cuentas"  style="width: 100%; margin: auto; margin-bottom: 20px">
+
+                                <br></br>
+                                <b><h:outputText value="Origen"/> </b>
+                                <hr></hr>
+                                <p:panelGrid   style="width: 100%; margin: auto;" class="noBoder">
+                                    <p:row>
+                                        <p:column width="50%"><h:outputText value="Entidad:"/></p:column>
+                                        <p:column><h:outputText value="Estructura Cuentas:"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column  style="width: 50%;">
+
+                                            <p:selectOneMenu id="car"  value="#{cuentaBean.idEntidad}"  style=" width: 100%;" > 
+                                                <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
+                                                <f:selectItems  var="end" value="#{cuentaBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{ !end.estadoEntidad ?  false :  (end.idEntidad eq cuentaBean.entidadSeleccionada.idEntidad ) }" />
+                                                <p:ajax update=":opDuplicar"></p:ajax>
+                                            </p:selectOneMenu>
+
+                                            <p:outputLabel value="#{cuentaBean.msgEntidad}" style=" color:  red"></p:outputLabel>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText  value="#{cuentaBean.configuracionDestino.cuentaConfiguracion}" style="width: 100%"  readonly="true"   >
+                                            </p:inputText>
+
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b><h:outputText value="Destino"/> </b>
+                                <hr></hr>
+                                <p:panelGrid   style="width: 100%; margin: auto;" class="noBoder">
+                                    <p:row>
+                                        <p:column style="width: 50%;"><h:outputText value="Entidad:"/></p:column>
+                                        <p:column >  </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column >
+                                            <p:inputText  value="#{cuentaBean.entidadSeleccionada.nombreEntidad}" style="width: 100%" readonly="true"  >
+                                            </p:inputText>  
+                                        </p:column>
+                                        <p:column  >   <p:outputLabel value="#{cuentaBean.msgEstructura}" style=" color:  #fb8c00"></p:outputLabel>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <center>
+                                    <p:commandButton   actionListener="#{cuentaBean.validarCopia()}" update=":opDuplicar"   icon="fa fa-check" style="#{cuentaBean.btnCrear}" value="Guardar"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{cuentaBean.limpiarCopia()}" update=":opDuplicar" icon="fa fa-minus"  style="#{cuentaBean.btnLimpiar}" value="Limpiar"> 
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{cuentaBean.enableShowDataBean}" update=":padding"  icon="fa fa-close" style="#{cuentaBean.btnCancelar}"  value="Cancelar"> 
+                                    </p:commandButton>
+                                </center>
+
+                            </p:panel>
+                        </h:form>
+
+                    </p:outputPanel>
+
                     <p:outputPanel rendered="#{cuentaBean.showCreate}" >
 
                         <p:outputPanel id="opAgregarCuenta"  > 
@@ -181,18 +268,18 @@
                                                   filterMatchMode="contains" width="40%" filterStyle="width: 100%">  
                                             <h:outputText value="#{cue.nombreCuenta}" />  
                                         </p:column>  
-                                        
-                                         <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.TCuenta.nombreCuenta}"  
-                                              headerText="Cuenta padre"
-                                              filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
-                                        <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
-                                    </p:column> 
+
+                                        <p:column sortBy="#{cue.TCuenta.nombreCuenta}" filterBy="#{cue.TCuenta.nombreCuenta}"  
+                                                  headerText="Cuenta padre"
+                                                  filterMatchMode="contains" width="30%" filterStyle="width: 100%">  
+                                            <h:outputText value="#{cue.TCuenta.nombreCuenta}" />  
+                                        </p:column> 
 
                                         <p:column  width="10%">  
                                             <p:commandButton  update="opAgregarCuenta" oncomplete="PF('dgBuscarCuenta').hide()"  icon="fa fa-check" title="Seleccionar" >
                                                 <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSeleccionaPadre}"  />
                                                 <f:setPropertyActionListener value="#{cue.naturalezaCuenta}" target="#{cuentaBean.cuenta.naturalezaCuenta}"  />
-                                               
+
                                             </p:commandButton>
                                         </p:column> 
                                     </p:dataTable> 
@@ -302,7 +389,7 @@
                     <p:outputPanel rendered="#{cuentaBean.showData}" id="opDatosCuentas">
 
                         <p:panel  header="Administrar cuentas" style="margin-bottom:20px">
-                            
+
                             <p:outputPanel  >
                                 <!--Actuliza la lista de Cuentas de la Entidad -->
                                 #{cuentaBean.updateListaCuentas()}
@@ -310,6 +397,7 @@
                                     <p:fieldset>
 
                                         <p:commandButton title="Nueva cuenta" id="add" update=":padding"  actionListener="#{cuentaBean.enableShowCreate}"     icon="fa fa-plus"  style="#{cuentaBean.btnNuevo}" />
+                                        <p:commandButton title="Copiar cuentas de otra entidad" update=":padding"  actionListener="#{cuentaBean.enableShowCreateAgropecuario()}"     icon="fa fa-files-o" style="#{cuentaBean.btnModificar}" disabled="#{!cuentaBean.listaCuentas.isEmpty()}" />
 
                                     </p:fieldset>
                                     <p:dataTable   id="dtDatosCuentas"

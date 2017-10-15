@@ -36,6 +36,10 @@
                             #{ejercicioBean.updatelistaEjercicios()}
                             <p:growl id="msgs"   />
 
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" appendTo="@(body)">
+                                <p:graphicImage name="/img/loader.gif" height="30px" width="150px" />
+                            </p:dialog>
+                            
                             <p:outputPanel rendered="#{ejercicioBean.showCreate}"  id="opAgregarEjerPer"   >
 
                                 <p:dialog  header="Confirmar" widgetVar="dialogPeriodoEjer" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)" visible="#{ejercicioBean.estadoValido}">
@@ -114,8 +118,8 @@
                                 <p:outputPanel rendered="#{ejercicioBean.showData}"   >
 
                                     <h:form id="fDatosPeriodos">
-                                        
-                 
+
+
 
                                         <p:tabView    value="#{ejercicioBean.listaEjercicios}" var="ejer"  >
 
@@ -126,12 +130,12 @@
                                                     <!-- Actualizando la vandera de mes de cierre -->
                                                     #{ejercicioBean.updateMesCierre(ejer.idEjercicio)}
 
-                                                    <p:commandButton   title="Nuevo periodo"    update=":opListaPer "   actionListener="#{ejercicioBean.enableShowUpdate()}" style="#{ejercicioBean.btnDarDeAlta}" 
-                                                                       icon="fa fa-plus" disabled="#{ejercicioBean.mesCierre}" > 
+                                                    <p:commandButton  onstart="PF('statusDialog').show()" onsuccess=" PF('statusDialog').hide()" title="Nuevo periodo"    update=":opListaPer "   actionListener="#{ejercicioBean.enableShowUpdate()}" style="#{ejercicioBean.btnDarDeAlta}" 
+                                                                      icon="fa fa-plus" disabled="#{ejercicioBean.mesCierre}" > 
                                                         <f:setPropertyActionListener value="#{ejer.idEjercicio}" target="#{ejercicioBean.idEjer}"/>
                                                     </p:commandButton>
 
-                                                    <p:commandButton  title="Cerrar ejercicio" update=":opListaPer"   actionListener="#{ejercicioBean.enableShowView()}"    style="#{ejercicioBean.btnDarDeBaja}"    icon="fa fa-close"   >
+                                                    <p:commandButton onstart="PF('statusDialog').show()" onsuccess=" PF('statusDialog').hide()" title="Cerrar ejercicio" update=":opListaPer"   actionListener="#{ejercicioBean.enableShowView()}"    style="#{ejercicioBean.btnDarDeBaja}"    icon="fa fa-close"   >
                                                         <f:setPropertyActionListener value="#{ejer.idEjercicio}" target="#{ejercicioBean.idEjerCierre}"/>
                                                     </p:commandButton>
 
@@ -151,7 +155,7 @@
                                                         <p:row>
                                                             <p:column headerText="Mes"/>
                                                             <p:column headerText="Estado"/>
-                                                           
+
                                                         </p:row>
 
                                                     </p:columnGroup>
@@ -177,7 +181,7 @@
 
 
 
-                                         
+
 
                                                     <f:facet name="footer">
                                                     </f:facet>
@@ -338,7 +342,7 @@
                                                             </p:column>
                                                             <p:column >
                                                                 <p:inputText  style="width: 100%" value="#{ejercicioBean.partida.fechaPartida}"  readonly="true" >
-                                                               <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
                                                                 </p:inputText>
                                                             </p:column>
                                                         </p:row>
@@ -422,9 +426,7 @@
 
                                 <p:outputPanel rendered="#{ejercicioBean.showView}" id="opCerrarEjer" >
                                     #{ejercicioBean.updateListaArea() }
-                                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" appendTo="@(body)">
-                                        <p:graphicImage name="/img/loader.gif" height="30px" width="150px" />
-                                    </p:dialog>
+
 
                                     <p:outputPanel id="opCierreConf">
                                         <p:dialog  header="Confirmar" widgetVar="dialogPeriodoEjer" modal="true" showEffect="fade"  visible="#{ejercicioBean.estadoValido}" hideEffect="fade" resizable="false" width="35%" appendTo="@(body)">
@@ -529,10 +531,10 @@
                                                 </p:column>
 
                                                 <p:column style="width: 50%">
-                                                     <p:inputText  style="width: 100%" value="#{ejercicioBean.ejercicioViejo.fechaCierre}"  readonly="true" >
-                                                               <f:convertDateTime pattern="dd/MM/YYYY"/>
-                                                                </p:inputText>
-                                                      </p:column> 
+                                                    <p:inputText  style="width: 100%" value="#{ejercicioBean.ejercicioViejo.fechaCierre}"  readonly="true" >
+                                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                    </p:inputText>
+                                                </p:column> 
                                             </p:row>
                                         </p:panelGrid>
 
@@ -645,11 +647,11 @@
                                                             </p:column>
                                                             <p:column></p:column>
                                                             <p:column>
-                                                                 <p:inputText  style="width: 100%" value="#{ejercicioBean.partida.fechaPartida}"  readonly="true" >
-                                                               <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                                <p:inputText  style="width: 100%" value="#{ejercicioBean.partida.fechaPartida}"  readonly="true" >
+                                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
                                                                 </p:inputText>
                                                             </p:column>
-                                                           
+
                                                         </p:row>
                                                     </p:panelGrid>
 

@@ -15,6 +15,7 @@ import com.sigaf.pojo.TCuenta;
 import com.sigaf.pojo.TEntidad;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class CuentaBean extends Actividad {
 
     private TEntidad entidadSeleccionada;
 
-    
+    private List<TEntidad> listaEntidades;
 
     private IEntidadBo entidadBo;
 
@@ -55,9 +56,29 @@ public class CuentaBean extends Actividad {
 
     private TConfiguracion configuracion;
 
+    private TConfiguracion configuracionDestino;
+
     private List<TCuenta> listaCuentas;
 
     private List<TCuenta> listaCuentasAct;
+
+    private TEntidad entidadDestino;
+
+    public TEntidad getEntidadDestino() {
+        return entidadDestino;
+    }
+
+    public void setEntidadDestino(TEntidad entidadDestino) {
+        this.entidadDestino = entidadDestino;
+    }
+
+    public TConfiguracion getConfiguracionDestino() {
+        return configuracionDestino;
+    }
+
+    public void setConfiguracionDestino(TConfiguracion configuracionDestino) {
+        this.configuracionDestino = configuracionDestino;
+    }
 
     /**
      * Objeto utilizado para guardar nueva cuenta
@@ -92,6 +113,143 @@ public class CuentaBean extends Actividad {
     private String msgNombre;
 
     private String msgTipo;
+
+    private String msgEntidad;
+
+    private String msgEstructura;
+
+    public String getMsgEntidad() {
+        return msgEntidad;
+    }
+
+    public void setMsgEntidad(String msgEntidad) {
+        this.msgEntidad = msgEntidad;
+    }
+
+    public String getMsgEstructura() {
+        return msgEstructura;
+    }
+
+    public void setMsgEstructura(String msgEstructura) {
+        this.msgEstructura = msgEstructura;
+    }
+
+    private int idEntidad;
+
+    public int getIdEntidad() {
+        return idEntidad;
+    }
+
+    public void setIdEntidad(int idEntidad) {
+        this.idEntidad = idEntidad;
+        this.estadoValido = false;
+
+        if (idEntidad != 0) {
+            if (this.cuentaBo.listCuentaEnt(idEntidad).isEmpty()) {
+                this.msgEntidad = "La entidad no dispone de cuentas";
+                this.msgEstructura = "";
+            } else {
+                this.msgEntidad = "";
+                this.configuracionDestino = configuracionBo.getConfiguracion(idEntidad);
+                this.msgEstructura = "La estructura de cuentas actual es: " + configuracion.getCuentaConfiguracion() + ", la cual será sustituida por la estructura de cuentas de la entidad de origen";
+
+            }
+
+        } else {
+            this.msgEntidad = "";
+            this.msgEstructura = "";
+
+        }
+
+    }
+
+    public void limpiarCopia() {
+
+        this.idEntidad = 0;
+        this.msgEstructura = "";
+        this.msgEntidad = "";
+    }
+
+    public void duplicarCatalog() {
+
+        try {
+
+            configuracion.setCuentaConfiguracion(this.configuracionDestino.getCuentaConfiguracion());
+
+            this.configuracionBo.update(configuracion);
+
+            this.entidadDestino = entidadBo.getTEntidad(idEntidad);
+
+            List<TCuenta> listaCuentasInser = new ArrayList<>();
+
+            /*Lo que dice destino, es en realidad el origen*/
+            List<TCuenta> listaCuentasDestino = this.cuentaBo.listCuentaEnt(idEntidad);
+
+            for (TCuenta tCuenta : listaCuentasDestino) {
+
+                if (tCuenta.getTCuenta() != null) {
+                    for (TCuenta tCuenta1 : listaCuentasInser) {
+                        if (tCuenta1.getCodigoCuenta().equals(tCuenta.getTCuenta().getCodigoCuenta())) {
+                        tCuenta.setTCuenta(tCuenta1);
+                        }
+                    }
+                }
+                
+                tCuenta.setFechaCuenta(new Date());
+                
+                tCuenta.setTEntidad(entidadSeleccionada);
+
+                this.cuentaBo.create(tCuenta);
+
+                listaCuentasInser.add(tCuenta);
+
+            }
+
+            
+            this.limpiarCopia();
+            this.enableShowDataBean();
+            TBitacora auxBitacora = new TBitacora();
+            auxBitacora.setTableBitacora("t_cuenta");
+            auxBitacora.setAccionBitacora("Duplicar cuentas");
+            auxBitacora.setDatosBitacora("Entidad origen:" + this.entidadDestino.getNombreEntidad() + ", Entidad destino:" + this.entidadSeleccionada.getNombreEntidad());
+            auxBitacora.setIdTableBitacora(cuenta.getIdCuenta());
+            auxBitacora.setHoraBitacora(new Date());
+            auxBitacora.setFechaBitacora(new Date());
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            // Get the loginBean from session attribute
+            LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+            auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+            bitacoraBo.create(auxBitacora);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuentas registradas correctamente.", ""));
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "la cuentas no pudieron ser registrada.", ""));
+        }
+
+    }
+
+    public void validarCopia() {
+
+        this.estadoValido = true;
+
+        if (this.cuentaBo.listCuentaEnt(idEntidad).isEmpty()) {
+            this.estadoValido = false;
+        }
+
+    }
+
+    public List<TEntidad> getListaEntidades() {
+        return listaEntidades;
+    }
+
+    public void setListaEntidades(List<TEntidad> listaEntidades) {
+        this.listaEntidades = listaEntidades;
+    }
+
+    public void updateListaEntidades() {
+        this.listaEntidades = this.entidadBo.listTEndidadTodos();
+    }
 
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
@@ -148,8 +306,6 @@ public class CuentaBean extends Actividad {
         this.msgTipo = "";
     }
 
-
-
     /**
      * Metodo que actuliza la lista de Cuentas consultado a la Base de Datos
      */
@@ -196,8 +352,6 @@ public class CuentaBean extends Actividad {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
-
 
     public List<TCuenta> getListaCuentasAct() {
         return listaCuentasAct;
