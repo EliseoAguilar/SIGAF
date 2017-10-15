@@ -31,7 +31,7 @@ public interface ICuentaDao {
 
     public List<TCuenta> listCuentaEntAct(Integer id, Boolean estado);
 
-    public void delete(Integer id);
+    public void delete(TCuenta cuenta);
 
     public void update(TCuenta cuenta);
 

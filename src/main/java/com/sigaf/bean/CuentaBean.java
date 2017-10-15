@@ -185,6 +185,35 @@ public class CuentaBean extends Actividad {
         this.msgEntidad = "";
     }
 
+    
+    public void eliminarCuenta(){
+    
+    try {
+            
+            this.cuentaBo.delete(cuentaSelecciona);
+
+            TBitacora auxBitacora = new TBitacora();
+            auxBitacora.setTableBitacora("t_cuenta");
+            auxBitacora.setAccionBitacora("Eliminar cuenta");
+            auxBitacora.setDatosBitacora("Código:" + cuentaSelecciona.getCodigoCuenta() + ", Nombre:" + cuentaSelecciona.getNombreCuenta()
+                    + ", Naturaleza:" + cuentaSelecciona.getNaturalezaCuenta() + ", Entidad:" + this.entidadSeleccionada.getNombreEntidad());
+            auxBitacora.setIdTableBitacora(cuentaSelecciona.getIdCuenta());
+            auxBitacora.setHoraBitacora(new Date());
+            auxBitacora.setFechaBitacora(new Date());
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            // Get the loginBean from session attribute
+            LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+            auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+            bitacoraBo.create(auxBitacora);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta eliminada correctamente.", ""));
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cuenta no puede ser eliminada.", ""));
+        }
+    
+    }
+            
     public void duplicarCatalog() {
 
         try {

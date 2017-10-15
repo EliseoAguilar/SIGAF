@@ -88,8 +88,12 @@ public class CuentaDao implements ICuentaDao {
     }
 
     @Override
-    public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(TCuenta cuenta) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(cuenta);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override

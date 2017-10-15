@@ -525,6 +525,12 @@
                                                     <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSelecciona}" />
                                                 </p:menuitem>
 
+                                                <p:menuitem value="Eliminar"  rendered="#{cue.estadoCuenta}"   
+                                                            oncomplete="PF('dlEliminar').show()" icon="fa fa-trash-o"  
+                                                            disabled="#{cue.TCuentas.size() eq 0 ? false : true}">
+                                                    <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSelecciona}" />
+                                                </p:menuitem>
+                                                
                                                 <p:menuitem value="Dar de alta" rendered="#{!cue.estadoCuenta}" 
                                                             oncomplete="PF('dlAlta').show()" icon="fa fa-arrow-up"     >
                                                     <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSelecciona}" />                 
@@ -574,6 +580,26 @@
                                         <p:commandButton value="Si" actionListener="#{cuentaBean.darDeAlta}" update=":padding"   style="#{cuentaBean.btnNuevo}">
                                         </p:commandButton>
                                         <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlBaja').hide()"  value="No" style="#{cuentaBean.btnCancelar}"> 
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
+                            </h:form>
+                        </p:dialog>
+                        
+                        
+                                     <p:dialog header="Confirmar" widgetVar="dlEliminar" modal="true"   visible="false"  resizable="true" responsive="true" width="35%" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+
+                                    <h:outputText value="¿Desea eliminar esta cuenta?" />
+                                    <br></br>
+                                    <br></br>
+
+                                    <hr></hr>
+                                    <center>
+                                        <p:commandButton value="Si" actionListener="#{cuentaBean.eliminarCuenta}" update=":padding"   style="#{cuentaBean.btnNuevo}">
+                                        </p:commandButton>
+                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlEliminar').hide()"  value="No" style="#{cuentaBean.btnCancelar}"> 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>
