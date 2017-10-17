@@ -59,7 +59,7 @@ WHERE
 	<pageHeader>
 		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="151" y="0" width="189" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
+				<reportElement x="136" y="0" width="205" height="23" uuid="1a04bfb6-9e4f-45aa-a105-385b8d792c80"/>
 				<textElement>
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
