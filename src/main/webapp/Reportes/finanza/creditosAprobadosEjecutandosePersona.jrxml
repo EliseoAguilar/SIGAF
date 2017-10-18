@@ -143,7 +143,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS APROBADOS/EJECUTÁNDOSE (PERSONAS NATURALES) ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS APROBADOS/EJECUTÁNDOSE (PERSONAS NATURALES) DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1" y="109" width="554" height="1" uuid="680f5c04-1d05-40be-97d8-5521d2b6ede5"/>
@@ -182,7 +182,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="1" width="60" height="20" uuid="c1559c84-1b56-4f14-a22e-805a9fef6000"/>
+				<reportElement x="314" y="1" width="45" height="20" uuid="c1559c84-1b56-4f14-a22e-805a9fef6000"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -207,7 +207,7 @@ FROM
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PAGO</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -235,8 +235,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="299" y="0" width="60" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
-				<textElement>
+				<reportElement x="293" y="0" width="60" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>

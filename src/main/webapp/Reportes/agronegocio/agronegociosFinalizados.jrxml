@@ -118,28 +118,28 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="2" y="83" width="396" height="20" uuid="030c2855-cf1e-4e7b-bce3-b65fd8c0470b"/>
+				<reportElement x="38" y="83" width="346" height="20" uuid="030c2855-cf1e-4e7b-bce3-b65fd8c0470b"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE AGRONEGOCIOS FINALIZADOS ENTRE EL      </style>]]></text>
+				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE AGRONEGOCIOS FINALIZADOS DEL      </style>]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="371" y="83" width="89" height="20" uuid="4ce42a29-18f9-46c8-b143-63cb491f3640"/>
+				<reportElement x="364" y="83" width="89" height="20" uuid="4ce42a29-18f9-46c8-b143-63cb491f3640"/>
 				<textElement markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + "</style>"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="421" y="83" width="35" height="20" uuid="22a066ae-e5f4-4c8d-a8a7-19fcfe05749d"/>
+				<reportElement x="414" y="83" width="35" height="20" uuid="22a066ae-e5f4-4c8d-a8a7-19fcfe05749d"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold"> AL</style>]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="454" y="83" width="61" height="20" uuid="6a573596-b020-426d-b1f8-9284792e56c0"/>
+				<reportElement x="447" y="83" width="61" height="20" uuid="6a573596-b020-426d-b1f8-9284792e56c0"/>
 				<textElement markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>

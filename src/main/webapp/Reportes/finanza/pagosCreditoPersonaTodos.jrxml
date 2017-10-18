@@ -377,7 +377,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{t_pago_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="218" y="1" width="58" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
+				<reportElement x="223" y="1" width="58" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>

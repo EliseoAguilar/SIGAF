@@ -109,32 +109,32 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="426" y="88" width="35" height="20" uuid="e0e4a23f-baec-45f2-93a8-dc3ec281b63d"/>
+				<reportElement x="414" y="88" width="35" height="20" uuid="e0e4a23f-baec-45f2-93a8-dc3ec281b63d"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold"> AL</style>]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="376" y="88" width="89" height="20" uuid="f566771d-fd02-48c9-be64-38a6bb117e1a"/>
+				<reportElement x="364" y="88" width="89" height="20" uuid="f566771d-fd02-48c9-be64-38a6bb117e1a"/>
 				<textElement markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + "</style>"]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="459" y="88" width="61" height="20" uuid="d174a663-5bfc-4d8c-b9e4-04c516c10f10"/>
+				<reportElement x="447" y="88" width="61" height="20" uuid="d174a663-5bfc-4d8c-b9e4-04c516c10f10"/>
 				<textElement markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin}) + "</style>"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="16" y="88" width="382" height="20" uuid="958aea0a-38be-4558-afec-4683a84a81ec"/>
+				<reportElement x="50" y="88" width="330" height="20" uuid="958aea0a-38be-4558-afec-4683a84a81ec"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE AGRONEGOCIOS PENDIENTES ENTRE EL      </style>]]></text>
+				<text><![CDATA[ <style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE AGRONEGOCIOS PENDIENTES DEL      </style>]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudesAprobadasCooperativas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="914a45ee-5a47-4deb-9726-c6d1a9d51835">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="25"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -104,7 +104,7 @@ FROM
 	<title>
 		<band height="110" splitType="Stretch">
 			<subreport>
-				<reportElement x="11" y="0" width="200" height="79" uuid="7e4f82f2-7151-486f-879d-52f584e5f7ae"/>
+				<reportElement x="10" y="0" width="200" height="79" uuid="7e4f82f2-7151-486f-879d-52f584e5f7ae"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
@@ -113,7 +113,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE SOLICITUDES PENDIENTES (COOPERATIVAS) ENTRE EL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal}) +"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE SOLICITUDES PENDIENTES (COOPERATIVAS) DEL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal}) +"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="107" width="555" height="1" uuid="235adcb2-8e92-4a18-b168-3d47af5c9066"/>
@@ -122,82 +122,110 @@ FROM
 	</title>
 	<columnHeader>
 		<band height="33" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="21" width="555" height="1" uuid="131cc75d-4825-4b2a-a8c0-6668273da854"/>
+			</line>
 			<staticText>
-				<reportElement x="1" y="2" width="65" height="20" uuid="0e81421b-c6bc-4b53-967c-b6bc836a735a"/>
+				<reportElement x="496" y="1" width="58" height="20" uuid="534e42e7-91f4-4d91-83f6-352af203a8bd"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REGISTRO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="189" y="2" width="94" height="20" uuid="678c5aa4-2c60-4d79-b534-e67216f45c60"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="403" y="2" width="59" height="20" uuid="2b9e96db-368c-443e-b621-00e6727f97ff"/>
+				<reportElement x="359" y="1" width="45" height="20" uuid="388648bf-4115-4cd2-93ad-01fb473bd3e5"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="2" width="123" height="20" uuid="ff5cd850-4048-4854-a91e-f75a3cc48ffa"/>
+				<reportElement x="48" y="1" width="104" height="20" uuid="fd9a9f5c-7c67-4034-aaf8-d010857a263b"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO COOPERATIVA</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
 			</staticText>
-			<line>
-				<reportElement x="1" y="21" width="555" height="1" uuid="131cc75d-4825-4b2a-a8c0-6668273da854"/>
-			</line>
 			<staticText>
-				<reportElement x="462" y="2" width="92" height="20" uuid="f1142ac4-380a-425c-9232-1ec99431af23"/>
+				<reportElement x="162" y="1" width="76" height="20" uuid="857bc8b8-8f97-428c-b1c2-a3246b296203"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA REGISTRO</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="1" width="40" height="20" uuid="20ad6f52-bd43-4c52-bcd2-ebe3f9364f4a"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PAGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="44" height="20" uuid="78142863-38d3-4448-a59e-b3da288d5f08"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="1" width="47" height="20" uuid="a53f69bd-e927-43ba-9c16-acaf6a29acfa"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
-			<textField>
-				<reportElement x="1" y="0" width="65" height="20" uuid="c8b86764-d624-4bc6-a7fc-0defb37b691e"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="495" y="0" width="59" height="20" uuid="08ff2511-e33c-4420-aee1-3054aeb097ee"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="66" y="0" width="123" height="20" uuid="6d6ff637-5b0b-4f15-83e0-bfd4dea4be53"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="189" y="0" width="214" height="20" uuid="2c4df169-3d7a-473b-b08b-8f7e029b6aeb"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
-			</textField>
-			<textField pattern="$#,##0.00">
-				<reportElement x="403" y="0" width="59" height="20" uuid="afc4f5c9-e749-4caa-a22d-a4ff2b63455e"/>
-				<textElement>
-					<font size="10"/>
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="351" y="0" width="46" height="20" uuid="175be17d-0003-4330-a7e4-8da6149e3233"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="462" y="0" width="92" height="20" uuid="215f48c5-5874-420b-824b-2ccfb22060ab"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="0" width="48" height="20" uuid="c7c23351-396e-4ff3-807a-835596587e2d"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_fecha}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="48" y="0" width="114" height="20" uuid="3f2af2bc-89cc-443c-b4cf-2deada80bc0f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="162" y="0" width="180" height="20" uuid="17817562-215e-413d-86cb-5b84c6c88ded"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="450" y="0" width="40" height="20" uuid="cb7fcff3-0e35-45a7-90b2-3ccb92b772a7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false ||$F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="44" height="20" uuid="75837b34-5735-4987-8265-fc8afe73e7b9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

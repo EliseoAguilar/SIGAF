@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialCreditosPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2fa3d6a7-0f44-46e4-bb0f-8c8f3b841cc8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="185"/>
+	<property name="ireport.y" value="62"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -83,28 +83,28 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="272" y="234" width="46" height="20" uuid="42b6701b-4cde-4964-968d-337a63b0ab3b"/>
+				<reportElement x="283" y="234" width="46" height="20" uuid="42b6701b-4cde-4964-968d-337a63b0ab3b"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="446" y="234" width="61" height="20" uuid="389fc4c4-2e6c-4393-b6ba-136e9823e4fb"/>
+				<reportElement x="451" y="234" width="61" height="20" uuid="389fc4c4-2e6c-4393-b6ba-136e9823e4fb"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="234" width="39" height="20" uuid="f0f9e225-e2e9-4994-a4ee-0b7f32d65775"/>
+				<reportElement x="337" y="234" width="39" height="20" uuid="f0f9e225-e2e9-4994-a4ee-0b7f32d65775"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="387" y="234" width="39" height="20" uuid="88026e5f-ff51-4428-929a-91293ab7005f"/>
+				<reportElement x="392" y="234" width="39" height="20" uuid="88026e5f-ff51-4428-929a-91293ab7005f"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -176,7 +176,7 @@ FROM
 				<reportElement x="0" y="106" width="555" height="1" uuid="e24ac857-c151-4133-bcc3-321f56a36741"/>
 			</line>
 			<subreport>
-				<reportElement x="11" y="0" width="261" height="79" uuid="bc22b015-e172-4a35-af75-04e192dc560b"/>
+				<reportElement x="12" y="0" width="261" height="79" uuid="bc22b015-e172-4a35-af75-04e192dc560b"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>

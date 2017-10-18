@@ -163,7 +163,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES ACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>":"<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES INACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES ACTIVAS DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>":"<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES INACTIVAS DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

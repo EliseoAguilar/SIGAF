@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="desembolsosPersonas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3107dd6-158f-421a-ae4d-b2218cbad8a1">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="336"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -154,7 +154,7 @@ WHERE
 	<columnHeader>
 		<band height="291" splitType="Stretch">
 			<staticText>
-				<reportElement x="200" y="268" width="46" height="20" uuid="3a3e246b-d14b-47e0-83d7-af6c46525ec5"/>
+				<reportElement x="229" y="268" width="41" height="20" uuid="3a3e246b-d14b-47e0-83d7-af6c46525ec5"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -281,7 +281,8 @@ WHERE
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField pattern="$#,##0.00">
-				<reportElement x="201" y="0" width="100" height="20" uuid="34a2b09a-550b-470d-b762-218949fe286b"/>
+				<reportElement x="199" y="0" width="69" height="20" uuid="34a2b09a-550b-470d-b762-218949fe286b"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_desembolso_monto_desembolso}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
@@ -300,7 +301,7 @@ WHERE
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total de desembolsos:</style>]]></text>
 			</staticText>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="455" y="25" width="100" height="20" uuid="80ec0954-2d0d-45a7-9f18-c9ab0396fe27"/>
+				<reportElement x="456" y="25" width="99" height="20" uuid="80ec0954-2d0d-45a7-9f18-c9ab0396fe27"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>

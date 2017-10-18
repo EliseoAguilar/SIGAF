@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="creditosFinalizalos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ab62ded-e4e6-4a28-9434-fb9f281248f2">
-	<property name="ireport.zoom" value="1.5026296018031553"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="327"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -181,10 +181,22 @@ FROM
 	<variable name="t_proyecto_monto_2" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_proyecto_monto}]]></variableExpression>
 	</variable>
+	<variable name="t_proyecto_monto_3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_proyecto_monto}]]></variableExpression>
+	</variable>
+	<variable name="t_pago_interes_3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_pago_interes}]]></variableExpression>
+	</variable>
+	<variable name="t_pago_mora_3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_pago_mora}]]></variableExpression>
+	</variable>
+	<variable name="t_pago_interes_4" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{t_pago_interes}]]></variableExpression>
+	</variable>
 	<group name="proyecto">
 		<groupExpression><![CDATA[$F{t_proyecto_idproyecto}]]></groupExpression>
 		<groupHeader>
-			<band height="32">
+			<band height="31">
 				<textField isBlankWhenNull="true">
 					<reportElement x="1" y="10" width="55" height="20" uuid="34da5b3c-90a1-452f-9a56-606afaded3ed"/>
 					<textElement>
@@ -207,7 +219,7 @@ FROM
 					<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
 				</textField>
 				<textField pattern="$#,##0.00" isBlankWhenNull="true">
-					<reportElement x="292" y="10" width="58" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
+					<reportElement x="292" y="10" width="57" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
@@ -220,18 +232,6 @@ FROM
 					</textElement>
 					<textFieldExpression><![CDATA[$F{t_proyecto_fecha_finalizacion_proyecto}]]></textFieldExpression>
 				</textField>
-				<line>
-					<reportElement x="1" y="28" width="554" height="1" uuid="7db71c11-9795-4c60-9532-999b70eb8b6a"/>
-					<graphicElement>
-						<pen lineWidth="0.25"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement x="1" y="3" width="554" height="1" uuid="d7ca354a-b709-4bc4-b9ca-75bd3cebf3bb"/>
-					<graphicElement>
-						<pen lineWidth="0.25"/>
-					</graphicElement>
-				</line>
 				<textField isBlankWhenNull="true">
 					<reportElement x="351" y="10" width="47" height="20" uuid="3e329d50-8c1e-44f0-b184-18ee50111774"/>
 					<textElement>
@@ -249,61 +249,61 @@ FROM
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="87">
-				<rectangle>
-					<reportElement x="0" y="4" width="554" height="57" uuid="4a17e091-4452-4272-9f9c-7799a158323e"/>
-					<graphicElement>
-						<pen lineWidth="0.25" lineStyle="Dotted"/>
-					</graphicElement>
-				</rectangle>
+			<band height="82">
 				<textField pattern="$#,##0.00" isBlankWhenNull="true">
-					<reportElement x="108" y="33" width="72" height="20" uuid="282ca45c-055e-4132-b9c2-5e850e6a2f31"/>
-					<textElement>
+					<reportElement x="220" y="19" width="64" height="20" uuid="282ca45c-055e-4132-b9c2-5e850e6a2f31"/>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{t_pago_interes_1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="37" y="13" width="100" height="20" uuid="48b58b95-8f80-4699-9f2d-045ce1537a9f"/>
+					<reportElement x="108" y="19" width="110" height="20" uuid="d376b74b-8dc9-4c62-90eb-f2e38c3a8a1d"/>
 					<textElement markup="styled">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RESULTADOS:</style>]]></text>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Interés:</style>]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="37" y="33" width="71" height="20" uuid="d376b74b-8dc9-4c62-90eb-f2e38c3a8a1d"/>
+					<reportElement x="108" y="38" width="110" height="20" uuid="b72ef12f-39e1-459f-9376-40c9f8ddc84c"/>
 					<textElement markup="styled">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL INTERÉS:</style>]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="181" y="33" width="62" height="20" uuid="b72ef12f-39e1-459f-9376-40c9f8ddc84c"/>
-					<textElement markup="styled">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL MORA:</style>]]></text>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Mora:</style>]]></text>
 				</staticText>
 				<textField pattern="$#,##0.00" isBlankWhenNull="true">
-					<reportElement x="243" y="33" width="74" height="20" uuid="aace91b5-4eac-4ae3-a925-3043cf0d0519"/>
-					<textElement>
+					<reportElement x="220" y="38" width="64" height="20" uuid="aace91b5-4eac-4ae3-a925-3043cf0d0519"/>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{t_pago_mora_1}]]></textFieldExpression>
 				</textField>
 				<textField pattern="$#,##0.00" isBlankWhenNull="true">
-					<reportElement x="459" y="33" width="76" height="20" uuid="74a40f2f-b40c-4e2c-b2cc-6da8b734f605"/>
-					<textElement>
+					<reportElement x="220" y="57" width="64" height="20" uuid="74a40f2f-b40c-4e2c-b2cc-6da8b734f605"/>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{t_pago_interes_1}.add($V{t_pago_mora_1}).add($F{t_proyecto_monto})]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="417" y="33" width="42" height="20" uuid="dad25ad8-c9a5-4b52-adbb-1265c456c520"/>
+					<reportElement x="108" y="57" width="122" height="20" uuid="dad25ad8-c9a5-4b52-adbb-1265c456c520"/>
 					<textElement markup="styled">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL:</style>]]></text>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total (Monto + interés + mora):</style>]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="81" width="554" height="1" uuid="7db71c11-9795-4c60-9532-999b70eb8b6a"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="56" y="0" width="71" height="20" uuid="62ed2b06-3e4b-498e-a990-d7d710af0d9f"/>
+					<textElement markup="styled">
+						<font size="8" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Resultado:</style>]]></text>
 				</staticText>
 			</band>
 		</groupFooter>
@@ -323,7 +323,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS FINALIZADOS (PERSONAS NATURALES) ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS FINALIZADOS (PERSONAS NATURALES) DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="109" width="554" height="1" uuid="bf45bf1e-61cd-42f4-b8b7-603a23a56573"/>
@@ -386,9 +386,6 @@ FROM
 			</staticText>
 		</band>
 	</columnHeader>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
@@ -404,64 +401,55 @@ FROM
 	</pageFooter>
 	<summary>
 		<band height="66">
-			<rectangle>
-				<reportElement x="1" y="16" width="553" height="45" uuid="6391d967-a094-4117-8797-8208be963f65"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
 			<staticText>
-				<reportElement x="38" y="21" width="100" height="20" uuid="82fdc429-0931-48e3-9349-dc39c92e0419"/>
+				<reportElement x="1" y="13" width="100" height="20" uuid="82fdc429-0931-48e3-9349-dc39c92e0419"/>
 				<textElement markup="styled">
-					<font size="8" isBold="true"/>
+					<font size="8" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">RESULTADO GENERAL:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="38" y="39" width="70" height="20" uuid="1da341cb-bc55-43d4-9b97-6b102a7c65b6"/>
+				<reportElement x="1" y="37" width="70" height="20" uuid="1da341cb-bc55-43d4-9b97-6b102a7c65b6"/>
 				<textElement markup="styled">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL INTERÉS:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="181" y="39" width="62" height="20" uuid="0facf628-b048-4d3c-98d8-33e0a7a9fafb"/>
+				<reportElement x="179" y="37" width="64" height="20" uuid="0facf628-b048-4d3c-98d8-33e0a7a9fafb"/>
 				<textElement markup="styled">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL MORA:</style>]]></text>
 			</staticText>
-			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="108" y="39" width="72" height="20" uuid="81c31866-7797-450c-9a2c-210c7ef159d2"/>
-				<textElement>
+			<textField pattern="$#,##0.00">
+				<reportElement x="50" y="37" width="61" height="20" uuid="465ee982-547f-4c38-87e3-bcd3abf973e4"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{t_pago_interes_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{t_pago_interes_3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="243" y="39" width="74" height="20" uuid="4689fe39-6cb3-4e3c-98f8-0dd979938498"/>
-				<textElement>
+			<textField pattern="$#,##0.00">
+				<reportElement x="220" y="37" width="62" height="20" uuid="289504f6-c466-4327-bfdd-7ae081265250"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{t_pago_mora_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{t_pago_mora_3}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="417" y="39" width="42" height="20" uuid="912791c6-fa7c-4288-8b27-cc8b708a6d7a"/>
+				<reportElement x="350" y="37" width="109" height="20" uuid="b6137792-c5d9-495d-b6cb-46d53bfff8fc"/>
 				<textElement markup="styled">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL:</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL (INTERÉS + MORA):</style>]]></text>
 			</staticText>
-			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="459" y="39" width="90" height="20" uuid="37ed82fa-92a8-4dbf-880c-a31013856f47"/>
-				<textElement>
+			<textField pattern="$#,##0.00">
+				<reportElement x="438" y="37" width="64" height="20" uuid="8b7f5a86-abc8-471e-9cc0-a185e6391811"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{t_pago_interes_2}.add($V{t_pago_mora_2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{t_pago_interes_4}.add($V{t_pago_mora_3})]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="3" width="554" height="1" uuid="ddba0320-5c5e-41cc-8651-7d99448ea085"/>
-			</line>
 		</band>
 	</summary>
 </jasperReport>

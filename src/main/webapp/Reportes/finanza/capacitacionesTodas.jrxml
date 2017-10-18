@@ -139,13 +139,13 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CAPACITACIONES DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="110" width="555" height="1" uuid="cce733f8-96c6-43fe-8def-c30a82aa6221"/>
 			</line>
 			<subreport>
-				<reportElement x="14" y="0" width="200" height="79" uuid="a2a9b301-3a11-4367-8618-83c3f5a83a3b"/>
+				<reportElement x="19" y="0" width="200" height="79" uuid="a2a9b301-3a11-4367-8618-83c3f5a83a3b"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
@@ -212,7 +212,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="310" y="3" width="46" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
+				<reportElement x="307" y="3" width="56" height="20" uuid="9cdefc1d-1325-474f-8fbe-818c7b5075c1"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_precio}]]></textFieldExpression>
 			</textField>

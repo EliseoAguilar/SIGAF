@@ -927,7 +927,7 @@
                                 <p:panelGrid  style="width: 100%; margin: auto;"> 
                                     <p:row>
                                         <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
-                                            <center>  <h:outputText value="Credito"/> </center> 
+                                            <center>  <h:outputText value="Crédito"/> </center> 
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -1517,7 +1517,7 @@
                                 <p:panelGrid  style="width: 100%; margin: auto;"> 
                                     <p:row>
                                         <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
-                                            <center>  <h:outputText value="Credito"/> </center> 
+                                            <center>  <h:outputText value="Crédito"/> </center> 
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -1973,7 +1973,7 @@
                                             <h:outputText value="Monto+interes+mora:"/>   <br></br>
                                             <h:outputText value="Calificación:"/>   <br></br>
                                         </p:column>
-                                        <p:column style=" width: 25%">
+                                        <p:column style=" width: 25%; text-align: right">
 
 
                                             <h:outputText value="$"/>
@@ -2003,12 +2003,7 @@
                                         <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar resultados">
                                             <f:actionListener binding="#{proyectoBean.verResultadosCooperativaPDF()}"/> 
                                         </p:menuitem>
-                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-eye" value="Ver constancia">
-                                            <f:actionListener binding="#{proyectoBean.verConstanciaFinalizacionCooperativa()}"/> 
-                                        </p:menuitem>
-                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar constancia">
-                                            <f:actionListener binding="#{proyectoBean.verConstanciaFinalizacionCooperativaPDF()}"/> 
-                                        </p:menuitem>
+                                        
                                         <p:menuitem   update=":padding"  icon="fa fa-arrow-left"  value="Volver">
                                             <f:actionListener binding="#{proyectoBean.enableShowSeguimiento()}"/> 
                                         </p:menuitem>
@@ -2187,12 +2182,7 @@
                                         <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar resultados">
                                             <f:actionListener binding="#{proyectoBean.verResultadosPersonaPDF()}"/> 
                                         </p:menuitem>
-                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-eye" value="Ver constancia">
-                                            <f:actionListener binding="#{proyectoBean.verConstanciaFinalizacionPersona()}"/> 
-                                        </p:menuitem>
-                                        <p:menuitem  ajax="false" update=":padding"  icon="fa fa-download" value="Descargar constancia">
-                                            <f:actionListener binding="#{proyectoBean.verConstanciaFinalizacionPersonaPDF()}"/> 
-                                        </p:menuitem>
+                                    
                                         <p:menuitem   update=":padding"   icon="fa fa-arrow-left"  value="Volver">
                                             <f:actionListener binding="#{proyectoBean.enableShowSeguimiento()}"/> 
                                         </p:menuitem>
@@ -3276,7 +3266,7 @@
                                 <p:panelGrid  style="width: 100%; margin: auto;"> 
                                     <p:row>
                                         <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
-                                            <center>  <h:outputText value="Credito"/> </center> 
+                                            <center>  <h:outputText value="Crédito"/> </center> 
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -4635,7 +4625,7 @@
                                         <br></br>
                                         <b>  <h:outputText value="Lista de pagos"/>  </b>
                                         <hr></hr>
-                                        <p:dataTable  id="basicDT"  var="entidades" widgetVar="amorti" rows="4"  paginator="true" value="#{proyectoBean.listaPagos}"
+                                        <p:dataTable  id="basicDT"  var="entidades" widgetVar="amortizacionPersona" rows="4"  paginator="true" value="#{proyectoBean.listaPagos}"
                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                       paginatorPosition="bottom" style="width: 100%;"
                                                       rowIndexVar="No" rowsPerPageTemplate="4"
