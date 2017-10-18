@@ -178,11 +178,9 @@ public class PartidaBean extends Actividad {
      * Metodo que actuliza la lista de Periodos consultado a la Base de Datos
      */
     public void updateListaPeriodos() {
-        if(idEjer!=0){
+       
         this.listaPeriodos = this.periodoBo.listPeriodo(idEjer);
-        }else{
-        this.listaPeriodos.clear();
-        }
+      
     }
 
     /**
@@ -270,6 +268,8 @@ public class PartidaBean extends Actividad {
         ContablidadPredeterminarBean ContPreBean = (ContablidadPredeterminarBean) request.getSession().getAttribute("contablidadPredeterminarBean");
 
         this.entidadSeleccionada = ContPreBean.getEntidadSeleccionada();
+        this.idEjer = 0;
+        this.idPeriodo = 0;
     }
 
     public TEntidad getEntidadSeleccionada() {
@@ -620,6 +620,7 @@ public class PartidaBean extends Actividad {
     public void init() {
         super.enableShowData();
         listaDetallePartida = new ArrayList<>();
+        this.listaPeriodos = new ArrayList<>();
         this.idEjer = 0;
         this.idPeriodo = 0;
         this.limpiar();

@@ -1738,11 +1738,11 @@ public class ActivoFijoBean extends Actividad {
 
                     detVenta.setTCuenta(cueDep);
 
-                    detVenta.setTipoSaldoDetallePartida("Debe");
+                    detVenta.setTipoSaldoDetallePartida("Haber");
 
-                    detVenta.setSaldoDetallePartida(this.valorVenta);
+                    detVenta.setSaldoDetallePartida(this.valorVenta.subtract(this.valorLibro) );
 
-                    this.totalDebe = totalDebe.add(this.valorVenta);
+                    this.totalHaber = totalHaber.add(this.valorVenta.subtract(this.valorLibro));
 
                     this.listaDetallePartida.add(detVenta);
                 } else {

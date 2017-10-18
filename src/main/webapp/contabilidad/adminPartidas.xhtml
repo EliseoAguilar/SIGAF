@@ -21,7 +21,8 @@
                             </p:column>
                             <p:column style="padding: 0px; text-align: right" >
                                 <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{partidaBean.btnCancelar}"  value="Cambiar Entidad"> 
-
+                                    
+                                           
                                 </p:commandButton>   
                             </p:column>
                         </p:row>
@@ -29,18 +30,11 @@
                 </h:form>
                 <p:outputPanel id="padding"  > 
 
-
-
                     <p:outputPanel rendered="#{partidaBean.showData}">
 
 
                         <p:panel id="opAdmiPol" header="Administrar partidas" style="margin-bottom:20px">
                             
-
-
-
-
-
                             <h:form id="fFiltro"> 
                                 <p:fieldset>
                                     <p:panelGrid style=" width: 100%" id="pgfiltro" class="noBoder" >

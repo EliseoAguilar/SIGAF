@@ -50,9 +50,9 @@ public class CuentaBo implements ICuentaBo {
     }
 
     @Override
-    public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void delete(TCuenta cuenta) {
+            
+    this.cuentaDao.delete(cuenta);}
 
     @Override
     public void update(TCuenta cuenta) {
