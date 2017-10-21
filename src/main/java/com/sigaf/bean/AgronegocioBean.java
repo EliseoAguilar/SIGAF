@@ -37,6 +37,7 @@ import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -1687,7 +1688,8 @@ public class AgronegocioBean extends Actividad {
         this.mora = BigDecimal.ZERO;
         if (this.fechaDePago.compareTo(this.agronegocioSeleccionado.getFechapago()) > 0) {
             this.dias = (int) ((this.fechaDePago.getTime() - this.agronegocioSeleccionado.getFechapago().getTime()) / 86400000);
-            this.mora = ((this.totales.multiply(this.politicaAgronegocioSeleccionado.getTasaMoraAgronegocio().divide(new BigDecimal(100)).divide(new BigDecimal(30)).multiply(new BigDecimal(this.dias)))));
+        this.mora = ((this.totales.multiply(this.politicaAgronegocioSeleccionado.getTasaMoraAgronegocio().divide(new BigDecimal(100), 7, RoundingMode.HALF_UP).divide(new BigDecimal(30), 7, RoundingMode.HALF_UP).multiply(new BigDecimal(this.dias)))));
+       
         } else {
             this.dias = 0;
         }

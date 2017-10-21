@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProyectoSeguimiento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="669d977c-beb6-4031-97cf-c28dba5f2d07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="299"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -53,16 +53,12 @@
      t_entidad."calificacion_entidad" AS t_entidad_calificacion_entidad,
      t_entidad_proyecto."identidadproyecto" AS t_entidad_proyecto_identidadproyecto,
      t_entidad_proyecto."identidad" AS t_entidad_proyecto_identidad,
-     t_entidad_proyecto."idproyecto" AS t_entidad_proyecto_idproyecto,
-     t_seguimiento."idseguimiento" AS t_seguimiento_idseguimiento,
-     t_seguimiento."descripcion" AS t_seguimiento_descripcion,
-     t_seguimiento."estado" AS t_seguimiento_estado,
-     t_seguimiento."idproyecto" AS t_seguimiento_idproyecto,
-     t_seguimiento."fechaseguimiento" AS t_seguimiento_fechaseguimiento
+     t_entidad_proyecto."idproyecto" AS t_entidad_proyecto_idproyecto
+
 FROM
      "public"."t_entidad" t_entidad INNER JOIN "public"."t_entidad_proyecto" t_entidad_proyecto ON t_entidad."id_entidad" = t_entidad_proyecto."identidad"
      INNER JOIN "public"."t_proyecto" t_proyecto ON t_entidad_proyecto."idproyecto" = t_proyecto."idproyecto"
-     INNER JOIN "public"."t_seguimiento" t_seguimiento ON t_proyecto."idproyecto" = t_seguimiento."idproyecto" where  t_proyecto."idproyecto" =$P{id_proyecto}]]>
+     where  t_proyecto."idproyecto" =$P{id_proyecto}]]>
 	</queryString>
 	<field name="t_proyecto_nombre" class="java.lang.String"/>
 	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
@@ -107,11 +103,6 @@ FROM
 	<field name="t_entidad_proyecto_identidadproyecto" class="java.lang.Integer"/>
 	<field name="t_entidad_proyecto_identidad" class="java.lang.Integer"/>
 	<field name="t_entidad_proyecto_idproyecto" class="java.lang.Integer"/>
-	<field name="t_seguimiento_idseguimiento" class="java.lang.Integer"/>
-	<field name="t_seguimiento_descripcion" class="java.lang.String"/>
-	<field name="t_seguimiento_estado" class="java.lang.Integer"/>
-	<field name="t_seguimiento_idproyecto" class="java.lang.Integer"/>
-	<field name="t_seguimiento_fechaseguimiento" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -210,7 +201,7 @@ FROM
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE SEGUIMIENTO</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE SEGUIMIENTOS</style>]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="109" width="555" height="1" uuid="4509080e-5663-4e81-8b63-a1cea3ba5af3"/>
@@ -274,28 +265,15 @@ FROM
 		</band>
 	</title>
 	<detail>
-		<band height="30">
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="396" y="1" width="80" height="20" uuid="2a1e2c20-f86c-4ba6-8eab-3c657bfd832b"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_seguimiento_fechaseguimiento}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="26" y="1" width="359" height="20" uuid="64d11f04-c1e6-4c1a-989b-0b3cc5f7d358"/>
-				<textElement textAlignment="Justified">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_seguimiento_descripcion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="476" y="1" width="61" height="20" uuid="cb804c4c-3354-420a-83b8-5fc5c91ace75"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_seguimiento_estado}.equals(1)? "Activo": "Inactivo"]]></textFieldExpression>
-			</textField>
+		<band height="50">
+			<subreport>
+				<reportElement x="27" y="0" width="510" height="50" uuid="826d2701-919b-4e81-80c1-df9094a67837"/>
+				<subreportParameter name="id_seguimiento">
+					<subreportParameterExpression><![CDATA[$F{t_proyecto_idproyecto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ReporteSeguimientos.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>

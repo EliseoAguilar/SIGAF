@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultadosCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f7340d7-dd94-4d83-9cc4-5383eaba1fb3">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="103"/>
+	<property name="ireport.y" value="583"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -403,22 +403,22 @@ FROM
 				<textFieldExpression><![CDATA[$P{numeroPagos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="413" y="60" width="94" height="20" uuid="a373f0d6-c945-4034-b85f-61104bcf7ea9"/>
-				<textElement>
+				<reportElement x="413" y="60" width="72" height="20" uuid="a373f0d6-c945-4034-b85f-61104bcf7ea9"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mora}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="413" y="80" width="94" height="20" uuid="68a71cbb-4be5-4ead-b76d-7b22958de53b"/>
-				<textElement>
+				<reportElement x="413" y="80" width="72" height="20" uuid="68a71cbb-4be5-4ead-b76d-7b22958de53b"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="413" y="38" width="94" height="20" uuid="86deea3c-c7aa-4c37-846c-1a3f795a9ecd"/>
-				<textElement>
+				<reportElement x="413" y="38" width="72" height="20" uuid="86deea3c-c7aa-4c37-846c-1a3f795a9ecd"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{interes}]]></textFieldExpression>
@@ -452,8 +452,8 @@ FROM
 				<text><![CDATA[SALDO ADICIONAL:]]></text>
 			</staticText>
 			<textField pattern="$#,##0.00">
-				<reportElement x="413" y="108" width="94" height="20" uuid="73dc47c1-1f36-4495-a596-059c2d5264b0"/>
-				<textElement>
+				<reportElement x="413" y="108" width="72" height="20" uuid="73dc47c1-1f36-4495-a596-059c2d5264b0"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{adicional}.equals( null )? "---": $P{adicional}]]></textFieldExpression>

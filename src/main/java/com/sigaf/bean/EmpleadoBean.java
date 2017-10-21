@@ -751,7 +751,7 @@ public class EmpleadoBean extends Actividad {
         this.fechaFin = null;
         this.empleados.setSalarioEmpleado(BigDecimal.ZERO);
         this.listaEmpleadoCargos = new ArrayList<>();
-        this.listaCargo = this.icargoBo.listCargo(1);
+        //this.listaCargo = this.icargoBo.listCargo(1);
         this.listaCargoModificarCopia = new ArrayList<>();
         this.listaEmpleadoCargosModificar = new ArrayList<>();
         this.listaEmpleadoCargosModificarCopia = new ArrayList<>();

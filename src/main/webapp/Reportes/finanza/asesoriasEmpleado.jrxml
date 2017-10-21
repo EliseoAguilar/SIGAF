@@ -163,7 +163,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS ACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>":"<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS INACTIVAS ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS ACTIVAS DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>":"<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE ASESORIAS INACTIVAS DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin})+"</style>"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -229,7 +229,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_asesoria_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00" isBlankWhenNull="true">
-				<reportElement x="335" y="2" width="51" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
+				<reportElement x="335" y="2" width="60" height="20" uuid="88fa3619-0274-4e0c-b7f9-3d6462bbd93a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_precio}]]></textFieldExpression>
 			</textField>

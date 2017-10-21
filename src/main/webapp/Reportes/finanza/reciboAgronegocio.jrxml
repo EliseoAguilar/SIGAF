@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ead269f-2472-4272-bdf6-16f64393d3fd">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1012"/>
+	<property name="ireport.y" value="1100"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -174,10 +174,10 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="26" y="203" width="79" height="20" uuid="e2311c56-8276-4d27-ab9b-8b2693f1462f"/>
-				<textElement>
+				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="214" y="55" width="136" height="22" uuid="f9bd7113-ea5c-4572-8f12-32147b8c5d1d"/>
@@ -275,10 +275,10 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="26" y="461" width="79" height="20" uuid="0551d21c-becf-4775-9a37-e3400fae1b4a"/>
-				<textElement>
+				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Total</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="26" y="433" width="79" height="20" uuid="4f9acb56-f038-4e34-b690-26cb3a4d828a"/>

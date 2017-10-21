@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="desembolsoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="434e6452-d722-420c-aac8-e6fc49cab9cb">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="461"/>
+	<property name="ireport.y" value="509"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -240,28 +240,28 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL ENTREGA:</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="411" width="340" height="20" uuid="209bf38c-d678-4dcf-8524-afeabf1b9426"/>
+				<reportElement x="35" y="411" width="322" height="20" uuid="209bf38c-d678-4dcf-8524-afeabf1b9426"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[He recibido a mi entera satisfacción en efectivo o cheque, la cantidad de ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="411" y="411" width="130" height="20" uuid="6154cbed-3150-4227-97da-a4cd174f12bb"/>
+				<reportElement x="411" y="411" width="121" height="20" uuid="6154cbed-3150-4227-97da-a4cd174f12bb"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[en concepto de liquidación de prestamo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="431" width="529" height="20" uuid="4f693968-f1c4-4306-9921-a1436445e5f4"/>
+				<reportElement x="35" y="431" width="497" height="20" uuid="4f693968-f1c4-4306-9921-a1436445e5f4"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[concedido en esta fecha y estoy de acuerdo con todo lo que ella consta, en fe de lo cual firmo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="464" width="80" height="20" uuid="62a8f8bc-93b9-4958-815f-5190bea68264"/>
+				<reportElement x="35" y="464" width="80" height="20" uuid="62a8f8bc-93b9-4958-815f-5190bea68264"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
@@ -282,14 +282,14 @@ FROM
 				<text><![CDATA[Firma del cliente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="464" width="44" height="20" uuid="b9324aaa-d8b2-4dce-8ebb-1de8eb82acfb"/>
+				<reportElement x="115" y="464" width="44" height="20" uuid="b9324aaa-d8b2-4dce-8ebb-1de8eb82acfb"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Usulutan, ]]></text>
 			</staticText>
 			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="135" y="464" width="100" height="20" uuid="607f0e14-addd-4737-a114-6456f6f9a309"/>
+				<reportElement x="158" y="464" width="100" height="20" uuid="607f0e14-addd-4737-a114-6456f6f9a309"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
@@ -338,7 +338,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="349" y="411" width="60" height="20" uuid="8d1abd0f-e7ce-431f-8bd6-4c79c6cadcdc"/>
+				<reportElement x="357" y="411" width="55" height="20" uuid="8d1abd0f-e7ce-431f-8bd6-4c79c6cadcdc"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>

@@ -438,7 +438,7 @@ public class SocioCooperativaBean extends Actividad {
     }
 
     public List<TCargo> getListaCargo() {
-        return listaCargo = this.icargoBo.listCargo(1);
+       return listaCargo = this.icargoBo.listCargo(1);       
     }
 
     public void setListaCargo(List<TCargo> listaCargo) {

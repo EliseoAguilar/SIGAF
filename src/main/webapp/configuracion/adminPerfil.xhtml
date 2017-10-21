@@ -41,7 +41,8 @@
                     <p:growl id="msgs" />
                     <p:outputPanel>
                         <h:form id="fPerfil" enctype="multipart/form-data" > 
-                            #{entidadBean.updateDatos()}
+                          
+                            #{entidadBean.modifico eq true? null  :entidadBean.updateDatos()}
                                                        <p:panel id="basic" header="Modificar Perfil"  style="width: 80%; margin: auto;">
                                 <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;">                 
                                     <p:row>
@@ -172,6 +173,8 @@
                                         <p:commandButton  value="Guardar" id="btnModificar" style="#{areaBean.btnCrear }" icon="fa fa-check"   actionListener="#{entidadBean.validarFormulario}" update=":padding" > 
                                         </p:commandButton>
                                         <p:commandButton  value="Cancelar" id="btnCancelar" style="#{areaBean.btnCancelar}" icon="fa fa-close"  actionListener="#{entidadBean.limpiar}"  action="configuracion?faces-redirect=true" > 
+                                                   <f:setPropertyActionListener value="#{false}" target="#{entidadBean.modifico}" />
+                                   
                                         </p:commandButton>
                                     </div>
                                 </center>

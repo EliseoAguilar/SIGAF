@@ -106,7 +106,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE SOLICITUDES PENDIENTES (PERSONAS NATURALES) ENTRE EL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaIncial}) + " AL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin}) +"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE SOLICITUDES PENDIENTES (PERSONAS NATURALES) DEL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaIncial}) + " AL "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFin}) +"</style>"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="108" width="555" height="1" uuid="74c06a3f-6235-4fbb-8da3-b99c8b629e71"/>
@@ -115,82 +115,110 @@ FROM
 	</title>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement x="396" y="0" width="59" height="20" uuid="458211af-7229-4dab-9388-6ce6fc947eb8"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="461" y="0" width="92" height="20" uuid="9fc1b705-899f-4ce0-a3ca-665d0865aea9"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA REGISTRO</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="65" y="0" width="70" height="20" uuid="c0c2ebfd-9fe6-4462-8443-cd96eb51b6e7"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DUI CLIENTE</style>]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="20" width="555" height="1" uuid="012e6072-b779-428c-bac8-4e613baca6ef"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="65" height="20" uuid="2250fff1-2360-4083-8ac7-00bed7822bbe"/>
+				<reportElement x="450" y="2" width="37" height="20" uuid="9cb818c6-a85d-42b8-85b8-1460b51f0115"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PAGO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="54" height="20" uuid="57d2e15c-6807-4b16-83b6-326d8544c330"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="135" y="0" width="78" height="20" uuid="02a6dc59-549b-4e3b-8d79-0ec0b0c7a213"/>
+				<reportElement x="136" y="1" width="97" height="20" uuid="504f10c5-5b2a-435a-aad2-5e8b84ef8bdc"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="60" y="1" width="70" height="20" uuid="009682ec-2a8e-4c1b-aac9-ff64afdc37bf"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DUI CLIENTE</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="2" width="60" height="20" uuid="7ba3e7c7-af74-4e46-9a16-900795fd0742"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REGISTRO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="2" width="47" height="20" uuid="60fe06de-b239-47a7-bd03-ff9a74ae00b1"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="2" width="48" height="20" uuid="ef582371-9a66-4454-adb7-0b1223e3c23e"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="65" height="20" uuid="128c0d01-c49e-4804-ab78-13fb4845a1d3"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="136" y="0" width="180" height="20" uuid="c7c08e83-b5f6-4f26-bd9c-0e8823538c92"/>
 				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="65" y="0" width="70" height="20" uuid="baf85d2f-289d-4da5-a836-aaff260505c3"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_cliente_dui_cliente}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="135" y="0" width="220" height="20" uuid="5f28be58-7636-45c6-8f36-98cfd8afe6f2"/>
-				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
 			</textField>
-			<textField pattern="$#,##0.00">
-				<reportElement x="396" y="0" width="59" height="20" uuid="184bcd51-1006-4024-b70c-a8ae18e62338"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="70" height="20" uuid="73bfcb83-1662-4acf-81c7-89fcbdce5103"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_cliente_dui_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="449" y="0" width="44" height="20" uuid="1521f9eb-bfa0-4429-914c-8c2e91f1f640"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false ||$F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="402" y="0" width="47" height="20" uuid="cc2b25af-85f9-44c7-8129-706fdc62c7a3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="336" y="0" width="58" height="20" uuid="fd5a8a0d-d426-4916-8aa7-7c3316e5f2f3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="461" y="0" width="88" height="20" uuid="ba6896c6-c4dd-4a1a-b2ee-bf8a8d5c2d35"/>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="493" y="0" width="61" height="20" uuid="ca8f0db4-d0d5-4b96-a6db-64d3a8790a73"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="54" height="20" uuid="d4009a33-b65f-469e-8f7c-6372f8c47a95"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

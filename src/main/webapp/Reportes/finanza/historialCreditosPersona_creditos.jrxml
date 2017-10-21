@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialCreditosPersona_creditos" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="326bf540-552d-4eed-9410-9b21d924bdae">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id_cliente" class="java.lang.Integer"/>
@@ -113,35 +113,35 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
-				<reportElement x="272" y="3" width="59" height="20" uuid="5e511adc-0836-4353-ae3b-76552da31317"/>
-				<textElement>
+				<reportElement x="264" y="3" width="59" height="20" uuid="5e511adc-0836-4353-ae3b-76552da31317"/>
+				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="445" y="3" width="110" height="20" uuid="588c14c4-38d3-4d21-981b-c83fa9a7a25d"/>
+				<reportElement x="450" y="3" width="105" height="20" uuid="588c14c4-38d3-4d21-981b-c83fa9a7a25d"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/Proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/Ejecutándose": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="331" y="3" width="56" height="20" uuid="56ccb1e1-9c25-4121-86ec-d9e05b45898c"/>
+				<reportElement x="336" y="3" width="56" height="20" uuid="56ccb1e1-9c25-4121-86ec-d9e05b45898c"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="387" y="3" width="58" height="20" uuid="e1a83caa-35a6-4320-9a9d-7932a4150791"/>
+				<reportElement x="392" y="3" width="58" height="20" uuid="e1a83caa-35a6-4320-9a9d-7932a4150791"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="71" y="3" width="201" height="20" uuid="e8970c87-c61f-41de-a517-e7b992c6ecbc"/>
+				<reportElement x="71" y="3" width="206" height="20" uuid="e8970c87-c61f-41de-a517-e7b992c6ecbc"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
 			</textField>
 		</band>

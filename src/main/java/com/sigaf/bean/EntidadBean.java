@@ -93,6 +93,15 @@ public class EntidadBean extends Actividad {
     //final File foto = new File();
     private UploadedFile img;
     private IBitacoraBo bitacoraBo;
+    private Boolean modifico;
+
+    public Boolean getModifico() {
+        return modifico;
+    }
+
+    public void setModifico(Boolean modifico) {
+        this.modifico = modifico;
+    }
 
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
@@ -412,6 +421,7 @@ public class EntidadBean extends Actividad {
         this.showImagenActa = false;
         this.showImagenRepre = false;
         this.codigoAuxiliar = "";
+        this.modifico=false;
         //FIN PERFIL
     }
 
@@ -586,6 +596,7 @@ public class EntidadBean extends Actividad {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil modificado correctamente"));
         } catch (HibernateException he) {
         }
+        this.modifico=false;
     }
 
     public void limpiar() {
@@ -751,6 +762,8 @@ public class EntidadBean extends Actividad {
         } else {
             this.msgDireccion = "";
         }
+        
+        this.modifico= true;
     }
 
     public void validarFormularioEntidad() {

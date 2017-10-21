@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="336"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -105,7 +105,7 @@
 				<reportElement x="1" y="113" width="555" height="1" uuid="85184753-f4f3-486f-a26e-9bdfd29dffba"/>
 			</line>
 			<staticText>
-				<reportElement x="27" y="150" width="71" height="20" uuid="6cdcc250-9053-49ae-b89f-c0c293713f68"/>
+				<reportElement x="25" y="150" width="71" height="20" uuid="6cdcc250-9053-49ae-b89f-c0c293713f68"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -119,7 +119,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CLIENTE</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="170" width="71" height="20" uuid="b78eefba-2808-425f-ac60-029b2dec6a3b"/>
+				<reportElement x="25" y="170" width="71" height="20" uuid="b78eefba-2808-425f-ac60-029b2dec6a3b"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -143,7 +143,7 @@
 				<reportElement x="0" y="135" width="555" height="1" uuid="2dfdf3c1-a345-4ec1-98d2-8f79a25107cf"/>
 			</line>
 			<staticText>
-				<reportElement x="25" y="238" width="71" height="20" uuid="02528683-6bd1-4e07-8220-51b82b6dc517"/>
+				<reportElement x="23" y="238" width="71" height="20" uuid="02528683-6bd1-4e07-8220-51b82b6dc517"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -168,7 +168,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{modalidadCredito}.equals(1)? "Empleados": false  || $P{modalidadCredito}.equals(2)? "Inversión cooperativa": false || $P{modalidadCredito}.equals(3)? "Producción cooperativa": false || $P{modalidadCredito}.equals(4)? "Producción agropecuario": false || $P{modalidadCredito}.equals(5)? "Lisiados de guerra": false || $P{modalidadCredito}.equals(7)? "Comercio": false || $P{modalidadCredito}.equals(9)? "Inversión agropecuario": false || $P{modalidadCredito}.equals(8)? "Capital de trabajo agropecuario": false]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{modalidadCredito}.equals(1)? "Crédito para empleados": false  || $P{modalidadCredito}.equals(2)? "Crédito para inversión cooperativa": false || $P{modalidadCredito}.equals(3)? "Crédito para producción cooperativa": false || $P{modalidadCredito}.equals(4)? "Crédito para producción agropecuario": false || $P{modalidadCredito}.equals(5)? "Crédito para lisiados de guerra": false || $P{modalidadCredito}.equals(7)? "Crédito para comercio": false || $P{modalidadCredito}.equals(9)? "Crédito para inversión agropecuaria": false || $P{modalidadCredito}.equals(8)? "Crédito para capital de trabajo agropecuario": false]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="206" width="555" height="20" uuid="b8c28b38-538f-4619-96fa-4b27203d1ede"/>
@@ -200,14 +200,14 @@
 				<textFieldExpression><![CDATA[$P{dui}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="25" y="258" width="71" height="20" uuid="df4c1de5-c1b8-41ba-9f6a-3af92e76b1db"/>
+				<reportElement x="23" y="258" width="71" height="20" uuid="df4c1de5-c1b8-41ba-9f6a-3af92e76b1db"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[MONTO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="25" y="278" width="71" height="20" uuid="f1115702-eeea-489a-ae28-b70942ce5ac8"/>
+				<reportElement x="23" y="278" width="71" height="20" uuid="f1115702-eeea-489a-ae28-b70942ce5ac8"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -250,7 +250,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTAS RETRASADAS</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="459" y="346" width="39" height="20" uuid="ce480c77-f432-4af3-a358-7fa21e456534"/>
+				<reportElement x="462" y="346" width="39" height="20" uuid="ce480c77-f432-4af3-a358-7fa21e456534"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -264,7 +264,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA DE PAGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="379" y="346" width="33" height="20" uuid="58144802-b003-4e88-a51e-57de575c1c85"/>
+				<reportElement x="381" y="346" width="33" height="20" uuid="58144802-b003-4e88-a51e-57de575c1c85"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -288,7 +288,7 @@
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="155" y="0" width="105" height="20" uuid="429ea860-b2e2-459c-852a-21af26033b74"/>
+				<reportElement x="149" y="0" width="105" height="20" uuid="429ea860-b2e2-459c-852a-21af26033b74"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{idpago}]]></textFieldExpression>
 			</textField>
@@ -330,7 +330,7 @@
 	<summary>
 		<band height="50">
 			<staticText>
-				<reportElement x="358" y="13" width="54" height="20" uuid="4b9393af-1aa6-46f7-a7a1-d86acaeaecfe"/>
+				<reportElement x="369" y="13" width="43" height="20" uuid="4b9393af-1aa6-46f7-a7a1-d86acaeaecfe"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>

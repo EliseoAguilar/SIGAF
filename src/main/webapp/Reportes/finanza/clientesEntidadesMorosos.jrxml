@@ -123,7 +123,7 @@
 				<reportElement x="0" y="101" width="555" height="1" uuid="86abda47-240f-4c7e-a783-391d2314631e"/>
 			</line>
 			<staticText>
-				<reportElement x="14" y="104" width="62" height="20" uuid="c5f02beb-e727-4755-ba15-44fd1ec89740"/>
+				<reportElement x="0" y="104" width="62" height="20" uuid="c5f02beb-e727-4755-ba15-44fd1ec89740"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -136,18 +136,11 @@
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="476" y="104" width="65" height="20" uuid="342bf1b8-fa80-48d5-a277-5774881e531d"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NIT</style>]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="121" width="555" height="1" uuid="7b636709-ca60-4b82-93a3-52558afbd513"/>
 			</line>
 			<staticText>
-				<reportElement x="77" y="104" width="95" height="20" uuid="e3d3b4d6-6016-4771-a0ab-eebce188ccc0"/>
+				<reportElement x="62" y="104" width="110" height="20" uuid="e3d3b4d6-6016-4771-a0ab-eebce188ccc0"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -157,20 +150,25 @@
 	</title>
 	<detail>
 		<band height="22" splitType="Stretch">
-			<textField>
-				<reportElement x="476" y="0" width="79" height="20" uuid="4c67c4be-c225-48e9-9d8b-94511686cbfc"/>
-				<textFieldExpression><![CDATA[$F{nitEntidad}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="177" y="0" width="291" height="20" uuid="c3827edf-bafa-4144-9f9d-c119ad3388df"/>
+				<reportElement x="177" y="0" width="377" height="20" uuid="c3827edf-bafa-4144-9f9d-c119ad3388df"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreEntidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="14" y="0" width="62" height="20" uuid="4e962547-0fba-4fef-aa1b-c06a46c603e5"/>
+				<reportElement x="0" y="0" width="62" height="20" uuid="4e962547-0fba-4fef-aa1b-c06a46c603e5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{codigoClienteEntidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="77" y="0" width="95" height="20" uuid="62e447a1-98a5-4f2b-bb05-70cc327ac7ed"/>
+				<reportElement x="62" y="0" width="110" height="20" uuid="62e447a1-98a5-4f2b-bb05-70cc327ac7ed"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{codigoEntidad}]]></textFieldExpression>
 			</textField>
 		</band>

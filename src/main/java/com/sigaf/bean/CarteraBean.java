@@ -47,6 +47,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -166,6 +167,29 @@ public class CarteraBean extends Actividad {
     private List<TClienteProyecto> listaClienteProyectoNoMorosos;
     private List<TEntidadProyecto> listaEntidadProyectoMorosos;
     private List<TEntidadProyecto> listaEntidadProyectoNoMorosos;
+    
+    private List<TEntidadProyecto> listaEntidadProyectoMorososAux;
+    private List<TEntidadProyecto> listaEntidadProyectoNoMorososAux;  
+
+    public List<TEntidadProyecto> getListaEntidadProyectoMorososAux() {
+        return listaEntidadProyectoMorososAux;
+    }
+
+    public void setListaEntidadProyectoMorososAux(List<TEntidadProyecto> listaEntidadProyectoMorososAux) {
+        this.listaEntidadProyectoMorososAux = listaEntidadProyectoMorososAux;
+    }
+
+    public List<TEntidadProyecto> getListaEntidadProyectoNoMorososAux() {
+        return listaEntidadProyectoNoMorososAux;
+    }
+
+    public void setListaEntidadProyectoNoMorososAux(List<TEntidadProyecto> listaEntidadProyectoNoMorososAux) {
+        this.listaEntidadProyectoNoMorososAux = listaEntidadProyectoNoMorososAux;
+    }
+    
+    
+    
+    
     private TEntidadProyecto entidadProyecto;
     private TEntidad Entidadeleccionada;
     private TProyecto proyecto;
@@ -277,6 +301,60 @@ public class CarteraBean extends Actividad {
     private String estadoCredito;
     private String duiAux;
     private String nitAux;
+    private String nombresNatural;
+    private String apellidosNatural;
+    private String nombreInstitucio;
+    private Integer destino;
+    private String descripcion;
+    private String cargoNatural;
+
+    public String getCargoNatural() {
+        return cargoNatural;
+    }
+
+    public void setCargoNatural(String cargoNatural) {
+        this.cargoNatural = cargoNatural;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Integer getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Integer destino) {
+        this.destino = destino;
+    }
+
+    public String getNombresNatural() {
+        return nombresNatural;
+    }
+
+    public void setNombresNatural(String nombresNatural) {
+        this.nombresNatural = nombresNatural;
+    }
+
+    public String getApellidosNatural() {
+        return apellidosNatural;
+    }
+
+    public void setApellidosNatural(String apellidosNatural) {
+        this.apellidosNatural = apellidosNatural;
+    }
+
+    public String getNombreInstitucio() {
+        return nombreInstitucio;
+    }
+
+    public void setNombreInstitucio(String nombreInstitucio) {
+        this.nombreInstitucio = nombreInstitucio;
+    }
 
     public String getNitAux() {
         return nitAux;
@@ -1816,6 +1894,8 @@ public class CarteraBean extends Actividad {
         this.listaClienteProyectoNoMorosos = new ArrayList<TClienteProyecto>();
         this.listaEntidadProyectoMorosos = new ArrayList<TEntidadProyecto>();
         this.listaEntidadProyectoNoMorosos = new ArrayList<TEntidadProyecto>();
+        this.listaEntidadProyectoMorososAux = new ArrayList<TEntidadProyecto>();
+        this.listaEntidadProyectoNoMorososAux = new ArrayList<TEntidadProyecto>();
         this.mostrarMorososCooperativas = false;
         this.calculos = false;
         this.referencia = new TReferencia();
@@ -2764,8 +2844,14 @@ public class CarteraBean extends Actividad {
                         this.listaEntidadProyectoNoMorosos.add(this.listaEntidadProyectosReducida.get(i));
                     } else {
                         this.listaEntidadProyectoMorosos.add(this.listaEntidadProyectosReducida.get(i));
+                      
                     }
                 }
+                           
+                
+                
+                
+                
             }
             if (this.tipoMora == 1) {
                 this.mostrarMorosos = false;
@@ -2789,6 +2875,14 @@ public class CarteraBean extends Actividad {
             this.mostrarPersonas = false;
             this.mostrarMorososCooperativas = false;
         }
+        
+        //eliminando objetos duplicados
+        
+      
+        
+        
+        
+        
 
     }
 
@@ -3515,9 +3609,11 @@ public class CarteraBean extends Actividad {
 
         this.listaEntidadesMorosas = new ArrayList<TEntidad>();
         this.listaClientesMorosos = new ArrayList<TCliente>();
-        for (int i = 0; i < this.listaEntidadProyectoMorosos.size(); i++) {
+        for (int i = 0; i < this.listaEntidadProyectoNoMorosos.size(); i++) {
             this.listaEntidadesMorosas.add(this.listaEntidadProyectoNoMorosos.get(i).getTEntidad());
+            
         }
+        System.out.println(this.listaEntidadesMorosas.size());
         Map<String, Object> parametros = new HashMap();
         TEntidad auxEntidad = ientidadBo.getTEntidad(1);
         parametros.put("nombreEntidad", auxEntidad.getNombreEntidad());
@@ -3525,7 +3621,7 @@ public class CarteraBean extends Actividad {
         parametros.put("telEntidad", auxEntidad.getTelefonoEntidad());
         parametros.put("logoEntidad", auxEntidad.getLogoEntidad());
         JRDataSource dataSource = new JRBeanCollectionDataSource(this.listaEntidadesMorosas);
-        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/clientesEntidadesMorosos.jasper"));
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/clientesEntidadesNoMorosos.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, dataSource);
         System.out.println(bytes.length);
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -4670,6 +4766,325 @@ public class CarteraBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
+    
+     public void verConstanciaFinalizacionPersona() throws SQLException, JRException, IOException {
+
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        parametros.put("descripcion", this.descripcion);
+        parametros.put("nombresNatural", this.nombresNatural);
+        parametros.put("cargo", this.cargoNatural);
+        
+        parametros.put("apellidosNatural", this.apellidosNatural);
+        parametros.put("nombreJuridica", this.nombreInstitucio);
+        
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
+     
+        
+        if(this.destino==1){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa1.jasper"));
+        
+        }
+        
+        if(this.destino==2){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa2.jasper"));
+        
+        }
+        
+           if(this.destino==3){
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa3.jasper"));
+        
+            
+        }byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar constancia de finalización");
+        String formaPagosCredito = "";
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+            formaPagosCredito = "Mensual";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+            formaPagosCredito = "Trimestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+            formaPagosCredito = "Semestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 4) {
+            formaPagosCredito = "Anual";
+        }
+        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", Monto: " + this.proyectoSeleccionado.getMonto()
+                + ", Plazo: " + this.proyectoSeleccionado.getPlazo()
+                + ", Forma de pago: " + formaPagosCredito
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.proyectoSeleccionado.getIdproyecto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+
+    public void verConstanciaFinalizacionCooperativa() throws SQLException, JRException, IOException {
+
+        this.getConexion();
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        parametros.put("descripcion", this.descripcion);
+        parametros.put("nombresNatural", this.nombresNatural);
+        parametros.put("cargo", this.cargoNatural);
+        
+        parametros.put("apellidosNatural", this.apellidosNatural);
+        parametros.put("nombreJuridica", this.nombreInstitucio);
+        
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
+     
+        
+        if(this.destino==1){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa1.jasper"));
+        
+        }
+        
+        if(this.destino==2){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa2.jasper"));
+        
+        }
+        
+           if(this.destino==3){
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa3.jasper"));
+        
+            
+        }
+        
+        
+        
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar constancia de finalización");
+        String formaPagosCredito = "";
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+            formaPagosCredito = "Mensual";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+            formaPagosCredito = "Trimestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+            formaPagosCredito = "Semestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 4) {
+            formaPagosCredito = "Anual";
+        }
+        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", Monto: " + this.proyectoSeleccionado.getMonto()
+                + ", Plazo: " + this.proyectoSeleccionado.getPlazo()
+                + ", Forma de pago: " + formaPagosCredito
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.proyectoSeleccionado.getIdproyecto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+
+    public void verConstanciaFinalizacionPersonaPDF() throws SQLException, JRException, IOException {
+
+       Map<String, Object> parametros = new HashMap();
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        parametros.put("descripcion", this.descripcion);
+        parametros.put("nombresNatural", this.nombresNatural);
+        parametros.put("cargo", this.cargoNatural);
+        
+        parametros.put("apellidosNatural", this.apellidosNatural);
+        parametros.put("nombreJuridica", this.nombreInstitucio);
+        
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
+     
+        
+        if(this.destino==1){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa1.jasper"));
+        
+        }
+        
+        if(this.destino==2){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa2.jasper"));
+        
+        }
+        
+           if(this.destino==3){
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa3.jasper"));
+        
+            
+        } JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Constancia finalizacion (Persona natural).pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar constancia de finalización");
+        String formaPagosCredito = "";
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+            formaPagosCredito = "Mensual";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+            formaPagosCredito = "Trimestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+            formaPagosCredito = "Semestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 4) {
+            formaPagosCredito = "Anual";
+        }
+        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", Monto: " + this.proyectoSeleccionado.getMonto()
+                + ", Plazo: " + this.proyectoSeleccionado.getPlazo()
+                + ", Forma de pago: " + formaPagosCredito
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.proyectoSeleccionado.getIdproyecto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+
+    public void verConstanciaFinalizacionCooperativaPDF() throws SQLException, JRException, IOException {
+
+     Map<String, Object> parametros = new HashMap();
+        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        
+        parametros.put("descripcion", this.descripcion);
+        parametros.put("nombresNatural", this.nombresNatural);
+        parametros.put("cargo", this.cargoNatural);
+        
+        parametros.put("apellidosNatural", this.apellidosNatural);
+        parametros.put("nombreJuridica", this.nombreInstitucio);
+        
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa.jasper"));
+     
+        
+        if(this.destino==1){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa1.jasper"));
+        
+        }
+        
+        if(this.destino==2){
+            
+             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa2.jasper"));
+        
+        }
+        
+           if(this.destino==3){
+            jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/constanciaCancelacionCooperativa3.jasper"));
+        
+            
+        } JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition", "attachment; filename=Constancia.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        TBitacora auxBitacora = new TBitacora();
+        auxBitacora.setTableBitacora("t_proyecto");
+        auxBitacora.setAccionBitacora("Generar constancia de finalización");
+        String formaPagosCredito = "";
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+            formaPagosCredito = "Mensual";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+            formaPagosCredito = "Trimestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+            formaPagosCredito = "Semestral";
+        }
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 4) {
+            formaPagosCredito = "Anual";
+        }
+        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
+                + ", Monto: " + this.proyectoSeleccionado.getMonto()
+                + ", Plazo: " + this.proyectoSeleccionado.getPlazo()
+                + ", Forma de pago: " + formaPagosCredito
+        );
+        auxBitacora.setHoraBitacora(new Date());
+        auxBitacora.setFechaBitacora(new Date());
+        auxBitacora.setIdTableBitacora(this.proyectoSeleccionado.getIdproyecto());
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
+        this.bitacoraBo.create(auxBitacora);
+
+    }
+    
+    public void cargarDatosConstancia(){
+        
+        this.descripcion= "Por este medio se hace constar que "+ this.Entidadeleccionada.getNombreEntidad()+ ", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. ";
+        
+        
+    }
+    
+     public void cargarDatosConstanciaVigencia(){
+        
+        this.descripcion= "Por este medio se hace constar que "+ this.Entidadeleccionada.getNombreEntidad()+ ", cliente de la Fundación Usulután II, esta vigente cancelando su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. ";
+        
+        
+    }
+     
+     public void cargarDatosConstanciaPersona(){
+        
+        this.descripcion= "Por este medio se hace constar que "+ this.clienteSeleccionado.getNombreCliente()+ " " + this.clienteSeleccionado.getApellidoCliente() +", cliente de la Fundación Usulután II, ha cancelado su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. ";
+        
+        
+    }
+    
+     public void cargarDatosConstanciaVigenciaPersona(){
+        
+        this.descripcion= "Por este medio se hace constar que "+ this.clienteSeleccionado.getNombreCliente()+ " " + this.clienteSeleccionado.getApellidoCliente() + ", cliente de la Fundación Usulután II, esta vigente cancelando su crédito con referencia " +this.proyectoSeleccionado.getCodigoProyecto() + ", otorgado por la Fundación, por la cantidad de $"+this.proyectoSeleccionado.getMonto().setScale(2, RoundingMode.HALF_UP) +" para el plazo de "+this.proyectoSeleccionado.getPlazo()+" meses. ";
+        
+        
+    }
+     
+     
     
     
     

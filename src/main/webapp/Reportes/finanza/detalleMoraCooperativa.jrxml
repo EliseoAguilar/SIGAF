@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="212"/>
+	<property name="ireport.y" value="0"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -167,7 +167,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{modalidadCredito}.equals(1)? "Empleados": false  || $P{modalidadCredito}.equals(2)? "Inversión cooperativa": false || $P{modalidadCredito}.equals(3)? "Producción cooperativa": false || $P{modalidadCredito}.equals(4)? "Producción agropecuario": false || $P{modalidadCredito}.equals(5)? "Lisiados de guerra": false || $P{modalidadCredito}.equals(7)? "Comercio": false || $P{modalidadCredito}.equals(9)? "Inversión agropecuario": false || $P{modalidadCredito}.equals(8)? "Capital de trabajo agropecuario": false]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{modalidadCredito}.equals(1)? "Crédito para empleados": false  || $P{modalidadCredito}.equals(2)? "Crédito para inversión cooperativa": false || $P{modalidadCredito}.equals(3)? "Crédito para producción cooperativa": false || $P{modalidadCredito}.equals(4)? "Crédito para producción agropecuaria": false || $P{modalidadCredito}.equals(5)? "Crédito para lisiados de guerra": false || $P{modalidadCredito}.equals(7)? "Crédito para comercio": false || $P{modalidadCredito}.equals(9)? "Crédito para inversión agropecuaria": false || $P{modalidadCredito}.equals(8)? "Crédito para capital de trabajo agropecuario": false]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="206" width="555" height="20" uuid="b8c28b38-538f-4619-96fa-4b27203d1ede"/>
@@ -324,7 +324,7 @@
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TOTAL:</style>]]></text>
 			</staticText>
-			<textField pattern="$#,##0.00">
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
 				<reportElement x="434" y="14" width="65" height="20" uuid="b18a0d54-7ce3-478b-9798-e3bc49de40ad"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{interes_1}]]></textFieldExpression>

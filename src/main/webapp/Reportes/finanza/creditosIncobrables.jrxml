@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="creditosFinalizalos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ab62ded-e4e6-4a28-9434-fb9f281248f2">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="7"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -106,7 +106,7 @@ ORDER BY
 				<textElement textAlignment="Center" markup="styled">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS INCOBRABLES ENTRE EL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>" + "REPORTE DE CRÉDITOS INCOBRABLES DEL "+new SimpleDateFormat("dd/MM/yyyy").format($P{fechaInicial}) + " AL " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaFinal})+"</style>"]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement x="9" y="0" width="200" height="79" uuid="41d18f94-0bb1-49c1-ae68-495a19e9c95c"/>
@@ -131,7 +131,7 @@ ORDER BY
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="108" width="58" height="20" uuid="c1559c84-1b56-4f14-a22e-805a9fef6000"/>
+				<reportElement x="223" y="108" width="44" height="20" uuid="c1559c84-1b56-4f14-a22e-805a9fef6000"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -175,49 +175,49 @@ ORDER BY
 			<textField>
 				<reportElement x="0" y="0" width="70" height="20" uuid="34da5b3c-90a1-452f-9a56-606afaded3ed"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="70" y="0" width="139" height="20" uuid="4798d8af-e893-4d61-bad1-fe5df5395dd4"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="209" y="0" width="58" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
-				<textElement>
-					<font size="10"/>
+				<reportElement x="209" y="0" width="53" height="20" uuid="d0f0e3d3-75f6-475f-a13d-0e1b7e77c13b"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="267" y="0" width="55" height="20" uuid="d63298fd-a197-40b6-9064-35da673c347a"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="321" y="0" width="51" height="20" uuid="49dfa54e-9f53-4a31-b6d7-b7c5fc4f1d10"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false ||$F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="435" y="0" width="118" height="20" uuid="67019f67-58af-44b0-bad3-8e91bc09bd35"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_razon_incobrabilidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="372" y="0" width="63" height="20" uuid="38041fc0-aac7-4957-9924-6b35448405fc"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_incobrabilidad}]]></textFieldExpression>
 			</textField>
