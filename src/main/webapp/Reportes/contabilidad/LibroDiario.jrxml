@@ -24,12 +24,13 @@ FROM
      INNER JOIN "t_partida" t ON p."id_periodo" = t."id_periodo_partida"
 WHERE
 
-     p.id_ejercicio = $P{idEjercicio}]]>
+     p.id_ejercicio = $P{idEjercicio} order by t_numero_partida]]>
 	</queryString>
 	<field name="id_ejercicio" class="java.lang.Integer"/>
 	<field name="estado_ejercicio" class="java.lang.Boolean"/>
 	<field name="id_entidad_ejercicio" class="java.lang.Integer"/>
 	<field name="aho_ejercicio" class="java.lang.Integer"/>
+	<field name="fecha_cierre" class="java.sql.Date"/>
 	<field name="id_periodo" class="java.lang.Integer"/>
 	<field name="estado_periodo" class="java.lang.Boolean"/>
 	<field name="mes_periodo" class="java.lang.String"/>

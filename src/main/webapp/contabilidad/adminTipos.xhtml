@@ -11,7 +11,7 @@
         <ui:composition template="./../index.xhtml">
 
             <ui:define name="content">
-                
+
                 <h:form>
                     <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;" class="noBoder"> 
                         <p:row>
@@ -122,65 +122,130 @@
 
                                 </p:panelGrid>
                                 <br></br>
-                                <b><h:outputText value="Cuentas contables "/></b>
+                                <b><h:outputText value="Activo"/></b>
                                 <hr></hr>
 
-                                <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;" class="noBoder">   
+                                <p:panelGrid   style="width: 100%; margin: auto;" class="noBoder">   
                                     <p:row>
                                         <p:column style="width: 50%" >
-                                            <h:outputText value="Cuenta del activo:*"/>
+                                            <h:outputText value="Código:*"/>
                                         </p:column>
                                         <p:column>
-                                            <h:outputText value="Cuenta de depreciación:*" />
+                                            <h:outputText value="Nombre:" />
                                         </p:column>
 
                                     </p:row>
                                     <p:row>
 
                                         <p:column>
-
-                                            <p:inputText id="tCueActivo"   style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly ="true"/>
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaActivo.codigoCuenta}" readonly ="true"/>
                                             <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
                                             <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgActivo}" style="color: red"/> 
                                         </p:column>
                                         <p:column>
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly ="true"/>
+                                        </p:column>
 
-                                            <p:inputText id="tDepreActivo"   style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly ="true"/>
+                                    </p:row>
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b><h:outputText value="Depreciación"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nombre:" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+
+                                        <p:column>
+
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaDepre.codigoCuenta}" readonly ="true"/>
                                             <p:commandButton    update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaDepre').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
                                             <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgDepre}" style="color: red"/> 
                                         </p:column>
-                                    </p:row>
-                                    <p:row>
                                         <p:column>
-                                            <h:outputText value="Cuenta de gastos de depreciación :*"/>
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly ="true"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Gasto"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
                                         </p:column>
                                         <p:column>
-                                            <h:outputText value="Cuenta de venta:*"/>
+                                            <h:outputText value="Nombre:" />
                                         </p:column>
 
                                     </p:row>
                                     <p:row>
                                         <p:column>
-                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly ="true"/>
+                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.codigoCuenta}" readonly ="true"/>
                                             <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaGasto').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
                                             <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgGastos}" style="color: red"/> 
                                         </p:column>
+
                                         <p:column>
-                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly ="true"/>
+                                            <p:inputText   style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly ="true"/>
+
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+
+                                <br></br>
+                                <b><h:outputText value="Venta"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nombre:" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.codigoCuenta}" readonly ="true"/>
                                             <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaVenta').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
                                             <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgVenta}" style="color: red"/> 
                                         </p:column>
 
+                                        <p:column>
+                                            <p:inputText   style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly ="true"/>
+
+                                        </p:column>
                                     </p:row>
                                 </p:panelGrid>
+
+
                                 <br></br>
 
 
@@ -465,51 +530,126 @@
                                     </p:row>
                                 </p:panelGrid>
                                 <br></br>
-                                <b><h:outputText value="Cuentas contables "/></b>
+                                <br></br>
+                                <b><h:outputText value="Activo"/></b>
                                 <hr></hr>
-                                <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;" class="noBoder">   
+
+                                <p:panelGrid   style="width: 100%; margin: auto;" class="noBoder">   
                                     <p:row>
                                         <p:column style="width: 50%" >
-                                            <h:outputText value="Cuenta del activo:*"/>
+                                            <h:outputText value="Código:*"/>
                                         </p:column>
                                         <p:column>
-                                            <h:outputText value="Cuenta de depreciación:*" />
+                                            <h:outputText value="Nombre:" />
                                         </p:column>
+
                                     </p:row>
                                     <p:row>
+
                                         <p:column>
-                                            <p:inputText id="tCueActivo"   style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly="true"/>
-                                            <p:commandButton    update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaActivo.codigoCuenta}" readonly ="true"/>
+                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaActivo').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
+                                            <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgActivo}" style="color: red"/> 
                                         </p:column>
                                         <p:column>
-                                            <p:inputText id="tDepreActivo"   style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly="true"/>
-                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaDepre').show()" icon="fa fa-search" title="Buscar" >
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" readonly ="true"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+
+                                <br></br>
+                                <b><h:outputText value="Depreciación"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nombre:" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+
+                                        <p:column>
+
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaDepre.codigoCuenta}" readonly ="true"/>
+                                            <p:commandButton    update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaDepre').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
+                                            <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgDepre}" style="color: red"/> 
                                         </p:column>
+                                        <p:column>
+                                            <p:inputText    style="width:85%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" readonly ="true"/>
+                                        </p:column>
+
+                                    </p:row>
+                                </p:panelGrid>
+                                <br></br>
+                                <b><h:outputText value="Gasto"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nombre:" />
+                                        </p:column>
+
                                     </p:row>
                                     <p:row>
                                         <p:column>
-                                            <h:outputText value="Cuenta de gastos de depreciación :*"/>
-                                        </p:column>
-                                        <p:column>
-                                            <h:outputText value="Cuenta de venta:*"/>
-                                        </p:column>
-                                    </p:row>
-                                    <p:row>
-                                        <p:column>
-                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly="true"/>
-                                            <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaGasto').show()" icon="fa fa-search" title="Buscar" >
+                                            <p:inputText id="tGastoActivo"  style="width:85%" value="#{tipoActivoBean.cuentaGasto.codigoCuenta}" readonly ="true"/>
+                                            <p:commandButton  update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaGasto').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
+                                            <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgGastos}" style="color: red"/> 
                                         </p:column>
+
                                         <p:column>
-                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly="true"/>
+                                            <p:inputText   style="width:85%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" readonly ="true"/>
+
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+
+                                <br></br>
+                                <b><h:outputText value="Venta"/></b>
+                                <hr></hr>
+                                <p:panelGrid  style="width: 100%; margin: auto;" class="noBoder">   
+
+
+                                    <p:row>
+                                        <p:column style="width: 50%" >
+                                            <h:outputText value="Código:*"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Nombre:" />
+                                        </p:column>
+
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText style="width:85%" value="#{tipoActivoBean.cuentaVenta.codigoCuenta}" readonly ="true"/>
                                             <p:commandButton   update=":opDataCuentas" oncomplete="PF('dgBuscarCuentaVenta').show()" icon="fa fa-search" title="Buscar" >
                                             </p:commandButton>
+                                            <br></br>
                                             <h:outputText value="#{tipoActivoBean.msgVenta}" style="color: red"/> 
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:inputText   style="width:85%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" readonly ="true"/>
+
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
@@ -670,7 +810,7 @@
                                             <p:panelGrid id="addPanel"  style="width: 100%; margin: auto;">   
                                                 <p:row>
                                                     <p:column style="width: 50%" >
-                                                        <h:outputText value="Codigo:"/>
+                                                        <h:outputText value="Código:"/>
                                                     </p:column>
                                                     <p:column>
                                                         <h:outputText value="#{tipoActivoBean.tipoActivoSeleccionado.codigoTipo}"/> 
@@ -711,10 +851,23 @@
                                             </p:panelGrid>
                                             <br></br>
                                             <b><h:outputText value="Cuentas contables "/></b>
-                                            <p:panelGrid id="addPanelCue"  style="width: 100%; margin: auto;">   
+                                            <p:panelGrid   style="width: 100%; margin: auto;">   
+
+
                                                 <p:row>
-                                                    <p:column style="width: 50%" >
-                                                        <h:outputText value="Cuenta del activo:"/>
+                                                    <p:column style="background-color: #ebedf0">Cuenta</p:column>
+                                                    <p:column style="background-color: #ebedf0; width: 30%">Código</p:column>
+                                                    <p:column style="background-color: #ebedf0; width: 40%">Nombre</p:column>
+
+                                                </p:row>
+
+
+                                                <p:row>
+                                                    <p:column  >
+                                                        <h:outputText value="Activo"/>
+                                                    </p:column>
+                                                     <p:column>
+                                                         <h:outputText style="width:100%" value="#{tipoActivoBean.cuentaActivo.codigoCuenta}" />
                                                     </p:column>
                                                     <p:column>
                                                         <h:outputText style="width:100%" value="#{tipoActivoBean.cuentaActivo.nombreCuenta}" />
@@ -722,17 +875,24 @@
                                                 </p:row>
                                                 <p:row>
                                                     <p:column>
-                                                        <h:outputText value="Cuenta de depreciación:" />
+                                                        <h:outputText value="Depreciación" />
                                                     </p:column>
                                                     <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaDepre.codigoCuenta}" />
+                                                    </p:column>
+                                                     <p:column>
                                                         <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaDepre.nombreCuenta}" />
                                                     </p:column>
                                                 </p:row>
                                                 <p:row>
                                                     <p:column>
-                                                        <h:outputText value="Cuenta de gastos de depreciación :"/>
+                                                        <h:outputText value="Gasto"/>
                                                     </p:column>
 
+                                                    <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaGasto.codigoCuenta}" />
+
+                                                    </p:column>
                                                     <p:column>
                                                         <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaGasto.nombreCuenta}" />
 
@@ -740,7 +900,10 @@
                                                 </p:row>
                                                 <p:row>
                                                     <p:column>
-                                                        <h:outputText value="Cuenta de venta:"/>
+                                                        <h:outputText value="Venta"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaVenta.codigoCuenta}" />
                                                     </p:column>
                                                     <p:column>
                                                         <h:outputText  style="width:100%" value="#{tipoActivoBean.cuentaVenta.nombreCuenta}" />
