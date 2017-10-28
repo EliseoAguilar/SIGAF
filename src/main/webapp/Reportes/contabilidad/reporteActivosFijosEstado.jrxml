@@ -246,7 +246,7 @@ WHERE
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_activo_fijo_registro_activo_fijo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_activo_fijo_registro_activo_fijo} == null ? "---" : $F{t_activo_fijo_registro_activo_fijo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="566" y="0" width="84" height="11" uuid="13620af3-33ed-42a6-8e8a-71ecfde78d35"/>
