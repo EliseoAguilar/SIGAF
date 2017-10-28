@@ -38,7 +38,7 @@
                             <center>
                                 <p:commandButton id="btnCreate"   ajax="false"  icon="fa fa-check" style="#{contablidadPredeterminarBean.btnCrear}" value="Guardar"> 
                                 </p:commandButton>
-                                <p:commandButton id="btnCancel"   action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{contablidadPredeterminarBean.btnCancelar}"  value="Cancelar"> 
+                                <p:commandButton id="btnCancel" actionListener="#{contablidadPredeterminarBean.limpiar()}"  action="/index.xhtml?faces-redirect=true"  icon="fa fa-close" style="#{contablidadPredeterminarBean.btnCancelar}"  value="Cancelar"> 
                                 </p:commandButton>
                             </center>
                         </h:form>

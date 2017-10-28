@@ -257,7 +257,7 @@
                                                 <h:outputText   id="tCodigo1" value="#{cuentaBean.msgNumero}" style="color: red"/> 
                                             </p:column>
                                             <p:column>
-                                                <p:calendar id="cFechaIngreso" value="#{cuentaBean.cuenta.fechaCuenta}"   maxdate="#{cuentaBean.cuenta.fechaCuenta}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy" showOn="button"/>
+                                                <p:calendar id="cFechaIngreso" value="#{cuentaBean.cuenta.fechaCuenta}"   maxdate="#{cuentaBean.cuenta.fechaCuenta}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy" showOn="button"/>
                                             </p:column>
                                         </p:row>
                                         <p:row>
@@ -410,7 +410,7 @@
                                             <h:outputText value="#{cuentaBean.msgNumero}" style="color: red"/>
                                         </p:column>
                                         <p:column>
-                                            <p:calendar id="cFechaIngreso" value="#{cuentaBean.cuentaSelecciona.fechaCuenta}"      maxdate="#{cuentaBean.cuenta.fechaCuenta}" style="width:100%" locale="es" navigator="true"   readonly="true" pattern="dd/MM/yyyy" showOn="button"/>
+                                            <p:calendar id="cFechaIngreso" value="#{cuentaBean.cuentaSelecciona.fechaCuenta}"      maxdate="#{cuentaBean.cuenta.fechaCuenta}" style="width:100%" locale="es" navigator="true"    pattern="dd/MM/yyyy" showOn="button"/>
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -525,7 +525,7 @@
                                                     <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSelecciona}" />
                                                 </p:menuitem>
 
-                                                <p:menuitem value="Eliminar"  rendered="#{cue.estadoCuenta}"   
+                                                <p:menuitem value="Eliminar"     
                                                             oncomplete="PF('dlEliminar').show()" icon="fa fa-trash-o"  
                                                             disabled="#{cue.TCuentas.size() eq 0 ? false : true}">
                                                     <f:setPropertyActionListener value="#{cue}" target="#{cuentaBean.cuentaSelecciona}" />

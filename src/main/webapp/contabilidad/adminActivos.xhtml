@@ -624,10 +624,10 @@
 
                                                 </p:menuitem>
 
-                                                <p:menuitem  value=" Dar de baja" update=":padding" disabled="#{act.estadoActivoFijo eq 'Activo'? false:true }"
+                                                <p:menuitem  value=" Dar de Alta" update=":padding" disabled="#{act.estadoActivoFijo eq 'Activo'? false:true }"
                                                              rendered="#{act.estadoActivoFijo eq 'Inactivo'?  !activoFijoBean.estadoRegistroContable(act.TValorActivos)  : false}"
                                                              actionListener="#{activoFijoBean.enableShowBaja()}" 
-                                                             icon="fa fa-arrow-down" >
+                                                             icon="fa fa-arrow-up" >
                                                     <f:setPropertyActionListener value="#{act}" target="#{activoFijoBean.activoFijoSeleccionado}"  />
 
                                                 </p:menuitem>
