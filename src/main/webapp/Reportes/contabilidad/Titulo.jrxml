@@ -38,7 +38,8 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_entidad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{id_entidad} == 1 ? $F{nombre_entidad}:$F{abreviacion_entidad}
+    ]]></textFieldExpression>
 			</textField>
 			<image>
 				<reportElement x="18" y="0" width="79" height="73" uuid="5d11aa8b-c712-4f52-a937-9d30d5fe1dab"/>
@@ -50,11 +51,11 @@
 				<textFieldExpression><![CDATA[$F{direccion_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="236" y="48" width="23" height="20" uuid="4191f0c4-8be9-444e-8afd-92bc7891d7f2"/>
+				<reportElement x="236" y="54" width="23" height="20" uuid="4191f0c4-8be9-444e-8afd-92bc7891d7f2"/>
 				<text><![CDATA[Tel.:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="260" y="48" width="100" height="20" uuid="8c7ce8e0-06aa-43a5-940d-4f258324b176"/>
+				<reportElement x="260" y="54" width="100" height="20" uuid="8c7ce8e0-06aa-43a5-940d-4f258324b176"/>
 				<textFieldExpression><![CDATA[$F{telefono_entidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
