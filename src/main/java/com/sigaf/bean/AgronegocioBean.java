@@ -166,6 +166,24 @@ public class AgronegocioBean extends Actividad {
     private BigDecimal totalDeuda;
     private BigDecimal totalDeudaFinal;
     private BigDecimal totalProductor;
+    private BigDecimal totalProductorFinal;
+    private BigDecimal comisionFinal;
+
+    public BigDecimal getTotalProductorFinal() {
+        return totalProductorFinal;
+    }
+
+    public void setTotalProductorFinal(BigDecimal totalProductorFinal) {
+        this.totalProductorFinal = totalProductorFinal;
+    }
+
+    public BigDecimal getComisionFinal() {
+        return comisionFinal;
+    }
+
+    public void setComisionFinal(BigDecimal comisionFinal) {
+        this.comisionFinal = comisionFinal;
+    }
 
     public BigDecimal getTotalProductor() {
         return totalProductor;
@@ -980,7 +998,7 @@ public class AgronegocioBean extends Actividad {
             this.agronegocio.setTipo("Contado");// 1 = contado
             this.agronegocio.setEstado("Finalizado");
         } else {
-            this.agronegocio.setTipo("Credito");// 2 = credito
+            this.agronegocio.setTipo("Crédito");// 2 = credito
             this.agronegocio.setEstado("Pendiente");
         }
         Date date = new Date();
@@ -1442,9 +1460,10 @@ public class AgronegocioBean extends Actividad {
             this.mostrarTable = true;
             this.monto = this.total;
             inters = (this.monto.doubleValue() * (this.politicaAgronegocio.getTasaInteresAgronegocio().doubleValue() / 100.0) * (this.agronegocio.getPlazo()) / 12.0);
-            this.interes = new BigDecimal(inters);
-            this.totales = this.monto.add(this.interes);
-            this.comisionCredito = this.totales.multiply(this.politicaAgronegocio.getTasaComisionAgronegocio().divide(new BigDecimal(100)));
+            this.interes = (new BigDecimal(inters)).setScale(2, BigDecimal.ROUND_HALF_UP);
+            this.totales = (this.monto.add(this.interes)).setScale(2, BigDecimal.ROUND_HALF_UP);;
+            this.comisionCredito = (this.totales.multiply(this.politicaAgronegocio.getTasaComisionAgronegocio().divide(new BigDecimal(100)))).setScale(2, BigDecimal.ROUND_HALF_UP);
+            
             int dias = 1;
             Calendar calendar = Calendar.getInstance();
             for (int i = 0; i < this.agronegocio.getPlazo(); i++) {
@@ -1497,25 +1516,37 @@ public class AgronegocioBean extends Actividad {
             this.interes = new BigDecimal("0");
             this.totales = this.monto.add(this.interes);
             this.totalDeuda=this.totales;
+            this.totalDeudaFinal= this.totales;
             this.totalProductor = this.totales.subtract(this.pagoAgro.getComision());
         }
-        if ("Credito".equals(this.agronegocioSeleccionado.getTipo())) {
+        if ("Crédito".equals(this.agronegocioSeleccionado.getTipo())) {
             Double inters;
             this.monto = this.agronegocioSeleccionado.getTotal();
             if ("Pendiente".equals(this.agronegocioSeleccionado.getEstado())) {
                 inters = (this.monto.doubleValue() * (this.politicaAgronegocio.getTasaInteresAgronegocio().doubleValue() / 100.0) * (this.agronegocioSeleccionado.getPlazo()) / 12.0);
                 this.interes = new BigDecimal(inters);
                 this.totalDeuda= this.agronegocioSeleccionado.getTotal().add(this.agronegocioSeleccionado.getInteres());
+                this.totalDeudaFinal= this.monto.add(this.interes);
                 this.totalProductor = this.totalDeuda.subtract(this.agronegocioSeleccionado.getComision());
+                
+                
             } else if ("Finalizado".equals(this.agronegocioSeleccionado.getEstado())) {
                 this.pagoAgro = this.pagoAgronegocioBo.getPagoAgronegocio(this.agronegocioSeleccionado.getIdAgronegocio());
                 inters = (this.monto.doubleValue() * (this.politicaAgronegocio.getTasaInteresAgronegocio().doubleValue() / 100.0) * (this.agronegocioSeleccionado.getPlazo()) / 12.0);
                 this.interes = new BigDecimal(inters);
-                this.totales = this.monto.add(this.interes).add(this.pagoAgro.getOtrosinteres());
+                this.totales = this.monto.add(this.pagoAgro.getInteres()).add(this.pagoAgro.getOtrosinteres());
+              
+                this.totalDeudaFinal= this.monto.add(this.interes);
                 this.totalDeuda= this.totales;
                
-                this.comision = this.totales.multiply(this.politicaAgronegocio.getTasaComisionAgronegocio().divide(new BigDecimal(100)));
-                this.totalProductor= this.totales.subtract(this.comision);
+                this.totalProductor = this.totalDeudaFinal.subtract(this.agronegocioSeleccionado.getComision());
+              
+                this.comisionFinal = this.pagoAgro.getComision();
+       
+                this.totalProductorFinal= this.totales.subtract(this.comisionFinal);
+                
+                
+                
             }
 
         }
@@ -1628,10 +1659,10 @@ public class AgronegocioBean extends Actividad {
         }
         this.pagoAgro.setFecha(date);
         this.pagoAgro.setHora("" + hourFormat.format(date));
-        this.pagoAgro.setInteres(this.interes);
-        this.pagoAgro.setOtrosinteres(this.mora);
+        this.pagoAgro.setInteres(this.interes.setScale(2, BigDecimal.ROUND_HALF_UP));
+        this.pagoAgro.setOtrosinteres(this.mora.setScale(2, BigDecimal.ROUND_HALF_UP));
         this.pagoAgro.setDias(this.dias);
-        this.pagoAgro.setComision(this.comision);
+        this.pagoAgro.setComision(this.comision.setScale(2, BigDecimal.ROUND_HALF_UP));
         if (this.tipoefectivo == true) {
             this.pagoAgro.setForma("Efectivo");
             this.pagoAgro.setCheque("No aplica");
@@ -1684,7 +1715,7 @@ public class AgronegocioBean extends Actividad {
             Logger.getLogger(PagoAgronegocioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         //calculo de dias de retraso 
-        this.totales = this.monto.add(this.interes);
+        this.totales = this.monto.add(this.interes.setScale(2, BigDecimal.ROUND_HALF_UP));
         this.mora = BigDecimal.ZERO;
         if (this.fechaDePago.compareTo(this.agronegocioSeleccionado.getFechapago()) > 0) {
             this.dias = (int) ((this.fechaDePago.getTime() - this.agronegocioSeleccionado.getFechapago().getTime()) / 86400000);
@@ -1693,7 +1724,11 @@ public class AgronegocioBean extends Actividad {
         } else {
             this.dias = 0;
         }
-        this.totales = this.monto.add(this.interes.add(this.mora));
+        
+      
+        
+        
+        this.totales = this.monto.add(this.interes.add(this.mora.setScale(2, BigDecimal.ROUND_HALF_UP)));
         this.comision = this.totales.multiply(this.politicaAgronegocioSeleccionado.getTasaComisionAgronegocio().divide(new BigDecimal(100)));
 
     }

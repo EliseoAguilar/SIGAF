@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agronegocio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12ce936e-f98d-4b7d-9622-99c676635df1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1678"/>
+	<property name="ireport.y" value="1870"/>
 	<parameter name="id_agronegocio" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -470,7 +470,7 @@ FROM
 			<textField pattern="$#,##0.00">
 				<reportElement x="188" y="267" width="54" height="20" uuid="2fa37424-4292-4731-86c8-db8baed9ec7f"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{t_agronegocio_total}.subtract($F{t_agronegocio_comision})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{t_agronegocio_total}.add($F{t_agronegocio_interes})).subtract($F{t_agronegocio_comision})]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="22" y="256" width="515" height="1" uuid="49d146b0-f210-43b1-aed7-e4227b3ebc49"/>
@@ -824,7 +824,7 @@ FROM
 			<textField pattern="$#,##0.00">
 				<reportElement x="187" y="595" width="55" height="20" uuid="e7d0c882-5934-4fc1-85a0-91a44148bf7c"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[($F{t_pago_agronegocio_monto}.add($F{t_pago_agronegocio_interes}).add($F{t_pago_agronegocio_otrosinteres})).subtract($F{t_agronegocio_comision})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{t_pago_agronegocio_monto}.add($F{t_pago_agronegocio_interes}).add($F{t_pago_agronegocio_otrosinteres})).subtract($F{t_pago_agronegocio_comision})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

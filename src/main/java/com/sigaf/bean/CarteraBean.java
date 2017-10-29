@@ -2329,7 +2329,7 @@ public class CarteraBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
@@ -2348,7 +2348,7 @@ public class CarteraBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
@@ -2367,7 +2367,7 @@ public class CarteraBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
@@ -2386,7 +2386,7 @@ public class CarteraBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);

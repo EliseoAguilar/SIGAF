@@ -3334,7 +3334,7 @@ public class ProyectoBean extends Actividad {
                 this.diasRetraso = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
                 moraGenerada = ((this.couto.doubleValue()) * ((this.politicaSeleccionada.getTasaInteresMora().doubleValue() / 100) / 30) * (this.diasRetraso));
-                this.mora = new BigDecimal(moraGenerada);
+                this.mora = (new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP);
             } else {
                 this.diasRetraso = 0;
                 this.mora = BigDecimal.ZERO;
@@ -3416,7 +3416,7 @@ public class ProyectoBean extends Actividad {
                 this.diasRetraso = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
                 moraGenerada = ((this.couto.doubleValue()) * ((this.politicaSeleccionada.getTasaInteresMora().doubleValue() / 100) / 30) * (this.diasRetraso));
-                this.mora = new BigDecimal(moraGenerada);
+                this.mora = (new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP);
             } else {
                 this.diasRetraso = 0;
                 this.mora = BigDecimal.ZERO;
@@ -3497,7 +3497,7 @@ public class ProyectoBean extends Actividad {
                 this.diasRetraso = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
                 moraGenerada = ((this.couto.doubleValue()) * ((this.politicaSeleccionada.getTasaInteresMora().doubleValue() / 100) / 30) * (this.diasRetraso));
-                this.mora = new BigDecimal(moraGenerada);
+                this.mora = (new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP);
             } else {
                 this.diasRetraso = 0;
                 this.mora = BigDecimal.ZERO;
@@ -3578,7 +3578,7 @@ public class ProyectoBean extends Actividad {
                 this.diasRetraso = (int) ((this.fechaAplicacion.getTime() - this.fechaEstipulada.getTime()) / 86400000);
                 Double moraGenerada;
                 moraGenerada = ((this.couto.doubleValue()) * ((this.politicaSeleccionada.getTasaInteresMora().doubleValue() / 100) / 30) * (this.diasRetraso));
-                this.mora = new BigDecimal(moraGenerada);
+                this.mora = (new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP);
             } else {
                 this.diasRetraso = 0;
                 this.mora = BigDecimal.ZERO;
@@ -5869,7 +5869,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -5905,7 +5905,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -5923,7 +5923,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -6057,7 +6057,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -6075,7 +6075,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -6093,7 +6093,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
@@ -6111,7 +6111,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
