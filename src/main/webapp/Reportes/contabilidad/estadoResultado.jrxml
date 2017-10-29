@@ -173,4 +173,48 @@ $F{grupo_reporte}.equals(6)? "Utilidad Liquida"   :  ""]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="118">
+			<staticText>
+				<reportElement x="26" y="45" width="160" height="20" uuid="443f1bb1-bf7f-486d-8c0e-1d4d0a4d1e19"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE LEGAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="26" y="44" width="160" height="1" uuid="73467f0a-63af-41c7-9c54-70d4198b6fe1"/>
+			</line>
+			<staticText>
+				<reportElement x="26" y="97" width="160" height="20" uuid="f8a14626-2885-40f8-9916-ff75cd708f9d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[AUDITOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="26" y="96" width="160" height="1" uuid="c171ae30-70fa-4f5c-a715-706120c2d873"/>
+			</line>
+			<staticText>
+				<reportElement x="362" y="44" width="156" height="20" uuid="3e9d69b1-bc25-4818-a3c9-b6d2b43f64bc"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONTADOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="362" y="43" width="160" height="1" uuid="2928eeaf-baef-4fff-b975-e55b8dfa4d2d"/>
+			</line>
+			<staticText>
+				<reportElement x="362" y="96" width="156" height="20" uuid="3b4fad8e-a6a9-421d-9c7b-bafc5173d1d4"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIRECTOR EJECUTIVO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="362" y="95" width="160" height="1" uuid="0197de38-7933-4923-ad3a-753a6093e22d"/>
+			</line>
+		</band>
+	</summary>
 </jasperReport>
