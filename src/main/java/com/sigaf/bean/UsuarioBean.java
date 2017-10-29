@@ -645,8 +645,7 @@ public class UsuarioBean extends Actividad {
             this.empleadoBo.update(usuarioSelecionado.getTEmpleado());
             
             this.usuarioBo.update(usuarioSelecionado);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario modificado correctamente.", ""));
-            TBitacora auxBitacora = new TBitacora();
+             TBitacora auxBitacora = new TBitacora();
             auxBitacora.setTableBitacora("t_usuario");
             auxBitacora.setAccionBitacora("Modificar perfil usuario");
             auxBitacora.setDatosBitacora("Usuario:" + usuarioSelecionado.getNombreUsuario()
@@ -666,7 +665,8 @@ public class UsuarioBean extends Actividad {
             bitacoraBo.create(auxBitacora);
             this.limpiar();
                
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario modificado correctamente.", ""));
+           
 
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ".", ""));

@@ -8,9 +8,9 @@
 
     <body>
 
-        <ui:composition template="./../index.xhtml" id="exter">
+        <ui:composition template="./../index.xhtml" >
 
-            <ui:define name="content" id="super">
+            <ui:define name="content" >
                 
                     #{usuarioBean.updateListaArea()}
                     
@@ -18,7 +18,8 @@
                 <p:outputPanel id="padding"  > 
                    
                      
-                   <p:growl id="msg"></p:growl>
+                <p:growl id="msg"></p:growl>  
+                
                     <p:dialog  header="Confirmar" widgetVar="dialogCrear" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="25%" appendTo="@(body)" visible="#{usuarioBean.estadoFormulario}">
                              <h:form>  
                                  <p:outputPanel>
@@ -26,7 +27,7 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnNuevo}"  ajax="false" > 
+                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnNuevo}"  update=":opUser, :padding" > 
                                     <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                     <p:commandButton  value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
@@ -54,7 +55,7 @@
                                         <p:fileUpload   id="cargar" allowTypes="/(\.|\/)(jpe?g|png)$/i" 
                                                         invalidFileMessage="El tipo de archivo es incorrecto" mode="advanced" 
                                                         uploadLabel="subir" label="Elegir" sizeLimit="1000000000000"
-                                                        fileUploadListener="#{usuarioBean.guardarImagen}" update="fotoCambiar"/> 
+                                                        fileUploadListener="#{usuarioBean.guardarImagen}" update=":padding"/> 
                                         <h:outputText value="#{usuarioBean.msgImagen}" style=" color:  red" />
 
                                     </p:column>

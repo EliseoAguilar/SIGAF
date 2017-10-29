@@ -221,6 +221,8 @@
                 zoom: 1;
                 border: 1px solid #ccc;
             }
+            
+
         </style>
         <div class="wrapper">
             
@@ -289,6 +291,7 @@
                 </div>
             </div>
             <div class="main-panel"  >
+                <p:outputPanel id="opUser" >
                 <h:form >
                     <nav class="navbar  navbar-absolute navbar-nav"  >
                         <div class="container-fluid" >
@@ -320,6 +323,7 @@
                         </div>
                     </nav>
                 </h:form>
+                </p:outputPanel>
                 <div class="content">
                     #{entidadBean.updateDatos()}                    
                     <div class="container-fluid">

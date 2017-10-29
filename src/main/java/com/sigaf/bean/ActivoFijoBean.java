@@ -217,8 +217,6 @@ public class ActivoFijoBean extends Actividad {
 
     private String msgFechaComp;
 
-    private String msgFechaReg;
-
     public String getMsgFechaComp() {
         return msgFechaComp;
     }
@@ -227,13 +225,6 @@ public class ActivoFijoBean extends Actividad {
         this.msgFechaComp = msgFechaComp;
     }
 
-    public String getMsgFechaReg() {
-        return msgFechaReg;
-    }
-
-    public void setMsgFechaReg(String msgFechaReg) {
-        this.msgFechaReg = msgFechaReg;
-    }
 
     public Date getFechaActual() {
         return fechaActual;
@@ -1516,6 +1507,12 @@ public class ActivoFijoBean extends Actividad {
 
         this.estadoValido = true;
 
+        if (this.activoFijoSeleccionado.getCompraActivoFijo()==null) {
+            msgFechaComp = "Fecha requerida";
+            this.estadoValido = false;
+        } else {
+            msgFechaComp = "";
+        }
 
         if (this.idArea == 0) {
             msgArea = "Área requerida";
@@ -1575,6 +1572,14 @@ public class ActivoFijoBean extends Actividad {
         this.estadoValido = true;
 
 
+        if (this.activoFijo.getCompraActivoFijo()==null) {
+            msgFechaComp = "Fecha requerida";
+            this.estadoValido = false;
+        } else {
+            msgFechaComp = "";
+        }
+
+        
         if (this.idArea == 0) {
             msgArea = "Área requerida";
             this.estadoValido = false;
