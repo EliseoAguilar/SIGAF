@@ -19,7 +19,7 @@ FROM
      "public"."t_tipo_activo" t_tipo_activo
 WHERE
      t_tipo_activo.id_entidad_tipo = $P{idEntidad}
- AND  t_tipo_activo.estado_tipo = $P{estado}]]>
+ AND  t_tipo_activo.estado_tipo = $P{estado} order by codigo_tipo]]>
 	</queryString>
 	<field name="id_tipo" class="java.lang.Integer"/>
 	<field name="nombre_tipo" class="java.lang.String"/>
@@ -142,7 +142,7 @@ WHERE
 			<subreport>
 				<reportElement x="116" y="74" width="430" height="20" uuid="ededd22b-f092-40e8-9336-5a2bf00caa5f"/>
 				<subreportParameter name="idCuenta">
-					<subreportParameterExpression><![CDATA[$F{id_cuenta_activo_tipo}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_depreciacion_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
@@ -202,7 +202,7 @@ WHERE
 			<subreport>
 				<reportElement x="116" y="50" width="430" height="22" uuid="539d00b2-9a4f-4b7d-b031-b79c556d6fa7"/>
 				<subreportParameter name="idCuenta">
-					<subreportParameterExpression><![CDATA[$F{id_cuenta_depreciacion_tipo}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_activo_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>

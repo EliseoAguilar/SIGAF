@@ -128,6 +128,19 @@ WHERE
 			</subreport>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="426" y="4" width="80" height="20" uuid="06e4410a-498c-4262-9a8e-08b12d409f73"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="4" width="40" height="20" uuid="f2114149-d0aa-46f1-adee-6ec2bf238f36"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="50">
 			<textField pattern="#,##0.00">

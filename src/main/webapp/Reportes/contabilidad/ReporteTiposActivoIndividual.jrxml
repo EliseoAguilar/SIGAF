@@ -78,7 +78,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<subreport>
 				<reportElement x="107" y="112" width="430" height="22" uuid="4f136b8c-a850-4d31-8bfe-3bb6306497f1"/>
 				<subreportParameter name="idCuenta">
-					<subreportParameterExpression><![CDATA[$F{id_cuenta_depreciacion_tipo}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_activo_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>
@@ -93,7 +93,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 			<subreport>
 				<reportElement x="107" y="136" width="430" height="20" uuid="0e53aeb1-c9f6-4d28-a201-d775eb78c9fa"/>
 				<subreportParameter name="idCuenta">
-					<subreportParameterExpression><![CDATA[$F{id_cuenta_activo_tipo}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{id_cuenta_depreciacion_tipo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subCuentas.jasper"]]></subreportExpression>

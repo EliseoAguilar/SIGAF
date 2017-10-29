@@ -105,7 +105,7 @@ FROM
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+"   -   "+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+", "+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="331" y="87" width="224" height="20" uuid="a120071e-56d1-4878-a04c-9808c575a92d"/>

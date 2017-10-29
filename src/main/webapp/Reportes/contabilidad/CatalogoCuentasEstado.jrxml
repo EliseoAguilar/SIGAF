@@ -64,7 +64,7 @@ select * from cuentas where estado_cuenta=$P{estado} order by codigo_cuenta]]>
 				<textElement>
 					<font size="14" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{estado}?"ACTIVOS":"INACTIVOS"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{estado}?"ACTIVO":"INACTIVO"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
