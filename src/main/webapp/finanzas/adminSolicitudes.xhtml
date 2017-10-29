@@ -346,7 +346,7 @@
                                                             <p:selectOneMenu id="smHipoteca" value="#{solicitudBean.garantia.hipotecaHipotecariaGarantia}" style="width:100%">
                                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
                                                                 <f:selectItem itemLabel="Abierta" itemValue="Abierta" />
-                                                                <f:selectItem itemLabel="Simple" itemValue="Cerrada" />
+                                                                <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
                                                             </p:selectOneMenu>
                                                             <h:outputText value="#{solicitudBean.msgGarantiaTipoHipoteca}" style=" color: red"/>
                                                         </p:column>
@@ -1798,7 +1798,7 @@
                                                             <p:selectOneMenu id="smHipoteca" value="#{solicitudBean.garantia.hipotecaHipotecariaGarantia}" style="width:100%">
                                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
                                                                 <f:selectItem itemLabel="Abierta" itemValue="Abierta" />
-                                                                <f:selectItem itemLabel="Simple" itemValue="Cerrada" />
+                                                                <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
                                                             </p:selectOneMenu>
                                                             <h:outputText value="#{solicitudBean.msgGarantiaTipoHipoteca}" style=" color: red"/>
                                                         </p:column>
@@ -2965,7 +2965,7 @@
                                                             <p:selectOneMenu id="smHipoteca" value="#{solicitudBean.garantia.hipotecaHipotecariaGarantia}" style="width:100%">
                                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
                                                                 <f:selectItem itemLabel="Abierta" itemValue="Abierta" />
-                                                                <f:selectItem itemLabel="Simple" itemValue="Cerrada" />
+                                                                <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
                                                             </p:selectOneMenu>
                                                             <h:outputText value="#{solicitudBean.msgGarantiaTipoHipoteca}" style=" color: red"/>
                                                         </p:column>
@@ -3208,7 +3208,7 @@
                                                     <p:row>
                                                         <p:column style=" width: 50%">
                                                             <p:selectOneMenu id="tipoD" value="#{solicitudBean.proyecto.TTipoCredito.idTipoCredito}" style="width:100%" >
-                                                                <p:ajax update="interes" listener="#{solicitudBean.cargarPolitica}"/>
+                                                                <p:ajax update="interes mon" listener="#{solicitudBean.cargarPolitica}"/>
                                                                 <f:selectItem  itemLabel="[SELECCIONE]" itemValue="0"  />
                                                                 <f:selectItem  itemLabel="Capital de trabajo" itemValue="8"  />  
                                                                 <f:selectItem  itemLabel="Inversión" itemValue="9"  />                                                 
@@ -3231,7 +3231,7 @@
                                                     </p:row>
                                                     <p:row>                                              
                                                         <p:column style=" width: 50%">
-                                                            <p:inputNumber  placeholder="#{solicitudBean.mensajePolitica}"  value="#{solicitudBean.proyecto.monto}" style="width: 100%;" /> 
+                                                            <p:inputNumber  id="mon" placeholder="#{solicitudBean.mensajePolitica}"  value="#{solicitudBean.proyecto.monto}" style="width: 100%;" /> 
                                                             <br></br>
                                                             <h:outputText value="#{solicitudBean.msgMonto}" style=" color:  red" />
                                                         </p:column>
@@ -4215,7 +4215,7 @@
                                                             <p:selectOneMenu id="smHipoteca" value="#{solicitudBean.garantia.hipotecaHipotecariaGarantia}" style="width:100%">
                                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
                                                                 <f:selectItem itemLabel="Abierta" itemValue="Abierta" />
-                                                                <f:selectItem itemLabel="Simple" itemValue="Cerrada" />
+                                                                <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
                                                             </p:selectOneMenu>
                                                             <h:outputText value="#{solicitudBean.msgGarantiaTipoHipoteca}" style=" color: red"/>
                                                         </p:column>
@@ -5423,7 +5423,7 @@
                                                             <p:selectOneMenu id="smHipoteca" value="#{solicitudBean.garantia.hipotecaHipotecariaGarantia}" style="width:100%">
                                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="" />
                                                                 <f:selectItem itemLabel="Abierta" itemValue="Abierta" />
-                                                                <f:selectItem itemLabel="Simple" itemValue="Cerrada" />
+                                                                <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
                                                             </p:selectOneMenu>
                                                             <h:outputText value="#{solicitudBean.msgGarantiaTipoHipoteca}" style=" color: red"/>
                                                         </p:column>

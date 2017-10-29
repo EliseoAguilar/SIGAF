@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ead269f-2472-4272-bdf6-16f64393d3fd">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="737"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -326,7 +326,7 @@ FROM
 				<textElement textAlignment="Right">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_pago_interes}.add($F{t_pago_abono}).add($F{t_pago_mora})]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
 				<reportElement x="103" y="222" width="66" height="20" uuid="b5372966-9c44-4709-ad39-df8e6b5272c8"/>
@@ -564,7 +564,7 @@ FROM
 				<textElement textAlignment="Right">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_pago_interes}.add($F{t_pago_abono}).add($F{t_pago_mora})]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
 				<reportElement x="106" y="427" width="66" height="20" uuid="0a7fe5dd-b57a-4ac8-b438-4a024afd336e"/>
@@ -625,7 +625,7 @@ FROM
 				<textElement textAlignment="Right">
 					<font fontName="Calibri" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_pago_interes}.add($F{t_pago_abono}).add($F{t_pago_mora})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="27" y="595" width="40" height="20" uuid="81faaec2-d636-4882-a487-b48066f8f5bc"/>

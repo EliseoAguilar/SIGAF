@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProveedoresGeneral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07953508-6232-43a0-b501-43a7a06b3145">
 	<property name="ireport.zoom" value="1.2396694214876032"/>
-	<property name="ireport.x" value="372"/>
+	<property name="ireport.x" value="94"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idEntidad" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -168,7 +168,7 @@ FROM
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+"-"+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proveedor_telefono1_proveedor}+", "+$F{t_proveedor_telefono2_proveedor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="405" y="3" width="115" height="20" isPrintWhenDetailOverflows="true" uuid="a120071e-56d1-4878-a04c-9808c575a92d"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteActivosFijos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d097d2c0-a3b5-4f37-80c1-22cd8d15ab41">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="148"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idEntidad" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -83,7 +83,7 @@ WHERE
 	<title>
 		<band height="46" splitType="Stretch">
 			<subreport>
-				<reportElement x="125" y="0" width="583" height="45" uuid="bd8995ff-d03d-443b-b831-1fa30b19ed2d"/>
+				<reportElement x="111" y="0" width="583" height="45" uuid="bd8995ff-d03d-443b-b831-1fa30b19ed2d"/>
 				<subreportParameter name="idEntidad">
 					<subreportParameterExpression><![CDATA[$P{idEntidad}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -116,11 +116,11 @@ WHERE
 				<reportElement x="0" y="4" width="799" height="1" uuid="00bf7d69-0d9f-4d8b-98ae-5d7729ea5dcc"/>
 			</line>
 			<staticText>
-				<reportElement x="755" y="7" width="42" height="20" uuid="d4deebcd-db72-42bf-bc15-c839422048e6"/>
+				<reportElement x="748" y="7" width="52" height="20" uuid="d4deebcd-db72-42bf-bc15-c839422048e6"/>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[VALOR]]></text>
+				<text><![CDATA[VALOR ($)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="382" y="7" width="56" height="20" uuid="39d28503-e43d-41d2-8c67-4a151041a11d"/>
@@ -186,7 +186,7 @@ WHERE
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[VIDA ÚTIL (AÑO/S)]]></text>
+				<text><![CDATA[VIDA ÚTIL (AÑOS)]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -207,7 +207,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{t_activo_fijo_marca_activo_fijo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="724" y="0" width="73" height="11" uuid="d70a1f78-7f60-40fe-9763-7d41d47f262d"/>
+				<reportElement x="724" y="0" width="76" height="11" uuid="d70a1f78-7f60-40fe-9763-7d41d47f262d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>

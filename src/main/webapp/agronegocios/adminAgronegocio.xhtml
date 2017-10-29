@@ -37,7 +37,7 @@
                     <p:growl id="msgs" />                   
                     <p:outputPanel  rendered="#{agronegocioBean.mostrarPago}" style=" width: 100%">
                         <h:form id="fAgregarArea">
-                            <p:panel id="pRegistrarComprador" header="Agregar pago"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                            <p:panel id="pRegistrarComprador" header="Agregar pago"  style="width: 85%; margin: auto; margin-bottom: 20px">
                                 <br></br>
                                 <p:panelGrid  style="width: 100%; margin: auto;"> 
                                     <p:row>
@@ -107,7 +107,7 @@
                                             <br></br>                                            
                                             <h:outputText value="Interés:"/>
                                             <br></br>
-                                            <h:outputText value="Interés por retraso:"/>
+                                            <h:outputText value="Mora:"/>
                                             <br></br>
                                             <h:outputText value="Total:"/><br></br>
                                             <h:outputText value="Comisión:"/>
@@ -128,7 +128,7 @@
                                             <b>
                                                 <h:outputText value="$"/>
                                                 <h:outputText value="#{agronegocioBean.totales}">
-                                                    <f:convertNumber  pattern="#0.00" locale="en-US" />
+                                                    <f:convertNumber  pattern=",#00.00" locale="en-US" />
                                                 </h:outputText>
                                             </b>
                                             <br></br>
@@ -319,7 +319,7 @@
                                         <p:outputPanel id="busqueda">
                                             <b>     <h:outputText  value="Comprador"/>  </b>
                                             <hr></hr>
-                                            <p:panelGrid  styleClass="companyHeaderGrid" style="width: 100%; margin: auto;">   
+                                            <p:panelGrid id="datosComp"  styleClass="companyHeaderGrid" style="width: 100%; margin: auto;">   
                                                 <p:row> 
                                                     <p:column >                                                
                                                         <h:outputText value="DUI:*"/>
@@ -566,7 +566,7 @@
                                                             </p:row>   
                                                             <p:row>
                                                                 <p:column style=" width: 25%" >
-                                                                    <h:outputText value="Total (Monto+Interes): $"/>
+                                                                    <h:outputText value="Total (Monto+Interés): $"/>
                                                                     <h:outputText value="#{agronegocioBean.totales}">
                                                                         <f:convertNumber    pattern=",#00.00" locale="en-US" /> 
                                                                     </h:outputText>
@@ -984,7 +984,7 @@
                                                     </p:column>
                                                     <p:column  style=" width: 25%; text-align:  right">
                                                         <h:outputText value="$"/>
-                                                        <h:outputText value="#{agronegocioBean.totalDeuda}">
+                                                        <h:outputText value="#{agronegocioBean.totalDeudaFinal}">
                                                             <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                         </h:outputText>
                                                     </p:column>
@@ -1298,7 +1298,7 @@
                                                     </p:column>
                                                     <p:column style=" width: 25%; text-align:  right">
                                                         <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado eq 'Pendiente'? '':'$' }"/>
-                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado eq 'Pendiente'? '----': agronegocioBean.totalProductor }">
+                                                        <h:outputText value="#{agronegocioBean.agronegocioSeleccionado.estado eq 'Pendiente'? '----': agronegocioBean.totalProductorFinal }">
                                                             <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
                                                         </h:outputText>
                                                     </p:column>

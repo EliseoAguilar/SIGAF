@@ -73,7 +73,7 @@ WHERE
 				<text><![CDATA[(Expresado en Dólares de los Estados Unidos de América)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="337" y="0" width="218" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
+				<reportElement x="343" y="0" width="218" height="23" uuid="e470cdc5-05a0-43e5-a457-782a524b306c"/>
 				<subreportParameter name="id_ejercicio">
 					<subreportParameterExpression><![CDATA[$P{idEjercicio}]]></subreportParameterExpression>
 				</subreportParameter>

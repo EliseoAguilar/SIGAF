@@ -349,8 +349,8 @@ public class ParametroBean extends Actividad {
 
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
-        parametros.put("idParametro", this.parametroSeleccionado.getIdparametro());
-        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/ReporteParametroIndividual.jasper"));
+        parametros.put("id_parametro", this.parametroSeleccionado.getIdparametro());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/ReporteParametroIndividual.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
         System.out.println(bytes.length);
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -381,8 +381,8 @@ public class ParametroBean extends Actividad {
 
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
-        parametros.put("idParametro", this.parametroSeleccionado.getIdparametro());
-        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/ReporteParametroIndividual.jasper"));
+        parametros.put("id_parametro", this.parametroSeleccionado.getIdparametro());
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/ReporteParametroIndividual.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.addHeader("Content-disposition", "attachment; filename=ReporteParametroIndividual.pdf");

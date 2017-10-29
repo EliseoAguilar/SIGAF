@@ -52,7 +52,7 @@ public class PartidaDao implements IPartidaDao {
     @Override
     public List<TPartida> listPartida(Integer id) {
         Session session = this.sessionFactory.openSession();
-        List<TPartida> listPartida = session.createQuery("from TPartida p"
+        List<TPartida> listPartida = session.createQuery("select distinct p from TPartida p"
                 + " left join fetch  p.TBajaActivoFijos ab"
                 + " left join fetch  p.TDepreciacions ad"
                 + " left join fetch p.TValorActivos av"
