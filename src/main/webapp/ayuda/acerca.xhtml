@@ -7,77 +7,29 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
-       <ui:composition template="./../index.xhtml">
+        <ui:composition template="./../index.xhtml">
             <ui:define name="content">
-                <style>
 
-                    .borderHidden.ui-panelgrid>*>tr,
-                    .borderHidden.ui-panelgrid .ui-panelgrid-cell {
-                        border: none;
-                    }
-                    #fAgregarArea\:pgAgregar td{
-                        border: none !important;
-                    }
-
-                    #fAgregarArea\:pgAgregar tr{
-                        border: none !important;
-                    }
-                    #fModificarArea\:pgModificar td{
-                        border: none !important;
-                    }
-
-                    #fModificarArea\:pgModificar tr{
-                        border: none !important;
-                    }
-                </style>
-
-                <p:outputPanel id="padding"> 
-                    <p:growl id="msgs"  />
-
-                    <p:outputPanel   style=" width: 100%">
-                        <h:form id="fAgregarArea">
-
-                            <p:panel id="pRegistrarComprador" header="Acerca de"  style="width: 75%; margin: auto; margin-bottom: 20px;">
+                <p:panel id="pRegistrarComprador" header="Acerca de" style=" margin: auto ;" >
 
 
 
-                                <div style=" align-content: center">
-                                    
-                                    
-                               
-                                    <p:panelGrid  styleClass="borderHidden"    style="width: 100%;">   
+                    <div  >
 
-                                    <p:row style=" text-align: center">
-                                        <p:column>
-                                            
-                                         <img  src="#{resource['img/acercaDe.png']}" />
-                                        </p:column>
-                                    </p:row>
+                        <img  src="#{resource['img/acercaDe1.png']}"  width="100%"/>
 
-
-                                </p:panelGrid>
-                                         
-                                </div>
-
-                                
-
-
-
-
-                                <br></br>
-                         
-                            </p:panel>
-                        </h:form>
+                    </div>
 
 
 
 
 
 
-                    </p:outputPanel>
+                    <br></br>
+
+                </p:panel>
 
 
-                </p:outputPanel>
 
 
             </ui:define>
