@@ -86,8 +86,6 @@ public class ActivoFijoBean extends Actividad {
 
     private BigDecimal valorActivoBaja;
 
-   
-
     private IEntidadBo entidadBo;
 
     private IValorActivoBo valorActivoBo;
@@ -211,9 +209,39 @@ public class ActivoFijoBean extends Actividad {
 
     private String msgValorActivoBaja;
 
+    private Date fechaActual;
+
     private Date fechaMinima;
 
     private Date fechaMaxima;
+
+    private String msgFechaComp;
+
+    private String msgFechaReg;
+
+    public String getMsgFechaComp() {
+        return msgFechaComp;
+    }
+
+    public void setMsgFechaComp(String msgFechaComp) {
+        this.msgFechaComp = msgFechaComp;
+    }
+
+    public String getMsgFechaReg() {
+        return msgFechaReg;
+    }
+
+    public void setMsgFechaReg(String msgFechaReg) {
+        this.msgFechaReg = msgFechaReg;
+    }
+
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
 
     public Date getFechaMaxima() {
         return fechaMaxima;
@@ -448,7 +476,6 @@ public class ActivoFijoBean extends Actividad {
 
                 this.ejercicio = this.ejercicioBo.getEjercicio(this.perido.getTEjercicio().getIdEjercicio());
 
-               
                 int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
 
                 int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
@@ -456,9 +483,8 @@ public class ActivoFijoBean extends Actividad {
                 this.fechaMaxima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, dia);
 
                 this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
-                
-                 numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
 
+                numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
 
             } else {
 
@@ -571,7 +597,6 @@ public class ActivoFijoBean extends Actividad {
 
         this.perido = this.periodoBo.getPeriodoAbierto(this.ejercicio.getIdEjercicio());
 
-       
         int mes = llenarMesPeriodoAux(perido.getMesPeriodo());
 
         int dia = obtenerUltimoDiaMes(ejercicio.getAhoEjercicio(), mes);
@@ -580,7 +605,7 @@ public class ActivoFijoBean extends Actividad {
 
         this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
 
-         numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
+        numPartida = this.partidaBo.numeroPartida(ejercicio.getIdEjercicio());
 
         partida.setFechaPartida(this.fechaMinima);
     }
@@ -791,7 +816,6 @@ public class ActivoFijoBean extends Actividad {
     public void setShowRegistro(Boolean showRegistro) {
         this.showRegistro = showRegistro;
     }
-
 
     public Boolean getShowBaja() {
         return showBaja;
@@ -1281,6 +1305,10 @@ public class ActivoFijoBean extends Actividad {
 
         try {
 
+            //Actualizo la fecha de registro
+            this.activoFijoSeleccionado.setRegistroActivoFijo(this.partida.getFechaPartida());
+            this.activoFijoBo.update(this.activoFijoSeleccionado);
+            
             this.partida.setEstadoPartida(true);
 
             this.partida.setNumeroPartida(numPartida);
@@ -1324,6 +1352,9 @@ public class ActivoFijoBean extends Actividad {
     public void registroActulizar() {
 
         try {
+            
+             
+            
             this.partidaBo.update(this.partida);
 
             this.detallePartidaBo.delete(this.partida.getIdPartida());
@@ -1452,11 +1483,11 @@ public class ActivoFijoBean extends Actividad {
         this.idArea = 0;
         this.idTipoActivo = 0;
 
-        this.activoFijo.setRegistroActivoFijo(new Date());
+
         this.activoFijo.setCompraActivoFijo(new Date());
 
         this.estadoValido = false;
-
+        this.fechaActual = new Date();
     }
 
     public void limpiarRegistro() {
@@ -1484,6 +1515,7 @@ public class ActivoFijoBean extends Actividad {
     public Boolean validarFormularioActivoModificar() {
 
         this.estadoValido = true;
+
 
         if (this.idArea == 0) {
             msgArea = "Área requerida";
@@ -1541,6 +1573,7 @@ public class ActivoFijoBean extends Actividad {
     public Boolean validarFormularioActivo() {
 
         this.estadoValido = true;
+
 
         if (this.idArea == 0) {
             msgArea = "Área requerida";
@@ -1740,7 +1773,7 @@ public class ActivoFijoBean extends Actividad {
 
                     detVenta.setTipoSaldoDetallePartida("Haber");
 
-                    detVenta.setSaldoDetallePartida(this.valorVenta.subtract(this.valorLibro) );
+                    detVenta.setSaldoDetallePartida(this.valorVenta.subtract(this.valorLibro));
 
                     this.totalHaber = totalHaber.add(this.valorVenta.subtract(this.valorLibro));
 

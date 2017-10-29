@@ -7,7 +7,10 @@
 	<queryString>
 		<![CDATA[SELECT
      id_ejercicio, estado_ejercicio ,
-     case  WHEN estado_ejercicio = TRUE THEN current_date
+     case  WHEN estado_ejercicio = TRUE THEN (select max(t.fecha_partida) from t_ejercicio e inner join t_periodo  p
+ on e.id_ejercicio = p.id_ejercicio inner join t_partida  t
+
+ on t.id_periodo_partida = p.id_periodo  where e.id_ejercicio=$P{id_ejercicio})
      ELSE fecha_cierre end
 
 FROM
@@ -22,7 +25,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="141" height="20" uuid="b99296d6-3031-44d7-84e8-0d349639299a"/>
 				<textElement>

@@ -25,7 +25,7 @@
                             </p:column>
                             <p:column style="padding: 0px; text-align: right" >
                                 <p:commandButton id="btnCancel"  action="/contabilidad/contabilidad.xhtml?faces-redirect=true"  actionListener="#{contablidadPredeterminarBean.limpiar()}" icon="fa fa-exchange" style="#{activoFijoBean.btnCancelar}"  value="Cambiar Entidad"> 
-                                   
+
                                 </p:commandButton>   
                             </p:column>
                         </p:row>
@@ -199,55 +199,41 @@
                                                     <p:column style="width: 50%" >
                                                         <h:outputText value="Fecha de compra:*"/>
                                                     </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="Fecha de registro:*" />
-                                                    </p:column>
-
-                                                </p:row>
-                                                <p:row>
-
-                                                    <p:column>
-                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
-
-                                                    </p:column>
-                                                    <p:column>
-                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
-
-                                                    </p:column>
-                                                </p:row>
-                                                <p:row>
-                                                    <p:column>
+                                                   <p:column>
                                                         <h:outputText value="Valor del activo:*"/>
                                                     </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="No. de factura:"/>
-                                                    </p:column>
 
                                                 </p:row>
                                                 <p:row>
+
                                                     <p:column>
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijo.compraActivoFijo}" maxdate="#{activoFijoBean.fechaActual}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgFechaComp}" style=" color:  red" />
+
+                                                    </p:column>
+                                                            <p:column>
                                                         <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" decimalPlaces="2" />
                                                         <br></br>
                                                         <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
                                                     </p:column>
+                                                </p:row>
+                                                <p:row>
+                                                    
+                                                    <p:column>
+                                                        <h:outputText value="No. de factura:"/>
+                                                    </p:column>
+  <p:column>
+                                                        <h:outputText value="Proveedor:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+                                            
                                                     <p:column>
                                                         <p:inputText id="tNumFac" style="width: 100%" value="#{activoFijoBean.activoFijo.numeroFacturaActivoFijo}"  />
 
                                                     </p:column>
-
-                                                </p:row>
-
-                                                <p:row>
-
-                                                    <p:column>
-                                                        <h:outputText value="Proveedor:*"/>
-                                                    </p:column>
-
-                                                </p:row>
-                                                <p:row>
-
-
-                                                    <p:column width="100%">
+                                                     <p:column width="100%">
                                                         <p:selectOneMenu id="sProv" value="#{activoFijoBean.activoFijo.TProveedor.idProveedor}" style="width:100%" >
 
                                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
@@ -256,7 +242,10 @@
                                                         <br></br>
                                                         <h:outputText value="#{activoFijoBean.msgProv}" style=" color:  red" />
                                                     </p:column>
+
                                                 </p:row>
+
+
                                             </p:panelGrid> 
                                         </p:tab>
                                     </p:tabView>
@@ -438,53 +427,39 @@
                                                         <h:outputText value="Fecha de compra:*"/>
                                                     </p:column>
                                                     <p:column>
-                                                        <h:outputText value="Fecha de registro:*" />
-                                                    </p:column>
-
-                                                </p:row>
-                                                <p:row>
-
-                                                    <p:column>
-                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" maxdate="#{activoFijoBean.activoFijo.compraActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
-
-                                                    </p:column>
-                                                    <p:column>
-                                                        <p:calendar id="cFechaReg"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" maxdate="#{activoFijoBean.activoFijo.registroActivoFijo}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" locale="es" navigator="true"    pattern="dd/MM/yyyy"/>
-
-                                                    </p:column>
-                                                </p:row>
-                                                <p:row>
-                                                    <p:column>
                                                         <h:outputText value="Valor del activo:*"/>
                                                     </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="No. de factura:"/>
-                                                    </p:column>
-
                                                 </p:row>
                                                 <p:row>
+
+                                                    <p:column>
+                                                        <p:calendar id="cFechaComp"  showOn="button" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.compraActivoFijo}" maxdate="#{activoFijoBean.fechaActual}" disabled="#{activoFijoBean.estadoRegistroContableModificar()}" locale="es" navigator="true"    pattern="dd/MM/yyyy" />
+                                                        <br></br>
+                                                        <h:outputText value="#{activoFijoBean.msgFechaComp}" style=" color:  red" />
+
+                                                    </p:column>
                                                     <p:column>
                                                         <p:inputNumber   style="width: 100%" value="#{activoFijoBean.valorActivo.valorActivo}" decimalPlaces="2" disabled="#{activoFijoBean.estadoRegistroContableModificar()}"/>
                                                         <br></br>
                                                         <h:outputText value="#{activoFijoBean.msgValor}" style=" color:  red" />
                                                     </p:column>
+                                                </p:row>
+                                                <p:row>
+
+                                                    <p:column>
+                                                        <h:outputText value="No. de factura:"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="Proveedor:*"/>
+                                                    </p:column>
+                                                </p:row>
+                                                <p:row>
+
 
                                                     <p:column>
                                                         <p:inputText id="tNumFac" style="width: 100%" value="#{activoFijoBean.activoFijoSeleccionado.numeroFacturaActivoFijo}"  />
 
                                                     </p:column>
-
-                                                </p:row>
-                                                <p:row>
-
-                                                    <p:column>
-                                                        <h:outputText value="Proveedor:*"/>
-                                                    </p:column>
-
-                                                </p:row>
-                                                <p:row>
-
-
                                                     <p:column>
                                                         <p:selectOneMenu id="sProv" value="#{activoFijoBean.activoFijoSeleccionado.TProveedor.idProveedor}" style="width:100%" >
 
@@ -495,6 +470,8 @@
                                                         <h:outputText value="#{activoFijoBean.msgProv}" style=" color:  red" />
                                                     </p:column>
                                                 </p:row>
+
+
                                             </p:panelGrid> 
 
 
@@ -796,7 +773,8 @@
                                                         <h:outputText value="Fecha de registro:" />
                                                     </p:column>
                                                     <p:column>
-                                                        <h:outputText value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" >
+                                                        <h:outputText rendered="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo eq null}" value="---"/>
+                                                        <h:outputText rendered="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo eq null ? false:true}" value="#{activoFijoBean.activoFijoSeleccionado.registroActivoFijo}" >
                                                             <f:convertDateTime pattern="dd/MM/YYYY"/>
                                                         </h:outputText>
                                                     </p:column>
@@ -1294,7 +1272,7 @@
 
                                         </p:column>
                                         <p:column style="width: 33%; ">
-                                            <h:outputText value="Fecha: *" />
+                                            <h:outputText value="Fecha:" />
                                         </p:column>         
                                     </p:row>
                                     <p:row>
@@ -1307,8 +1285,10 @@
                                         </p:column>
                                         <p:column>
 
-                                            <p:calendar id="cFechaIngreso"  showOn="button"   value="#{activoFijoBean.partida.fechaPartida}"   mindate="#{activoFijoBean.fechaMinima}" maxdate="#{activoFijoBean.fechaMaxima}"   style="width:100%" locale="es" navigator="true" pattern="dd/MM/yyyy"/>
-
+                                           
+                                                 <p:inputText  style="width: 100%" value="#{activoFijoBean.partida.fechaPartida}"  readonly="true" >
+                                                                    <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                                                </p:inputText>
 
                                         </p:column>
                                     </p:row>
