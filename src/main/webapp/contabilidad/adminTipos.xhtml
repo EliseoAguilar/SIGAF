@@ -17,7 +17,7 @@
                         <p:row>
                             <p:column style="padding: 0px;" >
                                 #{tipoActivoBean.getContabilidadPredeterminado()}
-                                <h:outputText class="etiquetaEn" value="#{tipoActivoBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                <h:outputText class="etiquetaEn" value="#{tipoActivoBean.entidadSeleccionada.idEntidad eq 1 ? tipoActivoBean.entidadSeleccionada.nombreEntidad :tipoActivoBean.entidadSeleccionada.abreviacionEntidad}" style="width: 100%;"> 
                                 </h:outputText>
                             </p:column>
                             <p:column style="padding: 0px; text-align: right" >

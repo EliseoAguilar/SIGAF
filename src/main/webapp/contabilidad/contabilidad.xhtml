@@ -27,7 +27,7 @@
                                     <p:column>
                                         <p:selectOneMenu id="car"  value="#{contablidadPredeterminarBean.idEntidad}" style=" width: 100%;" > 
                                             <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                            <f:selectItems  var="end" value="#{contablidadPredeterminarBean.listaEntidades}" itemLabel="#{end.nombreEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
+                                            <f:selectItems  var="end" value="#{contablidadPredeterminarBean.listaEntidades}" itemLabel="#{end.idEntidad eq 1? end.nombreEntidad : end.abreviacionEntidad}" itemValue="#{end.idEntidad}" itemDisabled="#{end.estadoEntidad eq true?false:true }" />
                                         </p:selectOneMenu>
                                         <br></br>
                                         <p:outputLabel value="#{contablidadPredeterminarBean.msgEntidad}" style=" color:  red"></p:outputLabel>
@@ -52,7 +52,7 @@
                             <p:row>
                                 <p:column style="padding: 0px;" >
                                    
-                                    <h:outputText class="etiquetaEn" value="#{contablidadPredeterminarBean.entidadSeleccionada.nombreEntidad}" style="width: 100%;"> 
+                                    <h:outputText class="etiquetaEn" value="#{contablidadPredeterminarBean.entidadSeleccionada.idEntidad eq  1 ? contablidadPredeterminarBean.entidadSeleccionada.nombreEntidad : contablidadPredeterminarBean.entidadSeleccionada.abreviacionEntidad}" style="width: 100%;"> 
                                     </h:outputText>
                                 </p:column>
                                 <p:column style="padding: 0px; text-align: right" >
