@@ -143,14 +143,14 @@
     
    
     <bean id="entidadBean" 
-          class="com.sigaf.bean.EntidadBean" init-method="Init">
+          class="com.sigaf.bean.EntidadBean" init-method="Init" scope="session">
         <property name="ientidadBo" ref="entidadBo"></property>
         <property name="iareaBo" ref="areaBo"></property>
            <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
     
     <bean id="cooperativaBean" 
-           class="com.sigaf.bean.CooperativaBean" init-method="Init">
+           class="com.sigaf.bean.CooperativaBean" init-method="Init" scope="session">
         <property name="ientidadBo" ref="entidadBo"></property>
         <property name="iareaBo" ref="areaBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
@@ -298,7 +298,7 @@
    
     
     <bean id="carteraBean" 
-          class="com.sigaf.bean.CarteraBean" init-method="Init">
+          class="com.sigaf.bean.CarteraBean" init-method="Init" scope="session">
         <property name="ientidadBo" ref="entidadBo"></property>
         <property name="iareaBo" ref="areaBo"></property>
         <property name="ientidadProyectoBo" ref="entidadProyectoBo"></property>
@@ -336,14 +336,14 @@
      
    
     <bean id="areaBean" 
-          class="com.sigaf.bean.AreaBean" init-method="Init">
+          class="com.sigaf.bean.AreaBean" init-method="Init" scope="session">
         <property name="areaBo" ref="areaBo"></property>
          <property name="ientidadBo" ref="entidadBo"></property>  
          <property name="bitacoraBo" ref="bitacoraBo"></property> 
     </bean>
     
     <bean id="ayudaBean" 
-          class="com.sigaf.bean.AyudaBean" init-method="Init">
+          class="com.sigaf.bean.AyudaBean" init-method="Init" scope="session">
      
     </bean>
     
@@ -360,7 +360,7 @@
      
    
     <bean id="cargoBean" 
-          class="com.sigaf.bean.CargoBean" init-method="Init">
+          class="com.sigaf.bean.CargoBean" init-method="Init" scope="session">
         <property name="icargoBo" ref="cargoBo"></property>
          <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
@@ -377,7 +377,7 @@
      
    
     <bean id="empleadocargoBean" 
-          class="com.sigaf.bean.EmpleadoCargoBean" init-method="Init">
+          class="com.sigaf.bean.EmpleadoCargoBean" init-method="Init" scope="session">
         <property name="iempleadoCargoBo" ref="empleadocargoBo"></property>
     </bean>
     
@@ -396,7 +396,7 @@
      
    
     <bean id="ocupacionBean" 
-          class="com.sigaf.bean.OcupacionBean">
+          class="com.sigaf.bean.OcupacionBean" scope="session">
         <property name="iocupacionBo" ref="ocupacionBo"></property>
         
     </bean>
@@ -424,7 +424,7 @@
      
    
     <bean id="empleadoBean" 
-          class="com.sigaf.bean.EmpleadoBean" init-method="Init">
+          class="com.sigaf.bean.EmpleadoBean" init-method="Init" scope="session">
         <property name="iempleadoBo" ref="empleadoBo"></property>
         <property name="areaBo" ref="areaBo"></property>
         <property name="ientidadBo" ref="entidadBo"></property>
@@ -439,7 +439,7 @@
     <!-- empleado cooperativa-->
 
     <bean id="empleadoCooperativaBean" 
-          class="com.sigaf.bean.EmpleadoCooperativaBean" init-method="Init">
+          class="com.sigaf.bean.EmpleadoCooperativaBean" init-method="Init" scope="session">
         <property name="iempleadoBo" ref="empleadoBo"></property>
         <property name="areaBo" ref="areaBo"></property>
         <property name="ientidadBo" ref="entidadBo"></property>
@@ -451,7 +451,7 @@
     </bean>
 
     <bean id="socioCooperativaBean" 
-          class="com.sigaf.bean.SocioCooperativaBean" init-method="Init">
+          class="com.sigaf.bean.SocioCooperativaBean" init-method="Init" scope="session">
         <property name="iempleadoBo" ref="empleadoBo"></property>
         <property name="areaBo" ref="areaBo"></property>
         <property name="ientidadBo" ref="entidadBo"></property>
@@ -475,7 +475,7 @@
     </bean>
    
     <bean id="productorIndividualBean" 
-          class="com.sigaf.bean.ProductorIndividualBean" init-method="init">
+          class="com.sigaf.bean.ProductorIndividualBean" init-method="init" scope="session">
         <property name="productorIndividualBo" ref="productorIndividualBo"></property>
         <property name="productorGrupalBo" ref="productorGrupalBo"></property>
          <property name="bitacoraBo" ref="bitacoraBo"></property>
@@ -493,7 +493,7 @@
     </bean>
    
     <bean id="productorGrupalBean" 
-          class="com.sigaf.bean.ProductorGrupalBean" init-method="init">
+          class="com.sigaf.bean.ProductorGrupalBean" init-method="init" scope="session">
         <property name="productorGrupalBo" ref="productorGrupalBo"></property>
          <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
@@ -543,7 +543,7 @@
     
     
     <bean id="productoBean" 
-          class="com.sigaf.bean.ProductoBean" init-method="init">
+          class="com.sigaf.bean.ProductoBean" init-method="init" scope="session">
         <property name="productoBo" ref="productoBo"></property>
         <property name="productoProductorBo" ref="productoProductorBo"></property>
         <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
@@ -554,7 +554,7 @@
     </bean>
     
     <bean id="agronegocioBean" 
-          class="com.sigaf.bean.AgronegocioBean" init-method="init">
+          class="com.sigaf.bean.AgronegocioBean" init-method="init" scope="session">
         <property name="productoBo" ref="productoBo"></property>
         <property name="productoProductorBo" ref="productoProductorBo"></property>
         <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
@@ -571,7 +571,7 @@
     </bean>
     
     <bean id="pagoAgronegocioBean" 
-          class="com.sigaf.bean.PagoAgronegocioBean" init-method="init">
+          class="com.sigaf.bean.PagoAgronegocioBean" init-method="init" scope="session">
         <property name="productoBo" ref="productoBo"></property>
         <property name="productoProductorBo" ref="productoProductorBo"></property>
         <property name="productoCooperativaBo" ref="productoCooperativaBo"></property>
@@ -624,7 +624,7 @@
     </bean>
    
     <bean id="areaCultivoBean" 
-          class="com.sigaf.bean.AreaCultivoBean" init-method="init">
+          class="com.sigaf.bean.AreaCultivoBean" init-method="init" scope="session">
         <property name="areaCultivoBo" ref="areaCultivoBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
@@ -640,7 +640,7 @@
     </bean>
    
     <bean id="tipoCultivoBean" 
-          class="com.sigaf.bean.TipoCultivoBean" init-method="init">
+          class="com.sigaf.bean.TipoCultivoBean" init-method="init" scope="session">
         <property name="tipoCultivoBo" ref="tipoCultivoBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
@@ -673,13 +673,13 @@
     
    
     <bean id="compradorBean" 
-          class="com.sigaf.bean.CompradorBean" init-method="init">
+          class="com.sigaf.bean.CompradorBean" init-method="init" scope="session">
         <property name="compradorBo" ref="compradorBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
     
     <bean id="asesoriaBean" 
-          class="com.sigaf.bean.AsesoriaBean" init-method="init">
+          class="com.sigaf.bean.AsesoriaBean" init-method="init" scope="session">
         <property name="compradorBo" ref="compradorBo"></property>
         <property name="areaBo" ref="areaBo"></property>
         <property name="empleadoBo" ref="empleadoBo"></property>
@@ -705,7 +705,7 @@
      
      
     <bean id="capacitacionBean" 
-          class="com.sigaf.bean.CapacitacionBean" init-method="init">
+          class="com.sigaf.bean.CapacitacionBean" init-method="init" scope="session">
         <property name="compradorBo" ref="compradorBo"></property>
         <property name="areaBo" ref="areaBo"></property>
         <property name="empleadoBo" ref="empleadoBo"></property>
@@ -733,7 +733,7 @@
      
    
     <bean id="politicaBean" 
-          class="com.sigaf.bean.PoliticaBean " init-method="Init">
+          class="com.sigaf.bean.PoliticaBean " init-method="Init" scope="session">
         <property name="ipoliticaBo" ref="politicaBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
         
@@ -752,7 +752,7 @@
     </bean>
    
     <bean id="configuracionAgronegocioBean" 
-          class="com.sigaf.bean.ConfiguracionAgronegocioBean" init-method="init">
+          class="com.sigaf.bean.ConfiguracionAgronegocioBean" init-method="init" scope="session">
         <property name="configuracionAgronegocioBo" ref="configuracionAgronegocioBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
     </bean>
@@ -845,7 +845,7 @@
         
     
     <bean id="solicitudBean" 
-          class="com.sigaf.bean.SolicitudBean" init-method="Init">
+          class="com.sigaf.bean.SolicitudBean" init-method="Init" scope="session">
         <property name="ilisiadoBo" ref="lisiadoBo"></property>
         <property name="igarantiaProBo" ref="garantiaProBo"></property>      
         <property name="ipropiedadLisiadoBo" ref="propiedadLisiadoBo"></property>             
@@ -872,7 +872,7 @@
     </bean>
     
     <bean id="resolucionBean" 
-          class="com.sigaf.bean.ResolucionBean" init-method="Init">
+          class="com.sigaf.bean.ResolucionBean" init-method="Init" scope="session">
         <property name="ilisiadoBo" ref="lisiadoBo"></property>
         <property name="igarantiaProBo" ref="garantiaProBo"></property>      
         <property name="ipropiedadLisiadoBo" ref="propiedadLisiadoBo"></property>             
@@ -911,7 +911,7 @@
     </bean>
    
     <bean id="parametroBean" 
-          class="com.sigaf.bean.ParametroBean" init-method="init">
+          class="com.sigaf.bean.ParametroBean" init-method="init" scope="session">
         <property name="parametroSeguimientoBo" ref="parametroSeguimientoBo"></property>
         <property name="bitacoraBo" ref="bitacoraBo"></property>
         
@@ -947,7 +947,7 @@
     
     
     <bean id="proyectoBean" 
-          class="com.sigaf.bean.ProyectoBean" init-method="Init">
+          class="com.sigaf.bean.ProyectoBean" init-method="Init" scope="session">
         <property name="ilisiadoBo" ref="lisiadoBo"></property>
          <property name="igarantiaProBo" ref="garantiaProBo"></property>
         
@@ -985,19 +985,19 @@
     
     
     <bean id="reporteAgronegocioBean" 
-          class="com.sigaf.bean.ReporteAgronegocioBean" init-method="init">   
+          class="com.sigaf.bean.ReporteAgronegocioBean" init-method="init" scope="session">   
         <property name="bitacoraBo" ref="bitacoraBo"></property>     
           
     </bean>
     
     <bean id="reporteAdministracionBean" 
-          class="com.sigaf.bean.ReporteAdministracionBean" init-method="init"> 
+          class="com.sigaf.bean.ReporteAdministracionBean" init-method="init" scope="session"> 
            <property name="bitacoraBo" ref="bitacoraBo"></property>      
           
     </bean>
     
     <bean id="reporteFinanzaBean" 
-           class="com.sigaf.bean.ReporteFinanzaBean" init-method="init">   
+           class="com.sigaf.bean.ReporteFinanzaBean" init-method="init" scope="session">   
          <property name="bitacoraBo" ref="bitacoraBo"></property>     
           
     </bean>
@@ -1200,7 +1200,7 @@
     <!-- Activo fijo-->
      
     <bean id="activoFijoBean" 
-          class="com.sigaf.bean.ActivoFijoBean" init-method="init">
+          class="com.sigaf.bean.ActivoFijoBean" init-method="init" scope="session">
         <property name="valorActivoBo" ref="valorActivoBo"></property> 
         <property name="activoFijoBo" ref="activoFijoBo"></property>
         <property name="tipoActivoBo" ref="tipoActivoBo"></property>
