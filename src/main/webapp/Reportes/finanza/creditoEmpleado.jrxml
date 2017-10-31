@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudComercioS" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99a12233-6bc6-4ced-b283-a79f39fccfbb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1575"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -735,7 +735,7 @@ FROM
 			</line>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="399" y="270" width="140" height="20" uuid="4a7856b3-10a7-4f95-8a0c-7d5b11c9748f"/>
-				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}.equals(null)? "--/--/----": $F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="137" y="270" width="139" height="20" uuid="99ec62e9-c92f-4496-9b28-f28d5b71dcf0"/>

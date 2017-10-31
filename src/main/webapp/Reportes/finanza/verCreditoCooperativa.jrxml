@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultadosCooperativa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f7340d7-dd94-4d83-9cc4-5383eaba1fb3">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="644"/>
+	<property name="ireport.y" value="132"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -181,7 +181,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="126" y="168" width="402" height="20" uuid="50bd97d4-14e3-46ba-8142-3189134ed410"/>
+				<reportElement x="126" y="168" width="419" height="20" uuid="50bd97d4-14e3-46ba-8142-3189134ed410"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -193,7 +193,7 @@ FROM
 				<text><![CDATA[COOPERATIVA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="413" y="148" width="115" height="20" uuid="2ff5595b-59d5-4f4e-88f0-dec18374d0bc"/>
+				<reportElement x="413" y="148" width="132" height="20" uuid="2ff5595b-59d5-4f4e-88f0-dec18374d0bc"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -215,7 +215,7 @@ FROM
 				<text><![CDATA[FECHA APROBACIÓN:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="127" y="314" width="408" height="20" uuid="27d1955b-540d-4b87-92b3-a04055117d98"/>
+				<reportElement x="127" y="314" width="418" height="20" uuid="27d1955b-540d-4b87-92b3-a04055117d98"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -245,7 +245,7 @@ FROM
 				<text><![CDATA[CÓDIGO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="413" y="251" width="121" height="20" uuid="a9a9a966-4404-4c0d-b903-6c98cd249528"/>
+				<reportElement x="413" y="251" width="132" height="20" uuid="a9a9a966-4404-4c0d-b903-6c98cd249528"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
@@ -253,11 +253,11 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_aprovacion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="413" y="274" width="121" height="20" uuid="413fa20e-5f7e-4871-8285-161b8f4e8bdb"/>
+				<reportElement x="413" y="274" width="132" height="20" uuid="413fa20e-5f7e-4871-8285-161b8f4e8bdb"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="127" y="336" width="408" height="20" uuid="8870bc46-fdfc-4e5d-9025-464d6630e103"/>
+				<reportElement x="127" y="336" width="418" height="20" uuid="8870bc46-fdfc-4e5d-9025-464d6630e103"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_destino_proyecto}]]></textFieldExpression>
 			</textField>
 			<line>

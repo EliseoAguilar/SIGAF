@@ -202,7 +202,7 @@
                                                             </p:column>
                                                             <p:column style=" width: 12%; text-align: center"  >  
 
-                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnModificar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
                                                                 </p:commandButton>
@@ -266,7 +266,7 @@
                                                             </p:column>
                                                             <p:column style=" width: 13%; text-align: center"  >  
 
-                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnModificar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
                                                                 </p:commandButton>
@@ -454,7 +454,7 @@
                                                             </p:column>
                                                             <p:column style=" width: 13%; text-align: center"  >  
 
-                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnModificar}" actionListener="#{resolucionBean.actualizarComentario(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerComentario(No)}" >
                                                                 </p:commandButton>
@@ -520,7 +520,7 @@
                                                             </p:column>
                                                             <p:column style=" width: 13%; text-align: center"  >  
 
-                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{resolucionBean.btnModificar}" actionListener="#{resolucionBean.actualizarSugerencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{resolucionBean.btnCancelar}" actionListener="#{resolucionBean.removerSugerencia(No)}" >
                                                                 </p:commandButton>
@@ -565,7 +565,7 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{resolucionBean.showData}">
-                        <p:panel id="pAdministrarResoluciones" header="Administración de resoluciones" style="margin-bottom:20px">
+                        <p:panel id="pAdministrarResoluciones" header="Administrar resoluciones" style="margin-bottom:20px">
                             <h:form id="fData">
                                 <p:fieldset>
                                     <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >

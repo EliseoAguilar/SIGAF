@@ -99,21 +99,21 @@ WHERE
 				<textElement textAlignment="Right">
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[  MENSUAL ($)]]></text>
+				<text><![CDATA[  MENSUAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="269" y="3" width="116" height="20" uuid="83cfea3f-e9fa-412b-b99d-658055c33a79"/>
 				<textElement textAlignment="Right">
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ ACUMULADA ($)]]></text>
+				<text><![CDATA[ ACUMULADA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="407" y="3" width="117" height="20" uuid="9eddfcf1-c3a8-40f8-8307-0aec7af79864"/>
 				<textElement textAlignment="Right">
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[VALOR NETO ($)]]></text>
+				<text><![CDATA[VALOR NETO]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
 				<reportElement x="407" y="25" width="117" height="20" uuid="5142444c-46b8-4584-a203-3f6e334c0f9e"/>

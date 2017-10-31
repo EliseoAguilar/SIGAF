@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteActivosFijos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d097d2c0-a3b5-4f37-80c1-22cd8d15ab41">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
-	<property name="ireport.x" value="123"/>
-	<property name="ireport.y" value="77"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="314"/>
 	<parameter name="idEntidad" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -129,7 +129,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{t_activo_fijo_marca_activo_fijo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="79" y="258" width="210" height="20" uuid="d70a1f78-7f60-40fe-9763-7d41d47f262d"/>
+				<reportElement x="66" y="258" width="223" height="20" uuid="d70a1f78-7f60-40fe-9763-7d41d47f262d"/>
 				<textFieldExpression><![CDATA[$F{t_valor_activo_valor_activo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -157,8 +157,8 @@ WHERE
 				<textFieldExpression><![CDATA[$F{t_tipo_activo_nombre_tipo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="385" y="89" width="170" height="20" uuid="ebccba06-fce9-4044-baba-38df53662bf7"/>
-				<textFieldExpression><![CDATA[$F{t_tipo_activo_vida_util_tipo}]]></textFieldExpression>
+				<reportElement x="367" y="89" width="188" height="20" uuid="ebccba06-fce9-4044-baba-38df53662bf7"/>
+				<textFieldExpression><![CDATA[$F{t_tipo_activo_vida_util_tipo}+" AÑO/S"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="118" width="54" height="20" uuid="265e45c2-1d55-43c1-b722-a4f834538da5"/>
@@ -217,11 +217,11 @@ WHERE
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="288" y="89" width="94" height="20" uuid="8a4cc36a-bd4d-4cd0-ac4e-b6ba91fc3ff0"/>
+				<reportElement x="291" y="89" width="73" height="20" uuid="8a4cc36a-bd4d-4cd0-ac4e-b6ba91fc3ff0"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ VIDA ÚTIL (AÑOS):]]></text>
+				<text><![CDATA[VIDA UTIL:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="258" width="66" height="20" uuid="d4deebcd-db72-42bf-bc15-c839422048e6"/>
@@ -239,7 +239,7 @@ WHERE
 				<textElement>
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ÁREA:]]></text>
+				<text><![CDATA[AREA:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="364" y="59" width="191" height="20" uuid="3b83e65a-e171-47c6-b757-132ce831680e"/>
@@ -323,10 +323,6 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_tipo_activo_calculo_tipo_activo}.equals( "Tangible" ) ? "DEPRECIACIÓN " : "AMORTIZACIÓN"]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="71" y="258" width="8" height="20" uuid="fcf45f86-2678-4241-843e-0588735a586b"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
 		</band>
 	</detail>
 	<pageFooter>

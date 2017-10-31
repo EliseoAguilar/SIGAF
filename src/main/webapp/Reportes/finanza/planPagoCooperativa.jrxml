@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
-	<property name="ireport.zoom" value="1.5026296018031553"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="474"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -235,8 +235,8 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="123" y="330" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>
-				<textElement markup="styled">
+				<reportElement x="113" y="330" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>
+				<textElement textAlignment="Center" markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTA</style>]]></text>
@@ -315,44 +315,44 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField pattern="$#,##0.00">
-				<reportElement x="102" y="0" width="59" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
+				<reportElement x="110" y="0" width="59" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="167" y="0" width="65" height="20" uuid="5060d3d0-e89d-4f85-9945-49a0e406c775"/>
+				<reportElement x="181" y="0" width="65" height="20" uuid="5060d3d0-e89d-4f85-9945-49a0e406c775"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="243" y="0" width="65" height="20" uuid="d10b878c-cd0f-4eaf-adda-82142b304337"/>
+				<reportElement x="244" y="0" width="65" height="20" uuid="d10b878c-cd0f-4eaf-adda-82142b304337"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="342" y="0" width="64" height="20" uuid="0123409f-d61b-4797-9d68-bd1d73b2ea77"/>
+				<reportElement x="387" y="0" width="64" height="20" uuid="0123409f-d61b-4797-9d68-bd1d73b2ea77"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{capitalamortizado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="453" y="0" width="56" height="20" uuid="9fcc530c-8584-40c6-8107-a10ff645b46c"/>
+				<reportElement x="457" y="0" width="56" height="20" uuid="9fcc530c-8584-40c6-8107-a10ff645b46c"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldocapital}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="27" y="0" width="76" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
+				<reportElement x="26" y="0" width="76" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
