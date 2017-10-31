@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagosCredito" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91c96e9e-c6ca-40d0-8827-9c6185235fb5">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="238"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="25"/>
+	<property name="ireport.y" value="508"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -342,56 +342,56 @@ WHERE
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="1" y="1" width="45" height="20" uuid="cbf7003b-4bca-44e2-8a5b-e09481a84b7f"/>
+				<reportElement x="0" y="1" width="46" height="20" uuid="cbf7003b-4bca-44e2-8a5b-e09481a84b7f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="212" y="1" width="58" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
+				<reportElement x="208" y="1" width="101" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_capitalamortizado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="47" y="1" width="42" height="20" uuid="d9fa9d6a-8ea4-4028-92ee-774cc9b7c66d"/>
+				<reportElement x="43" y="1" width="55" height="20" uuid="d9fa9d6a-8ea4-4028-92ee-774cc9b7c66d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="89" y="1" width="42" height="20" uuid="6e5a377c-e20a-43f0-a09e-e1faa9d3d531"/>
+				<reportElement x="98" y="1" width="48" height="20" uuid="6e5a377c-e20a-43f0-a09e-e1faa9d3d531"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="141" y="1" width="45" height="20" uuid="4f9bee8b-6bcc-47c3-81d4-4095454bbe8b"/>
+				<reportElement x="146" y="1" width="46" height="20" uuid="4f9bee8b-6bcc-47c3-81d4-4095454bbe8b"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_abono}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="289" y="1" width="58" height="20" uuid="656a3eda-203c-47e4-8c67-ede709c24c9d"/>
+				<reportElement x="309" y="1" width="51" height="20" uuid="656a3eda-203c-47e4-8c67-ede709c24c9d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_saldocapital}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="354" y="1" width="43" height="20" uuid="e9ebd562-5187-4220-b3d8-34e25962abf6"/>
+				<reportElement x="360" y="1" width="61" height="20" uuid="e9ebd562-5187-4220-b3d8-34e25962abf6"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_saldoadicional}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="415" y="1" width="41" height="20" uuid="81f712c6-3602-4eb0-a539-e4b8972d4e74"/>
+				<reportElement x="410" y="1" width="53" height="20" uuid="81f712c6-3602-4eb0-a539-e4b8972d4e74"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>

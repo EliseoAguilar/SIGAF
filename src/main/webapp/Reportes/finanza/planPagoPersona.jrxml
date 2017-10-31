@@ -246,7 +246,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="110" y="331" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>
-				<textElement markup="styled">
+				<textElement textAlignment="Center" markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTA</style>]]></text>
@@ -339,44 +339,44 @@
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="27" y="0" width="71" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
+				<reportElement x="25" y="0" width="71" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="98" y="0" width="51" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
+				<reportElement x="115" y="0" width="51" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="166" y="0" width="65" height="20" uuid="5060d3d0-e89d-4f85-9945-49a0e406c775"/>
+				<reportElement x="178" y="0" width="65" height="20" uuid="5060d3d0-e89d-4f85-9945-49a0e406c775"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="247" y="0" width="65" height="20" uuid="d10b878c-cd0f-4eaf-adda-82142b304337"/>
+				<reportElement x="248" y="0" width="65" height="20" uuid="d10b878c-cd0f-4eaf-adda-82142b304337"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="361" y="0" width="46" height="20" uuid="0123409f-d61b-4797-9d68-bd1d73b2ea77"/>
+				<reportElement x="413" y="0" width="46" height="20" uuid="0123409f-d61b-4797-9d68-bd1d73b2ea77"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{capitalamortizado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="464" y="0" width="49" height="20" uuid="9fcc530c-8584-40c6-8107-a10ff645b46c"/>
+				<reportElement x="469" y="0" width="49" height="20" uuid="9fcc530c-8584-40c6-8107-a10ff645b46c"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldocapital}]]></textFieldExpression>
 			</textField>

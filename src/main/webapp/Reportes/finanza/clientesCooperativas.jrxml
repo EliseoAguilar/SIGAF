@@ -60,7 +60,7 @@ FROM
 	<title>
 		<band height="107" splitType="Stretch">
 			<subreport>
-				<reportElement x="10" y="0" width="200" height="79" uuid="1e16cae1-153c-4ade-b941-a225fe11d4ce"/>
+				<reportElement x="11" y="0" width="200" height="79" uuid="1e16cae1-153c-4ade-b941-a225fe11d4ce"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
@@ -90,7 +90,7 @@ FROM
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NIT]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NIT</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="23" y="2" width="59" height="20" uuid="639471ec-b01c-406a-9fa1-13484367270a"/>

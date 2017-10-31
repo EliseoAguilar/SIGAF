@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ead269f-2472-4272-bdf6-16f64393d3fd">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="268"/>
+	<property name="ireport.x" value="188"/>
+	<property name="ireport.y" value="1187"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -671,14 +671,14 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Destino        :</style>]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="344" y="419" width="142" height="20" uuid="ad7a67b9-a251-4f04-8c2c-ace0e80e6665"/>
+				<reportElement x="348" y="419" width="142" height="20" uuid="ad7a67b9-a251-4f04-8c2c-ace0e80e6665"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_forma}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="344" y="439" width="142" height="20" uuid="530f09b5-4abd-4f7e-9368-53386d1e0331"/>
+				<reportElement x="348" y="439" width="142" height="20" uuid="530f09b5-4abd-4f7e-9368-53386d1e0331"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -703,17 +703,17 @@ FROM
 				<textElement markup="styled">
 					<font fontName="Calibri" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                 :</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                :</style>]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="344" y="692" width="142" height="20" uuid="11a94c6a-15ad-4ef3-9636-b41caa4ec76f"/>
+				<reportElement x="348" y="692" width="142" height="20" uuid="11a94c6a-15ad-4ef3-9636-b41caa4ec76f"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_cheque}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="344" y="672" width="142" height="20" uuid="f239927a-0b9e-4dfb-99f2-d5a114cb551a"/>
+				<reportElement x="348" y="672" width="142" height="20" uuid="f239927a-0b9e-4dfb-99f2-d5a114cb551a"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
@@ -734,14 +734,14 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Cheque                 :</style>]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="344" y="179" width="142" height="20" uuid="0e52c6d5-3971-4d8e-80cc-013c945d76b0"/>
+				<reportElement x="349" y="179" width="142" height="20" uuid="0e52c6d5-3971-4d8e-80cc-013c945d76b0"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_agronegocio_cheque}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="344" y="159" width="142" height="20" uuid="3edff7ed-f7cc-4d4a-a602-4e9b9f5ac9d5"/>
+				<reportElement x="349" y="159" width="142" height="20" uuid="3edff7ed-f7cc-4d4a-a602-4e9b9f5ac9d5"/>
 				<textElement>
 					<font fontName="Calibri" size="8"/>
 				</textElement>

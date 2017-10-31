@@ -71,11 +71,11 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="153" y="4" width="92" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
+				<reportElement x="155" y="4" width="51" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[VIDA ÚTIL (AÑOS)]]></text>
+				<text><![CDATA[VIDA ÚTIL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="450" y="4" width="100" height="20" uuid="9dd87f31-7a27-4092-9501-26c5db5f8c23"/>
@@ -88,7 +88,7 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				<reportElement x="0" y="1" width="554" height="1" uuid="270911a3-bdb0-449a-baa4-4b882cd074a5"/>
 			</line>
 			<staticText>
-				<reportElement x="245" y="5" width="65" height="20" uuid="7882711e-525e-4539-af5d-1e2ef9694e15"/>
+				<reportElement x="235" y="5" width="75" height="20" uuid="7882711e-525e-4539-af5d-1e2ef9694e15"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -114,9 +114,8 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				<textFieldExpression><![CDATA[$F{codigo_tipo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="153" y="7" width="92" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{vida_util_tipo} ]]></textFieldExpression>
+				<reportElement x="153" y="7" width="51" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
+				<textFieldExpression><![CDATA[$F{vida_util_tipo} + " Año/s"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="450" y="7" width="100" height="20" uuid="0970ada3-2a53-4a94-a73b-08532b6ab137"/>
@@ -204,7 +203,7 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="245" y="7" width="63" height="20" uuid="81897493-749b-4da7-ae44-05b4fd305e34"/>
+				<reportElement x="233" y="7" width="75" height="20" uuid="81897493-749b-4da7-ae44-05b4fd305e34"/>
 				<textFieldExpression><![CDATA[$F{calculo_tipo_activo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">

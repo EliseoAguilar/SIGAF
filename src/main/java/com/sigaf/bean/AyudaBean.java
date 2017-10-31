@@ -40,15 +40,12 @@ import org.primefaces.model.TreeNode;
 
 public class AyudaBean extends Actividad {
 
-    
     private TreeNode selectedNode;
     private Boolean mostrarDocumento;
-    
-    private TreeNode root;
-    
-    
-    private boolean mostrarTabla;
 
+    private TreeNode root;
+
+    private boolean mostrarTabla;
 
     public Boolean getMostrarDocumento() {
         return mostrarDocumento;
@@ -73,7 +70,6 @@ public class AyudaBean extends Actividad {
     public void setRoot(TreeNode root) {
         this.root = root;
     }
-
 
     public boolean isMostrarTabla() {
         return mostrarTabla;
@@ -116,34 +112,39 @@ public class AyudaBean extends Actividad {
         TreeNode node18 = new DefaultTreeNode("Grupos", node2);
         TreeNode node19 = new DefaultTreeNode("Compradores", node2);
         TreeNode node20 = new DefaultTreeNode("Cultivos", node2);
-        TreeNode node21 = new DefaultTreeNode("Agronegocios", node2);
-        TreeNode node22 = new DefaultTreeNode("Pagos", node2);
-        TreeNode node23 = new DefaultTreeNode("Políticas", node2);
-        TreeNode node24 = new DefaultTreeNode("Reportes", node2);
+        TreeNode node21 = new DefaultTreeNode("Área de cultivo", node2);
+        TreeNode node22 = new DefaultTreeNode("Tipos de cultivos", node2);
+        
+       
+        TreeNode node23 = new DefaultTreeNode("Agronegocios", node2);
+       
+        
+        TreeNode node24 = new DefaultTreeNode("Políticas", node2);
+        TreeNode node25 = new DefaultTreeNode("Reportes", node2);
 
-        TreeNode node25 = new DefaultTreeNode("Cooperativas", node3);
-        TreeNode node26 = new DefaultTreeNode("Áreas", node3);
-        TreeNode node27 = new DefaultTreeNode("Empleados", node3);
-        TreeNode node28 = new DefaultTreeNode("Socios", node3);
-        TreeNode node29 = new DefaultTreeNode("Reportes", node3);
+        TreeNode node26 = new DefaultTreeNode("Cooperativas", node3);
+        TreeNode node27 = new DefaultTreeNode("Áreas", node3);
+        TreeNode node28 = new DefaultTreeNode("Empleados", node3);
+        TreeNode node29 = new DefaultTreeNode("Socios", node3);
+        TreeNode node30 = new DefaultTreeNode("Reportes", node3);
 
-        TreeNode node34 = new DefaultTreeNode("Perfil", node4);
-        TreeNode node35 = new DefaultTreeNode("Áreas", node4);
-        TreeNode node36 = new DefaultTreeNode("Empleados", node4);
-        TreeNode node37 = new DefaultTreeNode("Cargos", node4);
-        TreeNode node38 = new DefaultTreeNode("Políticas", node4);
-        TreeNode node39 = new DefaultTreeNode("Reportes", node4);
+        TreeNode node31 = new DefaultTreeNode("Perfil", node4);
+        TreeNode node32 = new DefaultTreeNode("Áreas", node4);
+        TreeNode node33 = new DefaultTreeNode("Empleados", node4);
+        TreeNode node34 = new DefaultTreeNode("Cargos", node4);
+        TreeNode node35 = new DefaultTreeNode("Políticas", node4);
+        TreeNode node36 = new DefaultTreeNode("Reportes", node4);
 
-        TreeNode node43 = new DefaultTreeNode("Usuarios", node5);
-        TreeNode node44 = new DefaultTreeNode("Base de datos", node5);
-        TreeNode node45 = new DefaultTreeNode("Bitácora", node5);
-        TreeNode node46 = new DefaultTreeNode("Reportes", node5);
+        TreeNode node37 = new DefaultTreeNode("Usuarios", node5);
+        TreeNode node38 = new DefaultTreeNode("Base de datos", node5);
+        TreeNode node39 = new DefaultTreeNode("Bitácora", node5);
+        TreeNode node40 = new DefaultTreeNode("Reportes", node5);
 
-        TreeNode node47 = new DefaultTreeNode("Como navegar", node6);
-        TreeNode node48 = new DefaultTreeNode("Mapa del sitio", node6);
+        TreeNode node41 = new DefaultTreeNode("Mapa del sitio", node6);
+        TreeNode node42 = new DefaultTreeNode("Acerca de", node6);
 
     }
-    
+
     private String pagina;
 
     public String getPagina() {
@@ -157,44 +158,166 @@ public class AyudaBean extends Actividad {
     public void seleccion() {
 
         this.mostrarDocumento = true;
-        if(this.selectedNode.getData()=="Contabilidad"){
-            
-            this.pagina="16";
-            
+        if (this.selectedNode.getData() == "Contabilidad") {
+            this.pagina = "16";
         }
-        
-         if(this.selectedNode.getData()=="Finanzas"){
-            
-            this.pagina="18";
-            
+        if (this.selectedNode.getData() == "Periodos") {
+            this.pagina = "27";
         }
-        
-            if(this.selectedNode.getData()=="Agronegocios"){
-            
-            this.pagina="108";
-            
+        if (this.selectedNode.getData() == "Cuentas") {
+            this.pagina = "36";
         }
-                     if(this.selectedNode.getData()=="Administración"){
-            
-            this.pagina="150";
-            
+        if (this.selectedNode.getData() == "Partidas") {
+            this.pagina = "42";
+        }
+        if (this.selectedNode.getData() == "Proveedores") {
+            this.pagina = "47";
+        }
+        if (this.selectedNode.getData() == "Tipos de activos") {
+            this.pagina = "52";
+        }
+        if (this.selectedNode.getData() == "Activo fijo") {
+            this.pagina = "57";
+        }
+        if (this.selectedNode.getData() == "Configuración") {
+            this.pagina = "66";
+        }
+        if (this.selectedNode.getData() == "Reportes") {
+            this.pagina = "70";
+        }
+        if (this.selectedNode.getData() == "Finanzas") {
+            this.pagina = "73";
+        }
+        if (this.selectedNode.getData() == "Clientes") {
+            this.pagina = "74";
+        }
+        if (this.selectedNode.getData() == "Solicitudes") {
+            this.pagina = "85";
+        }
+        if (this.selectedNode.getData() == "Resoluciones") {
+            this.pagina = "140";
+        }
+        if (this.selectedNode.getData() == "Créditos") {
+            this.pagina = "149";
+        }
+        if (this.selectedNode.getData() == "Asesorias") {
+            this.pagina = "162";
+        }
+        if (this.selectedNode.getData() == "Capacitaciones") {
+            this.pagina = "168";
+        }
+        if (this.selectedNode.getData() == "Parametros") {
+            this.pagina = "174";
+        }
+        if (this.selectedNode.getData() == "Reportes") {
+            this.pagina = "178";
+        }
+        if (this.selectedNode.getData() == "Agronegocios") {
+            this.pagina = "180";
+        }
+        if (this.selectedNode.getData() == "Productores") {
+            this.pagina = "181";
+        }
+        if (this.selectedNode.getData() == "Grupos") {
+            this.pagina = "188";
+        }
+        if (this.selectedNode.getData() == "Compradores") {
+            this.pagina = "192";
+        }
+        if (this.selectedNode.getData() == "Cultivos") {
+            this.pagina = "197";
+        }
+        if (this.selectedNode.getData() == "Compradores") {
+            this.pagina = "192";
+        }
+        if (this.selectedNode.getData() == "Cultivos") {
+            this.pagina = "197";
+        }
+        if (this.selectedNode.getData() == "Área de cultivo") {
+            this.pagina = "203";
+        }
+        if (this.selectedNode.getData() == "Tipos de cultivos") {
+            this.pagina = "207";
+        }
+        if (this.selectedNode.getData() == "Agronegocios") {
+            this.pagina = "211";
+        }
+        if (this.selectedNode.getData() == "Políticas") {
+            this.pagina = "217";
+        }
+        if (this.selectedNode.getData() == "Reportes") {
+            this.pagina = "220";
+        }
+        if (this.selectedNode.getData() == "Administración") {
+            this.pagina = "222";
+        }
+        if (this.selectedNode.getData() == "Cooperativas") {
+            this.pagina = "223";
+        }
+        if (this.selectedNode.getData() == "Áreas") {
+            this.pagina = "229";
+        }
+        if (this.selectedNode.getData() == "Empleados") {
+            this.pagina = "233";
+        }
+        if (this.selectedNode.getData() == "Socios") {
+            this.pagina = "244";
         }
 
-               if(this.selectedNode.getData()=="Configuración"){
-            
-            this.pagina="181";
-            
+        if (this.selectedNode.getData() == "Configuración") {
+            this.pagina = "252";
         }
-                  if(this.selectedNode.getData()=="Seguridad"){
-            
-            this.pagina="204";
-            
+        if (this.selectedNode.getData() == "Perfil") {
+            this.pagina = "253";
         }
-                     if(this.selectedNode.getData()=="Ayuda"){
-            
-            this.pagina="217";
-            
+        if (this.selectedNode.getData() == "Áreas") {
+            this.pagina = "255";
         }
+        if (this.selectedNode.getData() == "Empleados") {
+            this.pagina = "259";
+        }
+
+        if (this.selectedNode.getData() == "Cargos") {
+            this.pagina = "265";
+        }
+
+        if (this.selectedNode.getData() == "Políticas") {
+            this.pagina = "267";
+        }
+
+        if (this.selectedNode.getData() == "Políticas") {
+            this.pagina = "267";
+        }
+
+        if (this.selectedNode.getData() == "Seguridad") {
+            this.pagina = "274";
+        }
+
+        if (this.selectedNode.getData() == "Usuarios") {
+            this.pagina = "275";
+        }
+        if (this.selectedNode.getData() == "Base de datos") {
+            this.pagina = "280";
+        }
+        if (this.selectedNode.getData() == "Bitácora") {
+            this.pagina = "283";
+        }
+
+        if (this.selectedNode.getData() == "Reportes") {
+            this.pagina = "286";
+        }
+
+        if (this.selectedNode.getData() == "Ayuda") {
+            this.pagina = "287";
+        }
+
+        if (this.selectedNode.getData() == "Mapa del sitio") {
+            this.pagina = "288";
+        }
+        if (this.selectedNode.getData() == "Acerca de") {
+            this.pagina = "217";
+        }
+
     }
 
 }

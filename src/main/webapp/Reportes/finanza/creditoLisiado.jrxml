@@ -887,7 +887,7 @@ FROM
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="400" y="259" width="140" height="20" uuid="ed6bbe00-9e2c-413e-bceb-07ed620b2412"/>
-				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_vencimiento_proyecto}.equals(null)? "--/--/----": $F{t_proyecto_fecha_vencimiento_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="139" y="316" width="401" height="20" uuid="fffd6d29-1aed-443c-8fa4-d466a7babb71"/>
