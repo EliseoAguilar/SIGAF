@@ -159,7 +159,7 @@ public class AyudaBean extends Actividad {
 
         this.mostrarDocumento = true;
         if (this.selectedNode.getData() == "Contabilidad") {
-            this.pagina = "16";
+            this.pagina = "24";
         }
         if (this.selectedNode.getData() == "Periodos") {
             this.pagina = "27";
@@ -239,7 +239,7 @@ public class AyudaBean extends Actividad {
         if (this.selectedNode.getData() == "Tipos de cultivos") {
             this.pagina = "207";
         }
-        if (this.selectedNode.getData() == "Agronegocios") {
+        if (this.selectedNode.getData() == "Agronegocios" && this.selectedNode.getParent().getData()=="Agronegocios") {
             this.pagina = "211";
         }
         if (this.selectedNode.getData() == "Políticas") {
