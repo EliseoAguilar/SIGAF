@@ -48,7 +48,7 @@ public class ReporteAgronegocioBean extends Actividad {
     private Date fechaFin;
     private String msgFechaIncial;
     private String msgFechaFin;
-    private Date hoy;
+
 
     public IBitacoraBo getBitacoraBo() {
         return bitacoraBo;
@@ -72,14 +72,6 @@ public class ReporteAgronegocioBean extends Actividad {
 
     public void setMsgFechaFin(String msgFechaFin) {
         this.msgFechaFin = msgFechaFin;
-    }
-
-    public Date getHoy() {
-        return new Date();
-    }
-
-    public void setHoy(Date hoy) {
-        this.hoy = hoy;
     }
 
     public Integer getEstadoReporte() {
@@ -202,14 +194,14 @@ public class ReporteAgronegocioBean extends Actividad {
                 }
             }
         }
-         if (idReporte == 10) {
+        if (idReporte == 10) {
             try {
                 this.generarGrupos();
             } catch (Exception ex) {
                 Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-          if (idReporte == 11) {
+        if (idReporte == 11) {
             try {
                 this.generarRepresentantes();
             } catch (Exception ex) {
@@ -293,14 +285,14 @@ public class ReporteAgronegocioBean extends Actividad {
                 }
             }
         }
-          if (idReporte == 10) {
+        if (idReporte == 10) {
             try {
                 this.generarGruposPDF();
             } catch (Exception ex) {
                 Logger.getLogger(ReporteContabilidadBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-          if (idReporte == 11) {
+        if (idReporte == 11) {
             try {
                 this.generarRepresentantesPDF();
             } catch (Exception ex) {
@@ -574,7 +566,7 @@ public class ReporteAgronegocioBean extends Actividad {
         outStream.flush();
         outStream.close();
         FacesContext.getCurrentInstance().responseComplete();
-        
+
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_comprador");
         auxBitacora.setAccionBitacora("Generar reporte de compradores mayoristas");
@@ -1022,7 +1014,7 @@ public class ReporteAgronegocioBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
-    
+
     public void generarGrupos() throws Exception {
 
         this.getConexion();
@@ -1064,14 +1056,14 @@ public class ReporteAgronegocioBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
-    
+
     public void generarRepresentantes() throws Exception {
 
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
-       
+
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/representantes.jasper"));
-        
+
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
         System.out.println(bytes.length);
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -1095,7 +1087,7 @@ public class ReporteAgronegocioBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
-    
+
     public void generarGruposPDF() throws Exception {
 
         this.getConexion();
@@ -1114,7 +1106,7 @@ public class ReporteAgronegocioBean extends Actividad {
         } else {
             jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/gruposProductoresTodos.jasper"));
         }
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.addHeader("Content-disposition", "attachment; filename=Grupos.pdf");
         ServletOutputStream stream = response.getOutputStream();
@@ -1135,15 +1127,15 @@ public class ReporteAgronegocioBean extends Actividad {
         this.bitacoraBo.create(auxBitacora);
 
     }
-    
+
     public void generarRepresentantesPDF() throws Exception {
 
         this.getConexion();
         Map<String, Object> parametros = new HashMap();
-       
+
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/agronegocio/representantes.jasper"));
-        
-         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.getConn());
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.addHeader("Content-disposition", "attachment; filename=Representantes.pdf");
         ServletOutputStream stream = response.getOutputStream();
@@ -1152,7 +1144,7 @@ public class ReporteAgronegocioBean extends Actividad {
         stream.close();
         FacesContext.getCurrentInstance().responseComplete();
 
-         TBitacora auxBitacora = new TBitacora();
+        TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_productor_Individual");
         auxBitacora.setAccionBitacora("Descargar reporte de representantes");
         auxBitacora.setDatosBitacora(""
@@ -1164,9 +1156,5 @@ public class ReporteAgronegocioBean extends Actividad {
         auxBitacora.setTUsuario(loginBean.getUsuarioActivo());
         this.bitacoraBo.create(auxBitacora);
     }
-    
-    
-    
-    
 
 }

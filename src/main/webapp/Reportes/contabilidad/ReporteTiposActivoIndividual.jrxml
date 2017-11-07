@@ -60,7 +60,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 	<detail>
 		<band height="219" splitType="Stretch">
 			<textField>
-				<reportElement x="64" y="29" width="222" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
+				<reportElement x="103" y="29" width="183" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
 				<textFieldExpression><![CDATA[$F{nombre_tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -68,8 +68,8 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 				<textFieldExpression><![CDATA[$F{codigo_tipo}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="64" y="59" width="222" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
-				<textFieldExpression><![CDATA[$F{vida_util_tipo}+" AÑO/S"]]></textFieldExpression>
+				<reportElement x="103" y="59" width="183" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
+				<textFieldExpression><![CDATA[$F{vida_util_tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="386" y="59" width="168" height="20" uuid="0970ada3-2a53-4a94-a73b-08532b6ab137"/>
@@ -164,11 +164,11 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="58" width="63" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
+				<reportElement x="1" y="58" width="91" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[VIDA ÚTIL:]]></text>
+				<text><![CDATA[VIDA ÚTIL (AÑOS):]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="286" y="29" width="100" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
@@ -178,7 +178,7 @@ WHERE t_tipo_activo.id_tipo = $P{idTipoActivo}]]>
 				<text><![CDATA[CÓDIGO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="29" width="63" height="20" uuid="e30f64f9-c693-45d3-b993-5041123a02c2"/>
+				<reportElement x="1" y="29" width="91" height="20" uuid="e30f64f9-c693-45d3-b993-5041123a02c2"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>

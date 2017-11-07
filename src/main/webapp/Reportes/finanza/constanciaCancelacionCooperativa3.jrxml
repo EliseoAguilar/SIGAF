@@ -63,14 +63,14 @@ FROM
 	<columnHeader>
 		<band height="59" splitType="Stretch">
 			<staticText>
-				<reportElement x="299" y="18" width="56" height="24" uuid="c7fbd70c-13e3-4319-aa23-e3081190ff36"/>
+				<reportElement x="342" y="18" width="56" height="24" uuid="c7fbd70c-13e3-4319-aa23-e3081190ff36"/>
 				<textElement>
 					<font size="11" isBold="true" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Usulután,]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="352" y="18" width="154" height="24" uuid="4a0bd5d0-9c51-469c-8366-fbd87f131f66"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="398" y="18" width="108" height="24" uuid="4a0bd5d0-9c51-469c-8366-fbd87f131f66"/>
 				<textElement>
 					<font size="11" isBold="true" isPdfEmbedded="false"/>
 				</textElement>

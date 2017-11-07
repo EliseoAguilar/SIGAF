@@ -82,10 +82,10 @@
                                         </p:row>
                                         <p:row>
                                             <p:column>
-                                                <p:calendar navigator="true" yearRange="1910:" maxdate="#{configuracionAgronegocioBean.hoy}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"    value="#{reporteFinanzaBean.fechaInicial}"/><br></br>
+                                                <p:calendar navigator="true"  value="#{reporteFinanzaBean.fechaInicial}" maxdate="#{reporteFinanzaBean.fechaActual}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"   /><br></br>
                                             </p:column>
                                             <p:column>
-                                                <p:calendar navigator="true" yearRange="1910:" maxdate="#{configuracionAgronegocioBean.hoy}"  locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  value="#{reporteFinanzaBean.fechaFin}"/><br></br>
+                                                <p:calendar navigator="true"  value="#{reporteFinanzaBean.fechaFin}" maxdate="#{reporteFinanzaBean.fechaActual}" locale="es" pattern="dd/MM/yyyy" mask="true" showOn="button"  id="cfecha"  /><br></br>
                                             </p:column>
                                         </p:row>
                                     </p:outputPanel>

@@ -104,7 +104,7 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -130,24 +130,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%" >
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -184,7 +184,7 @@
                                              <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -210,24 +210,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -266,7 +266,7 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -292,24 +292,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -347,7 +347,7 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -373,24 +373,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%" >
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -427,7 +427,7 @@
                                              <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -459,18 +459,18 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                           <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -507,7 +507,7 @@
                                              <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -533,24 +533,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -587,7 +587,7 @@
                                              <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -613,24 +613,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>
@@ -667,7 +667,7 @@
                                             <p:column headerText="Nº" width="5%" style=" text-align: center" >
                                                 <h:outputText value="#{No+1}" />
                                             </p:column> 
-                                            <p:column  width="17%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
+                                            <p:column  width="12%"  headerText="Interés (%)" filterBy="#{pol.tasaInteres}" sortBy="#{pol.tasaInteres}">
                                                 <div align="center"> <h:outputText value="#{pol.tasaInteres}">
                                                         <f:convertNumber     pattern="#0.00" locale="en-US" /> 
                                                     </h:outputText>
@@ -693,24 +693,24 @@
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column width="15%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
+                                            <p:column width="12%" headerText="Registro" filterBy="#{pol.registro}" sortBy="#{pol.registro}" >
                                                 <div align="center"> <h:outputText value="#{pol.registro}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                     </h:outputText>
                                                 </div>
                                             </p:column>
-                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="5%">
+                                            <p:column  rendered="#{pol.estado}" headerText="Estado" width="15%">
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: greenyellow" title="activo"  ></i>
+                                                    <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                                 </center>
                                             </p:column>
-                                            <p:column rendered="#{!pol.estado}" headerText="Estado" >
+                                            <p:column rendered="#{!pol.estado}" headerText="Estado" width="15%" >
                                                 <center>
-                                                    <i class="fa fa-circle" style="color: red" title="inactivo"  ></i>
+                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                                 </center>
                                             </p:column>
                                             <p:column width="6%">
-                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()" style="#{empleadoBean.btnVer}" icon="fa fa-eye" title="Ver">
+                                                <p:commandButton update=":padding" oncomplete="PF('dlVer').show()"  icon="fa fa-eye" title="Ver">
                                                     <f:setPropertyActionListener  value="#{pol}" target="#{politicaBean.politicaSeleccionada}"  />
                                                 </p:commandButton>
                                             </p:column>

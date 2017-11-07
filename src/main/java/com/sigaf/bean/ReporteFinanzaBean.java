@@ -44,7 +44,15 @@ public class ReporteFinanzaBean extends Actividad {
     private Integer estadoMensual;
     private Date fechaInicial;
     private Date fechaFin;
-    private Date hoy;
+    private Date fechaActual;
+
+    public Date getFechaActual() {
+        fechaActual = new Date();
+        return fechaActual;
+    }
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
     private IBitacoraBo bitacoraBo;
 
     public IBitacoraBo getBitacoraBo() {
@@ -75,13 +83,6 @@ public class ReporteFinanzaBean extends Actividad {
         return fechaFin;
     }
 
-    public Date getHoy() {
-        return new Date();
-    }
-
-    public void setHoy(Date hoy) {
-        this.hoy = hoy;
-    }
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;

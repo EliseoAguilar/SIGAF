@@ -5077,6 +5077,7 @@ public class ProyectoBean extends Actividad {
 
         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seguimiento guardado correctamente", null);
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
+        this.listaParametros2.clear();
         this.listaProyectoSeguimiento = this.iseguimientoBo.listaProyectoSeguimiento(this.proyectoSeleccionado.getIdproyecto());
         this.seguimiento= new TSeguimiento();
         limpiarSeguimiento();

@@ -1733,7 +1733,7 @@ public class EjercicioBean extends Actividad {
                     if (!listaDetallePartida.isEmpty()) {
 
                         int mes = llenarMesPeriodoAuxFecha(periodoNuevo.getMesPeriodo());
-                        this.fechaMinima = new Date(ejercicioViejo.getAhoEjercicio() - 1900, mes, 1);
+                        this.fechaMinima = new Date(ejercicio.getAhoEjercicio() - 1900, mes, 1);
                         this.partida = new TPartida();
                         this.partida.setFechaPartida(fechaMinima);
                         this.partida.setConceptoPartida("Inicio de operaciones del ejercicio " + this.ejercicio.getAhoEjercicio());
