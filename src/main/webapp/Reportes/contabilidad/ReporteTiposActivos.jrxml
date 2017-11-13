@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteTiposActivos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02a8fd36-b81a-4abb-b211-fedb11a14430">
-	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -28,6 +28,10 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 	<field name="id_cuenta_depreciacion_tipo" class="java.lang.Integer"/>
 	<field name="id_entidad_tipo" class="java.lang.Integer"/>
 	<field name="calculo_tipo_activo" class="java.lang.String"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num} + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -64,14 +68,14 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="5" width="46" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
+				<reportElement x="22" y="5" width="46" height="20" uuid="873c2b51-7504-4dc6-ba8f-d880aeb20338"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="153" y="4" width="92" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
+				<reportElement x="153" y="5" width="92" height="20" uuid="16b6717e-8db4-4503-803c-6b762879aaed"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -101,22 +105,29 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 				</textElement>
 				<text><![CDATA[DESCRIPCIÓN]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="20" height="20" uuid="2a20f794-0575-48b1-9920-9d714f42f400"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="153" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="68" y="7" width="85" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
+				<reportElement x="71" y="7" width="82" height="20" uuid="25b655d7-a9ef-4f78-8c27-529168e20c09"/>
 				<textFieldExpression><![CDATA[$F{nombre_tipo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="20" y="7" width="44" height="20" uuid="6163a9a2-92d0-45e9-9e53-e41e57a3d6f8"/>
+				<reportElement x="22" y="7" width="46" height="20" uuid="6163a9a2-92d0-45e9-9e53-e41e57a3d6f8"/>
 				<textFieldExpression><![CDATA[$F{codigo_tipo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="153" y="7" width="92" height="20" uuid="0873a9c4-aae4-4c6c-8101-8d0919abbb55"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{vida_util_tipo} ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vida_util_tipo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="450" y="7" width="100" height="20" uuid="0970ada3-2a53-4a94-a73b-08532b6ab137"/>
@@ -214,6 +225,10 @@ WHERE t_tipo_activo.id_entidad_tipo =$P{idEntidad} order by codigo_tipo]]>
 			<line>
 				<reportElement x="1" y="0" width="554" height="1" uuid="aa9b223c-1aae-43dc-b81a-10c53adcf433"/>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="7" width="20" height="20" uuid="e5c1252f-f8c6-4017-a16c-33697ef2da33"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>

@@ -53,7 +53,7 @@ WHERE
 				<reportElement x="0" y="69" width="555" height="1" uuid="ef8b563c-624a-440d-8783-052f1656aed2"/>
 			</line>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
-				<reportElement x="0" y="117" width="60" height="20" uuid="0b7f0488-afe9-42d2-92f2-e1a8f7e8d4c5"/>
+				<reportElement x="0" y="82" width="60" height="20" uuid="0b7f0488-afe9-42d2-92f2-e1a8f7e8d4c5"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>

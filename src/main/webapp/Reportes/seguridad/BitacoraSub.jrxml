@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BitacoraSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4eac451d-0ed7-43d3-882d-5ff05d29af6d">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fecha1" class="java.util.Date">
@@ -24,6 +24,10 @@
 	<field name="accion_bitacora" class="java.lang.String"/>
 	<field name="id_table_bitacora" class="java.lang.String"/>
 	<field name="datos_bitacora" class="java.lang.String"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num} + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -36,14 +40,14 @@
 				<reportElement x="0" y="22" width="555" height="1" uuid="044aee34-2b66-46a6-9b61-5303fb5bf9ba"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="2" width="100" height="20" uuid="ae5a9647-d3aa-4f76-8735-e34d2b965437"/>
+				<reportElement x="28" y="2" width="89" height="20" uuid="ae5a9647-d3aa-4f76-8735-e34d2b965437"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[TABLA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="2" width="100" height="20" uuid="e1b65762-1769-4309-aeff-240bdb1c921a"/>
+				<reportElement x="117" y="2" width="100" height="20" uuid="e1b65762-1769-4309-aeff-240bdb1c921a"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
@@ -64,18 +68,25 @@
 				<text><![CDATA[HORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="2" width="184" height="20" isPrintWhenDetailOverflows="true" uuid="40a22153-0bf1-413a-8f44-4416060f717b"/>
+				<reportElement x="217" y="2" width="173" height="20" isPrintWhenDetailOverflows="true" uuid="40a22153-0bf1-413a-8f44-4416060f717b"/>
 				<textElement>
 					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DATOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="2" width="27" height="20" uuid="93504788-fa2b-416f-9cb5-bda2edb8d629"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="1" width="100" height="20" uuid="fdf8d1cd-8372-4582-a155-610de08d6a7a"/>
+				<reportElement x="28" y="1" width="89" height="20" uuid="fdf8d1cd-8372-4582-a155-610de08d6a7a"/>
 				<textFieldExpression><![CDATA[$F{table_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH:mm:ss">
@@ -87,12 +98,16 @@
 				<textFieldExpression><![CDATA[$F{fecha_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="100" y="1" width="100" height="20" uuid="99836e85-b0b7-46d1-adab-e73e5528e094"/>
+				<reportElement x="117" y="1" width="100" height="20" uuid="99836e85-b0b7-46d1-adab-e73e5528e094"/>
 				<textFieldExpression><![CDATA[$F{accion_bitacora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="200" y="1" width="184" height="20" uuid="a190dce5-3fc9-45ad-ace2-0f7f6b33749c"/>
+				<reportElement x="217" y="1" width="173" height="20" uuid="a190dce5-3fc9-45ad-ace2-0f7f6b33749c"/>
 				<textFieldExpression><![CDATA[$F{datos_bitacora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="1" width="25" height="20" uuid="fa6f20ea-0974-4d0c-9208-910b4f0510ef"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

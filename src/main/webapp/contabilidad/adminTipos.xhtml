@@ -42,8 +42,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.crearTipo}"  oncomplete="PF('dialogCrear').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{tipoActivoBean.btnCancelar}">
+                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.crearTipo}"  oncomplete="PF('dialogCrear').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  icon="fa fa-fw fa-check"> </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{tipoActivoBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{tipoActivoBean.estadoValido}"  />
 
                                     </p:commandButton>
@@ -460,8 +460,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.actualizar}"  oncomplete="PF('dialogModificar').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{tipoActivoBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{tipoActivoBean.actualizar}"  oncomplete="PF('dialogModificar').hide()"   style="#{tipoActivoBean.btnNuevo}" update=":padding"  icon="fa fa-fw fa-check"> </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{tipoActivoBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{tipoActivoBean.estadoValido}"  />
                                     </p:commandButton>
                                 </div>
@@ -775,9 +775,9 @@
                                             <br></br>
                                             <hr></hr>
                                             <center>
-                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeBaja}" update=":padding" style="#{tipoActivoBean.btnNuevo}">
+                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeBaja}" update=":padding" style="#{tipoActivoBean.btnNuevo}" icon="fa fa-fw fa-check">
                                                 </p:commandButton>
-                                                <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()" style="#{tipoActivoBean.btnCancelar}"  value="No"> 
+                                                <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()" style="#{tipoActivoBean.btnCancelar}"  value="No" icon="fa fa-fw fa-close"> 
                                                 </p:commandButton>
                                             </center>
                                         </p:outputPanel>
@@ -793,9 +793,9 @@
                                             <br></br>
                                             <hr></hr>
                                             <center>
-                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeAlta}" update=":padding"   style="#{tipoActivoBean.btnNuevo}">
+                                                <p:commandButton value="Si" actionListener="#{tipoActivoBean.darDeAlta}" update=":padding"   style="#{tipoActivoBean.btnNuevo}" icon="fa fa-fw fa-check">
                                                 </p:commandButton>
-                                                <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').show()"  value="No" style="#{tipoActivoBean.btnCancelar}"> 
+                                                <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').show()"  value="No" style="#{tipoActivoBean.btnCancelar}"  icon="fa fa-fw fa-close"> 
                                                 </p:commandButton>
                                             </center>
                                         </p:outputPanel>

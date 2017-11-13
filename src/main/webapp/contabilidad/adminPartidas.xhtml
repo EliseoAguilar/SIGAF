@@ -191,8 +191,8 @@
                                     <br></br>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.crear}"  update=":padding"  style="#{partidaBean.btnNuevo}"> </p:commandButton>
-                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{partidaBean.btnCancelar}"  >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.crear}"  update=":padding"  style="#{partidaBean.btnNuevo}" icon="fa fa-fw fa-check"> </p:commandButton>
+                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{partidaBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                         <f:setPropertyActionListener value="#{false}" target="#{partidaBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>
@@ -451,8 +451,8 @@
                                     <br></br>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.actualizar()}"  oncomplete="PF('dialogActualizar').hide()" update=":padding"  style="#{partidaBean.btnNuevo}"> </p:commandButton>
-                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogActualizar').hide()"   style="#{partidaBean.btnCancelar}"  >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{partidaBean.actualizar()}"  oncomplete="PF('dialogActualizar').hide()" update=":padding"  style="#{partidaBean.btnNuevo}" icon="fa fa-fw fa-check" > </p:commandButton>
+                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogActualizar').hide()"   style="#{partidaBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                         <f:setPropertyActionListener value="#{false}" target="#{partidaBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>
@@ -620,9 +620,9 @@
                                 </p:panelGrid>
                                 <hr></hr>
                                 <center>
-                                    <p:commandButton value="Si" actionListener="#{partidaBean.eliminar()}" update=":padding" style="#{partidaBean.btnNuevo}">
+                                    <p:commandButton value="Si" actionListener="#{partidaBean.eliminar()}" update=":padding" style="#{partidaBean.btnNuevo}" icon="fa fa-fw fa-check">
                                     </p:commandButton>
-                                    <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"  style="#{partidaBean.btnCancelar}"  value="No"> 
+                                    <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"  style="#{partidaBean.btnCancelar}"  value="No" icon="fa fa-fw fa-close"> 
                                     </p:commandButton>
                                 </center>
                             </p:outputPanel>

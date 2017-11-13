@@ -31,8 +31,8 @@
                                 <hr></hr>
 
 
-                                <p:commandButton value="Si" id="withI"  onstart="PF('statusDialog').show()" actionListener="#{baseBean.hacerBackup()}"  oncomplete="PF('dlNew').hide()"  onsuccess=" PF('statusDialog').hide()"  style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                <p:commandButton value="No" id="with" oncomplete="PF('dlNew').hide()" update=":padding"  style="#{baseBean.btnCancelar}" >
+                                <p:commandButton value="Si" id="withI"  onstart="PF('statusDialog').show()" actionListener="#{baseBean.hacerBackup()}"  oncomplete="PF('dlNew').hide()"  icon="fa fa-fw fa-check" onsuccess=" PF('statusDialog').hide()"  style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                <p:commandButton value="No" id="with" oncomplete="PF('dlNew').hide()" update=":padding"  style="#{baseBean.btnCancelar}" icon="fa fa-fw fa-close" >
 
                                 </p:commandButton>
                             </div>
@@ -168,8 +168,8 @@
                                 <br></br>
                                 <h:outputText value="#{baseBean.baseSeleccionada.name}"/>
                                 <hr></hr>
-                                <p:commandButton value="Si"  actionListener="#{baseBean.restaurarBackup()}" onstart="PF('statusDialog').show()"  oncomplete="PF('dlAlta').hide()" onsuccess=" PF('statusDialog').hide()"    style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                <p:commandButton value="No"  oncomplete="PF('dlAlta').hide()" update=":padding"  style="#{baseBean.btnCancelar}" >
+                                <p:commandButton value="Si"  actionListener="#{baseBean.restaurarBackup()}" onstart="PF('statusDialog').show()"  icon="fa fa-fw fa-check" oncomplete="PF('dlAlta').hide()" onsuccess=" PF('statusDialog').hide()"    style="#{baseBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                <p:commandButton value="No"  oncomplete="PF('dlAlta').hide()" update=":padding"  style="#{baseBean.btnCancelar}"  icon="fa fa-fw fa-close" >
 
                                 </p:commandButton>
                             </div>

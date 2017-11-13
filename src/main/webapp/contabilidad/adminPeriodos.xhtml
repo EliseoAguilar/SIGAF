@@ -49,8 +49,8 @@
                                             <br></br>
                                             <br></br>
                                             <hr></hr>
-                                            <p:commandButton value="Si" id="withI" actionListener="#{ejercicioBean.agregarInicio}"    oncomplete="PF('dialogPeriodoEjer').hide()"   update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
-                                            <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}"  >
+                                            <p:commandButton value="Si" id="withI" actionListener="#{ejercicioBean.agregarInicio}"    oncomplete="PF('dialogPeriodoEjer').hide()"  icon="fa fa-fw fa-check" update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
+                                            <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                                 <f:setPropertyActionListener value="#{false}" target="#{ejercicioBean.estadoValido}" />
                                             </p:commandButton>
                                         </div>
@@ -210,8 +210,8 @@
                                                     <br></br>
                                                     <br></br>
                                                     <hr></hr>
-                                                    <p:commandButton value="Si" id="withI" actionListener="#{ejercicioBean.agregarCierrePeriodo()}"  oncomplete="PF('dialogPeriodoEjer').hide()"  update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
-                                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}"  >
+                                                    <p:commandButton value="Si" id="withI" actionListener="#{ejercicioBean.agregarCierrePeriodo()}"  oncomplete="PF('dialogPeriodoEjer').hide()" icon="fa fa-fw fa-check" update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
+                                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}"  icon="fa fa-fw fa-close">
                                                         <f:setPropertyActionListener value="#{false}" target="#{ejercicioBean.estadoValido}" />
                                                     </p:commandButton>
                                                 </div>
@@ -436,8 +436,8 @@
                                                     <br></br>
                                                     <br></br>
                                                     <hr></hr>
-                                                    <p:commandButton value="Si" id="withI"  onstart="PF('statusDialog').show()"  onsuccess=" PF('statusDialog').hide()" actionListener="#{ejercicioBean.agregarCierreEjercicio()}"   oncomplete="PF('dialogPeriodoEjer').hide()"  update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
-                                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}"  >
+                                                    <p:commandButton value="Si" id="withI"  onstart="PF('statusDialog').show()"  onsuccess=" PF('statusDialog').hide()" icon="fa fa-fw fa-check" actionListener="#{ejercicioBean.agregarCierreEjercicio()}"   oncomplete="PF('dialogPeriodoEjer').hide()"  update=":opDataPer"  style="#{ejercicioBean.btnNuevo}"> </p:commandButton>
+                                                    <p:commandButton value="No" id="with"   oncomplete="PF('dialogPeriodoEjer').hide()"   style="#{ejercicioBean.btnCancelar}"  icon="fa fa-fw fa-close">
                                                         <f:setPropertyActionListener value="#{false}" target="#{ejercicioBean.estadoValido}" />
                                                     </p:commandButton>
                                                 </div>

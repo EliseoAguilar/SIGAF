@@ -59,8 +59,8 @@
                                             <br></br>
                                             <br></br>
                                             <hr></hr>
-                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.crear}"      style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.crear}"      style="#{activoFijoBean.btnNuevo}" update=":padding" icon="fa fa-fw fa-check"  > </p:commandButton>
+                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close">
                                                 <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoValido}" />
                                             </p:commandButton>
                                         </div>
@@ -284,8 +284,8 @@
                                             ¿Estás seguro de guardar?
                                             <br></br>
                                             <hr></hr>
-                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.actualizar()}"   oncomplete="PF('dialogActualizar').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                            <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.actualizar()}"   oncomplete="PF('dialogActualizar').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding"  icon="fa fa-fw fa-check" > </p:commandButton>
+                                            <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                                 <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoValido}" />
                                             </p:commandButton>
                                         </div>
@@ -646,9 +646,9 @@
 
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeBaja}" update=":padding" style="#{activoFijoBean.btnNuevo}">
+                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeBaja}" update=":padding" style="#{activoFijoBean.btnNuevo}" icon="fa fa-fw fa-check">
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelarCerrar"   oncomplete="PF('dlBaja').hide()" style="#{activoFijoBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton id="btnCancelarCerrar"   oncomplete="PF('dlBaja').hide()" style="#{activoFijoBean.btnCancelar}"  value="No" icon="fa fa-fw fa-close"> 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>
@@ -664,9 +664,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeAlta}" update=":padding"   style="#{activoFijoBean.btnNuevo}">
+                                        <p:commandButton value="Si" actionListener="#{activoFijoBean.darDeAlta}" update=":padding"   style="#{activoFijoBean.btnNuevo}" icon="fa fa-fw fa-check">
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').hide()"  value="No" style="#{activoFijoBean.btnCancelar}"> 
+                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').hide()"  value="No" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close"> 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>
@@ -1033,8 +1033,8 @@
                                         <br></br>
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registro()}"   oncomplete="PF('dialogActualizar').hide()"    style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registro()}"   oncomplete="PF('dialogActualizar').hide()" icon="fa fa-fw fa-check"    style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                             <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </div>
@@ -1250,8 +1250,8 @@
                                         ¿Estás seguro de guardar?
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registroActulizar()}"    oncomplete="PF('dialogActualizar').hide()"  style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                        <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.registroActulizar()}"    oncomplete="PF('dialogActualizar').hide()"  style="#{activoFijoBean.btnNuevo}" update=":padding" icon="fa fa-fw fa-check"  > </p:commandButton>
+                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogActualizar').hide()" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close">
                                             <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </div>
@@ -1449,8 +1449,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.darDeBajaContable()}"   oncomplete="PF('dialogBaja').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogBaja').hide()" style="#{activoFijoBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{activoFijoBean.darDeBajaContable()}"   oncomplete="PF('dialogBaja').hide()"   style="#{activoFijoBean.btnNuevo}" update=":padding" icon="fa fa-fw fa-check" > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogBaja').hide()" style="#{activoFijoBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                         <f:setPropertyActionListener value="#{false}" target="#{activoFijoBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>

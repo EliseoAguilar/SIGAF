@@ -44,8 +44,8 @@
                                         ¿Estás seguro de guardar?
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrar}"  oncomplete="PF('dialogCrear').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                        <p:commandButton value="No"  oncomplete="PF('dialogCrear').hide()" style="#{configuracionBean.btnCancelar}" >
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrar}"  oncomplete="PF('dialogCrear').hide()" icon="fa fa-fw fa-check"  style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrear').hide()" style="#{configuracionBean.btnCancelar}" icon="fa fa-fw fa-close" >
                                             <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValido}"/>
                                         </p:commandButton>
                                     </div>
@@ -58,8 +58,8 @@
                                         ¿Estás seguro de guardar?
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarBalance()}"  oncomplete="PF('dialogCrearBalance').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearBalance').hide()" style="#{configuracionBean.btnCancelar}" >
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarBalance()}"  oncomplete="PF('dialogCrearBalance').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding" icon="fa fa-fw fa-check" > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearBalance').hide()" style="#{configuracionBean.btnCancelar}" icon="fa fa-fw fa-close">
                                             <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValidoBalance}"/>
                                         </p:commandButton>
                                     </div>
@@ -72,8 +72,8 @@
                                         ¿Estás seguro de guardar?
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarEstado()}"  oncomplete="PF('dialogCrearEstado').hide()"   style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearEstado').hide()" style="#{configuracionBean.btnCancelar}" >
+                                        <p:commandButton value="Si"  actionListener="#{configuracionBean.registrarEstado()}"  oncomplete="PF('dialogCrearEstado').hide()"  icon="fa fa-fw fa-check" style="#{configuracionBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                        <p:commandButton value="No"  oncomplete="PF('dialogCrearEstado').hide()" style="#{configuracionBean.btnCancelar}" icon="fa fa-fw fa-close">
                                             <f:setPropertyActionListener value="#{false}" target="#{configuracionBean.estadoValidoEstado}"/>
                                         </p:commandButton>
                                     </div>
