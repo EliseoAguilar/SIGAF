@@ -103,7 +103,7 @@
                     <p:outputPanel rendered="#{configuracionAgronegocioBean.showData}">
                         <h:form>        
                             #{configuracionAgronegocioBean.updateListaPoliticas()}
-                            <p:panel id="pDatosCultivos" header="Administrar políticas" style="width: 100%; margin: auto; margin-bottom: 20px" >
+                            <p:panel id="pDatosCultivos" header="Administrar políticas para agronegocios" style="width: 100%; margin: auto; margin-bottom: 20px" >
                                 <div align="center">
                                     <p:fieldset>
                                         <div align="left">
@@ -153,12 +153,12 @@
                                                 </h:outputText>
                                             </div>
                                         </p:column>
-                                        <p:column width="10%" rendered="#{configuraciones.estadoConfiguracion}" headerText="Estado">
+                                        <p:column width="10%" rendered="#{configuraciones.estadoConfiguracion}" headerText="Estado" sortBy="#{configuraciones.estadoConfiguracion}" >
                                             <center>
                                                 <h:outputText class="etiquetaAb" value="Activo" title="activo"  ></h:outputText>
                                             </center>
                                         </p:column>
-                                        <p:column width="10%" rendered="#{!configuraciones.estadoConfiguracion}" headerText="Estado" >
+                                        <p:column width="10%" rendered="#{!configuraciones.estadoConfiguracion}" headerText="Estado" sortBy="#{configuraciones.estadoConfiguracion}" >
                                             <center>
                                                  <h:outputText class="etiquetaSe" value="Inactivo" title="inactivo"  ></h:outputText>
                                             </center>
