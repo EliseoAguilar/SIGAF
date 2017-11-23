@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="desembolsoPersona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="434e6452-d722-420c-aac8-e6fc49cab9cb">
 	<property name="ireport.zoom" value="1.3636363636363635"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="408"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -238,7 +238,7 @@ WHERE
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[LIQUIDO A RECIBIR:]]></text>
+				<text><![CDATA[LÍQUIDO A RECIBIR:]]></text>
 			</staticText>
 			<textField pattern="$#,##0.00">
 				<reportElement x="366" y="74" width="100" height="20" uuid="309c37ff-c9af-4a88-a82a-9a0286f66b82"/>

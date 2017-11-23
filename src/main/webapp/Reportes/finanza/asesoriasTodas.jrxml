@@ -104,6 +104,10 @@ FROM
 	<variable name="t_asesoria_precio_2" class="java.lang.Float" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_asesoria_precio}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<group name="t_empleado_nombre_empleado">
 		<groupExpression><![CDATA[$F{t_empleado_nombre_empleado}]]></groupExpression>
 		<groupHeader>
@@ -154,7 +158,7 @@ FROM
 	<columnHeader>
 		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="2" width="72" height="20" uuid="c4467ae2-4838-4362-b4ee-1dd46deb5bc2"/>
+				<reportElement x="23" y="2" width="62" height="20" uuid="c4467ae2-4838-4362-b4ee-1dd46deb5bc2"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -171,7 +175,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">BENEFICIARIOS</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="73" y="2" width="81" height="20" uuid="0d4fe5ee-3f66-4d8e-84a1-9e08d90e06f3"/>
+				<reportElement x="85" y="2" width="81" height="20" uuid="0d4fe5ee-3f66-4d8e-84a1-9e08d90e06f3"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -198,16 +202,23 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="23" height="20" uuid="ff3d9957-93ee-4e05-822c-d03b1d7dd918"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="26" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="1" y="2" width="72" height="20" uuid="78ca0dd4-cfcf-4cdb-8c44-4ed21952b48b"/>
+				<reportElement x="23" y="2" width="62" height="20" uuid="78ca0dd4-cfcf-4cdb-8c44-4ed21952b48b"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="73" y="2" width="215" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
+				<reportElement x="85" y="2" width="203" height="20" uuid="4c8f378c-12f6-45ed-8523-1564739cb051"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_descripcion}]]></textFieldExpression>
 			</textField>
@@ -227,6 +238,10 @@ FROM
 			<textField isBlankWhenNull="true">
 				<reportElement x="503" y="2" width="52" height="20" uuid="140a692c-3216-44dc-b447-aa1d6c675ece"/>
 				<textFieldExpression><![CDATA[$F{t_asesoria_estado}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="23" height="20" uuid="ef3d53d6-817c-4b5f-96b8-e83c4c92d526"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

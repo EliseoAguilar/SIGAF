@@ -5449,9 +5449,11 @@ public class ProyectoBean extends Actividad {
     public void createPagoTotal() {
 
         TPago pagoTotal = new TPago();
-        pagoTotal.setCuota((this.pago.getSaldocapital().add(this.totalMoraGenerada)));
-        pagoTotal.setInteres(new BigDecimal("0"));
-        pagoTotal.setAbono(new BigDecimal("0"));
+        
+        pagoTotal.setCuota((this.pago.getSaldocapital()));
+        pagoTotal.setInteres(this.interesAcumulados);      
+     
+        pagoTotal.setAbono(pagoTotal.getCuota().subtract(this.interesAcumulados));
         pagoTotal.setCapitalamortizado(this.pago.getSaldocapital());
         pagoTotal.setSaldocapital(new BigDecimal("0"));
         pagoTotal.setSaldoadicional(new BigDecimal("0"));
@@ -5871,7 +5873,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5889,7 +5891,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono(new BigDecimal(moraGenerada));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5907,7 +5909,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -5925,32 +5927,29 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
             }
         }
-        //this.totalCapitalMora = this.mora.add(this.pago.getSaldocapital());
+        
+        this.calcularInteresPagoTotal(this.listaPagosMora.size());
+        
+           //this.totalCapitalMora = this.mora.add(this.pago.getSaldocapital());
         if (this.listaPagosMora.size() == 0) {
             this.mora = new BigDecimal("0");
             this.totalCapitalMora = this.pago.getSaldocapital();
+            this.interesAcumulados= new BigDecimal("0");
         } else {
             this.mora = new BigDecimal("0");
             for (int i = 0; i < this.listaPagosMora.size(); i++) {
                 this.mora = this.mora.add(this.listaPagosMora.get(i).getAbono());
                 this.totalMoraGenerada= this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
             }
-            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada);
+            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada).add(this.interesAcumulados);
         }
-        
-        
-        
-        System.out.println(this.listaPagosMora.size());
-        
        
-
-        
         
         this.mostrarCierre = false;
         this.mostrarCierrePersona = false;
@@ -6059,7 +6058,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -6077,7 +6076,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -6095,7 +6094,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
@@ -6113,28 +6112,34 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0
                 this.fechaEstipulada = calendar.getTime();
             }
         }
-        //this.totalCapitalMora = this.mora.add(this.pago.getSaldocapital());
+     
+        
+        
+        
+        System.out.println(this.listaPagosMora.size());
+        
+        this.calcularInteresPagoTotal(this.listaPagosMora.size());
+        
+           //this.totalCapitalMora = this.mora.add(this.pago.getSaldocapital());
         if (this.listaPagosMora.size() == 0) {
             this.mora = new BigDecimal("0");
             this.totalCapitalMora = this.pago.getSaldocapital();
+            this.interesAcumulados= new BigDecimal("0");
         } else {
             this.mora = new BigDecimal("0");
             for (int i = 0; i < this.listaPagosMora.size(); i++) {
                 this.mora = this.mora.add(this.listaPagosMora.get(i).getAbono());
                 this.totalMoraGenerada= this.totalMoraGenerada.add(this.listaPagosMora.get(i).getInteres());
             }
-            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada);
+            this.totalCapitalMora = this.pago.getSaldocapital().add(this.totalMoraGenerada).add(this.interesAcumulados);
         }
         
-        
-        
-        System.out.println(this.listaPagosMora.size());
         
         this.mostrarCierre = false;
         this.mostrarCierrePersona = false;
@@ -6146,6 +6151,175 @@ public class ProyectoBean extends Actividad {
         this.setShowData(false);
 
     }
+    
+    private BigDecimal interesAcumulados;
+
+    public BigDecimal getInteresAcumulados() {
+        return interesAcumulados;
+    }
+
+    public void setInteresAcumulados(BigDecimal interesAcumulados) {
+        this.interesAcumulados = interesAcumulados;
+    }
+    
+    public void calcularInteresPagoTotal(Integer numCuotasRetraso){
+              
+        BigDecimal interesAnual;
+        BigDecimal interesMensual;
+        this.interesAcumulados=new BigDecimal("0");
+        totalCuotas = new BigDecimal("0");
+        totalInteres = new BigDecimal("0");
+        totalAbono = new BigDecimal("0");
+        totalAmortizado = new BigDecimal("0");
+        totalCapital = new BigDecimal("0");
+        
+        Integer cantidad;
+        
+        
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
+            cantidad=numCuotasRetraso * 1;
+        } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+             cantidad=numCuotasRetraso * 3;
+        } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+             cantidad=numCuotasRetraso * 6;
+        } else {
+             cantidad=numCuotasRetraso * 12;
+        }
+        
+        
+        
+        
+        this.politicaSeleccionada = this.ipoliticaBo.getPoliticaHistorica(this.proyectoSeleccionado.getTPolitica().getIdPolitica());
+       
+        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {          
+           
+          
+            BigDecimal interesA;
+            BigDecimal abonoA = new BigDecimal("0");
+            BigDecimal capital = this.pago.getSaldocapital();
+            BigDecimal capitalA = new BigDecimal("0");
+         
+            
+            for (int i = 0; i < cantidad; i++) {
+                
+             
+                interesA = (capital.multiply((this.politicaSeleccionada.getTasaInteres().divide(new BigDecimal("100")).multiply(new BigDecimal(this.proyectoSeleccionado.getPlazo())))));
+                interesAnual = interesA.divide(new BigDecimal(this.proyectoSeleccionado.getPlazo()), 5, RoundingMode.HALF_UP);
+                interesMensual = interesAnual.divide(new BigDecimal("12"), 5, RoundingMode.HALF_UP);
+                this.intereses = this.intereses.add(interesMensual);
+                abonoA = this.couto.subtract(interesMensual);
+                capital = capital.subtract(abonoA);            
+                capitalA = capitalA.add(abonoA);
+                this.interesAcumulados= this.interesAcumulados.add(interesMensual);
+               
+            }
+           
+        } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
+           
+            BigDecimal interesA;
+            BigDecimal abonoA = new BigDecimal("0");
+            BigDecimal capital = this.pago.getSaldocapital();
+            BigDecimal capitalA = new BigDecimal("0");
+            BigDecimal interesAnual2;
+            BigDecimal interesMensual2;
+          
+            BigDecimal interesM = new BigDecimal("0");
+            BigDecimal abonoM = new BigDecimal("0");
+            BigDecimal capitalM = new BigDecimal("0");
+            BigDecimal capitalAM = new BigDecimal("0");
+          
+            for (int i = 0; i < cantidad; i++) {
+                
+          
+                interesA = (capital.multiply((this.politicaSeleccionada.getTasaInteres().divide(new BigDecimal("100")).multiply(new BigDecimal(this.proyectoSeleccionado.getPlazo())))));
+                interesAnual2 = interesA.divide(new BigDecimal(this.proyectoSeleccionado.getPlazo()), 5, RoundingMode.HALF_UP);
+                interesMensual2 = interesAnual2.divide(new BigDecimal("12"), 5, RoundingMode.HALF_UP);
+                this.intereses = this.intereses.add(interesMensual2);
+             
+                abonoA = this.couto.subtract(interesMensual2);
+                capital = capital.subtract(abonoA);
+                capitalA = capitalA.add(abonoA);
+                interesM = interesM.add(interesMensual2);
+                this.interesAcumulados= this.interesAcumulados.add(interesM);
+                abonoM = abonoM.add(abonoA);
+                capitalM = capitalA;
+                capitalAM = capital;
+               
+            }
+           
+        } else if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
+            
+            BigDecimal interesA;
+            BigDecimal abonoA = new BigDecimal("0");
+            BigDecimal capital = this.pago.getSaldocapital();
+            BigDecimal capitalA = new BigDecimal("0");
+            BigDecimal interesAnual2;
+            BigDecimal interesMensual2;
+          
+            BigDecimal interesM = new BigDecimal("0");
+            BigDecimal abonoM = new BigDecimal("0");
+            BigDecimal capitalM = new BigDecimal("0");
+            BigDecimal capitalAM = new BigDecimal("0");
+           
+            for (int i = 0; i < cantidad; i++) {
+              
+                interesA = (capital.multiply((this.politicaSeleccionada.getTasaInteres().divide(new BigDecimal("100")).multiply(new BigDecimal(this.proyectoSeleccionado.getPlazo())))));
+                interesAnual2 = interesA.divide(new BigDecimal(this.proyectoSeleccionado.getPlazo()), 5, RoundingMode.HALF_UP);
+                interesMensual2 = interesAnual2.divide(new BigDecimal("12"), 5, RoundingMode.HALF_UP);
+                this.intereses = this.intereses.add(interesMensual2);
+                this.interesAcumulados= this.interesAcumulados.add(this.intereses);
+                abonoA = this.couto.subtract(interesMensual2);
+                capital = capital.subtract(abonoA);
+                capitalA = capitalA.add(abonoA);
+                interesM = interesM.add(interesMensual2);
+                this.interesAcumulados= this.interesAcumulados.add(interesM);
+                abonoM = abonoM.add(abonoA);
+                capitalM = capitalA;
+                capitalAM = capital;
+               
+            }
+           
+        } else {
+           
+            BigDecimal interesA;
+            BigDecimal abonoA = new BigDecimal("0");
+            BigDecimal capital = this.pago.getSaldocapital();
+            BigDecimal capitalA = new BigDecimal("0");
+            BigDecimal interesAnual2;
+            BigDecimal interesMensual2;
+            
+            BigDecimal interesM = new BigDecimal("0");
+            BigDecimal abonoM = new BigDecimal("0");
+            BigDecimal capitalM = new BigDecimal("0");
+            BigDecimal capitalAM = new BigDecimal("0");
+         
+            for (int i = 0; i < cantidad; i++) {
+              
+                interesA = (capital.multiply((this.politicaSeleccionada.getTasaInteres().divide(new BigDecimal("100")).multiply(new BigDecimal(this.proyectoSeleccionado.getPlazo())))));
+                interesAnual2 = interesA.divide(new BigDecimal(this.proyectoSeleccionado.getPlazo()), 5, RoundingMode.HALF_UP);
+                interesMensual2 = interesAnual2.divide(new BigDecimal("12"), 5, RoundingMode.HALF_UP);
+                this.intereses = this.intereses.add(interesMensual2);
+                this.interesAcumulados= this.interesAcumulados.add(this.intereses);
+                abonoA = this.couto.subtract(interesMensual2);
+                capital = capital.subtract(abonoA);
+                capitalA = capitalA.add(abonoA);
+                interesM = interesM.add(interesMensual2);
+                this.interesAcumulados= this.interesAcumulados.add(interesM);
+                abonoM = abonoM.add(abonoA);
+                capitalM = capitalA;
+                capitalAM = capital;
+                
+            }
+
+        }
+       
+        
+        System.out.println(numCuotasRetraso);
+        System.out.println(this.interesAcumulados);
+        
+    }
+    
+    
     
     private Integer numeroTotalDesembolsos;
 

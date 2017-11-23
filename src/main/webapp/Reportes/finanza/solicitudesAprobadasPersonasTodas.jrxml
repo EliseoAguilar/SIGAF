@@ -91,6 +91,10 @@ FROM
 	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
 	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
 	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -136,25 +140,18 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="52" y="2" width="70" height="20" uuid="c0c2ebfd-9fe6-4462-8443-cd96eb51b6e7"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DUI CLIENTE</style>]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="22" width="555" height="1" uuid="012e6072-b779-428c-bac8-4e613baca6ef"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="2" width="52" height="20" uuid="2250fff1-2360-4083-8ac7-00bed7822bbe"/>
+				<reportElement x="22" y="2" width="52" height="20" uuid="2250fff1-2360-4083-8ac7-00bed7822bbe"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="122" y="2" width="75" height="20" uuid="02a6dc59-549b-4e3b-8d79-0ec0b0c7a213"/>
+				<reportElement x="84" y="2" width="113" height="20" uuid="02a6dc59-549b-4e3b-8d79-0ec0b0c7a213"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -174,26 +171,26 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PAGO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="22" height="20" uuid="92f1c432-2d15-4379-a336-a27f99f1066b"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="52" height="20" uuid="128c0d01-c49e-4804-ab78-13fb4845a1d3"/>
+				<reportElement x="22" y="0" width="62" height="20" uuid="128c0d01-c49e-4804-ab78-13fb4845a1d3"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="52" y="0" width="70" height="20" uuid="baf85d2f-289d-4da5-a836-aaff260505c3"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_cliente_dui_cliente}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="122" y="0" width="151" height="20" uuid="5f28be58-7636-45c6-8f36-98cfd8afe6f2"/>
+				<reportElement x="84" y="0" width="189" height="20" uuid="5f28be58-7636-45c6-8f36-98cfd8afe6f2"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -233,6 +230,13 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_aprovacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="22" height="20" uuid="77b7b8bf-5abc-45c8-8ec5-2e569cb72a95"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

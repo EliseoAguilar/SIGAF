@@ -94,17 +94,21 @@ FROM
 	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
 	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
 	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="63" height="20" uuid="93c76ac0-f792-4b80-8070-f22000316f7f"/>
+				<reportElement x="25" y="0" width="63" height="20" uuid="93c76ac0-f792-4b80-8070-f22000316f7f"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="68" y="0" width="207" height="20" uuid="ba9d0d96-dcb8-4915-bdbd-6681512eda47"/>
+				<reportElement x="93" y="0" width="182" height="20" uuid="ba9d0d96-dcb8-4915-bdbd-6681512eda47"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
@@ -137,6 +141,10 @@ FROM
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="25" height="20" uuid="01ba22ab-94c9-47eb-879a-fb891f9c9756"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

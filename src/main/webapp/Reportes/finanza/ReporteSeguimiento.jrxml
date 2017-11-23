@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProyectoSeguimiento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="669d977c-beb6-4031-97cf-c28dba5f2d07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="331"/>
+	<property name="ireport.y" value="353"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -127,7 +127,7 @@ WHERE
 				<reportElement x="-2" y="388" width="555" height="1" uuid="d5752fd1-d097-4587-b6d9-7eecfe56dc49"/>
 			</line>
 			<staticText>
-				<reportElement x="17" y="368" width="75" height="20" uuid="de8e374e-e615-45e4-9503-cee23ae83ce9"/>
+				<reportElement x="41" y="368" width="75" height="20" uuid="de8e374e-e615-45e4-9503-cee23ae83ce9"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -240,14 +240,14 @@ WHERE
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PARÁMETROS</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="233" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
+				<reportElement x="257" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">VALOR</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="303" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
+				<reportElement x="327" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -298,18 +298,25 @@ WHERE
 				<text><![CDATA[DESTINO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="136" y="368" width="75" height="20" uuid="7f26ea88-fedd-407e-8e52-721f0caf90bd"/>
+				<reportElement x="160" y="368" width="75" height="20" uuid="7f26ea88-fedd-407e-8e52-721f0caf90bd"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">UNIDAD</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="368" width="41" height="20" uuid="b1cce692-1190-490d-a56a-4b5b11281336"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
 			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="84">
 			<subreport>
-				<reportElement x="17" y="0" width="519" height="67" uuid="1317071e-5c33-4af4-88ed-d758fe811598"/>
+				<reportElement x="0" y="0" width="553" height="67" uuid="1317071e-5c33-4af4-88ed-d758fe811598"/>
 				<subreportParameter name="id_seguimiento">
 					<subreportParameterExpression><![CDATA[$F{t_seguimiento_idseguimiento}]]></subreportParameterExpression>
 				</subreportParameter>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudesAprobadasCooperativas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="914a45ee-5a47-4deb-9726-c6d1a9d51835">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="17"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -98,6 +98,10 @@ FROM
 	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
 	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
 	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -130,14 +134,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REGISTRO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="4" width="89" height="20" uuid="e657f9dd-14fc-4d62-8471-20e2eb6ee662"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="143" y="4" width="76" height="20" uuid="4fd0ff36-729b-4ec8-9ae7-b232353e3348"/>
+				<reportElement x="83" y="4" width="161" height="20" uuid="4fd0ff36-729b-4ec8-9ae7-b232353e3348"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -172,7 +169,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="4" width="42" height="20" uuid="303d9eed-713d-4472-86fd-e0eaea6e3ca7"/>
+				<reportElement x="25" y="4" width="42" height="20" uuid="303d9eed-713d-4472-86fd-e0eaea6e3ca7"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -181,6 +178,13 @@ FROM
 			<line>
 				<reportElement x="0" y="24" width="555" height="1" uuid="35a4c5ec-4e96-4126-9267-d2c258118adf"/>
 			</line>
+			<staticText>
+				<reportElement x="0" y="4" width="22" height="20" uuid="5df8759c-511d-4437-aff9-d8caecdfddb5"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -193,18 +197,11 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="142" y="2" width="148" height="20" uuid="2a85e085-a65c-439c-adcc-2f85e1be9d1d"/>
+				<reportElement x="82" y="2" width="199" height="20" uuid="2a85e085-a65c-439c-adcc-2f85e1be9d1d"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Crédito para empleado": false || $F{t_proyecto_idtipocredito}.equals(2)? "Crédito para inversión cooperativa": false  || $F{t_proyecto_idtipocredito}.equals(3)? "Crédito para producción cooperativa": false || $F{t_proyecto_idtipocredito}.equals(4)? "Crédito para producción agropecuaria": false || $F{t_proyecto_idtipocredito}.equals(5)? "Crédito para lisiado de guerra": false || $F{t_proyecto_idtipocredito}.equals(6)? "Crédito personal": false || $F{t_proyecto_idtipocredito}.equals(7)? "Crédito para comercio": false || $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo agropecuario": false || $F{t_proyecto_idtipocredito}.equals(9)? "Crédito para inversión agropecuario": false]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="47" y="2" width="95" height="20" uuid="e9301a0b-21ff-4679-bb9a-c33da9eb0029"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="485" y="2" width="70" height="20" uuid="3ff460d3-0019-4eaa-9a72-d9e7dac4c7c3"/>
@@ -214,7 +211,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha_aprovacion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1" y="2" width="41" height="20" uuid="b1d625dd-9bfc-4dbe-ba5b-69c4d381077f"/>
+				<reportElement x="25" y="2" width="53" height="20" uuid="b1d625dd-9bfc-4dbe-ba5b-69c4d381077f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -240,6 +237,13 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="22" height="20" uuid="ff9e79cc-e6c4-485d-92ea-377c70628686"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

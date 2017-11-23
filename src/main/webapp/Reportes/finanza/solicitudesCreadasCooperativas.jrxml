@@ -98,6 +98,10 @@ FROM
 	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
 	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
 	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -123,7 +127,7 @@ FROM
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="54" height="20" uuid="087828f4-aff7-4ad6-8a21-b07a7d99d8c1"/>
+				<reportElement x="23" y="0" width="54" height="20" uuid="087828f4-aff7-4ad6-8a21-b07a7d99d8c1"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -140,13 +144,6 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MONTO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="54" y="0" width="89" height="20" uuid="557ddfdd-f09d-49e1-b37d-7b8ab37aa502"/>
-				<textElement markup="styled">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="496" y="0" width="58" height="20" uuid="5519deaf-23ef-4c97-b454-e711fbbdffaa"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
@@ -161,7 +158,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PLAZO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="143" y="0" width="76" height="20" uuid="d9eeddfe-9118-4d7c-8387-af8350d57c70"/>
+				<reportElement x="86" y="0" width="133" height="20" uuid="d9eeddfe-9118-4d7c-8387-af8350d57c70"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -174,26 +171,26 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PAGO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="22" height="20" uuid="647210f7-b40a-4ba7-82e3-3d90d2c7e587"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="1" y="0" width="54" height="20" uuid="b4b85423-29c5-4e91-9cc8-378786edda7a"/>
+				<reportElement x="23" y="0" width="63" height="20" uuid="b4b85423-29c5-4e91-9cc8-378786edda7a"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="56" y="0" width="88" height="20" uuid="322c00c1-2d71-4077-9af9-dfe19366295c"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="143" y="0" width="187" height="20" uuid="9e059b6d-48c2-498f-a25c-d37e64b1a3f9"/>
+				<reportElement x="86" y="0" width="244" height="20" uuid="9e059b6d-48c2-498f-a25c-d37e64b1a3f9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -226,6 +223,13 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="22" height="20" uuid="e992995d-0ec6-40a0-9c50-162f2222aae8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

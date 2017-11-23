@@ -95,6 +95,10 @@
 	<variable name="saldocapital_2" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{saldocapital}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -245,7 +249,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="331" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>
+				<reportElement x="116" y="331" width="77" height="20" uuid="e6173e94-5412-42f1-ad01-f023b090edb1"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -259,7 +263,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL AMORTIZADO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="25" y="331" width="77" height="20" uuid="50b1fd74-a0ee-4fc8-9165-f08ac7d48635"/>
+				<reportElement x="39" y="331" width="77" height="20" uuid="50b1fd74-a0ee-4fc8-9165-f08ac7d48635"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -334,19 +338,26 @@
 			<line>
 				<reportElement x="1" y="230" width="555" height="1" uuid="bd8ba20c-0d7c-4efe-a6c3-efc478f74961"/>
 			</line>
+			<staticText>
+				<reportElement x="1" y="331" width="38" height="20" uuid="5b7d8592-b7f5-4ecf-b7cd-c11c0cd209d0"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="25" y="0" width="71" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
+				<reportElement x="39" y="0" width="71" height="20" uuid="7d2540cd-c9f6-4291-87a4-26c65b863c60"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="115" y="0" width="51" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
+				<reportElement x="121" y="0" width="51" height="20" uuid="d198e38d-87d4-4568-9989-366f2f7081ad"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -379,6 +390,13 @@
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldocapital}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="1" width="38" height="20" uuid="007c6ded-512d-4a04-9fa7-a8a3ae037532"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

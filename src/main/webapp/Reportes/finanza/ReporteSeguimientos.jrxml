@@ -21,10 +21,14 @@ FROM
 	<field name="t_seguimiento_estado" class="java.lang.Integer"/>
 	<field name="t_seguimiento_idproyecto" class="java.lang.Integer"/>
 	<field name="t_seguimiento_fechaseguimiento" class="java.sql.Date"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<detail>
 		<band height="26" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="359" height="20" uuid="bdde51a7-fba0-4116-bbbe-eb28292a5e1f"/>
+				<reportElement x="25" y="0" width="345" height="20" uuid="bdde51a7-fba0-4116-bbbe-eb28292a5e1f"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
@@ -43,6 +47,10 @@ FROM
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_seguimiento_estado}.equals(1)? "Activo": "Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="25" height="20" uuid="8397b5e0-3587-41ae-89c7-490ea586d56d"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

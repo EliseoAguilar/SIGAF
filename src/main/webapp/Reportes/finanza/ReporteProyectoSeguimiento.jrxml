@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProyectoSeguimiento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="669d977c-beb6-4031-97cf-c28dba5f2d07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="350"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -262,12 +262,19 @@ FROM
 				<reportElement x="287" y="228" width="249" height="20" uuid="2c74042e-51c4-4e0e-8018-7f9072f5377e"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_destino_proyecto}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="400" width="27" height="20" uuid="7a0d2970-4fc5-4147-9e15-da6556809053"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="50">
 			<subreport>
-				<reportElement x="27" y="0" width="510" height="50" uuid="826d2701-919b-4e81-80c1-df9094a67837"/>
+				<reportElement x="0" y="0" width="555" height="50" uuid="826d2701-919b-4e81-80c1-df9094a67837"/>
 				<subreportParameter name="id_seguimiento">
 					<subreportParameterExpression><![CDATA[$F{t_proyecto_idproyecto}]]></subreportParameterExpression>
 				</subreportParameter>

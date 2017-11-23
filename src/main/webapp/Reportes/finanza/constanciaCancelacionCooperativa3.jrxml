@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="constanciaCancelacion" pageWidth="595" pageHeight="842" columnWidth="506" leftMargin="49" rightMargin="40" topMargin="20" bottomMargin="20" uuid="502ec4f8-015f-4284-9132-a5225f62577c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="52"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -69,17 +69,17 @@ FROM
 				</textElement>
 				<text><![CDATA[Usulután,]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
+			<textField pattern="dd MMMMM yyyy">
 				<reportElement x="398" y="18" width="108" height="24" uuid="4a0bd5d0-9c51-469c-8366-fbd87f131f66"/>
 				<textElement>
 					<font size="11" isBold="true" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("dd MMMMM yyyy",new Locale("es", "ES"))).format(new Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="345" splitType="Stretch">
+		<band height="432" splitType="Stretch">
 			<staticText>
 				<reportElement x="182" y="19" width="144" height="24" uuid="8de36354-bf1b-4c32-9e69-6f195f855859"/>
 				<textElement textAlignment="Center">
@@ -96,7 +96,7 @@ FROM
 				<textFieldExpression><![CDATA[$P{descripcion}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="0" y="291" width="200" height="53" uuid="28b2791f-2e94-4a97-8b64-abf9b4464ba0"/>
+				<reportElement x="0" y="379" width="200" height="53" uuid="28b2791f-2e94-4a97-8b64-abf9b4464ba0"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloConstancia.jasper"]]></subreportExpression>
 			</subreport>
@@ -109,12 +109,6 @@ FROM
 			</staticText>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
 	</summary>
