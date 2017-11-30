@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroMayorSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0bd5ccd3-3730-46c1-8558-133e7f5659bb">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="148"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idCuenta" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -56,21 +56,21 @@ inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{
 				<textFieldExpression><![CDATA[$F{fecha_partida}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="62" y="0" width="113" height="15" uuid="faa71a04-bc98-4977-a99f-62e920e2c2a3"/>
+				<reportElement x="62" y="0" width="165" height="15" uuid="faa71a04-bc98-4977-a99f-62e920e2c2a3"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concepto_partida}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="229" y="0" width="85" height="15" uuid="ed66ab16-078b-4144-a386-8b3635ed06b7"/>
+				<reportElement x="252" y="0" width="62" height="15" uuid="ed66ab16-078b-4144-a386-8b3635ed06b7"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipo_saldo_detalle_partida}.equals("Debe")  ? $F{saldo_detalle_partida} : "0.00"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement x="313" y="0" width="88" height="15" uuid="8d9ae67a-e2e9-49cd-88b9-da5a91d3c8e3"/>
+				<reportElement x="338" y="0" width="62" height="15" uuid="8d9ae67a-e2e9-49cd-88b9-da5a91d3c8e3"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -91,8 +91,8 @@ inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{
 				<textFieldExpression><![CDATA[$V{totalDebe}.compareTo($V{totalHaber}) <=0 ? $V{totalHaber}.subtract($V{totalDebe}): BigDecimal.ZERO]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="187" y="0" width="42" height="15" uuid="81950438-efa8-4d90-9518-4cac4e1220f1"/>
-				<textElement>
+				<reportElement x="229" y="0" width="21" height="15" uuid="81950438-efa8-4d90-9518-4cac4e1220f1"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_partida}]]></textFieldExpression>
@@ -116,7 +116,7 @@ inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{
 				<textFieldExpression><![CDATA[$V{totalHaber}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="175" y="0" width="100" height="20" uuid="c6f8a2f7-3703-4456-867b-ec4a328fe472"/>
+				<reportElement x="175" y="0" width="52" height="20" uuid="c6f8a2f7-3703-4456-867b-ec4a328fe472"/>
 				<textElement>
 					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>

@@ -20,15 +20,8 @@
                 </style>
                 <p:outputPanel id="padding"  > 
                     <h:form id="fReportesContabilidad" target="_blank">
-                        <p:panel id="pReportesContabilidad" header="Reportes administracion"  style="width: 80%; margin: auto; margin-bottom: 20px">
-                            <f:facet name="actions">
-                                <h:commandLink id="btnAyuda"  styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText styleClass="ui-icon ui-icon-help" /></h:commandLink>
-                                <h:commandLink id="btnVolver" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText styleClass="ui-icon ui-icon-triangle-1-w
-
-                                                                                                                                               " /></h:commandLink>
-                                <p:tooltip id="toolAyuda" for="btnAyuda" value="Ver ayuda" position="top"/>
-                                <p:tooltip id="toolVolver" for="btnVolver" value="Volver al menu" position="top"/>
-                            </f:facet>
+                        <p:panel id="pReportesContabilidad" header="Reportes administración"  style="width: 80%; margin: auto; margin-bottom: 20px">
+                           
                             <p:fieldset style="margin-bottom:20px">
                                 <p:panelGrid id="pgReporte"  style="width: 100%; margin: auto;" styleClass="borderHidden" >   
                                     <p:row>
@@ -45,10 +38,10 @@
                                         <p:column>
                                             <p:selectOneMenu id="sModulo"  style="width:100%"  value="#{reporteAdministracionBean.idReporte}">
                                                 <f:selectItem itemLabel="[SELECCIONE]" itemValue="0" />
-                                                <f:selectItem itemLabel="Reporte de cooperativas" itemValue="1" />
-                                                <f:selectItem itemLabel="Reporte de Áreas" itemValue="2" />
-                                                <f:selectItem itemLabel="Reporte de empleados" itemValue="3" />                                                
-                                                <f:selectItem itemLabel="Reporte de socios" itemValue="4" />
+                                                <f:selectItem itemLabel="Listado de cooperativas" itemValue="1" />
+                                                <f:selectItem itemLabel="Listado de Áreas" itemValue="2" />
+                                                <f:selectItem itemLabel="Listado de empleados" itemValue="3" />                                                
+                                                <f:selectItem itemLabel="Listado de socios" itemValue="4" />
                                                 <p:ajax update=":padding"></p:ajax>
                                             </p:selectOneMenu>
                                         </p:column>

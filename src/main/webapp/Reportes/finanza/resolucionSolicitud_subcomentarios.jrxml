@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resolucionSolicitud_subcomentarios" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f9a2c5f3-381b-45bc-a1f7-f983bda0d012">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
@@ -60,14 +60,22 @@ FROM
 	<field name="t_proyecto_fecha_finalizacion_proyecto" class="java.sql.Date"/>
 	<field name="t_proyecto_fecha_incobrabilidad" class="java.sql.Date"/>
 	<field name="t_proyecto_razon_incobrabilidad" class="java.lang.String"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="555" height="20" uuid="5f54425c-34ba-487b-9555-6af591cc8f3a"/>
+				<reportElement x="25" y="0" width="555" height="20" uuid="5f54425c-34ba-487b-9555-6af591cc8f3a"/>
 				<textFieldExpression><![CDATA[$F{t_comentario_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="25" height="20" uuid="142ae3cc-c988-44ff-983e-941a186c2a23"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

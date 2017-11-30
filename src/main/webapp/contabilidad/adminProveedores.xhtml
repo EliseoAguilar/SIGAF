@@ -41,8 +41,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{proveedorBean.crearProv}"    style="#{proveedorBean.btnNuevo}"  oncomplete="PF('dialogCrear').hide()"  update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{proveedorBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{proveedorBean.crearProv}"    style="#{proveedorBean.btnNuevo}"  oncomplete="PF('dialogCrear').hide()"  update=":padding" icon="fa fa-fw fa-check" > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{proveedorBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{proveedorBean.estadoValido}" />
                                     </p:commandButton>
                                 </div>
@@ -160,8 +160,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{proveedorBean.actualizar}"   oncomplete="PF('dialogModificar').hide()"   style="#{proveedorBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{proveedorBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{proveedorBean.actualizar}"   oncomplete="PF('dialogModificar').hide()"   style="#{proveedorBean.btnNuevo}" update=":padding"  icon="fa fa-fw fa-check"> </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{proveedorBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{proveedorBean.estadoValido}" />
                                     </p:commandButton>
                                 </div>
@@ -394,9 +394,9 @@
                                         <br></br>
                                         <hr></hr>
                                         <center>
-                                            <p:commandButton value="Si" actionListener="#{proveedorBean.darDeBaja}" update=":padding" style="#{proveedorBean.btnNuevo}">
+                                            <p:commandButton value="Si" actionListener="#{proveedorBean.darDeBaja}" update=":padding" style="#{proveedorBean.btnNuevo}" icon="fa fa-fw fa-check">
                                             </p:commandButton>
-                                            <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"   style="#{proveedorBean.btnCancelar}"  value="No"> 
+                                            <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"   style="#{proveedorBean.btnCancelar}"  value="No" icon="fa fa-fw fa-close"> 
                                             </p:commandButton>
                                         </center>
                                     </p:outputPanel>
@@ -412,9 +412,9 @@
                                         <br></br>
                                         <hr></hr>
                                         <center>
-                                            <p:commandButton value="Si" actionListener="#{proveedorBean.darDeAlta}" update=":padding"   style="#{proveedorBean.btnNuevo}">
+                                            <p:commandButton value="Si" actionListener="#{proveedorBean.darDeAlta}" update=":padding"   style="#{proveedorBean.btnNuevo}" icon="fa fa-fw fa-check">
                                             </p:commandButton>
-                                            <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').hide()"  value="No" style="#{proveedorBean.btnCancelar}"> 
+                                            <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlAlta').hide()"  value="No" style="#{proveedorBean.btnCancelar}" icon="fa fa-fw fa-close"> 
                                             </p:commandButton>
                                         </center>
                                     </p:outputPanel>

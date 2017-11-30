@@ -175,8 +175,7 @@
                                         <p:column colspan="2" style=" width:25%">
                                             <h:outputText value="Capital amortizado:"/>   <br></br>
                                             <h:outputText value="Saldo del capital:"/>   <br></br>
-                                            <h:outputText value="Mora:"/>   <br></br>
-                                            <h:outputText value="Capital+mora:"/>   <br></br>
+                                          
                                         </p:column>
                                         <p:column style=" width: 25%; text-align: right">
                                             <h:outputText value="$"/>
@@ -184,69 +183,24 @@
                                                 <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                             </h:outputText>
                                             <br></br>
-                                            <b>
+                                         
                                                 <h:outputText value="$"/>
                                                 <h:outputText value="#{proyectoBean.pago.saldocapital}">
                                                     <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
-                                            </b>
-                                            <br></br>
-                                            <b>
-                                                <h:outputText value="$"/>
-                                                <h:outputText value="#{proyectoBean.totalMoraGenerada}">
-                                                    <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
-                                                </h:outputText>
-                                                <p:commandLink id="ajax" oncomplete="PF('dgDetalle').show()"    >
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </p:commandLink>
-                                            </b>
-                                            <br></br>
-                                            <b>
-                                                <h:outputText value="$"/>
-                                                <h:outputText value="#{proyectoBean.totalCapitalMora}">
-                                                    <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
-                                                </h:outputText>
-                                            </b>
+                                            
+                                         
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
-                                <br></br>
-                                <div align="center">
-                                    <p:commandButton  title="Registrar" value="Guardar"  actionListener="#{proyectoBean.validarFormularioPagoTotal}"  update=":padding"   icon="fa fa-check" style="#{proyectoBean.btnCrear}">
-                                    </p:commandButton>
-                                    <p:commandButton  actionListener="#{proyectoBean.enableShowSeguimiento}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{proyectoBean.btnCancelar}"> 
-                                    </p:commandButton>
-                                </div>
-                            </p:panel>
-                        </h:form>
-                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{proyectoBean.estadoFormularioPagoTotal}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
-                            <h:form>
-                                <p:outputPanel style="text-align:center;">
-                                    <br></br>
-                                    <p:panelGrid>
-                                        <h:outputText value="¿Desea guardar este pago?"/>
-                                    </p:panelGrid>
-                                    <br></br>
-                                    <hr></hr>                                 
-                                    <center>
-                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{proyectoBean.createPagoTotal}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
-                                            <f:setPropertyActionListener value="#{false}" target="#{proyectoBean.estadoFormularioPagoTotal}" />
-                                        </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
-                                            <f:setPropertyActionListener value="#{false}" target="#{proyectoBean.estadoFormularioPagoTotal}" />
-                                        </p:commandButton>
-                                    </center>
-                                </p:outputPanel>
-                            </h:form>
-                        </p:dialog>
-                        <p:dialog header="Detalles de mora" widgetVar="dgDetalle" modal="true"  width="60%" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
-                            <h:form>
-                                <b> <h:outputText value="Lista de cuotas retrasadas"/>
-                                </b>
-                                <hr></hr>
+                                
+                                 <br></br>
+                                 <b>    <h:outputText value="Detalle de mora generada por cuota"/></b>
+                                 <hr></hr>
+                                 
                                 <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{proyectoBean.listaPagosMora}"
                                               style="width: 100%;"
-                                              paginator="true"
+                                             
                                               rows="5"
                                               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                               rowsPerPageTemplate="5,10,15"
@@ -290,34 +244,91 @@
                                             </h:outputText>
                                         </div>
                                     </p:column> 
-                                    <p:column   
-                                        headerText="Total" width="10%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.interes}">
-                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
+                                    
                                 </p:dataTable>
-                                <br></br>
-                                <p:fieldset>
-                                    <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
-                                        <p:row>
-                                            <p:column style=" width: 15%">
-                                                <h:outputText value="Total mora:" /> 
-                                            </p:column>
-                                            <p:column style=" width: 85%"   >
-                                                <h:outputText value="$" />
+                                 
+                                  <br></br>
+                                  <b>        <h:outputText value="Detalle del pago por liquidación"/></b>
+                                 <hr></hr>
+                                 
+                                 <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    
+                                    <p:row>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="Fecha:"/>   <br></br>
+                                                                                      <h:outputText value="Interés acumulado:"/> <br></br>
+                                           
+                                        </p:column>
+                                        <p:column style=" width: 25%; text-align: right">
+                                            <h:outputText value="#{proyectoBean.fechaAplicacion}"
+                                                          
+                                                          >
+                                                  <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                                
+                                                <br></br>
+                                           
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{proyectoBean.interesAcumulados}">
+                                                <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                           
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:25%">
+                                            
+                                            <h:outputText value="Mora:"/>   <br></br>
+                                            <h:outputText value="Total a pagar:"/>   <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 25%; text-align: right">
+                                            
+                                          
+                                                <h:outputText value="$"/>
                                                 <h:outputText value="#{proyectoBean.totalMoraGenerada}">
-                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                                    <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
-                                            </p:column>
-                                        </p:row>
+                                                
+                                          
+                                            <br></br>
+                                            <b>
+                                                <h:outputText value="$"/>
+                                                <h:outputText value="#{proyectoBean.totalCapitalMora}">
+                                                    <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
+                                                </h:outputText>
+                                            </b>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                
+                                <br></br>
+                                <div align="center">
+                                    <p:commandButton  title="Registrar" value="Guardar"  actionListener="#{proyectoBean.validarFormularioPagoTotal}"  update=":padding"   icon="fa fa-check" style="#{proyectoBean.btnCrear}">
+                                    </p:commandButton>
+                                    <p:commandButton  actionListener="#{proyectoBean.enableShowSeguimiento}" update=":padding" icon="fa fa-close" title="Cancelar" value="Cancelar" style="#{proyectoBean.btnCancelar}"> 
+                                    </p:commandButton>
+                                </div>
+                            </p:panel>
+                        </h:form>
+                        <p:dialog header="Confirmar" width="25%" widgetVar="pgGuardar" modal="true"  visible="#{proyectoBean.estadoFormularioPagoTotal}" resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
+                            <h:form>
+                                <p:outputPanel style="text-align:center;">
+                                    <br></br>
+                                    <p:panelGrid>
+                                        <h:outputText value="¿Desea guardar este pago?"/>
                                     </p:panelGrid>
-                                </p:fieldset>
+                                    <br></br>
+                                    <hr></hr>                                 
+                                    <center>
+                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{proyectoBean.createPagoTotal}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                            <f:setPropertyActionListener value="#{false}" target="#{proyectoBean.estadoFormularioPagoTotal}" />
+                                        </p:commandButton>
+                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
+                                            <f:setPropertyActionListener value="#{false}" target="#{proyectoBean.estadoFormularioPagoTotal}" />
+                                        </p:commandButton>
+                                    </center>
+                                </p:outputPanel>
                             </h:form>
                         </p:dialog>
+                        
                     </p:outputPanel>
                     <p:outputPanel  rendered="#{proyectoBean.mostrarIncobrabilidadCooperativa}" style=" width: 100%">
                         <h:form id="fAgregarIncobrabilidadCoper">
@@ -639,7 +650,7 @@
                                 <p:panelGrid  style="width: 100%; margin: auto;"> 
                                     <p:row>
                                         <p:column colspan="5" style=" width: 15%; background-color:#ebedf0">
-                                            <center>  <h:outputText value="Credito"/> </center> 
+                                            <center>  <h:outputText value="Crédito"/> </center> 
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -706,7 +717,7 @@
                                 <br></br>
                                 <p:panelGrid  style="width: 100%; margin: auto;">   
                                     <p:row>
-                                        ,                                       <p:column colspan="6" style=" width: 25%; background-color: #ebedf0 "> 
+                                        <p:column colspan="6" style=" width: 25%; background-color: #ebedf0 "> 
                                             <center>           <h:outputText value="Ultimo pago"/> </center> 
                                         </p:column>
                                     </p:row>
@@ -737,10 +748,7 @@
                                         <p:column colspan="2" style=" width:25%">
                                             <h:outputText value="Capital amortizado:"/>   <br></br>
                                             <h:outputText value="Saldo del capital:"/>   <br></br>
-                                            <h:outputText value="Mora:"/> 
-                                           
-                                            <br></br>
-                                            <h:outputText value="Capital+mora:"/>   <br></br>
+                                          
                                         </p:column>
                                         <p:column style=" width: 25%; text-align: right">
                                             <h:outputText value="$"/>
@@ -748,23 +756,111 @@
                                                 <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                             </h:outputText>
                                             <br></br>
-                                            <b>
+                                         
                                                 <h:outputText value="$"/>
                                                 <h:outputText value="#{proyectoBean.pago.saldocapital}">
                                                     <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
-                                            </b>
-                                            <br></br>
-                                             <p:commandLink  oncomplete="PF('dgDetalle').show()"    >
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </p:commandLink>
-                                            <b>
+                                            
+                                         
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                
+                                 <br></br>
+                                 <b>   <h:outputText value="Detalle de mora generada por cuota"/></b>
+                                 <hr></hr>
+                                 
+                                <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{proyectoBean.listaPagosMora}"
+                                              style="width: 100%;"
+                                             
+                                              rows="5"
+                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                              rowsPerPageTemplate="5,10,15"
+                                              currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                              paginatorPosition="bottom"
+                                              emptyMessage="No se encontraron cuotas con mora" rowIndexVar="No" 
+                                              >
+                                    <p:column   
+                                        headerText="Nº" width="5%" style="text-align: center" >                                             
+                                        <h:outputText value="#{No+1}"  />                                      </p:column> 
+                                    <p:column   
+                                        headerText="Fecha de pago" width="10%" filterBy="#{entidades.fecha}" sortBy="#{entidades.fecha}" >                                             
+                                        <div align="center">
+                                            <h:outputText value="#{entidades.fecha}">
+                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Dias de retraso" width="10%" filterBy="#{entidades.idpago}" sortBy="#{entidades.idpago}" >                                             
+                                        <div align="center">
+                                            <h:outputText value="#{entidades.idpago}">
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Cuota" width="10%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}" >                                             
+                                        <div align="center">
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{entidades.cuota}">
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    <p:column   
+                                        headerText="Mora" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
+                                        <div align="center">
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{entidades.abono}">
+                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                        </div>
+                                    </p:column> 
+                                    
+                                </p:dataTable>
+                                 
+                                  <br></br>
+                                  <b>       <h:outputText value="Detalle del pago por liquidación"/> </b>
+                                 <hr></hr>
+                                 
+                                 <p:panelGrid  style="width: 100%; margin: auto;">   
+                                    
+                                    <p:row>
+                                        <p:column style=" width: 25%">
+                                            <h:outputText value="Fecha:"/>   <br></br>
+                                                                                      <h:outputText value="Interés acumulado:"/> <br></br>
+                                           
+                                        </p:column>
+                                        <p:column style=" width: 25%; text-align: right">
+                                            <h:outputText value="#{proyectoBean.fechaAplicacion}"
+                                                          
+                                                          >
+                                                  <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                            </h:outputText>
+                                                
+                                                <br></br>
+                                           
+                                            <h:outputText value="$"/>
+                                            <h:outputText value="#{proyectoBean.interesAcumulados}">
+                                                <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
+                                            </h:outputText>
+                                           
+                                        </p:column>
+                                        <p:column colspan="2" style=" width:25%">
+                                            
+                                            <h:outputText value="Mora:"/>   <br></br>
+                                            <h:outputText value="Total a pagar:"/>   <br></br>
+                                        </p:column>
+                                        <p:column style=" width: 25%; text-align: right">
+                                            
+                                          
                                                 <h:outputText value="$"/>
                                                 <h:outputText value="#{proyectoBean.totalMoraGenerada}">
                                                     <f:convertNumber  pattern=",#00.00" locale="en-US" /> 
                                                 </h:outputText>
                                                 
-                                            </b>
+                                          
                                             <br></br>
                                             <b>
                                                 <h:outputText value="$"/>
@@ -805,86 +901,7 @@
                                 </p:outputPanel>
                             </h:form>
                         </p:dialog>
-                        <p:dialog header="Detalles de mora" width="60%" widgetVar="dgDetalle" modal="true"   resizable="true" responsive="true" styleClass="ui-panelgrid-blank" appendTo="@(body)">
-                            <h:form>
-                                <b> <h:outputText value="Lista de cuotas retrasadas "/>
-                                </b>
-                                <hr></hr>
-                                <p:dataTable  id="basicMora" var="entidades" widgetVar="cuotasData" value="#{proyectoBean.listaPagosMora}"
-                                              style="width: 100%;"
-                                              paginator="true"
-                                              rows="5"
-                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                              rowsPerPageTemplate="5,10,15"
-                                              currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
-                                              paginatorPosition="bottom"
-                                              emptyMessage="No se encontraron cuotas retrasadas" rowIndexVar="No" 
-                                              >
-                                    <p:column   
-                                        headerText="Nº" width="5%" style="text-align: center" >                                             
-                                        <h:outputText value="#{No+1}"  />  
-                                    </p:column> 
-                                    <p:column   
-                                        headerText="Fecha de pago" width="10%" filterBy="#{entidades.fecha}" sortBy="#{entidades.fecha}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="#{entidades.fecha}">
-                                                <f:convertDateTime pattern="dd/MM/YYYY"/>
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
-                                    <p:column   
-                                        headerText="Dias de retraso" width="10%" filterBy="#{entidades.idpago}" sortBy="#{entidades.idpago}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="#{entidades.idpago}">
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
-                                    <p:column   
-                                        headerText="Cuota" width="10%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.cuota}">
-                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
-                                    <p:column   
-                                        headerText="Mora" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.abono}">
-                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
-                                    <p:column   
-                                        headerText="Total" width="10%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}" >                                             
-                                        <div align="center">
-                                            <h:outputText value="$"/>
-                                            <h:outputText value="#{entidades.interes}">
-                                                <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                            </h:outputText>
-                                        </div>
-                                    </p:column> 
-                                </p:dataTable>
-                                <br></br>
-                                <p:fieldset>
-                                    <p:panelGrid  style=" width: 100%;" styleClass="borderHidden" >
-                                        <p:row>
-                                            <p:column style=" width: 15%">
-                                                <h:outputText value="Total mora:" /> 
-                                            </p:column>
-                                            <p:column style=" width: 85%"   >
-                                                <h:outputText value="$" />
-                                                <h:outputText value="#{proyectoBean.totalMoraGenerada}">
-                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" /> 
-                                                </h:outputText>
-                                            </p:column>
-                                        </p:row>
-                                    </p:panelGrid>
-                                </p:fieldset>
-                            </h:form>
-                        </p:dialog>
+                       
                     </p:outputPanel>
                     <p:outputPanel  rendered="#{proyectoBean.mostrarRefinanciamientoCooperativa}" style=" width: 100%">
                         <h:form id="fAgregarRefinanciamientoCooperativa" target="_blank">

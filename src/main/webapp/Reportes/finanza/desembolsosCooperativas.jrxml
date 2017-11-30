@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="desembolsosPersonas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3107dd6-158f-421a-ae4d-b2218cbad8a1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="336"/>
+	<property name="ireport.y" value="132"/>
 	<parameter name="id_proyecto" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -122,6 +122,10 @@ WHERE
 	<variable name="t_desembolso_monto_desembolso_1" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_desembolso_monto_desembolso}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -194,15 +198,15 @@ WHERE
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESEMBOLSOS</style>]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="129" y="197" width="100" height="20" uuid="a2238ae5-3d2f-41b5-abb8-652b45735469"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual":false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral":false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual":false]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="129" y="157" width="100" height="20" uuid="4e2e6c6c-f1a7-4e8e-870f-172658599f57"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="341" y="177" width="100" height="20" uuid="46e07454-a337-4632-a528-db024ae7ec05"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}]]></textFieldExpression>
 			</textField>
@@ -222,7 +226,7 @@ WHERE
 				<reportElement x="241" y="157" width="100" height="20" uuid="66df5e53-80ce-486f-91d0-02cc4f8c9fa7"/>
 				<text><![CDATA[MODALIDAD:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="341" y="157" width="190" height="20" uuid="b9f61880-e6f1-4c97-97e1-dddd2affaddc"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
 			</textField>
@@ -244,7 +248,7 @@ WHERE
 					<pen lineWidth="0.75"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="129" y="44" width="100" height="20" uuid="0c8b08c3-8076-4575-9d93-7b43a7e3e858"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_cliente_entidad}]]></textFieldExpression>
 			</textField>
@@ -252,7 +256,7 @@ WHERE
 				<reportElement x="29" y="64" width="100" height="20" uuid="4ba9a268-8b8c-44e9-bc08-584975989417"/>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="129" y="64" width="402" height="20" uuid="39cd3c39-7005-4c1e-a3cb-e8033f1e0828"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
 			</textField>
@@ -264,7 +268,7 @@ WHERE
 				<reportElement x="241" y="44" width="100" height="20" uuid="5c572bd8-066e-4723-8503-88ea56b38ea3"/>
 				<text><![CDATA[COOPERATIVA:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="341" y="44" width="190" height="20" uuid="08c1b79a-80c4-414a-bfe5-7218988dcf08"/>
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
 			</textField>
@@ -272,10 +276,17 @@ WHERE
 				<reportElement x="29" y="177" width="100" height="20" uuid="20cfd630-fc63-4a56-8540-e88ccd6c024a"/>
 				<text><![CDATA[MONTO:]]></text>
 			</staticText>
-			<textField pattern="$#,##0.00">
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
 				<reportElement x="129" y="177" width="100" height="20" uuid="cb10f8f2-f85e-4d94-8411-16bc1b57b86e"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="29" y="268" width="42" height="20" uuid="02013092-82de-4883-aa88-3d0db8d5d832"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -288,6 +299,10 @@ WHERE
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="99" y="0" width="100" height="20" uuid="4257ea1f-9c65-4a94-8135-d9c0af6d9839"/>
 				<textFieldExpression><![CDATA[$F{t_desembolso_fecha_desembolso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="42" height="20" uuid="0c0e8139-7d6c-4e0f-9d22-82676f07ac95"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

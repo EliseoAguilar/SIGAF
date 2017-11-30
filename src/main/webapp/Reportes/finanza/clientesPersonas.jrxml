@@ -52,6 +52,10 @@ FROM
 	<field name="t_cliente_tipo_cliente1" class="java.lang.Integer"/>
 	<field name="t_cliente_tipo_cliente2" class="java.lang.Integer"/>
 	<field name="t_cliente_tipo_cliente3" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -103,6 +107,13 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TituloFunda.jasper"]]></subreportExpression>
 			</subreport>
+			<staticText>
+				<reportElement x="0" y="110" width="30" height="20" uuid="6cb8d67a-c364-4d85-aa98-bfc4bc9ada85"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
@@ -122,6 +133,13 @@ FROM
 			<textField>
 				<reportElement x="434" y="0" width="120" height="20" uuid="a7c0600d-00a9-4b34-a0a4-5db1f063a751"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_nit_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="30" height="20" uuid="d2234bfe-1f7d-4b2a-8676-c02012148932"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

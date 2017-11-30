@@ -177,67 +177,15 @@ WHERE
 	<variable name="t_pago_destino_1" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{t_pago_destino}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="381" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="353" width="43" height="20" uuid="53f5cf71-63af-4287-a103-ed53997eef88"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="52" y="353" width="45" height="20" uuid="5d6502a9-5101-4f75-85e8-5d9c2d943fde"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTA</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="104" y="353" width="45" height="20" uuid="3b3d53e0-e8db-4138-aa29-83c3b42065f1"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">INTERÉS</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="162" y="353" width="45" height="20" uuid="e001e9bf-5d3b-48d4-bc2a-f8a94894a6eb"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ABONO</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="207" y="353" width="114" height="20" uuid="b4d6fd36-54cc-4044-8d67-7041beebf5da"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL AMORTIZADO</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="325" y="353" width="51" height="20" uuid="6d9a438b-350c-49cc-a356-b930ec7eeb7a"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="376" y="353" width="56" height="20" uuid="09e22ace-792e-4221-b83d-2489dfc84b6d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ADICIONAL</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="435" y="353" width="41" height="20" uuid="fe752bd3-44f8-4f5e-bf7a-bd183d22edf1"/>
-				<textElement verticalAlignment="Middle" markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MORA</style>]]></text>
-			</staticText>
+		<band height="355" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="108" width="555" height="20" uuid="c70076e0-40aa-4ee5-bd95-5bef1dd3de5e"/>
 				<textElement markup="styled">
@@ -355,82 +303,156 @@ WHERE
 				<reportElement x="128" y="277" width="100" height="20" uuid="1b35906e-34dc-42ec-b962-df3f6d9b3893"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31">
+			<staticText>
+				<reportElement x="26" y="0" width="43" height="20" uuid="53f5cf71-63af-4287-a103-ed53997eef88"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="0" width="45" height="20" uuid="5d6502a9-5101-4f75-85e8-5d9c2d943fde"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CUOTA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="45" height="20" uuid="3b3d53e0-e8db-4138-aa29-83c3b42065f1"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">INTERÉS</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="45" height="20" uuid="e001e9bf-5d3b-48d4-bc2a-f8a94894a6eb"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ABONO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="0" width="114" height="20" uuid="b4d6fd36-54cc-4044-8d67-7041beebf5da"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL AMORTIZADO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="51" height="20" uuid="6d9a438b-350c-49cc-a356-b930ec7eeb7a"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPITAL</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="56" height="20" uuid="09e22ace-792e-4221-b83d-2489dfc84b6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ADICIONAL</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="0" width="41" height="20" uuid="fe752bd3-44f8-4f5e-bf7a-bd183d22edf1"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MORA</style>]]></text>
+			</staticText>
 			<line>
-				<reportElement x="0" y="374" width="555" height="1" uuid="025c9f75-33f8-49c7-9fba-7707d045b5a0"/>
+				<reportElement x="0" y="21" width="555" height="1" uuid="025c9f75-33f8-49c7-9fba-7707d045b5a0"/>
 			</line>
 			<staticText>
-				<reportElement x="476" y="353" width="79" height="20" uuid="6237dbd9-9edb-49e3-bd15-e12700507401"/>
+				<reportElement x="487" y="0" width="68" height="20" uuid="6237dbd9-9edb-49e3-bd15-e12700507401"/>
 				<textElement verticalAlignment="Middle" markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DESTINO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="26" height="20" uuid="fd3e77d1-aae4-4e7d-a939-87ecfa134799"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
-	</title>
+	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="1" width="43" height="20" uuid="cbf7003b-4bca-44e2-8a5b-e09481a84b7f"/>
+				<reportElement x="26" y="1" width="43" height="20" uuid="cbf7003b-4bca-44e2-8a5b-e09481a84b7f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="259" y="1" width="58" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
+				<reportElement x="267" y="1" width="58" height="20" uuid="07fb609f-8799-4d3d-9c0d-28e7c93fe908"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_capitalamortizado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="45" y="1" width="42" height="20" uuid="d9fa9d6a-8ea4-4028-92ee-774cc9b7c66d"/>
+				<reportElement x="69" y="1" width="42" height="20" uuid="d9fa9d6a-8ea4-4028-92ee-774cc9b7c66d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="101" y="1" width="45" height="20" uuid="6e5a377c-e20a-43f0-a09e-e1faa9d3d531"/>
+				<reportElement x="117" y="1" width="45" height="20" uuid="6e5a377c-e20a-43f0-a09e-e1faa9d3d531"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_interes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="152" y="1" width="45" height="20" uuid="4f9bee8b-6bcc-47c3-81d4-4095454bbe8b"/>
+				<reportElement x="162" y="1" width="45" height="20" uuid="4f9bee8b-6bcc-47c3-81d4-4095454bbe8b"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_abono}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="325" y="1" width="41" height="20" uuid="656a3eda-203c-47e4-8c67-ede709c24c9d"/>
+				<reportElement x="333" y="1" width="41" height="20" uuid="656a3eda-203c-47e4-8c67-ede709c24c9d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_saldocapital}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="393" y="1" width="37" height="20" uuid="e9ebd562-5187-4220-b3d8-34e25962abf6"/>
+				<reportElement x="400" y="1" width="37" height="20" uuid="e9ebd562-5187-4220-b3d8-34e25962abf6"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_saldoadicional}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="425" y="1" width="41" height="20" uuid="81f712c6-3602-4eb0-a539-e4b8972d4e74"/>
+				<reportElement x="437" y="1" width="41" height="20" uuid="81f712c6-3602-4eb0-a539-e4b8972d4e74"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_mora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="476" y="1" width="79" height="20" uuid="121eaace-f86a-4876-82ef-4778e1fe09aa"/>
+				<reportElement x="487" y="1" width="68" height="20" uuid="121eaace-f86a-4876-82ef-4778e1fe09aa"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_pago_destino}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="26" height="20" uuid="0f442b83-2420-4dc4-9207-251b7f1dba58"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

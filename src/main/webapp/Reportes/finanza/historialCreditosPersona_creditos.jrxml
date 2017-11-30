@@ -100,13 +100,17 @@ ORDER BY
 	<field name="t_tipo_credito_nombre" class="java.lang.String"/>
 	<field name="t_tipo_credito_descripcion" class="java.lang.String"/>
 	<field name="t_tipo_credito_estado" class="java.lang.Integer"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="3" width="72" height="20" uuid="2e67fa23-220f-4587-a1c8-6ace819e8002"/>
+				<reportElement x="25" y="3" width="72" height="20" uuid="2e67fa23-220f-4587-a1c8-6ace819e8002"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
@@ -141,8 +145,12 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="71" y="3" width="206" height="20" uuid="e8970c87-c61f-41de-a517-e7b992c6ecbc"/>
+				<reportElement x="96" y="3" width="168" height="20" uuid="e8970c87-c61f-41de-a517-e7b992c6ecbc"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="25" height="20" uuid="124ca7a4-fe33-4f14-9212-941e2612bf18"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

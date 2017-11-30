@@ -127,8 +127,8 @@ inner join t_periodo r on r.id_periodo=id_periodo_partida where id_ejercicio=$P{
 				<text><![CDATA[DEUDOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="184" y="4" width="18" height="19" uuid="a698eb2a-16af-4af7-a080-a9404cbad545"/>
-				<textElement>
+				<reportElement x="239" y="3" width="18" height="19" uuid="a698eb2a-16af-4af7-a080-a9404cbad545"/>
+				<textElement textAlignment="Center">
 					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[Nº ]]></text>

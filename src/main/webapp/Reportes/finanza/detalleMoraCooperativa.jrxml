@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planPagoPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb6dcc7e-cb12-4295-86a3-48f9cd3699f3">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="248"/>
+	<property name="ireport.y" value="295"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="nombreEntidad" class="java.lang.String"/>
 	<parameter name="telEntidad" class="java.lang.String"/>
@@ -60,6 +60,10 @@
 	</field>
 	<variable name="interes_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{interes}]]></variableExpression>
+	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -271,6 +275,13 @@
 			<line>
 				<reportElement x="0" y="225" width="555" height="1" uuid="691f64f9-12ba-4564-aa42-ed6a2e95739a"/>
 			</line>
+			<staticText>
+				<reportElement x="1" y="340" width="37" height="20" uuid="f9f6ec4b-84d2-4c46-ba97-05a440720e7d"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
@@ -298,6 +309,10 @@
 				<reportElement x="359" y="0" width="54" height="20" uuid="bce5f17a-263b-49e2-8e51-00e39bb1e11e"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="38" height="20" uuid="ec45d806-3534-4001-b838-7a94d667e297"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

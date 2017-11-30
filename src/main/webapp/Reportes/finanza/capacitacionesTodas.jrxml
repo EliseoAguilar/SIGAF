@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="capacitacionesEmpleado" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15422010-c642-450d-ad2c-c7e3cf39d5ae">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="97"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -104,6 +104,10 @@ FROM
 	<variable name="t_capacitacion_precio_2" class="java.lang.Float" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_capacitacion_precio}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<group name="empleado">
 		<groupExpression><![CDATA[$F{t_empleado_nombre_empleado}]]></groupExpression>
 		<groupHeader>
@@ -154,7 +158,7 @@ FROM
 	<columnHeader>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="82" y="0" width="72" height="20" uuid="daaba64e-c478-445b-8a46-80439d5cdf0a"/>
+				<reportElement x="105" y="0" width="78" height="20" uuid="daaba64e-c478-445b-8a46-80439d5cdf0a"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -171,7 +175,7 @@ FROM
 				<reportElement x="1" y="19" width="555" height="1" uuid="28c39a66-2803-451d-befe-c2e4a99a1e4c"/>
 			</line>
 			<staticText>
-				<reportElement x="1" y="0" width="81" height="20" uuid="7bdca493-1924-47c1-b9b2-95217661e738"/>
+				<reportElement x="23" y="0" width="82" height="20" uuid="7bdca493-1924-47c1-b9b2-95217661e738"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -198,16 +202,23 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRECIO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="23" height="20" uuid="24958f8e-0fc4-48bc-ae98-f84cbbb0b453"/>
+				<textElement markup="styled">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="27" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="3" width="82" height="20" uuid="e63be400-237a-4c4b-9c15-a0cb546902bf"/>
+				<reportElement x="22" y="3" width="83" height="20" uuid="e63be400-237a-4c4b-9c15-a0cb546902bf"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="82" y="3" width="228" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
+				<reportElement x="105" y="3" width="202" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
 			</textField>
@@ -227,6 +238,10 @@ FROM
 			<textField isBlankWhenNull="true">
 				<reportElement x="514" y="3" width="42" height="20" uuid="2c6deeaa-2250-4461-bf0d-36b76bab4b81"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_estado}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="23" height="20" uuid="4cadba09-51fa-4bd1-b210-d656c864093b"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

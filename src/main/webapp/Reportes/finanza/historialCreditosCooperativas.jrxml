@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialCreditosCooperativas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e342a336-9631-4518-a58b-feec83d613a0">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="337"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -125,7 +125,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_entidad_codigo_entidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="68" y="235" width="81" height="20" uuid="505e1ef0-90b9-4e92-8ff9-96c90b876109"/>
+				<reportElement x="93" y="234" width="81" height="20" uuid="505e1ef0-90b9-4e92-8ff9-96c90b876109"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -156,7 +156,7 @@ FROM
 				<reportElement x="0" y="254" width="555" height="1" uuid="1d9cb807-386d-4750-9d81-4ad0fb492432"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="235" width="45" height="20" uuid="7ece05d4-ac11-4157-bfb4-60561e473804"/>
+				<reportElement x="25" y="234" width="45" height="20" uuid="7ece05d4-ac11-4157-bfb4-60561e473804"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -168,6 +168,13 @@ FROM
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="234" width="25" height="20" uuid="422fca4b-df79-4a61-84c5-8be5f140d723"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
 			</staticText>
 		</band>
 	</title>

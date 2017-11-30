@@ -105,6 +105,10 @@ FROM
 	<variable name="t_capacitacion_precio_2" class="java.lang.Float" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_capacitacion_precio}]]></variableExpression>
 	</variable>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<group name="empleado">
 		<groupExpression><![CDATA[$F{t_empleado_nombre_empleado}]]></groupExpression>
 		<groupHeader>
@@ -177,7 +181,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PRECIO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="81" y="1" width="73" height="20" uuid="daaba64e-c478-445b-8a46-80439d5cdf0a"/>
+				<reportElement x="92" y="1" width="77" height="20" uuid="daaba64e-c478-445b-8a46-80439d5cdf0a"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -194,7 +198,7 @@ FROM
 				<reportElement x="1" y="20" width="555" height="1" uuid="28c39a66-2803-451d-befe-c2e4a99a1e4c"/>
 			</line>
 			<staticText>
-				<reportElement x="1" y="1" width="80" height="20" uuid="7bdca493-1924-47c1-b9b2-95217661e738"/>
+				<reportElement x="25" y="1" width="70" height="20" uuid="7bdca493-1924-47c1-b9b2-95217661e738"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -207,16 +211,23 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">BENEFICIARIO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="22" height="20" uuid="882839c8-e4a7-4df8-affe-d0f3dc591e5b"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="41" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="11" width="81" height="20" uuid="e63be400-237a-4c4b-9c15-a0cb546902bf"/>
+				<reportElement x="24" y="11" width="71" height="20" uuid="e63be400-237a-4c4b-9c15-a0cb546902bf"/>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="81" y="11" width="266" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
+				<reportElement x="92" y="11" width="255" height="20" uuid="641804fc-8a6d-4720-8a99-91c3a1c34702"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_descripcion}]]></textFieldExpression>
 			</textField>
@@ -232,6 +243,10 @@ FROM
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement x="496" y="11" width="60" height="20" uuid="099b1f9c-738b-46fa-b80b-e9089f666e6e"/>
 				<textFieldExpression><![CDATA[$F{t_capacitacion_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="11" width="22" height="20" uuid="7824e62c-36d9-4468-8097-eb2cf43c82e2"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

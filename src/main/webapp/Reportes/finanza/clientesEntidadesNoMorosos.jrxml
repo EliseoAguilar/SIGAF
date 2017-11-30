@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientesPersonasMorosos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b17e2f0-e720-4ffd-8d11-7399126195f5">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<import value="org.apache.commons.codec.binary.*"/>
@@ -80,6 +80,10 @@
 	<field name="visionEntidad" class="java.lang.String">
 		<fieldDescription><![CDATA[visionEntidad]]></fieldDescription>
 	</field>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -123,14 +127,14 @@
 				<reportElement x="0" y="106" width="555" height="1" uuid="86abda47-240f-4c7e-a783-391d2314631e"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="107" width="60" height="20" uuid="c5f02beb-e727-4755-ba15-44fd1ec89740"/>
+				<reportElement x="30" y="107" width="60" height="20" uuid="c5f02beb-e727-4755-ba15-44fd1ec89740"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="198" y="107" width="53" height="20" uuid="59f8f150-c0de-4383-9d2d-672682ddfbd0"/>
+				<reportElement x="215" y="107" width="36" height="20" uuid="59f8f150-c0de-4383-9d2d-672682ddfbd0"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -140,36 +144,50 @@
 				<reportElement x="0" y="126" width="555" height="1" uuid="7b636709-ca60-4b82-93a3-52558afbd513"/>
 			</line>
 			<staticText>
-				<reportElement x="60" y="107" width="95" height="20" uuid="6a3f40be-4efa-4e43-9548-0f365e0006f9"/>
+				<reportElement x="90" y="107" width="95" height="20" uuid="6a3f40be-4efa-4e43-9548-0f365e0006f9"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COOPERATIVA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="107" width="30" height="20" uuid="d4d6909a-8e89-4b8d-b3da-52b261975d85"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
 			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="198" y="1" width="356" height="20" uuid="c3827edf-bafa-4144-9f9d-c119ad3388df"/>
+				<reportElement x="215" y="1" width="339" height="20" uuid="c3827edf-bafa-4144-9f9d-c119ad3388df"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreEntidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="1" width="60" height="20" uuid="4e962547-0fba-4fef-aa1b-c06a46c603e5"/>
+				<reportElement x="30" y="1" width="60" height="20" uuid="4e962547-0fba-4fef-aa1b-c06a46c603e5"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{codigoClienteEntidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="1" width="124" height="20" uuid="2405d150-3a3e-49f3-9a24-1c0969a227b3"/>
+				<reportElement x="90" y="1" width="124" height="20" uuid="2405d150-3a3e-49f3-9a24-1c0969a227b3"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{codigoEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="30" height="20" uuid="155d4639-0d03-4d0f-9f7d-ad1169e1231a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

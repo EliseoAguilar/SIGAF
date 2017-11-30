@@ -49,8 +49,8 @@
                                     <br></br>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" onstart="PF('statusDialog').show()" onsuccess=" PF('statusDialog').hide()" id="withI" actionListener="#{cuentaBean.duplicarCatalog()}"     style="#{ejercicioBean.btnNuevo}" update=" :padding" oncomplete="PF('dialogDuplicar').hide()" > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogDuplicar').hide()" style="#{ejercicioBean.btnCancelar}" >
+                                    <p:commandButton value="Si" onstart="PF('statusDialog').show()" onsuccess=" PF('statusDialog').hide()" icon="fa fa-fw fa-check" id="withI" actionListener="#{cuentaBean.duplicarCatalog()}"     style="#{ejercicioBean.btnNuevo}" update=" :padding" oncomplete="PF('dialogDuplicar').hide()" > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogDuplicar').hide()" style="#{ejercicioBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{cuentaBean.estadoValido}" />
                                     </p:commandButton>
                                 </div>
@@ -192,8 +192,8 @@
                                         <br></br>
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.crearCuenta}"     style="#{ejercicioBean.btnNuevo}" update=" :padding" oncomplete="PF('dialogCrear').hide()" > </p:commandButton>
-                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{ejercicioBean.btnCancelar}" >
+                                        <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.crearCuenta}"     style="#{ejercicioBean.btnNuevo}" icon="fa fa-fw fa-check" update=" :padding" oncomplete="PF('dialogCrear').hide()" > </p:commandButton>
+                                        <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{ejercicioBean.btnCancelar}" icon="fa fa-fw fa-close">
                                             <f:setPropertyActionListener value="#{false}" target="#{cuentaBean.estadoValido}" />
                                         </p:commandButton>
                                     </div>
@@ -361,8 +361,8 @@
                                     <br></br>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.actulizar}" update=":padding"  oncomplete="PF('dialogModificar').hide()"    style="#{cuentaBean.btnNuevo}" > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{cuentaBean.btnCancelar}">
+                                    <p:commandButton value="Si" id="withI" actionListener="#{cuentaBean.actulizar}" update=":padding"  oncomplete="PF('dialogModificar').hide()"  icon="fa fa-fw fa-check"  style="#{cuentaBean.btnNuevo}" > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogModificar').hide()" style="#{cuentaBean.btnCancelar}" icon="fa fa-fw fa-close">
                                         <f:setPropertyActionListener value="#{false}" target="#{cuentaBean.estadoValido}" />
                                     </p:commandButton>
                                 </div>
@@ -558,9 +558,9 @@
 
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{cuentaBean.darDeBaja}" update=":padding" style="#{cuentaBean.btnNuevo}">
+                                        <p:commandButton value="Si" actionListener="#{cuentaBean.darDeBaja}" update=":padding" style="#{cuentaBean.btnNuevo}" icon="fa fa-fw fa-check">
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelarCerrar"  oncomplete="PF('dlBaja').hide()"  style="#{cuentaBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton id="btnCancelarCerrar" value="No" oncomplete="PF('dlBaja').hide()"  style="#{cuentaBean.btnCancelar}"  icon="fa fa-fw fa-close" > 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>
@@ -577,9 +577,9 @@
 
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{cuentaBean.darDeAlta}" update=":padding"   style="#{cuentaBean.btnNuevo}">
+                                        <p:commandButton value="Si" actionListener="#{cuentaBean.darDeAlta}" update=":padding"  icon="fa fa-fw fa-check" style="#{cuentaBean.btnNuevo}">
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlBaja').hide()"  value="No" style="#{cuentaBean.btnCancelar}"> 
+                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlBaja').hide()"  value="No" icon="fa fa-fw fa-close" style="#{cuentaBean.btnCancelar}"> 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>
@@ -597,9 +597,9 @@
 
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{cuentaBean.eliminarCuenta}" update=":padding"   style="#{cuentaBean.btnNuevo}">
+                                        <p:commandButton value="Si" actionListener="#{cuentaBean.eliminarCuenta}" update=":padding"   icon="fa fa-fw fa-check" style="#{cuentaBean.btnNuevo}">
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlEliminar').hide()"  value="No" style="#{cuentaBean.btnCancelar}"> 
+                                        <p:commandButton id="btnCancelarAbrir"  oncomplete="PF('dlEliminar').hide()"  value="No" icon="fa fa-fw fa-close" style="#{cuentaBean.btnCancelar}"> 
                                         </p:commandButton>
                                     </center>
                                 </p:outputPanel>

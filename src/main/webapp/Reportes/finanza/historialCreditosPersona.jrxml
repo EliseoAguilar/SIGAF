@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialCreditosPersona" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2fa3d6a7-0f44-46e4-bb0f-8c8f3b841cc8">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="62"/>
+	<property name="ireport.y" value="260"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -69,21 +69,21 @@ FROM
 				<reportElement x="0" y="254" width="555" height="1" uuid="6302001c-e26d-4a4c-8731-22dc05282110"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="234" width="45" height="20" uuid="c8bfa642-44b3-492d-ae04-dbc5e0f5c82f"/>
+				<reportElement x="25" y="234" width="45" height="20" uuid="c8bfa642-44b3-492d-ae04-dbc5e0f5c82f"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="235" width="85" height="20" uuid="9665f40e-260f-4c46-bf3c-b084261cd3c1"/>
+				<reportElement x="96" y="234" width="91" height="20" uuid="9665f40e-260f-4c46-bf3c-b084261cd3c1"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">MODALIDAD</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="283" y="234" width="46" height="20" uuid="42b6701b-4cde-4964-968d-337a63b0ab3b"/>
+				<reportElement x="283" y="234" width="54" height="20" uuid="42b6701b-4cde-4964-968d-337a63b0ab3b"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -191,6 +191,13 @@ FROM
 				<reportElement x="381" y="167" width="158" height="20" uuid="c54c1a91-7461-44e3-8881-9cfb01184b95"/>
 				<textFieldExpression><![CDATA[$F{t_cliente_apellido_cliente}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="234" width="25" height="20" uuid="187ac105-55ca-4dbb-a7e4-dec9b4a8d662"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>

@@ -185,11 +185,10 @@ public class CuentaBean extends Actividad {
         this.msgEntidad = "";
     }
 
-    
-    public void eliminarCuenta(){
-    
-    try {
-            
+    public void eliminarCuenta() {
+
+        try {
+
             this.cuentaBo.delete(cuentaSelecciona);
 
             TBitacora auxBitacora = new TBitacora();
@@ -211,9 +210,9 @@ public class CuentaBean extends Actividad {
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cuenta no puede ser eliminada.", ""));
         }
-    
+
     }
-            
+
     public void duplicarCatalog() {
 
         try {
@@ -789,7 +788,7 @@ public class CuentaBean extends Actividad {
 
         }
 
-        if (this.principal) {
+        if (this.principal && this.cuentaSeleccionaPadre.getCodigoCuenta() != null) {
             fin = true;
             String srtOr = this.cuentaSeleccionaPadre.getCodigoCuenta();
             String[] partsOr = srtOr.split("-");
@@ -815,7 +814,7 @@ public class CuentaBean extends Actividad {
 
     public Boolean vericarCodigoPadreHijo() {
 
-        if (this.principal) {
+        if (this.principal && this.cuentaSeleccionaPadre.getCodigoCuenta() != null) {
 
             String[] partsCuPa = this.cuentaSeleccionaPadre.getCodigoCuenta().split("-");
             String[] partsCu = this.cuenta.getCodigoCuenta().split("-");
@@ -862,6 +861,14 @@ public class CuentaBean extends Actividad {
     public void validarFormulario() {
 
         this.estadoValido = true;
+
+        if (this.principal && this.cuentaSeleccionaPadre.getCodigoCuenta() == null) {
+            this.msgCuentaPadre = "Seleccione la cuenta principal";
+            this.estadoValido = false;
+        } else {
+            this.msgCuentaPadre = "";
+
+        }
 
         if (this.cuenta.getNombreCuenta().length() < 3) {
             this.msgNombre = "El nombre debe contener como mínimo 3 caracteres";
@@ -997,7 +1004,7 @@ public class CuentaBean extends Actividad {
         }
 
         if (this.cuentaSelecciona.getCodigoCuenta().length() == 0) {
-            this.msgNumero = "Código requerido.";
+            this.msgNumero = "Código requerido";
             this.estadoValido = false;
         } else if (this.cuentaBo.getCuentaRepAct(this.entidadSeleccionada.getIdEntidad(), this.cuentaSelecciona.getIdCuenta(), this.cuentaSelecciona.getCodigoCuenta()) != null) {
             this.msgNumero = "El código ya fue asignado a otra cuenta";

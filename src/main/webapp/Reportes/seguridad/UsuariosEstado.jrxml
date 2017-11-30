@@ -36,6 +36,10 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 	<field name="lugar_nacimiento_empleado" class="java.lang.String"/>
 	<field name="tipo_empleado" class="java.lang.Integer"/>
 	<field name="estado_socio" class="java.lang.Boolean"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{num} + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -95,6 +99,13 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 				</textElement>
 				<text><![CDATA[TIPO]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="11" height="20" uuid="83ae92ea-bec8-4131-a00e-8473eaca5598"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -110,6 +121,10 @@ u.id_empleado_usuario=e.id_empleado where estado_usuario=$P{estado_usuario}]]>
 			<textField>
 				<reportElement x="398" y="7" width="100" height="20" uuid="448a47dd-898b-4fee-9ca2-22609337bfea"/>
 				<textFieldExpression><![CDATA[$F{tipo_usuario} == 1? "Contador": ($F{tipo_usuario} == 2 ? "Asesor de crédito":"Administrador")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="7" width="18" height="20" uuid="551fd492-a8b5-4672-bc8a-2655c450fd75"/>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
