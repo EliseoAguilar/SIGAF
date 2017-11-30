@@ -38,6 +38,10 @@ FROM
 	<field name="t_comprador_direccion_comprador" class="java.lang.String"/>
 	<field name="t_comprador_estado_comprador" class="java.lang.Boolean"/>
 	<field name="t_comprador_fechanacimiento_comprador" class="java.sql.Date"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -63,7 +67,7 @@ FROM
 	<columnHeader>
 		<band height="29" splitType="Stretch">
 			<staticText>
-				<reportElement x="418" y="3" width="59" height="20" uuid="36137743-1043-45fb-8e2c-f39ca2833ed1"/>
+				<reportElement x="390" y="3" width="59" height="20" uuid="36137743-1043-45fb-8e2c-f39ca2833ed1"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -73,57 +77,54 @@ FROM
 				<reportElement x="0" y="21" width="555" height="1" uuid="c22405ab-e58f-40fb-b342-adae9b810f81"/>
 			</line>
 			<staticText>
-				<reportElement x="168" y="3" width="59" height="20" uuid="e0a2e119-8793-48ec-a7e4-66d3b6a9b2c5"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>APELLIDOS</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="10" y="2" width="59" height="20" uuid="446183a4-116f-462e-9641-6185ec86de2a"/>
+				<reportElement x="159" y="1" width="59" height="20" uuid="446183a4-116f-462e-9641-6185ec86de2a"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>NOMBRES</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="3" width="59" height="20" uuid="afe3222a-d091-4369-a0cc-44cb69154302"/>
+				<reportElement x="292" y="3" width="59" height="20" uuid="afe3222a-d091-4369-a0cc-44cb69154302"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>DUI</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="2" width="59" height="20" uuid="e50a0bae-ef46-44db-a70a-925e4454321b"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="10" y="0" width="158" height="20" uuid="ae3f0268-8bf8-4004-9911-7087cf12c57d"/>
+				<reportElement x="108" y="1" width="184" height="20" uuid="ae3f0268-8bf8-4004-9911-7087cf12c57d"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}+" "+$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="168" y="0" width="150" height="20" uuid="b89084a5-c0ed-4bf0-8ced-bd6b5fad29ca"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="320" y="0" width="98" height="20" uuid="43abc7f8-e1fe-4b21-a152-30bd9dde9ea5"/>
+				<reportElement x="292" y="0" width="98" height="20" uuid="43abc7f8-e1fe-4b21-a152-30bd9dde9ea5"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_comprador_dui_comprador}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="418" y="0" width="114" height="20" uuid="6467002d-c083-4b2c-bbde-b373996741d6"/>
+				<reportElement x="390" y="0" width="114" height="20" uuid="6467002d-c083-4b2c-bbde-b373996741d6"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_comprador_nit_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="1" width="100" height="20" uuid="0d98a3f9-5eeb-4278-82e2-c97c57e9d4ab"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

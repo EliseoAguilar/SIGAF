@@ -25,6 +25,10 @@ FROM
 	<field name="t_tipo_cultivo_nombre_tipo_cultivo" class="java.lang.String"/>
 	<field name="t_tipo_cultivo_estado_tipo_cultivo" class="java.lang.Boolean"/>
 	<field name="t_tipo_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -50,7 +54,7 @@ FROM
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="18" y="3" width="100" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
+				<reportElement x="73" y="3" width="100" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -60,34 +64,45 @@ FROM
 				<reportElement x="0" y="22" width="555" height="1" uuid="14f3b0c0-0945-4a6e-9b35-750976b03e96"/>
 			</line>
 			<staticText>
-				<reportElement x="325" y="3" width="100" height="20" uuid="a0d2e8e7-49ab-4d65-97e7-e93d38c0dc3b"/>
+				<reportElement x="380" y="3" width="100" height="20" uuid="a0d2e8e7-49ab-4d65-97e7-e93d38c0dc3b"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="202" y="3" width="100" height="20" uuid="c88bf320-c6c5-4d69-b7da-927a79011c3d"/>
+				<reportElement x="257" y="3" width="100" height="20" uuid="c88bf320-c6c5-4d69-b7da-927a79011c3d"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ÁREA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="2" width="100" height="20" uuid="b59134f6-f4a6-453c-a4a7-f7f60149664a"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="18" y="1" width="174" height="20" uuid="bc3a1453-674d-4d80-a27e-c4e076defbd4"/>
+				<reportElement x="73" y="1" width="174" height="20" uuid="bc3a1453-674d-4d80-a27e-c4e076defbd4"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_cultivo_nombre_tipo_cultivo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="325" y="1" width="100" height="20" uuid="e4f0da5b-12ab-4ad1-b45f-54613b136482"/>
+				<reportElement x="380" y="1" width="100" height="20" uuid="e4f0da5b-12ab-4ad1-b45f-54613b136482"/>
 				<textFieldExpression><![CDATA[$F{t_tipo_cultivo_estado_tipo_cultivo}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="202" y="1" width="100" height="20" uuid="6ca6e18e-c052-44a1-b94a-7cca88be6ef1"/>
+				<reportElement x="257" y="1" width="100" height="20" uuid="6ca6e18e-c052-44a1-b94a-7cca88be6ef1"/>
 				<textFieldExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="1" width="100" height="20" uuid="05fda5d3-8463-4c47-9042-ce374baf57a2"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

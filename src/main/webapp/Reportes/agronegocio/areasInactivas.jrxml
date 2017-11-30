@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tiposAreas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b286a86c-1399-45f0-b0e6-56fb99725e5b">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="13"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
@@ -18,6 +18,10 @@ FROM
 	<field name="t_area_cultivo_id_area_cultivo" class="java.lang.Integer"/>
 	<field name="t_area_cultivo_nombre_area_cultivo" class="java.lang.String"/>
 	<field name="t_area_cultivo_estado_area_cultivo" class="java.lang.Boolean"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<group name="AREA">
 		<groupExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></groupExpression>
 	</group>
@@ -46,7 +50,7 @@ FROM
 	<columnHeader>
 		<band height="27" splitType="Stretch">
 			<staticText>
-				<reportElement x="18" y="2" width="100" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
+				<reportElement x="66" y="2" width="100" height="20" uuid="90abaf25-c185-4a95-be14-9fe78990f669"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -55,16 +59,27 @@ FROM
 			<line>
 				<reportElement x="0" y="21" width="554" height="1" uuid="14f3b0c0-0945-4a6e-9b35-750976b03e96"/>
 			</line>
+			<staticText>
+				<reportElement x="29" y="4" width="100" height="20" uuid="6403ae5d-fd5b-4b72-96ea-01e27c78c949"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="18" y="1" width="203" height="20" uuid="6b0b9fe6-0aba-4990-b871-e2c9818fb5c2"/>
+				<reportElement x="66" y="1" width="203" height="20" uuid="6b0b9fe6-0aba-4990-b871-e2c9818fb5c2"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_area_cultivo_nombre_area_cultivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="1" width="100" height="20" uuid="9a76a209-061e-454e-b1c3-90233993c5b1"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

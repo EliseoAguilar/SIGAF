@@ -86,6 +86,10 @@ t_productor_grupal."nombre_productor_grupal"!='Ninguno']]>
 	<field name="t_productor_grupal_ubicacion_productor_grupal" class="java.lang.String"/>
 	<field name="t_productor_grupal_estado_productor_grupal" class="java.lang.Boolean"/>
 	<field name="t_productor_grupal_calificacion_productor_grupal" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" resetType="Group" resetGroup="t_productor_grupal_nombre_productor_grupal">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<group name="t_productor_grupal_nombre_productor_grupal">
 		<groupExpression><![CDATA[$F{t_productor_grupal_nombre_productor_grupal}]]></groupExpression>
 		<groupHeader>
@@ -132,35 +136,28 @@ t_productor_grupal."nombre_productor_grupal"!='Ninguno']]>
 	<columnHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="12" y="0" width="85" height="20" uuid="075644f8-e9df-4028-a059-4c891e8c42ba"/>
+				<reportElement x="130" y="0" width="85" height="20" uuid="075644f8-e9df-4028-a059-4c891e8c42ba"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>NOMBRES</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="154" y="0" width="100" height="20" uuid="dbf3cddd-b6be-40c5-abb2-a15da80fb1a8"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>APELLIDOS</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="296" y="0" width="104" height="20" uuid="a153f496-850a-472a-94b3-92359bb8b5ab"/>
+				<reportElement x="267" y="0" width="104" height="20" uuid="a153f496-850a-472a-94b3-92359bb8b5ab"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>DUI</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="103" height="20" uuid="bb0ee35d-3876-43f9-9eee-59b220a8b9ab"/>
+				<reportElement x="371" y="0" width="103" height="20" uuid="bb0ee35d-3876-43f9-9eee-59b220a8b9ab"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>NIT</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="503" y="0" width="52" height="20" uuid="230ece7b-ab54-4e4c-89a4-cba4b02906fa"/>
+				<reportElement x="474" y="0" width="52" height="20" uuid="230ece7b-ab54-4e4c-89a4-cba4b02906fa"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -169,44 +166,48 @@ t_productor_grupal."nombre_productor_grupal"!='Ninguno']]>
 			<line>
 				<reportElement x="1" y="18" width="553" height="2" uuid="2caf1eba-0e29-4e16-8160-c51c12d4c702"/>
 			</line>
+			<staticText>
+				<reportElement x="13" y="1" width="85" height="20" uuid="c9f3edf3-b496-4c2c-8c68-997ba9fd06fa"/>
+				<textElement verticalAlignment="Top" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="12" y="0" width="142" height="20" uuid="7b001add-ed6c-413d-8154-317ef071ec48"/>
+				<reportElement x="97" y="2" width="303" height="20" uuid="7b001add-ed6c-413d-8154-317ef071ec48"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}+" "+$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="154" y="0" width="128" height="20" uuid="5f164faf-a2b9-42fc-beac-0496a791aceb"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="296" y="0" width="104" height="20" uuid="64300df2-8a0f-4166-9ae5-0ae73d13c94d"/>
+				<reportElement x="267" y="0" width="104" height="20" uuid="64300df2-8a0f-4166-9ae5-0ae73d13c94d"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_dui_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="103" height="20" uuid="cee7d589-7ea6-4ac4-9afe-fedbc56546c9"/>
+				<reportElement x="371" y="0" width="103" height="20" uuid="cee7d589-7ea6-4ac4-9afe-fedbc56546c9"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_nit_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="503" y="0" width="52" height="20" uuid="4f363b8b-36c2-4cfb-8933-e70629fcac39"/>
+				<reportElement x="474" y="0" width="52" height="20" uuid="4f363b8b-36c2-4cfb-8933-e70629fcac39"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estado_productor_individual}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="1" width="100" height="20" uuid="ed1752d3-150d-47b9-96f2-8fe9eb1f92ea"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

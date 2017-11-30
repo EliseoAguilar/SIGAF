@@ -86,6 +86,10 @@ t_productor_grupal."nombre_productor_grupal"!='Sin grupo' and  t_productor_indiv
 	<field name="t_productor_grupal_ubicacion_productor_grupal" class="java.lang.String"/>
 	<field name="t_productor_grupal_estado_productor_grupal" class="java.lang.Boolean"/>
 	<field name="t_productor_grupal_calificacion_productor_grupal" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -128,7 +132,7 @@ t_productor_grupal."nombre_productor_grupal"!='Sin grupo' and  t_productor_indiv
 				<reportElement x="1" y="20" width="553" height="2" uuid="2caf1eba-0e29-4e16-8160-c51c12d4c702"/>
 			</line>
 			<staticText>
-				<reportElement x="13" y="2" width="124" height="20" uuid="05ee7e64-970b-418f-b19d-9ca751a22613"/>
+				<reportElement x="22" y="2" width="124" height="20" uuid="05ee7e64-970b-418f-b19d-9ca751a22613"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -148,6 +152,13 @@ t_productor_grupal."nombre_productor_grupal"!='Sin grupo' and  t_productor_indiv
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="124" height="20" uuid="67c6d5ea-4774-4818-be00-54a60422a2cb"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -165,12 +176,16 @@ t_productor_grupal."nombre_productor_grupal"!='Sin grupo' and  t_productor_indiv
 				<textFieldExpression><![CDATA[$F{t_productor_individual_nit_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="13" y="1" width="124" height="20" uuid="2d869103-4675-4642-99b7-63a5ef915bfc"/>
+				<reportElement x="21" y="1" width="124" height="20" uuid="2d869103-4675-4642-99b7-63a5ef915bfc"/>
 				<textFieldExpression><![CDATA[$F{t_productor_grupal_nombre_productor_grupal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="497" y="1" width="58" height="20" uuid="dac72922-c4e4-42e4-a5fc-5b6da23aaa9d"/>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estado_productor_individual}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="def8b784-d8ca-44db-8181-d7578e966f00"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\yonat\\Desktop\\sigaf_V1.5\\sigaf\\src\\main\\webapp\\Reportes\\Configuracion\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
@@ -47,6 +47,10 @@ FROM
 	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
 	<field name="t_politica_estado" class="java.lang.Boolean"/>
 	<field name="t_politica_registro" class="java.sql.Date"/>
+	<variable name="contador" class="java.lang.Integer" incrementType="Report" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<group name="t_tipo_credito_id_tipo_credito">
 		<groupExpression><![CDATA[$F{t_tipo_credito_id_tipo_credito}]]></groupExpression>
 		<groupHeader>
@@ -186,13 +190,6 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_politica_monto_minimo}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00">
-				<reportElement x="1" y="0" width="50" height="20" uuid="fcee8348-8a4f-4cce-b674-e7d5947d6f62"/>
-				<textElement textAlignment="Right">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
-			</textField>
 			<textField pattern="###0.00;-###0.00">
 				<reportElement x="471" y="0" width="43" height="20" uuid="00ce4820-d224-46ac-b631-f24581410982"/>
 				<textElement textAlignment="Right">
@@ -241,6 +238,13 @@ FROM
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_politica_monto_maximo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="0" y="0" width="50" height="20" uuid="fcee8348-8a4f-4cce-b674-e7d5947d6f62"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

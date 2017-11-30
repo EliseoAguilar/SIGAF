@@ -47,6 +47,10 @@ FROM
 	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
 	<field name="t_politica_estado" class="java.lang.Boolean"/>
 	<field name="t_politica_registro" class="java.sql.Date"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<group name="tipo">
 		<groupExpression><![CDATA[$F{t_tipo_credito_id_tipo_credito}]]></groupExpression>
 		<groupHeader>
@@ -168,6 +172,13 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">TASA DE INTERÉS (%)</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="64" height="34" uuid="bf5c37dc-1cb7-4970-893a-af3e8cbac088"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
@@ -208,7 +219,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_politica_estado} == true ? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="1" y="0" width="50" height="20" uuid="dd5d787d-768b-4dea-bb12-77d26d7eadda"/>
+				<reportElement x="36" y="0" width="15" height="20" uuid="dd5d787d-768b-4dea-bb12-77d26d7eadda"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
@@ -248,6 +259,10 @@ FROM
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_politica_tasa_interes_mora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="-1" width="100" height="20" uuid="7f974c96-7981-4e95-80ac-6c47a096588d"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

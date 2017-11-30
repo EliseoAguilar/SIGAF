@@ -85,6 +85,10 @@ FROM
 	<field name="t_productor_grupal_ubicacion_productor_grupal" class="java.lang.String"/>
 	<field name="t_productor_grupal_estado_productor_grupal" class="java.lang.Boolean"/>
 	<field name="t_productor_grupal_calificacion_productor_grupal" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -110,13 +114,6 @@ FROM
 	<columnHeader>
 		<band height="27" splitType="Stretch">
 			<staticText>
-				<reportElement x="143" y="3" width="112" height="20" uuid="b8b645f3-ba5c-4acf-93d3-8d6a53d7e095"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">APELLIDOS</style>]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="278" y="3" width="59" height="20" uuid="45190a56-384c-4ba2-8f09-e9bfccece3cc"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
@@ -141,30 +138,23 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="3" width="59" height="20" uuid="fa61c5f3-6bd8-4a52-95da-219865d1bd14"/>
+				<reportElement x="120" y="3" width="59" height="20" uuid="fa61c5f3-6bd8-4a52-95da-219865d1bd14"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRES</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="31" y="4" width="59" height="20" uuid="6d8d2899-1e93-439a-bb0f-be883590ff8f"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
-			<textField>
-				<reportElement x="10" y="0" width="133" height="20" uuid="f1005f97-a78a-46ea-bbbe-fa983d18baf6"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="143" y="0" width="135" height="20" uuid="bc90755f-ed4d-4daa-9911-69691d3e1d82"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="278" y="0" width="94" height="20" uuid="76bc112a-f8c2-41e4-9972-c1cb8ce95e0c"/>
 				<textElement>
@@ -185,6 +175,17 @@ FROM
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_estado_productor_individual}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="133" height="20" uuid="f1005f97-a78a-46ea-bbbe-fa983d18baf6"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}+" "+$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="1" width="100" height="20" uuid="2aa18f0f-d279-4b64-82c9-273d58a263aa"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

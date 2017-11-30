@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="areasCooperativas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cfad6a4a-2d1c-4700-bb8a-eb593804c8bf">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="172"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -67,6 +67,10 @@ FROM
 	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
 	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
 	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -128,7 +132,7 @@ FROM
 	<columnHeader>
 		<band height="25">
 			<staticText>
-				<reportElement x="21" y="1" width="118" height="20" uuid="46ec9976-f8f2-42bd-b492-e33fc89b16f1"/>
+				<reportElement x="87" y="0" width="118" height="20" uuid="46ec9976-f8f2-42bd-b492-e33fc89b16f1"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -137,13 +141,25 @@ FROM
 			<line>
 				<reportElement x="0" y="18" width="555" height="1" uuid="6f1ac1d9-e5ef-4c1f-bf61-1bf2980d2bf2"/>
 			</line>
+			<staticText>
+				<reportElement x="21" y="0" width="17" height="20" uuid="291f5996-d28e-4a7e-8832-ef78e9a95b9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="21" y="0" width="183" height="20" uuid="62103a57-f38d-4597-968a-9079c83a9ddf"/>
+				<reportElement x="91" y="0" width="183" height="20" uuid="62103a57-f38d-4597-968a-9079c83a9ddf"/>
 				<textFieldExpression><![CDATA[$F{t_area_nombre_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="1" width="38" height="20" uuid="b9c4d0bc-658f-41cf-8171-79d526c3e152"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

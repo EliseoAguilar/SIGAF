@@ -54,6 +54,10 @@ FROM
 	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
 	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
 	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -89,7 +93,7 @@ FROM
 				<reportElement x="0" y="16" width="555" height="1" uuid="84ed16ec-338c-44ff-9684-38cfef2bb30a"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="d3e8a0e1-867c-484e-a878-1b3bc8bd04ae"/>
+				<reportElement x="19" y="0" width="100" height="20" uuid="d3e8a0e1-867c-484e-a878-1b3bc8bd04ae"/>
 				<textElement markup="styled">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -123,13 +127,20 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d325d77c-8764-48fc-a223-d4629e47f66f"/>
+				<textElement markup="styled">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="3" width="134" height="20" uuid="3adede55-0ce8-4531-a72c-fe9929fdb3c5"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="19" y="3" width="100" height="47" uuid="3adede55-0ce8-4531-a72c-fe9929fdb3c5"/>
+				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
@@ -168,6 +179,10 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_estado_entidad}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="100" height="20" uuid="95119a16-584d-4206-8933-8bfb44a948de"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -20,6 +20,10 @@ FROM
 	<field name="t_cargo_nombre_cargo" class="java.lang.String"/>
 	<field name="t_cargo_estado_cargo" class="java.lang.Integer"/>
 	<field name="t_cargo_tipo_cargo" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,6 +58,13 @@ FROM
 			<line>
 				<reportElement x="1" y="21" width="554" height="1" uuid="f0f37b28-8bc0-4ca2-ad43-e6add1db2abb"/>
 			</line>
+			<staticText>
+				<reportElement x="14" y="3" width="100" height="20" uuid="56701372-8014-4fd4-8957-5d88681e9515"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -61,6 +72,10 @@ FROM
 			<textField isStretchWithOverflow="true">
 				<reportElement x="45" y="0" width="174" height="20" uuid="29032785-1bc2-4fff-b22e-8e4d741c2ac9"/>
 				<textFieldExpression><![CDATA[$F{t_cargo_nombre_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="1" width="100" height="20" uuid="61164000-e3ba-48b0-8cce-2d71be2e8964"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

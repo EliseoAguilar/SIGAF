@@ -54,6 +54,10 @@ FROM
 	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
 	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
 	<field name="t_entidad_calificacion_entidad" class="java.lang.String"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -89,7 +93,7 @@ FROM
 				<reportElement x="0" y="21" width="555" height="1" uuid="84ed16ec-338c-44ff-9684-38cfef2bb30a"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="4" width="100" height="20" uuid="d3e8a0e1-867c-484e-a878-1b3bc8bd04ae"/>
+				<reportElement x="19" y="4" width="100" height="20" uuid="d3e8a0e1-867c-484e-a878-1b3bc8bd04ae"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -116,13 +120,20 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DIRECCIÓN</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="a48f5d95-b0f6-4507-abae-639b653ea88c"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="47" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="1" width="134" height="20" uuid="3adede55-0ce8-4531-a72c-fe9929fdb3c5"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="19" y="1" width="112" height="46" uuid="3adede55-0ce8-4531-a72c-fe9929fdb3c5"/>
+				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_nombre_entidad}]]></textFieldExpression>
@@ -154,6 +165,10 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_entidad_direccion_entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="100" height="20" uuid="d3a49716-4e51-40e9-87a2-7179c23ac00d"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

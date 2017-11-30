@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="productorProductor" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="213afc5f-830f-4642-9c70-925bbc862c5f">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="213"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -95,6 +95,10 @@ FROM
 	<field name="t_tipo_cultivo_nombre_tipo_cultivo" class="java.lang.String"/>
 	<field name="t_tipo_cultivo_estado_tipo_cultivo" class="java.lang.Boolean"/>
 	<field name="t_tipo_cultivo_id_area_cultivo" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -129,7 +133,7 @@ FROM
 				<reportElement x="0" y="234" width="555" height="1" uuid="5f66e4ab-1f81-4653-b8db-deaaed54f635"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="215" width="554" height="20" uuid="c7e02839-6e9e-4170-803d-02e1eebbffb6"/>
+				<reportElement x="-1" y="215" width="554" height="20" uuid="c7e02839-6e9e-4170-803d-02e1eebbffb6"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -148,7 +152,7 @@ FROM
 				<reportElement x="0" y="253" width="555" height="1" uuid="ee769a53-1f2a-4bce-9ab3-b8b9c72fe9a9"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="237" width="89" height="20" uuid="b3980084-3f6d-402c-8530-684f52bd7191"/>
+				<reportElement x="26" y="237" width="89" height="20" uuid="b3980084-3f6d-402c-8530-684f52bd7191"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -196,12 +200,19 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="237" width="89" height="20" uuid="fa89c87a-cf1e-4376-be77-5dc31bc591eb"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="115" height="20" uuid="5bada052-7d88-4d7b-9d41-4338bb7d86ad"/>
+				<reportElement x="26" y="0" width="115" height="20" uuid="5bada052-7d88-4d7b-9d41-4338bb7d86ad"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -248,6 +259,10 @@ FROM
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_producto_estado}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="eeab35a8-c106-4c33-a813-807f0294e6b2"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

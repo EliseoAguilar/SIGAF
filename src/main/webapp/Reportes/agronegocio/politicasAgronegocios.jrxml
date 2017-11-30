@@ -23,6 +23,10 @@ FROM
 	<field name="t_configuracion_agronegocio_tasa_mora_agronegocio" class="java.lang.Double"/>
 	<field name="t_configuracion_agronegocio_vigencia_agronegocio" class="java.sql.Date"/>
 	<field name="t_configuracion_agronegocio_estado_configuracion" class="java.lang.Boolean"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -123,6 +127,10 @@ FROM
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_estado_configuracion}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="1" width="100" height="20" uuid="f4211804-3e2d-48e8-9e36-4680d75cb8c9"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

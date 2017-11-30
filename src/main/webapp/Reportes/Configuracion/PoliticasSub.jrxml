@@ -39,6 +39,10 @@ WHERE
 	<field name="t_politica_capacidad_endeudamiento_minimo" class="java.math.BigDecimal"/>
 	<field name="t_politica_idtipocredito" class="java.lang.Integer"/>
 	<field name="t_politica_estado" class="java.lang.Boolean"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -115,7 +119,7 @@ WHERE
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CAPACIDAD DE PAGO</style>]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="32" width="802" height="1" uuid="f1a91811-6597-4bbd-968c-e4923c042122"/>
+				<reportElement x="-16" y="32" width="801" height="1" uuid="f1a91811-6597-4bbd-968c-e4923c042122"/>
 			</line>
 			<staticText>
 				<reportElement x="731" y="1" width="111" height="29" uuid="e61c11a3-30d3-48e6-bcae-769e45b3051a"/>
@@ -123,6 +127,13 @@ WHERE
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-6" y="4" width="13" height="29" isPrintInFirstWholeBand="true" uuid="daacbfa2-69b9-4d1d-94ac-c3547a52147d"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -181,6 +192,10 @@ WHERE
 			<textField pattern="">
 				<reportElement x="731" y="1" width="100" height="20" uuid="7dc2b235-1a77-4731-a060-1275bdb5cb4e"/>
 				<textFieldExpression><![CDATA[$F{t_politica_estado} == true ? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-10" y="0" width="21" height="20" uuid="51187170-e245-401e-8b4e-f33708e824ba"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

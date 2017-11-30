@@ -112,6 +112,10 @@ FROM
 	<field name="t_entidad_dui_representante_entidad" class="java.lang.String"/>
 	<field name="t_entidad_nit_representante_entidad" class="java.lang.String"/>
 	<field name="t_entidad_abreviacion_entidad" class="java.lang.String"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -126,7 +130,7 @@ FROM
 				<reportElement x="0" y="119" width="802" height="1" uuid="a5dcb72c-389f-4576-93e1-49b8d93fbd7f"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="122" width="187" height="20" uuid="a07904a8-ca73-4bcf-b344-0d6754be1f54"/>
+				<reportElement x="20" y="122" width="187" height="20" uuid="a07904a8-ca73-4bcf-b344-0d6754be1f54"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -177,12 +181,19 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$P{estado}.equals(true)? "<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE EMPLEADOS ACTIVOS </style>":"<style isBold='true' pdfFontName='Helvetica-Bold'> REPORTE DE EMPLEADOS INACTIVOS </style>"]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="121" width="187" height="20" uuid="e3ca875d-a83b-4df8-bee6-a92420a485f7"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="63">
 			<textField>
-				<reportElement x="0" y="0" width="187" height="20" uuid="3d2dc22c-5e5f-4330-a07b-46f226dfc169"/>
+				<reportElement x="20" y="0" width="187" height="20" uuid="3d2dc22c-5e5f-4330-a07b-46f226dfc169"/>
 				<textFieldExpression><![CDATA[$F{t_empleado_nombre_empleado}+" "+$F{t_empleado_apellido_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -237,6 +248,10 @@ FROM
 			<line>
 				<reportElement x="32" y="41" width="402" height="1" uuid="3bbf87e2-af9a-48d9-9b7e-3583931173e2"/>
 			</line>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="4c87723d-2ce6-4ed2-8aea-e24c051e4bf9"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>

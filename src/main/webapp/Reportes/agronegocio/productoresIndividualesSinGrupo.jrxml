@@ -86,6 +86,10 @@ FROM
 	<field name="t_productor_grupal_ubicacion_productor_grupal" class="java.lang.String"/>
 	<field name="t_productor_grupal_estado_productor_grupal" class="java.lang.Boolean"/>
 	<field name="t_productor_grupal_calificacion_productor_grupal" class="java.lang.Integer"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -111,28 +115,21 @@ FROM
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="16" y="5" width="59" height="20" uuid="fa61c5f3-6bd8-4a52-95da-219865d1bd14"/>
+				<reportElement x="128" y="4" width="59" height="20" uuid="fa61c5f3-6bd8-4a52-95da-219865d1bd14"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRES</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="163" y="4" width="103" height="20" uuid="b8b645f3-ba5c-4acf-93d3-8d6a53d7e095"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">APELLIDOS</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="307" y="4" width="115" height="20" uuid="45190a56-384c-4ba2-8f09-e9bfccece3cc"/>
+				<reportElement x="293" y="4" width="115" height="20" uuid="45190a56-384c-4ba2-8f09-e9bfccece3cc"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">DUI</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="422" y="4" width="59" height="20" uuid="9ca0007b-b9be-4486-8d62-8e5a5c7a8b3d"/>
+				<reportElement x="408" y="4" width="59" height="20" uuid="9ca0007b-b9be-4486-8d62-8e5a5c7a8b3d"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
@@ -141,37 +138,41 @@ FROM
 			<line>
 				<reportElement x="0" y="24" width="555" height="1" uuid="fb589fa4-a393-4ef7-a6ba-c95d1bc9bff4"/>
 			</line>
+			<staticText>
+				<reportElement x="19" y="5" width="59" height="20" uuid="ac99db54-ae15-45ca-96c2-87eb179827e8"/>
+				<textElement markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="16" y="2" width="146" height="20" uuid="f1005f97-a78a-46ea-bbbe-fa983d18baf6"/>
+				<reportElement x="89" y="2" width="312" height="20" uuid="f1005f97-a78a-46ea-bbbe-fa983d18baf6"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="162" y="2" width="144" height="20" uuid="bc90755f-ed4d-4daa-9911-69691d3e1d82"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_productor_individual_nombres_prodcutor_individual}+" "+$F{t_productor_individual_apellidos_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="307" y="2" width="115" height="20" uuid="76bc112a-f8c2-41e4-9972-c1cb8ce95e0c"/>
+				<reportElement x="293" y="2" width="115" height="20" uuid="76bc112a-f8c2-41e4-9972-c1cb8ce95e0c"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_dui_productor_individual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="422" y="2" width="132" height="20" uuid="3af6aa0d-4a85-4ed9-ade1-b26ef95fd232"/>
+				<reportElement x="408" y="2" width="132" height="20" uuid="3af6aa0d-4a85-4ed9-ade1-b26ef95fd232"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_productor_individual_nit_productor_individual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="2" width="100" height="20" uuid="d6efe7f6-d82f-4c55-bb73-879736224aa1"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

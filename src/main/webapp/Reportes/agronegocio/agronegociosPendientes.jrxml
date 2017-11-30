@@ -95,6 +95,10 @@ FROM
 	<variable name="t_agronegocio_comision_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{t_agronegocio_comision}]]></variableExpression>
 	</variable>
+	<variable name="contador" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -162,7 +166,7 @@ FROM
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">FECHA DE PAGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="3" width="52" height="20" uuid="5ed20a9e-8c53-45a3-857b-10b0567dd37d"/>
+				<reportElement x="16" y="3" width="52" height="20" uuid="5ed20a9e-8c53-45a3-857b-10b0567dd37d"/>
 				<textElement markup="styled">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -199,12 +203,19 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">COMISIÓN</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="-5" y="1" width="24" height="20" uuid="8f7c6694-f04c-46a6-86a1-8538396e7b8e"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="-1" y="0" width="68" height="20" uuid="dc11f91c-bfec-4090-b0c9-9d8452c0c98b"/>
+				<reportElement x="16" y="0" width="51" height="20" uuid="dc11f91c-bfec-4090-b0c9-9d8452c0c98b"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -258,6 +269,10 @@ FROM
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_agronegocio_fechapago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="50" height="20" uuid="d737827c-0da3-4321-a6b4-5133d503cf42"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

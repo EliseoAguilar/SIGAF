@@ -29,6 +29,10 @@ WHERE
 	<field name="t_area_codigo_area" class="java.lang.String"/>
 	<field name="t_area_identidad_area" class="java.lang.Integer"/>
 	<field name="t_area_estado_area" class="java.lang.Boolean"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,14 +58,14 @@ WHERE
 	<columnHeader>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="18" y="1" width="100" height="20" uuid="fa9db2c9-7769-4730-a0e7-e4cebfe39faf"/>
+				<reportElement x="59" y="1" width="100" height="20" uuid="fa9db2c9-7769-4730-a0e7-e4cebfe39faf"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">NOMBRE</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="190" y="1" width="100" height="20" uuid="0d86eb04-db63-475c-ae32-e0fb2e51d1bb"/>
+				<reportElement x="231" y="1" width="100" height="20" uuid="0d86eb04-db63-475c-ae32-e0fb2e51d1bb"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -71,27 +75,38 @@ WHERE
 				<reportElement x="0" y="19" width="555" height="1" uuid="dc8d81ad-e37e-4a00-b1ca-2955a3d181b5"/>
 			</line>
 			<staticText>
-				<reportElement x="314" y="1" width="100" height="20" uuid="0037cf5b-c68e-498c-8e97-b733b9673c60"/>
+				<reportElement x="355" y="1" width="100" height="20" uuid="0037cf5b-c68e-498c-8e97-b733b9673c60"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ESTADO</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="1" width="100" height="20" uuid="706676e6-ea78-49c6-acd7-bb254e222b87"/>
+				<textElement markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">#</style>]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="17" y="0" width="173" height="20" uuid="c684ed1c-364c-49f5-8109-bf8f2d8fcba7"/>
+				<reportElement x="58" y="0" width="173" height="20" uuid="c684ed1c-364c-49f5-8109-bf8f2d8fcba7"/>
 				<textFieldExpression><![CDATA[$F{nombre_area}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="190" y="0" width="100" height="20" uuid="e9e1c63b-8641-4c7c-a722-e750626a0561"/>
+				<reportElement x="231" y="0" width="100" height="20" uuid="e9e1c63b-8641-4c7c-a722-e750626a0561"/>
 				<textFieldExpression><![CDATA[$F{codigo_area}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="314" y="0" width="100" height="20" uuid="57528a5a-819f-4257-9cd3-dc8ca0c54346"/>
+				<reportElement x="355" y="0" width="100" height="20" uuid="57528a5a-819f-4257-9cd3-dc8ca0c54346"/>
 				<textFieldExpression><![CDATA[$F{estado_area} == true? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="0" width="100" height="20" uuid="a99be3db-7e4a-4f1a-9ae7-7d67e1a865aa"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -37,6 +37,10 @@ FROM
 	<field name="t_comprador_direccion_comprador" class="java.lang.String"/>
 	<field name="t_comprador_estado_comprador" class="java.lang.Boolean"/>
 	<field name="t_comprador_fechanacimiento_comprador" class="java.sql.Date"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}.intValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -69,18 +73,11 @@ FROM
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>DUI</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="3" width="59" height="20" uuid="76229ed2-a128-4cb2-a25c-7b306e14e6d7"/>
+				<reportElement x="100" y="3" width="59" height="20" uuid="76229ed2-a128-4cb2-a25c-7b306e14e6d7"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>NOMBRES</style>]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="137" y="3" width="59" height="20" uuid="97b78983-a9e2-41ae-b536-a7180a6f2c16"/>
-				<textElement markup="styled">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>APELLIDOS</style>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="370" y="3" width="80" height="20" uuid="1e1e5996-9e88-42c1-9657-b28d78929309"/>
@@ -99,24 +96,17 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="11" y="6" width="59" height="20" uuid="cf300051-ad1d-4011-a7cc-87096f8a441c"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="137" height="20" uuid="ef7a7c24-ec00-4b34-bd02-dd0f7e514d03"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="137" y="0" width="125" height="20" uuid="dcc9805d-5542-4dd4-acc9-181a421a43ee"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
-			</textField>
+		<band height="23" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="262" y="0" width="107" height="20" uuid="bf5e1e14-840e-4e4f-ac02-33bd7d29856f"/>
 				<textElement>
@@ -137,6 +127,18 @@ FROM
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_comprador_estado_comprador}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="0" width="180" height="20" uuid="ef7a7c24-ec00-4b34-bd02-dd0f7e514d03"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_comprador_nombres_comprador}+" "+$F{t_comprador_apellidos_comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="0" width="57" height="20" uuid="bcdf01b1-c20a-4de7-b146-d86163ac7cc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
