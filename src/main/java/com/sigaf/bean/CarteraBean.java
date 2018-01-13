@@ -3988,8 +3988,9 @@ public class CarteraBean extends Actividad {
     public void generarCarta() throws SQLException, JRException, IOException {
 
         this.getConexion();
+        System.out.println(this.lisiadoSeleccionado.getIdLisiado());
         Map<String, Object> parametros = new HashMap();
-        parametros.put("id_proyecto", this.proyectoSeleccionado.getIdproyecto());
+        parametros.put("id_proyecto", this.lisiadoSeleccionado.getIdLisiado());
         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/documentoCarta.jasper"));
         byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.getConn());
         System.out.println(bytes.length);
@@ -4003,27 +4004,14 @@ public class CarteraBean extends Actividad {
         FacesContext.getCurrentInstance().responseComplete();
         TBitacora auxBitacora = new TBitacora();
         auxBitacora.setTableBitacora("t_lisiado");
-        auxBitacora.setAccionBitacora("Generar carte de fondo de lisiado");
+        auxBitacora.setAccionBitacora("Generar carta de fondo de lisiado");
 
         String formaPagosCredito = "";
 
-        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 1) {
-            formaPagosCredito = "Mensual";
-        }
-        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 2) {
-            formaPagosCredito = "Trimestral";
-        }
-        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 3) {
-            formaPagosCredito = "Semestral";
-        }
-        if (this.proyectoSeleccionado.getFormaPagoProyecto() == 4) {
-            formaPagosCredito = "Anual";
-        }
+        
 
-        auxBitacora.setDatosBitacora("Crédito:" + this.proyectoSeleccionado.getCodigoProyecto()
-                + ", Monto: " + this.proyectoSeleccionado.getMonto()
-                + ", Plazo: " + this.proyectoSeleccionado.getPlazo()
-                + ", Forma de pago: " + formaPagosCredito
+        auxBitacora.setDatosBitacora("Carta generada:" + this.clienteSeleccionado.getNombreCliente() + " "+ this.clienteSeleccionado.getApellidoCliente()
+                
         );
         auxBitacora.setHoraBitacora(new Date());
         auxBitacora.setFechaBitacora(new Date());

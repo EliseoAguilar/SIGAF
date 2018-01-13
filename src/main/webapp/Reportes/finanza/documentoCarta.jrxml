@@ -29,30 +29,6 @@
      t_cliente."tipo_cliente1" AS t_cliente_tipo_cliente1,
      t_cliente."tipo_cliente2" AS t_cliente_tipo_cliente2,
      t_cliente."tipo_cliente3" AS t_cliente_tipo_cliente3,
-     t_cliente_proyecto."id_cliente_proyecto" AS t_cliente_proyecto_id_cliente_proyecto,
-     t_cliente_proyecto."id_cliente" AS t_cliente_proyecto_id_cliente,
-     t_cliente_proyecto."id_proyecto" AS t_cliente_proyecto_id_proyecto,
-     t_proyecto."nombre" AS t_proyecto_nombre,
-     t_proyecto."monto" AS t_proyecto_monto,
-     t_proyecto."plazo" AS t_proyecto_plazo,
-     t_proyecto."fecha" AS t_proyecto_fecha,
-     t_proyecto."estado" AS t_proyecto_estado,
-     t_proyecto."idtipocredito" AS t_proyecto_idtipocredito,
-     t_proyecto."idproyecto" AS t_proyecto_idproyecto,
-     t_proyecto."codigo" AS t_proyecto_codigo,
-     t_proyecto."descripcion" AS t_proyecto_descripcion,
-     t_proyecto."lugar" AS t_proyecto_lugar,
-     t_proyecto."calificacion" AS t_proyecto_calificacion,
-     t_proyecto."codigo_proyecto" AS t_proyecto_codigo_proyecto,
-     t_proyecto."estado_proyecto" AS t_proyecto_estado_proyecto,
-     t_proyecto."fecha_aprovacion" AS t_proyecto_fecha_aprovacion,
-     t_proyecto."forma_pago_proyecto" AS t_proyecto_forma_pago_proyecto,
-     t_proyecto."destino_proyecto" AS t_proyecto_destino_proyecto,
-     t_proyecto."fecha_vencimiento_proyecto" AS t_proyecto_fecha_vencimiento_proyecto,
-     t_proyecto."id_politica" AS t_proyecto_id_politica,
-     t_proyecto."fecha_finalizacion_proyecto" AS t_proyecto_fecha_finalizacion_proyecto,
-     t_proyecto."fecha_incobrabilidad" AS t_proyecto_fecha_incobrabilidad,
-     t_proyecto."razon_incobrabilidad" AS t_proyecto_razon_incobrabilidad,
      t_lisiado."id_lisiado" AS t_lisiado_id_lisiado,
      t_lisiado."nombre_conyugue" AS t_lisiado_nombre_conyugue,
      t_lisiado."telefono_conyugue" AS t_lisiado_telefono_conyugue,
@@ -81,11 +57,9 @@
      t_lisiado."id_cliente_lisiado" AS t_lisiado_id_cliente_lisiado,
      t_lisiado."edad_conyugue" AS t_lisiado_edad_conyugue
 FROM
-     "public"."t_cliente" t_cliente INNER JOIN "public"."t_cliente_proyecto" t_cliente_proyecto ON t_cliente."id_cliente" = t_cliente_proyecto."id_cliente"
-     INNER JOIN "public"."t_proyecto" t_proyecto ON t_cliente_proyecto."id_proyecto" = t_proyecto."idproyecto"
-     INNER JOIN "public"."t_lisiado" t_lisiado ON t_cliente."id_cliente" = t_lisiado."id_cliente_lisiado"
-WHERE
-     t_proyecto."idproyecto" = $P{id_proyecto}]]>
+     "public"."t_cliente" t_cliente INNER JOIN "public"."t_lisiado" t_lisiado ON t_cliente."id_cliente" = t_lisiado."id_cliente_lisiado"
+WHERE t_lisiado."id_lisiado" =
+     $P{id_proyecto}]]>
 	</queryString>
 	<field name="t_cliente_id_cliente" class="java.lang.Integer"/>
 	<field name="t_cliente_nombre_cliente" class="java.lang.String"/>
@@ -106,30 +80,6 @@ WHERE
 	<field name="t_cliente_tipo_cliente1" class="java.lang.Integer"/>
 	<field name="t_cliente_tipo_cliente2" class="java.lang.Integer"/>
 	<field name="t_cliente_tipo_cliente3" class="java.lang.Integer"/>
-	<field name="t_cliente_proyecto_id_cliente_proyecto" class="java.lang.Integer"/>
-	<field name="t_cliente_proyecto_id_cliente" class="java.lang.Integer"/>
-	<field name="t_cliente_proyecto_id_proyecto" class="java.lang.Integer"/>
-	<field name="t_proyecto_nombre" class="java.lang.String"/>
-	<field name="t_proyecto_monto" class="java.math.BigDecimal"/>
-	<field name="t_proyecto_plazo" class="java.lang.Integer"/>
-	<field name="t_proyecto_fecha" class="java.sql.Date"/>
-	<field name="t_proyecto_estado" class="java.lang.Integer"/>
-	<field name="t_proyecto_idtipocredito" class="java.lang.Integer"/>
-	<field name="t_proyecto_idproyecto" class="java.lang.Integer"/>
-	<field name="t_proyecto_codigo" class="java.lang.String"/>
-	<field name="t_proyecto_descripcion" class="java.lang.String"/>
-	<field name="t_proyecto_lugar" class="java.lang.String"/>
-	<field name="t_proyecto_calificacion" class="java.lang.String"/>
-	<field name="t_proyecto_codigo_proyecto" class="java.lang.String"/>
-	<field name="t_proyecto_estado_proyecto" class="java.lang.String"/>
-	<field name="t_proyecto_fecha_aprovacion" class="java.sql.Date"/>
-	<field name="t_proyecto_forma_pago_proyecto" class="java.lang.Integer"/>
-	<field name="t_proyecto_destino_proyecto" class="java.lang.String"/>
-	<field name="t_proyecto_fecha_vencimiento_proyecto" class="java.sql.Date"/>
-	<field name="t_proyecto_id_politica" class="java.lang.Integer"/>
-	<field name="t_proyecto_fecha_finalizacion_proyecto" class="java.sql.Date"/>
-	<field name="t_proyecto_fecha_incobrabilidad" class="java.sql.Date"/>
-	<field name="t_proyecto_razon_incobrabilidad" class="java.lang.String"/>
 	<field name="t_lisiado_id_lisiado" class="java.lang.Integer"/>
 	<field name="t_lisiado_nombre_conyugue" class="java.lang.String"/>
 	<field name="t_lisiado_telefono_conyugue" class="java.lang.String"/>
@@ -167,7 +117,7 @@ WHERE
 	<detail>
 		<band height="681">
 			<image>
-				<reportElement x="58" y="30" width="497" height="600" uuid="a214300b-3445-4ae2-9ed4-1db9447c6d1b"/>
+				<reportElement x="56" y="30" width="497" height="600" uuid="a214300b-3445-4ae2-9ed4-1db9447c6d1b"/>
 				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($F{t_lisiado_carta_lisiado}.split(",")[1].getBytes()))]]></imageExpression>
 			</image>
 		</band>

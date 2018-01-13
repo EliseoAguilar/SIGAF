@@ -77,11 +77,13 @@ import javax.inject.Named;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -3548,9 +3550,9 @@ public class SolicitudBean extends Actividad {
                 this.msgPlazo = "Debe introducir un plazo multiplo 3";
                 this.estadoFormulario = false;
 
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 3) {
@@ -3558,9 +3560,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 6 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 6";
                 this.estadoFormulario = false;
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 4) {
@@ -3568,9 +3570,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 12 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 12";
                 this.estadoFormulario = false;
-            }else{
-                
-                 this.msgPlazo = "";
+            } else {
+
+                this.msgPlazo = "";
             }
 
         } else {
@@ -3587,6 +3589,82 @@ public class SolicitudBean extends Actividad {
         this.verDatosEmpleado = false;
         this.verDatosLisiado = false;
         this.VerResolucion = false;
+
+    }
+
+    public void validarSeccionCreditoCooperativa() {
+
+        this.mostrarTabla = true;
+        if (this.proyecto.getTTipoCredito().getIdTipoCredito() == 0) {
+            this.msgModalidad = "Debe seleccionar una modalidad";
+            this.mostrarTabla = false;
+        } else {
+            this.msgModalidad = "";
+        }
+        if (this.proyecto.getDestinoProyecto() == "") {
+            this.msgDestino = "Debe introducir el destino";
+            this.mostrarTabla = false;
+        } else {
+            this.msgDestino = "";
+        }
+        if (this.proyecto.getTTipoCredito().getIdTipoCredito() != 0) {
+            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+                this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+                this.mostrarTabla = false;
+            } else {
+                this.msgMonto = "";
+            }
+        } else {
+            this.msgMonto = "Debe introducir un monto";
+        }
+        if (this.proyecto.getFormaPagoProyecto() == 0) {
+            this.msgFormaPago = "Debe seleccionar una forma de pago";
+            this.mostrarTabla = false;
+        } else {
+            this.msgFormaPago = "";
+        }
+        if (this.proyecto.getPlazo() == null) {
+            this.msgPlazo = "Debe introducir el plazo del proyecto";
+            this.mostrarTabla = false;
+        } else if (this.proyecto.getFormaPagoProyecto() == 2) {
+
+            if (this.proyecto.getPlazo() % 3 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 3";
+                this.mostrarTabla = false;
+
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 3) {
+
+            if (this.proyecto.getPlazo() % 6 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 6";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 4) {
+
+            if (this.proyecto.getPlazo() % 12 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 12";
+                this.mostrarTabla = false;
+            } else {
+
+                this.msgPlazo = "";
+            }
+
+        } else {
+            this.msgPlazo = "";
+        }
+
+        if (this.mostrarTabla == true) {
+            this.mostrarCalculos();
+
+        }
 
     }
 
@@ -3875,7 +3953,7 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgFormaPago = "";
         }
-       if (this.proyecto.getPlazo() == null) {
+        if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             this.estadoFormulario = false;
         } else if (this.proyecto.getFormaPagoProyecto() == 2) {
@@ -3884,9 +3962,9 @@ public class SolicitudBean extends Actividad {
                 this.msgPlazo = "Debe introducir un plazo multiplo 3";
                 this.estadoFormulario = false;
 
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 3) {
@@ -3894,9 +3972,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 6 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 6";
                 this.estadoFormulario = false;
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 4) {
@@ -3904,9 +3982,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 12 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 12";
                 this.estadoFormulario = false;
-            }else{
-                
-                 this.msgPlazo = "";
+            } else {
+
+                this.msgPlazo = "";
             }
 
         } else {
@@ -3925,6 +4003,148 @@ public class SolicitudBean extends Actividad {
             this.msgtiempo = "";
         }
 
+    }
+
+    public void validarSeccionAgropecuario() {
+
+        this.mostrarTabla = true;
+
+        if (this.proyecto.getTTipoCredito().getIdTipoCredito() == 0) {
+            this.msgModalidad = "Debe seleccionar una modalidad";
+            this.mostrarTabla = false;
+        } else {
+            this.msgModalidad = "";
+        }
+        if (this.proyecto.getDestinoProyecto() == "") {
+            this.msgDestino = "Debe introducir el destino";
+            this.mostrarTabla = false;
+        } else {
+            this.msgDestino = "";
+        }
+        if (this.proyecto.getTTipoCredito().getIdTipoCredito() != 0) {
+            if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+                this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+                this.mostrarTabla = false;
+            } else {
+                this.msgMonto = "";
+            }
+        } else {
+            this.msgMonto = "Debe de seleccionar una modalidad";
+        }
+        if (this.proyecto.getFormaPagoProyecto() == 0) {
+            this.msgFormaPago = "Debe seleccionar una forma de pago";
+            this.mostrarTabla = false;
+        } else {
+            this.msgFormaPago = "";
+        }
+        if (this.proyecto.getPlazo() == null) {
+            this.msgPlazo = "Debe introducir el plazo del proyecto";
+            this.mostrarTabla = false;
+        } else if (this.proyecto.getFormaPagoProyecto() == 2) {
+
+            if (this.proyecto.getPlazo() % 3 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 3";
+                this.mostrarTabla = false;
+
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 3) {
+
+            if (this.proyecto.getPlazo() % 6 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 6";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 4) {
+
+            if (this.proyecto.getPlazo() % 12 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 12";
+                this.mostrarTabla = false;
+            } else {
+
+                this.msgPlazo = "";
+            }
+
+        } else {
+            this.msgPlazo = "";
+        }
+
+        if (this.mostrarTabla == true) {
+            this.mostrarCalculos();
+        }
+
+    }
+    
+    public void validarSeccionComercio(){
+        
+        this.mostrarTabla=true;
+        
+        if (this.proyecto.getDestinoProyecto() == "") {
+            this.msgDestino = "Debe introducir el destino";
+            this.mostrarTabla = false;
+        } else {
+            this.msgDestino = "";
+        }
+        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+            this.mostrarTabla = false;
+        } else {
+            this.msgMonto = "";
+        }
+        if (this.proyecto.getFormaPagoProyecto() == 0) {
+            this.msgFormaPago = "Debe seleccionar una forma de pago";
+            this.mostrarTabla = false;
+        } else {
+            this.msgFormaPago = "";
+        }
+        if (this.proyecto.getPlazo() == null) {
+            this.msgPlazo = "Debe introducir el plazo del proyecto";
+            this.mostrarTabla = false;
+        } else if (this.proyecto.getFormaPagoProyecto() == 2) {
+
+            if (this.proyecto.getPlazo() % 3 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 3";
+                this.mostrarTabla = false;
+
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 3) {
+
+            if (this.proyecto.getPlazo() % 6 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 6";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 4) {
+
+            if (this.proyecto.getPlazo() % 12 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 12";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+            }
+
+        } else {
+            this.msgPlazo = "";
+        }   
+        
+        if(this.mostrarTabla==true){
+            
+            this.mostrarCalculos();
+        }
+        
     }
 
     public void validarFormularioComercio() {
@@ -4256,9 +4476,9 @@ public class SolicitudBean extends Actividad {
                 this.msgPlazo = "Debe introducir un plazo multiplo 3";
                 this.estadoFormulario = false;
 
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 3) {
@@ -4266,9 +4486,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 6 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 6";
                 this.estadoFormulario = false;
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 4) {
@@ -4276,13 +4496,81 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 12 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 12";
                 this.estadoFormulario = false;
-            }else{
-                
-                 this.msgPlazo = "";
+            } else {
+
+                this.msgPlazo = "";
             }
 
         } else {
             this.msgPlazo = "";
+        }
+
+    }
+
+    public void validarSeccionLisiado() {
+
+        this.mostrarTabla = true;
+
+        if (this.proyecto.getDestinoProyecto() == "") {
+            this.msgDestino = "Debe introducir el destino";
+            this.mostrarTabla = false;
+        } else {
+            this.msgDestino = "";
+        }
+        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+            this.mostrarTabla = false;
+        } else {
+            this.msgMonto = "";
+        }
+
+        if (this.proyecto.getFormaPagoProyecto() == 0) {
+            this.msgFormaPago = "Debe seleccionar una forma de pago";
+            this.mostrarTabla = false;
+        } else {
+            this.msgFormaPago = "";
+        }
+        if (this.proyecto.getPlazo() == null) {
+            this.msgPlazo = "Debe introducir el plazo del proyecto";
+            this.mostrarTabla = false;
+        } else if (this.proyecto.getFormaPagoProyecto() == 2) {
+
+            if (this.proyecto.getPlazo() % 3 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 3";
+                this.mostrarTabla = false;
+
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 3) {
+
+            if (this.proyecto.getPlazo() % 6 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 6";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 4) {
+
+            if (this.proyecto.getPlazo() % 12 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 12";
+                this.mostrarTabla = false;
+            } else {
+
+                this.msgPlazo = "";
+            }
+
+        } else {
+            this.msgPlazo = "";
+        }
+
+        if (this.mostrarTabla == true) {
+
+            this.mostrarCalculos();
         }
 
     }
@@ -4643,7 +4931,7 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgFormaPago = "";
         }
-       if (this.proyecto.getPlazo() == null) {
+        if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             this.estadoFormulario = false;
         } else if (this.proyecto.getFormaPagoProyecto() == 2) {
@@ -4652,9 +4940,9 @@ public class SolicitudBean extends Actividad {
                 this.msgPlazo = "Debe introducir un plazo multiplo 3";
                 this.estadoFormulario = false;
 
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 3) {
@@ -4662,9 +4950,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 6 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 6";
                 this.estadoFormulario = false;
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 4) {
@@ -4672,13 +4960,79 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 12 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 12";
                 this.estadoFormulario = false;
-            }else{
-                
-                 this.msgPlazo = "";
+            } else {
+
+                this.msgPlazo = "";
             }
 
         } else {
             this.msgPlazo = "";
+        }
+
+    }
+
+    public void validarSeccionEmpleado() {
+
+        this.mostrarTabla = true;
+
+        if (this.proyecto.getDestinoProyecto() == "") {
+            this.msgDestino = "Debe introducir el destino";
+            this.mostrarTabla = false;
+        } else {
+            this.msgDestino = "";
+        }
+        if ((this.proyecto.getMonto() == null) || (this.proyecto.getMonto().doubleValue() < this.politica.getMontoMinimo().doubleValue() || this.proyecto.getMonto().doubleValue() > this.politica.getMontoMaximo().doubleValue())) {
+            this.msgMonto = "Debe introducir un monto entre " + this.politica.getMontoMinimo() + " y " + this.politica.getMontoMaximo() + "";
+            this.mostrarTabla = false;
+        } else {
+            this.msgMonto = "";
+        }
+        if (this.proyecto.getFormaPagoProyecto() == 0) {
+            this.msgFormaPago = "Debe seleccionar una forma de pago";
+            this.mostrarTabla = false;
+        } else {
+            this.msgFormaPago = "";
+        }
+        if (this.proyecto.getPlazo() == null) {
+            this.msgPlazo = "Debe introducir el plazo del proyecto";
+            this.mostrarTabla = false;
+        } else if (this.proyecto.getFormaPagoProyecto() == 2) {
+
+            if (this.proyecto.getPlazo() % 3 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 3";
+                this.mostrarTabla = false;
+
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 3) {
+
+            if (this.proyecto.getPlazo() % 6 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 6";
+                this.mostrarTabla = false;
+            } else {
+                this.msgPlazo = "";
+
+            }
+
+        } else if (this.proyecto.getFormaPagoProyecto() == 4) {
+
+            if (this.proyecto.getPlazo() % 12 != 0) {
+                this.msgPlazo = "Debe introducir un plazo multiplo 12";
+                this.mostrarTabla = false;
+            } else {
+
+                this.msgPlazo = "";
+            }
+
+        } else {
+            this.msgPlazo = "";
+        }
+
+        if (this.mostrarTabla == true) {
+            this.mostrarCalculos();
         }
 
     }
@@ -4974,7 +5328,7 @@ public class SolicitudBean extends Actividad {
         } else {
             this.msgFormaPago = "";
         }
-       if (this.proyecto.getPlazo() == null) {
+        if (this.proyecto.getPlazo() == null) {
             this.msgPlazo = "Debe introducir el plazo del proyecto";
             this.estadoFormulario = false;
         } else if (this.proyecto.getFormaPagoProyecto() == 2) {
@@ -4983,9 +5337,9 @@ public class SolicitudBean extends Actividad {
                 this.msgPlazo = "Debe introducir un plazo multiplo 3";
                 this.estadoFormulario = false;
 
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 3) {
@@ -4993,9 +5347,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 6 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 6";
                 this.estadoFormulario = false;
-            }else{
-                 this.msgPlazo = "";
-                
+            } else {
+                this.msgPlazo = "";
+
             }
 
         } else if (this.proyecto.getFormaPagoProyecto() == 4) {
@@ -5003,9 +5357,9 @@ public class SolicitudBean extends Actividad {
             if (this.proyecto.getPlazo() % 12 != 0) {
                 this.msgPlazo = "Debe introducir un plazo multiplo 12";
                 this.estadoFormulario = false;
-            }else{
-                
-                 this.msgPlazo = "";
+            } else {
+
+                this.msgPlazo = "";
             }
 
         } else {
@@ -7621,6 +7975,13 @@ public class SolicitudBean extends Actividad {
             this.total = this.intereses.add(this.monto);
             this.mostrarTabla = true;
         }
+        
+        
+        if(this.listaPagos.size()>0){
+            
+            this.listaPagos.get(this.listaPagos.size()-1).setSaldocapital(new BigDecimal("0"));
+            
+        }
 
     }
 
@@ -8247,4 +8608,41 @@ public class SolicitudBean extends Actividad {
     }
 
     //TERMINA PROCESO DE MODIFICACION
+    
+    public void verReporteAmortizacion() throws SQLException, JRException, IOException {
+
+        Map<String, Object> parametros = new HashMap();
+        TEntidad auxEntidad = ientidadBo.getTEntidad(1);
+        parametros.put("nombreEntidad", auxEntidad.getNombreEntidad());
+        parametros.put("direccionEntidad", auxEntidad.getDireccionEntidad());
+        parametros.put("telEntidad", auxEntidad.getTelefonoEntidad());
+        parametros.put("logoEntidad", auxEntidad.getLogoEntidad());
+        
+        parametros.put("monto", this.proyecto.getMonto());
+        parametros.put("plazo", this.proyecto.getPlazo());
+        parametros.put("forma", this.proyecto.getFormaPagoProyecto());   
+        parametros.put("tasa", this.politica.getTasaInteres());
+        
+        
+        
+        
+        
+        JRDataSource dataSource = new JRBeanCollectionDataSource(this.listaPagos);
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/Reportes/finanza/tablaAmortizacion.jasper"));
+        byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, dataSource);
+        System.out.println(bytes.length);
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setContentLength(bytes.length);
+        ServletOutputStream outStream = response.getOutputStream();
+        outStream.write(bytes, 0, bytes.length);
+        outStream.flush();
+        outStream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        
+
+    }
+    
+    
+    
 }
