@@ -22,7 +22,7 @@
         <property name="estadoArea" type="java.lang.Boolean">
             <column name="estado_area" />
         </property>
-        <set name="TEmpleadoAreas" table="t_empleado_area" inverse="true" lazy="true" fetch="select">
+        <set name="TEmpleadoAreas" table="t_empleado_area" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="id_area" />
             </key>
