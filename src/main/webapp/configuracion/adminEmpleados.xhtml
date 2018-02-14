@@ -361,9 +361,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{empleadoBean.create}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        <p:commandButton icon="fa fa-check" style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{empleadoBean.create}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgGuardar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
                                             <f:setPropertyActionListener value="#{false}" target="#{empleadoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </center>
@@ -759,9 +759,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{empleadoBean.modificar}"   oncomplete="PF('pgModificar').hide()"  title="Cerrar" update=":padding">
+                                        <p:commandButton icon="fa fa-check" style="#{empleadoBean.btnNuevo}" value="Si" actionListener="#{empleadoBean.modificar}"   oncomplete="PF('pgModificar').hide()"  title="Cerrar" update=":padding">
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgModificar').hide()" style="#{empleadoBean.btnCancelar}"  value="No"> 
                                             <f:setPropertyActionListener value="#{false}" target="#{empleadoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </center>
@@ -1162,9 +1162,9 @@
                                         </p:panelGrid>
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton id="btnGuardarBaja" style="#{empleadoBean.btnNuevo}" actionListener="#{empleadoBean.darDeBaja}" update=":padding"  value="Si"> 
+                                        <p:commandButton icon="fa fa-check" id="btnGuardarBaja" style="#{empleadoBean.btnNuevo}" actionListener="#{empleadoBean.darDeBaja}" update=":padding"  value="Si"> 
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelBaja" style="#{empleadoBean.btnCancelar}" actionListener="#{empleadoBean.enableShowData}"  oncomplete="PF('dlBaja').hide()"   value="No"> 
+                                        <p:commandButton icon="fa fa-close" id="btnCancelBaja" style="#{empleadoBean.btnCancelar}" actionListener="#{empleadoBean.enableShowData}"  oncomplete="PF('dlBaja').hide()"   value="No"> 
                                         </p:commandButton>
                                     </p:outputPanel>
                                 </h:form>
@@ -1178,9 +1178,9 @@
                                         </p:panelGrid>
                                         <br></br>
                                         <hr></hr>
-                                        <p:commandButton id="btnGuardarAlta" style="#{empleadoBean.btnNuevo}" actionListener="#{empleadoBean.darDeAlta}" update=":padding" value="Si"> 
+                                        <p:commandButton icon="fa fa-check" id="btnGuardarAlta" style="#{empleadoBean.btnNuevo}" actionListener="#{empleadoBean.darDeAlta}" update=":padding" value="Si"> 
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelAlta" style="#{empleadoBean.btnCancelar}" actionListener="#{empleadoBean.enableShowData}" oncomplete="PF('dlAlta').hide()"   value="No"> 
+                                        <p:commandButton icon="fa fa-close" id="btnCancelAlta" style="#{empleadoBean.btnCancelar}" actionListener="#{empleadoBean.enableShowData}" oncomplete="PF('dlAlta').hide()"   value="No"> 
                                         </p:commandButton>
                                     </p:outputPanel>
                                 </h:form>

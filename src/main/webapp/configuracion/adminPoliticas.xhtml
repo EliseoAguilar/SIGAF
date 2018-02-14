@@ -993,9 +993,9 @@
                                     <br></br>
                                     <hr></hr>                              
                                     <center>
-                                        <p:commandButton style="#{politicaBean.btnNuevo}" value="Si" actionListener="#{politicaBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        <p:commandButton icon="fa fa-check" style="#{politicaBean.btnNuevo}" value="Si" actionListener="#{politicaBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgGuardar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
                                             <f:setPropertyActionListener value="#{false}" target="#{politicaBean.estadoFormulario}"/>
                                         </p:commandButton>
                                     </center>

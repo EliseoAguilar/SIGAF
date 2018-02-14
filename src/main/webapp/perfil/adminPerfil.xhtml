@@ -27,10 +27,10 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton  value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnNuevo}"  update=":opUser, :padding" > 
+                                    <p:commandButton icon="fa fa-check" value="Si" id="withI" actionListener="#{usuarioBean.actualizarPerfil}" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnNuevo}"  update=":opUser, :padding" > 
                                     <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
-                                    <p:commandButton  value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                    <p:commandButton icon="fa fa-close" value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
                                         <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>

@@ -117,9 +117,9 @@
                                     </p:panelGrid>
                                     <br></br>
                                     <hr></hr>            
-                                    <p:commandButton id="btnGuardarBaja" actionListener="#{cargoBean.darDeBaja}" update=":padding" style="#{cargoBean.btnNuevo}"  value="Si"> 
+                                    <p:commandButton icon="fa fa-check" id="btnGuardarBaja" actionListener="#{cargoBean.darDeBaja}" update=":padding" style="#{cargoBean.btnNuevo}"  value="Si"> 
                                     </p:commandButton>
-                                    <p:commandButton id="btnCancelBaja" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{cargoBean.btnCancelar}"  value="No" > 
+                                    <p:commandButton icon="fa fa-close" id="btnCancelBaja" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{cargoBean.btnCancelar}"  value="No" > 
                                     </p:commandButton>
                                 </p:outputPanel>
                             </h:form>
@@ -133,9 +133,9 @@
                                     </p:panelGrid>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton id="btnGuardarAlta" actionListener="#{cargoBean.darDeAlta}" update=":padding" style="#{areaBean.btnNuevo}"    value="Si"> 
+                                    <p:commandButton icon="fa fa-check" id="btnGuardarAlta" actionListener="#{cargoBean.darDeAlta}" update=":padding" style="#{areaBean.btnNuevo}"    value="Si"> 
                                     </p:commandButton>
-                                    <p:commandButton id="btnCancelAlta" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{areaBean.btnCancelar}"   value="No"> 
+                                    <p:commandButton icon="fa fa-close" id="btnCancelAlta" actionListener="#{cargoBean.enableShowData}" update=":padding"  style="#{areaBean.btnCancelar}"   value="No"> 
                                     </p:commandButton>
                                 </p:outputPanel>
                             </h:form>
@@ -184,9 +184,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton style="#{cargoBean.btnNuevo}" value="Si" actionListener="#{cargoBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
+                                        <p:commandButton icon="fa fa-check" style="#{cargoBean.btnNuevo}" value="Si" actionListener="#{cargoBean.crear}"   oncomplete="PF('pgGuardar').hide()"  title="Cerrar" update=":padding">
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgGuardar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgGuardar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
                                             <f:setPropertyActionListener value="#{false}" target="#{cargoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </center>
@@ -237,9 +237,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton  style="#{cargoBean.btnNuevo}" value="Si"  actionListener="#{cargoBean.modificar}" update=":padding"  oncomplete="PF('pgModificar').hide()"  title="Cerrar"  >
+                                        <p:commandButton icon="fa fa-check" style="#{cargoBean.btnNuevo}" value="Si"  actionListener="#{cargoBean.modificar}" update=":padding"  oncomplete="PF('pgModificar').hide()"  title="Cerrar"  >
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgModificar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgModificar').hide()" style="#{cargoBean.btnCancelar}"  value="No"> 
                                             <f:setPropertyActionListener value="#{false}" target="#{cargoBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </center>

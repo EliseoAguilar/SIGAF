@@ -190,9 +190,9 @@
                                     <br></br>
                                     <hr></hr>
                                     <center>
-                                        <p:commandButton value="Si" actionListener="#{entidadBean.modificarPerfil}" style="#{areaBean.btnNuevo}"   update=":padding" oncomplete="PF('pgAgregar').hide()"  title="Cerrar">
+                                        <p:commandButton icon="fa fa-check" value="Si" actionListener="#{entidadBean.modificarPerfil}" style="#{areaBean.btnNuevo}"   update=":padding" oncomplete="PF('pgAgregar').hide()"  title="Cerrar">
                                         </p:commandButton>
-                                        <p:commandButton oncomplete="PF('pgAgregar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
+                                        <p:commandButton icon="fa fa-close" oncomplete="PF('pgAgregar').hide()" style="#{areaBean.btnCancelar}"  value="No"> 
                                               <f:setPropertyActionListener value="#{false}" target="#{entidadBean.estadoFormulario}" />
                                         </p:commandButton>
                                     </center>
