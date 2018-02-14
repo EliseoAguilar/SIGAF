@@ -41,7 +41,7 @@
                 <p:outputPanel id="padding">
                     <p:growl id="msgs" />
                     <p:outputPanel  rendered="#{solicitudBean.showCreateCooperativa}" style=" width: 100%">
-                        <h:form id="fAgregarNuevaSolicitud">
+                        <h:form id="fAgregarNuevaSolicitud" target="_blank">
                             <p:panel id="pRegistrarSolicitud"  header="Agregar solicitud para crédito de cooperativa"  style="width: 90%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto;"  columnClasses="no-border, no-border, no-border">                 
                                     <p:row>
@@ -74,7 +74,7 @@
                                 <hr></hr>
                                 <p:tabView  >
                                     <p:tab title="Beneficiario">
-                                      
+
                                         <p:panelGrid id="pgEmpleado" styleClass="borderHidden"  style="width: 100%; margin: auto;">                                            
                                             <p:row> 
                                                 <p:column>                                                
@@ -126,8 +126,8 @@
                                         </p:panelGrid> 
                                     </p:tab>
                                     <p:tab title="Balance general">
-                                        
-                                          <b>  <h:outputText value="Cuentas principales"/></b>
+
+                                        <b>  <h:outputText value="Cuentas principales"/></b>
                                         <hr></hr>
                                         <p:panelGrid id="pgEmpleado6" styleClass="borderHidden"  style="width: 100%; margin: auto;">
                                             <p:row>
@@ -185,9 +185,9 @@
                                             </p:row>
                                         </p:panelGrid>
                                         <br></br>
-                                         <b>  <h:outputText value="Documento"/></b>
+                                        <b>  <h:outputText value="Documento"/></b>
                                         <hr></hr>
-                                        
+
                                         <p:outputPanel id="balance"> 
                                             <p:growl id="messa" />
                                             <p:outputPanel rendered="#{solicitudBean.showBalance}">
@@ -717,16 +717,80 @@
                                                             <br></br>
                                                             <h:outputText value="#{solicitudBean.msgPlazo}" style=" color: red"/>
                                                         </p:column>
-                                                    </p:row>
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
+                                                    </p:row>                                                    
                                                 </p:panelGrid>
                                                 <br></br>
-                                                
-                                              
+                                                <center>
+                                                    <p:commandButton  value="Generar tabla de amortización" id="btnGuardar" icon="fa fa-check"  actionListener="#{solicitudBean.validarSeccionCreditoCooperativa()}" update="calculos" > 
+                                                    </p:commandButton>
+                                                </center>                                                                                            
+                                                <p:outputPanel id="amort" rendered="#{solicitudBean.mostrarTabla}">
+                                                    <br></br>
+                                                    <b>  <h:outputText value="Lista de pagos"/>  </b>
+                                                    <hr></hr>
+                                                    <p:fieldset>
+
+
+                                                        <div style=" float:  right">
+                                                            <p:commandButton title="Generar reporte de amortización" ajax="false"   actionListener="#{solicitudBean.verReporteAmortizacion()}"   icon="fa fa-file-pdf-o"   />
+                                                        </div>
+
+                                                    </p:fieldset>
+                                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="amortizacionCooperativa"  paginator="true" rows="12" value="#{solicitudBean.listaPagos}"
+                                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                                  rowIndexVar="No" rowsPerPageTemplate="12"
+                                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                  >
+                                                        <p:column  style=" text-align:  center"  
+                                                                   headerText="Nº" width="5%" > 
+                                                            <h:outputText value="#{No+1}"  />  
+                                                        </p:column> 
+
+                                                        <p:column headerText="Cuota" width="8%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}"  
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"  />
+                                                                <h:outputText value="#{entidades.cuota}">
+                                                                    <f:convertNumber      pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>  
+                                                        <p:column  headerText="Interés" width="8%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}"  
+                                                                   >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.interes}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Abono a capital" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" 
+                                                                  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.abono}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Capital amortizado" width="12%" filterBy="#{entidades.capitalamortizado}" sortBy="#{entidades.capitalamortizado}" 
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.capitalamortizado}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div> </p:column>
+                                                        <p:column headerText="Saldo de capital" width="10%" filterBy="#{entidades.saldocapital}" sortBy="#{entidades.saldocapital}"   
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.saldocapital}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div>  </p:column>
+                                                    </p:dataTable>
+                                                </p:outputPanel>
+                                                <br></br>
                                             </p:outputPanel>
                                         </p:outputPanel>
                                     </p:tab>
@@ -805,7 +869,7 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{solicitudBean.showCreateLisiado}">
-                        <h:form id="fLisiados" >
+                        <h:form id="fLisiados" target="_blank" >
                             <p:panel id="basic" header="Agregar solicitud de crédito para lisiado de guerra"  style="width: 90%; margin: auto;">
                                 <p:panelGrid id="main-panel"  style="width: 100%; margin: auto;"  columnClasses="no-border, no-border, no-border">                 
                                     <p:row>
@@ -846,7 +910,7 @@
                                             <hr></hr>
                                             <p:outputPanel rendered="#{solicitudBean.existente}">
                                                 <br></br>
-                                            
+
                                                 <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
                                                     <p:row>
                                                         <p:column style=" width: 20%">
@@ -1014,14 +1078,14 @@
                                                                 <h:outputText value="#{solicitudBean.msgDireccion}" style=" color:  red" />
                                                             </p:column>
                                                         </p:row>
-                                                        
-                                                         </p:panelGrid>
+
+                                                    </p:panelGrid>
                                                     <br></br>
-                                                    
-                                                      <b>             <h:outputText value="Lesión"/>  </b>
+
+                                                    <b>             <h:outputText value="Lesión"/>  </b>
                                                     <hr></hr>
-                                                     <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;"> 
-                                                         
+                                                    <p:panelGrid styleClass="borderHidden"   style="width: 100%; margin: auto;"> 
+
                                                         <p:row>
                                                             <p:column>
                                                                 <h:outputText value="Tipo lesión:*"/>
@@ -1410,12 +1474,12 @@
                                                                 <h:outputText value=" #{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarActivo(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerActivos(No)}" >
                                                                 </p:commandButton>
-                                                             
+
                                                             </p:column>
                                                         </p:dataTable>
                                                         <h:outputText value="#{solicitudBean.msgActivo}" style=" color:  red" />
@@ -1506,7 +1570,7 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarIngreso(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerIngreso(No)}" >
@@ -1600,10 +1664,10 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"  >  
-                                                               
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarEgreso(No)}" >
                                                                 </p:commandButton>
-                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -1673,7 +1737,7 @@
                                                                 <h:outputText value=" #{empleados.telefono}" />
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarReferencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerReferencia(No)}" >
@@ -2091,11 +2155,78 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>                                                
+                                                <br></br>                                               
+                                                <center>
+                                                    <p:commandButton  value="Generar tabla de amortización" id="btnGuardar" icon="fa fa-check" actionListener="#{solicitudBean.validarSeccionLisiado()}" update="calculos" > 
+                                                    </p:commandButton>
+                                                </center>                                                                                            
+                                                <p:outputPanel id="amort" rendered="#{solicitudBean.mostrarTabla}">
+                                                    <br></br>
+                                                    <b>  <h:outputText value="Lista de pagos"/>  </b>
+                                                    <hr></hr>
+                                                    <p:fieldset>
+
+
+                                                        <div style=" float:  right">
+                                                            <p:commandButton title="Generar reporte de amortización" ajax="false"   actionListener="#{solicitudBean.verReporteAmortizacion()}" icon="fa fa-file-pdf-o"   />
+                                                        </div>
+
+                                                    </p:fieldset>
+                                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="amortizacionCooperativa"  paginator="true" rows="12" value="#{solicitudBean.listaPagos}"
+                                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                                  rowIndexVar="No" rowsPerPageTemplate="12"
+                                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                  >
+                                                        <p:column  style=" text-align:  center"  
+                                                                   headerText="Nº" width="5%" > 
+                                                            <h:outputText value="#{No+1}"  />  
+                                                        </p:column> 
+
+                                                        <p:column headerText="Cuota" width="8%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}"  
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"  />
+                                                                <h:outputText value="#{entidades.cuota}">
+                                                                    <f:convertNumber      pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>  
+                                                        <p:column  headerText="Interés" width="8%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}"  
+                                                                   >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.interes}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Abono a capital" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" 
+                                                                  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.abono}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Capital amortizado" width="12%" filterBy="#{entidades.capitalamortizado}" sortBy="#{entidades.capitalamortizado}" 
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.capitalamortizado}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div> </p:column>
+                                                        <p:column headerText="Saldo de capital" width="10%" filterBy="#{entidades.saldocapital}" sortBy="#{entidades.saldocapital}"   
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.saldocapital}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div>  </p:column>
+                                                    </p:dataTable>
+                                                </p:outputPanel>
                                                 <br></br>
-                                             
-                                               
-                                               
-                                               
                                             </p:outputPanel>
                                         </p:outputPanel>
                                     </p:tab>
@@ -2174,7 +2305,7 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{solicitudBean.showCreateAgropecuario}" >
-                        <h:form id="nuevo"  >                            
+                        <h:form id="nuevo" target="_blank"  >                            
                             <p:panel   header="Agregar solicitud de crédito agropecuario"  style="width: 90%; margin: auto;">
                                 <p:panelGrid  styleClass="borderHidden"  style="width: 100%; margin: auto;">
                                     <p:row>                                              
@@ -2214,7 +2345,7 @@
                                             <hr></hr>
                                             <p:outputPanel rendered="#{solicitudBean.existente}">
                                                 <br></br>
-                                               
+
                                                 <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
                                                     <p:row>
                                                         <p:column style=" width: 20%">
@@ -2576,7 +2707,7 @@
                                                                 <h:outputText value=" #{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarActivo(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerActivos(No)}" >
@@ -2671,10 +2802,10 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"  >  
-                                                               
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarIngreso(No)}" >
                                                                 </p:commandButton>
-                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerIngreso(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerIngreso(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -2765,7 +2896,7 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarEgreso(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
@@ -2839,8 +2970,8 @@
                                                                 <h:outputText value=" #{empleados.telefono}" />
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                                
-                                                           
+
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarReferencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerReferencia(No)}" >
@@ -3265,11 +3396,83 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                               
+
                                                 <br></br>
-                                                
-                                                
-                                                
+
+                                                <center>
+                                                    <p:commandButton  value="Generar tabla de amortización" id="btnGuardar" icon="fa fa-check" actionListener="#{solicitudBean.validarSeccionAgropecuario()}" update="calculos" > 
+                                                    </p:commandButton>
+                                                </center>                                                                                            
+                                                <p:outputPanel id="amort" rendered="#{solicitudBean.mostrarTabla}">
+                                                    <br></br>
+                                                    <b>  <h:outputText value="Lista de pagos"/>  </b>
+                                                    <hr></hr>
+                                                    <p:fieldset>
+                                          
+                                            
+                                            <div style=" float:  right">
+                                                <p:commandButton title="Generar reporte de amortización" ajax="false"   actionListener="#{solicitudBean.verReporteAmortizacion()}" icon="fa fa-file-pdf-o"   />
+                                            </div>
+                                            
+                                        </p:fieldset>
+                                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="amortizacionCooperativa"  paginator="true" rows="12" value="#{solicitudBean.listaPagos}"
+                                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                                  rowIndexVar="No" rowsPerPageTemplate="12"
+                                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                  >
+                                                        <p:column  style=" text-align:  center"  
+                                                                   headerText="Nº" width="5%" > 
+                                                            <h:outputText value="#{No+1}"  />  
+                                                        </p:column> 
+
+                                                        <p:column headerText="Cuota" width="8%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}"  
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"  />
+                                                                <h:outputText value="#{entidades.cuota}">
+                                                                    <f:convertNumber      pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>  
+                                                        <p:column  headerText="Interés" width="8%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}"  
+                                                                   >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.interes}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Abono a capital" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" 
+                                                                  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.abono}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Capital amortizado" width="12%" filterBy="#{entidades.capitalamortizado}" sortBy="#{entidades.capitalamortizado}" 
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.capitalamortizado}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div> </p:column>
+                                                        <p:column headerText="Saldo de capital" width="10%" filterBy="#{entidades.saldocapital}" sortBy="#{entidades.saldocapital}"   
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.saldocapital}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div>  </p:column>
+                                                    </p:dataTable>
+                                                </p:outputPanel>
+                                                <br></br>
+
+
+
                                             </p:outputPanel>
                                         </p:outputPanel>
                                     </p:tab>
@@ -3348,7 +3551,7 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{solicitudBean.mostrarCrearEmpleado}">
-                        <h:form id="nuevoEmpleado"  >                            
+                        <h:form id="nuevoEmpleado" target="_blank"  >                            
                             <p:panel   header="Agregar solicitud de crédito para empleados"  style="width: 90%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid  styleClass="borderHidden"  style="width: 100%; margin: auto;">
                                     <p:row>                                              
@@ -3388,7 +3591,7 @@
                                             <hr></hr>
                                             <p:outputPanel rendered="#{solicitudBean.existente}">
                                                 <br></br>
-                                                
+
                                                 <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
                                                     <p:row>
                                                         <p:column style=" width: 20%">
@@ -3828,7 +4031,7 @@
                                                                 <h:outputText value=" #{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"   >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarActivo(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerActivos(No)}" >
@@ -3923,7 +4126,7 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center">  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarIngreso(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerIngreso(No)}" >
@@ -4017,7 +4220,7 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="width: 12%; text-align: center"   >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Modificar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarEgreso(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Eliminar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
@@ -4090,7 +4293,7 @@
                                                                 <h:outputText value=" #{empleados.telefono}" />
                                                             </p:column>
                                                             <p:column  style=" width: 12%"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarReferencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerReferencia(No)}" >
@@ -4510,8 +4713,80 @@
                                                     </p:row>
                                                 </p:panelGrid>
                                                 <br></br>
-                                                
-                                                
+
+                                                <center>
+                                                    <p:commandButton  value="Generar tabla de amortización" id="btnGuardar" icon="fa fa-check" actionListener="#{solicitudBean.validarSeccionEmpleado()}" update="calculos" > 
+                                                    </p:commandButton>
+                                                </center>                                                                                            
+                                                <p:outputPanel id="amort" rendered="#{solicitudBean.mostrarTabla}">
+                                                    <br></br>
+                                                    <b>  <h:outputText value="Lista de pagos"/> </b>
+                                                    <hr></hr>
+                                                    <p:fieldset>
+                                          
+                                            
+                                            <div style=" float:  right">
+                                                <p:commandButton title="Generar reporte de amortización" ajax="false"   actionListener="#{solicitudBean.verReporteAmortizacion()}" icon="fa fa-file-pdf-o"   />
+                                            </div>
+                                            
+                                        </p:fieldset>
+                                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="amortizacionCooperativa"  paginator="true" rows="12" value="#{solicitudBean.listaPagos}"
+                                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                                  rowIndexVar="No" rowsPerPageTemplate="12"
+                                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                  >
+                                                        <p:column  style=" text-align:  center"  
+                                                                   headerText="Nº" width="5%" > 
+                                                            <h:outputText value="#{No+1}"  />  
+                                                        </p:column> 
+
+                                                        <p:column headerText="Cuota" width="8%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}"  
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"  />
+                                                                <h:outputText value="#{entidades.cuota}">
+                                                                    <f:convertNumber      pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>  
+                                                        <p:column  headerText="Interés" width="8%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}"  
+                                                                   >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.interes}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Abono a capital" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" 
+                                                                  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.abono}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Capital amortizado" width="12%" filterBy="#{entidades.capitalamortizado}" sortBy="#{entidades.capitalamortizado}" 
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.capitalamortizado}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div> </p:column>
+                                                        <p:column headerText="Saldo de capital" width="10%" filterBy="#{entidades.saldocapital}" sortBy="#{entidades.saldocapital}"   
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.saldocapital}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div>  </p:column>
+                                                    </p:dataTable>
+                                                </p:outputPanel>
+                                                <br></br>
+
+
                                             </p:outputPanel>
                                         </p:outputPanel>
                                     </p:tab>
@@ -4590,7 +4865,7 @@
                         </p:dialog>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{solicitudBean.showCreateComercio}" >
-                        <h:form id="nuevoSolicitudComercio"  >                            
+                        <h:form id="nuevoSolicitudComercio" target="_blank"  >                            
                             <p:panel   header="Agregar solicitud de crédito para comercio"  style="width: 90%; margin: auto; margin-bottom: 20px">
                                 <p:panelGrid  styleClass="borderHidden"  style="width: 100%; margin: auto;">
                                     <p:row>                                              
@@ -4630,7 +4905,7 @@
                                             <hr></hr>
                                             <br></br>
                                             <p:outputPanel rendered="#{solicitudBean.existente}">
-                                               
+
                                                 <p:panelGrid   style="width: 100%; margin: auto;" styleClass="companyHeaderGrid">
                                                     <p:row>
                                                         <p:column style=" width: 20%">
@@ -5037,10 +5312,10 @@
                                                                 <h:outputText value=" #{empleados.descripcion}" />
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                               
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarActivo(No)}" >
                                                                 </p:commandButton>
-                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerActivos(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerActivos(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -5132,7 +5407,7 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarIngreso(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerIngreso(No)}" >
@@ -5225,10 +5500,10 @@
                                                                 </h:outputText>
                                                             </p:column>
                                                             <p:column style="text-align: center; width: 12%"  >  
-                                                               
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarEgreso(No)}" >
                                                                 </p:commandButton>
-                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
+                                                                <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerEgresos(No)}" >
                                                                 </p:commandButton>
                                                             </p:column>
                                                         </p:dataTable>
@@ -5298,7 +5573,7 @@
                                                                 <h:outputText value=" #{empleados.telefono}" />
                                                             </p:column>
                                                             <p:column  style="width: 12%; text-align: center"  >  
-                                                                
+
                                                                 <p:commandButton update=":padding"     icon="fa fa-pencil" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.actualizarReferencia(No)}" >
                                                                 </p:commandButton>
                                                                 <p:commandButton update=":padding"     icon="fa fa-trash" title="Seleccionar" style="#{solicitudBean.btnCancelar}" actionListener="#{solicitudBean.removerReferencia(No)}" >
@@ -5717,9 +5992,84 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                                
+
                                                 <br></br>
-                                                
+
+                                                <center>
+                                                    <p:commandButton  value="Generar tabla de amortización" id="btnGuardar" icon="fa fa-check" actionListener="#{solicitudBean.validarSeccionComercio()}" update="calculos" > 
+                                                    </p:commandButton>
+                                                </center>                                                                                            
+                                                <p:outputPanel id="amort" rendered="#{solicitudBean.mostrarTabla}">
+                                                    <br></br>
+                                                    <b>  <h:outputText value="Lista de pagos"/> </b>
+                                                    <hr></hr>
+
+                                                    <p:fieldset>
+
+
+                                                        <div style=" float:  right">
+                                                            <p:commandButton title="Generar reporte de amortización" ajax="false"   actionListener="#{solicitudBean.verReporteAmortizacion()}" icon="fa fa-file-pdf-o"   />
+                                                        </div>
+
+                                                    </p:fieldset>
+
+
+                                                    <p:dataTable  id="basicDT" var="entidades" widgetVar="amortizacionCooperativa"  paginator="true" rows="12" value="#{solicitudBean.listaPagos}"
+                                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                  paginatorPosition="bottom" style="width: 100%;"
+                                                                  rowIndexVar="No" rowsPerPageTemplate="12"
+                                                                  currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+                                                                  >
+                                                        <p:column  style=" text-align:  center"  
+                                                                   headerText="Nº" width="5%" > 
+                                                            <h:outputText value="#{No+1}"  />  
+                                                        </p:column> 
+
+                                                        <p:column headerText="Cuota" width="8%" filterBy="#{entidades.cuota}" sortBy="#{entidades.cuota}"  
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"  />
+                                                                <h:outputText value="#{entidades.cuota}">
+                                                                    <f:convertNumber      pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column>  
+                                                        <p:column  headerText="Interés" width="8%" filterBy="#{entidades.interes}" sortBy="#{entidades.interes}"  
+                                                                   >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.interes}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Abono a capital" width="10%" filterBy="#{entidades.abono}" sortBy="#{entidades.abono}" 
+                                                                  >
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.abono}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>
+                                                            </div>
+                                                        </p:column> 
+                                                        <p:column headerText="Capital amortizado" width="12%" filterBy="#{entidades.capitalamortizado}" sortBy="#{entidades.capitalamortizado}" 
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.capitalamortizado}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div> </p:column>
+                                                        <p:column headerText="Saldo de capital" width="10%" filterBy="#{entidades.saldocapital}" sortBy="#{entidades.saldocapital}"   
+                                                                  >  
+                                                            <div style=" text-align: right">
+                                                                <h:outputText value="$"/>
+                                                                <h:outputText value="#{entidades.saldocapital}">
+                                                                    <f:convertNumber     pattern=",#00.00" locale="en-US" />  
+                                                                </h:outputText>  </div>  </p:column>
+                                                    </p:dataTable>
+                                                </p:outputPanel>
+                                                <br></br>
+
                                             </p:outputPanel>
                                         </p:outputPanel>
                                     </p:tab>
@@ -6286,10 +6636,10 @@
                                                 <p:menuitem rendered="#{empleados.TProyecto.estado eq 1? true:false}"  update=":padding" oncomplete="PF('dlEnviar').show()" icon="fa fa-paper-plane" value="Enviar">
                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{solicitudBean.proyectoSeleccionado}" />
                                                 </p:menuitem> 
-                                                
-                                               
-                                                
-                                                
+
+
+
+
                                                 <p:menuitem   update=":padding" oncomplete="PF('dlEliminarCooperativa').show()"   icon="fa fa-trash" value="Eliminar"    >
                                                     <f:setPropertyActionListener value="#{empleados.TProyecto}" target="#{solicitudBean.proyectoSeleccionado}" />
                                                     <f:setPropertyActionListener  value="#{empleados}" target="#{solicitudBean.entidadProyectoEliminar}"  />
@@ -6626,8 +6976,8 @@
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
-                                          <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
-                                                          <b>  <h:outputText value="Contacto" /></b>  
+                                                <p:panelGrid rendered="#{solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 1? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 4? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 5? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 6? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 7? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 8? true:false or solicitudBean.proyectoSeleccionado.TTipoCredito.idTipoCredito eq 9? true:false }"  style=" width: 100%" >
+                                                    <b>  <h:outputText value="Contacto" /></b>  
                                                     <hr></hr>
                                                     <p:row>
                                                         <p:column style=" width: 13%"   >
@@ -6886,14 +7236,14 @@
                                         </p:panelGrid>
                                         <hr></hr>
                                         <br></br>
-                                        
-                                         
+
+
                                         <b>         <h:outputText value="Lista de comentarios" /></b> 
-                                                    <hr></hr>
-                                           
-                                        
+                                        <hr></hr>
+
+
                                         <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
-                                          
+
                                             <p:row>   
                                                 <p:column>
                                                     <p:dataTable   id="comentariosData"
@@ -6917,10 +7267,10 @@
                                         </p:panelGrid>
                                         <br></br>
                                         <b>     <h:outputText value="Lista de sugerencias" /></b>
-                                                                                                        <hr></hr>
+                                        <hr></hr>
 
                                         <p:panelGrid styleClass="borderHidden"  style="width: 100%; margin: auto; height: auto ">
-                                             
+
                                             <p:row>   
                                                 <p:column>
                                                     <p:dataTable   id="sugerenciasData"
