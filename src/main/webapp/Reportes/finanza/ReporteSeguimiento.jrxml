@@ -240,14 +240,14 @@ WHERE
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PARÁMETROS</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="257" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
+				<reportElement x="241" y="368" width="70" height="20" uuid="31cf9ca0-db83-48b9-8174-f3b22aa3a974"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">VALOR</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="327" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
+				<reportElement x="316" y="368" width="75" height="20" uuid="d664e4df-0e50-40ad-95c2-ee271e60d652"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -298,7 +298,7 @@ WHERE
 				<text><![CDATA[DESTINO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="368" width="75" height="20" uuid="7f26ea88-fedd-407e-8e52-721f0caf90bd"/>
+				<reportElement x="144" y="368" width="75" height="20" uuid="7f26ea88-fedd-407e-8e52-721f0caf90bd"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>

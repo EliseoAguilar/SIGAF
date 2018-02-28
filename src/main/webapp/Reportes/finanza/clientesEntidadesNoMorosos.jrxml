@@ -134,7 +134,7 @@
 				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">CÓDIGO</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="215" y="107" width="36" height="20" uuid="59f8f150-c0de-4383-9d2d-672682ddfbd0"/>
+				<reportElement x="215" y="107" width="63" height="20" uuid="59f8f150-c0de-4383-9d2d-672682ddfbd0"/>
 				<textElement markup="styled">
 					<font isBold="true"/>
 				</textElement>
