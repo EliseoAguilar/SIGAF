@@ -50,19 +50,19 @@ FROM
 		</band>
 	</title>
 	<columnHeader>
-		<band height="32" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement x="117" y="3" width="170" height="20" uuid="14c7a9e2-989e-48c0-804d-52284318ac1e"/>
-				<textElement markup="styled">
+				<reportElement x="170" y="3" width="116" height="29" uuid="14c7a9e2-989e-48c0-804d-52284318ac1e"/>
+				<textElement textAlignment="Center" markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>TASA DE INTERÉS POR MORA (%)</style>]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="22" width="555" height="1" uuid="e98efde4-e06d-4c7b-a587-760845d0b1ca"/>
+				<reportElement x="0" y="32" width="555" height="1" uuid="e98efde4-e06d-4c7b-a587-760845d0b1ca"/>
 			</line>
 			<staticText>
-				<reportElement x="1" y="3" width="111" height="20" uuid="fed235d7-27d1-4cb4-bdae-cdb321e57f10"/>
+				<reportElement x="56" y="3" width="111" height="20" uuid="fed235d7-27d1-4cb4-bdae-cdb321e57f10"/>
 				<textElement markup="styled">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -89,19 +89,26 @@ FROM
 				</textElement>
 				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>ESTADO</style>]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="56" height="20" uuid="7b082117-cd0e-4c63-9ffc-7547c9aaff2e"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' pdfFontName='Helvetica-Bold'>#</style>]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField pattern="###0.00">
-				<reportElement x="13" y="0" width="40" height="20" uuid="21ae421a-8b29-4f31-9c6b-0b83d605de01"/>
+				<reportElement x="82" y="0" width="40" height="20" uuid="21ae421a-8b29-4f31-9c6b-0b83d605de01"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_tasa_interes_agronegocio}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="143" y="0" width="52" height="20" uuid="d8684a90-cefc-430d-b9a0-3d21104a92ee"/>
+				<reportElement x="197" y="0" width="52" height="20" uuid="d8684a90-cefc-430d-b9a0-3d21104a92ee"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
@@ -129,7 +136,8 @@ FROM
 				<textFieldExpression><![CDATA[$F{t_configuracion_agronegocio_estado_configuracion}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="1" width="100" height="20" uuid="f4211804-3e2d-48e8-9e36-4680d75cb8c9"/>
+				<reportElement x="2" y="1" width="54" height="20" uuid="f4211804-3e2d-48e8-9e36-4680d75cb8c9"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>

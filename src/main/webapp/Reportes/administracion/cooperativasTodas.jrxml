@@ -182,6 +182,9 @@ FROM
 			</textField>
 			<textField>
 				<reportElement x="0" y="3" width="100" height="20" uuid="95119a16-584d-4206-8933-8bfb44a948de"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{contador}]]></textFieldExpression>
 			</textField>
 		</band>
