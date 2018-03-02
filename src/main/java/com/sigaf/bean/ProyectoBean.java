@@ -5453,7 +5453,7 @@ public class ProyectoBean extends Actividad {
         pagoTotal.setCuota((this.pago.getSaldocapital()));
         pagoTotal.setInteres(this.interesAcumulados);      
      
-        pagoTotal.setAbono(pagoTotal.getCuota().subtract(this.interesAcumulados));
+        pagoTotal.setAbono(this.pago.getSaldocapital());
         pagoTotal.setCapitalamortizado(this.pago.getSaldocapital());
         pagoTotal.setSaldocapital(new BigDecimal("0"));
         pagoTotal.setSaldoadicional(new BigDecimal("0"));
@@ -5890,7 +5890,7 @@ public class ProyectoBean extends Actividad {
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
                 this.pagoMora.setCuota(this.couto);
-                this.pagoMora.setAbono(new BigDecimal(moraGenerada));
+                this.pagoMora.setAbono(new BigDecimal(moraGenerada).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setInteres(this.pagoMora.getAbono());
                 this.listaPagosMora.add(this.pagoMora);
                 calendar.add(Calendar.MONTH, mesesAux);  // numero de días a añadir, o restar en caso de días<0

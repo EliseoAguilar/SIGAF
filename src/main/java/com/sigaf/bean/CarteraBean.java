@@ -2328,9 +2328,9 @@ public class CarteraBean extends Actividad {
                 numeroCuotasRetraso++;
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
-                this.pagoMora.setCuota(this.couto);
+                this.pagoMora.setCuota((this.couto).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add((this.couto)).setScale(2,RoundingMode.HALF_UP));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
                 this.fechaEstipulada = calendar2.getTime();
@@ -2347,9 +2347,9 @@ public class CarteraBean extends Actividad {
                 numeroCuotasRetraso++;
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
-                this.pagoMora.setCuota(this.couto);
+                this.pagoMora.setCuota((this.couto).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add((this.couto)).setScale(2,RoundingMode.HALF_UP));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
                 this.fechaEstipulada = calendar2.getTime();
@@ -2366,9 +2366,9 @@ public class CarteraBean extends Actividad {
                 numeroCuotasRetraso++;
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
-                this.pagoMora.setCuota(this.couto);
+                this.pagoMora.setCuota((this.couto).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add((this.couto)).setScale(2,RoundingMode.HALF_UP));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
                 this.fechaEstipulada = calendar2.getTime();
@@ -2385,9 +2385,9 @@ public class CarteraBean extends Actividad {
                 numeroCuotasRetraso++;
                 this.pagoMora.setFecha(this.fechaEstipulada);
                 this.pagoMora.setIdpago(dia);
-                this.pagoMora.setCuota(this.couto);
+                this.pagoMora.setCuota((this.couto).setScale(2,RoundingMode.HALF_UP));
                 this.pagoMora.setAbono((new BigDecimal(moraGenerada)).setScale(2,RoundingMode.HALF_UP));
-                this.pagoMora.setInteres(this.pagoMora.getAbono().add(this.couto));
+                this.pagoMora.setInteres(this.pagoMora.getAbono().add((this.couto)).setScale(2,RoundingMode.HALF_UP));
                 this.listaPagosMora.add(this.pagoMora);
                 calendar2.add(Calendar.MONTH, mesesAux);
                 this.fechaEstipulada = calendar2.getTime();

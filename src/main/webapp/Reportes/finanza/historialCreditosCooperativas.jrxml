@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialCreditosCooperativas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e342a336-9631-4518-a58b-feec83d613a0">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="337"/>
+	<property name="ireport.y" value="110"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
@@ -111,7 +111,7 @@ FROM
 				<textElement textAlignment="Center" markup="styled">
 					<font size="14" isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE HISTORIAL CRÉDITICIO</style>]]></text>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">REPORTE DE HISTORIAL CREDITICIO</style>]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="105" width="555" height="1" uuid="08286d14-7e3a-41fc-a4db-2249f301c64b"/>

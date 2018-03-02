@@ -112,44 +112,50 @@ ORDER BY
 			<textField>
 				<reportElement x="25" y="3" width="72" height="20" uuid="2e67fa23-220f-4587-a1c8-6ace819e8002"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
 				<reportElement x="264" y="3" width="59" height="20" uuid="5e511adc-0836-4353-ae3b-76552da31317"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="450" y="3" width="105" height="20" uuid="588c14c4-38d3-4d21-981b-c83fa9a7a25d"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/Proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/Ejecutándose": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="336" y="3" width="56" height="20" uuid="56ccb1e1-9c25-4121-86ec-d9e05b45898c"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="392" y="3" width="58" height="20" uuid="e1a83caa-35a6-4320-9a9d-7932a4150791"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="96" y="3" width="168" height="20" uuid="e8970c87-c61f-41de-a517-e7b992c6ecbc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{t_tipo_credito_nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="3" width="25" height="20" uuid="124ca7a4-fe33-4f14-9212-941e2612bf18"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>

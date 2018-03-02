@@ -103,47 +103,50 @@ FROM
 			<textField isStretchWithOverflow="true">
 				<reportElement x="25" y="0" width="63" height="20" uuid="93c76ac0-f792-4b80-8070-f22000316f7f"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_codigo_proyecto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="93" y="0" width="182" height="20" uuid="ba9d0d96-dcb8-4915-bdbd-6681512eda47"/>
+				<reportElement x="93" y="0" width="163" height="20" uuid="ba9d0d96-dcb8-4915-bdbd-6681512eda47"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_idtipocredito}.equals(1)? "Credito para empleados":false || $F{t_proyecto_idtipocredito}.equals(2)? "Credito para inversion":false || $F{t_proyecto_idtipocredito}.equals(3)? "Credito para la produccion":false || $F{t_proyecto_idtipocredito}.equals(4)? "Credito para produccion agropecuaria":false || $F{t_proyecto_idtipocredito}.equals(5)? "Credito para lisiados de guerra":false || $F{t_proyecto_idtipocredito}.equals(6)? "Credito personal":false || $F{t_proyecto_idtipocredito}.equals(7)? "Credito comercial":false ||  $F{t_proyecto_idtipocredito}.equals(8)? "Credito para capital de trabajo":false || $F{t_proyecto_idtipocredito}.equals(9)? "Credito para la inversion":false]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="$#,##0.00">
-				<reportElement x="275" y="0" width="58" height="20" uuid="0c393ca1-5797-42c1-a33a-83d207245057"/>
+				<reportElement x="256" y="0" width="58" height="20" uuid="0c393ca1-5797-42c1-a33a-83d207245057"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_monto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="444" y="0" width="111" height="20" uuid="11ff3326-66ed-458d-a68f-240470c69263"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_estado}.equals(3)? "Aprobado/Proceso": false || $F{t_proyecto_estado}.equals(5)? "Aprobado/Ejecutándose": false || $F{t_proyecto_estado}.equals(6)? "Finalizado": false || $F{t_proyecto_estado}.equals(7)? "Incobrable": false]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="333" y="0" width="53" height="20" uuid="ec79a7b6-ce10-4f99-a171-ae1952cc9a2f"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_plazo}+" meses"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="386" y="0" width="58" height="20" uuid="e804024e-c5cf-4f99-b9d9-5cbf4e89c1c1"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t_proyecto_forma_pago_proyecto}.equals(1)? "Mensual": false || $F{t_proyecto_forma_pago_proyecto}.equals(2)? "Trimestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(3)? "Semestral": false || $F{t_proyecto_forma_pago_proyecto}.equals(4)? "Anual": false]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="25" height="20" uuid="01ba22ab-94c9-47eb-879a-fb891f9c9756"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
 			</textField>
 		</band>
