@@ -1123,6 +1123,7 @@ public class EjercicioBean extends Actividad {
         this.ReservaEstructura = null;
         this.utilidadEstructura = null;
 
+        try{
         if (!auxEstado.isEmpty()) {
 
             for (TEstructura tEstructura : auxEstado) {
@@ -1535,6 +1536,9 @@ public class EjercicioBean extends Actividad {
             bitacoraBo.create(auxBitacora);
 
         }
+        }catch( Exception ex){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El periodo no pudo ser registrado.", ex.getMessage()));
+        }
     }
 
     public void agregarCierreEjercicio() {
@@ -1721,12 +1725,15 @@ public class EjercicioBean extends Actividad {
                     listaEstructuraOtrosGastos.setTEjercicio(ejercicio);
                     this.estructuraBo.create(listaEstructuraOtrosGastos);
 
+                    if(rentaEstructura!=null){
                     this.rentaEstructura.setTEjercicio(ejercicio);
                     this.estructuraBo.create(this.rentaEstructura);
-
+                    }
+                    
+                    if(ReservaEstructura!=null){
                     this.ReservaEstructura.setTEjercicio(ejercicio);
                     this.estructuraBo.create(this.ReservaEstructura);
-
+                    }
                     this.utilidadEstructura.setTEjercicio(ejercicio);
                     this.estructuraBo.create(this.utilidadEstructura);
 

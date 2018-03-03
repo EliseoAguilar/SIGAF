@@ -316,7 +316,7 @@ public class ProveedorBean extends Actividad {
         }
 
         if (this.provedor.getNrcProveedor().length() == 0) {
-            this.msgNRC = "NRC requrido.";
+            this.msgNRC = "NRC requrido";
             this.estadoValido = false;
         } else if (this.proveedorBo.getProveedorRepNrc(entidadSeleccionada.getIdEntidad(), this.provedor.getNrcProveedor()) != null) {
             this.msgNRC = "El NRC ya fue asignado a otro proveedor";
