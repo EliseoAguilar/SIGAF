@@ -187,7 +187,7 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="13" y="208" width="153" height="20" uuid="1c22bbec-1e56-4da1-98f9-4df0013b67d5"/>
-				<text><![CDATA[ACTIVIDADES ECONOMICAS:]]></text>
+				<text><![CDATA[ACTIVIDADES ECONÓMICAS:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="284" y="108" width="100" height="20" uuid="6cf6a288-3eac-4dcf-845d-aea6fe770588"/>

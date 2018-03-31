@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UsuarioIndividual" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f15e63da-7380-458b-a761-d716c6c85baf">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UsuarioIndividual" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f15e63da-7380-458b-a761-d716c6c85baf">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="71"/>
 	<import value="org.apache.commons.codec.binary.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -61,13 +61,13 @@ WHERE
 		<groupFooter>
 			<band height="50" splitType="Stretch">
 				<textField evaluationTime="Report">
-					<reportElement x="513" y="13" width="40" height="20" uuid="a080b13e-86e3-4caf-acec-24613f1114e0"/>
+					<reportElement x="514" y="14" width="40" height="20" uuid="a080b13e-86e3-4caf-acec-24613f1114e0"/>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="461" y="13" width="52" height="20" uuid="98606ae6-aea7-4389-9c6e-a80b73a30285"/>
+					<reportElement x="322" y="14" width="192" height="20" uuid="98606ae6-aea7-4389-9c6e-a80b73a30285"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -109,11 +109,11 @@ WHERE
 				<text><![CDATA[TIPO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="203" y="79" width="156" height="20" uuid="46fef992-2170-4f9f-9ceb-c70e804a6739"/>
+				<reportElement x="219" y="79" width="156" height="20" uuid="46fef992-2170-4f9f-9ceb-c70e804a6739"/>
 				<textFieldExpression><![CDATA[$F{t_usuario_nombre_usuario}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="203" y="113" width="299" height="20" uuid="28983459-46b0-42f7-a97d-308b75bf3bdd"/>
+				<reportElement x="219" y="113" width="299" height="20" uuid="28983459-46b0-42f7-a97d-308b75bf3bdd"/>
 				<textFieldExpression><![CDATA[$F{t_usuario_tipo_usuario} == 1? "Contador": ($F{t_usuario_tipo_usuario} == 2 ? "Asesor de crédito":"Administrador")]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -131,7 +131,7 @@ WHERE
 				<text><![CDATA[ESTADO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="203" y="146" width="156" height="20" uuid="e8aa7979-6788-4e14-b4ca-359b922e048d"/>
+				<reportElement x="219" y="146" width="156" height="20" uuid="e8aa7979-6788-4e14-b4ca-359b922e048d"/>
 				<textFieldExpression><![CDATA[$F{t_usuario_estado_usuario}? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<staticText>

@@ -25,8 +25,8 @@
                                     <br></br>
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.crear()}"     style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.crear()}" icon="fa fa-fw fa-check"    style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" icon="fa fa-fw fa-close" style="#{usuarioBean.btnCancelar}" >
                                         <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>
@@ -146,8 +146,8 @@
                                     ¿Estás seguro de guardar?
                                     <br></br>
                                     <hr></hr>
-                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.actualizar()}"  oncomplete="PF('dialogCrear').hide()"   style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
-                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" style="#{usuarioBean.btnCancelar}" >
+                                    <p:commandButton value="Si" id="withI" actionListener="#{usuarioBean.actualizar()}" icon="fa fa-fw fa-check" oncomplete="PF('dialogCrear').hide()"   style="#{usuarioBean.btnNuevo}" update=":padding"  > </p:commandButton>
+                                    <p:commandButton value="No" id="with" oncomplete="PF('dialogCrear').hide()" icon="fa fa-fw fa-close" style="#{usuarioBean.btnCancelar}" >
                                         <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.estadoFormulario}" />
                                     </p:commandButton>
                                 </div>
@@ -405,8 +405,8 @@
                                         </p:panelGrid>
                                         <br></br>
                                         <center>
-                                            <p:splitButton id="btnVer"   ajax="false"  actionListener="#{usuarioBean.generarUsuario()}"    value="Ver PDF"> 
-                                                <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{usuarioBean.generarUsuarioPDF}"     value="Descargar PDF"> 
+                                            <p:splitButton id="btnVer"   ajax="false"  actionListener="#{usuarioBean.generarUsuario()}"  icon="fa fa-eye"   value="Ver PDF"> 
+                                                <p:menuitem id="btnDescargar"   ajax="false"   actionListener="#{usuarioBean.generarUsuarioPDF}"  icon="fa fa-download"   value="Descargar PDF"> 
                                                 </p:menuitem> 
                                             </p:splitButton>
                                         </center>
@@ -424,9 +424,9 @@
                                             <br></br>
                                     
                                         <hr></hr>
-                                        <p:commandButton id="btnGuardarBaja" update=":padding" actionListener="#{usuarioBean.darDeBaja}"  style="#{usuarioBean.btnNuevo}"  value="Si"> 
+                                        <p:commandButton id="btnGuardarBaja" update=":padding" actionListener="#{usuarioBean.darDeBaja}"  icon="fa fa-fw fa-check" style="#{usuarioBean.btnNuevo}"  value="Si"> 
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelBaja"  oncomplete="PF('dlBaja').hide()"  style="#{usuarioBean.btnCancelar}"  value="No" > 
+                                        <p:commandButton id="btnCancelBaja"  oncomplete="PF('dlBaja').hide()"  style="#{usuarioBean.btnCancelar}" icon="fa fa-fw fa-close" value="No" > 
                                         </p:commandButton>
 
                                     </p:outputPanel>
@@ -443,9 +443,9 @@
                                             <br></br>
                                        
                                         <hr></hr>
-                                        <p:commandButton id="btnGuardarAlta" actionListener="#{usuarioBean.darDeAlta}" update=":padding" style="#{usuarioBean.btnNuevo}"    value="Si"> 
+                                        <p:commandButton id="btnGuardarAlta" actionListener="#{usuarioBean.darDeAlta}" icon="fa fa-fw fa-check" update=":padding" style="#{usuarioBean.btnNuevo}"    value="Si"> 
                                         </p:commandButton>
-                                        <p:commandButton id="btnCancelAlta"  oncomplete="PF('dlAlta').hide()"  style="#{usuarioBean.btnCancelar}"   value="No"> 
+                                        <p:commandButton id="btnCancelAlta"  oncomplete="PF('dlAlta').hide()"   icon="fa fa-fw fa-close" style="#{usuarioBean.btnCancelar}"   value="No"> 
                                         </p:commandButton>
                                     </p:outputPanel>
                                 </h:form>

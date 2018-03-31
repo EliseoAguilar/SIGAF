@@ -124,9 +124,9 @@ WHERE
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="460" y="18" width="52" height="20" uuid="45bb7620-9145-4239-8487-a413e9f62ef3"/>
+				<reportElement x="330" y="18" width="182" height="20" uuid="45bb7620-9145-4239-8487-a413e9f62ef3"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="512" y="18" width="40" height="20" uuid="f2eeec17-4962-47bf-8af4-baebb86246ea"/>

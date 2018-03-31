@@ -173,9 +173,9 @@ u.id_empleado_usuario=e.id_empleado where u.id_usuario=$P{id_usuario}]]>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="461" y="0" width="52" height="20" uuid="98882a27-8dcd-4a7b-9ca4-003132109f8b"/>
+				<reportElement x="320" y="0" width="193" height="20" uuid="98882a27-8dcd-4a7b-9ca4-003132109f8b"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["pág."+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="513" y="0" width="40" height="20" uuid="f6aa480e-651b-4b3a-837d-4b1e61479b4c"/>

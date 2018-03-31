@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agronegocio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12ce936e-f98d-4b7d-9622-99c676635df1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="188"/>
+	<property name="ireport.y" value="1356"/>
 	<parameter name="id_agronegocio" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -424,7 +424,7 @@ FROM
 			</staticText>
 			<textField>
 				<reportElement x="396" y="102" width="142" height="20" uuid="1e6ab783-dbc3-45fc-9abc-aef8c880c774"/>
-				<textFieldExpression><![CDATA[$F{t_agronegocio_estado}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{t_agronegocio_estadoregistro}.equals(true)? "Activo":"Inactivo"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="22" y="203" width="112" height="20" uuid="1ca1870c-2e7b-48cd-b15c-ba48a001e047"/>
@@ -526,7 +526,7 @@ FROM
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[NUMERO DE CHEQUE:]]></text>
+				<text><![CDATA[NÚMERO DE CHEQUE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="279" y="371" width="112" height="20" uuid="9fc564e5-51b5-4401-b2c4-2f8a8f330225"/>
@@ -554,7 +554,7 @@ FROM
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[DIAS DE RETRASO:]]></text>
+				<text><![CDATA[DÍAS DE RETRASO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="23" y="523" width="138" height="20" uuid="de4b7388-1377-4906-914f-52677b1caf74"/>
